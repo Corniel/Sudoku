@@ -15,9 +15,7 @@ namespace Corniel.Sudoku.UnitTests
 				..|.4
 				..|..");
 
-			var act = puzzle.GetType();
-			var exp = typeof(SudokuState2x2);
-			Assert.AreEqual(exp, act);
+			Assert.AreEqual(2, puzzle.Size);
 		}
 
 		[Test]
@@ -36,9 +34,7 @@ namespace Corniel.Sudoku.UnitTests
 				...|419|..5
 				...|.8.|.79");
 
-			var act = puzzle.GetType();
-			var exp = typeof(SudokuState3x3);
-			Assert.AreEqual(exp,act);
+			Assert.AreEqual(3, puzzle.Size);
 		}
 	}
 }

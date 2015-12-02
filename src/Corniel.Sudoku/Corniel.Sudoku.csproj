@@ -41,10 +41,10 @@
   <ItemGroup>
     <Compile Include="Bits.cs" />
     <Compile Include="InvalidPuzzleException.cs" />
-    <Compile Include="ISudokuState.cs" />
     <Compile Include="ReduceResult.cs" />
+    <Compile Include="SudokuRegions.cs" />
     <Compile Include="SudokuRegionType.cs" />
-    <Compile Include="SudokuState3x3.cs" />
+    <Compile Include="SudokuSolverMethods.cs" />
     <Compile Include="SudokuParseToken.cs" />
     <Compile Include="SudokuPuzzle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -53,7 +53,6 @@
     <Compile Include="SudokuRegion.cs" />
     <Compile Include="SudokuSolver.cs" />
     <Compile Include="SudokuState.cs" />
-    <Compile Include="SudokuState2x2.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

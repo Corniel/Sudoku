@@ -1,10 +1,14 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Corniel.Sudoku
 {
 	/// <summary>Represents the structure of a Sudoku puzzle.</summary>
 	public abstract class SudokuPuzzle
 	{
+		/// <summary>Represents a square with no valid options.</summary>
+		public const ulong Invalid = 0;
+
 		/// <summary>Gets the Singleton instance of 2x2 puzzle.</summary>
 		public static readonly SudokuPuzzle Puzzle2x2 = new SudokuPuzzle2x2();
 
@@ -20,17 +24,18 @@ namespace Corniel.Sudoku
 			this.Size2 = size * size;
 
 			Grid = new int[Size2, Size2];
-			Regions = new List<SudokuRegion>();
-			Lookup = new List<SudokuRegion>[Size2 * Size2];
+			Regions = new SudokuRegions();
+			Lookup = new SudokuRegions[Size2 * Size2];
 
 			InitializeGrid(Size2);
 
 			InitializeRowRegions(Size2);
 			InitializeColumnRegions(Size2);
 			InitializeSubSquareRegions(size);
-			initializeLookup();
+			InitializeLookup();
+			InitializeIntersected();
 		}
-		
+
 		/// <summary>Initializes a square with its indexes.</summary>
 		protected void InitializeGrid(int size2)
 		{
@@ -95,11 +100,11 @@ namespace Corniel.Sudoku
 		}
 		
 		/// <summary>Initializes a lookup to map each square to its corresponding regions.</summary>
-		protected void initializeLookup()
+		protected void InitializeLookup()
 		{
 			for (var index = 0; index < Lookup.Length; index++)
 			{
-				Lookup[index] = new List<SudokuRegion>();
+				Lookup[index] = new SudokuRegions();
 			}
 			foreach (var region in Regions)
 			{
@@ -110,12 +115,21 @@ namespace Corniel.Sudoku
 			}
 		}
 
+		/// <summary>Initializes the intersected per region.</summary>
+		protected void InitializeIntersected()
+		{
+			foreach(var region in Regions)
+			{
+				region.Intersected.AddRange(Regions.Where(other => region.HasIntersectionOf2OrMoreSquares(other)));
+			}
+		}
+
 		/// <summary>All (distinct) regions.</summary>
-		public List<SudokuRegion> Regions { get; protected set; }
+		public SudokuRegions Regions { get; protected set; }
 
 		/// <summary>The lookup to map each square to its corresponding regions.</summary>
-		public List<SudokuRegion>[] Lookup { get; protected set; }
-		
+		public SudokuRegions[] Lookup { get; protected set; }
+
 		/// <summary>The grid with the corresponding indexes.</summary>
 		protected int[,] Grid { get; set; }
 
@@ -124,5 +138,11 @@ namespace Corniel.Sudoku
 
 		/// <summary>The squared size of a single sub square.</summary>
 		public int Size2 { get; protected set; }
+
+		/// <summary>Gets the unknown value.</summary>
+		public abstract ulong Unknown { get; }
+
+		/// <summary>Gets the possible (single) values.</summary>
+		public abstract ICollection<ulong> SingleValues { get; }
 	}
 }

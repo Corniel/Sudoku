@@ -6,17 +6,23 @@ namespace Corniel.Sudoku
 	public class SudokuSolver
 	{
 		/// <summary>Initializes a new solver for a given puzzle.</summary>
-		public SudokuSolver(SudokuPuzzle puzzle)
+		public SudokuSolver(SudokuPuzzle puzzle) : this(puzzle, SudokuSolverMethods.All) { }
+
+		/// <summary>Initializes a new solver for a given puzzle.</summary>
+		public SudokuSolver(SudokuPuzzle puzzle, SudokuSolverMethods methods)
 		{
 			if (puzzle == null) { throw new ArgumentNullException(); }
 			Puzzle = puzzle;
+			Methods = methods;
 		}
 
 		/// <summary>Gets the puzzle (structure) used by this solver.</summary>
 		public SudokuPuzzle Puzzle { get; private set; }
+		/// <summary>Gets the methods that are used to try to solve the puzzle.</summary>
+		public SudokuSolverMethods Methods { get; private set; }
 
 		/// <summary>Solves a Sudoku puzzle given the Sudoku state.</summary>
-		public ISudokuState Solve(ISudokuState state)
+		public SudokuState Solve(SudokuState state)
 		{
 			// As states are not immutable, create a copy.
 			var worker = state.Copy();
@@ -25,10 +31,11 @@ namespace Corniel.Sudoku
 
 			while (result == ReduceResult.Reduced)
 			{
-				result = ReduceSingles(worker);
-				result |= ReduceHiddenSingles(worker);
-				result |= ReduceNakedPairs(worker);
-				result |= ReduceLockedCandidates(worker);
+				result = ReduceResult.None;
+				result |= ReduceSingles(result, worker);
+				result |= ReduceHiddenSingles(result, worker);
+				result |= ReduceLockedCandidates(result, worker);
+				result |= ReduceNakedPairs(result, worker);
 			}
 			if (result.HasFlag(ReduceResult.Inconsistend))
 			{
@@ -45,10 +52,11 @@ namespace Corniel.Sudoku
 		/// value is also excluded as a candidate from all other blank cells sharing
 		/// the same row, column and sub square.
 		/// </remarks>
-		private ReduceResult ReduceSingles(ISudokuState state)
+		private ReduceResult ReduceSingles(ReduceResult result, SudokuState state)
 		{
-			var result = ReduceResult.Reduced;
+			if (SkipMethod(SudokuSolverMethods.Singles, result)) { return result; }
 
+			result = ReduceResult.Reduced;
 			while (result == ReduceResult.Reduced)
 			{
 				result = ReduceResult.None;
@@ -63,7 +71,7 @@ namespace Corniel.Sudoku
 							{
 								if (square != index)
 								{
-									result |= state.Reduce(square, index);
+									result |= state.Exclude(square, index);
 								}
 							}
 						}
@@ -73,34 +81,88 @@ namespace Corniel.Sudoku
 			return result;
 		}
 
+		/// <summary>Returns false if the result is solved or the method is disabled.</summary>
+		private bool SkipMethod(SudokuSolverMethods method, ReduceResult result)
+		{
+			return
+				(Methods & method) == SudokuSolverMethods.None || 
+				(result & ReduceResult.Solved) == ReduceResult.Solved;
+		}
+
 		/// <summary>Reduces hidden singles.</summary>
 		/// <remarks>
 		/// Very frequently, there is only one candidate for a given row, column or
 		/// sub square, but it is hidden among other candidates.
 		/// </remarks>
-		private ReduceResult ReduceHiddenSingles(ISudokuState state)
+		private ReduceResult ReduceHiddenSingles(ReduceResult result, SudokuState state)
 		{
-			var result = ReduceResult.None;
+			if (SkipMethod(SudokuSolverMethods.HiddenSingles, result)) { return result; }
 
 			foreach (var region in Puzzle.Regions)
 			{
-				result |= state.ReduceHiddenSingles(region);
+				foreach (var singleValue in Puzzle.SingleValues)
+				{
+					var cnt = 0;
+					var found = -1;
+					foreach (var index in region)
+					{
+						var val = state[index];
+						if ((val & singleValue) != SudokuPuzzle.Invalid)
+						{
+							unchecked { cnt++; }
+							if (state.IsKnown(index))
+							{
+								found = -1;
+								break;
+							}
+							else if (cnt == 1)
+							{
+								found = index;
+							}
+						}
+					}
+					if (cnt == 1 && found != -1)
+					{
+						result |= state.AndMask(found, singleValue);
+					}
+					else if (cnt == 0)
+					{
+						return ReduceResult.Inconsistend;
+					}
+				}
 			}
 			return result;
 		}
 
 		/// <summary>Reduces options that should be in the intersection.</summary>
-		private ReduceResult ReduceLockedCandidates(ISudokuState state)
+		private ReduceResult ReduceLockedCandidates(ReduceResult result, SudokuState state)
 		{
-			var result = ReduceResult.None;
+			if (SkipMethod(SudokuSolverMethods.LockedCandidates, result)) { return result; }
 
 			foreach (var region in Puzzle.Regions)
 			{
-				foreach (var other in Puzzle.Regions)
+				foreach (var other in region.Intersected)
 				{
-					if (region.HasIntersectionOf2OrMoreSquares(other))
+					ulong combined = 0;
+					foreach (var index in region)
 					{
-						result |= state.ReduceIntersection(region, other);
+						if (!other.Contains(index))
+						{
+							combined |= state[index];
+						}
+					}
+					// There are options that should be in the intersection.
+					if (combined != Puzzle.Unknown)
+					{
+						foreach (var index in other)
+						{
+							if (!region.Contains(index))
+							{
+								var val = state[index];
+								var nw = val & combined;
+								result |= state.AndMask(index, nw);
+							}
+						}
 					}
 				}
 			}
@@ -115,9 +177,9 @@ namespace Corniel.Sudoku
 		/// 
 		/// These 2 candidates can be excluded from other cells in the group.
 		/// </remarks>
-		private	ReduceResult ReduceNakedPairs(ISudokuState state)
+		private ReduceResult ReduceNakedPairs(ReduceResult result, SudokuState state)
 		{
-			var result = ReduceResult.None;
+			if (SkipMethod(SudokuSolverMethods.NakedPairs, result)) { return result; }
 
 			foreach (var region in Puzzle.Regions)
 			{
@@ -152,7 +214,7 @@ namespace Corniel.Sudoku
 					{
 						if (index != pair0 && index != pair1)
 						{
-							result |= state.Reduce(index, pair0);
+							result |= state.Exclude(index, pair0);
 						}
 					}
 				}

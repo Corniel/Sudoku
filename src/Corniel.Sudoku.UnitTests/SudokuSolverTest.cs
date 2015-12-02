@@ -126,37 +126,7 @@ namespace Corniel.Sudoku.UnitTests
 				925|831|746
 				637|549|281");
 		}
-
-		[Test]
-		public void Solve_3x3Example3_SolvedPuzzle()
-		{
-			Solve(SudokuPuzzle.Puzzle3x3, @"
-				...|7..|...
-				1..|...|...
-				...|43.|2..
-				---+---+---
-				...|...|..6
-				...|5.9|...
-				...|...|418
-				---+---+---
-				...|.81|...
-				..2|...|.5.
-				.4.|...|3..
-				",
-				@"
-				264|715|839
-				137|892|645
-				598|436|271
-				---+---+---
-				423|178|596
-				816|549|723
-				759|623|418
-				---+---+---
-				375|281|964
-				982|364|157
-				641|957|382");
-		}
-
+	
 		[Test]
 		public void Solve_3x3WorldsHardestStudokuAccordingToTheTelegraph_SolvedPuzzle()
 		{
@@ -198,7 +168,7 @@ namespace Corniel.Sudoku.UnitTests
 
 			Console.WriteLine("Elapsed: {0:#,##0.#####} ms", sw.Elapsed.TotalMilliseconds);
 
-			Assert.IsTrue(actual.IsSolved(), "The puzzle is not solved.");
+			Assert.IsTrue(actual.IsSolved, "The puzzle is not solved.");
 			Assert.AreEqual(SudokuState.Parse(expected), actual);
 		}
 	}

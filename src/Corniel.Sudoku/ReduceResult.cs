@@ -10,7 +10,9 @@ namespace Corniel.Sudoku
 		None = 0,
 		/// <summary>Something changed, at least one reduction of the options.</summary>
 		Reduced = 1,
+		/// <summary>Action results in a solved puzzle.</summary>
+		Solved = 2,
 		/// <summary>An inconstancy occurred while reducing.</summary>
-		Inconsistend = 2,
+		Inconsistend = 4,
 	}
 }

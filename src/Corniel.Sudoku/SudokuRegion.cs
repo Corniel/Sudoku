@@ -8,13 +8,17 @@ namespace Corniel.Sudoku
 	[DebuggerDisplay("{ToString()}")]
 	public class SudokuRegion : HashSet<int> 
 	{
+		/// <summary>Creates a Sudoku region.</summary>
 		public SudokuRegion(SudokuRegionType type)
 		{
 			RegionType = type;
+			Intersected = new SudokuRegions();
 		}
 
 		/// <summary>Gets the type of the region.</summary>
 		public SudokuRegionType RegionType { get; protected set; }
+
+		public SudokuRegions Intersected { get; private set; }
 
 		/// <summary>Represents the region as <see cref="System.String"/>.</summary>
 		public override string ToString()

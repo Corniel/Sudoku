@@ -98,14 +98,12 @@ namespace Corniel.Sudoku
 			{
 				foreach (var other in Puzzle.Regions)
 				{
-					if (region.IntersectsWith(other))
+					if (region.HasIntersectionOf2OrMoreSquares(other))
 					{
 						result |= state.ReduceIntersection(region, other);
 					}
 				}
 			}
-
-
 			return result;
 		}
 

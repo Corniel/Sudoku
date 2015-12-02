@@ -48,7 +48,7 @@ namespace Corniel.Sudoku
 		{
 			for (int row = 0; row < size2; row++)
 			{
-				var region = new SudokuRegion();
+				var region = new SudokuRegion(SudokuRegionType.Row);
 				Regions.Add(region);
 
 				for (int width = 0; width < size2; width++)
@@ -63,7 +63,7 @@ namespace Corniel.Sudoku
 		{
 			for (var column = 0; column < size2; column++)
 			{
-				var region = new SudokuRegion();
+				var region = new SudokuRegion(SudokuRegionType.Column);
 				Regions.Add(region);
 
 				for (var height = 0; height < size2; height++)
@@ -80,7 +80,7 @@ namespace Corniel.Sudoku
 			{
 				for (var ySub = 0; ySub < size; ySub++)
 				{
-					var region = new SudokuRegion();
+					var region = new SudokuRegion(SudokuRegionType.SubSquare);
 					Regions.Add(region);
 
 					for (var x = 0; x < size; x++)

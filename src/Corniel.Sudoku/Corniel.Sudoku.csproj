@@ -43,6 +43,7 @@
     <Compile Include="InvalidPuzzleException.cs" />
     <Compile Include="ISudokuState.cs" />
     <Compile Include="ReduceResult.cs" />
+    <Compile Include="SudokuRegionType.cs" />
     <Compile Include="SudokuState3x3.cs" />
     <Compile Include="SudokuParseToken.cs" />
     <Compile Include="SudokuPuzzle.cs" />

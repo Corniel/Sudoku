@@ -10,7 +10,8 @@ namespace Corniel.Sudoku
 		HiddenSingles = 0x2,
 		LockedCandidates = 0x4,
 		NakedPairs = 0x8,
+		NakedTriples = 0x10,
 
-		All = Singles | HiddenSingles | LockedCandidates | NakedPairs,
+		All = 0x1F,
 	}
 }

@@ -35,9 +35,6 @@ namespace Corniel.Sudoku
 			return new SudokuState(m_Size, m_Unknown, copy);
 		}
 
-		/// <summary>Return true if both indexes represent the same options, otherwise false.</summary>
-		public bool Equals(int index0, int index1) { return m_Values[index0] == m_Values[index1]; }
-
 		#region Count & count related
 
 		/// <summary>Gets the number of optional values for a given index of the Sudoku state.</summary>
@@ -50,7 +47,7 @@ namespace Corniel.Sudoku
 		public bool IsSolved { get { return m_Unknown == 0; } }
 
 		/// <summary>A lookup to get the number of options of a value.</summary>
-		private static readonly byte[] CountLookup = GetCountLookup();
+		public static readonly byte[] CountLookup = GetCountLookup();
 		private static byte[] GetCountLookup()
 		{
 			var count = new byte[SudokuPuzzle.Puzzle3x3.Unknown + 1];
@@ -93,7 +90,10 @@ namespace Corniel.Sudoku
 				var val = m_Values[index];
 				var nw = val & mask;
 				m_Values[index] = nw;
-				if (nw == SudokuPuzzle.Invalid) { return ReduceResult.Inconsistend; }
+				if (nw == SudokuPuzzle.Invalid)
+				{
+					return ReduceResult.Inconsistend;
+				}
 
 				if (CountLookup[nw] == 1 && CountLookup[val] != 1)
 				{

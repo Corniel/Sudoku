@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace Corniel.Sudoku
 {
@@ -36,6 +37,7 @@ namespace Corniel.Sudoku
 				result |= ReduceHiddenSingles(result, worker);
 				result |= ReduceLockedCandidates(result, worker);
 				result |= ReduceNakedPairs(result, worker);
+				result |= ReduceNakedTriples(result, worker);
 			}
 			if (result.HasFlag(ReduceResult.Inconsistend))
 			{
@@ -85,8 +87,8 @@ namespace Corniel.Sudoku
 		private bool SkipMethod(SudokuSolverMethods method, ReduceResult result)
 		{
 			return
-				(Methods & method) == SudokuSolverMethods.None || 
-				(result & ReduceResult.Solved) == ReduceResult.Solved;
+				(Methods & method) == SudokuSolverMethods.None ||
+				(result & (ReduceResult.Solved | ReduceResult.Inconsistend)) != ReduceResult.None;
 		}
 
 		/// <summary>Reduces hidden singles.</summary>
@@ -181,44 +183,82 @@ namespace Corniel.Sudoku
 		{
 			if (SkipMethod(SudokuSolverMethods.NakedPairs, result)) { return result; }
 
-			foreach (var region in Puzzle.Regions)
+			foreach (var singleValue in Puzzle.SingleValues)
 			{
-				var pair0 = -1;
-				var pair1 = -1;
-				foreach (var index in region)
+				foreach (var region in Puzzle.Regions)
 				{
-					if(state.Count(index) == 2)
-					{
-						if (pair0 == -1)
-						{
-							pair0 = index;
-						}
-						else if (pair1 == -1)
-						{
-							if (state.Equals(pair0, index))
-							{
-								pair1 = index;
-							}
-						}
-						// more than 2 pairs with the same restriction.
-						else
-						{
-							return ReduceResult.Inconsistend;
-						}
-					}
-				}
-				// We found a naked pair.
-				if (pair0 != -1 && pair1 != -1)
-				{
+					var index0 = -1;
+					var index1 = -1;
+
+					var match = singleValue;
+
 					foreach (var index in region)
 					{
-						if (index != pair0 && index != pair1)
+						var value = state[index];
+						if (!state.IsKnown(index) && (value & match) != SudokuPuzzle.Invalid)
 						{
-							result |= state.Exclude(index, pair0);
+							match |= value;
+
+							/**/ if (index0 == -1) { index0 = index; }
+							else if (index1 == -1) { index1 = index; }
+							else { index1 = -1; break; }
+						}
+					}
+					// We found 2 squares.
+					if (index1 != -1 && SudokuState.CountLookup[match] == 2)
+					{
+						foreach (var index in region)
+						{
+							if (index != index0 && index != index1)
+							{
+								result |= state.AndMask(index, ~match);
+							}
 						}
 					}
 				}
+			}
+			return result;
+		}
 
+		private ReduceResult ReduceNakedTriples(ReduceResult result, SudokuState state)
+		{
+			if (SkipMethod(SudokuSolverMethods.NakedTriples, result)) { return result; }
+
+			foreach (var singleValue in Puzzle.SingleValues)
+			{
+				foreach (var region in Puzzle.Regions)
+				{
+					var index0 = -1;
+					var index1 = -1;
+					var index2 = -1;
+
+					var match = singleValue;
+
+					foreach (var index in region)
+					{
+						var value = state[index];
+						if (!state.IsKnown(index) && (value & match) != SudokuPuzzle.Invalid)
+						{
+							match |= value;
+
+							/**/ if (index0 == -1) { index0 = index; }
+							else if (index1 == -1) { index1 = index; }
+							else if (index2 == -1) { index2 = index; }
+							else { index2 = -1; break; }
+						}
+					}
+					// We found 3 squares.
+					if (index2 != -1 && SudokuState.CountLookup[match] == 3)
+					{
+						foreach (var index in region)
+						{
+							if (index != index0 && index != index1 && index != index2)
+							{
+								result |= state.AndMask(index, ~match);
+							}
+						}
+					}
+				}
 			}
 			return result;
 		}

@@ -5,13 +5,13 @@ namespace Corniel.Sudoku
 	/// <summary>Represents a default 2x2 puzzle.</summary>
 	public class SudokuPuzzle2x2 : SudokuPuzzle
 	{
-		/// <summary>Represents a square with value 1.</summary>
+		/// <summary>Represents a cell with value 1.</summary>
 		public const ulong Value1 = 0x1;
-		/// <summary>Represents a square with value 2.</summary>
+		/// <summary>Represents a cell with value 2.</summary>
 		public const ulong Value2 = 0x2;
-		/// <summary>Represents a square with value 3.</summary>
+		/// <summary>Represents a cell with value 3.</summary>
 		public const ulong Value3 = 0x4;
-		/// <summary>Represents a square with value 4.</summary>
+		/// <summary>Represents a cell with value 4.</summary>
 		public const ulong Value4 = 0x8;
 
 		/// <summary>Gets the mapping from value to String.</summary>

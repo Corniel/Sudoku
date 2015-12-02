@@ -4,23 +4,23 @@ namespace Corniel.Sudoku
 	/// <summary>Represents a default 3x3 puzzle.</summary>
 	public class SudokuPuzzle3x3 : SudokuPuzzle
 	{
-		/// <summary>Represents a square with value 1.</summary>
+		/// <summary>Represents a cell with value 1.</summary>
 		public const ulong Value1 = 0x001;
-		/// <summary>Represents a square with value 2.</summary>
+		/// <summary>Represents a cell with value 2.</summary>
 		public const ulong Value2 = 0x002;
-		/// <summary>Represents a square with value 3.</summary>
+		/// <summary>Represents a cell with value 3.</summary>
 		public const ulong Value3 = 0x004;
-		/// <summary>Represents a square with value 4.</summary>
+		/// <summary>Represents a cell with value 4.</summary>
 		public const ulong Value4 = 0x008;
-		/// <summary>Represents a square with value 5.</summary>
+		/// <summary>Represents a cell with value 5.</summary>
 		public const ulong Value5 = 0x010;
-		/// <summary>Represents a square with value 6.</summary>
+		/// <summary>Represents a cell with value 6.</summary>
 		public const ulong Value6 = 0x020;
-		/// <summary>Represents a square with value 7.</summary>
+		/// <summary>Represents a cell with value 7.</summary>
 		public const ulong Value7 = 0x040;
-		/// <summary>Represents a square with value 8.</summary>
+		/// <summary>Represents a cell with value 8.</summary>
 		public const ulong Value8 = 0x080;
-		/// <summary>Represents a square with value 9.</summary>
+		/// <summary>Represents a cell with value 9.</summary>
 		public const ulong Value9 = 0x100;
 
 		/// <summary>Gets the mapping from value to String.</summary>

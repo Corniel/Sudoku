@@ -6,7 +6,7 @@ namespace Corniel.Sudoku
 	/// <summary>Represents the structure of a Sudoku puzzle.</summary>
 	public abstract class SudokuPuzzle
 	{
-		/// <summary>Represents a square with no valid options.</summary>
+		/// <summary>Represents a cell with no valid options.</summary>
 		public const ulong Invalid = 0;
 
 		/// <summary>Gets the Singleton instance of 2x2 puzzle.</summary>

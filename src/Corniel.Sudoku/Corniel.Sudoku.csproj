@@ -42,6 +42,7 @@
     <Compile Include="Bits.cs" />
     <Compile Include="InvalidPuzzleException.cs" />
     <Compile Include="ReduceResult.cs" />
+    <Compile Include="SudokuCell.cs" />
     <Compile Include="SudokuRegions.cs" />
     <Compile Include="SudokuRegionType.cs" />
     <Compile Include="SudokuSolverMethods.cs" />

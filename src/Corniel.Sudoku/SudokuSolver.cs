@@ -63,17 +63,17 @@ namespace Corniel.Sudoku
 			{
 				result = ReduceResult.None;
 
-				for (var index = 0; index <= Puzzle.MaximumIndex; index++)
+				for (var index1 = 0; index1 <= Puzzle.MaximumIndex; index1++)
 				{
-					if (state.IsKnown(index))
+					if (state.IsKnown(index1))
 					{
-						foreach (var group in Puzzle.Lookup[index])
+						foreach (var group in Puzzle.Lookup[index1])
 						{
-							foreach (var square in group)
+							foreach (var index0 in group)
 							{
-								if (square != index)
+								if (index0 != index1)
 								{
-									result |= state.Exclude(square, index);
+									result |= state.Exclude(index0, index1);
 								}
 							}
 						}
@@ -204,8 +204,8 @@ namespace Corniel.Sudoku
 							else { index1 = -1; break; }
 						}
 					}
-					// We found 2 squares.
-					if (index1 != -1 && SudokuState.CountLookup[match] == 2)
+					// We found 2 cells.
+					if (index1 != -1 && SudokuCell.Count(match) == 2)
 					{
 						foreach (var index in region)
 						{
@@ -247,8 +247,8 @@ namespace Corniel.Sudoku
 							else { index2 = -1; break; }
 						}
 					}
-					// We found 3 squares.
-					if (index2 != -1 && SudokuState.CountLookup[match] == 3)
+					// We found 3 cells.
+					if (index2 != -1 && SudokuCell.Count(match) == 3)
 					{
 						foreach (var index in region)
 						{

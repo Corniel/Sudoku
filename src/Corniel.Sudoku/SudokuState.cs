@@ -38,37 +38,26 @@ namespace Corniel.Sudoku
 		#region Count & count related
 
 		/// <summary>Gets the number of optional values for a given index of the Sudoku state.</summary>
-		public int Count(int index) { return CountLookup[m_Values[index]]; }
+		public int Count(int index) { return SudokuCell.Count(m_Values[index]); }
 
-		/// <summary>Return true of the square of the index has only one optional value, otherwise false.</summary>
+		/// <summary>Return true of cell square of the index has only one optional value, otherwise false.</summary>
 		public bool IsKnown(int index) { return Count(index) == 1; }
 
 		/// <summary>Returns true if the Sudoku is solved, otherwise false.</summary>
 		public bool IsSolved { get { return m_Unknown == 0; } }
 
-		/// <summary>A lookup to get the number of options of a value.</summary>
-		public static readonly byte[] CountLookup = GetCountLookup();
-		private static byte[] GetCountLookup()
-		{
-			var count = new byte[SudokuPuzzle.Puzzle3x3.Unknown + 1];
-
-			for (ushort val = 1; val <= SudokuPuzzle.Puzzle3x3.Unknown; val++)
-			{
-				count[val] = unchecked((byte)Bits.Count(val));
-			}
-			return count;
-		}
+		
 
 		#endregion
 
 		#region Updating
 
-		/// <summary>Reduced a square by excluding the options of the other.</summary>
+		/// <summary>Reduced a cell by excluding the options of the other.</summary>
 		/// <param name="index0">
-		/// The index of the square to update.
+		/// The index of the cell to update.
 		/// </param>
 		/// <param name="index1">
-		/// The index of the square to exclude the value(s) from.
+		/// The index of the cell to exclude the value(s) from.
 		/// </param>
 		public ReduceResult Exclude(int index0, int index1)
 		{
@@ -76,13 +65,7 @@ namespace Corniel.Sudoku
 			return AndMask(index0, mask);
 		}
 
-		/// <summary>Reduced a square by excluding the options of the other.</summary>
-		/// <param name="index">
-		/// The index of the square to reduce.
-		/// </param>
-		/// <param name="index">
-		/// The index of the square to exclude the value(s) from.
-		/// </param>
+		/// <summary>Reduced a cell by excluding the options of the other.</summary>
 		public ReduceResult AndMask(int index, ulong mask)
 		{
 			unchecked
@@ -95,7 +78,7 @@ namespace Corniel.Sudoku
 					return ReduceResult.Inconsistend;
 				}
 
-				if (CountLookup[nw] == 1 && CountLookup[val] != 1)
+				if (SudokuCell.Count(nw) == 1 && SudokuCell.Count(val) != 1)
 				{
 					m_Unknown--;
 					if (IsSolved)

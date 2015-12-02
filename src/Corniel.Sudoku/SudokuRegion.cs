@@ -26,7 +26,7 @@ namespace Corniel.Sudoku
 			return string.Format("{1}: {{{0}}}", string.Join(", ", this.ToArray()), RegionType);
 		}
 
-		/// <summary>Returns true if the other has a intersection with this region of at least 2 squares, but is not the same region.</summary>
+		/// <summary>Returns true if the other has a intersection with this region of at least 2 cells, but is not the same region.</summary>
 		public bool HasIntersectionOf2OrMoreSquares(SudokuRegion other)
 		{
 			if (other == this) { return false; }

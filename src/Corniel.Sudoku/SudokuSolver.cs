@@ -23,27 +23,28 @@ namespace Corniel.Sudoku
 		public SudokuSolverMethods Methods { get; private set; }
 
 		/// <summary>Solves a Sudoku puzzle given the Sudoku state.</summary>
-		public SudokuState Solve(SudokuState state)
+		public SudokuState Solve(SudokuState sudokuState)
 		{
 			// As states are not immutable, create a copy.
-			var worker = state.Copy();
+			var state = sudokuState.Copy();
 
 			var result = ReduceResult.Reduced;
 
 			while (result == ReduceResult.Reduced)
 			{
 				result = ReduceResult.None;
-				result |= ReduceSingles(result, worker);
-				result |= ReduceHiddenSingles(result, worker);
-				result |= ReduceLockedCandidates(result, worker);
-				result |= ReduceNakedPairs(result, worker);
-				result |= ReduceNakedTriples(result, worker);
+				result |= ReduceSingles(result, state);
+				result |= ReduceHiddenSingles(result, state);
+				result |= ReduceLockedCandidates(result, state);
+				result |= ReduceNakedPairs(result, state);
+				result |= ReduceNakedTriples(result, state);
+				result |= ReduceNakedQuads(result, state);
 			}
 			if (result.HasFlag(ReduceResult.Inconsistend))
 			{
 				throw new InvalidPuzzleException();
 			}
-			return worker;
+			return state;
 		}
 
 		/// <summary>Reduces singles.</summary>
@@ -220,6 +221,7 @@ namespace Corniel.Sudoku
 			return result;
 		}
 
+		/// <summary>Reduces naked triples.</summary>
 		private ReduceResult ReduceNakedTriples(ReduceResult result, SudokuState state)
 		{
 			if (SkipMethod(SudokuSolverMethods.NakedTriples, result)) { return result; }
@@ -253,6 +255,52 @@ namespace Corniel.Sudoku
 						foreach (var index in region)
 						{
 							if (index != index0 && index != index1 && index != index2)
+							{
+								result |= state.AndMask(index, ~match);
+							}
+						}
+					}
+				}
+			}
+			return result;
+		}
+
+		/// <summary>Reduces naked quads.</summary>
+		private ReduceResult ReduceNakedQuads(ReduceResult result, SudokuState state)
+		{
+			if (SkipMethod(SudokuSolverMethods.NakedQuads, result)) { return result; }
+
+			foreach (var singleValue in Puzzle.SingleValues)
+			{
+				foreach (var region in Puzzle.Regions)
+				{
+					var index0 = -1;
+					var index1 = -1;
+					var index2 = -1;
+					var index3 = -1;
+
+					var match = singleValue;
+
+					foreach (var index in region)
+					{
+						var value = state[index];
+						if (!state.IsKnown(index) && (value & match) != SudokuPuzzle.Invalid)
+						{
+							match |= value;
+
+							/**/ if (index0 == -1) { index0 = index; }
+							else if (index1 == -1) { index1 = index; }
+							else if (index2 == -1) { index2 = index; }
+							else if (index3 == -1) { index3 = index; }
+							else { index3 = -1; break; }
+						}
+					}
+					// We found 3 cells.
+					if (index3 != -1 && SudokuCell.Count(match) == 4)
+					{
+						foreach (var index in region)
+						{
+							if (index != index0 && index != index1 && index != index2 && index != index3)
 							{
 								result |= state.AndMask(index, ~match);
 							}

@@ -11,7 +11,8 @@ namespace Corniel.Sudoku
 		LockedCandidates = 0x4,
 		NakedPairs = 0x8,
 		NakedTriples = 0x10,
+		NakedQuads = 0x20,
 
-		All = 0x1F,
+		All = 0x3F,
 	}
 }

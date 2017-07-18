@@ -13,6 +13,9 @@ namespace Corniel.Sudoku
 		/// <summary>Action results in a solved puzzle.</summary>
 		Solved = 2,
 		/// <summary>An inconstancy occurred while reducing.</summary>
-		Inconsistend = 4,
+		Inconsistent = 4,
+
+        /// <summary>When solved or inconsistent, the outcome is final.</summary>
+        Final = Solved| Inconsistent,
 	}
 }

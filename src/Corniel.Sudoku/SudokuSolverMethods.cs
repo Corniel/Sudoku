@@ -12,7 +12,7 @@ namespace Corniel.Sudoku
 		NakedPairs = 0x8,
 		NakedTriples = 0x10,
 		NakedQuads = 0x20,
-
-		All = 0x3F,
+        BruteForce = 0x40,
+		All = 0x7F,
 	}
 }

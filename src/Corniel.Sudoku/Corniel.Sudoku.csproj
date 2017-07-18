@@ -41,6 +41,15 @@
   <ItemGroup>
     <Compile Include="Bits.cs" />
     <Compile Include="InvalidPuzzleException.cs" />
+    <Compile Include="ISudokuSolver.cs" />
+    <Compile Include="Solvers\BruteForceSolver.cs" />
+    <Compile Include="Solvers\MixedSolver.cs" />
+    <Compile Include="Solvers\ReduceSingles.cs" />
+    <Compile Include="Solvers\ReduceHiddenSingles.cs" />
+    <Compile Include="Solvers\ReduceLockedCandidates.cs" />
+    <Compile Include="Solvers\ReduceNakedPairs.cs" />
+    <Compile Include="Solvers\ReduceNakedTriples.cs" />
+    <Compile Include="Solvers\ReduceNakedQuads.cs" />
     <Compile Include="ReduceResult.cs" />
     <Compile Include="SudokuCell.cs" />
     <Compile Include="SudokuRegions.cs" />

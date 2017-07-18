@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
-using NUnit.Framework.Compatibility;
 using System;
+using System.Diagnostics;
 
 namespace Corniel.Sudoku.UnitTests
 {

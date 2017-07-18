@@ -1,0 +1,52 @@
+﻿namespace Corniel.Sudoku
+{
+    /// <summary>Reduces naked quads.</summary>
+    internal class ReduceNakedQuads: ISudokuSolver
+    {
+        /// <summary>Solves the Sudoku by reducing naked quads.</summary>
+        public ReduceResult Solve(SudokuPuzzle Puzzle, SudokuState state)
+        {
+            var result = ReduceResult.None;
+
+            foreach (var singleValue in Puzzle.SingleValues)
+            {
+                foreach (var region in Puzzle.Regions)
+                {
+                    var index0 = -1;
+                    var index1 = -1;
+                    var index2 = -1;
+                    var index3 = -1;
+
+                    var match = singleValue;
+
+                    foreach (var index in region)
+                    {
+                        var value = state[index];
+                        if (!state.IsKnown(index) && (value & match) != SudokuPuzzle.Invalid)
+                        {
+                            match |= value;
+
+                            if /**/ (index0 == -1) { index0 = index; }
+                            else if (index1 == -1) { index1 = index; }
+                            else if (index2 == -1) { index2 = index; }
+                            else if (index3 == -1) { index3 = index; }
+                            else/**/{ index3 = -1; break; }
+                        }
+                    }
+                    // We found 3 cells.
+                    if (index3 != -1 && SudokuCell.Count(match) == 4)
+                    {
+                        foreach (var index in region)
+                        {
+                            if (index != index0 && index != index1 && index != index2 && index != index3)
+                            {
+                                result |= state.AndMask(index, ~match);
+                            }
+                        }
+                    }
+                }
+            }
+            return result;
+        }
+    }
+}

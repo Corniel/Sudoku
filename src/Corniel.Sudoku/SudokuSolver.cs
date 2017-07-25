@@ -25,14 +25,9 @@ namespace Corniel.Sudoku
         /// <summary>Solves a Sudoku puzzle given the Sudoku state.</summary>
         public SudokuState Solve(SudokuState sudokuState)
         {
-            // As states are not immutable, create a copy.
+            // As states are mutable, create a copy.
             var state = sudokuState.Copy();
-
-            var result = Solver.Solve(Puzzle, state);
-            if (result.HasFlag(ReduceResult.Inconsistent))
-            {
-                throw new InvalidPuzzleException();
-            }
+            Solver.Solve(Puzzle, state);
             return state;
         }
     }

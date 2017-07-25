@@ -19,12 +19,15 @@ namespace Corniel.Sudoku
         public int Size { get; }
 
         /// <summary>The underlying byte array.</summary>
-        private ulong[] m_Values;
+        private readonly ulong[] m_Values;
 
         /// <summary>The number of cells that is unknown.</summary>
         private int m_Unknown;
 
         public ulong this[int index] => m_Values[index];
+
+        /// <summary>Gets the number of unknowns.</summary>
+        public int Unknowns => m_Unknown;
 
         /// <summary>Creates a copy of the current state.</summary>
         public SudokuState Copy()

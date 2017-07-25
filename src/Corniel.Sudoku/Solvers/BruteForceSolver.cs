@@ -1,100 +1,84 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace Corniel.Sudoku
 {
     internal class BruteForceSolver : ISudokuSolver
-    { 
-        private ISudokuSolver Solver { get; set; }
+    {
+        public BruteForceSolver(ISudokuSolver parent)
+        {
+            Parent = parent;
+        }
+
+        public ISudokuSolver Parent { get; }
 
         public ReduceResult Solve(SudokuPuzzle puzzle, SudokuState state)
         {
-            if (Solver == null)
+            var firstUknown = GetFirstUnknown(puzzle, state);
+            
+            if(firstUknown == -1)
             {
-                Solver = new MixedSolver(SudokuSolverMethods.All ^ SudokuSolverMethods.BruteForce);
+                return ReduceResult.None;
             }
-            return Solve(puzzle, state, Cursor.Initial);
-        }
 
-        private ReduceResult Solve(SudokuPuzzle puzzle, SudokuState state, Cursor cursor)
-        {
-            while(cursor.IsNotDone())
+            var values = GetPossibleValues(puzzle, state, firstUknown).ToArray();
+
+            foreach (var value in values)
             {
-                if(cursor.IsUnknown(puzzle, state))
+                var copy = Apply(state, firstUknown, value);
+                var result = Parent.Solve(puzzle, copy);
+                if (result == ReduceResult.Solved)
                 {
-                    Console.WriteLine(cursor);
-
-                    var copy = state.Copy();
-                    var mask = puzzle.GetSingleValue(cursor.Value);
-                    var result = copy.AndMask(cursor.Index, mask);
-
-                    if (result.HasFlag(ReduceResult.Inconsistent))
-                    {
-                        return Solve(puzzle, state, cursor.Next(puzzle));
-                    }
-
-                    result = Solver.Solve(puzzle, copy);
-
-                    // Inconsistent, try next.
-                    if (result.HasFlag(ReduceResult.Inconsistent))
-                    {
-                        return Solve(puzzle, state, cursor.Next(puzzle));
-                    }
-                    // We're done, return.
-                    if (result == ReduceResult.Solved)
-                    {
-                        state.GetValuesFrom(copy);
-                        return result;
-                    }
-                    // Continue with the copy.
-                    return Solve(puzzle, copy, cursor.Next(puzzle));
+                    state.GetValuesFrom(copy);
+                    return result;
                 }
-                cursor = cursor.Next(puzzle);
             }
             return ReduceResult.None;
         }
 
-        private struct Cursor
+        private static int GetFirstUnknown(SudokuPuzzle puzzle, SudokuState state)
         {
-            public readonly int Index;
-            public readonly int Value;
-
-            public static readonly Cursor Done = new Cursor(int.MaxValue, int.MaxValue);
-            public static readonly Cursor Initial = new Cursor(0, 0);
-
-            public Cursor(int idx, int val)
+            for(var index = 0; index < puzzle.MaximumIndex; index++)
             {
-                Index = idx;
-                Value = val;
+                if(state.IsUnknown(index))
+                {
+                    return index;
+                }
             }
+            return -1;
+        }
 
-            public Cursor Next(SudokuPuzzle puzzle)
+        private static IEnumerable<ulong> GetPossibleValues(SudokuPuzzle puzzle, SudokuState state, int index)
+        {
+            foreach (var value in puzzle.SingleValues)
             {
-                if(Value < puzzle.SingleValues.Count)
+                var values = state[index];
+
+                if ((value & values) != 0)
                 {
-                    return new Cursor(Index, Value + 1);
+                    yield return value; 
                 }
-                if(Index < puzzle.MaximumIndex)
-                {
-                    return new Cursor(Index + 1, 0);
-                }
-                return Done;
             }
+        }
 
-            public bool IsNotDone() => !Equals(Done);
+        private static SudokuState Apply(SudokuState state, int index, ulong value)
+        {
+            var copy = state.Copy();
+            var result = copy.AndMask(index, value);
 
-            public bool IsUnknown(SudokuPuzzle puzzle, SudokuState state)
+            //using (var writer = new StreamWriter(@"C:\TEMP\sudoku.txt", true))
+            //{
+            //    var num = 1 + Math.Log(value, 2);
+            //    writer.WriteLine($"Index: {index}, Value: {num:0}, Unknowns: {copy.Unknowns}");
+            //    writer.WriteLine(copy);
+            //    writer.WriteLine();
+            //}
+
+            if (result == ReduceResult.Inconsistent)
             {
-                if(state.IsUnknown(Index))
-                {
-                    var values = state[Index];
-                    var mask = puzzle.GetSingleValue(Value);
-                    return (values & mask) != 0;
-                }
-                return false;
+                throw new InvalidPuzzleException("This should never happen.");
             }
-
-            public override string ToString() => $"index: {Index}, value: {Value}";
+            return copy;
         }
     }
 }

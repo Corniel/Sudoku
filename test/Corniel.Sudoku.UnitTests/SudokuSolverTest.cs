@@ -9,7 +9,7 @@ namespace Corniel.Sudoku.UnitTests
         [Test]
         public void Solve_3x3WikipediaExample_SolvedPuzzle()
         {
-            Solve(SudokuPuzzle.Puzzle3x3, @"
+            Solve(SudokuPuzzle.Struture, @"
                 53.|.7.|...
                 6..|195|...
                 .98|...|.6.
@@ -38,7 +38,7 @@ namespace Corniel.Sudoku.UnitTests
         [Test]
         public void Solve_3x3Example1_SolvedPuzzle()
         {
-            Solve(SudokuPuzzle.Puzzle3x3, @"
+            Solve(SudokuPuzzle.Struture, @"
                 6..|..4|..3
                 ..5|7.6|.1.
                 .1.|...|7..
@@ -67,7 +67,7 @@ namespace Corniel.Sudoku.UnitTests
         [Test]
         public void Solve_3x3Example2_SolvedPuzzle()
         {
-            Solve(SudokuPuzzle.Puzzle3x3, @"
+            Solve(SudokuPuzzle.Struture, @"
                 ...|317|.69
                 16.|.92|..3
                 ..9|...|...
@@ -94,9 +94,39 @@ namespace Corniel.Sudoku.UnitTests
         }
 
         [Test]
+        public void Solve_3x3Example3_SolvedPuzzle()
+        {
+            Solve(SudokuPuzzle.Struture, @"
+                ...|8.3|.12
+                ...|2..|6..
+                ...|...|85.
+                ---+---+---
+                2..|.31|..7
+                6..|...|..9
+                7..|98.|..6
+                ---+---+---
+                .74|...|.3.
+                ..6|..9|...
+                .5.|3.4|...",
+                @"
+                469|853|712
+                583|217|694
+                127|496|853
+                ---+---+---
+                298|631|547
+                635|742|189
+                741|985|326
+                ---+---+---
+                974|168|235
+                316|529|478
+                852|374|961");
+        }
+
+
+        [Test]
         public void Solve_3x3WorldsHardestStudokuAccordingToTheTelegraph_SolvedPuzzle()
         {
-            Solve(SudokuPuzzle.Puzzle3x3, @"
+            Solve(SudokuPuzzle.Struture, @"
                 8..|...|...
                 ..3|6..|...
                 .7.|.9.|2..

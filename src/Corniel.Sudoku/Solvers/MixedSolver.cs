@@ -10,7 +10,7 @@ namespace Corniel.Sudoku
         {
             Methods = methods;
             Solvers = new List<ISudokuSolver>();
-            AddSolver(SudokuSolverMethods.Singles, new ReduceSingles());
+            AddSolver(SudokuSolverMethods.Singles, new ReduceNakedSingles());
             AddSolver(SudokuSolverMethods.HiddenSingles, new ReduceHiddenSingles());
             AddSolver(SudokuSolverMethods.LockedCandidates, new ReduceLockedCandidates());
             AddSolver(SudokuSolverMethods.NakedPairs, new ReduceNakedPairs());

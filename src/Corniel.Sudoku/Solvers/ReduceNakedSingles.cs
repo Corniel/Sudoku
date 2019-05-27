@@ -1,6 +1,6 @@
 ﻿namespace Corniel.Sudoku
 {
-    /// <summary>Reduces singles.</summary>
+    /// <summary>Reduces (naked) singles.</summary>
     /// <remarks>
     /// Any cells which have only one candidate can safely be assigned that value.
     /// 
@@ -8,12 +8,13 @@
     /// value is also excluded as a candidate from all other blank cells sharing
     /// the same row, column and sub square.
     /// </remarks>
-    internal class ReduceSingles : ISudokuSolver
+    internal class ReduceNakedSingles : ISudokuSolver
     {
         /// <summary>Solves the Sudoku by reducing singles.</summary>
         public ReduceResult Solve(SudokuPuzzle puzzle, SudokuState state)
         {
             var result = ReduceResult.Reduced;
+
             while (result == ReduceResult.Reduced)
             {
                 result = ReduceResult.None;

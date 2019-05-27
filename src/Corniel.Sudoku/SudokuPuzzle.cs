@@ -4,20 +4,39 @@ using System.Linq;
 namespace Corniel.Sudoku
 {
     /// <summary>Represents the structure of a Sudoku puzzle.</summary>
-    public abstract class SudokuPuzzle
+    public class SudokuPuzzle
     {
-        /// <summary>Represents a cell with no valid options.</summary>
-        public const ulong Invalid = 0;
-        
-        /// <summary>Gets the Singleton instance of 3x3 puzzle.</summary>
-        public static readonly SudokuPuzzle Puzzle3x3 = new SudokuPuzzle3x3();
+        public static readonly SudokuPuzzle Struture = new SudokuPuzzle();
 
-        /// <summary>Constructs a Sudoku puzzle based on its size.</summary>
-        /// <param name="size">
-        /// The size of a single square.
-        /// </param>
-        protected SudokuPuzzle(int size)
+        /// <summary>Represents a cell with no valid options.</summary>
+        public const uint Invalid = 0;
+
+        /// <summary>Represents a cell with value 1.</summary>
+        public const uint Value1 = 0x001;
+        /// <summary>Represents a cell with value 2.</summary>
+        public const uint Value2 = 0x002;
+        /// <summary>Represents a cell with value 3.</summary>
+        public const uint Value3 = 0x004;
+        /// <summary>Represents a cell with value 4.</summary>
+        public const uint Value4 = 0x008;
+        /// <summary>Represents a cell with value 5.</summary>
+        public const uint Value5 = 0x010;
+        /// <summary>Represents a cell with value 6.</summary>
+        public const uint Value6 = 0x020;
+        /// <summary>Represents a cell with value 7.</summary>
+        public const uint Value7 = 0x040;
+        /// <summary>Represents a cell with value 8.</summary>
+        public const uint Value8 = 0x080;
+        /// <summary>Represents a cell with value 9.</summary>
+        public const uint Value9 = 0x100;
+
+        /// <summary>Gets the unknown value.</summary>
+        public const uint Unknown = 0x1FF;
+
+        /// <summary>Gets the Singleton instance of 3x3 puzzle.</summary>
+        private SudokuPuzzle()
         {
+            const int size = 3;
             Size2 = size * size;
 
             Grid = new int[Size2, Size2];
@@ -33,8 +52,12 @@ namespace Corniel.Sudoku
             InitializeIntersected();
         }
 
+        /// <summary>Constructs a Sudoku puzzle based on its size.</summary>
+        /// <param name="size">
+        /// The size of a single square.
+        /// </param>
         /// <summary>Initializes a square with its indexes.</summary>
-        protected void InitializeGrid(int size2)
+        private void InitializeGrid(int size2)
         {
             for (var x = 0; x < size2; x++)
             {
@@ -46,7 +69,7 @@ namespace Corniel.Sudoku
         }
 
         /// <summary>Initializes all row regions.</summary>
-        protected void InitializeRowRegions(int size2)
+        private void InitializeRowRegions(int size2)
         {
             for (int row = 0; row < size2; row++)
             {
@@ -61,7 +84,7 @@ namespace Corniel.Sudoku
         }
 
         /// <summary>Initializes all column regions.</summary>
-        protected void InitializeColumnRegions(int size2)
+        private void InitializeColumnRegions(int size2)
         {
             for (var column = 0; column < size2; column++)
             {
@@ -76,7 +99,7 @@ namespace Corniel.Sudoku
         }
 
         /// <summary>Initializes all sub square regions.</summary>
-        protected void InitializeSubSquareRegions(int size)
+        private void InitializeSubSquareRegions(int size)
         {
             for (var xSub = 0; xSub < size; xSub++)
             {
@@ -97,7 +120,7 @@ namespace Corniel.Sudoku
         }
 
         /// <summary>Initializes a lookup to map each square to its corresponding regions.</summary>
-        protected void InitializeLookup()
+        private void InitializeLookup()
         {
             for (var index = 0; index < Lookup.Length; index++)
             {
@@ -113,7 +136,7 @@ namespace Corniel.Sudoku
         }
 
         /// <summary>Initializes the intersected per region.</summary>
-        protected void InitializeIntersected()
+        private void InitializeIntersected()
         {
             foreach (var region in Regions)
             {
@@ -122,26 +145,37 @@ namespace Corniel.Sudoku
         }
 
         /// <summary>All (distinct) regions.</summary>
-        public SudokuRegions Regions { get; protected set; }
+        public SudokuRegions Regions { get; private set; }
 
         /// <summary>The lookup to map each square to its corresponding regions.</summary>
-        public SudokuRegions[] Lookup { get; protected set; }
+        public SudokuRegions[] Lookup { get; private set; }
 
         /// <summary>The grid with the corresponding indexes.</summary>
-        protected int[,] Grid { get; set; }
+        private int[,] Grid { get; set; }
 
         /// <summary>The highest index in the grid.</summary>
-        public int MaximumIndex { get { return Grid.Length - 1; } }
+        public int MaximumIndex => Grid.Length - 1;
 
         /// <summary>The squared size of a single sub square.</summary>
         public int Size2 { get; }
 
-        /// <summary>Gets the unknown value.</summary>
-        public abstract ulong Unknown { get; }
-
-        public ulong GetSingleValue(int index) => SingleValues.Skip(index).FirstOrDefault();
+        public uint GetSingleValue(int index) => SingleValues.Skip(index).FirstOrDefault();
 
         /// <summary>Gets the possible (single) values.</summary>
-        public abstract ICollection<ulong> SingleValues { get; }
+        public ICollection<uint> SingleValues => Mapping.Keys;
+
+        /// <summary>Gets the mapping from value to String.</summary>
+        public static readonly Dictionary<uint, string> Mapping = new Dictionary<uint, string>()
+        {
+            { Value1, "1" },
+            { Value2, "2" },
+            { Value3, "3" },
+            { Value4, "4" },
+            { Value5, "5" },
+            { Value6, "6" },
+            { Value7, "7" },
+            { Value8, "8" },
+            { Value9, "9" },
+        };
     }
 }

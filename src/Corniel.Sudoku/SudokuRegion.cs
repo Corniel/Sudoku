@@ -1,13 +1,14 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics;
+﻿#pragma warning disable S3925 // "ISerializable" should be implemented correctly
+// No support for serialization.
+
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Corniel.Sudoku
 {
-	/// <summary>Represents a (distinct) Sudoku region.</summary>
-	[DebuggerDisplay("{ToString()}")]
-	public class SudokuRegion : HashSet<int> 
-	{
+    /// <summary>Represents a (distinct) Sudoku region.</summary>
+    public class SudokuRegion : HashSet<int>
+    {
 		/// <summary>Creates a Sudoku region.</summary>
 		public SudokuRegion(SudokuRegionType type)
 		{
@@ -16,11 +17,11 @@ namespace Corniel.Sudoku
 		}
 
 		/// <summary>Gets the type of the region.</summary>
-		public SudokuRegionType RegionType { get; protected set; }
+		public SudokuRegionType RegionType { get; }
 
-		public SudokuRegions Intersected { get; private set; }
+		public SudokuRegions Intersected { get; }
 
-		/// <summary>Represents the region as <see cref="System.String"/>.</summary>
+		/// <summary>Represents the region as <see cref="string"/>.</summary>
 		public override string ToString()
 		{
 			return string.Format("{1}: {{{0}}}", string.Join(", ", this.ToArray()), RegionType);
@@ -33,8 +34,14 @@ namespace Corniel.Sudoku
 			var count = 0;
 			foreach (var index in this)
 			{
-				if (other.Contains(index)) { count++; }
-				if (count > 1) { break; }
+                if (other.Contains(index))
+                {
+                    count++;
+                }
+                if (count > 1)
+                {
+                    break;
+                }
 			}
 			return count > 1;
 		}

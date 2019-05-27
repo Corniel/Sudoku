@@ -4,15 +4,15 @@
     internal class ReduceLockedCandidates : ISudokuSolver
     {
         /// <summary>Solves the Sudoku by reducing locked candidates.</summary>
-        public ReduceResult Solve(SudokuPuzzle Puzzle, SudokuState state)
+        public ReduceResult Solve(SudokuPuzzle puzzle, SudokuState state)
         {
             var result = ReduceResult.None;
 
-            foreach (var region in Puzzle.Regions)
+            foreach (var region in puzzle.Regions)
             {
                 foreach (var other in region.Intersected)
                 {
-                    ulong combined = 0;
+                    uint combined = 0;
                     foreach (var index in region)
                     {
                         if (!other.Contains(index))
@@ -21,7 +21,7 @@
                         }
                     }
                     // There are options that should be in the intersection.
-                    if (combined != Puzzle.Unknown)
+                    if (combined != SudokuPuzzle.Unknown)
                     {
                         foreach (var index in other)
                         {

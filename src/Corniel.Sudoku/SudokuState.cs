@@ -6,35 +6,31 @@ using System.Text;
 namespace Corniel.Sudoku
 {
     /// <summary>Sudoku state factory.</summary>
-    public class SudokuState : IEquatable<SudokuState>
+    public sealed class SudokuState : IEquatable<SudokuState>
     {
         /// <summary>Constructor.</summary>
-        private SudokuState(int size, int unknown, ulong[] values)
+        private SudokuState(int unknown, uint[] values)
         {
-            Size = size;
-            m_Unknown = unknown;
+            Unknowns = unknown;
             m_Values = values;
         }
 
-        public int Size { get; }
+        public int Size => 3;
 
         /// <summary>The underlying byte array.</summary>
-        private readonly ulong[] m_Values;
+        private readonly uint[] m_Values;
 
-        /// <summary>The number of cells that is unknown.</summary>
-        private int m_Unknown;
-
-        public ulong this[int index] => m_Values[index];
+        public uint this[int index] => m_Values[index];
 
         /// <summary>Gets the number of unknowns.</summary>
-        public int Unknowns => m_Unknown;
+        public int Unknowns { get; private set; }
 
         /// <summary>Creates a copy of the current state.</summary>
         public SudokuState Copy()
         {
-            var copy = new ulong[m_Values.Length];
+            var copy = new uint[m_Values.Length];
             Array.Copy(m_Values, copy, m_Values.Length);
-            return new SudokuState(Size, m_Unknown, copy);
+            return new SudokuState(Unknowns, copy);
         }
 
         internal void GetValuesFrom(SudokuState test)
@@ -54,7 +50,7 @@ namespace Corniel.Sudoku
         public bool IsUnknown(int index) => Count(index) > 1;
 
         /// <summary>Returns true if the Sudoku is solved, otherwise false.</summary>
-        public bool IsSolved => m_Unknown == 0;
+        public bool IsSolved => Unknowns == 0;
 
         #endregion
 
@@ -74,7 +70,7 @@ namespace Corniel.Sudoku
         }
 
         /// <summary>Reduced a cell by excluding the options of the other.</summary>
-        public ReduceResult AndMask(int index, ulong mask)
+        public ReduceResult AndMask(int index, uint mask)
         {
             unchecked
             {
@@ -88,7 +84,7 @@ namespace Corniel.Sudoku
 
                 if (SudokuCell.Count(nw) == 1 && SudokuCell.Count(val) != 1)
                 {
-                    m_Unknown--;
+                    Unknowns--;
                     if (IsSolved)
                     {
                         return ReduceResult.Solved;
@@ -115,10 +111,13 @@ namespace Corniel.Sudoku
                 if (index % (Size * Size) == 0) { sb.AppendLine(); }
                 else if (index % Size == 0) { sb.Append('|'); }
 
-                if (index > 0 && index % (Size * Size * Size) == 0) { sb.AppendLine(Sections[Size]); }
+                if (index > 0 && index % (Size * Size * Size) == 0)
+                {
+                    sb.AppendLine("---+---+---");
+                }
 
-                var str = String.Empty;
-                if (Mappings[Size].TryGetValue(val, out str))
+                var str = string.Empty;
+                if (SudokuPuzzle.Mapping.TryGetValue(val, out str))
                 {
                     sb.Append(str);
                 }
@@ -129,38 +128,33 @@ namespace Corniel.Sudoku
             }
             return sb.ToString();
         }
-        private static readonly string[] Sections =
-        {
-            "",
-            "-",
-            "--+--",
-            "---+---+---",
-            "----+----+----+----",
-        };
-        private static readonly Dictionary<int, Dictionary<ulong, string>> Mappings = new Dictionary<int, Dictionary<ulong, string>>()
-        {
-            { 3, SudokuPuzzle3x3.Mapping },
-        };
+
         #endregion
 
         #region IEquatable
 
-        public override bool Equals(object obj)
-        {
-            if (obj is SudokuState)
-            {
-                return Equals((SudokuState)obj);
-            }
-            return false;
-        }
+        /// <inheritdoc />
+        public override bool Equals(object obj) => Equals(obj as SudokuState);
+
+        /// <inheritdoc />
         public bool Equals(SudokuState other)
         {
+            if(other is null)
+            {
+                return false;
+            }
+
             for (var i = 0; i < m_Values.Length; i++)
             {
-                if (m_Values[i] != other.m_Values[i]) { return false; }
+                if (m_Values[i] != other.m_Values[i])
+                {
+                    return false;
+                }
             }
             return true;
         }
+
+        /// <inheritdoc />
         public override int GetHashCode()
         {
             unchecked
@@ -185,11 +179,13 @@ namespace Corniel.Sudoku
         /// The puzzle to parse.</param>
         public static SudokuState Parse(string puzzle)
         {
-            if (String.IsNullOrEmpty(puzzle)) { throw new ArgumentNullException("puzzle"); }
-
+            if (string.IsNullOrEmpty(puzzle))
+            {
+                throw new ArgumentNullException(nameof(puzzle));
+            }
             var rows = new List<SudokuParseToken[]>();
-
             var buffer = new List<SudokuParseToken>();
+
             foreach (var ch in puzzle)
             {
                 switch (ch)
@@ -221,15 +217,15 @@ namespace Corniel.Sudoku
 
             if (rows.Count == 9 && rows.All(row => row.Length == 9))
             {
-                return Create3x3(rows);
+                return Create(rows);
             }
-            throw new ArgumentException("Invalid Sudoku puzzle.", "puzzle");
+            throw new ArgumentException("Invalid Sudoku puzzle.", nameof(puzzle));
         }
 
         /// <summary>Creates a Sudoku state.</summary>
-        internal static SudokuState Create3x3(List<SudokuParseToken[]> rows)
+        internal static SudokuState Create(List<SudokuParseToken[]> rows)
         {
-            var values = new ulong[9 * 9];
+            var values = new uint[9 * 9];
             var unknown = 0;
 
             var index = 0;
@@ -239,26 +235,26 @@ namespace Corniel.Sudoku
                 {
                     switch (rows[x][y])
                     {
-                        case SudokuParseToken.Num1: values[index] = SudokuPuzzle3x3.Value1; break;
-                        case SudokuParseToken.Num2: values[index] = SudokuPuzzle3x3.Value2; break;
-                        case SudokuParseToken.Num3: values[index] = SudokuPuzzle3x3.Value3; break;
-                        case SudokuParseToken.Num4: values[index] = SudokuPuzzle3x3.Value4; break;
-                        case SudokuParseToken.Num5: values[index] = SudokuPuzzle3x3.Value5; break;
-                        case SudokuParseToken.Num6: values[index] = SudokuPuzzle3x3.Value6; break;
-                        case SudokuParseToken.Num7: values[index] = SudokuPuzzle3x3.Value7; break;
-                        case SudokuParseToken.Num8: values[index] = SudokuPuzzle3x3.Value8; break;
-                        case SudokuParseToken.Num9: values[index] = SudokuPuzzle3x3.Value9; break;
+                        case SudokuParseToken.Num1: values[index] = SudokuPuzzle.Value1; break;
+                        case SudokuParseToken.Num2: values[index] = SudokuPuzzle.Value2; break;
+                        case SudokuParseToken.Num3: values[index] = SudokuPuzzle.Value3; break;
+                        case SudokuParseToken.Num4: values[index] = SudokuPuzzle.Value4; break;
+                        case SudokuParseToken.Num5: values[index] = SudokuPuzzle.Value5; break;
+                        case SudokuParseToken.Num6: values[index] = SudokuPuzzle.Value6; break;
+                        case SudokuParseToken.Num7: values[index] = SudokuPuzzle.Value7; break;
+                        case SudokuParseToken.Num8: values[index] = SudokuPuzzle.Value8; break;
+                        case SudokuParseToken.Num9: values[index] = SudokuPuzzle.Value9; break;
 
-                        case SudokuParseToken.Uknown:
+                        // case SudokuParseToken.Uknown:
                         default:
-                            values[index] = SudokuPuzzle.Puzzle3x3.Unknown;
+                            values[index] = SudokuPuzzle.Unknown;
                             unknown++;
                             break;
                     }
                     index++;
                 }
             }
-            return new SudokuState(3, unknown, values);
+            return new SudokuState(unknown, values);
         }
 
         #endregion

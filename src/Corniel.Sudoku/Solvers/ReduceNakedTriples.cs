@@ -4,13 +4,13 @@
     internal class ReduceNakedTriples: ISudokuSolver
     {
         /// <summary>Solves the Sudoku by reducing naked triples.</summary>
-        public ReduceResult Solve(SudokuPuzzle Puzzle, SudokuState state)
+        public ReduceResult Solve(SudokuPuzzle puzzle, SudokuState state)
         {
             var result = ReduceResult.None;
 
-            foreach (var singleValue in Puzzle.SingleValues)
+            foreach (var singleValue in puzzle.SingleValues)
             {
-                foreach (var region in Puzzle.Regions)
+                foreach (var region in puzzle.Regions)
                 {
                     var index0 = -1;
                     var index1 = -1;

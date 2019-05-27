@@ -21,7 +21,7 @@ namespace Corniel.Sudoku
                 return ReduceResult.None;
             }
 
-            var values = GetPossibleValues(puzzle, state, firstUknown).ToArray();
+            var values = GetPossibleValues(puzzle, state, firstUknown);
 
             foreach (var value in values)
             {
@@ -48,7 +48,7 @@ namespace Corniel.Sudoku
             return -1;
         }
 
-        private static IEnumerable<ulong> GetPossibleValues(SudokuPuzzle puzzle, SudokuState state, int index)
+        private static IEnumerable<uint> GetPossibleValues(SudokuPuzzle puzzle, SudokuState state, int index)
         {
             foreach (var value in puzzle.SingleValues)
             {
@@ -61,18 +61,10 @@ namespace Corniel.Sudoku
             }
         }
 
-        private static SudokuState Apply(SudokuState state, int index, ulong value)
+        private static SudokuState Apply(SudokuState state, int index, uint value)
         {
             var copy = state.Copy();
             var result = copy.AndMask(index, value);
-
-            //using (var writer = new StreamWriter(@"C:\TEMP\sudoku.txt", true))
-            //{
-            //    var num = 1 + Math.Log(value, 2);
-            //    writer.WriteLine($"Index: {index}, Value: {num:0}, Unknowns: {copy.Unknowns}");
-            //    writer.WriteLine(copy);
-            //    writer.WriteLine();
-            //}
 
             if (result == ReduceResult.Inconsistent)
             {

@@ -105,7 +105,7 @@ namespace Corniel.Sudoku
             {
                 for (var ySub = 0; ySub < size; ySub++)
                 {
-                    var region = new SudokuRegion(SudokuRegionType.SubSquare);
+                    var region = new SudokuRegion(SudokuRegionType.Block);
                     Regions.Add(region);
 
                     for (var x = 0; x < size; x++)

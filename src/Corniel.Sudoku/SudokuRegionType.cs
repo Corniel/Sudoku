@@ -5,7 +5,7 @@
 		Unknown = 0,
 		Row,
 		Column,
-		SubSquare,
+		Block,
 		Miscellaneous,
 	}
 }

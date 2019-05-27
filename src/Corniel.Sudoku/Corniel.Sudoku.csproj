@@ -10,5 +10,9 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\smart-ass\src\SmartAss\SmartAss.csproj" />
+  </ItemGroup>
   
 </Project>

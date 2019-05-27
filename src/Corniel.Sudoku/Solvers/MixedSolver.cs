@@ -5,23 +5,28 @@ namespace Corniel.Sudoku
     /// <summary>A mixed solver that uses multiple Sudoku solving techniques.</summary>
     internal class MixedSolver : ISudokuSolver
     {
-        /// <summary>Initializes a mixed solver.</summary>
-        public MixedSolver(SudokuSolverMethods methods)
+        private ISudokuSolver[] solvers;
+        
+        private ISudokuSolver[] Solvers
         {
-            Methods = methods;
-            Solvers = new List<ISudokuSolver>();
-            AddSolver(SudokuSolverMethods.Singles, new ReduceNakedSingles());
-            AddSolver(SudokuSolverMethods.HiddenSingles, new ReduceHiddenSingles());
-            AddSolver(SudokuSolverMethods.LockedCandidates, new ReduceLockedCandidates());
-            AddSolver(SudokuSolverMethods.NakedPairs, new ReduceNakedPairs());
-            AddSolver(SudokuSolverMethods.NakedTriples, new ReduceNakedTriples());
-            AddSolver(SudokuSolverMethods.NakedQuads, new ReduceNakedQuads());
-            AddSolver(SudokuSolverMethods.BruteForce, new BruteForceSolver(this));
+            get
+            {
+                if (solvers is null)
+                {
+                    solvers = new ISudokuSolver[]
+                    {
+                        new ReduceNakedSingles(),
+                        new ReduceHiddenSingles(),
+                        new ReduceNakedPairs(),
+                        // new ReducePointingPairs(),
+                        new ReduceLockedCandidates(),
+                        new ReduceNakedTriples(),
+                        new ReduceNakedQuads(),
+                    };
+                }
+                return solvers;
+            }
         }
-
-        /// <summary>Gets the methods that are used to try to solve the puzzle.</summary>
-        public SudokuSolverMethods Methods { get; }
-        private List<ISudokuSolver> Solvers { get; }
 
         /// <summary>Solves a Sudoku by applying multiple techniques.</summary>
         public ReduceResult Solve(SudokuPuzzle puzzle, SudokuState state)
@@ -32,7 +37,7 @@ namespace Corniel.Sudoku
             {
                 result = ReduceResult.None;
 
-                for(var index = 0; index < Solvers.Count; index++)
+                for(var index = 0; index < Solvers.Length; index++)
                 {
                     var solver = Solvers[index];
                     result |= solver.Solve(puzzle, state);
@@ -51,14 +56,6 @@ namespace Corniel.Sudoku
                 }
             }
             return result;
-        }
-
-        private void AddSolver(SudokuSolverMethods method, ISudokuSolver solver)
-        {
-            if((Methods & method) != SudokuSolverMethods.None)
-            {
-                Solvers.Add(solver);
-            }
         }
     }
 }

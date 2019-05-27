@@ -8,7 +8,7 @@
     /// value is also excluded as a candidate from all other blank cells sharing
     /// the same row, column and sub square.
     /// </remarks>
-    internal class ReduceNakedSingles : ISudokuSolver
+    public class ReduceNakedSingles : ISudokuSolver
     {
         /// <summary>Solves the Sudoku by reducing singles.</summary>
         public ReduceResult Solve(SudokuPuzzle puzzle, SudokuState state)

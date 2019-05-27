@@ -3,11 +3,12 @@
     public static class SudokuCell
 	{
 		/// <summary>Counts the number of options for this cell.</summary>
-		public static int Count(ulong cell) { return CountLookup[cell]; }
+		public static int Count(uint cell) => CountLookup[cell];
 
 		/// <summary>A lookup to get the number of options of a value.</summary>
 		private static readonly byte[] CountLookup = GetCountLookup();
-		private static byte[] GetCountLookup()
+
+        private static byte[] GetCountLookup()
 		{
 			var count = new byte[SudokuPuzzle.Unknown + 1];
 

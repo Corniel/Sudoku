@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 
 namespace Corniel.Sudoku
 {
@@ -7,13 +6,10 @@ namespace Corniel.Sudoku
     public class SudokuSolver
     {
         /// <summary>Initializes a new solver for a given puzzle.</summary>
-        public SudokuSolver(SudokuPuzzle puzzle) : this(puzzle, SudokuSolverMethods.All) { }
-
-        /// <summary>Initializes a new solver for a given puzzle.</summary>
-        public SudokuSolver(SudokuPuzzle puzzle, SudokuSolverMethods methods)
-        {
+        public SudokuSolver(SudokuPuzzle puzzle)
+        { 
             Puzzle = puzzle ?? throw new ArgumentNullException(nameof(puzzle));
-            Solver = new MixedSolver(methods);
+            Solver = new MixedSolver();
         }
 
         /// <summary>Gets the puzzle (structure) used by this solver.</summary>
@@ -27,7 +23,13 @@ namespace Corniel.Sudoku
         {
             // As states are mutable, create a copy.
             var state = sudokuState.Copy();
-            Solver.Solve(Puzzle, state);
+            var result = Solver.Solve(Puzzle, state);
+
+            // TODO: fix this.
+            //if (result == ReduceResult.Inconsistent)
+            //{
+            //    throw new InvalidPuzzleException();
+            //}
             return state;
         }
     }

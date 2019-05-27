@@ -139,7 +139,6 @@ namespace Corniel.Sudoku
         };
         private static readonly Dictionary<int, Dictionary<ulong, string>> Mappings = new Dictionary<int, Dictionary<ulong, string>>()
         {
-            { 2, SudokuPuzzle2x2.Mapping },
             { 3, SudokuPuzzle3x3.Mapping },
         };
         #endregion
@@ -224,41 +223,7 @@ namespace Corniel.Sudoku
             {
                 return Create3x3(rows);
             }
-            if (rows.Count == 4 && rows.All(row => row.Length == 4))
-            {
-                return Create2x2(rows);
-            }
             throw new ArgumentException("Invalid Sudoku puzzle.", "puzzle");
-        }
-
-        /// <summary>Creates a Sudoku state.</summary>
-        internal static SudokuState Create2x2(List<SudokuParseToken[]> rows)
-        {
-            var values = new ulong[4 * 4];
-            var unknown = 0;
-
-            var index = 0;
-            for (var x = 0; x < 4; x++)
-            {
-                for (var y = 0; y < 4; y++)
-                {
-                    switch (rows[x][y])
-                    {
-                        case SudokuParseToken.Num1: values[index] = SudokuPuzzle2x2.Value1; break;
-                        case SudokuParseToken.Num2: values[index] = SudokuPuzzle2x2.Value2; break;
-                        case SudokuParseToken.Num3: values[index] = SudokuPuzzle2x2.Value3; break;
-                        case SudokuParseToken.Num4: values[index] = SudokuPuzzle2x2.Value4; break;
-
-                        case SudokuParseToken.Uknown:
-                        default:
-                            values[index] = SudokuPuzzle.Puzzle2x2.Unknown;
-                            unknown++;
-                            break;
-                    }
-                    index++;
-                }
-            }
-            return new SudokuState(2, unknown, values);
         }
 
         /// <summary>Creates a Sudoku state.</summary>

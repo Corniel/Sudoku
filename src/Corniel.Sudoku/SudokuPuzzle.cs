@@ -8,10 +8,7 @@ namespace Corniel.Sudoku
     {
         /// <summary>Represents a cell with no valid options.</summary>
         public const ulong Invalid = 0;
-
-        /// <summary>Gets the Singleton instance of 2x2 puzzle.</summary>
-        public static readonly SudokuPuzzle Puzzle2x2 = new SudokuPuzzle2x2();
-
+        
         /// <summary>Gets the Singleton instance of 3x3 puzzle.</summary>
         public static readonly SudokuPuzzle Puzzle3x3 = new SudokuPuzzle3x3();
 

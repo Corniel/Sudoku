@@ -4,42 +4,8 @@ using System.Diagnostics;
 
 namespace Corniel.Sudoku.UnitTests
 {
-    [TestFixture]
     public class SudokuSolverTest
     {
-        [Test]
-        public void Solve_2x2Invalid_ThrowsInvalidPuzzleException()
-        {
-            Assert.Catch<InvalidPuzzleException>(() =>
-            {
-                var puzzle = SudokuState.Parse(@"
-                .2|..
-                2.|..
-                --+--
-                ..|..
-                ..|..");
-                var solver = new SudokuSolver(SudokuPuzzle.Puzzle2x2);
-                solver.Solve(puzzle);
-            });
-
-        }
-        [Test]
-        public void Solve_2x2_SolvedPuzzle()
-        {
-            Solve(SudokuPuzzle.Puzzle2x2, @"
-                .4|.1
-                3.|..
-                --+--
-                ..|.4
-                ..|..",
-                @"
-                24|31
-                31|42
-                --+--
-                13|24
-                42|13");
-        }
-
         [Test]
         public void Solve_3x3WikipediaExample_SolvedPuzzle()
         {

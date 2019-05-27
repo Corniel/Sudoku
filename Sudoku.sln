@@ -1,16 +1,16 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28922.388
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Corniel.Sudoku", "Corniel.Sudoku\Corniel.Sudoku.csproj", "{28838A6E-B56D-4F5B-83E8-D9ED0C11DF75}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Corniel.Sudoku", "src\Corniel.Sudoku\Corniel.Sudoku.csproj", "{28838A6E-B56D-4F5B-83E8-D9ED0C11DF75}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Corniel.Sudoku.UnitTests", "Corniel.Sudoku.UnitTests\Corniel.Sudoku.UnitTests.csproj", "{4D78B40A-76C4-4BD5-B6A9-6D82753D1502}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Corniel.Sudoku.UnitTests", "test\Corniel.Sudoku.UnitTests\Corniel.Sudoku.UnitTests.csproj", "{4D78B40A-76C4-4BD5-B6A9-6D82753D1502}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{51CC3132-FAC7-4803-B2BA-56BF24CF8819}"
 	ProjectSection(SolutionItems) = preProject
-		..\License.md = ..\License.md
-		..\README.md = ..\README.md
+		License.md = License.md
+		README.md = README.md
 	EndProjectSection
 EndProject
 Global
@@ -46,5 +46,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9189A05E-FFD5-415F-86D2-C4E34C87F0D6}
 	EndGlobalSection
 EndGlobal

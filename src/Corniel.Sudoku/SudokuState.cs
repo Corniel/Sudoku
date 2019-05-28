@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Corniel.Sudoku.Events;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -50,11 +51,36 @@ namespace Corniel.Sudoku
         public bool IsUnknown(int index) => Count(index) > 1;
 
         /// <summary>Returns true if the Sudoku is solved, otherwise false.</summary>
-        public bool IsSolved => Unknowns == 0;
+        public bool IsSolved => m_Values.All(value => SudokuCell.Count(value) == 1);
 
         #endregion
 
         #region Updating
+
+        /// <summary>Reduced a cell by excluding the options of the other.</summary>
+        public IEvent And<TSolver>(int index, uint mask)
+        {
+            unchecked
+            {
+                var val = m_Values[index];
+                var nw = val & mask;
+                m_Values[index] = nw;
+
+                if (nw == SudokuPuzzle.Invalid)
+                {
+                    throw new InvalidPuzzleException();
+                }
+
+                if (SudokuCell.Count(nw) == 1 && SudokuCell.Count(val) != 1)
+                {
+                    return ValueFound.Ctor<TSolver>(index, nw);
+                }
+
+                return val != nw ? ReducedOption.Instance : (IEvent)NoReduction.Instance;
+            }
+        }
+
+
 
         /// <summary>Reduced a cell by excluding the options of the other.</summary>
         /// <param name="index0">
@@ -87,8 +113,9 @@ namespace Corniel.Sudoku
                     Unknowns--;
                     if (IsSolved)
                     {
-                        return ReduceResult.Solved;
+                        return ReduceResult.Solved | ReduceResult.Reduced | ReduceResult.Found;
                     }
+                    return ReduceResult.Reduced | ReduceResult.Found;
                 }
 
                 return val != nw ? ReduceResult.Reduced : ReduceResult.None;

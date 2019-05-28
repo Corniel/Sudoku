@@ -1,10 +1,13 @@
 ﻿using System.Collections.Generic;
+using Corniel.Sudoku.Events;
+using System.Linq;
 
 namespace Corniel.Sudoku
 {
     /// <summary>A mixed solver that uses multiple Sudoku solving techniques.</summary>
     internal class MixedSolver : ISudokuSolver
     {
+        private readonly ISudokuSolver ReduceNakedSingles = new ReduceNakedSingles();
         private ISudokuSolver[] solvers;
         
         private ISudokuSolver[] Solvers
@@ -15,47 +18,31 @@ namespace Corniel.Sudoku
                 {
                     solvers = new ISudokuSolver[]
                     {
-                        new ReduceNakedSingles(),
                         new ReduceHiddenSingles(),
-                        new ReduceNakedPairs(),
-                        // new ReducePointingPairs(),
-                        new ReduceLockedCandidates(),
-                        new ReduceNakedTriples(),
-                        new ReduceNakedQuads(),
                     };
                 }
                 return solvers;
             }
         }
 
-        /// <summary>Solves a Sudoku by applying multiple techniques.</summary>
-        public ReduceResult Solve(SudokuPuzzle puzzle, SudokuState state)
+        public IEnumerable<IEvent> Solve(SudokuPuzzle puzzle, SudokuState state)
         {
-            var result = ReduceResult.Reduced;
+            var events = new List<IEvent>();
+            var count = 0;
 
-            while(result.HasBeenReduced())
+            do
             {
-                result = ReduceResult.None;
-
-                for(var index = 0; index < Solvers.Length; index++)
-                {
-                    var solver = Solvers[index];
-                    result |= solver.Solve(puzzle, state);
-
-                    // We're done.
-                    if (result.IsFinal())
-                    {
-                        return result; 
-                    }
-
-                    // We don't want to break on index 0 when reduced.
-                    if(index != 0 && result.HasBeenReduced())
-                    {
-                        break;
-                    }
-                }
+                count = events.Count;
+                events.AddRange(ReduceNakedSingles.Solve(puzzle, state));
+                events.AddRange(Solvers.SelectMany(solver => solver.Solve(puzzle, state).Take(1)));
             }
-            return result;
+            while (events.Count > count);
+
+            if (state.IsSolved)
+            {
+                events.Add(new SolvedPuzzle());
+            }
+            return events;
         }
     }
 }

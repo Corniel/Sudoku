@@ -1,4 +1,7 @@
-﻿namespace Corniel.Sudoku
+﻿using Corniel.Sudoku.Events;
+using System.Collections.Generic;
+
+namespace Corniel.Sudoku
 {
     /// <summary>Reduces (naked) singles.</summary>
     /// <remarks>
@@ -10,33 +13,47 @@
     /// </remarks>
     public class ReduceNakedSingles : ISudokuSolver
     {
-        /// <summary>Solves the Sudoku by reducing singles.</summary>
-        public ReduceResult Solve(SudokuPuzzle puzzle, SudokuState state)
+        /// <inheritdoc />
+        public IEnumerable<IEvent> Solve(SudokuPuzzle puzzle, SudokuState state)
         {
-            var result = ReduceResult.Reduced;
+            var reduced = false;
 
-            while (result == ReduceResult.Reduced)
+            for (var index = 0; index <= puzzle.MaximumIndex; index++)
             {
-                result = ReduceResult.None;
-
-                for (var index1 = 0; index1 <= puzzle.MaximumIndex; index1++)
+                // For known cells only.
+                if (state.IsKnown(index))
                 {
-                    if (state.IsKnown(index1))
+                    var mask = ~state[index];
+
+                    // for all groups the cell belongs to.
+                    foreach (var group in puzzle.Lookup[index])
                     {
-                        foreach (var group in puzzle.Lookup[index1])
+                        foreach (var target in group)
                         {
-                            foreach (var index0 in group)
+                            if (target == index)
                             {
-                                if (index0 != index1)
-                                {
-                                    result |= state.Exclude(index0, index1);
-                                }
+                                continue;
+                            }
+
+                            var result = state.And<ReduceNakedSingles>(target, mask);
+
+                            if (result is ReducedOption)
+                            {
+                                reduced = true;
+                            }
+                            else if (result is ValueFound)
+                            {
+                                yield return result;
                             }
                         }
                     }
                 }
             }
-            return result;
+
+            if (reduced)
+            {
+                yield return ReducedOptions.Ctor<ReduceNakedSingles>();
+            }
         }
     }
 }

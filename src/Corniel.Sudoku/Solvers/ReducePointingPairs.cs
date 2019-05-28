@@ -11,7 +11,7 @@ namespace Corniel.Sudoku
     /// a poiting pair. All other appearances of the candidates can be
     /// eliminated.
     /// </remarks>
-    public class ReducePointingPairs : ISudokuSolver
+    public class ReducePointingPairs : ISudokuSolverOld
     {
         private readonly SimpleList<int> buffer = new SimpleList<int>(3);
 

@@ -23,13 +23,7 @@ namespace Corniel.Sudoku
         {
             // As states are mutable, create a copy.
             var state = sudokuState.Copy();
-            var result = Solver.Solve(Puzzle, state);
-
-            // TODO: fix this.
-            //if (result == ReduceResult.Inconsistent)
-            //{
-            //    throw new InvalidPuzzleException();
-            //}
+            Solver.Solve(Puzzle, state);
             return state;
         }
     }

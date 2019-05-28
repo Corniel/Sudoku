@@ -1,7 +1,7 @@
 ﻿namespace Corniel.Sudoku
 {
     /// <summary>Reduces naked triples.</summary>
-    internal class ReduceNakedTriples: ISudokuSolver
+    internal class ReduceNakedTriples: ISudokuSolverOld
     {
         /// <summary>Solves the Sudoku by reducing naked triples.</summary>
         public ReduceResult Solve(SudokuPuzzle puzzle, SudokuState state)

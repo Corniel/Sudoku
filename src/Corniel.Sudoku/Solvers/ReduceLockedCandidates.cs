@@ -1,7 +1,7 @@
 ﻿namespace Corniel.Sudoku
 {
     /// <summary>Reduces options that should be in the intersection.</summary>
-    internal class ReduceLockedCandidates : ISudokuSolver
+    internal class ReduceLockedCandidates : ISudokuSolverOld
     {
         /// <summary>Solves the Sudoku by reducing locked candidates.</summary>
         public ReduceResult Solve(SudokuPuzzle puzzle, SudokuState state)

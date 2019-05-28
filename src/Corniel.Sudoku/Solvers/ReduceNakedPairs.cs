@@ -8,7 +8,7 @@
     /// 
     /// These 2 candidates can be excluded from other cells in the group.
     /// </remarks>
-    internal class ReduceNakedPairs : ISudokuSolver
+    internal class ReduceNakedPairs : ISudokuSolverOld
     {
         /// <summary>Solves the Sudoku by reducing naked pairs.</summary>
         public ReduceResult Solve(SudokuPuzzle puzzle, SudokuState state)

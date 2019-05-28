@@ -10,10 +10,12 @@ namespace Corniel.Sudoku
         None = 0,
         /// <summary>Something changed, at least one reduction of the options.</summary>
         Reduced = 1,
+        /// <summary>A specific cell was found.</summary>
+        Found = 2,
         /// <summary>Action results in a solved puzzle.</summary>
-        Solved = 2,
+        Solved = 4,
         /// <summary>An inconstancy occurred while reducing.</summary>
-        Inconsistent = 4,
+        Inconsistent = 8,
 
         /// <summary>When solved or inconsistent, the outcome is final.</summary>
         Final = Solved | Inconsistent,
@@ -28,5 +30,7 @@ namespace Corniel.Sudoku
         public static bool IsInconsistent(this ReduceResult result) => (result & ReduceResult.Inconsistent) != 0;
 
         public static bool HasBeenReduced(this ReduceResult result) => (result & ReduceResult.Reduced) != 0;
+
+        public static bool FoundValue(this ReduceResult result) => (result & ReduceResult.Found) != 0;
     }
 }

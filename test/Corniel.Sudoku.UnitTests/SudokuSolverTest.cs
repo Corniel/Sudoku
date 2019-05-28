@@ -164,6 +164,8 @@ namespace Corniel.Sudoku.UnitTests
 
             Console.WriteLine("Elapsed: {0:#,##0.#####} ms", sw.Elapsed.TotalMilliseconds);
 
+            Console.WriteLine(actual);
+
             Assert.AreEqual(actual.IsSolved, "The puzzle is not solved.");
             Assert.AreEqual(SudokuState.Parse(expected), actual);
         }

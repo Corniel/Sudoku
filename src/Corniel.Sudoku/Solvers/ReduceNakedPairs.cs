@@ -1,55 +1,94 @@
-﻿namespace Corniel.Sudoku
+﻿using Corniel.Sudoku.Events;
+using System.Collections.Generic;
+
+namespace Corniel.Sudoku
 {
     /// <summary>Reduces naked pairs.</summary>
     /// <remarks>
-    /// If two cells in a group contain an identical pair of candidates and only
-    /// those two candidates, then no other cells in that group could be those
-    /// values.
+    /// Two cells in a row, a column or a block having only the same pair of
+    /// candidates are called a Naked Pair.
     /// 
-    /// These 2 candidates can be excluded from other cells in the group.
+    /// All other appearances of the two candidates in the same row, column,
+    /// or block can be eliminated.
     /// </remarks>
-    internal class ReduceNakedPairs : ISudokuSolverOld
+    internal class ReduceNakedPairs : ISudokuSolver
     {
-        /// <summary>Solves the Sudoku by reducing naked pairs.</summary>
-        public ReduceResult Solve(SudokuPuzzle puzzle, SudokuState state)
+        /// <inheritdoc />
+        public IEnumerable<IEvent> Solve(SudokuPuzzle puzzle, SudokuState state)
         {
-            var result = ReduceResult.None;
-
-            foreach (var singleValue in puzzle.SingleValues)
+            foreach (var region in puzzle.Regions)
             {
-                foreach (var region in puzzle.Regions)
+                IEvent result = ReduceRegion(region, state);
+
+                if (!(result is NoReduction))
                 {
-                    var index0 = -1;
-                    var index1 = -1;
+                    yield return result;
+                }
+            }
+        }
 
-                    var match = singleValue;
+        private IEvent ReduceRegion(SudokuRegion region, SudokuState state)
+        {
+            var nakedPair = 0u;
+            var count = 0;
 
-                    foreach (var index in region)
+            foreach (var index in region)
+            {
+                var value = state[index];
+
+                // nothing found yet.
+                if (nakedPair == default)
+                {
+                    if (SudokuCell.Count(value) == 2)
                     {
-                        var value = state[index];
-                        if (!state.IsKnown(index) && (value & match) != SudokuPuzzle.Invalid)
-                        {
-                            match |= value;
-
-                            if /**/ (index0 == -1) { index0 = index; }
-                            else if (index1 == -1) { index1 = index; }
-                            else/**/{ index1 = -1; break; }
-                        }
+                        nakedPair = value;
+                        count++;
                     }
-                    // We found 2 cells.
-                    if (index1 != -1 && SudokuCell.Count(match) == 2)
+                }
+
+                // Equal to the first (potential) naked pair.
+                else if (value == nakedPair && count++ > 2)
+                {
+                    throw new InvalidPuzzleException();
+                }
+            }
+
+            if (count < 2)
+            {
+                return NoReduction.Instance;
+            }
+            return Fetch(nakedPair, region, state);
+        }
+
+        private IEvent Fetch(uint nakedPair, SudokuRegion region, SudokuState state)
+        {
+            var mask = ~nakedPair;
+
+            IEvent result = NoReduction.Instance;
+
+            foreach (var index in region)
+            {
+                var value = state[index];
+                if (value != nakedPair)
+                {
+                    var test = state.And<ReduceNakedPairs>(index, mask);
+
+                    if (test is ValueFound)
                     {
-                        foreach (var index in region)
-                        {
-                            if (index != index0 && index != index1)
-                            {
-                                result |= state.AndMask(index, ~match);
-                            }
-                        }
+                        return test;
+                    }
+                    else if (test is ReducedOption)
+                    {
+                        result = test;
                     }
                 }
             }
-            return result;
+
+            if (result is NoReduction)
+            {
+                return result;
+            }
+            return ReducedOptions.Ctor<ReduceNakedPairs>();
         }
     }
 }

@@ -23,7 +23,11 @@ namespace Corniel.Sudoku
         {
             // As states are mutable, create a copy.
             var state = sudokuState.Copy();
-            Solver.Solve(Puzzle, state);
+            var events = Solver.Solve(Puzzle, state);
+            foreach(var @event in events)
+            {
+                Console.WriteLine(@event);
+            }
             return state;
         }
     }

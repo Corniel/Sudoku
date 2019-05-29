@@ -11,6 +11,8 @@ namespace Corniel.Sudoku.Events
 
         public Type SolverType { get; }
 
+        public override string ToString() => $"Reduced options, {SolverType.Name}";
+
         public static ReducedOptions Ctor<TSolver>()
         {
             return new ReducedOptions(typeof(TSolver));

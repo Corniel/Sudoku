@@ -19,6 +19,7 @@ namespace Corniel.Sudoku
                     solvers = new ISudokuSolver[]
                     {
                         new ReduceHiddenSingles(),
+                        new ReduceNakedPairs(),
                     };
                 }
                 return solvers;
@@ -40,7 +41,7 @@ namespace Corniel.Sudoku
 
             if (state.IsSolved)
             {
-                events.Add(new SolvedPuzzle());
+                events.Add(SolvedPuzzle.Instance);
             }
             return events;
         }

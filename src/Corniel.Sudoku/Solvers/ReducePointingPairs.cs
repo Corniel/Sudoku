@@ -1,4 +1,5 @@
-﻿using SmartAss.Collections;
+﻿using Corniel.Sudoku.Events;
+using SmartAss.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -11,64 +12,89 @@ namespace Corniel.Sudoku
     /// a poiting pair. All other appearances of the candidates can be
     /// eliminated.
     /// </remarks>
-    public class ReducePointingPairs : ISudokuSolverOld
+    public class ReducePointingPairs : ISudokuSolver
     {
-        private readonly SimpleList<int> buffer = new SimpleList<int>(3);
+        private readonly SimpleList<int> intersection = new SimpleList<int>(9);
 
-        public ReduceResult Solve(SudokuPuzzle puzzle, SudokuState state)
+        public IEnumerable<IEvent> Solve(SudokuPuzzle puzzle, SudokuState state)
         {
-            var result = ReduceResult.None;
-
-            foreach (var region in GetRegions(puzzle))
+            foreach (var region in puzzle.Regions)
             {
-                foreach (var singleValue in puzzle.SingleValues)
+                foreach (var intersected in region.Intersected)
                 {
-                    buffer.Clear();
+                    intersection.Clear();
+                    intersection.AddRange(region.Intersect(intersected));
 
-                    foreach (var index in region)
+                    // We found candidate intersections
+                    if (intersection.Count > 1)
                     {
-                        if (state.IsKnown(index))
+                        foreach (var value in puzzle.SingleValues)
                         {
-                            continue;
-                        }
-
-                        var val = state[index];
-
-                        if ((val & singleValue) != SudokuPuzzle.Invalid)
-                        {
-                            buffer.Add(index);
-
-                            if (buffer.Count == 3)
+                            var result = Solve(state, region, intersected, value);
+                            if (!(result is NoReduction))
                             {
-                                break;
-                            }
-                        }
-                    }
-
-                    // under normal circomstances, other counts are taken care off by other strategies.
-                    if (buffer.Count == 2)
-                    {
-                        foreach (var other in region.Intersected)
-                        {
-                            // all are shared.
-                            if (buffer.All(i => other.Contains(i)))
-                            {
-                                var mask = ~singleValue;
-                                foreach (var index in other.Where(i => other.Contains(i)))
-                                {
-                                    result |= state.AndMask(index, mask);
-                                }
+                                yield return result;
                             }
                         }
                     }
                 }
             }
-            return result;
         }
 
-        private static IEnumerable<SudokuRegion> GetRegions(SudokuPuzzle puzzle)
+        private IEvent Solve(SudokuState state, SudokuRegion region, SudokuRegion intersected, uint value)
         {
-            return puzzle.Regions.Where(region => region.RegionType == SudokuRegionType.Block);
+            var count = 0;
+
+            foreach (var index in region)
+            {
+                if ((state[index] & value) != 0)
+                {
+                    if (intersection.Contains(index))
+                    {
+                        count++;
+                    }
+                    else
+                    {
+                        return NoReduction.Instance;
+                    }
+                }
+            }
+            if (count > 1)
+            {
+                return Fetch(value, intersection, intersected, state);
+            }
+            return NoReduction.Instance;
+        }
+
+        private IEvent Fetch(uint value, SimpleList<int> intersection, SudokuRegion intersected, SudokuState state)
+        {
+            IEvent result = NoReduction.Instance;
+            var mask = ~value;
+
+            foreach (var index in intersected)
+            {
+                // items in the shared section should be skipped.
+                if (intersection.Contains(index))
+                {
+                    continue;
+                }
+                var test = state.And<ReducePointingPairs>(index, mask);
+
+                if (test is ValueFound)
+                {
+                    return test;
+                }
+                else if (test is ReducedOption)
+                {
+                    result = test;
+                }
+            }
+
+            if (result is NoReduction)
+            {
+                return result;
+            }
+            return ReducedOptions.Ctor<ReduceNakedPairs>();
         }
     }
 }

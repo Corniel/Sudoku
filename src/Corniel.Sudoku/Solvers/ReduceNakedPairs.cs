@@ -18,7 +18,7 @@ namespace Corniel.Sudoku
         {
             foreach (var region in puzzle.Regions)
             {
-                IEvent result = ReduceRegion(region, state);
+                var result = ReduceRegion(region, state);
 
                 if (!(result is NoReduction))
                 {
@@ -62,9 +62,8 @@ namespace Corniel.Sudoku
 
         private IEvent Fetch(uint nakedPair, SudokuRegion region, SudokuState state)
         {
-            var mask = ~nakedPair;
-
             IEvent result = NoReduction.Instance;
+            var mask = ~nakedPair;
 
             foreach (var index in region)
             {

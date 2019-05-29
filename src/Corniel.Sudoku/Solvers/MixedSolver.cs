@@ -20,7 +20,8 @@ namespace Corniel.Sudoku
                     {
                         new ReduceHiddenSingles(),
                         new ReduceNakedPairs(),
-                        //new ReducePointingPairs(),
+                        new ReducePointingPairs(),
+                        new ReduceHiddenPairs(),
                     };
                 }
                 return solvers;

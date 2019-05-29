@@ -16,6 +16,7 @@ namespace Corniel.Sudoku
     {
         private readonly SimpleList<int> intersection = new SimpleList<int>(9);
 
+        /// <inheritdoc />
         public IEnumerable<IEvent> Solve(SudokuPuzzle puzzle, SudokuState state)
         {
             foreach (var region in puzzle.Regions)

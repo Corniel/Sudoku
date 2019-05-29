@@ -17,24 +17,25 @@ namespace Corniel.Sudoku
         private const int NoIndex = -1;
 
         /// <inheritdoc />
-        public IEnumerable<IEvent> Solve(SudokuPuzzle puzzle, SudokuState state)
+        public void Solve(SudokuPuzzle puzzle, SudokuState state, ICollection<IEvent> events)
         {
             // check all groups.
             foreach (var region in puzzle.Regions)
             {
                 foreach (var singleValue in puzzle.SingleValues)
                 {
-                    var result = CheckCells(state, region, singleValue);
+                    var pre = events.Count;
+                    CheckCells(state, region, singleValue, events);
 
-                    if (!(result is NoReduction))
+                    if (pre != events.Count)
                     {
-                        yield return result;
+                        return;
                     }
                 }
             }
         }
 
-        private static IEvent CheckCells(SudokuState state, SudokuRegion region, uint singleValue)
+        private void CheckCells(SudokuState state, SudokuRegion region, uint singleValue, ICollection<IEvent> events)
         {
             var hidden = NoIndex;
 
@@ -48,13 +49,13 @@ namespace Corniel.Sudoku
                     // Already value, try next.
                     if (singleValue == value)
                     {
-                        return NoReduction.Instance;
+                        return;
                     }
 
                     // not the first
                     if (hidden != NoIndex)
                     {
-                        return NoReduction.Instance;
+                        return;
                     }
                     hidden = index;
                 }
@@ -62,9 +63,9 @@ namespace Corniel.Sudoku
 
             if (hidden == NoIndex)
             {
-                return NoReduction.Instance;
+                return;
             }
-            return state.And<ReduceHiddenSingles>(hidden, singleValue);
+            events.Add(state.And<ReduceHiddenSingles>(hidden, singleValue));
         }
     }
 }

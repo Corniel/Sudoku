@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Corniel.Sudoku.Events;
+using System;
+using System.Collections.Generic;
 
 namespace Corniel.Sudoku
 {
@@ -23,7 +25,8 @@ namespace Corniel.Sudoku
         {
             // As states are mutable, create a copy.
             var state = sudokuState.Copy();
-            var events = Solver.Solve(Puzzle, state);
+            var events = new List<IEvent>(128);
+            Solver.Solve(Puzzle, state, events);
             foreach(var @event in events)
             {
                 Console.WriteLine(@event);

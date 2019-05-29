@@ -1,6 +1,7 @@
 ﻿using Corniel.Sudoku.Events;
 using SmartAss.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Corniel.Sudoku
 {
@@ -30,23 +31,26 @@ namespace Corniel.Sudoku
         }
 
         /// <inheritdoc />
-        public IEnumerable<IEvent> Solve(SudokuPuzzle puzzle, SudokuState state)
+        public void Solve(SudokuPuzzle puzzle, SudokuState state, ICollection<IEvent> events)
         {
             foreach (var region in puzzle.Regions)
             {
                 foreach (var pair in Pairs)
                 {
-                    var result = ReduceRegion(pair, region, state);
+                    var pre = events.Count;
 
-                    if (!(result is NoReduction))
+                    ReduceRegion(pair, region, state, events);
+
+                    // We found some, let simpler strategies try again.
+                    if (pre != events.Count)
                     {
-                        yield return result;
+                        return;
                     }
                 }
             }
         }
 
-        private IEvent ReduceRegion(uint pair, SudokuRegion region, SudokuState state)
+        private void ReduceRegion(uint pair, SudokuRegion region, SudokuState state, ICollection<IEvent> events)
         {
             HiddenPairs.Clear();
 
@@ -60,33 +64,35 @@ namespace Corniel.Sudoku
                     // If not both are present or we already had 2, return.
                     if (and != pair || HiddenPairs.Count > 1)
                     {
-                        return NoReduction.Instance;
+                        return;
                     }
-
                     HiddenPairs.Add(index);
                 }
             }
 
             if (HiddenPairs.Count == 2)
             {
-                return Fetch(pair, HiddenPairs, state);
+                Fetch(pair, HiddenPairs, state, events);
             }
-            return NoReduction.Instance;
         }
 
-        private IEvent Fetch(uint pair, SimpleList<int> hiddenPairs, SudokuState state)
+        private void Fetch(uint pair, SimpleList<int> hiddenPairs, SudokuState state, ICollection<IEvent> events)
         {
             IEvent result = NoReduction.Instance;
 
             foreach (var index in hiddenPairs)
             {
                 var test = state.And<ReduceHiddenPairs>(index, pair);
-                if (!(test is NoReduction))
+
+                if (test is ReducedOption)
                 {
                     result = test;
                 }
             }
-            return result;
+            if (result is ReducedOption)
+            {
+                events.Add(ReducedOptions.Ctor<ReduceHiddenPairs>());
+            }
         }
     }
 }

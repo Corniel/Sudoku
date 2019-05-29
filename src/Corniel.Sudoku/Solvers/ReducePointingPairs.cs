@@ -17,7 +17,7 @@ namespace Corniel.Sudoku
         private readonly SimpleList<int> intersection = new SimpleList<int>(9);
 
         /// <inheritdoc />
-        public IEnumerable<IEvent> Solve(SudokuPuzzle puzzle, SudokuState state)
+        public void Solve(SudokuPuzzle puzzle, SudokuState state, ICollection<IEvent> events)
         {
             foreach (var region in puzzle.Regions)
             {
@@ -31,10 +31,12 @@ namespace Corniel.Sudoku
                     {
                         foreach (var value in puzzle.SingleValues)
                         {
-                            var result = Solve(state, region, intersected, value);
-                            if (!(result is NoReduction))
+                            var pre = events.Count;
+                            Solve(state, region, intersected, value, events);
+
+                            if(pre != events.Count)
                             {
-                                yield return result;
+                                return;
                             }
                         }
                     }
@@ -42,7 +44,7 @@ namespace Corniel.Sudoku
             }
         }
 
-        private IEvent Solve(SudokuState state, SudokuRegion region, SudokuRegion intersected, uint value)
+        private void Solve(SudokuState state, SudokuRegion region, SudokuRegion intersected, uint value, ICollection<IEvent> events)
         {
             var count = 0;
 
@@ -56,18 +58,17 @@ namespace Corniel.Sudoku
                     }
                     else
                     {
-                        return NoReduction.Instance;
+                        return;
                     }
                 }
             }
             if (count > 1)
             {
-                return Fetch(value, intersection, intersected, state);
+                Fetch(value, intersection, intersected, state, events);
             }
-            return NoReduction.Instance;
         }
 
-        private IEvent Fetch(uint value, SimpleList<int> intersection, SudokuRegion intersected, SudokuState state)
+        private void Fetch(uint value, SimpleList<int> intersection, SudokuRegion intersected, SudokuState state, ICollection<IEvent> events)
         {
             IEvent result = NoReduction.Instance;
             var mask = ~value;
@@ -83,7 +84,7 @@ namespace Corniel.Sudoku
 
                 if (test is ValueFound)
                 {
-                    return test;
+                    events.Add(test);
                 }
                 else if (test is ReducedOption)
                 {
@@ -91,11 +92,10 @@ namespace Corniel.Sudoku
                 }
             }
 
-            if (result is NoReduction)
+            if (result is ReducedOption)
             {
-                return result;
+                events.Add(ReducedOptions.Ctor<ReduceNakedPairs>());
             }
-            return ReducedOptions.Ctor<ReduceNakedPairs>();
         }
     }
 }

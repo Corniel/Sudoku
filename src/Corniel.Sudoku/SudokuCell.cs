@@ -1,4 +1,6 @@
-﻿namespace Corniel.Sudoku
+﻿using System.Collections.Generic;
+
+namespace Corniel.Sudoku
 {
     public static class SudokuCell
 	{
@@ -27,15 +29,20 @@
         /// <summary>Gets the unknown value.</summary>
         public const uint Unknown = 0x1FF;
 
-        public static uint Single(int value) => Singles[value];
+        /// <summary>Gets all single values a cell could (potentially) have.</summary>
+        public static readonly IReadOnlyList<uint> Singles = new[] { Value1, Value2, Value3, Value4, Value5, Value6, Value7, Value8, Value9 };
 
-        private static readonly uint[] Singles = { Invalid, Value1, Value2, Value3, Value4, Value5, Value6, Value7, Value8, Value9 };
+        public static uint Single(int value) => _SingleLookUp[value];
+
+        private static readonly uint[] _SingleLookUp = { Invalid, Value1, Value2, Value3, Value4, Value5, Value6, Value7, Value8, Value9 };
 
         /// <summary>Counts the number of options for this cell.</summary>
         public static int Count(uint cell) => CountLookup[cell];
 
 		/// <summary>A lookup to get the number of options of a value.</summary>
 		private static readonly byte[] CountLookup = GetCountLookup();
+
+        
 
         private static byte[] GetCountLookup()
 		{

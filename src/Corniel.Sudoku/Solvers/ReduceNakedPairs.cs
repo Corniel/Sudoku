@@ -14,20 +14,21 @@ namespace Corniel.Sudoku
     internal class ReduceNakedPairs : ISudokuSolver
     {
         /// <inheritdoc />
-        public IEnumerable<IEvent> Solve(SudokuPuzzle puzzle, SudokuState state)
+        public void Solve(SudokuPuzzle puzzle, SudokuState state, ICollection<IEvent> events)
         {
             foreach (var region in puzzle.Regions)
             {
-                var result = ReduceRegion(region, state);
+                var pre = events.Count;
+                ReduceRegion(region, state, events);
 
-                if (!(result is NoReduction))
+                if (pre != events.Count)
                 {
-                    yield return result;
+                    return;
                 }
             }
         }
 
-        private IEvent ReduceRegion(SudokuRegion region, SudokuState state)
+        private void ReduceRegion(SudokuRegion region, SudokuState state, ICollection<IEvent> events)
         {
             var nakedPair = 0u;
             var count = 0;
@@ -53,14 +54,13 @@ namespace Corniel.Sudoku
                 }
             }
 
-            if (count < 2)
+            if (count > 1)
             {
-                return NoReduction.Instance;
+                Fetch(nakedPair, region, state, events);
             }
-            return Fetch(nakedPair, region, state);
         }
 
-        private IEvent Fetch(uint nakedPair, SudokuRegion region, SudokuState state)
+        private void Fetch(uint nakedPair, SudokuRegion region, SudokuState state, ICollection<IEvent> events)
         {
             IEvent result = NoReduction.Instance;
             var mask = ~nakedPair;
@@ -74,7 +74,7 @@ namespace Corniel.Sudoku
 
                     if (test is ValueFound)
                     {
-                        return test;
+                        events.Add(test);
                     }
                     else if (test is ReducedOption)
                     {
@@ -83,11 +83,10 @@ namespace Corniel.Sudoku
                 }
             }
 
-            if (result is NoReduction)
+            if (result is ReducedOption)
             {
-                return result;
+                events.Add(ReducedOptions.Ctor<ReduceNakedPairs>());
             }
-            return ReducedOptions.Ctor<ReduceNakedPairs>();
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Corniel.Sudoku
     public class ReduceNakedSingles : ISudokuSolver
     {
         /// <inheritdoc />
-        public IEnumerable<IEvent> Solve(SudokuPuzzle puzzle, SudokuState state)
+        public void Solve(SudokuPuzzle puzzle, SudokuState state, ICollection<IEvent> events)
         {
             var reduced = false;
 
@@ -43,16 +43,15 @@ namespace Corniel.Sudoku
                             }
                             else if (result is ValueFound)
                             {
-                                yield return result;
+                                events.Add(result);
                             }
                         }
                     }
                 }
             }
-
             if (reduced)
             {
-                yield return ReducedOptions.Ctor<ReduceNakedSingles>();
+                events.Add(ReducedOptions.Ctor<ReduceNakedSingles>());
             }
         }
     }

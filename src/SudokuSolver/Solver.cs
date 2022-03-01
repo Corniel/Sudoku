@@ -34,6 +34,7 @@ public static class Solver
         new NakedSingles(),
         new HiddenSingles(),
         new NakedPairs(),
+        new HiddenPairs(),
         new NakedTriples(),
         new NakedQuads(),
         new SteeringWheel(),

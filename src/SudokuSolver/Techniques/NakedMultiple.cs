@@ -25,8 +25,11 @@ public abstract class NakedMultiple : Technique
             if (values.Count == Size && (multiples.Count == 0 || multiples[0] == values))
             {
                 // pair occurs more than twice.
-                if (multiples.Count == Size) return cells;
-                multiples.Add(values);
+                if (multiples.Count < Size)
+                {
+                    multiples.Add(values);
+                }
+                else return cells;
             }
         }
         if (multiples.Count == Size)

@@ -32,9 +32,10 @@ public static class Solver
     private static readonly Technique[] Techniques = new Technique[] 
     {
         new NakedSingles(),
-        new HiddenSingles(),
+        new Singles(),
         new NakedPairs(),
         new HiddenPairs(),
+        new PointingPair(),
         new NakedTriples(),
         new NakedQuads(),
         new SteeringWheel(),

@@ -67,7 +67,7 @@ public class SteeringWheel : Technique
                 
                 if (cell.IsUndecided())
                 {
-                    reduced = reduced.And(index, mask);
+                    reduced = reduced.And(Location.Index(index), mask);
                 }
             }
         }
@@ -81,7 +81,7 @@ public class SteeringWheel : Technique
 
                 if (cell.IsUndecided())
                 {
-                    reduced = reduced.And(index, mask);
+                    reduced = reduced.And(Location.Index(index), mask);
                 }
             }
         }

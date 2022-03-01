@@ -92,7 +92,7 @@ public class With_technique
         4..|...|..3
         .5.|..7|...
         2..|.8.|..1
-        ---+---|---
+        ---+---|--- 
         ..9|...|8.5
         .7.|...|.6.
         ...|3.4|...",
@@ -125,13 +125,15 @@ public class With_technique
             var delta = r.Reduced.Delta(last.Reduced).ToArray();
             last = r;
             Console.WriteLine(r.Technique.Name);
-            Console.WriteLine(string.Join(", ", delta.OrderByDescending(c => c.Values.SingleValue())));
+            Console.WriteLine(string.Join(", ", delta.Where(c => c.Values.SingleValue())));
             Console.WriteLine();
         }
 
         Console.WriteLine("Elapsed: {0:#,##0.#####} ms", sw.Elapsed.TotalMilliseconds);
 
         Console.WriteLine(last.Reduced);
+
+        Console.WriteLine(string.Join(", ", last.Reduced.Where(c => c.Values.IsUndecided())));
 
         reductions.Should().NotBeEmpty();
         reductions.Last().Reduced.Solved().Should().BeTrue();

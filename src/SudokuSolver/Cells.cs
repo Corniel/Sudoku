@@ -20,29 +20,22 @@ public readonly struct Cells : IReadOnlyCollection<Cell>, IEquatable<Cells>
     public Values this[int index] => cells[index];
     public Values this[int row, int column] => cells[row * Size2 + column];
 
-    public Cells And(int index, Values cell)
-    {
-        var updated = cells[index] & (uint)cell;
-        // create copy when changing.
-        if (updated != cells[index])
-        {
-            var copy = new uint[cells.Length];
-            Array.Copy(cells, copy, cells.Length);
-            copy[index] = updated;
-            return new Cells(copy);
-        }
-        else return this;
-    }
+    public Cells And(Location location, Values cell) => Update(location, cells[location] & (uint)cell);
 
-    public Cells Not(int index, Values cell)
+    public Cells Not(Location location, Values cell) => Update(location, cells[location] & ~(uint)cell);
+
+    private Cells Update(Location location, uint updated)
     {
-        var updated = cells[index] & ~(uint)cell;
+        if (updated == 0)
+        {
+            throw new InvalidPuzzle();
+        }
         // create copy when changing.
-        if (updated != cells[index])
+        if (updated != cells[location])
         {
             var copy = new uint[cells.Length];
             Array.Copy(cells, copy, cells.Length);
-            copy[index] = updated;
+            copy[location] = updated;
             return new Cells(copy);
         }
         else return this;

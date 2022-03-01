@@ -9,7 +9,7 @@
 /// All other appearences of the same candidate, if any, are eliminated if
 /// they can bee seen by the Single.
 /// </remarks>
-internal class HiddenSingles : Technique
+internal class Singles : Technique
 {
     private const int NoIndex = -1;
 

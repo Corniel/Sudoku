@@ -6,7 +6,7 @@ using System.Linq;
 namespace Corniel.Sudoku
 {
     /// <summary>Reduces naked triples.</summary>
-    internal class ReduceNakedTriples : ISudokuSolver
+    internal class ReduceNakedTriples : Technique_old
     {
         private readonly SimpleList<int> buffer = new SimpleList<int>(4);
 

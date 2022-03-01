@@ -1,0 +1,10 @@
+﻿namespace SudokuSolver;
+
+public enum RegionType
+{
+	Unknown = 0,
+	Row,
+	Column,
+	Block,
+	Miscellaneous,
+}

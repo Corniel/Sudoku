@@ -11,7 +11,7 @@ namespace Corniel.Sudoku
     /// All other appearances of the two candidates in the same row, column,
     /// or block can be eliminated.
     /// </remarks>
-    internal class ReduceNakedPairs : ISudokuSolver
+    internal class ReduceNakedPairs : Technique_old
     {
         /// <inheritdoc />
         public void Solve(SudokuPuzzle puzzle, SudokuState state, ICollection<IEvent> events)
@@ -50,7 +50,7 @@ namespace Corniel.Sudoku
                 // Equal to the first (potential) naked pair.
                 else if (value == nakedPair && count++ > 2)
                 {
-                    throw new InvalidPuzzleException();
+                    throw new InvalidPuzzle();
                 }
             }
 

@@ -12,7 +12,7 @@ namespace Corniel.Sudoku
     /// All other appearences of the same candidate, if any, are eliminated if
     /// they can bee seen by the Single.
     /// </remarks>
-    internal class ReduceHiddenSingles : ISudokuSolver
+    internal class ReduceHiddenSingles : Technique_old
     {
         private const int NoIndex = -1;
 

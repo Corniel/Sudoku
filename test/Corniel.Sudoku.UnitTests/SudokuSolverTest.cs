@@ -94,6 +94,33 @@ namespace Corniel.Sudoku.UnitTests
         }
 
         [Test]
+        public void Naked_pairs() => Solve(SudokuPuzzle.Struture, @"
+        251|348|796
+        ...|917|2.4
+        ..7|256|...
+        ---+---+---
+        ...|.6.|837
+        ...|...|.7.
+        ..8|...|9..
+        ---+---+---
+        ...|62.|..8
+        8..|7..|...
+        ..2|5.1|64.",
+    @"
+        672|914|583
+        845|736|219
+        913|258|746
+        ---+---+---
+        198|325|674
+        756|849|321
+        234|167|895
+        ---+---+---
+        421|583|967
+        569|472|138
+        387|691|452");
+
+
+        [Test]
         public void Solve_3x3Example3_SolvedPuzzle()
         {
             Solve(SudokuPuzzle.Struture, @"
@@ -122,6 +149,32 @@ namespace Corniel.Sudoku.UnitTests
                 852|374|961");
         }
 
+        /// <remarks>See: https://youtu.be/Ui1hrp7rovw</remarks>
+        [Test]
+        public void with_steering_wheel() => Solve(SudokuPuzzle.Struture, @"
+            ...|1.2|...
+            .6.|...|.7.
+            ..8|...|9..
+            ---+---+---
+            4..|...|..3
+            .5.|..7|...
+            2..|.8.|..1
+            ---+---|---
+            ..9|...|8.5
+            .7.|...|.6.
+            ...|3.4|...",
+                @"
+            ...|1.2|...
+            .6.|...|.7.
+            ..8|...|9..
+            ---+---+---
+            4..|...|..3
+            .5.|..7|...
+            2..|.8.|..1
+            ---+---|---
+            ..9|...|8.5
+            .7.|...|.6.
+            ...|3.4|...");
 
         [Test]
         public void Solve_3x3WorldsHardestStudokuAccordingToTheTelegraph_SolvedPuzzle()
@@ -156,7 +209,7 @@ namespace Corniel.Sudoku.UnitTests
         private void Solve(SudokuPuzzle puzzle, string input, string expected)
         {
             var state = SudokuState.Parse(input);
-            var solver = new SudokuSolver(puzzle);
+            var solver = new Solver(puzzle);
 
             var sw = Stopwatch.StartNew();
             var actual = solver.Solve(state);

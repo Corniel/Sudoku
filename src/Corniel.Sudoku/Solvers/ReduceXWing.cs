@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Corniel.Sudoku
 {
-    internal class ReduceXWing : ISudokuSolver
+    internal class ReduceXWing : Technique_old
     {
         private readonly SimpleList<int> buffer = new SimpleList<int>(4);
 
@@ -69,21 +69,26 @@ namespace Corniel.Sudoku
             }
             if (buffer.Count == 4)
             {
-                var reducded = Fetch(
-                    value,
-                    first.Intersected.FirstOrDefault(r => r.RegionType == otherType),
-                    state,
-                    events);
-
-                reducded |= Fetch(
-                    value,
-                    second.Intersected.FirstOrDefault(r => r.RegionType == otherType),
-                    state,
-                    events);
-
-                if (reducded)
+                var f = first.Intersected.FirstOrDefault(r => r.RegionType == otherType);
+                var s = second.Intersected.FirstOrDefault(r => r.RegionType == otherType);
+                if (f is { } && s is { })
                 {
-                    events.Add(ReducedOptions.Ctor<ReduceXWing>());
+                    var reducded = Fetch(
+                        value,
+                        f,
+                        state,
+                        events);
+
+                    reducded |= Fetch(
+                        value,
+                        s,
+                        state,
+                        events);
+
+                    if (reducded)
+                    {
+                        events.Add(ReducedOptions.Ctor<ReduceXWing>());
+                    }
                 }
             }
         }

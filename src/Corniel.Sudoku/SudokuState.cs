@@ -1,10 +1,4 @@
-﻿using Corniel.Sudoku.Events;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Corniel.Sudoku
+﻿namespace Corniel.Sudoku
 {
     /// <summary>Sudoku state factory.</summary>
     public sealed class SudokuState : IEquatable<SudokuState>
@@ -68,7 +62,7 @@ namespace Corniel.Sudoku
 
                 if (nw == SudokuPuzzle.Invalid)
                 {
-                    throw new InvalidPuzzleException();
+                    throw new InvalidPuzzle();
                 }
 
                 if (SudokuCell.Count(nw) == 1 && SudokuCell.Count(val) != 1)

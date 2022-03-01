@@ -14,7 +14,7 @@ namespace Corniel.Sudoku
     /// All candidates other than the pair in the cells can be eliminated,
     /// yielding a Naked Pair.
     /// </remarks>
-    internal class ReduceHiddenPairs : ISudokuSolver
+    internal class ReduceHiddenPairs : Technique_old
     {
         private readonly SimpleList<int> HiddenPairs = new SimpleList<int>(3);
         private readonly List<uint> Pairs = new List<uint>();

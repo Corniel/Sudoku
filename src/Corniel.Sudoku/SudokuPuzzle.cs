@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-namespace Corniel.Sudoku
+﻿namespace Corniel.Sudoku
 {
     /// <summary>Represents the structure of a Sudoku puzzle.</summary>
     public class SudokuPuzzle

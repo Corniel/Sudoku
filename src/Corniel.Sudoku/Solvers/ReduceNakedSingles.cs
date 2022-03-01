@@ -11,7 +11,7 @@ namespace Corniel.Sudoku
     /// value is also excluded as a candidate from all other blank cells sharing
     /// the same row, column and sub square.
     /// </remarks>
-    public class ReduceNakedSingles : ISudokuSolver
+    public class ReduceNakedSingles : Technique_old
     {
         /// <inheritdoc />
         public void Solve(SudokuPuzzle puzzle, SudokuState state, ICollection<IEvent> events)

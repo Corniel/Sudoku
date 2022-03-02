@@ -1,18 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace SudokuSolver.Techniques;
 
-namespace SudokuSolver.Techniques;
-
+/// <summary>Reduces pointing pairs/triples and box reduction.</summary>
+/// <remarks>
+/// If a candidate is present in only N Cells of a Square/Row/Column, then it
+/// must be the solution for one of these N cells. If these two cells belong
+/// to the same Row or Column, then this candidate can not be the solution in
+/// any other cell of the same Row or Column, respectively. 
+/// </remarks>
 public abstract class PointingMultiple : Technique
 {
     protected abstract int Size{ get; }
 
     public Cells Reduce(Cells cells, Regions regions)
     {
-        foreach (var region in regions.Where(r => r.Type == RegionType.Block))
+        foreach (var region in regions)
         {
             foreach(var value in Values.Singles)
             {

@@ -12,17 +12,16 @@ public class HiddenPairs : Technique
             .ToArray();
     }
 
-    public Cells? Reduce(Cells cells, Regions regions)
+    public Cells Reduce(Cells cells, Regions regions)
     {
-        var reduced = cells;
         foreach (var pair in Pairs)
         {
             foreach (var region in regions)
             {
-                reduced = CheckCells(reduced, pair, region);
+                cells = CheckCells(cells, pair, region);
             }
         }
-        return reduced == cells ? null : reduced;
+        return cells;
     }
 
     private static Cells CheckCells(Cells cells, Values pair, Region region)

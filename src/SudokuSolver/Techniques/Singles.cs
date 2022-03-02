@@ -11,22 +11,17 @@
 /// </remarks>
 internal class Singles : Technique
 {
-    private const int NoIndex = -1;
-
     /// <inheritdoc />
-    public Cells? Reduce(Cells cells, Regions regions)
+    public Cells Reduce(Cells cells, Regions regions)
     {
-        var reduced = cells;
-        
-        // check all groups.
         foreach (var region in regions)
         {
             foreach (var single in Values.Singles)
             {
-                reduced = CheckCells(reduced, single, region);
+                cells = CheckCells(cells, single, region);
             }
         }
-        return reduced == cells ? null : reduced;
+        return cells;
     }
 
     private static Cells CheckCells(Cells cells, Values single, Region region)
@@ -42,7 +37,7 @@ internal class Singles : Technique
             else if ((cell.Values & single) != default)
             {
                 // Not the only candidate.
-                if (hidden == NoIndex)
+                if (hidden == Location.None)
                 {
                     hidden = cell.Location;
                 }

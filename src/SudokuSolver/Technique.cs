@@ -5,5 +5,5 @@
 public interface Technique
 {
     /// <summary>Reduces the options per cell.</summary>
-    Cells? Reduce(Cells cells, Regions regions);
+    Cells Reduce(Cells cells, Regions regions);
 }

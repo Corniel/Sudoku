@@ -11,24 +11,22 @@
 public class NakedSingles : Technique
 {
     /// <inheritdoc />
-    public Cells? Reduce(Cells cells, Regions regions)
+    public Cells Reduce(Cells cells, Regions regions)
     {
-        var reduced = cells;
-
         foreach (var index in regions.Locations)
         {
-            var cell = reduced[index];
+            var cell = cells[index];
             if (cell.SingleValue())
             {
                 foreach (var region in regions[index])
                 {
                     foreach (var other in region.Where(i => i != index))
                     {
-                        reduced = reduced.Not(other, cell);
+                        cells = cells.Not(other, cell);
                     }
                 }
             }
         }
-        return reduced == cells ? null : reduced;
+        return cells;
     }
 }

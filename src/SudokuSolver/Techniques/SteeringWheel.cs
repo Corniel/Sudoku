@@ -38,10 +38,8 @@ public class SteeringWheel : Technique
         64, 65, /**/ 69, 70
     };
 
-    public Cells? Reduce(Cells cells, Regions regions)
+    public Cells Reduce(Cells cells, Regions regions)
     {
-        Cells reduced = cells;
-
         var _inner = inner.Select(index => cells[index]).Where(c => c.SingleValue()).ToList();
         var _outer = outer.Select(index => cells[index]).Where(c => c.SingleValue()).ToList();
 
@@ -63,11 +61,11 @@ public class SteeringWheel : Technique
 
             foreach(var index in inner)
             {
-                Values cell = reduced[index];
+                var cell = cells[index];
                 
                 if (cell.IsUndecided())
                 {
-                    reduced = reduced.And(Location.Index(index), mask);
+                    cells = cells.And(Location.Index(index), mask);
                 }
             }
         }
@@ -77,14 +75,14 @@ public class SteeringWheel : Technique
 
             foreach (var index in outer)
             {
-                Values cell = reduced[index];
+                Values cell = cells[index];
 
                 if (cell.IsUndecided())
                 {
-                    reduced = reduced.And(Location.Index(index), mask);
+                    cells = cells.And(Location.Index(index), mask);
                 }
             }
         }
-        return reduced == cells ? null : reduced;
+        return cells;
     }
 }

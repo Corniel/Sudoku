@@ -18,7 +18,9 @@ public static class Solver
 
             foreach(var technique in techniques)
             {
-                if (technique.Reduce(cells, regions) is { } reduced)
+                var reduced = technique.Reduce(cells, regions);
+
+                if(reduced != cells)
                 {
                     running = true;
                     cells = reduced;

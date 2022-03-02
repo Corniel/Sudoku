@@ -6,14 +6,13 @@ public abstract class NakedMultiple : Technique
     protected abstract int Size { get; }
 
     /// <inheritdoc />
-    public Cells? Reduce(Cells cells, Regions regions)
+    public Cells Reduce(Cells cells, Regions regions)
     {
-        var reduced = cells;
         foreach (var region in regions)
         {
-            reduced = CheckCells(reduced, region);
+            cells = CheckCells(cells, region);
         }
-        return reduced == cells ? null : reduced;
+        return cells;
     }
 
     private  Cells CheckCells(Cells cells, Region region)

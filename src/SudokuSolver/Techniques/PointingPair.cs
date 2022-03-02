@@ -9,19 +9,18 @@ public class PointingPair : Technique
     /// a poiting pair. All other appearances of the candidates can be
     /// eliminated.
     /// </remarks>
-    public Cells? Reduce(Cells cells, Regions regions)
+    public Cells Reduce(Cells cells, Regions regions)
     {
-        var reduced = cells;
         foreach (var region in regions)
         {
             var locations = new List<Location>(2);
 
             foreach(var single in Values.Singles)
             {
-                reduced = CheckCells(regions, reduced, region, locations, single);
+                cells = CheckCells(regions, cells, region, locations, single);
             }
         }
-        return reduced == cells ? null : reduced;
+        return cells;
     }
 
     private static Cells CheckCells(Regions regions, Cells cells, Region region, List<Location> locations, Values single)

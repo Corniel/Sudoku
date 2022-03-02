@@ -32,8 +32,7 @@ public class HiddenPairs : Technique
         {
             var and = cell.Values & pair;
 
-            // If not both are present or we already had 2, return.
-            if (cell.Values == pair)
+            if (and == pair)
             {
                 if (hidden.Count < 2)
                 {
@@ -41,10 +40,7 @@ public class HiddenPairs : Technique
                 }
                 else return cells;
             }
-            else if (and != default)
-            {
-                return cells;
-            }
+            else if (and != default) return cells;
         }
         if (hidden.Count == 2)
         {

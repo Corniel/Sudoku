@@ -33,7 +33,7 @@ public class With_technique
         new NakedSingles());
 
     [Test]
-    public void hidden_singles() => Solve(@"
+    public void Hidden_singles() => Solve(@"
         6..|..4|..3
         ..5|7.6|.1.
         .1.|...|7..
@@ -88,6 +88,37 @@ public class With_technique
         new NakedPairs(),
         new NakedSingles(),
         new HiddenSingles());
+
+    [Test]
+    public void Hidden_pairs() => Solve(@"
+        ..1|3..|...
+        ...|.9.|..4
+        92.|..8|...
+        ---+---+---
+        1.9|6..|.72
+        5..|...|..3
+        68.|..2|4.9
+        ---+---+---
+        ...|1..|.28
+        2..|.4.|...
+        ...|..7|3..",
+    @"
+        639|278|514
+        587|314|269
+        124|569|387
+        ---+---+---
+        345|986|721
+        798|132|456
+        216|457|893
+        ---+---+---
+        453|891|672
+        861|723|945
+        972|645|138",
+        new HiddenPairs(),
+        
+        new NakedSingles(),
+        new HiddenSingles(),
+        new NakedPairs());
 
     /// <remarks>See: https://youtu.be/4GVyBiFUNws</remarks>
     [Test]

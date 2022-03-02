@@ -1,6 +1,15 @@
 ﻿namespace SudokuSolver.Techniques;
 
 /// <summary>Reduces naked multiples.</summary>
+/// <remarks>
+/// If N Cells in a region (Row, Column or Square) contain exactly the same
+/// N candidates, then one of these candidates is the solution for one of
+/// these Cells and the other candidates is the solution for the other Cells.
+/// 
+/// Hence none of these two candidates can be the solution in any other Cell of
+/// that region; these two candidates can be deleted from the other Cells of
+/// that region.
+/// </remarks>
 public abstract class NakedMultiple : Technique
 {
     protected abstract int Size { get; }
@@ -23,7 +32,6 @@ public abstract class NakedMultiple : Technique
         {
             if (values.Count == Size && (multiples.Count == 0 || multiples[0] == values))
             {
-                // pair occurs more than twice.
                 if (multiples.Count < Size)
                 {
                     multiples.Add(values);
@@ -35,13 +43,9 @@ public abstract class NakedMultiple : Technique
         {
             var multiple = multiples[0];
 
-            foreach (var index in region)
+            foreach (var cell in cells.Region(region).Where(c => c.Values!= multiple))
             {
-                var cell = cells[index];
-                if (cell != multiple)
-                {
-                    cells = cells.Not(index, multiple);
-                }
+                cells = cells.Not(cell.Location, multiple);
             }
         }
         return cells;

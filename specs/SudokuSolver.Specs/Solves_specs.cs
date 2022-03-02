@@ -1,9 +1,37 @@
 using SudokuSolver;
+using SudokuSolver.Techniques;
 
 namespace Solves;
 
 public class With_technique
 {
+    [Test]
+    public void Naked_singles() => Solve(@"
+        6..|..4|..3
+        ..5|7.6|.1.
+        .1.|...|7..
+        ---+---+---
+        .98|32.|6..
+        75.|8..|.21
+        ..4|1.7|.9.
+        ---+---+---
+        4..|5..|..7
+        .6.|...|1..
+        3..|69.|.52",
+        @"
+        672|914|583
+        845|736|219
+        913|258|746
+        ---+---+---
+        198|325|674
+        756|849|321
+        234|167|895
+        ---+---+---
+        421|583|967
+        569|472|138
+        387|691|452",
+        new NakedSingles());
+
     [Test]
     public void hidden_singles() => Solve(@"
         6..|..4|..3
@@ -17,7 +45,7 @@ public class With_technique
         4..|5..|..7
         .6.|...|1..
         3..|69.|..2",
-    @"
+        @"
         672|914|583
         845|736|219
         913|258|746
@@ -28,7 +56,9 @@ public class With_technique
         ---+---+---
         421|583|967
         569|472|138
-        387|691|452");
+        387|691|452", 
+        new NakedSingles(),
+        new HiddenSingles());
 
     [Test]
     public void Naked_pairs() => Solve(@"
@@ -109,14 +139,15 @@ public class With_technique
         .7.|...|.6.
         ...|3.4|...");
 
-    private void Solve(string input, string expected)
+    private void Solve(string input, string expected, params Technique[] techniques)
     {
+        techniques = techniques.Any() ? techniques : null;
         _ = Regions.Default;
         var cells = Cells.Parse(input);
         var solution = Cells.Parse(expected);
 
         var sw = Stopwatch.StartNew();
-        var reductions = Solver.Solve(cells).ToArray();
+        var reductions = Solver.Solve(cells, techniques).ToArray();
         sw.Stop();
 
         var last = new Reduction(cells, typeof(object));

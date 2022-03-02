@@ -9,7 +9,7 @@
 /// All other appearences of the same candidate, if any, are eliminated if
 /// they can bee seen by the Single.
 /// </remarks>
-internal class Singles : Technique
+public class HiddenSingles : Technique
 {
     /// <inheritdoc />
     public Cells Reduce(Cells cells, Regions regions)

@@ -34,7 +34,7 @@ public static class Solver
     private static readonly Technique[] Techniques = new Technique[] 
     {
         new NakedSingles(),
-        new Singles(),
+        new HiddenSingles(),
         new NakedPairs(),
         new HiddenPairs(),
         new PointingPair(),

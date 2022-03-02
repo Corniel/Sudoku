@@ -89,40 +89,9 @@ public class With_technique
         new NakedSingles(),
         new HiddenSingles());
 
-    [Test]
-    public void Hidden_pairs() => Solve(@"
-        ..1|3..|...
-        ...|.9.|..4
-        92.|..8|...
-        ---+---+---
-        1.9|6..|.72
-        5..|...|..3
-        68.|..2|4.9
-        ---+---+---
-        ...|1..|.28
-        2..|.4.|...
-        ...|..7|3..",
-    @"
-        639|278|514
-        587|314|269
-        124|569|387
-        ---+---+---
-        345|986|721
-        798|132|456
-        216|457|893
-        ---+---+---
-        453|891|672
-        861|723|945
-        972|645|138",
-        new HiddenPairs(),
-        
-        new NakedSingles(),
-        new HiddenSingles(),
-        new NakedPairs());
-
     /// <remarks>See: https://youtu.be/4GVyBiFUNws</remarks>
     [Test]
-    public void Hard_easy() => Solve(@"
+    public void Hidden_pairs() => Solve(@"
         .8.|.2.|56.
         ...|1..|..7
         ...|...|...
@@ -145,7 +114,12 @@ public class With_technique
         ---+---+---
         274|961|835
         961|385|724
-        835|274|196");
+        835|274|196",
+        new HiddenPairs(),
+
+        new NakedSingles(),
+        new HiddenSingles(),
+        new NakedPairs());
 
     /// <remarks>See: https://youtu.be/Ui1hrp7rovw</remarks>
     [Test]
@@ -172,6 +146,33 @@ public class With_technique
         ..9|...|8.5
         .7.|...|.6.
         ...|3.4|...");
+
+
+    [Test]
+    public void Unsolved() => Solve(@"
+        ..1|3..|...
+        ...|.9.|..4
+        92.|..8|...
+        ---+---+---
+        1.9|6..|.72
+        5..|...|..3
+        68.|..2|4.9
+        ---+---+---
+        ...|1..|.28
+        2..|.4.|...
+        ...|..7|3..",
+    @"
+        639|278|514
+        587|314|269
+        124|569|387
+        ---+---+---
+        345|986|721
+        798|132|456
+        216|457|893
+        ---+---+---
+        453|891|672
+        861|723|945
+        972|645|138");
 
     private void Solve(string input, string expected, params Technique[] techniques)
     {

@@ -3,7 +3,7 @@
 /// <summary>Reduces pointing pairs/triples and box reduction.</summary>
 /// <remarks>
 /// If a candidate is present in only N Cells of a Square/Row/Column, then it
-/// must be the solution for one of these N cells. If these two cells belong
+/// must be the solution for one of these N puzzle. If these two puzzle belong
 /// to the same Row or Column, then this candidate can not be the solution in
 /// any other cell of the same Row or Column, respectively. 
 /// </remarks>
@@ -11,27 +11,27 @@ public abstract class PointingMultiple : Technique
 {
     protected abstract int Size{ get; }
 
-    public Puzzle Reduce(Puzzle cells, Regions regions)
+    public Puzzle Reduce(Puzzle puzzle, Regions regions)
     {
         foreach (var region in regions)
         {
             foreach(var value in Values.Singles)
             {
-                cells = CheckCells(cells, value, region, regions);
+                puzzle = CheckCells(puzzle, value, region, regions);
             }
         }
-        return cells;
+        return puzzle;
     }
 
-    private Puzzle CheckCells(Puzzle cells, Values value, Region region, Regions regions)
+    private Puzzle CheckCells(Puzzle puzzle, Values value, Region region, Regions regions)
     {
         var pointing = new List<Location>(Size);
 
-        foreach(var cell in cells.Region(region))
+        foreach(var cell in puzzle.Region(region))
         {
             if (cell.Values == value)
             {
-                return cells;
+                return puzzle;
             }
             else if (cell.Values & value)
             {
@@ -39,7 +39,7 @@ public abstract class PointingMultiple : Technique
                 {
                     pointing.Add(cell.Location);
                 }
-                else return cells;
+                else return puzzle;
             }
         }
         if (pointing.Count == Size)
@@ -48,11 +48,11 @@ public abstract class PointingMultiple : Technique
             {
                 foreach(var loc in other.Where(l => !pointing.Contains(l)))
                 {
-                    cells = cells.Not(loc, value);
+                    puzzle = puzzle.Not(loc, value);
                 }
             }
         }
-        return cells;
+        return puzzle;
 
     }
 }

@@ -12,26 +12,26 @@
 public class HiddenSingles : Technique
 {
     /// <inheritdoc />
-    public Puzzle Reduce(Puzzle cells, Regions regions)
+    public Puzzle Reduce(Puzzle puzzle, Regions regions)
     {
         foreach (var region in regions)
         {
             foreach (var single in Values.Singles)
             {
-                cells = CheckCells(cells, single, region);
+                puzzle = CheckCells(puzzle, single, region);
             }
         }
-        return cells;
+        return puzzle;
     }
 
-    private static Puzzle CheckCells(Puzzle cells, Values single, Region region)
+    private static Puzzle CheckCells(Puzzle puzzle, Values single, Region region)
     {
         var hidden = Location.None;
 
-        foreach(var cell in cells.Region(region))
+        foreach(var cell in puzzle.Region(region))
         {
             // Single has already been assigned.
-            if (cell.Values == single) return cells;
+            if (cell.Values == single) return puzzle;
             
             // cell is candidate
             else if (cell.Values & single)
@@ -41,11 +41,11 @@ public class HiddenSingles : Technique
                 {
                     hidden = cell.Location;
                 }
-                else return cells;
+                else return puzzle;
             }
         }
         return hidden == Location.None
-            ? cells
-            : cells.And(hidden, single);
+            ? puzzle
+            : puzzle.And(hidden, single);
     }
 }

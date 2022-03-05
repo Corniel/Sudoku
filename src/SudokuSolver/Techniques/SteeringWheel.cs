@@ -1,6 +1,6 @@
 ﻿namespace SudokuSolver.Techniques;
 
-/// <summary>Uses steering wheel symmetry to reduce cells.</summary>
+/// <summary>Uses steering wheel symmetry to reduce puzzle.</summary>
 /// <remarks></remarks>
 /// all digits in {b} should also be in {a}
 ///
@@ -38,10 +38,10 @@ public class SteeringWheel : Technique
         64, 65, /**/ 69, 70
     };
 
-    public Puzzle Reduce(Puzzle cells, Regions regions)
+    public Puzzle Reduce(Puzzle puzzle, Regions regions)
     {
-        var _inner = inner.Select(index => cells[index]).Where(c => c.SingleValue()).ToList();
-        var _outer = outer.Select(index => cells[index]).Where(c => c.SingleValue()).ToList();
+        var _inner = inner.Select(index => puzzle[index]).Where(c => c.SingleValue()).ToList();
+        var _outer = outer.Select(index => puzzle[index]).Where(c => c.SingleValue()).ToList();
 
         var inner_undecided = 16 - _inner.Count;
         var outer_undecided = 16 - _outer.Count;
@@ -61,11 +61,11 @@ public class SteeringWheel : Technique
 
             foreach(var index in inner)
             {
-                var cell = cells[index];
+                var cell = puzzle[index];
                 
                 if (cell.IsUndecided())
                 {
-                    cells = cells.And(Location.Index(index), mask);
+                    puzzle = puzzle.And(Location.Index(index), mask);
                 }
             }
         }
@@ -75,14 +75,14 @@ public class SteeringWheel : Technique
 
             foreach (var index in outer)
             {
-                Values cell = cells[index];
+                Values cell = puzzle[index];
 
                 if (cell.IsUndecided())
                 {
-                    cells = cells.And(Location.Index(index), mask);
+                    puzzle = puzzle.And(Location.Index(index), mask);
                 }
             }
         }
-        return cells;
+        return puzzle;
     }
 }

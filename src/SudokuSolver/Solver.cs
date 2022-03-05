@@ -4,10 +4,10 @@ namespace SudokuSolver;
 
 public static class Solver
 {
-    public static IEnumerable<Reduction> Solve(Puzzle cells, IEnumerable<Technique>? techniques = null)
-        => Solve(cells, Regions.Default, techniques);
+    public static IEnumerable<Reduction> Solve(Puzzle puzzle, IEnumerable<Technique>? techniques = null)
+        => Solve(puzzle, Regions.Default, techniques);
 
-    public static IEnumerable<Reduction> Solve(Puzzle cells, Regions regions, IEnumerable<Technique>? techniques = null)
+    public static IEnumerable<Reduction> Solve(Puzzle puzzle, Regions regions, IEnumerable<Technique>? techniques = null)
     {
         techniques ??= Techniques;
         var running = true;
@@ -18,12 +18,12 @@ public static class Solver
 
             foreach(var technique in techniques)
             {
-                var reduced = technique.Reduce(cells, regions);
+                var reduced = technique.Reduce(puzzle, regions);
 
-                if(reduced != cells)
+                if(reduced != puzzle)
                 {
                     running = true;
-                    cells = reduced;
+                    puzzle = reduced;
                     yield return new Reduction(reduced, technique.GetType());
                     break;
                 }

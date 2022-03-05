@@ -5,5 +5,5 @@
 public interface Technique
 {
     /// <summary>Reduces the options per cell.</summary>
-    Puzzle Reduce(Puzzle cells, Regions regions);
+    Puzzle Reduce(Puzzle puzzle, Regions regions);
 }

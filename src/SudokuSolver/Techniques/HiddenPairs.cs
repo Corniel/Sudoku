@@ -12,23 +12,23 @@ public class HiddenPairs : Technique
             .ToArray();
     }
 
-    public Puzzle Reduce(Puzzle cells, Regions regions)
+    public Puzzle Reduce(Puzzle puzzle, Regions regions)
     {
         foreach (var pair in Pairs)
         {
             foreach (var region in regions)
             {
-                cells = CheckCells(cells, pair, region);
+                puzzle = CheckCells(puzzle, pair, region);
             }
         }
-        return cells;
+        return puzzle;
     }
 
-    private static Puzzle CheckCells(Puzzle cells, Values pair, Region region)
+    private static Puzzle CheckCells(Puzzle puzzle, Values pair, Region region)
     {
         var hidden = new List<Location>(2);
 
-        foreach (var cell in cells.Region(region))
+        foreach (var cell in puzzle.Region(region))
         {
             var and = cell.Values & pair;
 
@@ -38,17 +38,17 @@ public class HiddenPairs : Technique
                 {
                     hidden.Add(cell.Location);
                 }
-                else return cells;
+                else return puzzle;
             }
-            else if (and) return cells;
+            else if (and) return puzzle;
         }
         if (hidden.Count == 2)
         {
             foreach (var location in hidden)
             {
-                cells = cells.And(location, pair);
+                puzzle = puzzle.And(location, pair);
             }
         }
-        return cells;
+        return puzzle;
     }
 }

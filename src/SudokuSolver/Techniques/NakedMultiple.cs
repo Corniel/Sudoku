@@ -15,20 +15,20 @@ public abstract class NakedMultiple : Technique
     protected abstract int Size { get; }
 
     /// <inheritdoc />
-    public Puzzle Reduce(Puzzle cells, Regions regions)
+    public Puzzle Reduce(Puzzle puzzle, Regions regions)
     {
         foreach (var region in regions)
         {
-            cells = CheckCells(cells, region);
+            puzzle = CheckCells(puzzle, region);
         }
-        return cells;
+        return puzzle;
     }
 
-    private  Puzzle CheckCells(Puzzle cells, Region region)
+    private  Puzzle CheckCells(Puzzle puzzle, Region region)
     {
         var multiples = new List<Values>(Size);
 
-        foreach (var values in cells.Region(region).Select(c => c.Values))
+        foreach (var values in puzzle.Region(region).Select(c => c.Values))
         {
             if (values.Count == Size && (multiples.Count == 0 || multiples[0] == values))
             {
@@ -36,18 +36,18 @@ public abstract class NakedMultiple : Technique
                 {
                     multiples.Add(values);
                 }
-                else return cells;
+                else return puzzle;
             }
         }
         if (multiples.Count == Size)
         {
             var multiple = multiples[0];
 
-            foreach (var cell in cells.Region(region).Where(c => c.Values!= multiple))
+            foreach (var cell in puzzle.Region(region).Where(c => c.Values!= multiple))
             {
-                cells = cells.Not(cell.Location, multiple);
+                puzzle = puzzle.Not(cell.Location, multiple);
             }
         }
-        return cells;
+        return puzzle;
     }
 }

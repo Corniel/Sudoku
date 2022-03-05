@@ -178,14 +178,14 @@ public class With_technique
     {
         techniques = techniques.Any() ? techniques : null;
         _ = Regions.Default;
-        var cells = Puzzle.Parse(input);
+        var puzzle = Puzzle.Parse(input);
         var solution = Puzzle.Parse(expected);
 
         var sw = Stopwatch.StartNew();
-        var reductions = Solver.Solve(cells, techniques).ToArray();
+        var reductions = Solver.Solve(puzzle, techniques).ToArray();
         sw.Stop();
 
-        var last = new Reduction(cells, typeof(object));
+        var last = new Reduction(puzzle, typeof(object));
         foreach(var r in reductions)
         {
             var delta = r.Reduced.Delta(last.Reduced).ToArray();

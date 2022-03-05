@@ -12,7 +12,7 @@ public class HiddenPairs : Technique
             .ToArray();
     }
 
-    public Cells Reduce(Cells cells, Regions regions)
+    public Puzzle Reduce(Puzzle cells, Regions regions)
     {
         foreach (var pair in Pairs)
         {
@@ -24,7 +24,7 @@ public class HiddenPairs : Technique
         return cells;
     }
 
-    private static Cells CheckCells(Cells cells, Values pair, Region region)
+    private static Puzzle CheckCells(Puzzle cells, Values pair, Region region)
     {
         var hidden = new List<Location>(2);
 

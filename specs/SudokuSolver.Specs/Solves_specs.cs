@@ -178,8 +178,8 @@ public class With_technique
     {
         techniques = techniques.Any() ? techniques : null;
         _ = Regions.Default;
-        var cells = Cells.Parse(input);
-        var solution = Cells.Parse(expected);
+        var cells = Puzzle.Parse(input);
+        var solution = Puzzle.Parse(expected);
 
         var sw = Stopwatch.StartNew();
         var reductions = Solver.Solve(cells, techniques).ToArray();

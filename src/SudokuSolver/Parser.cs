@@ -2,7 +2,7 @@
 
 internal static class Parser
 {
-    public static Cells Parse(string str)
+    public static Puzzle Parse(string str)
     {
         if (str is null) throw new ArgumentNullException(nameof(str));
 
@@ -10,7 +10,7 @@ internal static class Parser
 
         //if (!Dimensions(tokens, 9, 9)) throw new FormatException("Not a valid sudoku puzzle.");
 
-        return new Cells(tokens.Where(t => t != Token.NewLine).Select(Value).ToArray());
+        return new Puzzle(tokens.Where(t => t != Token.NewLine).Select(Value).ToArray());
     }
     static bool Dimensions(IEnumerable<Token> tokens, int rows, int cols)
     {

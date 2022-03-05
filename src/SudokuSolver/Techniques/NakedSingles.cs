@@ -11,7 +11,7 @@
 public class NakedSingles : Technique
 {
     /// <inheritdoc />
-    public Cells Reduce(Cells cells, Regions regions)
+    public Puzzle Reduce(Puzzle cells, Regions regions)
     {
         foreach (var index in regions.Locations)
         {

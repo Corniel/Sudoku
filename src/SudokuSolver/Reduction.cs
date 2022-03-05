@@ -1,3 +1,3 @@
 ﻿namespace SudokuSolver;
 
-public record Reduction(Cells Reduced, Type Technique);
+public record Reduction(Puzzle Reduced, Type Technique);

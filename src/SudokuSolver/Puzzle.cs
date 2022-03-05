@@ -1,6 +1,6 @@
 ﻿namespace SudokuSolver;
 
-public readonly struct Cells : IReadOnlyCollection<Cell>, IEquatable<Cells>
+public readonly struct Puzzle : IReadOnlyCollection<Cell>, IEquatable<Puzzle>
 {
     public static readonly int Size = 3;
     public static readonly int Size2 = Size * Size;
@@ -9,9 +9,9 @@ public readonly struct Cells : IReadOnlyCollection<Cell>, IEquatable<Cells>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly uint[] cells;
 
-    public static Cells Parse(string str) => Parser.Parse(str);
+    public static Puzzle Parse(string str) => Parser.Parse(str);
 
-    internal Cells(uint[] cs) => cells = cs;
+    internal Puzzle(uint[] cs) => cells = cs;
 
     public int Count => cells.Length;
 
@@ -20,11 +20,11 @@ public readonly struct Cells : IReadOnlyCollection<Cell>, IEquatable<Cells>
     public Values this[int index] => cells[index];
     public Values this[int row, int column] => cells[row * Size2 + column];
 
-    public Cells And(Location location, Values cell) => Update(location, cells[location] & (uint)cell);
+    public Puzzle And(Location location, Values cell) => Update(location, cells[location] & (uint)cell);
 
-    public Cells Not(Location location, Values cell) => Update(location, cells[location] & ~(uint)cell);
+    public Puzzle Not(Location location, Values cell) => Update(location, cells[location] & ~(uint)cell);
 
-    private Cells Update(Location location, uint updated)
+    private Puzzle Update(Location location, uint updated)
     {
         if (updated == 0)
         {
@@ -36,7 +36,7 @@ public readonly struct Cells : IReadOnlyCollection<Cell>, IEquatable<Cells>
             var copy = new uint[cells.Length];
             Array.Copy(cells, copy, cells.Length);
             copy[location] = updated;
-            return new Cells(copy);
+            return new Puzzle(copy);
         }
         else return this;
     }
@@ -49,7 +49,7 @@ public readonly struct Cells : IReadOnlyCollection<Cell>, IEquatable<Cells>
         return region.Select(loc => new Cell(loc, local[loc])); 
     }
 
-    public IEnumerable<Cell> Delta(Cells other)
+    public IEnumerable<Cell> Delta(Puzzle other)
     {
         for(var i = 0; i < cells.Length; i++)
         {
@@ -82,9 +82,9 @@ public readonly struct Cells : IReadOnlyCollection<Cell>, IEquatable<Cells>
         return sb.ToString();
     }
 
-    public override bool Equals(object? obj) => obj is Cells other && Equals(other);
+    public override bool Equals(object? obj) => obj is Puzzle other && Equals(other);
 
-    public bool Equals(Cells other)
+    public bool Equals(Puzzle other)
         => cells.Length == other.cells.Length
         && Enumerable.SequenceEqual(cells, other.cells);
 
@@ -102,8 +102,8 @@ public readonly struct Cells : IReadOnlyCollection<Cell>, IEquatable<Cells>
         }
     }
 
-    public static bool operator ==(Cells l, Cells r) => l.Equals(r);
-    public static bool operator !=(Cells l, Cells r) => !(l == r);
+    public static bool operator ==(Puzzle l, Puzzle r) => l.Equals(r);
+    public static bool operator !=(Puzzle l, Puzzle r) => !(l == r);
 
     public IEnumerator<Cell> GetEnumerator() => new CellIterator(cells);
     IEnumerator IEnumerable.GetEnumerator()=> GetEnumerator();

@@ -11,7 +11,7 @@ public abstract class PointingMultiple : Technique
 {
     protected abstract int Size{ get; }
 
-    public Cells Reduce(Cells cells, Regions regions)
+    public Puzzle Reduce(Puzzle cells, Regions regions)
     {
         foreach (var region in regions)
         {
@@ -23,7 +23,7 @@ public abstract class PointingMultiple : Technique
         return cells;
     }
 
-    private Cells CheckCells(Cells cells, Values value, Region region, Regions regions)
+    private Puzzle CheckCells(Puzzle cells, Values value, Region region, Regions regions)
     {
         var pointing = new List<Location>(Size);
 

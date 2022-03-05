@@ -4,10 +4,10 @@ namespace SudokuSolver;
 
 public static class Solver
 {
-    public static IEnumerable<Reduction> Solve(Cells cells, IEnumerable<Technique>? techniques = null)
+    public static IEnumerable<Reduction> Solve(Puzzle cells, IEnumerable<Technique>? techniques = null)
         => Solve(cells, Regions.Default, techniques);
 
-    public static IEnumerable<Reduction> Solve(Cells cells, Regions regions, IEnumerable<Technique>? techniques = null)
+    public static IEnumerable<Reduction> Solve(Puzzle cells, Regions regions, IEnumerable<Technique>? techniques = null)
     {
         techniques ??= Techniques;
         var running = true;

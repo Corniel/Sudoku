@@ -38,7 +38,7 @@ public class SteeringWheel : Technique
         64, 65, /**/ 69, 70
     };
 
-    public Cells Reduce(Cells cells, Regions regions)
+    public Puzzle Reduce(Puzzle cells, Regions regions)
     {
         var _inner = inner.Select(index => cells[index]).Where(c => c.SingleValue()).ToList();
         var _outer = outer.Select(index => cells[index]).Where(c => c.SingleValue()).ToList();

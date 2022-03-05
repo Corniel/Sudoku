@@ -8,8 +8,8 @@ public readonly struct Location : IEquatable<Location>
 
     private Location(int i) => index = i;
 
-    public int Row => index /Cells.Size2;
-    public int Column => index % Cells.Size2;
+    public int Row => index /Puzzle.Size2;
+    public int Column => index % Puzzle.Size2;
 
     public override bool Equals(object? obj) => obj is Location other && Equals(other);
     
@@ -26,7 +26,7 @@ public readonly struct Location : IEquatable<Location>
 
     public static Location Index(int i) => new(i);
 
-    public static Location New(int row, int col) => new(row * Cells.Size2 + col);
+    public static Location New(int row, int col) => new(row * Puzzle.Size2 + col);
 
     public static bool operator ==(Location left, Location right)=> left.Equals(right);
 

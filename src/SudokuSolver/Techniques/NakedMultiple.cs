@@ -15,7 +15,7 @@ public abstract class NakedMultiple : Technique
     protected abstract int Size { get; }
 
     /// <inheritdoc />
-    public Cells Reduce(Cells cells, Regions regions)
+    public Puzzle Reduce(Puzzle cells, Regions regions)
     {
         foreach (var region in regions)
         {
@@ -24,7 +24,7 @@ public abstract class NakedMultiple : Technique
         return cells;
     }
 
-    private  Cells CheckCells(Cells cells, Region region)
+    private  Puzzle CheckCells(Puzzle cells, Region region)
     {
         var multiples = new List<Values>(Size);
 

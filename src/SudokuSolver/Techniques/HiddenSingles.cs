@@ -12,7 +12,7 @@
 public class HiddenSingles : Technique
 {
     /// <inheritdoc />
-    public Cells Reduce(Cells cells, Regions regions)
+    public Puzzle Reduce(Puzzle cells, Regions regions)
     {
         foreach (var region in regions)
         {
@@ -24,7 +24,7 @@ public class HiddenSingles : Technique
         return cells;
     }
 
-    private static Cells CheckCells(Cells cells, Values single, Region region)
+    private static Puzzle CheckCells(Puzzle cells, Values single, Region region)
     {
         var hidden = Location.None;
 

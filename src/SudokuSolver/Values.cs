@@ -59,9 +59,11 @@ public readonly struct Values : IEquatable<Values>
 
     public static explicit operator uint(Values cell) => cell.values;
     public static implicit operator Values(uint cell) => new(cell);
+    public static implicit operator bool(Values cell) => cell.values != default;
 
     public static Values operator |(Values l, Values r) => new(l.values | r.values);
     public static Values operator &(Values l, Values r) => new(l.values & r.values);
+
 
     /// <summary>A lookup to get the number of options of a value.</summary>
     private static readonly byte[] Counts = CalcCounts();

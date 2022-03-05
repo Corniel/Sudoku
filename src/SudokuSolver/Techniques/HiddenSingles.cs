@@ -34,7 +34,7 @@ public class HiddenSingles : Technique
             if (cell.Values == single) return cells;
             
             // cell is candidate
-            else if ((cell.Values & single) != default)
+            else if (cell.Values & single)
             {
                 // Not the only candidate.
                 if (hidden == Location.None)

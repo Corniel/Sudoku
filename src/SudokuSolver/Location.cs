@@ -8,6 +8,9 @@ public readonly struct Location : IEquatable<Location>
 
     private Location(int i) => index = i;
 
+    public int Row => index /Cells.Size2;
+    public int Column => index % Cells.Size2;
+
     public override bool Equals(object? obj) => obj is Location other && Equals(other);
     
     public bool Equals(Location other) => index == other.index;
@@ -16,7 +19,7 @@ public readonly struct Location : IEquatable<Location>
 
     public override string ToString() 
         => index >= 0
-        ? $"[{index / Cells.Size2}, {index % Cells.Size2}]"
+        ? $"[{Row}, {Column}]"
         : "[?]";
 
     public static implicit operator int(Location location) => location.index;

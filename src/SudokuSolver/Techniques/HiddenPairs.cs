@@ -40,7 +40,7 @@ public class HiddenPairs : Technique
                 }
                 else return cells;
             }
-            else if (and != default) return cells;
+            else if (and) return cells;
         }
         if (hidden.Count == 2)
         {

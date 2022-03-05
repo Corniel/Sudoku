@@ -33,7 +33,7 @@ public abstract class PointingMultiple : Technique
             {
                 return cells;
             }
-            else if ((cell.Values & value) != default)
+            else if (cell.Values & value)
             {
                 if (pointing.Count < Size)
                 {

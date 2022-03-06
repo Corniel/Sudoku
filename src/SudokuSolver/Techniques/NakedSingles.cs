@@ -13,14 +13,14 @@ public class NakedSingles : Technique
     /// <inheritdoc />
     public Puzzle Reduce(Puzzle puzzle, Regions regions)
     {
-        foreach (var index in regions.Locations)
+        foreach (var location in regions.Locations)
         {
-            var cell = puzzle[index];
+            var cell = puzzle[location];
             if (cell.SingleValue())
             {
-                foreach (var region in regions[index])
+                foreach (var region in regions[location])
                 {
-                    foreach (var other in region.Where(i => i != index))
+                    foreach (var other in region.Where(i => i != location))
                     {
                         puzzle = puzzle.Not(other, cell);
                     }

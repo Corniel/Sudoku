@@ -24,7 +24,7 @@ public class Regions : IReadOnlyCollection<Region>
 
     public IReadOnlyCollection<Location> Locations { get; }
 
-    public IReadOnlyCollection<Region> this[int index] => regions[index];
+    public IReadOnlyCollection<Region> this[Location location] => regions[location];
 
     public IEnumerator<Region> GetEnumerator() => all.AsEnumerable().GetEnumerator();
 

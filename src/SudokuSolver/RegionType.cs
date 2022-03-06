@@ -5,7 +5,7 @@ public enum RegionType
 	Unknown = 0,
 	Row,
 	Column,
-	Block,
+	Square,
 	Miscellaneous,
 }
 

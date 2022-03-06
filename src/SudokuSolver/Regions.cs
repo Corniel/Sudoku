@@ -67,7 +67,7 @@ public class Regions : IReadOnlyCollection<Region>
                     indexes.Add(index);
                 }
             }
-            yield return new Region(indexes.ToArray(), RegionType.Block);
+            yield return new Region(indexes.ToArray(), RegionType.Square);
         }
     }
 }

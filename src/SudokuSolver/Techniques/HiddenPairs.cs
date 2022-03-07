@@ -2,15 +2,10 @@
 
 public class HiddenPairs : Technique
 {
-    private readonly Values[] Pairs;
-
-    public HiddenPairs()
-    {
-        Pairs = Values.Singles
-            .SelectMany(single => Values.Singles.Select(other => single | other))
-            .Where(p => p.Count == 2)
-            .ToArray();
-    }
+    public static readonly IReadOnlyCollection<Values> Pairs = Values.Singles
+        .SelectMany(single => Values.Singles.Select(other => single | other))
+        .Where(p => p.Count == 2)
+        .ToArray();
 
     public Puzzle Reduce(Puzzle puzzle, Regions regions)
     {

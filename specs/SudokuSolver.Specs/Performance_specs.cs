@@ -1,4 +1,5 @@
 ﻿using SudokuSolver;
+using SudokuSolver.Techniques;
 
 namespace Performance_specs;
 
@@ -10,6 +11,7 @@ public class Solves
         var runs = 100;
         var regions = Regions.Default;
         var puzzles = Puzzles();
+        _ = HiddenPairs.Pairs.ToArray();
 
         var count = 0;
 

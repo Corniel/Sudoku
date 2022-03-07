@@ -21,8 +21,8 @@ public readonly struct Location : IEquatable<Location>
 
     public override string ToString() 
         => index >= 0
-        ? $"[{Row}, {Column}]"
-        : "[?]";
+        ? $"{"ABCDEFGHJ"[Row]}{Column + 1}"
+        : "??";
 
     public static implicit operator int(Location location) => location.index;
 

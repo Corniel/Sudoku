@@ -28,7 +28,7 @@ public abstract class NakedMultiple : Technique
     {
         var multiples = new List<Values>(Size);
 
-        foreach (var values in puzzle.Region(region).Select(c => c.Values))
+        foreach (var values in puzzle.Region(region).Values())
         {
             if (values.Count == Size && (multiples.Count == 0 || multiples[0] == values))
             {

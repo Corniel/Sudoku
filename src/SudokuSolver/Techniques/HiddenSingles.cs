@@ -6,7 +6,7 @@
 /// candidates is the only candidate is a row, collumn or block. The single
 /// candidate is the solution to the cell.
 /// 
-/// All other appearences of the same candidate, if any, are eliminated if
+/// All other appearances of the same candidate, if any, are eliminated if
 /// they can bee seen by the Single.
 /// </remarks>
 public class HiddenSingles : Technique

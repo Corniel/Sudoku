@@ -12,7 +12,7 @@ public readonly struct Values : IEquatable<Values>
     public static readonly Values Value1 = 0x001;
     /// <summary>Represents a cell with value 2.</summary>
     public static readonly Values Value2 = 0x002;
-    /// <static readonly>Represents a cell with value 3.</summary>
+    /// <summary>Represents a cell with value 3.</summary>
     public static readonly Values Value3 = 0x004;
     /// <summary>Represents a cell with value 4.</summary>
     public static readonly Values Value4 = 0x008;
@@ -28,6 +28,8 @@ public readonly struct Values : IEquatable<Values>
     public static readonly Values Value9 = 0x100;
 
     public static readonly IReadOnlyCollection<Values> Singles = new[] { Value1, Value2, Value3, Value4, Value5, Value6, Value7, Value8, Value9 };
+    public static readonly IReadOnlyCollection<Values> Doubles;
+    public static readonly IReadOnlyCollection<Values> Triples;
 
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly uint values;
@@ -66,24 +68,33 @@ public readonly struct Values : IEquatable<Values>
 
 
     /// <summary>A lookup to get the number of options of a value.</summary>
-    private static readonly byte[] Counts = CalcCounts();
+    private static readonly byte[] Counts;
 
-    private static byte[] CalcCounts()
+#pragma warning disable S3963 // "static" fields should be initialized inline
+    static Values()
     {
         var counts = new byte[Unknown.values + 1];
 
+        var doubles = new List<Values>();
+        var triples = new List<Values>();
+
         for (ushort val = 1; val < counts.Length; val++)
         {
+            byte count = 0;
             for (var i = 0; i < 9; i++)
             {
                 if ((val & (1 << i)) != 0)
                 {
-                    counts[val]++;
+                    count++;
                 }
             }
+            counts[val] = count;
+            if (count == 2) { doubles.Add(val); }
+            else if (count == 3) { triples.Add(val); }
         }
-        return counts;
+        Doubles = doubles.ToArray();
+        Triples = triples.ToArray();
+        Counts = counts;
     }
-
-    
+#pragma warning restore S3963 // "static" fields should be initialized inline
 }

@@ -1,7 +1,4 @@
-﻿using SudokuSolver;
-using System.Linq;
-
-namespace Regions_specs;
+﻿namespace Regions_specs;
 
 public class All
 {

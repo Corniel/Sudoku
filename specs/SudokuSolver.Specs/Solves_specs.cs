@@ -1,6 +1,3 @@
-using SudokuSolver;
-using SudokuSolver.Techniques;
-
 namespace Solves;
 
 public class Naked_Singles : SolverBase

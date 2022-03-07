@@ -15,6 +15,8 @@ public readonly struct Location : IEquatable<Location>
     
     public bool Equals(Location other) => index == other.index;
     
+    public bool Alligns(Location other) => (Row == other.Row) ^ (Column == other.Column);
+
     public override int GetHashCode() => index;
 
     public override string ToString() 

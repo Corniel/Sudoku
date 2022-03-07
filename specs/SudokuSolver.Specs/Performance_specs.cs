@@ -1,7 +1,4 @@
-﻿using SudokuSolver;
-using SudokuSolver.Techniques;
-
-namespace Performance_specs;
+﻿namespace Performance_specs;
 
 public class Solves
 {

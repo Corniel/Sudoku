@@ -35,13 +35,18 @@ public static class Solver
     {
         new NakedSingles(),
         new HiddenSingles(),
+
         new NakedPairs(),
         new PointingPair(),
         new HiddenPairs(),
+        
         new NakedTriples(),
         new PointingTriple(),
         new HiddenTriples(),
+        
         new NakedQuads(),
+        new HiddenQuads(),
+        
         new SteeringWheel(),
     };
 }

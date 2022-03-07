@@ -243,6 +243,48 @@ public class Unsolved : SolverBase
         861|723|945
         972|645|138");
 
+    [Test]
+    public void Hidden_Quads() => Solve(@"
+        ...|5..|...
+        425|.9.|..1
+        8..|.1.|.2.
+        ---+---+---
+        5..|...|...
+        .19|...|46.
+        ...|...|..2
+        ---+---+---
+        .9.|.4.|..3
+        2..|.6.|8.7
+        ...|..1|6..",
+        @"
+        639|278|514
+        587|314|269
+        124|569|387
+        ---+---+---
+        345|986|721
+        798|132|456
+        216|457|893
+        ---+---+---
+        453|891|672
+        861|723|945
+        972|645|138",
+        
+        new HiddenQuads(),
+
+        new NakedSingles(),
+        new HiddenSingles(),
+
+        new NakedPairs(),
+        new PointingPair(),
+        new HiddenPairs(),
+
+        new NakedTriples(),
+        new PointingTriple(),
+        new HiddenTriples(),
+
+        new NakedQuads(),
+        new HiddenQuads());
+
     /// <remarks>See: https://youtu.be/Ui1hrp7rovw</remarks>
     [Test]
     public void Steering_wheel() => Solve(@"...|1.2|...

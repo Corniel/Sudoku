@@ -11,4 +11,6 @@ public static class ValuesExensions
         }
         return cell;
     }
+
+    public static IEnumerable<Values> Undecided(this IEnumerable<Values> vals) => vals.Where(v => v.IsUndecided());
 }

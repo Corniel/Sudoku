@@ -7,39 +7,42 @@ public abstract class HiddenMultiple : Technique
 
     public Puzzle Reduce(Puzzle puzzle, Regions regions)
     {
-        foreach (var region in regions)
+        foreach (var candidate in puzzle.Where(cell => cell.Values.Count >= Size))
         {
-            foreach (var values in Hidden)
+            foreach (var hidden in Hidden.Where(h => (h & candidate.Values) == h))
             {
-                puzzle = CheckCells(puzzle, values, region);
+                foreach (var region in regions)
+                {
+                    puzzle = CheckCells(puzzle, hidden, region);
+                }
             }
         }
         return puzzle;
     }
 
-    private Puzzle CheckCells(Puzzle puzzle, Values pair, Region region)
+    private Puzzle CheckCells(Puzzle puzzle, Values hidden, Region region)
     {
-        var hidden = new List<Location>(Size);
+        var hiddens = new List<Location>(Size);
 
         foreach (var cell in puzzle.Region(region))
         {
-            var and = cell.Values & pair;
+            var and = cell.Values & hidden;
 
-            if (and == pair)
+            if (and == hidden)
             {
-                if (hidden.Count < Size)
+                if (hiddens.Count < Size)
                 {
-                    hidden.Add(cell.Location);
+                    hiddens.Add(cell.Location);
                 }
                 else return puzzle;
             }
             else if (and) return puzzle;
         }
-        if (hidden.Count == Size)
+        if (hiddens.Count == Size)
         {
-            foreach (var location in hidden)
+            foreach (var location in hiddens)
             {
-                puzzle = puzzle.And(location, pair);
+                puzzle = puzzle.And(location, hidden);
             }
         }
         return puzzle;

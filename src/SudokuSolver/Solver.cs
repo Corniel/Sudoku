@@ -11,16 +11,16 @@ public static class Solver
     {
         techniques ??= Techniques;
         var running = true;
-        
-        while(running)
+
+        while (running)
         {
             running = false;
 
-            foreach(var technique in techniques)
+            foreach (var technique in techniques)
             {
                 var reduced = technique.Reduce(puzzle, regions);
 
-                if(reduced != puzzle)
+                if (reduced != puzzle)
                 {
                     running = true;
                     puzzle = reduced;
@@ -31,7 +31,7 @@ public static class Solver
         }
     }
 
-    private static readonly Technique[] Techniques = new Technique[] 
+    private static readonly Technique[] Techniques = new Technique[]
     {
         new NakedSingles(),
         new HiddenSingles(),
@@ -40,8 +40,8 @@ public static class Solver
         new HiddenPairs(),
         new NakedTriples(),
         new PointingTriple(),
+        new HiddenTriples(),
         new NakedQuads(),
-        new XWing(),
         new SteeringWheel(),
     };
 }

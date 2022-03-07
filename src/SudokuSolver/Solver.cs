@@ -36,11 +36,12 @@ public static class Solver
         new NakedSingles(),
         new HiddenSingles(),
         new NakedPairs(),
-        new HiddenPairs(),
         new PointingPair(),
+        new HiddenPairs(),
         new NakedTriples(),
         new PointingTriple(),
         new NakedQuads(),
+        new XWing(),
         new SteeringWheel(),
     };
 }

@@ -155,6 +155,39 @@ public class Hidden_Pairs : SolverBase
         new NakedPairs());
 }
 
+public class Pointing_Triple : SolverBase
+{
+    [Test]
+    public void Puzzle_00() => Solve(@"
+        ..5|..6|24.
+        3..|..7|..6
+        ...|.24|...
+        ---+---+---
+        1..|...|3..
+        2.6|...|9.4
+        ..9|...|..1
+        ---+---+---
+        ...|68.|...
+        4..|7..|..3
+        .83|4..|1..",
+       @"
+        795|136|248
+        324|897|516
+        618|524|739
+        ---+---+---
+        147|968|325
+        256|371|984
+        839|245|671
+        ---+---+---
+        571|683|492
+        462|719|853
+        983|452|167",
+
+       new PointingTriple(),
+       new NakedSingles(),
+       new HiddenSingles(),
+       new NakedPairs());
+}
 
 public class Unsolved : SolverBase
 {
@@ -184,32 +217,6 @@ public class Unsolved : SolverBase
         152|843|976
         476|159|823");
 
-    /// <remarks>See: https://youtu.be/Ui1hrp7rovw</remarks>
-    [Test]
-    public void Steering_wheel() => Solve(@"...|1.2|...
-        .6.|...|.7.
-        ..8|...|9..
-        ---+---+---
-        4..|...|..3
-        .5.|..7|...
-        2..|.8.|..1
-        ---+---|--- 
-        ..9|...|8.5
-        .7.|...|.6.
-        ...|3.4|...",
-        @"
-        ...|1.2|...
-        .6.|...|.7.
-        ..8|...|9..
-        ---+---+---
-        4..|...|..3
-        .5.|..7|...
-        2..|.8.|..1
-        ---+---|---
-        ..9|...|8.5
-        .7.|...|.6.
-        ...|3.4|...");
-
     [Test]
     public void Puzzle_01() => Solve(@"
         ..1|3..|...
@@ -235,6 +242,32 @@ public class Unsolved : SolverBase
         453|891|672
         861|723|945
         972|645|138");
+
+    /// <remarks>See: https://youtu.be/Ui1hrp7rovw</remarks>
+    [Test]
+    public void Steering_wheel() => Solve(@"...|1.2|...
+        .6.|...|.7.
+        ..8|...|9..
+        ---+---+---
+        4..|...|..3
+        .5.|..7|...
+        2..|.8.|..1
+        ---+---|--- 
+        ..9|...|8.5
+        .7.|...|.6.
+        ...|3.4|...",
+        @"
+        ...|1.2|...
+        .6.|...|.7.
+        ..8|...|9..
+        ---+---+---
+        4..|...|..3
+        .5.|..7|...
+        2..|.8.|..1
+        ---+---|---
+        ..9|...|8.5
+        .7.|...|.6.
+        ...|3.4|...");
 }
 public class SolverBase
 {
@@ -250,24 +283,31 @@ public class SolverBase
         var reductions = Solver.Solve(puzzle, techniques).ToArray();
         sw.Stop();
 
-        var last = new Reduction(puzzle, typeof(object));
-        foreach (var r in reductions)
+        Console.WriteLine($"Elapsed: {sw.Elapsed.TotalMilliseconds:#,##0.#####} ms");
+        Console.WriteLine($"Techniques:\r\n- {string.Join("\r\n- ", reductions.Select(r => r.Technique).Distinct().Select(t => t.Name).OrderBy(n => n))}");
+
+        if (reductions.Any())
         {
-            var delta = r.Reduced.Delta(last.Reduced).ToArray();
-            last = r;
-            Console.WriteLine(r.Technique.Name);
-            Console.WriteLine(string.Join(", ", delta.Where(c => c.Values.SingleValue())));
-            Console.WriteLine();
+            var reduced = reductions.Last().Reduced;
+
+            Console.WriteLine(reduced);
+
+            if (!reduced.Solved())
+            {
+                var undecided = reduced.Where(c => c.Values.IsUndecided());
+                Console.WriteLine();
+                Console.WriteLine($"Undecided: {undecided.Count()}");
+                Console.WriteLine(string.Join("\r\n", undecided));
+                Assert.Fail("Not solved.");
+            }
+            else if (reduced != solution)
+            {
+                Assert.Fail("Different solution.");
+            }
         }
-
-        Console.WriteLine("Elapsed: {0:#,##0.#####} ms", sw.Elapsed.TotalMilliseconds);
-
-        Console.WriteLine(last.Reduced);
-
-        Console.WriteLine(string.Join(", ", last.Reduced.Where(c => c.Values.IsUndecided())));
-
-        reductions.Should().NotBeEmpty();
-        reductions.Last().Reduced.Solved().Should().BeTrue();
-        reductions.Last().Reduced.Should().BeEquivalentTo(solution);
+        else
+        {
+            Assert.Fail("No reductions could be made.");
+        }
     }
 }

@@ -344,7 +344,7 @@ public class SolverBase
     {
         techniques = techniques.Any() ? techniques : null;
         _ = Regions.Default;
-        _ = HiddenPairs.Pairs.ToArray();
+        _ = Values.Pairs.ToArray();
         var puzzle = Puzzle.Parse(input);
         var solution = Puzzle.Parse(expected);
 

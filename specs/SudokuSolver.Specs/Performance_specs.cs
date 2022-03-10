@@ -8,9 +8,7 @@ public class Solves
         var runs = 100;
         var regions = Regions.Default;
         var puzzles = Puzzles();
-        _ = HiddenPairs.Pairs.ToArray();
-        _ = HiddenTriples.Triples.ToArray();
-        _ = HiddenQuads.Quads.ToArray();
+        _ = Values.Pairs.ToArray();
 
         var count = 0;
 

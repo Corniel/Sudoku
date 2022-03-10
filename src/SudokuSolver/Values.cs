@@ -28,8 +28,9 @@ public readonly struct Values : IEquatable<Values>
     public static readonly Values Value9 = 0x100;
 
     public static readonly IReadOnlyCollection<Values> Singles = new[] { Value1, Value2, Value3, Value4, Value5, Value6, Value7, Value8, Value9 };
-    public static readonly IReadOnlyCollection<Values> Doubles;
+    public static readonly IReadOnlyCollection<Values> Pairs;
     public static readonly IReadOnlyCollection<Values> Triples;
+    public static readonly IReadOnlyCollection<Values> Quads;
 
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly uint values;
@@ -74,9 +75,9 @@ public readonly struct Values : IEquatable<Values>
     static Values()
     {
         var counts = new byte[Unknown.values + 1];
-
-        var doubles = new List<Values>();
+        var pairs = new List<Values>();
         var triples = new List<Values>();
+        var quads = new List<Values>();
 
         for (ushort val = 1; val < counts.Length; val++)
         {
@@ -89,11 +90,13 @@ public readonly struct Values : IEquatable<Values>
                 }
             }
             counts[val] = count;
-            if (count == 2) { doubles.Add(val); }
+            if (count == 2) { pairs.Add(val); }
             else if (count == 3) { triples.Add(val); }
+            else if (count == 4) { quads.Add(val); }
         }
-        Doubles = doubles.ToArray();
+        Pairs = pairs.ToArray();
         Triples = triples.ToArray();
+        Quads = quads.ToArray();
         Counts = counts;
     }
 #pragma warning restore S3963 // "static" fields should be initialized inline

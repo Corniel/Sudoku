@@ -9,9 +9,9 @@ public abstract class HiddenMultiple : Technique
     {
         foreach (var candidate in puzzle.Where(cell => cell.Values.Count >= Size))
         {
-            foreach (var hidden in Hidden.Where(h => (h & candidate.Values) == h))
+            foreach (var region in regions)
             {
-                foreach (var region in regions)
+                foreach (var hidden in Hidden)
                 {
                     puzzle = CheckCells(puzzle, hidden, region);
                 }
@@ -26,17 +26,14 @@ public abstract class HiddenMultiple : Technique
 
         foreach (var cell in puzzle.Region(region))
         {
-            var and = cell.Values & hidden;
-
-            if (and == hidden)
+            if (cell.Values & hidden)
             {
-                if (hiddens.Count < Size)
+                if (hiddens.Count < Size && cell.Values.IsUndecided())
                 {
                     hiddens.Add(cell.Location);
                 }
                 else return puzzle;
             }
-            else if (and) return puzzle;
         }
         if (hiddens.Count == Size)
         {

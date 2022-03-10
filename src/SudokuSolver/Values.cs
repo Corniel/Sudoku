@@ -67,7 +67,6 @@ public readonly struct Values : IEquatable<Values>
     public static Values operator |(Values l, Values r) => new(l.values | r.values);
     public static Values operator &(Values l, Values r) => new(l.values & r.values);
 
-
     /// <summary>A lookup to get the number of options of a value.</summary>
     private static readonly byte[] Counts;
 

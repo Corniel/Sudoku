@@ -11,4 +11,5 @@
 public class NakedQuads : NakedMultiple
 {
     protected override int Size => 4;
+    protected override IReadOnlyCollection<Values> Naked => Values.Quads;
 }

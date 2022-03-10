@@ -14,38 +14,41 @@ public abstract class NakedMultiple : Technique
 {
     protected abstract int Size { get; }
 
+    protected abstract IReadOnlyCollection<Values> Naked { get; }
+
     /// <inheritdoc />
     public Puzzle Reduce(Puzzle puzzle, Regions regions)
     {
         foreach (var region in regions)
         {
-            puzzle = CheckCells(puzzle, region);
+            foreach (var naked in Naked)
+            {
+                puzzle = CheckCells(puzzle, naked, region);
+            }
         }
         return puzzle;
     }
 
-    private  Puzzle CheckCells(Puzzle puzzle, Region region)
+    private  Puzzle CheckCells(Puzzle puzzle, Values naked, Region region)
     {
-        var multiples = new List<Values>(Size);
+        var multiples = new List<Location>(Size);
 
-        foreach (var values in puzzle.Region(region).Values())
+        foreach (var cell in puzzle.Region(region))
         {
-            if (values.Count == Size && (multiples.Count == 0 || multiples[0] == values))
+            if ((cell.Values & naked) == cell.Values)
             {
-                if (multiples.Count < Size)
+                if (multiples.Count < Size && cell.Values.IsUndecided())
                 {
-                    multiples.Add(values);
+                    multiples.Add(cell.Location);
                 }
                 else return puzzle;
             }
         }
         if (multiples.Count == Size)
         {
-            var multiple = multiples[0];
-
-            foreach (var cell in puzzle.Region(region).Where(c => c.Values!= multiple))
+            foreach (var location in region.Where(l => !multiples.Contains(l)))
             {
-                puzzle = puzzle.Not(cell.Location, multiple);
+                puzzle = puzzle.Not(location, naked);
             }
         }
         return puzzle;

@@ -11,4 +11,5 @@
 public class NakedTriples : NakedMultiple
 {
     protected override int Size => 3;
+    protected override IReadOnlyCollection<Values> Naked => Values.Triples;
 }

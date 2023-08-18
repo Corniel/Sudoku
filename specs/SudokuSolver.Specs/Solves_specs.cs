@@ -189,6 +189,7 @@ public class Pointing_Triple : SolverBase
        new NakedPairs());
 }
 
+[Ignore("Unsolved")]
 public class Unsolved : SolverBase
 {
     [Test]

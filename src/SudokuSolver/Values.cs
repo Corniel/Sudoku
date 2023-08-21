@@ -41,7 +41,7 @@ public readonly struct Values : IEquatable<Values>
 
     public bool SingleValue() => Count == 1;
 
-    public bool IsUndecided() => Count > 1;
+    public bool IsUndecided() => (values & (values - 1)) != 0;
 
     public override string ToString()
     {
@@ -64,6 +64,7 @@ public readonly struct Values : IEquatable<Values>
     public static implicit operator Values(uint cell) => new(cell);
     public static implicit operator bool(Values cell) => cell.values != default;
 
+    public static Values operator ~(Values values) => new(~values.values);
     public static Values operator |(Values l, Values r) => new(l.values | r.values);
     public static Values operator &(Values l, Values r) => new(l.values & r.values);
 

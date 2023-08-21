@@ -8,7 +8,7 @@
 /// value is also excluded as a candidate from all other blank puzzle sharing
 /// the same row, column and sub square.
 /// </remarks>
-public class NakedSingles : Technique
+public sealed class NakedSingles : Technique
 {
     /// <inheritdoc />
     public Puzzle Reduce(Puzzle puzzle, Regions regions)
@@ -18,15 +18,20 @@ public class NakedSingles : Technique
             var cell = puzzle[location];
             if (cell.SingleValue())
             {
-                foreach (var region in regions[location])
+                foreach (var link in Links[location])
                 {
-                    foreach (var other in region.Where(i => i != location))
-                    {
-                        puzzle = puzzle.Not(other, cell);
-                    }
+                    puzzle = puzzle.Not(link, cell);
                 }
             }
         }
-        return puzzle;
+        return puzzle.Reduce();
     }
+
+    public static readonly IReadOnlyList<IReadOnlyCollection<Location>> Links = Enumerable.Range(0, 81)
+            .Select(Location.Index)
+            .Select(GetLinks)
+            .ToArray();
+
+    private static Location[] GetLinks(Location location)
+        => Regions.Default.Where(r => r.Contains(location)).SelectMany(r => r).Where(r => r != location).Distinct().ToArray();
 }

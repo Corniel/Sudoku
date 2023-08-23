@@ -24,7 +24,7 @@ public sealed class NakedSingles : Technique
                 }
             }
         }
-        return puzzle.Reduce();
+        return puzzle;
     }
 
     public static readonly IReadOnlyList<IReadOnlyCollection<Location>> Links = Enumerable.Range(0, 81)

@@ -39,9 +39,14 @@ public readonly struct Values : IEquatable<Values>
 
     public int Count => Counts[values];
 
+    public bool IsSingle => Count == 1;
+    public bool HasAny => values != 0;
+
     public bool SingleValue() => Count == 1;
 
     public bool IsUndecided() => (values & (values - 1)) != 0;
+
+    public Values First => new(1u << BitOperations.Log2(values));
 
     public override string ToString()
     {

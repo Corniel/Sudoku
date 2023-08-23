@@ -7,7 +7,7 @@ public readonly struct Puzzle : IReadOnlyCollection<Cell>, IEquatable<Puzzle>
     public static readonly int Size3 = Size2 * Size;
 
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    private readonly uint[] cells;
+    internal readonly uint[] cells;
 
     public static Puzzle Parse(string str) => Parser.Parse(str);
 

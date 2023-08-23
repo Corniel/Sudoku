@@ -28,8 +28,43 @@ public class Naked_Singles : SolverBase
         569|472|138
         387|691|452",
         new NakedSingles());
-}
 
+    [Test]
+    public void Puzzle_00_with_context()
+    {
+        var puzzle = Puzzle.Parse(@"
+        6..|..4|..3
+        ..5|7.6|.1.
+        .1.|...|7..
+        ---+---+---
+        .98|32.|6..
+        75.|8..|.21
+        ..4|1.7|.9.
+        ---+---+---
+        4..|5..|..7
+        .6.|...|1..
+        3..|69.|.52");
+
+        var context = new Context(puzzle);
+
+        SudokuSolver.Techniques2.NakedSingles.Reduce(context).Should().BeTrue();
+
+
+        context.Puzzle.Should().BeEquivalentTo(Puzzle.Parse(@"
+            672|914|583
+            845|736|219
+            913|258|746
+            ---+---+---
+            198|325|674
+            756|849|321
+            234|167|895
+            ---+---+---
+            421|583|967
+            569|472|138
+            387|691|452"));
+
+    }
+}
 public class Naked_Pairs : SolverBase
 {
     [Test]
@@ -119,6 +154,42 @@ public class Hidden_Singles : SolverBase
         476|159|823",
         new HiddenSingles(),
         new NakedSingles());
+
+    [Test]
+    public void Puzzle_01_with_context()
+    {
+        var puzzle = Puzzle.Parse(@"
+        ..5|...|1..
+        .61|...|2..
+        ...|38.|...
+        ---+---+---
+        .2.|...|..4
+        ...|.3.|..9
+        .13|5..|..2
+        ---+---+---
+        9..|..2|.4.
+        ...|...|.7.
+        4..|.59|..3");
+
+        var context = new Context(puzzle);
+
+        (SudokuSolver.Techniques2.NakedSingles.Reduce(context)
+            && SudokuSolver.Techniques2.HiddenSingles.Reduce(context)).Should().BeTrue();
+
+        context.Puzzle.Should().BeEquivalentTo(
+            Puzzle.Parse(@"
+                845|926|137
+                361|475|298
+                297|381|465
+                ---+---+---
+                729|618|354
+                584|237|619
+                613|594|782
+                ---+---+---
+                938|762|541
+                152|843|976
+                476|159|823"));
+    }
 }
 
 public class Hidden_Pairs : SolverBase

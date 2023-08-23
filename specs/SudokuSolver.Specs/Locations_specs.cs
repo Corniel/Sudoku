@@ -29,6 +29,15 @@ public class Iterator
             Location.Index(80)
         });
     }
+
+    [Test]
+    public void interats()
+    {
+        var locations = new Locations(lo: 13666849599736162014, hi: 26124);
+        locations.Count.Should().Be(43);
+
+        locations.ToArray().Length.Should().Be(43);
+    }
 }
 
 public class Not

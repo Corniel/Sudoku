@@ -9,30 +9,34 @@ public static class NakedSingles
         while (todo.HasAny)
         {
             todo = todo.Dequeue(out var single);
+            var values = new Values(context.Cells[single]);
 
-            var mask = ~context.Cells[single];
+            var except = ~values;
 
             var links = Links.All[single];
 
-            foreach(var link in links)
+            foreach (var link in links)
             {
-                var cell = context.Cells[link];
+                var cell = new Values(context.Cells[link]);
 
                 // already single: skip.
-                if ((cell & (cell - 1)) == 0) { continue; }
+                if (cell.IsSingle) { continue; }
 
-                var reduced = cell & mask;
-                
+                var reduced = cell & except;
+
                 // inconsistency.
-                if (reduced == 0) { return false; }
+                if (reduced.IsInvalid)
+                {
+                    return false;
+                }
 
-                context.Cells[link] = reduced;
+                context.Cells[link] = (uint)reduced;
 
                 // single
-                if ((reduced & reduced -1) == 0)
+                if (reduced.IsSingle)
                 {
                     context.Singles |= link;
-                    todo = link;
+                    todo |= link;
                 }
             }
         }

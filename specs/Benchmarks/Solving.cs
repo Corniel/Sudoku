@@ -54,4 +54,43 @@ public class Solving
             return context.Puzzle;
         }
     }
+
+    public class Hidden_Singles
+    {
+        private static readonly Puzzle Puzzle = Puzzle.Parse(@"
+            ..5|...|1..
+            .61|...|2..
+            ...|38.|...
+            ---+---+---
+            .2.|...|..4
+            ...|.3.|..9
+            .13|5..|..2
+            ---+---+---
+            9..|..2|.4.
+            ...|...|.7.
+            4..|.59|..3"
+        );
+
+        private static readonly Locations Singles = Locations.All(Puzzle.Where(c => c.Values.SingleValue()).Select(c => c.Location));
+        private static readonly Technique[] Techniques = new Technique[] 
+        {
+            new SudokuSolver.Techniques.NakedSingles(),
+            new SudokuSolver.Techniques.HiddenSingles() 
+        };
+
+        [Benchmark]
+        public Puzzle Old()
+        {
+            return Solver.Solve(Puzzle, Techniques).Last().Reduced;
+        }
+
+        [Benchmark]
+        public Puzzle With_context()
+        {
+            var context = new Context(Puzzle, Singles);
+            SudokuSolver.Techniques2.NakedSingles.Reduce(context);
+            SudokuSolver.Techniques2.HiddenSingles.Reduce(context);
+            return context.Puzzle;
+        }
+    }
 }

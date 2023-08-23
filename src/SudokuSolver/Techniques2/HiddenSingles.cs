@@ -26,13 +26,12 @@ public static class HiddenSingles
                 {
                     context.Cells[multiple] = (uint)value;
                     context.Singles |= multiple;
-                    values = default;
 
-                    // An invalid state occured.
+                    // An invalid state occurred.
                     if (!NakedSingles.Reduce(context, Locations.New(multiple))) return false;
 
-                    // We can reduce the number of TODO's.
-                    todo = todo.Except(context.Singles);
+                    todo = context.Singles.Not();
+                    break;
                 }
             }
         }

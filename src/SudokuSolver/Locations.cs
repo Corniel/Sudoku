@@ -53,6 +53,25 @@ public readonly struct Locations : IReadOnlyCollection<Location>
     }
 
     [Pure]
+    public Locations Append(Locations other)
+    {
+        var lo = Lo | other.Lo;
+        var hi = Hi | other.Hi;
+        return new(lo, hi);
+    }
+
+    [Pure]
+    public Locations Append(IEnumerable<Location> other)
+    {
+        var appended = this;
+        foreach(var location in other)
+        {
+            appended = appended.Append(location);
+        }
+        return appended;
+    }
+
+    [Pure]
     public Locations Except(Location location)
     {
         var lo = Lo;
@@ -90,6 +109,8 @@ public readonly struct Locations : IReadOnlyCollection<Location>
     }
 
     public static Locations operator |(Locations locations, Location location) => locations.Append(location);
+    
+    public static Locations operator |(Locations l, Locations r) => l.Append(r);
 
     [Pure]
     public static Locations All(IEnumerable<Location> locations)

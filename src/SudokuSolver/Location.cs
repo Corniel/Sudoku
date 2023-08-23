@@ -13,6 +13,8 @@ public readonly struct Location : IEquatable<Location>
 
     public int Idx => index;
 
+    public bool IsKnown => index != -1;
+
     public override bool Equals(object? obj) => obj is Location other && Equals(other);
     
     public bool Equals(Location other) => index == other.index;

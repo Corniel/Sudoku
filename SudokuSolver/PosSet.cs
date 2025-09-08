@@ -1,26 +1,32 @@
 using System.Diagnostics.Contracts;
+using System.Runtime.CompilerServices;
 
 namespace SudokuSolver;
 
+[CollectionBuilder(typeof(PosSet), nameof(New))]
 [DebuggerDisplay("Count = {Count}")]
 [DebuggerTypeProxy(typeof(Diagnostics.CollectionDebugView))]
-public readonly struct PosSet(Int128 mask) : IReadOnlyCollection<Pos>
+public readonly struct PosSet(Int128 bits) : IReadOnlyCollection<Pos>
 {
     public static readonly PosSet Empty;
 
     public static readonly PosSet All = new((Int128.One << _9x9) - 1);
 
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    private readonly Int128 Mask = mask;
+    private readonly Int128 Bits = bits;
 
-    public int Count => (int)Int128.PopCount(Mask);
+    public int Count => (int)Int128.PopCount(Bits);
 
-    public bool Contains(Pos pos) => (Mask & (Int128.One << pos)) != 0;
+    public bool HasNone => Bits == 0;
+
+    public bool HasAny => Bits != 0;
+
+    public bool Contains(Pos pos) => (Bits & (Int128.One << pos)) != 0;
 
     [Pure]
     public PosSet AddRange(IEnumerable<Pos> positions)
     {
-        var m = Mask;
+        var m = Bits;
 
         foreach (var pos in positions)
         {
@@ -42,21 +48,41 @@ public readonly struct PosSet(Int128 mask) : IReadOnlyCollection<Pos>
     }
 
     [Pure]
-    public static PosSet New(params IEnumerable<Pos> positions) => Empty.AddRange(positions);
+    public static PosSet New(params IEnumerable<Pos> positions)
+    {
+        Int128 bits = 0;
+        foreach (var pos in positions)
+        {
+            bits |= Int128.One << pos;
+        }
+        return new PosSet(bits);
+    }
 
-    public static PosSet operator ~(PosSet set) => new(~set.Mask & All.Mask);
+    [Pure]
+    [OverloadResolutionPriority(1)]
+    public static PosSet New(params ReadOnlySpan<Pos> positions)
+    {
+        Int128 bits = 0;
+        foreach (var pos in positions)
+        {
+            bits |= Int128.One << pos;
+        }
+        return new PosSet(bits);
+    }
 
-    public static PosSet operator |(PosSet set, Pos pos) => new(set.Mask | Int128.One << pos);
+    public static PosSet operator ~(PosSet set) => new(~set.Bits & All.Bits);
 
-    public static PosSet operator ^(PosSet set, Pos pos) => new(set.Mask & ~(Int128.One << pos));
+    public static PosSet operator |(PosSet set, Pos pos) => new(set.Bits | Int128.One << pos);
 
-    public static PosSet operator |(PosSet l, PosSet r) => new(l.Mask | r.Mask);
+    public static PosSet operator ^(PosSet set, Pos pos) => new(set.Bits & ~(Int128.One << pos));
 
-    public static PosSet operator &(PosSet l, PosSet r) => new(l.Mask & r.Mask);
+    public static PosSet operator |(PosSet l, PosSet r) => new(l.Bits | r.Bits);
 
-    public static PosSet operator ^(PosSet l, PosSet r) => new(l.Mask & ~r.Mask);
+    public static PosSet operator &(PosSet l, PosSet r) => new(l.Bits & r.Bits);
 
-    public Iterator GetEnumerator() => new(Mask);
+    public static PosSet operator ^(PosSet l, PosSet r) => new(l.Bits & ~r.Bits);
+
+    public Iterator GetEnumerator() => new(Bits);
 
     IEnumerator<Pos> IEnumerable<Pos>.GetEnumerator() => GetEnumerator();
 

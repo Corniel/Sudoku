@@ -2,46 +2,109 @@ namespace SudokuSolver.Solvers;
 
 public static partial class DynamicSolver
 {
-    public static Cells Solve(Clues clues, Rules rules)
+    public static Cells Solve(Clues clues) => Solve(clues, Rules.Standard);
+
+    public static Cells Solve(Clues clues, ImmutableArray<Constraint> rules)
     {
         var peers = range(_9x9, _ => PosSet.Empty);
         var restrictions = range(_9x9, _ => new List<Restriction>());
 
-        foreach (var @set in rules.Sets)
+        foreach (var @set in rules.Where(r => r.IsSet))
             foreach (var peer in @set)
-                peers[peer] |= set;
+                peers[peer] |= set.Cells;
 
-        foreach (var restriction in rules.Restrictions)
-            restrictions[restriction.AppliesTo].Add(restriction);
+        foreach (var constraint in rules)
+            foreach (var res in constraint.Restrictions)
+                restrictions[res.AppliesTo].Add(res);
 
-        return Solve(
-            clues,
-            [
-                .. Pos.All.Select(p => new CellContext(p)
+        CellContext[] contexts = [.. Pos.All.Select(p => new CellContext(p)
+        {
+            Peers = [.. peers[p] ^ p],
+            Restrictions = [.. restrictions[p]],
+        })];
+
+        var cells = Cells.Empty;
+
+        var singles = ProcessGivens(clues, cells, contexts);
+        singles |= ResolveNakedSingles(cells, contexts, ~singles);
+
+        foreach (var constraint in rules)
+        {
+            foreach (var res in constraint.Restrictions)
+            {
+                var ctx = contexts[res.AppliesTo];
+                ctx.Candidates &= res.Restrict(cells);
+
+                if (ctx.Candidates.HasSingle && !singles.Contains(ctx.Pos))
                 {
-                    Peers = [.. peers[p] ^ p],
-                    Restrictions = [.. restrictions[p]],
-                })
-            ],
-            rules);
+                    singles |= ResolveSingle(ctx, ctx.Candidates, cells, contexts);
+                }
+            }
+        }
+
+        Solve(Queue(singles, contexts, rules), cells);
+        return cells;
     }
 
-    public static Cells Solve(Clues clues)
-        => Solve(clues, [.. Pos.All.Select(InitStandard)], Rules.Standard);
-
-    private static CellContext InitStandard(Pos p) => new(p) { Peers = Standard[p] };
-
-    public static readonly ImmutableArray<ImmutableArray<Pos>> Standard = [.. InitStandard()];
-
-    private static IEnumerable<ImmutableArray<Pos>> InitStandard()
+    private static ContextQueue Queue(PosSet done, CellContext[] contexts, ImmutableArray<Constraint> rules)
     {
-        var set = new PosSet[_9x9];
+        var unsolved = ~done;
+        var q = new CellContext[unsolved.Count];
 
-        for (Pos p = Pos.First; p <= Pos.Last; p++)
-            foreach (var dis in Houses.Standard.Where(d => d.Contains(p)))
-                set[p] |= dis;
+        var count = 0;
+        var size = 0;
 
-        return set.Select((s, p) => (s ^ new Pos(p)).ToImmutableArray());
+        var groups = new PosSet[rules.Length];
+
+        foreach (var rule in rules)
+            groups[size++] = rule.Cells;
+
+        // every loop, we try to find set with adds a minimum of new combiations
+        while (count < q.Length)
+        {
+            var best = int.MaxValue;
+            var index = int.MaxValue;
+            var group = unsolved;
+
+            for (var i = 0; i < size; i++)
+            {
+                var set = groups[i] & unsolved;
+
+                while (set.HasNone && i < size + 1)
+                {
+                    set = groups[--size] & unsolved;
+                    groups[i] = set;
+                }
+
+                var test = 1;
+
+                foreach (var c in set)
+                {
+                    test *= contexts[c].Candidates.Count;
+
+                    // looping sets is more expensive than branching
+                    if (test > best) break;
+                }
+
+                if (test < best)
+                {
+                    group = set;
+                    best = test;
+                    index = i;
+                }
+            }
+
+            foreach (var p in group.OrderBy(p => contexts[p].Candidates.Count))
+                q[count++] = contexts[p];
+
+            if (size > 0)
+            {
+                groups[index] = groups[--size];
+                unsolved ^= group;
+            }
+        }
+
+        return new([.. q]);
     }
 
     private static T[] range<T>(int size, Func<int, T> select) => [.. Enumerable.Range(0, size).Select(select)];

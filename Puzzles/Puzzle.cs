@@ -10,7 +10,7 @@ public abstract class Puzzle
 
     public abstract Clues Clues { get; }
 
-    public virtual Rules Rules { get; } = Rules.Standard;
+    public virtual ImmutableArray<Constraint> Constraints { get; } = Rules.Standard;
 
     public virtual Cells Solution { get; } = Cells.Empty;
 

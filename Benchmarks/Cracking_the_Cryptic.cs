@@ -11,5 +11,5 @@ public class Cracking_the_Cryptic
 
     [Benchmark]
     public Cells The_Miracle_Sudoku_Of_Eleven()
-        => DynamicSolver.Solve(Puzzle.Clues, Puzzle.Rules);
+        => DynamicSolver.Solve(Puzzle.Clues, Puzzle.Constraints);
 }

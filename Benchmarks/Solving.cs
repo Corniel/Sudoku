@@ -38,7 +38,7 @@ public class Solving
 
         foreach (var clue in Clues)
         {
-            solved += DynamicSolver.Solve(clue)[0, 0];
+            solved += DynamicSolver.Solve(clue, Rules.Standard)[0, 0];
         }
         return solved;
     }

@@ -1,5 +1,3 @@
-using SudokuSolver.Restrictions;
-
 namespace Puzzles.CrackingTheCryptic;
 
 public sealed class _2025_08_21 : CtcPuzzle
@@ -36,40 +34,35 @@ public sealed class _2025_08_21 : CtcPuzzle
         936|841|752
         """);
 
-    public override Rules Rules => new()
-    {
-        Sets = Houses.Standard,
-        Restrictions =
-        [
-            .. AtMosts(),
-            .. Pos.All.Select(NonConsecutive)
-        ]
-    };
+    public override ImmutableArray<Constraint> Constraints =>
+    [
+        .. Rules.Standard,
+        .. AtMost11s(),
+        .. NonConsecutives(),
+    ];
 
-    private static IEnumerable<AtMost> AtMosts()
+    public static IEnumerable<AtMost> AtMost11s()
     {
         for (var r = 1; r < 9; r++)
         {
             for (var c = 0; c < 8; c++)
             {
-                Pos fst = (r + 0, c + 0);
-                Pos sec = (r - 1, c + 1);
+                Pos one = (r + 0, c + 0);
+                Pos two = (r - 1, c + 1);
 
-                yield return new AtMost(fst, sec, 11);
-                yield return new AtMost(sec, fst, 11);
+                yield return new AtMost(one, two, 11);
             }
         }
     }
 
-    private static NonConsecutive NonConsecutive(Pos cell)
+    private static IEnumerable<NonConsecutive> NonConsecutives()
     {
-        Pos[] others =
-        [
-            cell.N(),
-            cell.E(),
-            cell.S(),
-            cell.W(),
-        ];
-        return new(cell, [.. others.Where(p => p.OnBoard)]);
+        foreach(var pos in Pos.All)
+        {
+            var n = pos.N();
+            var w = pos.W();
+            if (n.OnBoard) yield return new NonConsecutive(pos, n);
+            if (w.OnBoard) yield return new NonConsecutive(pos, w);
+        }
     }
 }

@@ -2,7 +2,7 @@ namespace Benchmarks;
 
 public static class Program
 {
-    public static void Main(string[] args)
+    public static void Main()
     {
         _ = BenchmarkDotNet.Running.BenchmarkRunner.Run<Solving>();
     }

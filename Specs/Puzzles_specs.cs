@@ -16,7 +16,7 @@ public class Cracking_the_Cryptic
     [TestCaseSource(nameof(Puzzles))]
     public void Puzzle(Puzzle puzzle)
     {
-        var solved = DynamicSolver.Solve(puzzle.Clues, puzzle.Rules);
+        var solved = DynamicSolver.Solve(puzzle.Clues, puzzle.Constraints);
 
         solved.Should().Be(puzzle.Solution);
 
@@ -64,7 +64,7 @@ public class Puzzle_bank
 
     private static void Solve(Puzzle puzzle)
     {
-        var solved = DynamicSolver.Solve(puzzle.Clues);
+        var solved = DynamicSolver.Solve(puzzle.Clues, Rules.Standard);
         solved.Should().BeSolved();
     }
 }

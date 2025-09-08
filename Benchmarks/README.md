@@ -10,22 +10,22 @@ Test all 512 possible states of `Values`.
 ## Solvers
 Tested on 1000 hard puzzles. The mean is the average per puzzle.
 
-| Method    | Config     | Mean       | Ratio |
-|---------- |----------- |-----------:|------:|
-| Reference | Diabolical | 2,441.8 us |  6.58 |
-| Dynamic   | Diabolical |   371.1 us |  1.00 |
-|           |            |            |       |
-| Reference | Hard       | 1,402.5 us | 12.12 |
-| Dynamic   | Hard       |   115.7 us |  1.00 |
-|           |            |            |       |
-| Reference | Medium     | 1,393.8 us | 12.08 |
-| Dynamic   | Medium     |   115.5 us |  1.00 |
-|           |            |            |       |
-| Reference | Easy       | 1,390.5 us | 12.04 |
-| Dynamic   | Easy       |   115.5 us |  1.00 |
-
+| Method    | Config     | Mean        | Ratio |
+|---------- |----------- |------------:|------:|
+| Reference | Diabolical | 2,479.82 us | 25.06 |
+| Dynamic   | Diabolical |    98.98 us |  1.00 |
+|           |            |             |       |
+| Reference | Hard       | 1,440.78 us | 30.03 |
+| Dynamic   | Hard       |    47.98 us |  1.00 |
+|           |            |             |       |
+| Reference | Medium     | 1,416.96 us | 28.47 |
+| Dynamic   | Medium     |    49.79 us |  1.00 |
+|           |            |             |       |
+| Reference | Easy       | 1,422.07 us | 29.44 |
+| Dynamic   | Easy       |    48.32 us |  1.00 |
+| 
 
 ## Cracking The Cryptic
 | Puzzle                       | Mean     |
 |----------------------------- |---------:|
-| The Miracle Sudoku Of Eleven | 1.291 ms |
+| The Miracle Sudoku Of Eleven | 6.102 ms |

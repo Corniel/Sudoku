@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path=".net.csproj" />
+  <Project Path="Benchmarks/Benchmarks.csproj" />
+  <Project Path="Specs/Specs.csproj" />
+  <Project Path="Puzzles/Puzzles.csproj" />
+  <Project Path="SudokuSolver/SudokuSolver.csproj" />
+</Solution>

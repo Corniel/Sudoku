@@ -10,7 +10,7 @@ public sealed record NonConsecutive : Restriction
 
     public override Candidates Restrict(Cells cells)
     {
-        Candidates values = Candidates.All;
+        Candidates values = Candidates._1_to_9;
         foreach (var other in Involved)
         {
             values &= Reduction[cells[other]];
@@ -23,7 +23,7 @@ public sealed record NonConsecutive : Restriction
 
     private static readonly ImmutableArray<Candidates> Reduction =
     [
-        /* 0 */ Candidates.All,
+        /* 0 */ Candidates._1_to_9,
         /* 1 */ Candidates.New(_, _, 3, 4, 5, 6, 7, 8, 9),
         /* 2 */ Candidates.New(_, _, _, 4, 5, 6, 7, 8, 9),
         /* 3 */ Candidates.New(1, _, _, _, 5, 6, 7, 8, 9),

@@ -1,3 +1,5 @@
+using SudokuSolver.Restrictions;
+
 namespace Puzzles.CrackingTheCryptic;
 
 public sealed class _2025_08_21 : CtcPuzzle

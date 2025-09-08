@@ -22,7 +22,7 @@ public class ValueIterator
 
         foreach (var values in All)
         {
-            var iterator = new Candidates.Iterator(values.Mask);
+            var iterator = new Candidates.Iterator(values.Bits);
             while (iterator.MoveNext())
             {
                 sum += iterator.Current;

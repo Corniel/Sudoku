@@ -7,7 +7,7 @@ public sealed record CellContext
 
     public Pos Pos { get; }
 
-    public Candidates Candidates { get; set; } = Candidates.All;
+    public Candidates Candidates { get; set; } = Candidates._1_to_9;
 
     public ImmutableArray<Pos> Peers { get; set; }
 

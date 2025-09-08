@@ -62,7 +62,7 @@ public class Flags
     [Test]
     public void All_1_to_9()
      {
-        int[] candidates = [.. Candidates.All];
+        int[] candidates = [.. Candidates._1_to_9];
         candidates.Should().BeEquivalentTo([1, 2, 3, 4, 5, 6, 7, 8, 9]);
     }
 
@@ -78,7 +78,7 @@ public class Flags
     [TestCase(9, /* => */ 1, 2, 3, 4, 5, 6, 7, 8, _)]
     public void Value(int value, params int[] values)
     {
-        var reduced = Candidates.All ^ value;
+        var reduced = Candidates._1_to_9 ^ value;
         reduced.Should().Be([.. values.Where(v => v != _)]);
     }
 }
@@ -154,4 +154,20 @@ public class Maths
     [Test]
     public void Subtracts_many()
         => (Candidates.New(3, 4) - 2).Should().Be([1, 2]);
+}
+
+public class All
+{
+    [Test]
+    public void iterates_512_combinations()
+    {
+        Candidates[] all = [.. Candidates.All];
+
+        all[00].Should().Be(Candidates.None);
+        all[^1].Should().Be(Candidates._1_to_9);
+
+        all.Should().OnlyHaveUniqueItems()
+            .And.HaveCount(512);
+    }
+
 }

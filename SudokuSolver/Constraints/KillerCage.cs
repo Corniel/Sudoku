@@ -11,14 +11,14 @@ public sealed partial class KillerCage(int sum, PosSet cells) : Constraint
 
     public override PosSet Cells => cells;
 
-    public override ImmutableArray<Restriction> Restrictions { get; } = [.. Init(sum, cells)];
+    public override ImmutableArray<Restriction> Restrictions { get; } = [.. Reducers(sum, cells)];
 
     public static KillerCage operator -(KillerCage cage, KillerCage other)
         => cage.Cells.IsSubsetOf(other.Cells)
         ? new(cage.Sum - other.Sum, cage.Cells ^ other.Cells)
         : cage;
 
-    private static IEnumerable<Restriction> Init(int sum, PosSet cells) => cells.Count switch
+    private static IEnumerable<Restriction> Reducers(int sum, PosSet cells) => cells.Count switch
     {
         1 => [new Cage1(sum, cells.First())],
         2 => [new Cage2(sum, cells.First(), cells.Skip(1).First())],

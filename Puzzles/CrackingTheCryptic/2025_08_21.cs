@@ -2,7 +2,7 @@ namespace Puzzles.CrackingTheCryptic;
 
 public sealed class _2025_08_21 : CtcPuzzle
 {
-    public override string Title => "The Miracle Sudoku Of Eleven";
+    public override string Title => "Miracle Of Eleven";
     public override string? Author => "Aad van de Wetering";
     public override Uri? Url => new("https://youtu.be/OzzuJUU6g84");
 

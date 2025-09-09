@@ -4,6 +4,9 @@
 [DebuggerTypeProxy(typeof(Diagnostics.CollectionDebugView))]
 public readonly struct Clues(ImmutableArray<Cell> cells) : IReadOnlyCollection<Cell>
 {
+    /// <summary>No clues given.</summary>
+    public static readonly Clues None = new([]);
+
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly ImmutableArray<Cell> Cells = cells;
 

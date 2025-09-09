@@ -1,5 +1,6 @@
 using Puzzles;
 using Puzzles.CrackingTheCryptic;
+using Puzzles.Killer;
 using Puzzles.PuzzleBank;
 using Puzzles.SudokuPad;
 using SudokuSolver.Solvers;
@@ -24,6 +25,21 @@ public class Cracking_the_Cryptic
     }
 }
 
+public class Killers
+{
+    private static readonly ImmutableArray<Puzzle> Puzzles = [..KillerPuzzle.Load()];
+
+    [TestCaseSource(nameof(Puzzles))]
+    public void Puzzle(Puzzle puzzle)
+    {
+        var solved = DynamicSolver.Solve(puzzle.Clues, puzzle.Constraints);
+
+        solved.ToString().Should().NotContain(".");
+
+        Console.WriteLine(solved);
+    }
+}
+
 public class SudokuPad_app
 {
     private static readonly ImmutableArray<Puzzle> Puzzles = SudokuPadPuzzle.All;
@@ -31,7 +47,7 @@ public class SudokuPad_app
     [TestCaseSource(nameof(Puzzles))]
     public void Puzzle(Puzzle puzzle)
     {
-        var solved = DynamicSolver.Solve(puzzle.Clues);
+        var solved = DynamicSolver.Solve(puzzle.Clues, puzzle.Constraints);
 
         solved.Should().Be(puzzle.Solution);
 

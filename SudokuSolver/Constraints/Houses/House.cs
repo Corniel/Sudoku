@@ -16,5 +16,5 @@ public abstract class House(int index, PosSet cells) : Constraint
 
     internal override string DebuggerDisplay => $"[{Index}]";
 
-    internal static IEnumerable<int> range() => Enumerable.Range(0, 9);
+    internal static IEnumerable<int> range() => Enumerable.Range(0, _9);
 }

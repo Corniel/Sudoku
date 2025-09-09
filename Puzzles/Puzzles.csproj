@@ -1,6 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
+    <EmbeddedResource Include="Killer/*.md" />
     <EmbeddedResource Include="PuzzleBank/*.txt" />
   </ItemGroup>
   

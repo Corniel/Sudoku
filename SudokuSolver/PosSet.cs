@@ -6,7 +6,7 @@ namespace SudokuSolver;
 [CollectionBuilder(typeof(PosSet), nameof(New))]
 [DebuggerDisplay("Count = {Count}")]
 [DebuggerTypeProxy(typeof(Diagnostics.CollectionDebugView))]
-public readonly struct PosSet(Int128 bits) : IReadOnlyCollection<Pos>
+public readonly struct PosSet(Int128 bits) : IEquatable<PosSet>, IReadOnlyCollection<Pos>
 {
     public static readonly PosSet Empty;
 
@@ -22,6 +22,9 @@ public readonly struct PosSet(Int128 bits) : IReadOnlyCollection<Pos>
     public bool HasAny => Bits != 0;
 
     public bool Contains(Pos pos) => (Bits & (Int128.One << pos)) != 0;
+
+    /// <inheritdoc cref="IReadOnlySet{T}.IsSubsetOf(IEnumerable{T})" />
+    public bool IsSubsetOf(PosSet other) => (other.Bits & Bits) == other.Bits;
 
     [Pure]
     public PosSet AddRange(IEnumerable<Pos> positions)
@@ -48,6 +51,15 @@ public readonly struct PosSet(Int128 bits) : IReadOnlyCollection<Pos>
     }
 
     [Pure]
+    public override bool Equals(object? obj) => obj is PosSet other && Equals(other);
+
+    [Pure]
+    public bool Equals(PosSet other) => Bits == other.Bits;
+
+    [Pure]
+    public override int GetHashCode() => Bits.GetHashCode();
+
+    [Pure]
     public static PosSet New(params IEnumerable<Pos> positions)
     {
         Int128 bits = 0;
@@ -69,6 +81,10 @@ public readonly struct PosSet(Int128 bits) : IReadOnlyCollection<Pos>
         }
         return new PosSet(bits);
     }
+
+    public static bool operator ==(PosSet l, PosSet r) => l.Equals(r);
+
+    public static bool operator !=(PosSet l, PosSet r) => !(l == r);
 
     public static PosSet operator ~(PosSet set) => new(~set.Bits & All.Bits);
 

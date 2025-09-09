@@ -1,8 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
+  <ItemGroup>
+    <EmbeddedResource Include="Constraints/*.md" />
+  </ItemGroup>
+
   <ItemGroup Label="Analyzers">
     <PackageReference PrivateAssets="all" Include="Qowaiv.Analyzers.CSharp" />
     <PackageReference PrivateAssets="all" Include="StyleCop.Analyzers.Unstable" />
   </ItemGroup>
-  
+
 </Project>

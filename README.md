@@ -75,6 +75,27 @@ var rules_ = KillerCages.Parse("""
 var solution = DynamicSolver.Solve(Clues.Empty, rules);
 ```
 
+## X Sudoku
+To let the dynamic solver solve an X Sudoku puzzle:
+
+``` csharp
+var clues = Clues.Parse("""
+    .1.|2.3|.4.
+    8..|...|6.5
+    .7.|...|...
+    ---+---+---
+    4..|...|..6
+    ...|...|...
+    2..|...|..7
+    ---+---+---
+    ...|...|.9.
+    7.9|...|..8
+    .2.|3.4|.5.
+    """);
+
+var solution = DynamicSolver.Solve(clues, Rules.XSudoku);
+```
+
 ## Cracking The Cryptic
 [Cracking Tye Cryptic](https://www.youtube.com/@CrackingTheCryptic) is a YouTube
 channel dedicated to solving world-class puzzles (their wording, not mine). With

@@ -4,7 +4,6 @@ using Puzzles.Killer;
 using Puzzles.PuzzleBank;
 using Puzzles.SudokuPad;
 using SudokuSolver.Solvers;
-using System;
 using System.Collections.Immutable;
 
 namespace Specs.Puzzles_specs;
@@ -55,6 +54,39 @@ public class SudokuPad_app
     }
 }
 
+public class X_Sudoku
+{
+    [Test]
+    public void Solves() => DynamicSolver.Solve(
+            Clues.Parse("""
+            .1.|2.3|.4.
+            8..|...|6.5
+            .7.|...|...
+            ---+---+---
+            4..|...|..6
+            ...|...|...
+            2..|...|..7
+            ---+---+---
+            ...|...|.9.
+            7.9|...|..8
+            .2.|3.4|.5.
+            """),
+            Rules.XSudoku)
+           .Should().Be("""
+            516|273|849
+            832|941|675
+            974|658|123
+            ---+---+---
+            485|712|936
+            397|486|512
+            261|539|487
+            ---+---+---
+            153|867|294
+            749|125|368
+            628|394|751
+        """);
+}
+
 public class Puzzle_bank
 {
     private static readonly ImmutableArray<Puzzle> Easys = [.. PuzzleBankPuzzle.Easy.Take(100)];
@@ -65,6 +97,13 @@ public class Puzzle_bank
 
     private static readonly ImmutableArray<Puzzle> Diabolicals = [.. PuzzleBankPuzzle.Diabolical.Take(100)];
 
+    private static readonly ImmutableArray<Puzzle> Xs =
+    [
+        .. PuzzleBankPuzzle.Diabolical.Where(p => p.IsX).Take(25),
+        .. PuzzleBankPuzzle.Hard.Where(p => p.IsX).Take(25),
+        .. PuzzleBankPuzzle.Medium.Where(p => p.IsX).Take(25),
+        .. PuzzleBankPuzzle.Easy.Where(p => p.IsX).Take(25),
+    ];
 
     [TestCaseSource(nameof(Easys))]
     public void Easy(Puzzle puzzle) => Solve(puzzle);
@@ -78,9 +117,13 @@ public class Puzzle_bank
     [TestCaseSource(nameof(Diabolicals))]
     public void Diabolical(Puzzle puzzle) => Solve(puzzle);
 
-    private static void Solve(Puzzle puzzle)
+    [TestCaseSource(nameof(Xs))]
+    public void XSudoku(Puzzle puzzle) => Solve(puzzle, Rules.XSudoku);
+
+    private static void Solve(Puzzle puzzle, ImmutableArray<Constraint>? rules = null)
     {
-        var solved = DynamicSolver.Solve(puzzle.Clues, Rules.Standard);
+        var cs = rules ?? Rules.Standard;
+        var solved = DynamicSolver.Solve(puzzle.Clues, cs);
         solved.Should().BeSolved();
     }
 }

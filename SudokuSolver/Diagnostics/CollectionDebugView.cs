@@ -2,8 +2,6 @@
 // Properties should not make collection or array copies
 // Required for debugging purposes.
 
-using System.Diagnostics.CodeAnalysis;
-
 namespace SudokuSolver.Diagnostics;
 
 /// <summary>Allows the debugger to display collections.</summary>

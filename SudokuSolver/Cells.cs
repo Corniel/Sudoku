@@ -20,6 +20,9 @@ public readonly struct Cells : IEquatable<Cells>
         set => Values[pos] = value;
     }
 
+    /// <summary>Indicates that all values have been resolved.</summary>
+    public bool IsSolved => Values.All(v => v is not 0);
+
     /// <summary>Represents the Sudoku state as string.</summary>
     public override string ToString()
     {

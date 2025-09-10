@@ -22,7 +22,7 @@ public readonly struct Clues(ImmutableArray<Cell> cells) : IReadOnlyCollection<C
     public static Clues Parse(string str)
     {
         var cells = new Cell[_9x9];
-        var p = Pos.First;
+        var p = Pos.O;
         var i = 0;
 
         foreach (var ch in str)

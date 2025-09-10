@@ -5,8 +5,9 @@ public readonly struct Pos(int i) : IEquatable<Pos>
 {
     public static AllIterator All => new();
 
-    public static readonly Pos First;
-    public static readonly Pos Last = (8, 8);
+    /// <summary>The O(rigin) postion (0, 0).</summary>
+    public static readonly Pos O;
+
     public static readonly Pos Invalid = (_9, _9);
 
     public Pos(int row, int col) : this((row * _9) + col) { }

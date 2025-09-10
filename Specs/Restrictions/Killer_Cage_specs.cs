@@ -1,6 +1,5 @@
 using SudokuSolver.Constraints;
 using SudokuSolver.Solvers;
-using System;
 using System.IO;
 using System.Text;
 

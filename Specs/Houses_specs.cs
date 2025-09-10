@@ -1,5 +1,3 @@
-using System;
-
 namespace Specs.Houses_specs;
 
 public class Rows

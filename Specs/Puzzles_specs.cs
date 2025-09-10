@@ -5,6 +5,8 @@ using Puzzles.PuzzleBank;
 using Puzzles.SudokuPad;
 using SudokuSolver.Solvers;
 using System.Collections.Immutable;
+using System.IO;
+using System.Text;
 
 namespace Specs.Puzzles_specs;
 
@@ -23,8 +25,40 @@ public class Cracking_the_Cryptic
         Console.WriteLine(solved);
     }
 }
+public class Hyper_Sudoku
+{
+    [Test]
+    public void Solves() => DynamicSolver.Solve(
+        Clues.Parse("""
+            .4.|...|..9
+            9..|...|8..
+            .1.|3..|...
+            ---+---+---
+            ...|4.2|..8
+            ...|.3.|...
+            ...|...|7.5
+            ---+---+---
+            ...|.9.|...
+            .67|..4|...
+            ...|..5|4..
+            """),
+            Rules.Hyper)
+        .Should().Be("""
+            543|168|279
+            926|547|813
+            718|329|546
+            ---+---+---
+            179|452|368
+            285|736|194
+            634|981|725
+            ---+---+---
+            451|293|687
+            367|814|952
+            892|675|431
+            """);
+}
 
-public class Killers
+public class Killer_Sudoku
 {
     private static readonly ImmutableArray<Puzzle> Puzzles = [..KillerPuzzle.Load()];
 
@@ -34,21 +68,6 @@ public class Killers
         var solved = DynamicSolver.Solve(puzzle.Clues, puzzle.Constraints);
 
         solved.ToString().Should().NotContain(".");
-
-        Console.WriteLine(solved);
-    }
-}
-
-public class SudokuPad_app
-{
-    private static readonly ImmutableArray<Puzzle> Puzzles = SudokuPadPuzzle.All;
-
-    [TestCaseSource(nameof(Puzzles))]
-    public void Puzzle(Puzzle puzzle)
-    {
-        var solved = DynamicSolver.Solve(puzzle.Clues, puzzle.Constraints);
-
-        solved.Should().Be(puzzle.Solution);
 
         Console.WriteLine(solved);
     }
@@ -87,6 +106,21 @@ public class X_Sudoku
         """);
 }
 
+public class SudokuPad_app
+{
+    private static readonly ImmutableArray<Puzzle> Puzzles = SudokuPadPuzzle.All;
+
+    [TestCaseSource(nameof(Puzzles))]
+    public void Puzzle(Puzzle puzzle)
+    {
+        var solved = DynamicSolver.Solve(puzzle.Clues, puzzle.Constraints);
+
+        solved.Should().Be(puzzle.Solution);
+
+        Console.WriteLine(solved);
+    }
+}
+
 public class Puzzle_bank
 {
     private static readonly ImmutableArray<Puzzle> Easys = [.. PuzzleBankPuzzle.Easy.Take(100)];
@@ -96,6 +130,14 @@ public class Puzzle_bank
     private static readonly ImmutableArray<Puzzle> Hards = [.. PuzzleBankPuzzle.Hard.Take(100)];
 
     private static readonly ImmutableArray<Puzzle> Diabolicals = [.. PuzzleBankPuzzle.Diabolical.Take(100)];
+
+    private static readonly ImmutableArray<Puzzle> Hypers =
+    [
+        .. PuzzleBankPuzzle.Diabolical.Where(p => p.IsHyper).Take(25),
+        .. PuzzleBankPuzzle.Hard.Where(p => p.IsHyper).Take(25),
+        .. PuzzleBankPuzzle.Medium.Where(p => p.IsHyper).Take(25),
+        .. PuzzleBankPuzzle.Easy.Where(p => p.IsHyper).Take(25),
+    ];
 
     private static readonly ImmutableArray<Puzzle> Xs =
     [
@@ -117,8 +159,33 @@ public class Puzzle_bank
     [TestCaseSource(nameof(Diabolicals))]
     public void Diabolical(Puzzle puzzle) => Solve(puzzle);
 
+    [TestCaseSource(nameof(Hypers))]
+    public void Hyper(Puzzle puzzle) => Solve(puzzle, Rules.Hyper);
+
+
     [TestCaseSource(nameof(Xs))]
     public void XSudoku(Puzzle puzzle) => Solve(puzzle, Rules.XSudoku);
+
+    [Explicit("Only usefull to extend the file definitions")]
+    [TestCase(nameof(Diabolical))]
+    [TestCase(nameof(Hard))]
+    [TestCase(nameof(Medium))]
+    [TestCase(nameof(Easy))]
+    public void Process(string name)
+    {
+        var file = new FileInfo($"../../../../Puzzles/PuzzleBank/{name}.txt");
+
+        file.Exists.Should().BeTrue();
+
+        using var writer = new StreamWriter(file.FullName, false, new UTF8Encoding(false));
+
+        //using var writer = new StreamWriter("")
+        foreach (var puzzle in PuzzleBankPuzzle.Load(name))
+        {
+            // Update puzzles.
+            puzzle.WriteTo(writer);
+        }
+    }
 
     private static void Solve(Puzzle puzzle, ImmutableArray<Constraint>? rules = null)
     {

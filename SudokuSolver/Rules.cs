@@ -8,6 +8,9 @@ public static class Rules
     /// <summary>The standard set of houses.</summary>
     public static readonly ImmutableArray<Constraint> Standard = [.. Row.All, .. Col.All, .. Box.All];
 
+    /// <summary>The standard set of houses extended with the four windows.</summary>
+    public static readonly ImmutableArray<Constraint> Hyper = [.. Standard, ..Window.All];
+
     /// <summary>The standard set of houses extended with both diagonals.</summary>
-    public static readonly ImmutableArray<Constraint> XSudoku = [.. Row.All, .. Col.All, .. Box.All, Diagonal.NE_SW, Diagonal.NW_SE];
+    public static readonly ImmutableArray<Constraint> XSudoku = [.. Standard, Diagonal.NE_SW, Diagonal.NW_SE];
 }

@@ -29,7 +29,44 @@ var clues = Clues.Parse("""
 var solution = DynamicSolver.Solve(clues);
 ```
 
-### Killer Sudoku
+## Hyper Sudoku
+Hyper Sudoku (also called Windoku) adds for extra 3x3 regions:
+
+```
+...|...|...
+.11|1.2|22.
+.11|1.2|22.
+---+---+---
+.11|1.2|22.
+...|...|...
+.33|3.4|44.
+---+---+---
+.33|3.4|44.
+.33|3.4|44.
+...|...|...
+```
+
+To let te dynamic solver solve these puzzles:
+
+``` csharp
+var clues = Clues.Parse("""
+    .4.|...|..9
+    9..|...|8..
+    .1.|3..|...
+    ---+---+---
+    ...|4.2|..8
+    ...|.3.|...
+    ...|...|7.5
+    ---+---+---
+    ...|.9.|...
+    .67|..4|...
+    ...|..5|4..
+    """);
+
+var solution = DynamicSolver.Solve(clues, Rules.Hyper);
+```
+
+## Killer Sudoku
 The dynamic solver can also solve [Killer Sudoku's](https://en.wikipedia.org/wiki/Killer_sudoku).
 As there is no standard plain text format to describe these (that I'm aware of) there are
 two support formats that seem logical:

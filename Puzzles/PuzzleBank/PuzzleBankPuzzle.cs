@@ -15,6 +15,9 @@ public sealed class PuzzleBankPuzzle(string title, Clues clues) : Puzzle
 
     public decimal Level { get; init; }
 
+    /// <summary>Indicates that the puzzle also meets the <see cref="Rules.Hyper"/> constraints.</summary>
+    public bool IsHyper { get; init; }
+
     /// <summary>Indicates that the puzzle also meets the <see cref="Rules.XSudoku"/> constraints.</summary>
     public bool IsX { get; init; }
 
@@ -28,6 +31,8 @@ public sealed class PuzzleBankPuzzle(string title, Clues clues) : Puzzle
 
     public override string ToString() => $"{Title} ({Level:0.0})";
 
+    /// <summary>Writes a puzzle as a single line to a stream writer.</summary>
+    /// <remarks>Helps to update the file(s) if needed.</remarks>
     public void WriteTo(StreamWriter writer)
     {
         writer.Write(Title);
@@ -37,13 +42,16 @@ public sealed class PuzzleBankPuzzle(string title, Clues clues) : Puzzle
             writer.Write(Clues.FirstOrDefault(c => c.Pos == p).Value);
         }
         writer.Write($" {Level.ToString("0.0", CultureInfo.InvariantCulture),4}");
-        if (IsX)
+        if (IsHyper || IsX)
         {
-            writer.Write(" x");
+            writer.Write(' ');
+            if (IsHyper) writer.Write('h');
+            if (IsX) writer.Write('x');
         }
+        writer.Write('\n');
     }
 
-    private static IEnumerable<PuzzleBankPuzzle> Load(string file)
+    public static IEnumerable<PuzzleBankPuzzle> Load(string file)
     {
         using var stream = typeof(PuzzleBankPuzzle).Assembly.GetManifestResourceStream($"Puzzles.PuzzleBank.{file}.txt")!;
         using var reader = new StreamReader(stream);
@@ -55,6 +63,7 @@ public sealed class PuzzleBankPuzzle(string title, Clues clues) : Puzzle
                 yield return new PuzzleBankPuzzle(parts[0], Clues.Parse(parts[1]))
                 {
                     Level = decimal.Parse(parts[2], CultureInfo.InvariantCulture),
+                    IsHyper = parts.Length > 3 && parts[3].Contains('h'),
                     IsX = parts.Length > 3 && parts[3].Contains('x'),
                 };
             }

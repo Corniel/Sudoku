@@ -16,13 +16,13 @@ public sealed class PuzzleBankPuzzle(string title, Clues clues) : Puzzle
     public decimal Level { get; init; }
 
     /// <summary>Indicates that the puzzle also meets the <see cref="Rules.AntiKnight"/> constraints.</summary>
-    public bool IsAntiKnight { get; init; }
+    public bool IsAntiKnight { get; set; }
 
     /// <summary>Indicates that the puzzle also meets the <see cref="Rules.Hyper"/> constraints.</summary>
-    public bool IsHyper { get; init; }
+    public bool IsHyper { get; set; }
 
     /// <summary>Indicates that the puzzle also meets the <see cref="Rules.XSudoku"/> constraints.</summary>
-    public bool IsX { get; init; }
+    public bool IsX { get; set; }
 
     public static ImmutableArray<PuzzleBankPuzzle> Easy => [.. Load(nameof(Easy))];
 

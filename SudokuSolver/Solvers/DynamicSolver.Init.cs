@@ -57,7 +57,7 @@ public static partial class DynamicSolver
             {
                 var set = groups[i] & unsolved;
 
-                while (set.HasNone && i < size + 1)
+                while (set.HasNone && i > 0 && i < size - 1)
                 {
                     set = groups[--size] & unsolved;
                     groups[i] = set;

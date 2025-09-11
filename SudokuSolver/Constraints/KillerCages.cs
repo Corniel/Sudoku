@@ -39,9 +39,9 @@ public static partial class KillerCages
                 var sum = int.Parse(line.Groups["Sum"].Value);
                 var cells = PosSet.Empty;
 
-                foreach (Match p in Pos().Matches(line.Value))
+                foreach (var groups in Pos().Matches(line.Value).Select(p => p.Groups))
                 {
-                    cells |= (int.Parse(p.Groups["Row"].Value), int.Parse(p.Groups["Col"].Value));
+                    cells |= (int.Parse(groups["Row"].Value), int.Parse(groups["Col"].Value));
                 }
                 cages.Add(new KillerCage(sum, cells));
             }

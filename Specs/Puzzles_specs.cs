@@ -95,8 +95,24 @@ public class Hyper_Sudoku
 public class Jigsaw_Sudokud
 {
     [Test]
-    public void Solves() => DynamicSolver.Solve(
-       Clues.Parse("""
+    public void Solves()
+    {
+        var rules = Rules.Jigsaw("""
+            AAA|BBB|BCC
+            AAA|BBB|BCC
+            AAD|DEB|CCC 
+            ---+---+---        
+            ADD|DEE|FCC
+            DDD|EEE|FFF
+            GGD|EEF|FFH
+            ---+---+---
+            GGG|JEF|FHH
+            GGJ|JJJ|HHH
+            GGJ|JJJ|HHH
+            """);
+
+        DynamicSolver.Solve(
+          Clues.Parse("""
             4..|7.9|.2.
             ...|.2.|...
             .9.|..8|...
@@ -109,19 +125,7 @@ public class Jigsaw_Sudokud
             ...|.4.|...
             .1.|2..|.45
             """),
-           Rules.Jigsaw("""
-            AAA|BBB|BCC
-            AAA|BBB|BCC
-            AAD|DEB|CCC 
-            ---+---+---        
-            ADD|DEE|FCC
-            DDD|EEE|FFF
-            GGD|EEF|FFH
-            ---+---+---
-            GGG|JEF|FHH
-            GGJ|JJJ|HHH
-            GGJ|JJJ|HHH
-            """))
+            rules)
        .Should().Be("""
             463|719|528
             857|326|491
@@ -134,7 +138,9 @@ public class Jigsaw_Sudokud
             528|634|917
             671|543|289
             319|287|645
-            """);
+            """,
+            rules);
+    }
 }
 
 public class Killer_Sudoku
@@ -147,6 +153,8 @@ public class Killer_Sudoku
         var solved = DynamicSolver.Solve(puzzle.Clues, puzzle.Constraints);
 
         solved.ToString().Should().NotContain(".");
+
+        puzzle.Constraints.IsValid(solved).Should().BeTrue();
 
         Console.WriteLine(solved);
     }
@@ -215,24 +223,24 @@ public class Puzzle_bank
        .. PuzzleBankPuzzle.Diabolical.Where(p => p.IsAntiKnight),
         .. PuzzleBankPuzzle.Hard.Where(p => p.IsAntiKnight),
         .. PuzzleBankPuzzle.Medium.Where(p => p.IsAntiKnight),
-        .. PuzzleBankPuzzle.Easy.Where(p => p.IsAntiKnight).Take(75),
+        .. PuzzleBankPuzzle.Easy.Where(p => p.IsAntiKnight),
     ];
 
 
     private static readonly ImmutableArray<Puzzle> Hypers =
     [
-        .. PuzzleBankPuzzle.Diabolical.Where(p => p.IsHyper).Take(25),
-        .. PuzzleBankPuzzle.Hard.Where(p => p.IsHyper).Take(25),
-        .. PuzzleBankPuzzle.Medium.Where(p => p.IsHyper).Take(25),
-        .. PuzzleBankPuzzle.Easy.Where(p => p.IsHyper).Take(25),
+        .. PuzzleBankPuzzle.Diabolical.Where(p => p.IsHyper),
+        .. PuzzleBankPuzzle.Hard.Where(p => p.IsHyper),
+        .. PuzzleBankPuzzle.Medium.Where(p => p.IsHyper),
+        .. PuzzleBankPuzzle.Easy.Where(p => p.IsHyper),
     ];
 
     private static readonly ImmutableArray<Puzzle> Xs =
     [
-        .. PuzzleBankPuzzle.Diabolical.Where(p => p.IsX).Take(25),
-        .. PuzzleBankPuzzle.Hard.Where(p => p.IsX).Take(25),
-        .. PuzzleBankPuzzle.Medium.Where(p => p.IsX).Take(25),
-        .. PuzzleBankPuzzle.Easy.Where(p => p.IsX).Take(25),
+        .. PuzzleBankPuzzle.Diabolical.Where(p => p.IsX),
+        .. PuzzleBankPuzzle.Hard.Where(p => p.IsX),
+        .. PuzzleBankPuzzle.Medium.Where(p => p.IsX),
+        .. PuzzleBankPuzzle.Easy.Where(p => p.IsX),
     ];
 
     [TestCaseSource(nameof(Easys))]
@@ -269,10 +277,12 @@ public class Puzzle_bank
 
         using var writer = new StreamWriter(file.FullName, false, new UTF8Encoding(false));
 
-        //using var writer = new StreamWriter("")
         foreach (var puzzle in PuzzleBankPuzzle.Load(name))
         {
-            // puzzle.IsAntiKnight = DynamicSolver.Solve(puzzle.Clues, Rules.AntiKnight).IsSolved
+            var solved = DynamicSolver.Solve(puzzle.Clues);
+            puzzle.IsX = Rules.XSudoku.IsValid(solved);
+            puzzle.IsAntiKnight = Rules.AntiKnight.IsValid(solved);
+            puzzle.IsHyper = Rules.Hyper.IsValid(solved);
 
             // Update puzzles.
             puzzle.WriteTo(writer);
@@ -283,7 +293,7 @@ public class Puzzle_bank
     {
         var cs = rules ?? Rules.Standard;
         var solved = DynamicSolver.Solve(puzzle.Clues, cs);
-        solved.Should().BeSolved();
+        solved.Should().BeSolved(rules);
     }
 }
 

@@ -1,6 +1,6 @@
 using AwesomeAssertions.Execution;
 using SudokuSolver.Solvers;
-using System.Diagnostics.CodeAnalysis;
+using System.Collections.Immutable;
 
 namespace AwesomeAssertions;
 
@@ -10,22 +10,28 @@ public sealed class CellsAssertions(Cells subject)
 
     public Cells Subject { get; } = subject;
 
-    public void BeSolved([StringSyntax("CompositeFormat")] string because = "", params object[] becauseArgs)
+    public void BeSolved(ImmutableArray<Constraint>? rules = null)
     {
         var reference = Backtracker.Solve(Clues.Parse(Subject.ToString()));
 
-        Be(reference, because, becauseArgs);
+        Be(reference, rules);
     }
 
-    public void Be(string expected, [StringSyntax("CompositeFormat")] string because = "", params object[] becauseArgs)
-        => Be(Cells.Parse(expected), because, becauseArgs);
+    public void Be(string expected, ImmutableArray<Constraint>? rules = null)
+        => Be(Cells.Parse(expected), rules);
 
-    public void Be(Cells expected, [StringSyntax("CompositeFormat")] string because = "", params object[] becauseArgs)
+    public void Be(Cells expected, ImmutableArray<Constraint>? rules = null)
     {
+        rules ??= Rules.Standard;
+
         Chain
-            .BecauseOf(because, becauseArgs)
             .ForCondition(Subject.Equals(expected))
             .WithDefaultIdentifier("Puzzle")
             .FailWith($"Expected:\n{expected}\n\nAcutal:\n{Subject}");
+
+        Chain
+            .ForCondition(rules.IsValid(expected))
+            .WithDefaultIdentifier("Puzzle")
+            .FailWith("Expected to be valid for the specified rule set.");
     }
 }

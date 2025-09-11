@@ -29,6 +29,27 @@ var clues = Clues.Parse("""
 var solution = DynamicSolver.Solve(clues);
 ```
 
+### Anti-Knight Sudoku
+In Anti-Knight (Antiknight), besides the regular houses, cells may also not
+share a digit when they are on (chess) knight distance:
+
+``` csharp
+var clues = Clues.Parse("""
+    ...|5..|...
+    ...|..4|...
+    .58|...|.2.
+    ---+---+---
+    ...|..9|...
+    .6.|...|..5
+    ...|1..|3..
+    ---+---+---
+    ..3|..2|4..
+    6..|.78|...
+    .9.|...|..1
+    """);
+
+var solution = DynamicSolver.Solve(clues, Rules.AntiKnight);
+
 ### Hyper Sudoku
 Hyper Sudoku (also called Windoku) adds for extra 3x3 regions:
 

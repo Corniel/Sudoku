@@ -25,6 +25,40 @@ public class Cracking_the_Cryptic
         Console.WriteLine(solved);
     }
 }
+
+public class Anti_Knight
+{
+    [Test]
+    public void Solves() => DynamicSolver.Solve(
+      Clues.Parse("""
+            ...|5..|...
+            ...|..4|...
+            .58|...|.2.
+            ---+---+---
+            ...|..9|...
+            .6.|...|..5
+            ...|1..|3..
+            ---+---+---
+            ..3|..2|4..
+            6..|.78|...
+            .9.|...|..1
+            """),
+          Rules.AntiKnight)
+      .Should().Be("""
+            926|583|714
+            137|624|598
+            458|791|623
+            ---+---+---
+            245|839|167
+            361|247|985
+            879|165|342
+            ---+---+---
+            583|912|476
+            614|378|259
+            792|456|831
+            """);
+}
+
 public class Hyper_Sudoku
 {
     [Test]
@@ -176,6 +210,15 @@ public class Puzzle_bank
 
     private static readonly ImmutableArray<Puzzle> Diabolicals = [.. PuzzleBankPuzzle.Diabolical.Take(100)];
 
+    private static readonly ImmutableArray<Puzzle> AntiKnights =
+   [
+       .. PuzzleBankPuzzle.Diabolical.Where(p => p.IsAntiKnight),
+        .. PuzzleBankPuzzle.Hard.Where(p => p.IsAntiKnight),
+        .. PuzzleBankPuzzle.Medium.Where(p => p.IsAntiKnight),
+        .. PuzzleBankPuzzle.Easy.Where(p => p.IsAntiKnight).Take(75),
+    ];
+
+
     private static readonly ImmutableArray<Puzzle> Hypers =
     [
         .. PuzzleBankPuzzle.Diabolical.Where(p => p.IsHyper).Take(25),
@@ -204,9 +247,11 @@ public class Puzzle_bank
     [TestCaseSource(nameof(Diabolicals))]
     public void Diabolical(Puzzle puzzle) => Solve(puzzle);
 
+    [TestCaseSource(nameof(AntiKnights))]
+    public void AntiKnight(Puzzle puzzle) => Solve(puzzle, Rules.AntiKnight);
+
     [TestCaseSource(nameof(Hypers))]
     public void Hyper(Puzzle puzzle) => Solve(puzzle, Rules.Hyper);
-
 
     [TestCaseSource(nameof(Xs))]
     public void XSudoku(Puzzle puzzle) => Solve(puzzle, Rules.XSudoku);
@@ -227,6 +272,8 @@ public class Puzzle_bank
         //using var writer = new StreamWriter("")
         foreach (var puzzle in PuzzleBankPuzzle.Load(name))
         {
+            // puzzle.IsAntiKnight = DynamicSolver.Solve(puzzle.Clues, Rules.AntiKnight).IsSolved
+
             // Update puzzles.
             puzzle.WriteTo(writer);
         }

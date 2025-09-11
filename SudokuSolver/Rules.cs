@@ -8,6 +8,9 @@ public static class Rules
     /// <summary>The standard set of houses.</summary>
     public static readonly ImmutableArray<Constraint> Standard = [.. Row.All, .. Col.All, .. Box.All];
 
+    /// <summary>The standard set of housed extended with the <see cref="Constraints.AntiKnight"/> restrictions.</summary>
+    public static readonly ImmutableArray<Constraint> AntiKnight = [.. Standard, .. Constraints.AntiKnight.All];
+
     /// <summary>The standard set of houses extended with the four windows.</summary>
     public static readonly ImmutableArray<Constraint> Hyper = [.. Standard, ..Window.All];
 

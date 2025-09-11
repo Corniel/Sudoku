@@ -15,6 +15,9 @@ public sealed class PuzzleBankPuzzle(string title, Clues clues) : Puzzle
 
     public decimal Level { get; init; }
 
+    /// <summary>Indicates that the puzzle also meets the <see cref="Rules.AntiKnight"/> constraints.</summary>
+    public bool IsAntiKnight { get; init; }
+
     /// <summary>Indicates that the puzzle also meets the <see cref="Rules.Hyper"/> constraints.</summary>
     public bool IsHyper { get; init; }
 
@@ -42,9 +45,10 @@ public sealed class PuzzleBankPuzzle(string title, Clues clues) : Puzzle
             writer.Write(Clues.FirstOrDefault(c => c.Pos == p).Value);
         }
         writer.Write($" {Level.ToString("0.0", CultureInfo.InvariantCulture),4}");
-        if (IsHyper || IsX)
+        if (IsAntiKnight || IsHyper || IsX)
         {
             writer.Write(' ');
+            if (IsAntiKnight) writer.Write('N');
             if (IsHyper) writer.Write('h');
             if (IsX) writer.Write('x');
         }
@@ -60,11 +64,14 @@ public sealed class PuzzleBankPuzzle(string title, Clues clues) : Puzzle
         {
             if (line.Split(' ', StringSplitOptions.RemoveEmptyEntries) is { Length: >= 3 } parts)
             {
+                var variants = parts.Length > 3 ? parts[3] : string.Empty;
+
                 yield return new PuzzleBankPuzzle(parts[0], Clues.Parse(parts[1]))
                 {
                     Level = decimal.Parse(parts[2], CultureInfo.InvariantCulture),
-                    IsHyper = parts.Length > 3 && parts[3].Contains('h'),
-                    IsX = parts.Length > 3 && parts[3].Contains('x'),
+                    IsAntiKnight = variants.Contains('N'),
+                    IsHyper = variants.Contains('h'),
+                    IsX = variants.Contains('x'),
                 };
             }
         }

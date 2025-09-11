@@ -58,6 +58,51 @@ public class Hyper_Sudoku
             """);
 }
 
+public class Jigsaw_Sudokud
+{
+    [Test]
+    public void Solves() => DynamicSolver.Solve(
+       Clues.Parse("""
+            4..|7.9|.2.
+            ...|.2.|...
+            .9.|..8|...
+            ---+---+---
+            1.4|...|3..
+            7..|4.1|..2
+            ..2|...|1.3
+            ---+---+---
+            ...|6..|.1.
+            ...|.4.|...
+            .1.|2..|.45
+            """),
+           Rules.Jigsaw("""
+            AAA|BBB|BCC
+            AAA|BBB|BCC
+            AAD|DEB|CCC 
+            ---+---+---        
+            ADD|DEE|FCC
+            DDD|EEE|FFF
+            GGD|EEF|FFH
+            ---+---+---
+            GGG|JEF|FHH
+            GGJ|JJJ|HHH
+            GGJ|JJJ|HHH
+            """))
+       .Should().Be("""
+            463|719|528
+            857|326|491
+            296|158|734
+            ---+---+---
+            184|972|356
+            735|491|862
+            942|865|173
+            ---+---+---
+            528|634|917
+            671|543|289
+            319|287|645
+            """);
+}
+
 public class Killer_Sudoku
 {
     private static readonly ImmutableArray<Puzzle> Puzzles = [..KillerPuzzle.Load()];

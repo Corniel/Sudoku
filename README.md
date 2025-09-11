@@ -1,15 +1,15 @@
 # Sudoku Solver
-
 My attempt to write a [Sudoku](https://en.wikipedia.org/wiki/Sudoku) solver.
 
 ## Dynamic solver
 The approach of my solver is that I specify both [clues](#Clues) and the
 (potentially custom) [constraints](#Constraint) to apply when trying to solve
-the puzzle.
+the puzzle. By doing so, my solver can solve a wide variety Sudoku variants.
+ 
+## Suported variants
 
-## Standard Sudoku
-To let the dynamic solver solve a standard Sudoku puzzle the following code
-will do the trick:
+### Standard Sudoku
+Obviously, standard Suduko's are supported.
 
 ``` csharp
 var clues = Clues.Parse("""
@@ -29,7 +29,7 @@ var clues = Clues.Parse("""
 var solution = DynamicSolver.Solve(clues);
 ```
 
-## Hyper Sudoku
+### Hyper Sudoku
 Hyper Sudoku (also called Windoku) adds for extra 3x3 regions:
 
 ```
@@ -45,8 +45,6 @@ Hyper Sudoku (also called Windoku) adds for extra 3x3 regions:
 .33|3.4|44.
 ...|...|...
 ```
-
-To let te dynamic solver solve these puzzles:
 
 ``` csharp
 var clues = Clues.Parse("""
@@ -66,7 +64,40 @@ var clues = Clues.Parse("""
 var solution = DynamicSolver.Solve(clues, Rules.Hyper);
 ```
 
-## Killer Sudoku
+### Jigsaw Sudoku
+Jigsaw Sudoku has irreguarly shared boxes instead of the standard 3x3 boxes.
+
+``` csharp
+var clues = Clues.Parse("""
+    4..|7.9|.2.
+    ...|.2.|...
+    .9.|..8|...
+    ---+---+---
+    1.4|...|3..
+    7..|4.1|..2
+    ..2|...|1.3
+    ---+---+---
+    ...|6..|.1.
+    ...|.4.|...
+    .1.|2..|.45
+    """);
+
+var solution = DynamicSolver.Solve(clues, Rules.Jigsaw("""
+    AAA|BBB|BCC
+    AAA|BBB|BCC
+    AAD|DEB|CCC 
+    ---+---+---        
+    ADD|DEE|FCC
+    DDD|EEE|FFF
+    GGD|EEF|FFH
+    ---+---+---
+    GGG|JEF|FHH
+    GGJ|JJJ|HHH
+    GGJ|JJJ|HHH
+    """));
+```
+
+### Killer Sudoku
 The dynamic solver can also solve [Killer Sudoku's](https://en.wikipedia.org/wiki/Killer_sudoku).
 As there is no standard plain text format to describe these (that I'm aware of) there are
 two support formats that seem logical:
@@ -112,8 +143,8 @@ var rules_ = KillerCages.Parse("""
 var solution = DynamicSolver.Solve(Clues.Empty, rules);
 ```
 
-## X Sudoku
-To let the dynamic solver solve an X Sudoku puzzle:
+### X-Sudoku
+With X-Sudoku, the to diagonals are also considered [houses](#House).
 
 ``` csharp
 var clues = Clues.Parse("""
@@ -133,7 +164,7 @@ var clues = Clues.Parse("""
 var solution = DynamicSolver.Solve(clues, Rules.XSudoku);
 ```
 
-## Cracking The Cryptic
+### Cracking The Cryptic
 [Cracking Tye Cryptic](https://www.youtube.com/@CrackingTheCryptic) is a YouTube
 channel dedicated to solving world-class puzzles (their wording, not mine). With
 the extra [constraints](#Constraint) implemented, the Dynamic solver has been
@@ -144,7 +175,7 @@ able to solve the following puzzles (so far):
 
 ## Models
 
-## Candidates
+### Candidates
 The `Candidates` contain all possible values for a specified [cell](#Cell).
 The underlying `uint` ranges from `0` (no options) to `0b_111_111_111_0` when
 all 9 digits are candidate values. A single candidate flag is calculated by
@@ -167,9 +198,9 @@ The `Clues` contain all given [cells](#Cell) for a puzzle.
 The `Constraint` specfies the involved [positions](#PosSet) and the
 [restrictions](#Restriction) per involved position.
 
-### Houses
-The `Houses` contain al houses as [sets](#PosSet) that are commonly used: rows,
-columns, 3x3 boxes, and diagonals.
+### House
+The `House` contains all cells as [set](#PosSet) that must have unique digits.
+Common houses are: rows, columns, 3x3 boxes, and diagonals.
 
 ### Position
 The `Pos` is an index based value type that can be deconstructed in a row and
@@ -185,4 +216,3 @@ latter is preferred.
 The `Restricton` is defined on a [cell](#Cell), with a referenced to other
 involved cells. It is able, based on a given state of [cells](#Cells), to
 return a (restricted) set of [candidates](#Candidates).
-

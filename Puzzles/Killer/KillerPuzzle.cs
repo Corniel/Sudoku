@@ -13,7 +13,7 @@ public sealed class KillerPuzzle(string title, ImmutableArray<Constraint> rules)
 
     public static IEnumerable<KillerPuzzle> Load()
     {
-        foreach(var name in typeof(PuzzleBankPuzzle).Assembly.GetManifestResourceNames().Where(n => n.StartsWith("Puzzles.Killer.")))
+        foreach (var name in typeof(PuzzleBankPuzzle).Assembly.GetManifestResourceNames().Where(n => n.StartsWith("Puzzles.Killer.")))
         {
             using var stream = typeof(PuzzleBankPuzzle).Assembly.GetManifestResourceStream(name)!;
             using var reader = new StreamReader(stream);
@@ -21,7 +21,6 @@ public sealed class KillerPuzzle(string title, ImmutableArray<Constraint> rules)
             var rules = KillerCages.Parse(reader.ReadToEnd());
 
             yield return new KillerPuzzle(name.Split('.')[^2], rules);
-
         }
     }
 }

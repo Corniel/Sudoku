@@ -11,7 +11,7 @@ public sealed partial class KillerCage
     {
         var lookup = new CandidateLookup<Candidates>[_9][];
 
-        for (var bits = 3; bits < _9; bits++)
+        for (var bits = 2; bits < _9; bits++)
         {
             var tabels = new List<CandidateLookup<Candidates>>();
 

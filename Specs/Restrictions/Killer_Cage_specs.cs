@@ -90,6 +90,7 @@ public class Parses
 
 public class Generates
 {
+    [TestCase(1 + 2, /*.................................................*/ 8 + 9, 2)]
     [TestCase(1 + 2 + 3, /*.........................................*/ 7 + 8 + 9, 3)]
     [TestCase(1 + 2 + 3 + 4, /*.................................*/ 6 + 7 + 8 + 9, 4)]
     [TestCase(1 + 2 + 3 + 4 + 5, /*.........................*/ 5 + 6 + 7 + 8 + 9, 5)]
@@ -106,6 +107,7 @@ public class Generates
     }
 
     [Explicit]
+    [TestCase(2)]
     [TestCase(3)]
     [TestCase(4)]
     [TestCase(5)]

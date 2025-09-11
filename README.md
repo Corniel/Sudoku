@@ -191,8 +191,9 @@ channel dedicated to solving world-class puzzles (their wording, not mine). With
 the extra [constraints](#Constraint) implemented, the Dynamic solver has been
 able to solve the following puzzles (so far):
 
-* [2025-05-21: Stepped Themos](Puzzles/CrackingTheCryptic/2025_05_21.cs)
+* [2025-09-09: Phistomefel](Puzzles/CrackingTheCryptic/2025_09_09.cs)
 * [2025-08-21: Miracle Of Eleven](Puzzles/CrackingTheCryptic/2025_08_21.cs)
+* [2025-05-21: Stepped Themos](Puzzles/CrackingTheCryptic/2025_05_21.cs)
 
 ## Models
 

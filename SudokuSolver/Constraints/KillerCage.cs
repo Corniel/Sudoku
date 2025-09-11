@@ -13,6 +13,8 @@ public sealed partial class KillerCage(int sum, PosSet cells) : Constraint
 
     public override ImmutableArray<Restriction> Restrictions { get; } = [.. Reducers(sum, cells)];
 
+    internal override string DebuggerDisplay => $", Sum = {Sum}";
+
     public static KillerCage operator -(KillerCage cage, KillerCage other)
         => cage.Cells.IsSubsetOf(other.Cells)
         ? new(cage.Sum - other.Sum, cage.Cells ^ other.Cells)

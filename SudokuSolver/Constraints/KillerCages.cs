@@ -53,7 +53,7 @@ public static partial class KillerCages
 
     private static ImmutableArray<Constraint> Process(List<KillerCage> cages)
     {
-        List<Constraint> cs = [.. Rules.Standard, .. cages];
+        List<KillerCage> inverses = [];
 
         foreach (var r in Rules.Standard)
         {
@@ -65,11 +65,11 @@ public static partial class KillerCages
             }
             if (house.Sum is > 0 and < 45)
             {
-                cs.Add(house);
+                inverses.Add(house);
             }
         }
 
-        return [.. cs];
+        return [.. Rules.Standard, .. cages, .. inverses];
     }
 
     private sealed partial record NamedCage(char Name, int Sum)

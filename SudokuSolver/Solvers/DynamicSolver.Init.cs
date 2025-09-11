@@ -25,24 +25,11 @@ public static partial class DynamicSolver
 
         var cells = Cells.Empty;
 
-        var singles = ProcessGivens(clues, cells, contexts);
-        singles |= ResolveNakedSingles(cells, contexts, ~singles);
+        var singles = Reduce(clues, cells, contexts);
+        var queue = Queue(singles, contexts, rules);
 
-        foreach (var constraint in rules)
-        {
-            foreach (var res in constraint.Restrictions)
-            {
-                var ctx = contexts[res.AppliesTo];
-                ctx.Candidates &= res.Restrict(cells);
+        Solve(queue, cells);
 
-                if (ctx.Candidates.HasSingle && !singles.Contains(ctx.Pos))
-                {
-                    singles |= ResolveSingle(ctx, ctx.Candidates, cells, contexts);
-                }
-            }
-        }
-
-        Solve(Queue(singles, contexts, rules), cells);
         return cells;
     }
 

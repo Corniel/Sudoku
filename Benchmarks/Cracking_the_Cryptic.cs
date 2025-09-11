@@ -7,9 +7,14 @@ namespace Benchmarks;
 
 public class Cracking_the_Cryptic
 {
-    private static readonly _2025_08_21 Puzzle = new();
+    private static readonly _2025_05_21 _2025_05_21 = new();
+    private static readonly _2025_08_21 _2025_08_21 = new();
 
     [Benchmark]
-    public Cells The_Miracle_Sudoku_Of_Eleven()
-        => DynamicSolver.Solve(Puzzle.Clues, Puzzle.Constraints);
+    public Cells Stepped_Themos()
+        => DynamicSolver.Solve(_2025_05_21.Clues, _2025_05_21.Constraints);
+
+    [Benchmark]
+    public Cells Miracle_Of_Eleven()
+        => DynamicSolver.Solve(_2025_08_21.Clues, _2025_08_21.Constraints);
 }

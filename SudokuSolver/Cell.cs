@@ -12,6 +12,12 @@ public readonly struct Cell(Pos pos, int value) : IEquatable<Cell>
         value = Value;
     }
 
+    public void Deconstruct(out Pos pos, out int value)
+    {
+        pos = Pos;
+        value = Value;
+    }
+
     /// <inheritdoc />
     public override bool Equals(object? obj) => obj is Cell other && other.Equals(this);
 

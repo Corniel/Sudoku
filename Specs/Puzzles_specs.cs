@@ -18,7 +18,7 @@ public class Cracking_the_Cryptic
     [TestCaseSource(nameof(Puzzles))]
     public void Puzzle(Puzzle puzzle)
     {
-        var solved = DynamicSolver.Solve(puzzle.Clues, puzzle.Constraints);
+        var solved = puzzle.Solve();
 
         solved.Should().Be(puzzle.Solution);
 
@@ -150,7 +150,7 @@ public class Killer_Sudoku
     [TestCaseSource(nameof(Puzzles))]
     public void Puzzle(Puzzle puzzle)
     {
-        var solved = DynamicSolver.Solve(puzzle.Clues, puzzle.Constraints);
+        var solved = puzzle.Solve();
 
         solved.ToString().Should().NotContain(".");
 
@@ -200,7 +200,7 @@ public class SudokuPad_app
     [TestCaseSource(nameof(Puzzles))]
     public void Puzzle(Puzzle puzzle)
     {
-        var solved = DynamicSolver.Solve(puzzle.Clues, puzzle.Constraints);
+        var solved = puzzle.Solve();
 
         solved.Should().Be(puzzle.Solution);
 

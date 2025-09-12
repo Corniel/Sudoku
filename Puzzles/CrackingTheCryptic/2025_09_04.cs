@@ -6,9 +6,9 @@ public sealed class _2025_09_04 : CtcPuzzle
     public override string? Author => "clover!";
     public override Uri? Url => new("https://youtu.be/OMqUAduLZfI");
 
-    public override Clues Clues => Clues.None;
+    public override Clues Clues { get; } = Clues.None;
 
-    public override Cells Solution => Cells.Parse("""
+    public override Cells Solution { get; } = Cells.Parse("""
         865|793|421
         743|251|869
         291|486|753
@@ -22,7 +22,7 @@ public sealed class _2025_09_04 : CtcPuzzle
         429|875|136
         """);
 
-    public override ImmutableArray<Constraint> Constraints =>
+     public override ImmutableArray<Constraint> Constraints { get; } =
     [
         .. Rules.Standard,
         .. Cages()

@@ -7,7 +7,7 @@ public sealed class KillerPuzzle(string title, ImmutableArray<Constraint> rules)
 {
     public override string Title { get; } = title;
 
-    public override Clues Clues => Clues.None;
+    public override Clues Clues { get; } = Clues.None;
 
     public override ImmutableArray<Constraint> Constraints { get; } = rules;
 

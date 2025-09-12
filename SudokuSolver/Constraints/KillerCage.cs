@@ -9,7 +9,7 @@ public sealed partial class KillerCage(int sum, PosSet cells) : Constraint
 
     public override bool IsSet => true;
 
-    public override PosSet Cells => cells;
+    public override PosSet Cells { get; } = cells;
 
     public override ImmutableArray<Restriction> Restrictions { get; } = [.. Reducers(sum, cells)];
 

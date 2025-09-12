@@ -6,7 +6,7 @@ public sealed class _7gJb9G8fRt : SudokuPadPuzzle
 
     public override string Title => "Steering Wheel";
 
-    public override Clues Clues => Clues.Parse("""
+    public override Clues Clues { get; } = Clues.Parse("""
         ...|1.2|...
         .6.|...|.7.
         ..8|...|9..
@@ -20,7 +20,7 @@ public sealed class _7gJb9G8fRt : SudokuPadPuzzle
         ...|3.4|...
         """);
 
-    public override Cells Solution => Cells.Parse("""
+    public override Cells Solution { get; } = Cells.Parse("""
         934|172|658
         561|948|372
         728|635|914

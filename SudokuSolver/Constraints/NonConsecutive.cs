@@ -4,7 +4,7 @@ public sealed class NonConsecutive(Pos one, Pos two) : Constraint
 {
     public override bool IsSet => true;
 
-    public override PosSet Cells => [one, two];
+    public override PosSet Cells { get; } = [one, two];
 
     public override ImmutableArray<Restriction> Restrictions { get; } =
     [

@@ -6,9 +6,9 @@ public sealed class _2025_09_09 : CtcPuzzle
     public override string? Author => "Phistomefel";
     public override Uri? Url => new("https://youtu.be/DF0f15tya5Q");
 
-    public override Clues Clues => Clues.None;
+    public override Clues Clues { get; } = Clues.None;
 
-    public override Cells Solution => Cells.Parse("""
+    public override Cells Solution { get; } = Cells.Parse("""
         531|498|267
         947|265|381
         286|731|495
@@ -22,7 +22,7 @@ public sealed class _2025_09_09 : CtcPuzzle
         172|856|934
         """);
 
-    public override ImmutableArray<Constraint> Constraints => 
+     public override ImmutableArray<Constraint> Constraints { get; } = 
     [
         .. Rules.Standard,
         .. KillerCages.Parse("""

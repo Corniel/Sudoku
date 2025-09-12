@@ -7,7 +7,7 @@ public class _2025_08_19 : CtcPuzzle
     public override string? Author => "Cane_Puzzles";
     public override Uri? Url => new("https://youtu.be/stUFi592gxk");
 
-    public override Clues Clues => Clues.None;
+    public override Clues Clues { get; } = Clues.None;
     
     public override ImmutableArray<Constraint> Constraints { get; } = KillerCages.Parse("""
         .36|.4A|BB.
@@ -28,7 +28,7 @@ public class _2025_08_19 : CtcPuzzle
         z = 12  x = 18
         """);
 
-    public override Cells Solution => Cells.Parse("""
+    public override Cells Solution { get; } = Cells.Parse("""
         736|948|152
         145|326|897
         829|751|436

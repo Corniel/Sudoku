@@ -196,7 +196,8 @@ able to solve the following puzzles (so far):
 * [2025-08-21: Miracle Of Eleven](Puzzles/CrackingTheCryptic/2025_08_21.cs)
 * [2025-08-19: Pile Of 15](Puzzles/CrackingTheCryptic/2025_08_19.cs)
 * [2025-05-21: Stepped Themos](Puzzles/CrackingTheCryptic/2025_05_21.cs)
-
+* [2024-09-29: 3 In the Corner](Puzzles/CrackingTheCryptic/2024_09_29.cs)
+ 
 ## Models
 
 ### Candidates

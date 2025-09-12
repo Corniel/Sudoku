@@ -4,7 +4,7 @@ public sealed class AtMost(Pos one, Pos two, int sum) : Constraint
 {
     public override bool IsSet => false;
 
-    public override PosSet Cells => [one, two];
+    public override PosSet Cells { get; } = [one, two];
 
     public override ImmutableArray<Restriction> Restrictions { get; } =
     [

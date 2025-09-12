@@ -6,7 +6,7 @@ public sealed class _2025_08_21 : CtcPuzzle
     public override string? Author => "Aad van de Wetering";
     public override Uri? Url => new("https://youtu.be/OzzuJUU6g84");
 
-    public override Clues Clues => Clues.Parse("""
+    public override Clues Clues { get; } = Clues.Parse("""
         ...|...|...
         ...|...|...
         ...|...|...
@@ -20,7 +20,7 @@ public sealed class _2025_08_21 : CtcPuzzle
         ...|...|...
         """);
 
-    public override Cells Solution => Cells.Parse("""
+    public override Cells Solution { get; } = Cells.Parse("""
         752|693|184
         184|275|369
         369|418|527
@@ -34,7 +34,7 @@ public sealed class _2025_08_21 : CtcPuzzle
         936|841|752
         """);
 
-    public override ImmutableArray<Constraint> Constraints =>
+     public override ImmutableArray<Constraint> Constraints { get; } =
     [
         .. Rules.Standard,
         .. AtMost11s(),

@@ -28,6 +28,7 @@ Tested on 1000 hard puzzles. The mean is the average per puzzle.
 ## Cracking The Cryptic
 | Puzzle            | Mean         |
 |------------------ |-------------:|
+| Piles Of 15       |      3.67 ms |
 | Miracle Of Eleven |      6.17 ms |
 | Stepped Themos    |    208.41 ms |
 | Phistomefel       |      3.39 s  |

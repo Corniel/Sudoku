@@ -16,6 +16,7 @@ public static partial class KillerCages
             }
 
             Pos p = default;
+            var singles = new List<KillerCage>();
 
             foreach (var ch in str.Take(matches[0].Index))
             {
@@ -27,8 +28,16 @@ public static partial class KillerCages
                 {
                     lookup[ch].Members.Add(p++);
                 }
+                else if (char.IsAsciiDigit(ch))
+                {
+                    singles.Add(new KillerCage(ch - '0', PosSet.New(p++)));
+                }
             }
-            return Process([.. lookup.Values.Select(cage => new KillerCage(cage.Sum, [.. cage.Members]))]);
+            return Process(
+            [
+                .. lookup.Values.Select(cage => new KillerCage(cage.Sum, [.. cage.Members])),
+                .. singles,
+            ]);
         }
         else if (Line().Matches(str) is { Count: > 0 } lines)
         {

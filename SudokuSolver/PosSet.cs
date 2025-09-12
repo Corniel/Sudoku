@@ -1,4 +1,5 @@
 using System.Diagnostics.Contracts;
+using System.Numerics;
 using System.Runtime.CompilerServices;
 
 namespace SudokuSolver;
@@ -25,6 +26,12 @@ public readonly struct PosSet(Int128 bits) : IEquatable<PosSet>, IReadOnlyCollec
 
     /// <inheritdoc cref="IReadOnlySet{T}.IsSubsetOf(IEnumerable{T})" />
     public bool IsSubsetOf(PosSet other) => (other.Bits & Bits) == other.Bits;
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public Pos First() => HasNone ? Pos.Invalid : new((int)Int128.TrailingZeroCount(Bits));
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public Pos Last() => HasNone ? Pos.Invalid : new((int)Int128.Log2(Bits));
 
     [Pure]
     public PosSet AddRange(IEnumerable<Pos> positions)

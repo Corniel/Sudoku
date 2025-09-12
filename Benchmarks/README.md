@@ -31,5 +31,6 @@ Tested on 1000 hard puzzles. The mean is the average per puzzle.
 | Piles Of 15       |      3.67 ms |
 | Miracle Of Eleven |      6.17 ms |
 | Stepped Themos    |    208.41 ms |
+| Fortune Cookie II |      1.10 s  | 
 | Phistomefel       |      3.39 s  |
 | Packing Problem   |     16.12 s  |

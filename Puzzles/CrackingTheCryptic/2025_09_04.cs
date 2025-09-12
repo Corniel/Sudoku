@@ -1,3 +1,5 @@
+using SudokuSolver.Parsing;
+
 namespace Puzzles.CrackingTheCryptic;
 
 public sealed class _2025_09_04 : CtcPuzzle
@@ -161,7 +163,7 @@ public sealed class _2025_09_04 : CtcPuzzle
 
     public static IEnumerable<Cage> Cages()
     {
-        var str = """
+        var cages = NamedCage.Parse("""
             ...|.BB|BBC
             .EE|DDD|..C
             EEA|AD.|.CC
@@ -173,22 +175,8 @@ public sealed class _2025_09_04 : CtcPuzzle
             G..|III|I..
             GH.|JJJ|JKK
             HHH|...|KK.
-            """;
+            """);
 
-        var cages = new PosSet[27];
-        var pos = Pos.O;
-
-        foreach(var ch in str)
-        {
-            if (ch is '.') pos++;
-            else if(ch is >= 'A' and <= 'Z')
-            {
-                cages[ch - 'A'] |= pos++;
-            }
-        }
-
-        return cages.Where(ps => ps.Count is 4)
-            .Select((ps, i) => new Cage(ps, i is not 0));
-
+        return cages.Select(c => new Cage([.. c.Cells], c.Name is not 'A'));
     }
 }

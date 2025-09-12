@@ -1,4 +1,6 @@
 
+using SudokuSolver.Parsing;
+
 namespace Puzzles.CrackingTheCryptic;
 
 public sealed class _2024_12_08 : CtcPuzzle
@@ -33,7 +35,7 @@ public sealed class _2024_12_08 : CtcPuzzle
 
     public static IEnumerable<Consecutive> Consequtives()
     {
-        var str = """
+        var cages = NamedCage.Parse("""
             .AA|BBE|FCC
             DD.|..E|F..
             .GG|HH.|II.
@@ -45,19 +47,9 @@ public sealed class _2024_12_08 : CtcPuzzle
             .SS|.WW|YZZ
             .TT|VVX|Y..
             .UU|..X|.aa
-            """;
-        var sets = new Dictionary<char, PosSet>();
-        var p = Pos.O;
-        foreach (var c in str)
-        {
-            if (c is '.') p++;
-            else if (char.IsLetter(c))
-            {
-                sets.TryAdd(c, PosSet.Empty);
-                sets[c] |= p++;
-            }
-        }
-        return sets.Values.Select(s => new Consecutive(s.First(), s.Last())).ToArray();
+            """);
+
+        return [.. cages.Select(s => new Consecutive(s.Cells[0], s.Cells[1]))];
     }
 
     public static IEnumerable<Not7Nor13> Not7Nor13s()

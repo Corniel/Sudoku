@@ -1,3 +1,4 @@
+using SudokuSolver.Parsing;
 using System.Text.RegularExpressions;
 
 namespace SudokuSolver.Constraints;
@@ -6,38 +7,9 @@ public static partial class KillerCages
 {
     public static ImmutableArray<Constraint> Parse(string str)
     {
-        if (NamedCage.Pattern().Matches(str) is { Count: > 0 } matches)
+        if (NamedCage.Parse(str) is { Length: > 0 } cs)
         {
-            var lookup = new Dictionary<char, NamedCage>();
-
-            foreach (var cage in matches.Select(NamedCage.FromMatch))
-            {
-                lookup[cage.Name] = cage;
-            }
-
-            Pos p = default;
-            var singles = new List<KillerCage>();
-
-            foreach (var ch in str.Take(matches[0].Index))
-            {
-                if (ch is '.')
-                {
-                    p++;
-                }
-                else if (char.IsAsciiLetter(ch))
-                {
-                    lookup[ch].Members.Add(p++);
-                }
-                else if (char.IsAsciiDigit(ch))
-                {
-                    singles.Add(new KillerCage(ch - '0', PosSet.New(p++)));
-                }
-            }
-            return Process(
-            [
-                .. lookup.Values.Select(cage => new KillerCage(cage.Sum, [.. cage.Members])),
-                .. singles,
-            ]);
+            return Process([.. cs.Select(c => new KillerCage(c.Sum, [..c.Cells])) ]);
         }
         else if (Line().Matches(str) is { Count: > 0 } lines)
         {
@@ -81,23 +53,9 @@ public static partial class KillerCages
         return [.. Rules.Standard, .. cages, .. inverses];
     }
 
-    private sealed partial record NamedCage(char Name, int Sum)
-    {
-        public List<Pos> Members { get; } = [];
-
-        public static NamedCage FromMatch(Match m) => new(
-            m.Groups[nameof(Name)].Value[0],
-            int.Parse(m.Groups[nameof(Sum)].Value));
-
-        public override string ToString() => $"{Name} = {Sum,-2}, {string.Join(", ", Members)}";
-
-        [GeneratedRegex(@"(?<Name>[A-Za-z])\s*=\s*(?<Sum>[0-9]{1,2})", RegexOptions.CultureInvariant | RegexOptions.ExplicitCapture)]
-        public static partial Regex Pattern();
-    }
-
     [GeneratedRegex(@"(?<Sum>[0-9]{1,2})\s*=(?<Pos>.*?\((?<Row>[0-8]{1,2}),\s*(?<Col>[0-8]{1,2})\))+", RegexOptions.CultureInvariant)]
-    public static partial Regex Line();
+    private static partial Regex Line();
 
     [GeneratedRegex(@"\((?<Row>[0-8]{1,2}),\s*(?<Col>[0-8]{1,2})\)", RegexOptions.CultureInvariant | RegexOptions.ExplicitCapture)]
-    public static partial Regex Pos();
+    private static partial Regex Pos();
 }

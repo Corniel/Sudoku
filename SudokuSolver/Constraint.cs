@@ -1,5 +1,3 @@
-using SudokuSolver.Validation;
-
 namespace SudokuSolver;
 
 /// <summary>A constraint.</summary>

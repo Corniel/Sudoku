@@ -11,8 +11,8 @@ public class Cracking_the_Cryptic
     private static readonly _2025_08_19 _2025_08_19 = new();
     private static readonly _2025_08_21 _2025_08_21 = new();
     private static readonly _2025_09_04 _2025_09_04 = new();
+    private static readonly _2025_09_08 _2025_09_08 = new();
     private static readonly _2025_09_09 _2025_09_09 = new();
-
 
     [Benchmark]
     public Cells Fortune_Cookie_II() => _2024_12_08.Solve();
@@ -28,6 +28,9 @@ public class Cracking_the_Cryptic
 
     [Benchmark]
     public Cells Packing_Problem() => _2025_09_04.Solve();
+
+    [Benchmark]
+    public Cells Four_at_a_Time() => _2025_09_08.Solve();
 
     [Benchmark]
     public Cells Phistomefel() => _2025_09_09.Solve();

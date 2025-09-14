@@ -192,6 +192,7 @@ the extra [constraints](#Constraint) implemented, the Dynamic solver has been
 able to solve the following puzzles (so far):
 
 * [2025-09-09: Phistomefel](Puzzles/CrackingTheCryptic/2025_09_09.cs)
+* [2025-09-08: Four at a Time](Puzzles/CrackingTheCryptic/2025_09_08.cs)
 * [2025-09-04: Packing Problem](Puzzles/CrackingTheCryptic/2025_09_04.cs)
 * [2025-08-21: Miracle Of Eleven](Puzzles/CrackingTheCryptic/2025_08_21.cs)
 * [2025-08-19: Pile Of 15](Puzzles/CrackingTheCryptic/2025_08_19.cs)

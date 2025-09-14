@@ -16,11 +16,13 @@ public class Cracking_the_Cryptic
     [TestCaseSource(nameof(Puzzles))]
     public void Puzzle(Puzzle puzzle)
     {
+       puzzle.Constraints.Should().BeValidFor(puzzle.Solution);
+
         var solved = puzzle.Solve();
 
-        solved.Should().Be(puzzle.Solution);
-
         Console.WriteLine(solved);
+
+        solved.Should().Be(puzzle.Solution, puzzle.Constraints);
     }
 }
 

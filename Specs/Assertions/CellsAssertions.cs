@@ -1,4 +1,3 @@
-using AwesomeAssertions.Execution;
 using SudokuSolver.Solvers;
 using System.Collections.Immutable;
 
@@ -24,14 +23,11 @@ public sealed class CellsAssertions(Cells subject)
     {
         rules ??= Rules.Standard;
 
+        rules.Should().BeValidFor(expected);
+
         Chain
             .ForCondition(Subject.Equals(expected))
             .WithDefaultIdentifier("Puzzle")
             .FailWith($"Expected:\n{expected}\n\nAcutal:\n{Subject}");
-
-        Chain
-            .ForCondition(rules.IsValid(expected))
-            .WithDefaultIdentifier("Puzzle")
-            .FailWith("Expected to be valid for the specified rule set.");
     }
 }

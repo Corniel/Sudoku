@@ -3,8 +3,6 @@ using Puzzles.CrackingTheCryptic;
 using Puzzles.Killer;
 using Puzzles.PuzzleBank;
 using Puzzles.SudokuPad;
-using SudokuSolver.Solvers;
-using System.Collections.Immutable;
 using System.IO;
 using System.Text;
 
@@ -154,7 +152,7 @@ public class Killer_Sudoku
 
         solved.ToString().Should().NotContain(".");
 
-        puzzle.Constraints.IsValid(solved).Should().BeTrue();
+        puzzle.Constraints.Should().BeValidFor(solved);
 
         Console.WriteLine(solved);
     }

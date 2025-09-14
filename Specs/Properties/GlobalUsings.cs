@@ -3,3 +3,8 @@ global using NUnit.Framework;
 global using SudokuSolver;
 global using System;
 global using System.Linq;
+global using System.Collections.Generic;
+global using AwesomeAssertions.Execution;
+global using SudokuSolver.Solvers;
+global using SudokuSolver.Validation;
+global using System.Collections.Immutable;

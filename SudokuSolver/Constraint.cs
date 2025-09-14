@@ -1,3 +1,5 @@
+using SudokuSolver.Validation;
+
 namespace SudokuSolver;
 
 /// <summary>A constraint.</summary>
@@ -19,28 +21,6 @@ public abstract class Constraint : IReadOnlyCollection<Pos>
 
     /// <summary>The restrictions (other than being peers).</summary>
     public abstract ImmutableArray<Restriction> Restrictions { get; }
-
-    /// <summary>Validates that the digits in the cell are compliant with the constraint.</summary>
-    public bool IsValid(Cells cells)
-    {
-        if (IsSet)
-        {
-            var values = Candidates.None;
-            foreach (var cell in Cells)
-            {
-                values |= cells[cell];
-            }
-            if (values.Count != Count) return false;
-        }
-
-        foreach (var res in Restrictions)
-        {
-            Candidates value = [cells[res.AppliesTo]];
-
-            if ((value & res.Restrict(cells)).HasNone) return false;
-        }
-        return true;
-    }
 
     /// <inheritdoc cref="IEnumerable{T}.GetEnumerator()" />
     public PosSet.Iterator GetEnumerator() => Cells.GetEnumerator();

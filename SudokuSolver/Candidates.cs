@@ -64,6 +64,9 @@ public readonly struct Candidates(uint bits) : IEquatable<Candidates>, IReadOnly
     public override string ToString() => $"[{string.Join(',', this)}]";
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public bool Contains(int value) => (Bits & (1u << value)) is not 0;
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public int First() => BitOperations.TrailingZeroCount(Bits) & 15;
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]

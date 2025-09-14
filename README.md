@@ -191,6 +191,7 @@ channel dedicated to solving world-class puzzles (their wording, not mine). With
 the extra [constraints](#Constraint) implemented, the Dynamic solver has been
 able to solve the following puzzles (so far):
 
+* [2025-09-13: Royalty](Puzzles/CrackingTheCryptic/2025_09_13.cs)
 * [2025-09-09: Phistomefel](Puzzles/CrackingTheCryptic/2025_09_09.cs)
 * [2025-09-08: Four at a Time](Puzzles/CrackingTheCryptic/2025_09_08.cs)
 * [2025-09-04: Packing Problem](Puzzles/CrackingTheCryptic/2025_09_04.cs)

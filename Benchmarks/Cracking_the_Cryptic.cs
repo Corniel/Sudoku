@@ -13,6 +13,7 @@ public class Cracking_the_Cryptic
     private static readonly _2025_09_04 _2025_09_04 = new();
     private static readonly _2025_09_08 _2025_09_08 = new();
     private static readonly _2025_09_09 _2025_09_09 = new();
+    private static readonly _2025_09_13 _2025_09_13 = new();
 
     [Benchmark]
     public Cells Fortune_Cookie_II() => _2024_12_08.Solve();
@@ -34,4 +35,7 @@ public class Cracking_the_Cryptic
 
     [Benchmark]
     public Cells Phistomefel() => _2025_09_09.Solve();
+
+    [Benchmark]
+    public Cells Royalty() => _2025_09_13.Solve();
 }

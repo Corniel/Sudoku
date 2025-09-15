@@ -191,16 +191,19 @@ channel dedicated to solving world-class puzzles (their wording, not mine). With
 the extra [constraints](#Constraint) implemented, the Dynamic solver has been
 able to solve the following puzzles (so far):
 
-* [2025-09-13: Royalty](Puzzles/CrackingTheCryptic/2025_09_13.cs)
-* [2025-09-09: Phistomefel](Puzzles/CrackingTheCryptic/2025_09_09.cs)
-* [2025-09-08: Four at a Time](Puzzles/CrackingTheCryptic/2025_09_08.cs)
-* [2025-09-04: Packing Problem](Puzzles/CrackingTheCryptic/2025_09_04.cs)
-* [2025-08-21: Miracle Of Eleven](Puzzles/CrackingTheCryptic/2025_08_21.cs)
-* [2025-08-19: Pile Of 15](Puzzles/CrackingTheCryptic/2025_08_19.cs)
-* [2025-05-21: Stepped Themos](Puzzles/CrackingTheCryptic/2025_05_21.cs)
-* [2024-12-08: Forune Cookie II](Puzzles/CrackingTheCryptic/2024_12_08.cs)
-* [2024-09-29: 3 In the Corner](Puzzles/CrackingTheCryptic/2024_09_29.cs)
- 
+| Date       | Puzzle                                                          | Speed     |
+|:----------:|---------------------------------------------------------------- |:----------|
+| 2025-09-13 | [Royalty](Puzzles/CrackingTheCryptic/2025_09_13.cs)             | 271.40 ms |
+| 2025-09-09 | [Phistomefel](Puzzles/CrackingTheCryptic/2025_09_09.cs)         |   3.39 s  |
+| 2025-09-08 | [Four at a Time](Puzzles/CrackingTheCryptic/2025_09_08.cs)      |   3.11 s  |
+| 2025-09-04 | [Packing Problem](Puzzles/CrackingTheCryptic/2025_09_04.cs)     |  16.12 s  |
+| 2025-08-21 | [Miracle Of Eleven](Puzzles/CrackingTheCryptic/2025_08_21.cs)   |   6.17 ms |
+| 2025-08-19 | [Pile Of 15](Puzzles/CrackingTheCryptic/2025_08_19.cs)          |   3.67 ms |
+| 2025-05-21 | [Stepped Thermos](Puzzles/CrackingTheCryptic/2025_05_21.cs)     | 208.41 ms |
+| 2025-05-02 | [Arrows v.s. Thermos](Puzzles/CrackingTheCryptic/2025_05_02.cs) | 296.50 us |
+| 2024-12-08 | [Fortune Cookie II](Puzzles/CrackingTheCryptic/2024_12_08.cs)   |   1.10 s  |
+| 2024-09-29 | [3 In the Corner](Puzzles/CrackingTheCryptic/2024_09_29.cs)     |        ?  |
+
 ## Models
 
 ### Candidates

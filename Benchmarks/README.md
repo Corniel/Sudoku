@@ -24,15 +24,3 @@ Tested on 1000 hard puzzles. The mean is the average per puzzle.
 | Reference | Medium     | 1,135.90 us | 23.83 |
 | Dynamic   | Medium     |    47.68 us |  1.00 |
 | 
-
-## Cracking The Cryptic
-| Puzzle            | Mean         |
-|------------------ |-------------:|
-| Piles Of 15       |      3.67 ms |
-| Miracle Of Eleven |      6.17 ms |
-| Royalty           |    271.40 ms |
-| Stepped Themos    |    208.41 ms |
-| Fortune Cookie II |      1.10 s  |
-| Four at a Time    |      3.11 s  |
-| Phistomefel       |      3.39 s  |
-| Packing Problem   |     16.12 s  |

@@ -8,20 +8,10 @@ public static partial class DynamicSolver
     {
         var peers = range(_9x9, _ => PosSet.Empty);
         var restrictions = range(_9x9, _ => new List<Restriction>());
-        
+
         foreach (var @set in rules.Where(r => r.IsSet))
-        {
             foreach (var peer in @set)
-            {
-                try
-                {
-                    peers[peer] |= set.Cells;
-                }
-                catch (Exception ex)
-                {
-                }
-            }
-        }
+                peers[peer] |= set.Cells;
 
         foreach (var constraint in rules)
             foreach (var res in constraint.Restrictions)

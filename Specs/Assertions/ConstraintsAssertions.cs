@@ -1,5 +1,3 @@
-using SudokuSolver.Validation;
-
 namespace AwesomeAssertions;
 
 internal sealed class ConstraintsAssertions(IEnumerable<Constraint> subject)

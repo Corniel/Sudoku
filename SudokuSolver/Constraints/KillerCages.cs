@@ -9,7 +9,7 @@ public static partial class KillerCages
     {
         if (NamedCage.Parse(str) is { Length: > 0 } cs)
         {
-            return Process([.. cs.Select(c => new KillerCage(c.Sum, [..c.Cells])) ]);
+            return Process([.. cs.Select(c => new KillerCage(c.Sum, [.. c.Cells]))]);
         }
         else if (Line().Matches(str) is { Count: > 0 } lines)
         {
@@ -21,9 +21,8 @@ public static partial class KillerCages
                 var cells = PosSet.Empty;
 
                 foreach (var groups in Pos().Matches(line.Value).Select(p => p.Groups))
-                {
                     cells |= (int.Parse(groups["Row"].Value), int.Parse(groups["Col"].Value));
-                }
+
                 cages.Add(new KillerCage(sum, cells));
             }
 

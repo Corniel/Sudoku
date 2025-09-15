@@ -200,6 +200,7 @@ able to solve the following puzzles (so far):
 | 2025-08-21 | [Miracle Of Eleven](Puzzles/CrackingTheCryptic/2025_08_21.cs)   |   6.17 ms |
 | 2025-08-19 | [Pile Of 15](Puzzles/CrackingTheCryptic/2025_08_19.cs)          |   3.67 ms |
 | 2025-05-21 | [Stepped Thermos](Puzzles/CrackingTheCryptic/2025_05_21.cs)     | 208.41 ms |
+| 2025-05-11 | [Quadrants](Puzzles/CrackingTheCryptic/2025_05_11.cs)           |  16.97 ms |
 | 2025-05-02 | [Arrows v.s. Thermos](Puzzles/CrackingTheCryptic/2025_05_02.cs) | 296.50 us |
 | 2024-12-08 | [Fortune Cookie II](Puzzles/CrackingTheCryptic/2024_12_08.cs)   |   1.10 s  |
 | 2024-09-29 | [3 In the Corner](Puzzles/CrackingTheCryptic/2024_09_29.cs)     |        ?  |

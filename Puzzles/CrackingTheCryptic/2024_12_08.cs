@@ -54,10 +54,10 @@ public sealed class _2024_12_08 : CtcPuzzle
 
     public static IEnumerable<Not7Nor13> Not7Nor13s()
     {
-        foreach(var p in Pos.All)
+        foreach (var p in Pos.All)
         {
-            if (p.N() is { OnBoard: true }) yield return new Not7Nor13(p, p.N());
-            if (p.W() is { OnBoard: true }) yield return new Not7Nor13(p, p.W());
+            if (p.N() is { } n) yield return new Not7Nor13(p, n);
+            if (p.W() is { } w) yield return new Not7Nor13(p, w);
         }
     }
 

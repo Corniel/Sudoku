@@ -48,16 +48,11 @@ public sealed class _2024_09_29 : CtcPuzzle
         {
             foreach (var c in box)
             {
-                var w = c.W();
-                if (box.Cells.Contains(w))
-                {
+                if (c.W() is { } w && box.Cells.Contains(w))
                     yield return new AtLeast3(c, w);
-                }
-                var s = c.S();
-                if(box.Cells.Contains(s))
-                {
+
+                if(c.S() is { } s && box.Cells.Contains(s))
                     yield return new AtLeast3(c, s);
-                }
             }
         }
     }

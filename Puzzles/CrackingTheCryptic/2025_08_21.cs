@@ -59,10 +59,8 @@ public sealed class _2025_08_21 : CtcPuzzle
     {
         foreach(var pos in Pos.All)
         {
-            var n = pos.N();
-            var w = pos.W();
-            if (n.OnBoard) yield return new NonConsecutive(pos, n);
-            if (w.OnBoard) yield return new NonConsecutive(pos, w);
+            if (pos.N() is { } n) yield return new NonConsecutive(pos, n);
+            if (pos.W() is { } w) yield return new NonConsecutive(pos, w);
         }
     }
 }

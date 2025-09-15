@@ -15,30 +15,28 @@ public readonly struct Pos(int i) : IEquatable<Pos>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly int Index = i;
 
-    public bool OnBoard => Index is >= 0 and < _9x9;
-
-    public Pos N()
+    public Pos? N()
     {
         var r = Index / _9;
-        return r is 0 ? Invalid : new(Index - _9);
+        return r is 0 ? null : new(Index - _9);
     }
 
-    public Pos E()
+    public Pos? E()
     {
         var c = Index % _9;
-        return c is 8 ? Invalid : new(Index + 1);
+        return c is 8 ? null : new(Index + 1);
     }
 
-    public Pos S()
+    public Pos? S()
     {
         var r = Index / _9;
-        return r is 8 ? Invalid : new(Index + _9);
+        return r is 8 ? null : new(Index + _9);
     }
 
-    public Pos W()
+    public Pos? W()
     {
         var c = Index % _9;
-        return c is 0 ? Invalid : new(Index - 1);
+        return c is 0 ? null : new(Index - 1);
     }
 
     /// <summary>Deconstructs the position in a row and column component.</summary>
@@ -69,6 +67,7 @@ public readonly struct Pos(int i) : IEquatable<Pos>
     public static Pos operator ++(Pos pos) => new(pos.Index + 1);
 
     public static Pos operator +(Pos pos, int steps) => new(pos.Index + steps);
+    public static Pos operator -(Pos pos, int steps) => new(pos.Index - steps);
 
     public static implicit operator Pos((int Row, int Col) tuple) => new(tuple.Row, tuple.Col);
 

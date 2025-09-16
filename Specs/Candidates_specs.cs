@@ -136,6 +136,7 @@ public class Maths
     [TestCase(1, 3, /* => */ 1, 2, 3)]
     [TestCase(4, 7, /* => */ 4, 5, 6, 7)]
     [TestCase(1, 9, /* => */ 1, 2, 3, 4, 5, 6, 7, 8, 9)]
+    [TestCase(3, 36, /* => */ 3, 4, 5, 6, 7, 8, 9)]
     [TestCase(0, 45, /* => */ 1, 2, 3, 4, 5, 6, 7, 8, 9)]
     public void Between(int min, int max, params int[] values)
       => Candidates.Between(min, max).Should().Be([.. values]);

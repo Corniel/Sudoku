@@ -40,9 +40,9 @@ public readonly struct Candidates(uint bits) : IEquatable<Candidates>, IReadOnly
 
     public static Candidates Between(int min, int max)
     {
-        var atl = 0b_111_111_111_1U << (min & gte0(min));
-        var atm = (2U << gte0(max)) - 1;
-        return new(atl & atm);
+        var atl = 0b_111_111_111_1UL << (min & gte0(min));
+        var atm = (2UL << gte0(max)) - 1;
+        return new((uint)(atl & atm));
     }
 
     /// <summary>Values lower then zero are treated as zero.</summary>

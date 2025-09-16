@@ -5,20 +5,27 @@ namespace SudokuSolver.Constraints;
 /// </summary>
 public sealed class Jigsaw(int index, PosSet cells) : House(index, cells)
 {
+    public override string ToString() => $"Jigsaw = {string.Join(", ", Cells)}";
+
     public static ImmutableArray<Jigsaw> Parse(string str)
     {
         var jigsaws = new Dictionary<char, PosSet>();
 
         var p = Pos.O;
 
-        foreach (var ch in str.Where(IsCell))
+        foreach (var ch in str)
         {
-            jigsaws.TryAdd(ch, PosSet.Empty);
-            jigsaws[ch] |= p++;
+            if (ch is '.' or '?')
+            {
+                p++;
+            }
+            else if (char.IsAsciiLetterOrDigit(ch))
+            {
+                jigsaws.TryAdd(ch, PosSet.Empty);
+                jigsaws[ch] |= p++;
+            }
         }
 
         return [.. jigsaws.Values.Select((set, i) => new Jigsaw(i, set))];
     }
-
-    private static bool IsCell(char ch) => ch is '.' or '?' || char.IsAsciiLetterOrDigit(ch);
 }

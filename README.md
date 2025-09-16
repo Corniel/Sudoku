@@ -204,6 +204,7 @@ able to solve the following puzzles (so far):
 | 2025-05-02 | [Arrows v.s. Thermos](Puzzles/CrackingTheCryptic/2025_05_02.cs) | 296.50 us |
 | 2024-12-08 | [Fortune Cookie II](Puzzles/CrackingTheCryptic/2024_12_08.cs)   |   1.10 s  |
 | 2024-09-29 | [3 In the Corner](Puzzles/CrackingTheCryptic/2024_09_29.cs)     |        ?  |
+| 2022-03-13 | [The Trident](Puzzles/CrackingTheCryptic/2022_03_13.cs)         |  58.51 s  |
 
 ## Models
 

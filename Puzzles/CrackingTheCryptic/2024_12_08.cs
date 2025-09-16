@@ -1,6 +1,3 @@
-
-using SudokuSolver.Parsing;
-
 namespace Puzzles.CrackingTheCryptic;
 
 public sealed class _2024_12_08 : CtcPuzzle
@@ -16,7 +13,19 @@ public sealed class _2024_12_08 : CtcPuzzle
         new Ratio12((4, 3), (5, 3)),
         .. Rules.Standard,
         .. Not7Nor13s(),
-        .. Consequtives(),
+        .. Consecutive.Parse("""
+        .AA|BBE|FCC
+        DD.|..E|F..
+        .GG|HH.|II.
+        ---+---+---
+        J.K|.MN|PQ.
+        J.K|.MN|PQ.
+        LL.|.OO|RR.
+        ---+---+---
+        .SS|.WW|YZZ
+        .TT|VVX|Y..
+        .UU|..X|.aa
+        """),
     ];
 
     public override Cells Solution { get; } = Cells.Parse("""
@@ -32,25 +41,6 @@ public sealed class _2024_12_08 : CtcPuzzle
         978|236|514
         632|415|798
         """);
-
-    public static IEnumerable<Consecutive> Consequtives()
-    {
-        var cages = NamedCage.Parse("""
-            .AA|BBE|FCC
-            DD.|..E|F..
-            .GG|HH.|II.
-            ---+---+---
-            J.K|.MN|PQ.
-            J.K|.MN|PQ.
-            LL.|.OO|RR.
-            ---+---+---
-            .SS|.WW|YZZ
-            .TT|VVX|Y..
-            .UU|..X|.aa
-            """);
-
-        return [.. cages.Select(s => new Consecutive(s.Cells[0], s.Cells[1]))];
-    }
 
     public static IEnumerable<Not7Nor13> Not7Nor13s()
     {

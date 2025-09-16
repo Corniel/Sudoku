@@ -1,17 +1,7 @@
-using SudokuSolver.Parsing;
-
 namespace SudokuSolver.Constraints;
 
-[DebuggerDisplay("{Cells.First()} = {Cells.Last()} ± 1")]
 public sealed class Consecutive(Pos one, Pos two) : Constraint
 {
-    public static ImmutableArray<Consecutive> Parse(string str) =>
-    [
-        .. NamedCage.Parse(str)
-        .Where(c => c.Cells.Length is 2)
-        .Select(c => new Consecutive(c.Cells[0], c.Cells[1]))
-    ];
-
     public override bool IsSet => true;
 
     public override PosSet Cells { get; } = [one, two];
@@ -21,6 +11,8 @@ public sealed class Consecutive(Pos one, Pos two) : Constraint
         new Reducer(one, two),
         new Reducer(two, one),
     ];
+
+    public override string ToString() => $"{Cells.First()} = {Cells.Last()} ± 1";
 
     public sealed class Reducer(Pos applies, Pos other) : Restriction
     {

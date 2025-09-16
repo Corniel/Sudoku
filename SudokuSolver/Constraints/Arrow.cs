@@ -42,12 +42,6 @@ public sealed class Arrow(ImmutableArray<Pos> cells) : Constraint
                     max += val;
                 }
             }
-
-            if(AppliesTo == new Pos(3, 1))
-            {
-
-            }
-
             return Candidates.Between(min, max);
         }
     }

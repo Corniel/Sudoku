@@ -199,6 +199,7 @@ able to solve the following puzzles (so far):
 | 2025-09-04 | [Packing Problem](Puzzles/CrackingTheCryptic/2025_09_04.cs)     |  16.12 s  |
 | 2025-08-21 | [Miracle Of Eleven](Puzzles/CrackingTheCryptic/2025_08_21.cs)   |   6.17 ms |
 | 2025-08-19 | [Pile Of 15](Puzzles/CrackingTheCryptic/2025_08_19.cs)          |   3.67 ms |
+| 2025-08-07 | [Unstable Seesaws](Puzzles/CrackingTheCryptic/2025_08_07.cs)    |   1.89 m  |
 | 2025-05-21 | [Stepped Thermos](Puzzles/CrackingTheCryptic/2025_05_21.cs)     | 208.41 ms |
 | 2025-05-11 | [Quadrants](Puzzles/CrackingTheCryptic/2025_05_11.cs)           |  16.97 ms |
 | 2025-05-02 | [Arrows v.s. Thermos](Puzzles/CrackingTheCryptic/2025_05_02.cs) | 296.50 µs |

@@ -17,6 +17,9 @@ public readonly struct Candidates(uint bits) : IEquatable<Candidates>, IReadOnly
 
     public static readonly Candidates _1_to_9 = new(Mask);
 
+    public static readonly Candidates Even = [2, 4, 6, 8];
+    public static readonly Candidates Odd = [1, 3, 5, 7, 9];
+
     public static Candidates New(int value) => new(1U << value);
 
     public static Candidates New(params ReadOnlySpan<int> values)
@@ -24,9 +27,8 @@ public readonly struct Candidates(uint bits) : IEquatable<Candidates>, IReadOnly
         var vals = 0U;
 
         foreach (var v in values)
-        {
             vals |= 1U << v;
-        }
+
         return new(vals);
     }
 

@@ -61,9 +61,23 @@ public class Flags
 
     [Test]
     public void All_1_to_9()
-     {
+    {
         int[] candidates = [.. Candidates._1_to_9];
         candidates.Should().BeEquivalentTo([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+    }
+
+    [Test]
+    public void Even()
+    {
+        int[] candidates = [.. Candidates.Even];
+        candidates.Should().BeEquivalentTo([2, 4, 6, 8]);
+    }
+
+    [Test]
+    public void Odd()
+    {
+        int[] candidates = [.. Candidates.Odd];
+        candidates.Should().BeEquivalentTo([1, 3, 5, 7, 9]);
     }
 
     [TestCase(0, /* => */ 1, 2, 3, 4, 5, 6, 7, 8, 9)]
@@ -98,7 +112,7 @@ public class Maths
     [TestCase(10, /* => */ 1, 2, 3, 4, 5, 6, 7, 8, 9)]
     [TestCase(11, /* => */ 1, 2, 3, 4, 5, 6, 7, 8, 9)]
     [TestCase(20, /* => */ 1, 2, 3, 4, 5, 6, 7, 8, 9)]
-    public void At_most(int value, params int[] values) 
+    public void At_most(int value, params int[] values)
         => Candidates.AtMost(value).Should().Be([.. values]);
 
     [TestCase(-1, /* => */ 1, 2, 3, 4, 5, 6, 7, 8, 9)]

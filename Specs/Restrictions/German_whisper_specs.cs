@@ -19,7 +19,7 @@ public class Parses
             .P.|...|X.l
             ..Q|.TV|Y.b
             ...|RU.|.ac
-            """);
+            """).ToArray();
 
         var clues = Clues.Parse("""
             ..2|.8.|.9.

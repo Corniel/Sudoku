@@ -4,28 +4,35 @@ public static class GermanWhispers
 {
     public static IEnumerable<GermanWhisper> Parse(string str)
     {
-        var lookup = new Dictionary<int, Pos>();
+        var nodes = new List<Node>();
         var p = Pos.O;
         foreach (var ch in str)
         {
             if (ch is '.' or '?') p++;
             else if (char.IsAsciiLetterOrDigit(ch))
-                lookup.Add(Order.IndexOf(ch), p++);
+                nodes.Add(new(ch, p++));
         }
 
-        KeyValuePair<int, Pos>[] sorted = [.. lookup.OrderBy(kvp => kvp.Key)];
+        nodes.Sort();
 
-        for (var i = 1; i < sorted.Length; i++)
+        for (var i = nodes.Count - 1; i > 0; i--)
         {
-            var prev = sorted[i - 1];
-            var curr = sorted[i];
-
-            if (curr.Key - prev.Key is 1)
+            if (nodes[i].Order - nodes[i - 1].Order > 1)
             {
-                yield return new GermanWhisper(prev.Value, curr.Value);
+                var line = nodes[i..];
+                yield return new GermanWhisper([.. line.Select(n => n.Cell)]);
+                nodes.RemoveRange(i, line.Count);
             }
         }
+        yield return new GermanWhisper([.. nodes.Select(n => n.Cell)]);
     }
 
-    private const string Order = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    private readonly record struct Node(char Ch, Pos Cell) : IComparable<Node>
+    {
+        public int Order => "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".IndexOf(Ch);
+
+        public int CompareTo(Node other) => Order.CompareTo(other.Order);
+
+        public override string ToString() => $"{Ch} = {Cell}, Order = {Order}";
+    }
 }

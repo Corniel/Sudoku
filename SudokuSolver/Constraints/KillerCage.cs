@@ -22,6 +22,7 @@ public sealed partial class KillerCage(int sum, PosSet cells) : Constraint
 
     private static IEnumerable<Restriction> Reducers(int sum, PosSet cells) => cells.Count switch
     {
+        _ when sum is 0 => [],
         1 => [new Cage1(sum, cells.First())],
         9 => [],
         _ => Cages(sum, cells),

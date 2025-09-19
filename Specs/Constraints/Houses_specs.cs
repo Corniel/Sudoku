@@ -1,43 +1,45 @@
-namespace Specs.Houses_specs;
+using SudokuSolver.Constraints;
+
+namespace Specs.Constraints.Houses_specs;
 
 public class Rows
 {
     [Test]
     public void unique_for([Range(0, 8)] int index)
-        => Houses.Row[index].Should().HaveCount(9);
+        => Row.All[index].Should().HaveCount(9);
 
     [Test]
     public void all_unique()
-        => Houses.Row.SelectMany(x => x).Should().BeEquivalentTo(Pos.All);
+        => Row.All.SelectMany(x => x).Should().BeEquivalentTo(Pos.All);
 }
 
 public class Cols
 {
     [Test]
     public void unique_for([Range(0, 8)] int index)
-        => Houses.Col[index].Should().HaveCount(9);
+        => Col.All[index].Should().HaveCount(9);
 
     [Test]
     public void all_unique()
-        => Houses.Col.SelectMany(x => x).Should().BeEquivalentTo(Pos.All);
+        => Col.All.SelectMany(x => x).Should().BeEquivalentTo(Pos.All);
 }
 
 public class Boxes
 {
     [Test]
     public void unique_for([Range(0, 8)] int index)
-        => Houses.Box[index].Should().HaveCount(9);
+        => Box.All[index].Should().HaveCount(9);
 
     [Test]
     public void all_unique()
-        => Houses.Box.SelectMany(x => x).Should().BeEquivalentTo(Pos.All);
+        => Box.All.SelectMany(x => x).Should().BeEquivalentTo(Pos.All);
 }
 
 public class Diagonals
 {
     [Test]
     public void NW_SE()
-        => Houses.Diagonal.NW_SE.Should().BeEquivalentTo(
+        => Diagonal.NW_SE.Should().BeEquivalentTo(
         [
             new Pos(0, 0),
             (1, 1),
@@ -52,7 +54,7 @@ public class Diagonals
 
     [Test]
     public void NE_SW()
-        => Houses.Diagonal.NE_SW.Should().BeEquivalentTo(
+        => Diagonal.NE_SW.Should().BeEquivalentTo(
         [
             new Pos(0, 8),
             (1, 7),

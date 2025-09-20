@@ -8,7 +8,7 @@ Test all 512 possible states of `Values`.
 | Sum    | 1.209 us |
 
 ## Solvers
-Tested on 1000 hard puzzles. The mean is the average per puzzle.
+Tested on 1000 puzzles. The mean is the average per puzzle.
 
 | Method    | Config     | Mean        | Ratio |
 |---------- |----------- |------------:|------:|
@@ -23,4 +23,3 @@ Tested on 1000 hard puzzles. The mean is the average per puzzle.
 |           |            |             |       |
 | Reference | Medium     | 1,135.90 us | 23.83 |
 | Dynamic   | Medium     |    47.68 us |  1.00 |
-| 

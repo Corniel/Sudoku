@@ -1,25 +1,67 @@
-using SudokuSolver.Constraints;
-
 namespace SudokuSolver;
 
 /// <summary>A set of rules that apply when solving a set of <see cref="Clues"/>.</summary>
-public static class Rules
+[DebuggerDisplay("Count = {Count}")]
+[DebuggerTypeProxy(typeof(Diagnostics.CollectionDebugView))]
+public readonly partial struct Rules(ImmutableArray<Rule> rules, Constraint[] cells) : IReadOnlyCollection<Rule>
 {
-    /// <summary>The standard set of houses.</summary>
-    public static readonly ImmutableArray<Constraint> Standard = [.. Row.All, .. Col.All, .. Box.All];
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    private readonly ImmutableArray<Rule> Collection = rules;
 
-    /// <summary>The standard set of housed extended with the <see cref="Constraints.AntiKing"/> restrictions.</summary>
-    public static readonly ImmutableArray<Constraint> AntiKing = [.. Standard, .. Constraints.AntiKing.All];
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    private readonly Constraint[] Cells = cells;
 
-    /// <summary>The standard set of housed extended with the <see cref="Constraints.AntiKnight"/> restrictions.</summary>
-    public static readonly ImmutableArray<Constraint> AntiKnight = [.. Standard, .. Constraints.AntiKnight.All];
+    /// <inheritdoc />
+    public int Count => Collection.Length;
 
-    /// <summary>The standard set of houses extended with the four windows.</summary>
-    public static readonly ImmutableArray<Constraint> Hyper = [.. Standard, ..Window.All];
+    public Constraint this[Pos pos] => Cells[pos];
 
-    /// <summary>The standard set of houses extended with both diagonals.</summary>
-    public static readonly ImmutableArray<Constraint> XSudoku = [.. Standard, Diagonal.NE_SW, Diagonal.NW_SE];
+    public IReadOnlyList<Constraint> Cons => Cells;
 
-    /// <summary>The rows, columsn and jigsaw shaped houses.</summary>
-    public static ImmutableArray<Constraint> Jigsaw(string jigsaws) => [.. Row.All, .. Col.All, .. Constraints.Jigsaw.Parse(jigsaws)];
+    /// <inheritdoc />
+    public IEnumerator<Rule> GetEnumerator() => ((IEnumerable<Rule>)Collection).GetEnumerator();
+
+    public Constraint[] ToArray()
+    {
+        var copy = new Constraint[Cells.Length];
+        Array.Copy(Cells, copy, copy.Length);
+        return copy;
+    }
+
+    /// <inheritdoc />
+    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+    public static Rules operator +(Rules rules, Rule rule) => rules + [rule];
+
+    public static Rules operator +(Rules rules, IEnumerable<Rule> add)
+    {
+        var copy = rules.ToArray();
+        var all = rules.Collection;
+
+        foreach (var rule in add)
+        {
+            if (rule.Restrictions.Length > 0
+                || !rules.Collection.Any(r => rule.Cells.IsSubsetOf(r.Cells)))
+            {
+                all = all.Add(rule);
+            }
+
+            if (rule.IsSet)
+            {
+                foreach (var peer in rule.Cells)
+                {
+                    copy[peer] += rule.Cells;
+                }
+            }
+            else
+            {
+                all = all.Add(rule);
+            }
+            foreach (var res in rule.Restrictions)
+            {
+                copy[res.AppliesTo] += res;
+            }
+        }
+        return new(all, copy);
+    }
 }

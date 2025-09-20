@@ -1,4 +1,4 @@
-using SudokuSolver.Constraints;
+using SudokuSolver.Common;
 using System.IO;
 using System.Text;
 
@@ -9,7 +9,7 @@ public class Parses
     [Test]
     public void cell_based_cages()
     {
-        var rules = KillerCages.Parse("""
+        var rules = Rules.Killer("""
             AAB|BBC|DEF
             GGH|HCC|DEF
             GGI|ICJ|KKF
@@ -34,7 +34,7 @@ public class Parses
             b = 13  c = 17
             """);
 
-        var solution = DynamicSolver.Solve(Clues.None, rules);
+        var solution = Solver.Solve(Clues.None, rules);
 
         solution.Should().Be("""
             215|647|398
@@ -54,7 +54,7 @@ public class Parses
     [Test]
     public void cages_per_line()
     {
-        var rules = KillerCages.Parse("""
+        var rules = Rules.Killer("""
             27=(0,0)+(0,1)+(1,0)+(2,0)
             13=(0,2)+(1,1)+(1,2)+(2,1)
             15=(0,3)+(1,3)+(2,3)+(3,3)+(4,3)
@@ -69,7 +69,7 @@ public class Parses
             27=(1,7)+(1,8)+(2,7)+(2,8)
             """);
 
-        var solution = DynamicSolver.Solve(Clues.None, rules);
+        var solution = Solver.Solve(Clues.None, rules);
 
         solution.Should().Be("""
             792|564|138

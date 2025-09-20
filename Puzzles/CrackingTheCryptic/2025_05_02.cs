@@ -21,13 +21,11 @@ public sealed class _2025_05_02 : CtcPuzzle
         ...|...|...
         """);
 
-    public override ImmutableArray<Constraint> Constraints { get; } =
-    [
-        .. Rules.Standard,
-        .. ArrowsHi(),
-        .. ArrowsLo(),
-        .. Thermos(),
-    ];
+    public override Rules Constraints { get; } =
+        Rules.Standard
+        + ArrowsHi()
+        + ArrowsLo()
+        + Thermos();
 
     public override Cells Solution { get; } = Cells.Parse("""
         482|956|371

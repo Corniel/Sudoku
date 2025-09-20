@@ -2,11 +2,11 @@ namespace SudokuSolver.Validation;
 
 public static class Validator
 {
-    public static IEnumerable<Violation> Validate(this IEnumerable<Constraint> constraints, Cells cells)
+    public static IEnumerable<Violation> Validate(this IEnumerable<Rule> constraints, Cells cells)
         => constraints.SelectMany(c => c.Validate(cells));
 
     /// <summary>Validates that the digits in the cell are compliant with the constraint.</summary>
-    public static IEnumerable<Violation> Validate(this Constraint constraint, Cells cells)
+    public static IEnumerable<Violation> Validate(this Rule constraint, Cells cells)
     {
         if (constraint.IsSet)
         {
@@ -38,6 +38,6 @@ public static class Validator
         }
     }
 
-    public static bool IsValid(this IEnumerable<Constraint> constraints, Cells cells)
+    public static bool IsValid(this IEnumerable<Rule> constraints, Cells cells)
         => !constraints.Validate(cells).Any();
 }

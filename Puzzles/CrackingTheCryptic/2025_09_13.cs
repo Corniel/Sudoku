@@ -22,23 +22,21 @@ public sealed class _2025_09_13 : CtcPuzzle
         ...|...|...
         """);
 
-    public override ImmutableArray<Constraint> Constraints { get; } =
-    [
-        .. Rules.Standard,
-        .. RenbanLines.Parse("""
-            AAA|BCC|C..
-            A..|B.D|C..
-            .EE|DDD|FFF
-            ---+---+---
-            .EG|GG.|..F
-            JEG|..H|IIF
-            J.G|HHH|I..
-            ---+---+---
-            JJ.|...|I.K
-            .LM|MMN|.KK
-            LLM|NNN|.K.
-            """),
-    ];
+    public override Rules Constraints { get; } =
+        Rules.Standard
+        + RenbanLines.Parse("""
+        AAA|BCC|C..
+        A..|B.D|C..
+        .EE|DDD|FFF
+        ---+---+---
+        .EG|GG.|..F
+        JEG|..H|IIF
+        J.G|HHH|I..
+        ---+---+---
+        JJ.|...|I.K
+        .LM|MMN|.KK
+        LLM|NNN|.K.
+        """);
 
     public override Cells Solution { get; } = Cells.Parse("""
         324|956|781

@@ -20,10 +20,9 @@ public sealed class _2025_09_08 : CtcPuzzle
         ...|...|5..
         """);
 
-    public override ImmutableArray<Constraint> Constraints { get; } =
-    [
-        .. Rules.Standard,
-        SlowThermometer.Parse("""
+    public override Rules Constraints { get; } =
+        Rules.Standard
+        + SlowThermometer.Parse("""
             1..|...|...
             .2.|...|...
             ..3|...|...
@@ -35,8 +34,8 @@ public sealed class _2025_09_08 : CtcPuzzle
             7..|...|...
             ...|...|...
             ...|...|...
-            """),
-        SlowThermometer.Parse("""
+            """)
+        + SlowThermometer.Parse("""
             ..1|...|..7
             ...|2..|.6.
             ...|.3.|5..
@@ -48,8 +47,8 @@ public sealed class _2025_09_08 : CtcPuzzle
             ...|...|...
             ...|...|...
             ...|...|...
-            """),
-        SlowThermometer.Parse("""
+            """)
+        + SlowThermometer.Parse("""
             ...|...|...
             ...|...|...
             ...|...|...
@@ -61,8 +60,8 @@ public sealed class _2025_09_08 : CtcPuzzle
             ..3|.5.|...
             .2.|..6|...
             1..|...|7..
-            """),
-        SlowThermometer.Parse("""
+            """)
+        + SlowThermometer.Parse("""
             ...|...|...
             ...|...|...
             ...|...|..1
@@ -74,9 +73,7 @@ public sealed class _2025_09_08 : CtcPuzzle
             ...|...|5..
             ...|...|.6.
             ...|...|..7
-            """),
-    ];
-
+            """);
     public override Cells Solution { get; } = Cells.Parse("""
         961|437|258
         485|269|173
@@ -91,7 +88,7 @@ public sealed class _2025_09_08 : CtcPuzzle
         174|983|562
         """);
 
-    public sealed class SlowThermometer(ImmutableArray<Pos> cells) : Constraint
+    public sealed class SlowThermometer(ImmutableArray<Pos> cells) : Rule
     {
         public override bool IsSet => false;
 

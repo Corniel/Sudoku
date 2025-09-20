@@ -1,3 +1,5 @@
+using SudokuSolver.Restrictions;
+
 namespace Puzzles.CrackingTheCryptic;
 
 public sealed class _2024_12_08 : CtcPuzzle
@@ -8,12 +10,11 @@ public sealed class _2024_12_08 : CtcPuzzle
 
     public override Clues Clues { get; } = Clues.None;
 
-    public override ImmutableArray<Constraint> Constraints { get; } =
-    [
-        new Ratio1_2((4, 3), (5, 3)),
-        .. Rules.Standard,
-        .. Not7Nor13s(),
-        .. WhiteDots.Parse("""
+    public override Rules Constraints { get; } =
+        Rules.Standard
+        + new Ratio1_2((4, 3), (5, 3))
+        + Not7Nor13s()
+        + WhiteDots.Parse("""
         .AA|BBE|FCC
         DD.|..E|F..
         .GG|HH.|II.
@@ -25,8 +26,7 @@ public sealed class _2024_12_08 : CtcPuzzle
         .SS|.WW|YZZ
         .TT|VVX|Y..
         .UU|..X|.aa
-        """),
-    ];
+        """);
 
     public override Cells Solution { get; } = Cells.Parse("""
         421|873|965
@@ -51,7 +51,7 @@ public sealed class _2024_12_08 : CtcPuzzle
         }
     }
 
-    public sealed class Not7Nor13(Pos a, Pos b) : Constraint
+    public sealed class Not7Nor13(Pos a, Pos b) : Rule
     {
         public override bool IsSet => true;
 
@@ -63,12 +63,9 @@ public sealed class _2024_12_08 : CtcPuzzle
             new Reduce(b, a),
         ];
 
-        public sealed class Reduce(Pos appliesTo, Pos other) : Restriction
+        public sealed class Reduce(Pos appliesTo, Pos other) : Pair(appliesTo, other)
         {
-            public Pos AppliesTo { get; } = appliesTo;
-            public Pos Other { get; } = other;
-
-            public Candidates Restrict(Cells cells) => Lookup[cells[Other]];
+            public override Candidates Restrict(Cells cells) => Lookup[cells[Other]];
 
             private static readonly ImmutableArray<Candidates> Lookup =
             [

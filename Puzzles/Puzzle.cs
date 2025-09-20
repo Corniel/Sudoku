@@ -12,13 +12,13 @@ public abstract class Puzzle
 
     public abstract Clues Clues { get; }
 
-    public virtual ImmutableArray<Constraint> Constraints { get; } = Rules.Standard;
+    public virtual Rules Constraints { get; } = Rules.Standard;
 
     public virtual Cells Solution { get; } = Cells.Empty;
 
     public override string ToString() => Title;
 
-    public Cells Solve() => DynamicSolver.Solve(Clues, Constraints);
+    public Cells Solve() => Solver.Solve(Clues, Constraints);
 
     public static ImmutableArray<Puzzle> Collect(Predicate<Puzzle> predicate) => [.. typeof(Puzzle)
         .Assembly

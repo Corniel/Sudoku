@@ -1,4 +1,5 @@
-using SudokuSolver.Constraints;
+using SudokuSolver.Common;
+using SudokuSolver.Houses;
 
 namespace Specs.Validation.Validator_specs;
 
@@ -48,7 +49,7 @@ public class Invalidates
             372|516|948
             """);
 
-        ImmutableArray<Constraint> rules = [new KillerCage(3, [(0, 0), (0, 1)])];
+        ImmutableArray<Rule> rules = [new KillerCage(3, [(0, 0), (0, 1)])];
 
         var violation = rules.Validate(solution).First();
 

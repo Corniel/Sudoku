@@ -1,7 +1,7 @@
 # Sudoku Solver
 My attempt to write a [Sudoku](https://en.wikipedia.org/wiki/Sudoku) solver.
 
-## Dynamic solver
+## Solver
 The approach of my solver is that I specify both [clues](#Clues) and the
 (potentially custom) [constraints](#Constraint) to apply when trying to solve
 the puzzle. By doing so, my solver can solve a wide variety Sudoku variants.
@@ -26,7 +26,7 @@ var clues = Clues.Parse("""
     .9.|...|4..
     """);
 
-var solution = DynamicSolver.Solve(clues);
+var solution = Solver.Solve(clues);
 ```
 
 ### Anti-Knight Sudoku
@@ -48,7 +48,7 @@ var clues = Clues.Parse("""
     .9.|...|..1
     """);
 
-var solution = DynamicSolver.Solve(clues, Rules.AntiKnight);
+var solution = Solver.Solve(clues, Rules.AntiKnight);
 
 ### Hyper Sudoku
 Hyper Sudoku (also called Windoku) adds for extra 3x3 regions:
@@ -82,7 +82,7 @@ var clues = Clues.Parse("""
     ...|..5|4..
     """);
 
-var solution = DynamicSolver.Solve(clues, Rules.Hyper);
+var solution = Solver.Solve(clues, Rules.Hyper);
 ```
 
 ### Jigsaw Sudoku
@@ -103,7 +103,7 @@ var clues = Clues.Parse("""
     .1.|2..|.45
     """);
 
-var solution = DynamicSolver.Solve(clues, Rules.Jigsaw("""
+var solution = Solver.Solve(clues, Rules.Jigsaw("""
     AAA|BBB|BCC
     AAA|BBB|BCC
     AAD|DEB|CCC 
@@ -119,7 +119,7 @@ var solution = DynamicSolver.Solve(clues, Rules.Jigsaw("""
 ```
 
 ### Killer Sudoku
-The dynamic solver can also solve [Killer Sudoku's](https://en.wikipedia.org/wiki/Killer_sudoku).
+The solver can also solve [Killer Sudoku's](https://en.wikipedia.org/wiki/Killer_sudoku).
 As there is no standard plain text format to describe these (that I'm aware of) there are
 two support formats that seem logical:
 
@@ -161,7 +161,7 @@ var rules_ = KillerCages.Parse("""
     27 = (1,7) + (1,8) + (2,7) + (2,8)
 """);
 
-var solution = DynamicSolver.Solve(Clues.Empty, rules);
+var solution = Solver.Solve(Clues.Empty, rules);
 ```
 
 ### X-Sudoku
@@ -182,13 +182,13 @@ var clues = Clues.Parse("""
     .2.|3.4|.5.
     """);
 
-var solution = DynamicSolver.Solve(clues, Rules.XSudoku);
+var solution = Solver.Solve(clues, Rules.XSudoku);
 ```
 
 ### Cracking The Cryptic
 [Cracking Tye Cryptic](https://www.youtube.com/@CrackingTheCryptic) is a YouTube
 channel dedicated to solving world-class puzzles (their wording, not mine). With
-the extra [constraints](#Constraint) implemented, the Dynamic solver has been
+the extra [constraints](#Constraint) implemented, the solver has been
 able to solve the following puzzles (so far):
 
 | Date       | Puzzle                                                          | Speed     |

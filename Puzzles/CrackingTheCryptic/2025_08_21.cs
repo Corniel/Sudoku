@@ -34,12 +34,10 @@ public sealed class _2025_08_21 : CtcPuzzle
         936|841|752
         """);
 
-     public override ImmutableArray<Constraint> Constraints { get; } =
-    [
-        .. Rules.Standard,
-        .. AtMost11s(),
-        .. NonConsecutives(),
-    ];
+     public override Rules Constraints { get; } =
+        Rules.Standard
+        + AtMost11s()
+        + NonConsecutives();
 
     public static IEnumerable<AtMost> AtMost11s()
     {

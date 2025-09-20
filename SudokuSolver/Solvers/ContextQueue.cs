@@ -4,23 +4,23 @@ namespace SudokuSolver.Solvers;
 
 [DebuggerDisplay("Count = {Count}")]
 [DebuggerTypeProxy(typeof(Diagnostics.CollectionDebugView))]
-public readonly struct ContextQueue(ImmutableArray<CellContext> contexts, int head = 0) : IReadOnlyCollection<CellContext>
+public readonly struct ContextQueue(ImmutableArray<Constraint> constraints, int head = 0) : IReadOnlyCollection<Constraint>
 {
     private readonly int Head = head;
 
-    private readonly ImmutableArray<CellContext> Contexts = contexts;
+    private readonly ImmutableArray<Constraint> Constraints = constraints;
 
-    public bool IsEmpty => Head >= Contexts.Length;
+    public bool IsEmpty => Head >= Constraints.Length;
 
-    public int Count => Contexts.Length - Head;
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public CellContext Peek() => Contexts[Head];
+    public int Count => Constraints.Length - Head;
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public ContextQueue Dequeue() => new(Contexts, Head + 1);
+    public Constraint Peek() => Constraints[Head];
 
-    public IEnumerator<CellContext> GetEnumerator() => Contexts.Skip(Head).GetEnumerator();
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public ContextQueue Dequeue() => new(Constraints, Head + 1);
+
+    public IEnumerator<Constraint> GetEnumerator() => Constraints.Skip(Head).GetEnumerator();
 
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 }

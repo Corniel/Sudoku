@@ -1,4 +1,4 @@
-using SudokuSolver.Constraints;
+using SudokuSolver.Common;
 
 namespace Specs.Restrictions.Dutch_wisper_specs;
 
@@ -21,10 +21,9 @@ public class Solves
             ..6|.7.|8..
             """);
 
-        ImmutableArray<Constraint> rules =
-        [
-            .. Rules.Standard,
-            ..DutchWhispers.Parse("""
+        Rules rules =
+            Rules.Standard
+            + DutchWhispers.Parse("""
             ABC|DEF|GHI
             RQP|ONM|LKJ
             STU|VWX|YZa
@@ -36,8 +35,8 @@ public class Solves
             ...|...|...
             ...|...|...
             ...|...|...
-            """),
-            ..DutchWhispers.Parse("""
+            """)
+            + DutchWhispers.Parse("""
             ...|...|...
             ...|...|...
             ...|...|...
@@ -49,8 +48,8 @@ public class Solves
             ...|...|...
             ...|...|...
             ...|...|...
-            """),
-            ..DutchWhispers.Parse("""
+            """)
+            + DutchWhispers.Parse("""
             ...|...|...
             ...|...|...
             ...|...|...
@@ -62,10 +61,9 @@ public class Solves
             IHG|FED|CBA
             JKL|MNO|PQR
             aZY|XWV|UTS
-            """),
-        ];
+            """);
 
-        var solved = DynamicSolver.Solve(clues, rules);
+        var solved = Solver.Solve(clues, rules);
 
         solved.Should().Be("""
             495|162|738

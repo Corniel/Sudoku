@@ -3,13 +3,13 @@ using System.IO;
 
 namespace Puzzles.Killer;
 
-public sealed class KillerPuzzle(string title, ImmutableArray<Constraint> rules) : Puzzle
+public sealed class KillerPuzzle(string title, Rules rules) : Puzzle
 {
     public override string Title { get; } = title;
 
     public override Clues Clues { get; } = Clues.None;
 
-    public override ImmutableArray<Constraint> Constraints { get; } = rules;
+    public override Rules Constraints { get; } = rules;
 
     public static IEnumerable<KillerPuzzle> Load()
     {
@@ -18,7 +18,7 @@ public sealed class KillerPuzzle(string title, ImmutableArray<Constraint> rules)
             using var stream = typeof(PuzzleBankPuzzle).Assembly.GetManifestResourceStream(name)!;
             using var reader = new StreamReader(stream);
 
-            var rules = KillerCages.Parse(reader.ReadToEnd());
+            var rules = Rules.Killer(reader.ReadToEnd());
 
             yield return new KillerPuzzle(name.Split('.')[^2], rules);
         }

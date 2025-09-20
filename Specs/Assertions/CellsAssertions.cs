@@ -6,17 +6,17 @@ public sealed class CellsAssertions(Cells subject)
 
     public Cells Subject { get; } = subject;
 
-    public void BeSolved(ImmutableArray<Constraint>? rules = null)
+    public void BeSolved(Rules? rules = null)
     {
         var reference = Backtracker.Solve(Clues.Parse(Subject.ToString()));
 
         Be(reference, rules);
     }
 
-    public void Be(string expected, ImmutableArray<Constraint>? rules = null)
+    public void Be(string expected, Rules? rules = null)
         => Be(Cells.Parse(expected), rules);
 
-    public void Be(Cells expected, ImmutableArray<Constraint>? rules = null)
+    public void Be(Cells expected, Rules? rules = null)
     {
         rules ??= Rules.Standard;
 

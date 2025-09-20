@@ -1,33 +1,36 @@
 namespace SudokuSolver;
 
-/// <summary>A constraint.</summary>
-[DebuggerDisplay("{GetType().Name}{DebuggerDisplay}, Count = {Count}, Restrictions = {Restrictions.Length}")]
-[DebuggerTypeProxy(typeof(Diagnostics.CollectionDebugView))]
-public abstract class Constraint : IReadOnlyCollection<Pos>
+public sealed record Constraint
 {
-    /// <summary>
-    /// Indicates that all cells are part of the same set, and therefor must
-    /// have different values.
-    /// </summary>
-    public abstract bool IsSet { get; }
+    public static Constraint None(Pos cell) => new() { Cell = cell };
 
-    /// <summary>The cells bound to the constraint.</summary>
-    public abstract PosSet Cells { get; }
+    /// <summary>The constraint cell.</summary>
+    public required Pos Cell { get; init; }
 
-    /// <inheritdoc />
-    public int Count => Cells.Count;
+    /// <summary>The candidates that can be considered.</summary>
+    public Candidates Candidates { get; init; } = Candidates._1_to_9;
 
-    /// <summary>The restrictions (other than being peers).</summary>
-    public abstract ImmutableArray<Restriction> Restrictions { get; }
+    /// <summary>The set representation of the peers.</summary>
+    public PosSet Set { get; init; }
 
-    /// <inheritdoc cref="IEnumerable{T}.GetEnumerator()" />
-    public PosSet.Iterator GetEnumerator() => Cells.GetEnumerator();
+    /// <summary>The array representation of the peers.</summary>
+    public ImmutableArray<Pos> Peers { get; init; } = [];
 
-    /// <inheritdoc />
-    IEnumerator<Pos> IEnumerable<Pos>.GetEnumerator() => GetEnumerator();
+    /// <summary>The (dynamic) restrictions that apply to this cell.</summary>
+    public ImmutableArray<Restriction> Restrictions { get; init; } = [];
 
-    /// <inheritdoc />
-    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+    public Constraint Solve(int value) => this with { Candidates = Candidates.New(value) };
 
-    internal virtual string DebuggerDisplay => IsSet ? " (set)" : string.Empty;
+    public Constraint Reduce(int value) => this with { Candidates = Candidates ^ value };
+
+    public override string ToString() => $"{Cell}, Res = {Restrictions.Length}, Set = {Set.Count} [ {string.Join(", ", Set)} ]";
+
+    public static Constraint operator +(Constraint c, PosSet peers)
+    {
+        var join = c.Set | peers;
+        return c with { Set = join, Peers = [.. join] };
+    }
+
+    public static Constraint operator +(Constraint c, Restriction res)
+        => c with { Restrictions = c.Restrictions.Add(res) };
 }

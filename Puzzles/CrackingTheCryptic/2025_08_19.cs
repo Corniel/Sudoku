@@ -9,7 +9,8 @@ public class _2025_08_19 : CtcPuzzle
 
     public override Clues Clues { get; } = Clues.None;
     
-    public override ImmutableArray<Constraint> Constraints { get; } = KillerCages.Parse("""
+    public override Rules Constraints { get; } = 
+        Rules.Killer("""
         .36|.4A|BB.
         .CD|D.A|EB.
         .CC|D.A|EE.

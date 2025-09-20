@@ -35,10 +35,10 @@ public sealed class _2024_01_08 : CtcPuzzle
         352|419|867
         """);
 
-    public override ImmutableArray<Constraint> Constraints { get; } =
-    [
-        .. Rules.Standard,
-        .. RenbanLines.Parse("""
+    public override Rules Constraints { get; } =
+        Rules.Standard
+        
+        + RenbanLines.Parse("""
         AAA|...|BBB
         A..|A.B|..B
         A.F|...|F.B
@@ -50,9 +50,9 @@ public sealed class _2024_01_08 : CtcPuzzle
         C..|...|..D
         C..|C.D|..D
         CCC|...|DDD
-        """),
+        """)
 
-        .. GermanWhispers.Parse("""
+        + GermanWhispers.Parse("""
         ..A|...|D..
         ...|B.E|...
         a..|...|h.d
@@ -64,6 +64,5 @@ public sealed class _2024_01_08 : CtcPuzzle
         J..|...|..P
         ...|k.o|...
         ..j|...|p..
-        """),
-    ];
+        """);
 }

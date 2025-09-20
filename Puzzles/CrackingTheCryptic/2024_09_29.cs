@@ -1,3 +1,6 @@
+using SudokuSolver.Houses;
+using SudokuSolver.Restrictions;
+
 namespace Puzzles.CrackingTheCryptic;
 
 public sealed class _2024_09_29 : CtcPuzzle
@@ -22,11 +25,9 @@ public sealed class _2024_09_29 : CtcPuzzle
         3..|...|...
         """);
 
-    public override ImmutableArray<Constraint> Constraints { get; } =
-    [
-        .. Rules.Standard,
-        .. AtLeast3s(),
-    ];
+    public override Rules Constraints { get; } =
+        Rules.Standard
+        + AtLeast3s();
 
     public override Cells Solution { get; } = Cells.Parse("""
         594|738|261
@@ -42,7 +43,7 @@ public sealed class _2024_09_29 : CtcPuzzle
         372|516|948
         """);
 
-    private static IEnumerable<Constraint> AtLeast3s()
+    private static IEnumerable<Rule> AtLeast3s()
     {
        foreach(var box in Box.All)
         {
@@ -57,7 +58,7 @@ public sealed class _2024_09_29 : CtcPuzzle
         }
     }
 
-    public sealed class AtLeast3(Pos a, Pos b) : Constraint
+    public sealed class AtLeast3(Pos a, Pos b) : Rule
     {
         public override bool IsSet => false;
 
@@ -69,12 +70,9 @@ public sealed class _2024_09_29 : CtcPuzzle
             new Reduce(b, a),
         ];
 
-        public sealed class Reduce(Pos appliesTo, Pos other) : Restriction
+        public sealed class Reduce(Pos appliesTo, Pos other) : Pair(appliesTo, other)
         {
-            public Pos AppliesTo { get; } = appliesTo;
-            public Pos Other {get;} =other;
-
-            public Candidates Restrict(Cells cells)
+            public override Candidates Restrict(Cells cells)
             {
                 var value = cells[Other];
                 return value is 0

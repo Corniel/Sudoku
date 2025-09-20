@@ -1,3 +1,5 @@
+using SudokuSolver.Restrictions;
+
 namespace Puzzles.CrackingTheCryptic;
 
 public sealed class _2025_05_11 : CtcPuzzle
@@ -20,11 +22,7 @@ public sealed class _2025_05_11 : CtcPuzzle
         ...|...|...
         """);
 
-    public override ImmutableArray<Constraint> Constraints { get; } =
-    [
-        .. Rules.Standard,
-        .. Regions(),
-    ];
+    public override Rules Constraints { get; } = Rules.Standard + Regions();
 
     public override Cells Solution { get; } = Cells.Parse("""
         526|839|174
@@ -68,7 +66,7 @@ public sealed class _2025_05_11 : CtcPuzzle
         }
     }
 
-    public sealed class Region(ImmutableArray<Pos> cells) : Constraint
+    public sealed class Region(ImmutableArray<Pos> cells) : Rule
     {
         public override bool IsSet => false;
 
@@ -79,12 +77,9 @@ public sealed class _2025_05_11 : CtcPuzzle
             .. cells.Select(c => new Reduce(c, cells.Remove(c))),
         ];
 
-        public sealed class Reduce(Pos appliesTo, ImmutableArray<Pos> others) : Restriction
+        public sealed class Reduce(Pos appliesTo, ImmutableArray<Pos> others) : Group(appliesTo, others)
         {
-            public Pos AppliesTo { get; } = appliesTo;
-            public ImmutableArray<Pos> Others { get; } = others;
-
-            public Candidates Restrict(Cells cells)
+            public override Candidates Restrict(Cells cells)
             {
                 var sum = 0;
 

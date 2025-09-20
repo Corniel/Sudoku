@@ -29,7 +29,7 @@ public class Cracking_the_Cryptic
 public class Anti_Knight
 {
     [Test]
-    public void Solves() => DynamicSolver.Solve(
+    public void Solves() => Solver.Solve(
       Clues.Parse("""
             ...|5..|...
             ...|..4|...
@@ -62,7 +62,7 @@ public class Anti_Knight
 public class Hyper_Sudoku
 {
     [Test]
-    public void Solves() => DynamicSolver.Solve(
+    public void Solves() => Solver.Solve(
         Clues.Parse("""
             .4.|...|..9
             9..|...|8..
@@ -111,7 +111,7 @@ public class Jigsaw_Sudokud
             GGJ|JJJ|HHH
             """);
 
-        DynamicSolver.Solve(
+        Solver.Solve(
           Clues.Parse("""
             4..|7.9|.2.
             ...|.2.|...
@@ -163,7 +163,7 @@ public class Killer_Sudoku
 public class X_Sudoku
 {
     [Test]
-    public void Solves() => DynamicSolver.Solve(
+    public void Solves() => Solver.Solve(
             Clues.Parse("""
             .1.|2.3|.4.
             8..|...|6.5
@@ -279,7 +279,7 @@ public class Puzzle_bank
 
         foreach (var puzzle in PuzzleBankPuzzle.Load(name))
         {
-            var solved = DynamicSolver.Solve(puzzle.Clues);
+            var solved = Solver.Solve(puzzle.Clues);
             puzzle.IsX = Rules.XSudoku.IsValid(solved);
             puzzle.IsAntiKnight = Rules.AntiKnight.IsValid(solved);
             puzzle.IsHyper = Rules.Hyper.IsValid(solved);
@@ -289,10 +289,10 @@ public class Puzzle_bank
         }
     }
 
-    private static void Solve(Puzzle puzzle, ImmutableArray<Constraint>? rules = null)
+    private static void Solve(Puzzle puzzle, Rules? rules = null)
     {
         var cs = rules ?? Rules.Standard;
-        var solved = DynamicSolver.Solve(puzzle.Clues, cs);
+        var solved = Solver.Solve(puzzle.Clues, cs);
         solved.Should().BeSolved(rules);
     }
 }
@@ -316,7 +316,7 @@ public class Other
             ...|.8.|.79
             """);
 
-        DynamicSolver.Solve(clues).Should().Be("""
+        Solver.Solve(clues).Should().Be("""
             534|678|912
             672|195|348
             198|342|567
@@ -348,7 +348,7 @@ public class Other
             .9.|...|4..
             """);
 
-        DynamicSolver.Solve(clues).Should().Be("""
+        Solver.Solve(clues).Should().Be("""
             812|753|649
             943|682|175
             675|491|283

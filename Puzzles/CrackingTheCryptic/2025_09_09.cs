@@ -22,25 +22,22 @@ public sealed class _2025_09_09 : CtcPuzzle
         172|856|934
         """);
 
-     public override ImmutableArray<Constraint> Constraints { get; } = 
-    [
-        .. Rules.Standard,
-        .. KillerCages.Parse("""
-            AAA|...|BB.
-            ...|CC.|...
-            .DD|...|EEE
-            ---+---+---
-            ...|.F.|...
-            .G.|.F.|.H.
-            IGJ|JFK|KHL
-            ---+---+---
-            I.J|J.K|K.L
-            I.M|.N.|O.L
-            I.M|NNN|O.L
+     public override Rules Constraints { get; } = 
+        Rules.Killer("""
+        AAA|...|BB.
+        ...|CC.|...
+        .DD|...|EEE
+        ---+---+---
+        ...|.F.|...
+        .G.|.F.|.H.
+        IGJ|JFK|KHL
+        ---+---+---
+        I.J|J.K|K.L
+        I.M|.N.|O.L
+        I.M|NNN|O.L
 
-            A = 9   B = 8   C = 8   D = 14  E = 18
-            F = 11  G = 11  H = 6   I = 15  J = 18  K = 18  L = 27
-            M = 10  N = 23  O = 10
-            """)
-    ];
+        A = 9   B = 8   C = 8   D = 14  E = 18
+        F = 11  G = 11  H = 6   I = 15  J = 18  K = 18  L = 27
+        M = 10  N = 23  O = 10
+        """);
 }

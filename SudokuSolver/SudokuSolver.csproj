@@ -4,6 +4,16 @@
     <EmbeddedResource Include="Constraints/*.md" />
   </ItemGroup>
 
+  <ItemGroup>
+    <EmbeddedResource Include="Common\KillerCage_2.md" />
+    <EmbeddedResource Include="Common\KillerCage_3.md" />
+    <EmbeddedResource Include="Common\KillerCage_4.md" />
+    <EmbeddedResource Include="Common\KillerCage_5.md" />
+    <EmbeddedResource Include="Common\KillerCage_6.md" />
+    <EmbeddedResource Include="Common\KillerCage_7.md" />
+    <EmbeddedResource Include="Common\KillerCage_8.md" />
+  </ItemGroup>
+
   <ItemGroup Label="Analyzers">
     <PackageReference PrivateAssets="all" Include="Qowaiv.Analyzers.CSharp" />
     <PackageReference PrivateAssets="all" Include="StyleCop.Analyzers.Unstable" />

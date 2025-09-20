@@ -1,4 +1,4 @@
-using SudokuSolver.Constraints;
+using SudokuSolver.Common;
 
 namespace Specs.Restrictions.German_whisper_specs;
 
@@ -7,7 +7,7 @@ public class Parses
     [Test]
     public void multiple_at_once()
     {
-        var wispers = GermanWhispers.Parse("""
+        var wispers = Rules.Standard + GermanWhispers.Parse("""
             ...|.5.|.E.
             .13|4..|DFG
             I2.|..C|...
@@ -35,7 +35,7 @@ public class Parses
             ...|...|...
             """);
 
-        var solved = DynamicSolver.Solve(clues, [.. Rules.Standard, .. wispers]);
+        var solved = Solver.Solve(clues, wispers);
 
         solved.Should().Be("""
             352|186|794
@@ -50,6 +50,6 @@ public class Parses
             679|831|452
             231|495|687
             """,
-            [.. Rules.Standard, .. wispers]);
+            wispers);
     }
 }

@@ -1,4 +1,5 @@
 using SudokuSolver.Parsing;
+using SudokuSolver.Restrictions;
 
 namespace Puzzles.CrackingTheCryptic;
 
@@ -24,13 +25,9 @@ public sealed class _2025_09_04 : CtcPuzzle
         429|875|136
         """);
 
-     public override ImmutableArray<Constraint> Constraints { get; } =
-    [
-        .. Rules.Standard,
-        .. Cages()
-    ];
+    public override Rules Constraints { get; } = Rules.Standard + Cages();
 
-    public sealed class Cage(PosSet cells, bool isSet) : Constraint
+    public sealed class Cage(PosSet cells, bool isSet) : Rule
     {
         public override bool IsSet { get; } = isSet;
 
@@ -38,15 +35,11 @@ public sealed class _2025_09_04 : CtcPuzzle
 
         public override ImmutableArray<Restriction> Restrictions { get; } = [.. Reducer.Create([.. cells], isSet)];
 
-        public sealed class Reducer(Pos appliesTo, ImmutableArray<Pos> others, ImmutableArray<Candidates> lookup) : Restriction
+        public sealed class Reducer(Pos appliesTo, ImmutableArray<Pos> others, ImmutableArray<Candidates> lookup) : Group(appliesTo, others)
         {
-            public Pos AppliesTo { get; } = appliesTo;
-
-            public ImmutableArray<Pos> Others { get; } = others;
-
             public ImmutableArray<Candidates> Candidates { get; } = lookup;
 
-            public Candidates Restrict(Cells cells) => Candidates[0
+            public override Candidates Restrict(Cells cells) => Candidates[0
                 + cells[Others[0]] * 1
                 + cells[Others[1]] * 10
                 + cells[Others[2]] * 100];

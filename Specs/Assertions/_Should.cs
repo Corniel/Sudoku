@@ -11,5 +11,5 @@ internal static class _Should
     public static ValuesAssertions Should(this Candidates values) => new(values);
 
     [Pure]
-    public static ConstraintsAssertions Should(this IEnumerable<Constraint>sonstraints) => new(sonstraints);
+    public static ConstraintsAssertions Should(this IEnumerable<Rule>sonstraints) => new(sonstraints);
 }

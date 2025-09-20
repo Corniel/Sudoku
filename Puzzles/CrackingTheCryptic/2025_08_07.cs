@@ -8,9 +8,8 @@ public sealed class _2025_08_07 : CtcPuzzle
 
     public override Clues Clues { get; } = Clues.None;
 
-    public override ImmutableArray<Constraint> Constraints { get; } =
-    [
-        .. KillerCages.Parse("""
+    public override Rules Constraints { get; } =
+        Rules.Killer("""
         ...|...|..1
         ...|...|...
         AAA|A..|...
@@ -23,9 +22,9 @@ public sealed class _2025_08_07 : CtcPuzzle
         ...|...|.6.
         ...|...|...
         A = 21  B = 21  C = 20  D = 22
-        """),
+        """)
 
-        .. WhiteDots.Parse("""
+        + WhiteDots.Parse("""
         B..|AA.|...
         B..|...|...
         ...|.CD|...
@@ -37,9 +36,9 @@ public sealed class _2025_08_07 : CtcPuzzle
         ...|.YZ|...
         .F.|...|...
         .F.|...|...
-        """),
+        """)
 
-        .. GermanWhispers.Parse("""
+        + GermanWhispers.Parse("""
         87.|...|...
         .6.|...|...
         ...|...|adg
@@ -51,8 +50,7 @@ public sealed class _2025_08_07 : CtcPuzzle
         ...|...|BEH
         23.|...|...
         1..|KL.|...
-        """),
-    ];
+        """);
 
     public override Cells Solution { get; } = Cells.Parse("""
         296|784|351

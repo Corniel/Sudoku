@@ -19,62 +19,76 @@ public static partial class Solver
 
     private static ContextQueue Queue(PosSet done, Reduction reduction)
     {
-        var unsolved = ~done;
-        var q = new Constraint[unsolved.Count];
+        var q = new Constraint[(~done).Count];
 
         var count = 0;
-        var size = 0;
+        var min = 0;
+        var max = 0;
 
-        var groups = new PosSet[reduction.Rules.Count];
+        Rule[] rules = [.. reduction.Rules];
+        max = rules.Length;
 
-        foreach (var rule in reduction.Rules)
-            groups[size++] = rule.Cells;
-
-        // every loop, we try to find set with adds a minimum of new combiations
         while (count < q.Length)
         {
-            var best = int.MaxValue;
-            var index = int.MaxValue;
-            var group = unsolved;
+            var b_val = double.MinValue;
+            var b_idx = 0;
 
-            for (var i = 0; i < size; i++)
+            for (var idx = min; idx < max; idx++)
             {
-                var set = groups[i] & unsolved;
+                var rule = rules[idx];
 
-                while (set.HasNone && i > 0 && i < size - 1)
+                if (rule.Cells.IsSubsetOf(done))
                 {
-                    set = groups[--size] & unsolved;
-                    groups[i] = set;
+                    if (idx == max - 1)
+                    {
+                        max--;
+                    }
+                    else if (idx > min)
+                    {
+                        rules[idx++] = rules[min++];
+                    }
+                    continue;
                 }
+                var test = Score(rule);
 
-                var test = 1;
-
-                foreach (var c in set)
+                if (test > b_val)
                 {
-                    test *= reduction[c].Candidates.Count;
-
-                    // looping sets is more expensive than branching
-                    if (test > best) break;
-                }
-
-                if (test < best)
-                {
-                    group = set;
-                    best = test;
-                    index = i;
+                    b_val = test;
+                    b_idx = idx;
                 }
             }
-
-            foreach (var p in group.OrderBy(p => reduction[p].Candidates.Count))
-                q[count++] = reduction[p];
-
-            if (size > 0)
-            {
-                groups[index] = groups[--size];
-                unsolved ^= group;
-            }
+            Add(b_idx);
         }
 
         return new([.. q]);
+
+        void Add(int indx)
+        {
+            var rule = rules[indx];
+
+            var todo = rule.Cells;
+            todo ^= done;
+
+            foreach (var c in todo.Select(c => reduction[c]).OrderByDescending(r => r.Bits))
+                q[count++] = c;
+
+            done |= todo;
+
+            if (indx != --max)
+            {
+                rules[indx] = rules[max];
+            }
+        }
+
+        double Score(Rule rule)
+        {
+            var test = 0.0;
+            
+            foreach (var c in rule.Cells)
+                test += done.Contains(c) ? 7 : reduction[c].Bits;
+
+            test /= rule.Count;
+            return test;
+        }
     }
 }

@@ -1,4 +1,5 @@
 using SudokuSolver.Generics;
+using System.Globalization;
 using System.IO;
 
 namespace SudokuSolver.Common;
@@ -6,6 +7,8 @@ namespace SudokuSolver.Common;
 public sealed partial class KillerCage
 {
     public static readonly ImmutableArray<CandidateLookup<Candidates>[]> Lookup = [..Init()];
+
+    public static readonly ImmutableArray<double[]> Infos = [..GetInfos()];
 
     private static CandidateLookup<Candidates>[][] Init()
     {
@@ -23,7 +26,10 @@ public sealed partial class KillerCage
             {
                 if (line.StartsWith("## "))
                 {
-                    sum = int.Parse(line[3..]);
+                    var split = line.Split(' ');
+
+                    sum = int.Parse(split[1]);
+
                     while (tabels.Count <= sum)
                     {
                         tabels.Add(null!);
@@ -48,5 +54,32 @@ public sealed partial class KillerCage
                 c |= 1u << (ch - '0');
             return new(c);
         }
+    }
+
+    private static double[][] GetInfos()
+    {
+        var lookup = new double[9][];
+
+        for (var bits = 2; bits < _9; bits++)
+        {
+            var infos = new double[45];
+
+            using var stream = typeof(KillerCage).Assembly.GetManifestResourceStream($"SudokuSolver.Common.KillerCage_{bits}.md")!;
+            using var reader = new StreamReader(stream);
+            var sum = 0;
+
+            while (reader.ReadLine() is { } line)
+            {
+                if (line.StartsWith("## ") && line.Split(' ') is { Length: > 2} split)
+                {
+                    sum = int.Parse(split[1]);
+                    var info = double.Parse(split[2], CultureInfo.InvariantCulture);
+                    infos[sum] = info;
+                }
+            }
+            lookup[bits] = infos;
+        }
+
+        return lookup;
     }
 }

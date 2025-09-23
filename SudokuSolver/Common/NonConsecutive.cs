@@ -16,6 +16,8 @@ public sealed class NonConsecutive(Pos one, Pos two) : Rule
 
     public sealed class Reducer(Pos appliesTo, Pos other) : Pair(appliesTo, other)
     {
+        public override double Bits => bits;
+
         public override Candidates Restrict(Cells cells) => Reduction[cells[Other]];
 
         private const int _ = 0;
@@ -33,5 +35,7 @@ public sealed class NonConsecutive(Pos one, Pos two) : Rule
             /* 8 */ Candidates.New(1, 2, 3, 4, 5, 6, _, _, _),
             /* 9 */ Candidates.New(1, 2, 3, 4, 5, 6, 7, _, _),
         ];
+
+        private static readonly double bits = Info.Avg(6.6);
     }
 }

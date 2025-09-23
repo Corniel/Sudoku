@@ -17,6 +17,8 @@ public sealed class AtMost(Pos one, Pos two, int sum) : Rule
     [DebuggerDisplay("{AppliesTo} + {Other} <= {Sum}")]
     public sealed class Reducer(Pos appliesTo, Pos other, int sum) : Pair(appliesTo, other)
     {
+        public override double Bits => Info.Avg(4.5);
+
         public int Sum { get; } = sum;
 
         public override Candidates Restrict(Cells cells) => Candidates.AtMost(Sum - cells[Other]);

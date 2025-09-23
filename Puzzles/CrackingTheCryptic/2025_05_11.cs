@@ -79,6 +79,8 @@ public sealed class _2025_05_11 : CtcPuzzle
 
         public sealed class Reduce(Pos appliesTo, ImmutableArray<Pos> others) : Group(appliesTo, others)
         {
+            public override double Bits => Info.Avg(2.925);
+
             public override Candidates Restrict(Cells cells)
             {
                 var sum = 0;

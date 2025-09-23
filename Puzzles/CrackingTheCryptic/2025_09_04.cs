@@ -37,6 +37,8 @@ public sealed class _2025_09_04 : CtcPuzzle
 
         public sealed class Reducer(Pos appliesTo, ImmutableArray<Pos> others, ImmutableArray<Candidates> lookup) : Group(appliesTo, others)
         {
+            public override double Bits => 3 * Info.Avg(1.9);
+
             public ImmutableArray<Candidates> Candidates { get; } = lookup;
 
             public override Candidates Restrict(Cells cells) => Candidates[0

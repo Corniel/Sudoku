@@ -102,8 +102,12 @@ public sealed class _2025_09_08 : CtcPuzzle
         public sealed class Reduce(Pos appliesTo, ImmutableArray<Pos> before, ImmutableArray<Pos> after) : Restriction
         {
             public Pos AppliesTo { get; } = appliesTo;
+            
             public ImmutableArray<Pos> Before { get; } = [.. before.Reverse()];
+            
             public ImmutableArray<Pos> After { get; } = after;
+
+            public double Bits => Info.Avg(6);
 
             public Candidates Restrict(Cells cells)
             {

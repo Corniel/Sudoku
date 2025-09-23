@@ -38,7 +38,7 @@ public class Solving
 
         foreach (var clue in Clues)
         {
-            solved += Solver.Solve(clue, Rules.Standard)[0, 0];
+            solved += Solver.Solve(clue, Rules.Standard)[Pos.O];
         }
         return solved;
     }

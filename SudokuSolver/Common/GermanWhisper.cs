@@ -37,6 +37,8 @@ public sealed class GermanWhisper(ImmutableArray<Pos> cells) : Rule
 
     public sealed class Neighbors(Pos appliesTo, Pos neighbor) : Pair(appliesTo, neighbor)
     {
+        public override double Bits { get; } = Info.Avg(2.7);
+
         public override string ToString() => $"{AppliesTo} = {Other} ± 5";
 
         public override Candidates Restrict(Cells cells) => Allowed[cells[Other]];
@@ -58,6 +60,8 @@ public sealed class GermanWhisper(ImmutableArray<Pos> cells) : Rule
 
     public sealed class Toggle(Pos appliesTo, Pos neighbor) : Pair(appliesTo, neighbor)
     {
+        public override double Bits { get; } = Info.Avg(4);
+
         public override string ToString() => $"Toggle: {AppliesTo}, {Other}";
 
         public override Candidates Restrict(Cells cells) => Allowed[cells[Other]];
@@ -79,6 +83,8 @@ public sealed class GermanWhisper(ImmutableArray<Pos> cells) : Rule
 
     public sealed class NoToggle(Pos appliesTo, Pos neighbor) : Pair(appliesTo, neighbor)
     {
+        public override double Bits { get; } = Info.Avg(4);
+
         public override string ToString() => $"No toggle: {AppliesTo}, {Other}";
 
         public override Candidates Restrict(Cells cells) => Allowed[cells[Other]];

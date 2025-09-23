@@ -37,12 +37,16 @@ public sealed class Thermometer(ImmutableArray<Pos> path) : Rule
     {
         public int Delta { get; } = delta;
 
+        public override double Bits => Info.Avg(9 - Delta);
+
         public override Candidates Restrict(Cells cells) => Candidates.AtMost(cells[Other] - Delta);
     }
 
     [DebuggerDisplay("{AppliesTo} >= {Other} + {Delta}")]
     public sealed class More(Pos appliesTo, Pos other, int delta) : Pair(appliesTo, other)
     {
+        public override double Bits => Info.Avg(9 - Delta);
+
         public int Delta { get; } = delta;
 
         public override Candidates Restrict(Cells cells) => Candidates.AtLeast(cells[Other] + Delta);

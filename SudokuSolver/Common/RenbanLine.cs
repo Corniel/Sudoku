@@ -15,6 +15,8 @@ public sealed class RenbanLine(ImmutableArray<Pos> cells) : Rule
 
     public sealed class Reduce(Pos appliesTo, ImmutableArray<Pos> others) : Group(appliesTo, others)
     {
+        public override double Bits => Info.Bits(Others.Length / (1d + Others.Length));
+
         public override Candidates Restrict(Cells cells)
         {
             var min = int.MaxValue;

@@ -72,6 +72,8 @@ public sealed class _2024_09_29 : CtcPuzzle
 
         public sealed class Reduce(Pos appliesTo, Pos other) : Pair(appliesTo, other)
         {
+            public override double Bits => Info.Avg(8);
+
             public override Candidates Restrict(Cells cells)
             {
                 var value = cells[Other];

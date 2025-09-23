@@ -1,4 +1,8 @@
+using Puzzles.SudokuPad;
+using Specs.Info_specs;
+using SudokuSolver;
 using SudokuSolver.Common;
+using System.Globalization;
 using System.IO;
 using System.Text;
 
@@ -72,16 +76,16 @@ public class Parses
         var solution = Solver.Solve(Clues.None, rules);
 
         solution.Should().Be("""
-            792|564|138
-            864|371|259
-            315|298|467
+            892|463|571
+            364|571|289
+            715|298|364
             ---+---+---
-            689|123|745
-            573|486|912
-            241|759|683
+            689|324|157
+            573|186|492
+            241|759|638
             ---+---+---
-            428|637|591
-            956|812|374
+            428|637|915
+            956|812|743
             137|945|826
             """);
     }
@@ -113,32 +117,32 @@ public class Generates
     [TestCase(6)]
     [TestCase(7)]
     [TestCase(8)]
-    public void lookup(int bits)
+    public void lookup(int cells)
     {
-        var file = new FileInfo($"./../../../../SudokuSolver/Constraints/KillerCage_{bits}.md");
+        var file = new FileInfo($"./../../../../SudokuSolver/Common/KillerCage_{cells}.md");
 
         using var writer = new StreamWriter(file.FullName, false, new UTF8Encoding(false));
 
         Console.WriteLine(file.FullName);
 
-        for (var sum = Min(bits); sum <= Max(bits); sum++)
+        for (var sum = Min(cells); sum <= Max(cells); sum++)
         {
-            writer.Write($"## {sum}\n");
+            writer.Write($"## {sum} {GetInfo(cells, sum).ToString("0.0000", CultureInfo.InvariantCulture)}\n");
 
-            foreach (var known in Candidates.All.Where(c => c.Count < bits).OrderByDescending(c => c.Count))
+            foreach (var known in Candidates.All.Where(c => c.Count < cells).OrderByDescending(c => c.Count))
             {
                 var missing = sum - known.Sum();
-                var unknown = bits - known.Count;
+                var unknown = cells - known.Count;
                 var candidates = Candidates.None;
 
                 // check for bitcount, sum, and not overlapping already used digits
-                foreach(var option in Candidates.All
-                    .Where(c 
-                        => c.Count == unknown 
+                foreach (var option in Candidates.All
+                    .Where(c
+                        => c.Count == unknown
                         && c.Sum() == missing
                         && ((known & c) == Candidates.None)))
                 {
-                   candidates |= option;
+                    candidates |= option;
                 }
 
                 candidates ^= known;
@@ -153,6 +157,22 @@ public class Generates
         writer.Flush();
         file.Refresh();
         file.Exists.Should().BeTrue();
+    }
+
+    private static double GetInfo(int cells, int sum)
+    {
+        var cs = Candidates.None;
+
+        foreach (var combo in Candidates.All.Where(c => c.Count == cells && c.Sum() == sum))
+            cs |= combo;
+
+        double count = cs.Count;
+        double cmin1 = count - 1;
+
+        var info = Info.Bits((cmin1 / count) + (1d / count * cmin1 / count))
+            - Info.Peer(9);
+
+        return info * (cells - 1);
     }
 
     static int Min(int unknown) => Enumerable.Range(1, unknown).Sum();

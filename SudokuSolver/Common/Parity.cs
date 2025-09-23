@@ -35,6 +35,8 @@ public sealed class Parity(ImmutableArray<Pos> evens, ImmutableArray<Pos> odds) 
     {
         public Pos AppliesTo { get; } = cell;
 
+        public double Bits => 0;
+
         public Candidates Restrict(Cells cells) => Candidates.Even;
 
         public override string ToString() => $"{AppliesTo} is even";
@@ -43,6 +45,8 @@ public sealed class Parity(ImmutableArray<Pos> evens, ImmutableArray<Pos> odds) 
     public sealed class Odd(Pos cell) : Restriction
     {
         public Pos AppliesTo { get; } = cell;
+
+        public double Bits => 0;
 
         public Candidates Restrict(Cells cells) => Candidates.Odd;
 

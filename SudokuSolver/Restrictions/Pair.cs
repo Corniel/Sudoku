@@ -10,6 +10,9 @@ public abstract class Pair(Pos appliesTo, Pos other) : Restriction
     public Pos Other { get; } = other;
 
     /// <inheritdoc />
+    public abstract double Bits { get; }
+
+    /// <inheritdoc />
     public abstract Candidates Restrict(Cells cells);
 
     /// <inheritdoc />

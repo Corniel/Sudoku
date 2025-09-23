@@ -1,6 +1,6 @@
 namespace SudokuSolver.Solvers;
 
-internal sealed class Reduction(Rules rules)
+public sealed class Reduction(Rules rules)
 {
     private readonly Constraint[] Constraints = rules.ToArray();
 

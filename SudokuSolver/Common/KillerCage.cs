@@ -1,6 +1,5 @@
 using SudokuSolver.Generics;
 using SudokuSolver.Restrictions;
-using static SudokuSolver.Common.Arrow;
 
 namespace SudokuSolver.Common;
 
@@ -9,7 +8,6 @@ public sealed partial class KillerCage(int sum, PosSet cells) : Rule
 {
     public int Sum { get; } = sum;
 
-    [Obsolete("Refactor out")]
     public override bool IsSet => true;
 
     public override PosSet Cells { get; } = cells;
@@ -47,12 +45,16 @@ public sealed partial class KillerCage(int sum, PosSet cells) : Rule
 
         public Pos AppliesTo { get; } = appliesTo;
 
+        public double Bits => 0;
+
         public Candidates Restrict(Cells cells) => Sum;
     }
 
     private sealed class Cage(int sum, Pos appliesTo, ImmutableArray<Pos> others) : Group(appliesTo, others)
     {
         public int Sum { get; } = sum;
+
+        public override double Bits => Infos[Others.Length + 1][Sum];
 
         public CandidateLookup<Candidates> Candidates { get; } = Lookup[others.Length + 1][sum];
 

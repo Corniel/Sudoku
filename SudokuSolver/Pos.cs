@@ -67,6 +67,7 @@ public readonly struct Pos(int i) : IEquatable<Pos>
     public static Pos operator ++(Pos pos) => new(pos.Index + 1);
 
     public static Pos operator +(Pos pos, int steps) => new(pos.Index + steps);
+
     public static Pos operator -(Pos pos, int steps) => new(pos.Index - steps);
 
     public static implicit operator Pos((int Row, int Col) tuple) => new(tuple.Row, tuple.Col);

@@ -3,6 +3,9 @@ namespace SudokuSolver.Restrictions;
 /// <summary>Describes a restriction between two cells.</summary>
 public abstract class Group(Pos appliesTo, ImmutableArray<Pos> others) : Restriction
 {
+    /// <inheritdoc />
+    public abstract double Bits { get; }
+
     /// <summary>The cell that is bound to the restriction.</summary>
     public Pos AppliesTo { get; } = appliesTo;
 

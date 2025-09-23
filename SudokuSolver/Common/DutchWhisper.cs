@@ -26,6 +26,8 @@ public sealed class DutchWhisper(ImmutableArray<Pos> cells) : Rule
     {
         public int Skip { get; } = skip;
 
+        public override double Bits => bits[Skip];
+
         public override string ToString() => $"{AppliesTo} = {Other} ± 4 ({Skip})";
 
         public override Candidates Restrict(Cells cells) => Allowed[Skip][cells[Other]];
@@ -68,6 +70,13 @@ public sealed class DutchWhisper(ImmutableArray<Pos> cells) : Rule
                 /* 8 */ [1,2,3,4,5,9],
                 /* 9 */ [1,2,3,4,5,6,7,8,9],
             ],
+        ];
+
+        public static readonly double[] bits =
+        [
+            Info.Avg(5.4),
+            Info.Avg(6.0),
+            Info.Avg(7.2),
         ];
     }
 }

@@ -18,6 +18,8 @@ public sealed class Consecutive(Pos one, Pos two) : Rule
 
     public sealed class Reducer(Pos appliesTo, Pos other) : Pair(appliesTo, other)
     {
+        public override double Bits => bits;
+
         public override Candidates Restrict(Cells cells) => Reduction[cells[Other]];
 
         private const int _ = 0;
@@ -35,5 +37,7 @@ public sealed class Consecutive(Pos one, Pos two) : Rule
             /* 8 */ Candidates.New(_, _, _, _, _, _, 7, _, 9),
             /* 9 */ Candidates.New(_, _, _, _, _, _, _, 8, _),
         ];
+
+        private static readonly double bits = Info.Avg(2.5);
     }
 }

@@ -19,11 +19,26 @@ public sealed record Constraint
     /// <summary>The (dynamic) restrictions that apply to this cell.</summary>
     public ImmutableArray<Restriction> Restrictions { get; init; } = [];
 
+    public double Bits
+    {
+        get
+        {
+            if (field is 0)
+            {
+                var count = Candidates.Count;
+                field = Info.Cell(count)
+                    + (Info.Peer(count) * Set.Count)
+                    + Restrictions.Sum(r => r.Bits);
+            }
+            return field;
+        }
+    }
+
     public Constraint Solve(int value) => this with { Candidates = Candidates.New(value) };
 
     public Constraint Reduce(int value) => this with { Candidates = Candidates ^ value };
 
-    public override string ToString() => $"{Cell}, Res = {Restrictions.Length}, Set = {Set.Count} [ {string.Join(", ", Set)} ]";
+    public override string ToString() => $"{Cell}, {Candidates}, Bits = {Bits:0.000}, Res = {Restrictions.Length}, Set = {Set.Count} [ {string.Join(", ", Set)} ]";
 
     public static Constraint operator +(Constraint c, PosSet peers)
     {

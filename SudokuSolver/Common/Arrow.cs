@@ -22,6 +22,8 @@ public sealed class Arrow(ImmutableArray<Pos> cells) : Rule
 
     public sealed class Circle(Pos circle, ImmutableArray<Pos> shaft) : Group(circle, shaft)
     {
+        public override double Bits => Info.Avg(_9 - Others.Length);
+
         public override Candidates Restrict(Cells cells)
         {
             var min = 0;
@@ -46,6 +48,8 @@ public sealed class Arrow(ImmutableArray<Pos> cells) : Rule
 
     public sealed class Shaft(Pos sum, Pos appliesTo, ImmutableArray<Pos> others) : Group(appliesTo, others)
     {
+        public override double Bits => Info.Avg(9d / Others.Length);
+
         public Pos Sum { get; } = sum;
 
         public int Size => Others.Length + 1;

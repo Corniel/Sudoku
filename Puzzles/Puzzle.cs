@@ -10,6 +10,8 @@ public abstract class Puzzle
 
     public virtual Uri? Url { get; }
 
+    public virtual O Duration { get; }
+
     public abstract Clues Clues { get; }
 
     public virtual Rules Constraints { get; } = Rules.Standard;

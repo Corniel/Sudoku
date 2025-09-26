@@ -19,6 +19,8 @@ public readonly struct PosSet(Int128 bits) : IEquatable<PosSet>, IReadOnlyCollec
 
     public bool HasNone => Bits == 0;
 
+    public bool HasSingle => (Bits & (Bits - 1)) == 0 && Bits != 0;
+
     public bool HasAny => Bits != 0;
 
     public bool Contains(Pos pos) => (Bits & (Int128.One << pos)) != 0;

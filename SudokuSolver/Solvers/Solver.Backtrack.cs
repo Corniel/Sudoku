@@ -2,7 +2,7 @@ namespace SudokuSolver.Solvers;
 
 public static partial class Solver
 {
-    private static bool Solve(ContextQueue queue, Cells cells)
+    private static bool Backtrack(ContextQueue queue, Cells cells)
     {
         if (queue.IsEmpty) return true;
 
@@ -23,7 +23,7 @@ public static partial class Solver
         {
             cells[ctx.Cell] = candidate;
 
-            if (Solve(queue.Dequeue(), cells))
+            if (Backtrack(queue.Dequeue(), cells))
             {
                 return true;
             }

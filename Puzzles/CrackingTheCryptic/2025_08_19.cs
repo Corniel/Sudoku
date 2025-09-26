@@ -6,7 +6,7 @@ public class _2025_08_19 : CtcPuzzle
     public override string Title => "Pile of 15";
     public override string? Author => "Cane_Puzzles";
     public override Uri? Url => new("https://youtu.be/stUFi592gxk");
-
+    public override O Duration => O.s;
     public override Clues Clues { get; } = Clues.None;
     
     public override Rules Constraints { get; } = 

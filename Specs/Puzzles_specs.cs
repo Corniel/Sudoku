@@ -8,20 +8,29 @@ using System.Text;
 
 namespace Specs.Puzzles_specs;
 
-[Explicit]
 public class Cracking_the_Cryptic
 {
-    private static readonly ImmutableArray<Puzzle> Puzzles = CtcPuzzle.All;
+    private static readonly ImmutableArray<Puzzle> Fasts = [.. CtcPuzzle.All.Where(p => p.Duration is < O.ms100 and not O.Unknown)];
+    private static readonly ImmutableArray<Puzzle> Slows = [..CtcPuzzle.All.Where(p => p.Duration is >= O.ms100 or O.Unknown)];
 
-    [TestCaseSource(nameof(Puzzles))]
-    public void Puzzle(Puzzle puzzle)
+    [TestCaseSource(nameof(Fasts))]
+    public void Fast(Puzzle puzzle)
     {
-       puzzle.Constraints.Should().BeValidFor(puzzle.Solution);
+        puzzle.Constraints.Should().BeValidFor(puzzle.Solution);
 
         var solved = puzzle.Solve();
 
         Console.WriteLine(solved);
 
+        solved.Should().Be(puzzle.Solution, puzzle.Constraints);
+    }
+
+    [Explicit]
+    [TestCaseSource(nameof(Slows))]
+    public void Slow(Puzzle puzzle)
+    {
+        puzzle.Constraints.Should().BeValidFor(puzzle.Solution);
+        var solved = puzzle.Solve();
         solved.Should().Be(puzzle.Solution, puzzle.Constraints);
     }
 }
@@ -292,7 +301,7 @@ public class Puzzle_bank
     private static void Solve(Puzzle puzzle, Rules? rules = null)
     {
         var cs = rules ?? Rules.Standard;
-        var solved = Solver.Solve(puzzle.Clues, cs);
+        var solved = Solver.Solve(puzzle.Clues, cs, new());
         solved.Should().BeSolved(rules);
     }
 }

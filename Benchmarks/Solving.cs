@@ -32,13 +32,37 @@ public class Solving
     }
 
     [Benchmark(Baseline = true)]
-    public int Dynamic()
+    public int Default()
     {
         var solved = 0;
 
         foreach (var clue in Clues)
         {
-            solved += Solver.Solve(clue, Rules.Standard)[Pos.O];
+            solved += Solver.Solve(clue, Rules.Standard, ReduceOptions.Default)[Pos.O];
+        }
+        return solved;
+    }
+
+    [Benchmark]
+    public int No_pre_processing()
+    {
+        var solved = 0;
+
+        foreach (var clue in Clues)
+        {
+            solved += Solver.Solve(clue, Rules.Standard, ReduceOptions.None)[Pos.O];
+        }
+        return solved;
+    }
+
+     [Benchmark]
+    public int Naked_and_hidden_singles()
+    {
+        var solved = 0;
+
+        foreach (var clue in Clues)
+        {
+            solved += Solver.Solve(clue, Rules.Standard, ReduceOptions.All)[Pos.O];
         }
         return solved;
     }

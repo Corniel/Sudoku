@@ -7,6 +7,7 @@ public sealed class _2025_05_11 : CtcPuzzle
     public override string Title => "Quadrants";
     public override string? Author => "Supware";
     public override Uri? Url => new("https://youtu.be/IEO4oA2-TTQ");
+    public override O Duration => O.s;
 
     public override Clues Clues { get; } = Clues.Parse("""
         .2.|...|...

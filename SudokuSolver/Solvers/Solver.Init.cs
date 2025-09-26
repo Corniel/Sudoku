@@ -2,17 +2,17 @@ namespace SudokuSolver.Solvers;
 
 public static partial class Solver
 {
-    public static Cells Solve(Clues clues) => Solve(clues, Rules.Standard);
+    public static Cells Solve(Clues clues) => Solve(clues, Rules.Standard, ReduceOptions.Default);
 
-    public static Cells Solve(Clues clues, Rules rules)
+    public static Cells Solve(Clues clues, Rules rules, ReduceOptions? options = null)
     {
         var cells = Cells.Empty;
         var reduction = new Reduction(rules);
 
-        var singles = Reduce(clues, cells, reduction);
+        var singles = Reduce(clues, cells, reduction, options ?? ReduceOptions.Default);
         var queue = Queue(singles, reduction);
 
-        Solve(queue, cells);
+        Backtrack(queue, cells);
 
         return cells;
     }

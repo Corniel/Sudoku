@@ -20,7 +20,7 @@ public sealed class Ratio1_2(Pos a, Pos b) : Rule
     {
         public override double Bits => bits;
 
-        public override Candidates Restrict(Cells cells) => Lookup[cells[Other]];
+        protected override Candidates Restrict(int value) => Lookup[value];
 
         private static readonly ImmutableArray<Candidates> Lookup =
         [

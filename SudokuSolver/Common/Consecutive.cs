@@ -20,7 +20,7 @@ public sealed class Consecutive(Pos one, Pos two) : Rule
     {
         public override double Bits => bits;
 
-        public override Candidates Restrict(Cells cells) => Reduction[cells[Other]];
+        protected override Candidates Restrict(int value) => Reduction[value];
 
         private const int _ = 0;
 

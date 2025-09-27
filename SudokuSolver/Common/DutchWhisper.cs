@@ -30,7 +30,7 @@ public sealed class DutchWhisper(ImmutableArray<Pos> cells) : Rule
 
         public override string ToString() => $"{AppliesTo} = {Other} ± 4 ({Skip})";
 
-        public override Candidates Restrict(Cells cells) => Allowed[Skip][cells[Other]];
+        protected override Candidates Restrict(int value) => Allowed[Skip][value];
 
         private static readonly ImmutableArray<ImmutableArray<Candidates>> Allowed =
         [

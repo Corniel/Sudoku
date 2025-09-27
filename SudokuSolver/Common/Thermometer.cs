@@ -39,11 +39,7 @@ public sealed class Thermometer(ImmutableArray<Pos> path) : Rule
 
         public override double Bits => Info.Avg(9 - Delta);
 
-        public override Candidates Restrict(Cells cells)
-        {
-            var value = cells[Other];
-            return Candidates.AtMost((value is 0 ? _9 : value) - Delta);
-        }
+        protected override Candidates Restrict(int value) => Candidates.AtMost((value is 0 ? _9 : value) - Delta);
     }
 
     [DebuggerDisplay("{AppliesTo} >= {Other} + {Delta}")]
@@ -53,10 +49,6 @@ public sealed class Thermometer(ImmutableArray<Pos> path) : Rule
 
         public int Delta { get; } = delta;
 
-        public override Candidates Restrict(Cells cells)
-        {
-            var value = cells[Other];
-            return Candidates.AtLeast((value is 0 ? 1 : value) + Delta);
-        }
+        protected override Candidates Restrict(int value) => Candidates.AtLeast((value is 0 ? 1 : value) + Delta);
     }
 }

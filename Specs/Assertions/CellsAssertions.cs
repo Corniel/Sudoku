@@ -8,7 +8,7 @@ public sealed class CellsAssertions(Cells subject)
 
     public void BeSolved(Rules? rules = null)
     {
-        var reference = Backtracker.Solve(Clues.Parse(Subject.ToString()));
+        var reference = ReferenceSolver.Solve(Clues.Parse(Subject.ToString()));
 
         Be(reference, rules);
     }

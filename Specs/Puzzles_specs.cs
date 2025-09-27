@@ -301,7 +301,7 @@ public class Puzzle_bank
     private static void Solve(Puzzle puzzle, Rules? rules = null)
     {
         var cs = rules ?? Rules.Standard;
-        var solved = Solver.Solve(puzzle.Clues, cs, new());
+        var solved = Solver.Solve(puzzle.Clues, cs, ReduceOptions.All);
         solved.Should().BeSolved(rules);
     }
 }

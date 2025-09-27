@@ -1,90 +1,132 @@
+using System.Runtime.CompilerServices;
+
 namespace SudokuSolver.Solvers;
 
-/// <summary>
-/// Straight-forward multi-demensional aray based backtracking Sudoku solver.
-/// </summary>
-/// <remarks>
-/// See; https://www.geeksforgeeks.org/dsa/sudoku-backtracking-7/.
-/// </remarks>
-public static class Backtracker
+[DebuggerDisplay("Count = {Count}")]
+[DebuggerTypeProxy(typeof(Diagnostics.CollectionDebugView))]
+public readonly struct Backtracker(ImmutableArray<Constraint> constraints, int head = 0) : IReadOnlyCollection<Constraint>
 {
-    public static Cells Solve(Clues clues)
+    private readonly int Head = head;
+
+    private readonly ImmutableArray<Constraint> Constraints = constraints;
+
+    public bool IsEmpty => Head >= Constraints.Length;
+
+    public int Count => Constraints.Length - Head;
+
+    public bool Solve(Cells cells)
     {
-        var mat = new int[9, 9];
-        foreach (var (r, c, v) in clues)
+        if (IsEmpty) return true;
+
+        var ctx = Peek();
+        var candidates = ctx.Candidates;
+
+        foreach (var peer in ctx.Peers)
         {
-            mat[r, c] = v;
+            candidates ^= cells[peer];
         }
 
-        Solve(mat, 0, 0);
-        return mat.ToCells();
-    }
-
-    // Function to solve the Sudoku problem
-    private static bool Solve(int[,] mat, int row, int col)
-    {
-        // base case: Reached nth column of the last row
-        if (row == 8 && col == 9)
-            return true;
-
-        // If last column of the row go to the next row
-        if (col == 9)
+        foreach (var res in ctx.Restrictions)
         {
-            row++;
-            col = 0;
+            candidates &= res.Restrict(cells);
         }
 
-        // If cell is already occupied then move forward
-        if (mat[row, col] != 0)
-            return Solve(mat, row, col + 1);
-
-        for (int num = 1; num <= 9; num++)
+        foreach (var candidate in candidates)
         {
-            // If it is safe to place num at current position
-            if (IsSafe(mat, row, col, num))
+            cells[ctx.Cell] = candidate;
+
+            if (Dequeue().Solve(cells))
             {
-                mat[row, col] = num;
-                if (Solve(mat, row, col + 1))
-                    return true;
-                mat[row, col] = 0;
+                return true;
             }
         }
+        cells[ctx.Cell] = 0;
 
         return false;
     }
 
-    // Function to check if it is safe to place num at mat[row][col]
-    private static bool IsSafe(int[,] mat, int row, int col, int num)
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public Constraint Peek() => Constraints[Head];
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public Backtracker Dequeue() => new(Constraints, Head + 1);
+
+    public IEnumerator<Constraint> GetEnumerator() => Constraints.Skip(Head).GetEnumerator();
+
+    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+    public static Backtracker Init(Context context)
     {
-        // Check if num exists in the row
-        for (int x = 0; x < 9; x++)
-            if (mat[row, x] == num)
-                return false;
+        var q = new Constraint[context.Todos.Count];
 
-        // Check if num exists in the col
-        for (int x = 0; x < 9; x++)
-            if (mat[x, col] == num)
-                return false;
+        var count = 0;
+        var min = 0;
+        var max = 0;
 
-        // Check if num exists in the 3x3 sub-matrix
-        int startRow = row - (row % 3), startCol = col - (col % 3);
+        Rule[] rules = [.. context.Rules];
+        max = rules.Length;
 
-        for (int i = 0; i < 3; i++)
-            for (int j = 0; j < 3; j++)
-                if (mat[i + startRow, j + startCol] == num)
-                    return false;
+        while (count < q.Length)
+        {
+            var b_val = double.MinValue;
+            var b_idx = 0;
 
-        return true;
-    }
+            for (var idx = min; idx < max; idx++)
+            {
+                var rule = rules[idx];
 
-    private static Cells ToCells(this int[,] mat)
-    {
-        var cells = Cells.Empty;
+                if (rule.Cells.IsSubsetOf(context.Singles))
+                {
+                    if (idx == max - 1)
+                    {
+                        max--;
+                    }
+                    else if (idx > min)
+                    {
+                        rules[idx++] = rules[min++];
+                    }
+                    continue;
+                }
+                var test = Score(rule);
 
-        for (var r = 0; r < 9; r++)
-            for (var c = 0; c < 9; c++)
-                cells[r, c] = mat[r, c];
+                if (test > b_val)
+                {
+                    b_val = test;
+                    b_idx = idx;
+                }
+            }
+            Add(b_idx);
+        }
 
-        return cells;
+        return new([.. q]);
+
+        void Add(int indx)
+        {
+            var rule = rules[indx];
+
+            var todo = rule.Cells;
+            todo ^= context.Singles;
+
+            foreach (var c in todo.Select(c => context[c].Constraint).OrderByDescending(r => r.Bits))
+                q[count++] = c;
+
+            context.Singles |= todo;
+
+            if (indx != --max)
+            {
+                rules[indx] = rules[max];
+            }
+        }
+
+        double Score(Rule rule)
+        {
+            var test = 0.0;
+
+            foreach (var c in rule.Cells)
+                test += context.Singles.Contains(c) ? 7 : context[c].Constraint.Bits;
+
+            test /= rule.Count;
+            return test;
+        }
     }
 }

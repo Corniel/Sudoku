@@ -26,7 +26,7 @@ public class Solving
 
         foreach (var clue in Clues)
         {
-            solved += Backtracker.Solve(clue)[0, 0];
+            solved += SudokuSolver.Solvers.ReferenceSolver.Solve(clue)[0, 0];
         }
         return solved;
     }
@@ -50,13 +50,39 @@ public class Solving
 
         foreach (var clue in Clues)
         {
-            solved += Solver.Solve(clue, Rules.Standard, ReduceOptions.None)[Pos.O];
+            solved += Solver.Solve(clue, Rules.Standard, ReduceOptions.Backtracking)[Pos.O];
         }
         return solved;
     }
 
-     [Benchmark]
-    public int Naked_and_hidden_singles()
+    [Benchmark]
+    public int Hidden()
+    {
+        var solved = 0;
+        var options = new ReduceOptions { NakedSingles = true, Hidden = true };
+
+        foreach (var clue in Clues)
+        {
+            solved += Solver.Solve(clue, Rules.Standard, options)[Pos.O];
+        }
+        return solved;
+    }
+
+    [Benchmark]
+    public int Pairs()
+    {
+        var solved = 0;
+        var options = new ReduceOptions { NakedSingles = true, NakedPairs = true };
+
+        foreach (var clue in Clues)
+        {
+            solved += Solver.Solve(clue, Rules.Standard, options)[Pos.O];
+        }
+        return solved;
+    }
+
+    [Benchmark]
+    public int All()
     {
         var solved = 0;
 

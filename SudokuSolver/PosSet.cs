@@ -23,9 +23,11 @@ public readonly struct PosSet(Int128 bits) : IEquatable<PosSet>, IReadOnlyCollec
 
     public bool HasAny => Bits != 0;
 
+    [Pure]
     public bool Contains(Pos pos) => (Bits & (Int128.One << pos)) != 0;
 
     /// <inheritdoc cref="IReadOnlySet{T}.IsSubsetOf(IEnumerable{T})" />
+    [Pure]
     public bool IsSubsetOf(PosSet other) => (other.Bits & Bits) == Bits;
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]

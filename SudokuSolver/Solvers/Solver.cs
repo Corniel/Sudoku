@@ -14,7 +14,7 @@ public static partial class Solver
 
         if (options.Backtracker && context.Todos.HasAny)
         {
-            var backtracker = Backtracker.Init(context);
+            var backtracker = Backtracker.New(context);
             backtracker.Solve(cells);
         }
         return cells;

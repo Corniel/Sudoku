@@ -5,6 +5,7 @@ public sealed class _2025_09_09 : CtcPuzzle
     public override string Title => "Seylla";
     public override string? Author => "Phistomefel";
     public override Uri? Url => new("https://youtu.be/DF0f15tya5Q");
+    public override O Duration => O.s10;
 
     public override Clues Clues { get; } = Clues.None;
 

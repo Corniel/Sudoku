@@ -7,6 +7,7 @@ public sealed class _2025_05_21 : CtcPuzzle
     public override string Title => "Stepped Themos";
     public override string? Author => "Aad van de Wetering";
     public override Uri? Url => new("https://youtu.be/AdSOJQ3huN0");
+    public override O Duration => O.ms10;
 
     public override Clues Clues { get; } = Clues.Parse("""
         ...|...|...

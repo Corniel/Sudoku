@@ -11,7 +11,7 @@ namespace Specs.Puzzles_specs;
 public class Cracking_the_Cryptic
 {
     private static readonly ImmutableArray<Puzzle> Fasts = [.. CtcPuzzle.All.Where(p => p.Duration is < O.ms100 and not O.Unknown)];
-    private static readonly ImmutableArray<Puzzle> Slows = [..CtcPuzzle.All.Where(p => p.Duration is >= O.ms100 or O.Unknown)];
+    private static readonly ImmutableArray<Puzzle> Slows = [.. CtcPuzzle.All.Where(p => p.Duration is >= O.ms100 or O.Unknown)];
 
     [TestCaseSource(nameof(Fasts))]
     public void Fast(Puzzle puzzle)
@@ -154,7 +154,7 @@ public class Jigsaw_Sudokud
 
 public class Killer_Sudoku
 {
-    private static readonly ImmutableArray<Puzzle> Puzzles = [..KillerPuzzle.Load()];
+    private static readonly ImmutableArray<Puzzle> Puzzles = [.. KillerPuzzle.Load()];
 
     [TestCaseSource(nameof(Puzzles))]
     public void Puzzle(Puzzle puzzle)

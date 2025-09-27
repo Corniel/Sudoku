@@ -34,11 +34,8 @@ public sealed record Constraint
         }
     }
 
-    public Constraint Solve(int value) => this with { Candidates = Candidates.New(value) };
-
-    public Constraint Reduce(int value) => this with { Candidates = Candidates ^ value };
-
-    public override string ToString() => $"{Cell}, {Candidates}, Bits = {Bits:0.000}, Res = {Restrictions.Length}, Set = {Set.Count} [ {string.Join(", ", Set)} ]";
+    /// <inheritdoc />
+    public override string ToString() => $"{Cell}, {Candidates}, Bits = {Bits:0.000}, Res = {Restrictions.Length}, Peers = {Peers.Length}";
 
     public static Constraint operator +(Constraint c, PosSet peers)
     {

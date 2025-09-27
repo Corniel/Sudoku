@@ -20,7 +20,7 @@ public abstract class Puzzle
 
     public override string ToString() => Title;
 
-    public Cells Solve() => Solver.Solve(Clues, Constraints, ReduceOptions.Default);
+    public Cells Solve() => Solver.Solve(Clues, Constraints, ReduceOptions.All);
 
     public static ImmutableArray<Puzzle> Collect(Predicate<Puzzle> predicate) => [.. typeof(Puzzle)
         .Assembly

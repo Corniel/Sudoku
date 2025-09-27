@@ -1,5 +1,3 @@
-using SudokuSolver.Parsing;
-
 namespace Puzzles.CrackingTheCryptic;
 
 public sealed class _2025_09_13 : CtcPuzzle
@@ -7,6 +5,7 @@ public sealed class _2025_09_13 : CtcPuzzle
     public override string Title => "Royalty";
     public override string? Author => "zetamath";
     public override Uri? Url => new("https://youtu.be/uyTSKJ1DB6c");
+    public override O Duration => O.s;
 
     public override Clues Clues { get; } = Clues.Parse("""
         ...|...|.8.

@@ -55,7 +55,7 @@ public readonly struct Backtracker(ImmutableArray<Constraint> constraints, int h
 
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-    public static Backtracker Init(Context context)
+    public static Backtracker New(Context context)
     {
         var q = new Constraint[context.Todos.Count];
 

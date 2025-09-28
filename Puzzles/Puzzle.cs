@@ -10,7 +10,7 @@ public abstract class Puzzle
 
     public virtual Uri? Url { get; }
 
-    public virtual O Duration { get; }
+    public virtual O Duration { get; } = O.oo;
 
     public abstract Clues Clues { get; }
 

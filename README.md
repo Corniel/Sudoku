@@ -193,6 +193,7 @@ able to solve the following puzzles (so far):
 
 | Date       | Puzzle                                                          | Speed     |
 |:----------:|---------------------------------------------------------------- |:----------|
+| 2025-09-15 | [Studious](Puzzles/CrackingTheCryptic/2025_09_15.cs)            |  46.00 ms |
 | 2025-09-13 | [Royalty](Puzzles/CrackingTheCryptic/2025_09_13.cs)             | 271.40 ms |
 | 2025-09-09 | [Seylla](Puzzles/CrackingTheCryptic/2025_09_09.cs)              |  45.60 s  |
 | 2025-09-08 | [Four at a Time](Puzzles/CrackingTheCryptic/2025_09_08.cs)      |   3.11 s  |

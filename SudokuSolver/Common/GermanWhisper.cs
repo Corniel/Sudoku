@@ -14,8 +14,8 @@ public sealed class GermanWhisper(ImmutableArray<Pos> cells) : Rule
     {
         for (var f = 0; f < cells.Length - 1; f++)
         {
-            yield return new Neighbors(cells[f + 0], cells[f + 1]);
-            yield return new Neighbors(cells[f + 1], cells[f + 0]);
+            yield return new DeltaMin(cells[f + 0], cells[f + 1], 5);
+            yield return new DeltaMin(cells[f + 1], cells[f + 0], 5);
 
             for (var s = f + 2; s < cells.Length; s++)
             {
@@ -35,30 +35,7 @@ public sealed class GermanWhisper(ImmutableArray<Pos> cells) : Rule
 
     public override string ToString() => $"German whispers = {string.Join(", ", Cells)}";
 
-    public sealed class Neighbors(Pos appliesTo, Pos neighbor) : Pair(appliesTo, neighbor)
-    {
-        public override double Bits { get; } = Info.Avg(2.7);
-
-        public override string ToString() => $"{AppliesTo} = {Other} ± 5";
-
-        protected override Candidates Restrict(int value) => Allowed[value];
-
-        private static readonly ImmutableArray<Candidates> Allowed =
-        [
-            /* ? */ [1, 2, 3, 4, 6, 7, 8, 9],
-            /* 1 */ [6, 7, 8, 9],
-            /* 2 */ [7, 8, 9],
-            /* 3 */ [8, 9],
-            /* 4 */ [9],
-            /* 5 */ [],
-            /* 6 */ [1],
-            /* 7 */ [1, 2],
-            /* 8 */ [1, 2, 3],
-            /* 9 */ [1, 2, 3, 4],
-        ];
-    }
-
-    public sealed class Toggle(Pos appliesTo, Pos neighbor) : Pair(appliesTo, neighbor)
+    private sealed class Toggle(Pos appliesTo, Pos neighbor) : Pair(appliesTo, neighbor)
     {
         public override double Bits { get; } = Info.Avg(4);
 
@@ -81,7 +58,7 @@ public sealed class GermanWhisper(ImmutableArray<Pos> cells) : Rule
         ];
     }
 
-    public sealed class NoToggle(Pos appliesTo, Pos neighbor) : Pair(appliesTo, neighbor)
+    private sealed class NoToggle(Pos appliesTo, Pos neighbor) : Pair(appliesTo, neighbor)
     {
         public override double Bits { get; } = Info.Avg(4);
 

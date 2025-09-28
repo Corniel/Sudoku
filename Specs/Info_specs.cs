@@ -1,4 +1,5 @@
 using SudokuSolver.Common;
+using SudokuSolver.Restrictions;
 
 namespace Specs.Info_specs;
 
@@ -13,7 +14,7 @@ public class Bits
         .Bits.Should().BeApproximately(bits, epsilon);
 
     [Test]
-    public void German_whipser() => new GermanWhisper.Neighbors(Pos.O, Pos.O).Bits.Should().BeApproximately(1.40439, epsilon);
+    public void German_whipser() => new DeltaMin(Pos.O, Pos.O, 5).Bits.Should().BeApproximately(1.33086, epsilon);
 
     [TestCase(0, 0)]
     [TestCase(1, 0.16992)]

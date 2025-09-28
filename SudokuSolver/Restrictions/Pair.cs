@@ -1,5 +1,4 @@
 using SudokuSolver.Solvers;
-using System.Collections.Concurrent;
 
 namespace SudokuSolver.Restrictions;
 

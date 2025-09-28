@@ -8,30 +8,18 @@ public sealed class RenbanLine(ImmutableArray<Pos> cells) : Rule
 
     public override PosSet Cells { get; } = [.. cells];
 
-    public override ImmutableArray<Restriction> Restrictions { get; } =
-    [
-        .. cells.Select(c => new Reduce(c, cells.Remove(c))),
-    ];
+    public override ImmutableArray<Restriction> Restrictions { get; } = [.. Pairs(cells)];
 
-    public sealed class Reduce(Pos appliesTo, ImmutableArray<Pos> others) : Group(appliesTo, others)
+    private static IEnumerable<DeltaMax> Pairs(ImmutableArray<Pos> cells)
     {
-        public override double Bits => Info.Bits(Others.Length / (1d + Others.Length));
-
-        public override Candidates Restrict(Cells cells)
+        var delta = cells.Length - 1;
+        for (var f = 0; f < delta; f++)
         {
-            var min = int.MaxValue;
-            var max = int.MinValue;
-
-            foreach (var val in Others.Select(o => cells[o]).Where(v => v is not 0))
+            for (var s = f + 1; s <= delta; s++)
             {
-                min = Math.Min(min, val);
-                max = Math.Max(max, val);
+                yield return new(cells[f], cells[s], delta);
+                yield return new(cells[s], cells[f], delta);
             }
-
-            if (min is int.MaxValue) return Candidates._1_to_9;
-
-            var dt = Others.Length - (max - min);
-            return Candidates.Between(min - dt, max + dt);
         }
     }
 }

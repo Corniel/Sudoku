@@ -24,7 +24,7 @@ public sealed partial class KillerCage(int sum, PosSet cells) : Rule
     private static IEnumerable<Restriction> Reducers(int sum, PosSet cells) => cells.Count switch
     {
         _ when sum is 0 => [],
-        1 => [new Cage1(sum, cells.First())],
+        1 => [new Mask(cells.First(), [sum])],
         9 => [],
         _ => Cages(sum, cells),
     };
@@ -39,33 +39,12 @@ public sealed partial class KillerCage(int sum, PosSet cells) : Rule
         }
     }
 
-    private sealed class Cage1(int sum, Pos appliesTo) : Restriction
-    {
-        public Candidates Sum { get; } = [sum];
-
-        public Pos AppliesTo { get; } = appliesTo;
-
-        public double Bits => 0;
-
-        public Candidates Restrict(Cells cells) => Sum;
-    }
-
-    private sealed class Cage(int sum, Pos appliesTo, ImmutableArray<Pos> others) : Group(appliesTo, others)
+    private sealed class Cage(int sum, Pos appliesTo, ImmutableArray<Pos> others) : Restrictions.Cage(appliesTo, others)
     {
         public int Sum { get; } = sum;
 
         public override double Bits => Infos[Others.Length + 1][Sum];
 
-        public CandidateLookup<Candidates> Candidates { get; } = Lookup[others.Length + 1][sum];
-
-        public override Candidates Restrict(Cells cells)
-        {
-            var known = SudokuSolver.Candidates.None;
-
-            foreach (var cell in Others)
-                known |= cells[cell];
-
-            return Candidates[known];
-        }
+        public override Candidates Restrict(Cells cells) => Restrict(cells, Sum);
     }
 }

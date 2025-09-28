@@ -1,8 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <EmbeddedResource Include="Common/*.md" />
-    <EmbeddedResource Include="Constraints/*.md" />
+    <EmbeddedResource Include="Restrictions/*.md" />
   </ItemGroup>
 
   <ItemGroup Label="Analyzers">

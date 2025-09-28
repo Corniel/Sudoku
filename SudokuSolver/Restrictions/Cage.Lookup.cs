@@ -2,9 +2,9 @@ using SudokuSolver.Generics;
 using System.Globalization;
 using System.IO;
 
-namespace SudokuSolver.Common;
+namespace SudokuSolver.Restrictions;
 
-public sealed partial class KillerCage
+public partial class Cage
 {
     public static readonly ImmutableArray<CandidateLookup<Candidates>[]> Lookup = [..Init()];
 
@@ -18,7 +18,7 @@ public sealed partial class KillerCage
         {
             var tabels = new List<CandidateLookup<Candidates>>();
 
-            using var stream = typeof(KillerCage).Assembly.GetManifestResourceStream($"SudokuSolver.Common.KillerCage_{bits}.md")!;
+            using var stream = typeof(Cage).Assembly.GetManifestResourceStream($"SudokuSolver.Restrictions.Cage_{bits}.md")!;
             using var reader = new StreamReader(stream);
             var sum = 0;
 
@@ -64,7 +64,7 @@ public sealed partial class KillerCage
         {
             var infos = new double[45];
 
-            using var stream = typeof(KillerCage).Assembly.GetManifestResourceStream($"SudokuSolver.Common.KillerCage_{bits}.md")!;
+            using var stream = typeof(Cage).Assembly.GetManifestResourceStream($"SudokuSolver.Restrictions.Cage_{bits}.md")!;
             using var reader = new StreamReader(stream);
             var sum = 0;
 

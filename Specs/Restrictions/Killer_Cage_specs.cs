@@ -1,7 +1,3 @@
-using Puzzles.SudokuPad;
-using Specs.Info_specs;
-using SudokuSolver;
-using SudokuSolver.Common;
 using System.Globalization;
 using System.IO;
 using System.Text;
@@ -102,7 +98,7 @@ public class Generates
     [TestCase(1 + 2 + 3 + 4 + 5 + 6 + 7 + 8, /*.*/ 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9, 8)]
     public void lookup_for_sum(int min, int max, int bits)
     {
-        var lookups = KillerCage.Lookup[bits];
+        var lookups = SudokuSolver.Restrictions.Cage.Lookup[bits];
 
         lookups[..(min - 1)].Should().AllSatisfy(l => l.Should().BeNull());
         lookups[min..].Should().AllSatisfy(l => l.Should().NotBeNull());
@@ -119,7 +115,7 @@ public class Generates
     [TestCase(8)]
     public void lookup(int cells)
     {
-        var file = new FileInfo($"./../../../../SudokuSolver/Common/KillerCage_{cells}.md");
+        var file = new FileInfo($"./../../../../SudokuSolver/Restrictions/Cage_{cells}.md");
 
         using var writer = new StreamWriter(file.FullName, false, new UTF8Encoding(false));
 

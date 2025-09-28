@@ -41,7 +41,7 @@ public sealed class GermanWhisper(ImmutableArray<Pos> cells) : Rule
 
         public override string ToString() => $"Toggle: {AppliesTo}, {Other}";
 
-        protected override Candidates Restrict(int value) => Allowed[value];
+        public override Candidates Restrict(int value) => Allowed[value];
 
         private static readonly ImmutableArray<Candidates> Allowed =
         [
@@ -64,7 +64,7 @@ public sealed class GermanWhisper(ImmutableArray<Pos> cells) : Rule
 
         public override string ToString() => $"No toggle: {AppliesTo}, {Other}";
 
-        protected override Candidates Restrict(int value) => Allowed[value];
+        public override Candidates Restrict(int value) => Allowed[value];
 
         private static readonly ImmutableArray<Candidates> Allowed =
         [

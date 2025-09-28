@@ -6,7 +6,7 @@ public sealed class DeltaMin(Pos appliesTo, Pos other, int delta) : Pair(applies
 
     public override double Bits => Infos[Delta];
 
-    protected override Candidates Restrict(int value) => Lookup[Delta][value];
+    public override Candidates Restrict(int value) => Lookup[Delta][value];
 
     public static readonly ImmutableArray<ImmutableArray<Candidates>> Lookup = lookup();
 

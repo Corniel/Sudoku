@@ -18,7 +18,7 @@ public sealed class NonConsecutive(Pos one, Pos two) : Rule
     {
         public override double Bits => bits;
 
-        protected override Candidates Restrict(int value) => Reduction[value];
+        public override Candidates Restrict(int value) => Reduction[value];
 
         private const int _ = 0;
 

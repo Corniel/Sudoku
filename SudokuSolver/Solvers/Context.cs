@@ -1,4 +1,5 @@
 using SudokuSolver.Diagnostics;
+using SudokuSolver.Restrictions;
 
 namespace SudokuSolver.Solvers;
 
@@ -29,6 +30,8 @@ public sealed class Context(Rules rules)
 
         public List<Restriction> Restrictions { get; init; } = [];
 
+        public Dictionary<Pos, ImmutableArray<Pair>> PairRestrictions { get; init; } = [];
+
         public Constraint Constraint
         {
             get => field ??= new()
@@ -37,7 +40,7 @@ public sealed class Context(Rules rules)
                 Candidates = Candidates,
                 Peers = [.. Peers],
                 Set = Peers,
-                Restrictions = [.. Restrictions],
+                Restrictions = [.. PairRestrictions.SelectMany(r => r.Value), .. Restrictions],
             };
         }
 
@@ -45,13 +48,21 @@ public sealed class Context(Rules rules)
             ? $"{Pos} = {Candidates.First()}"
             : Format();
 
-        private string Format() => $"{Pos} = {Candidates}, Peers = {Peers.Count}{(Restrictions.Count > 0 ? $", Res = {Restrictions.Count}" : string.Empty)}";
+        private string Format()
+            => $"{Pos} = {Candidates}, "
+            + $"Peers = {Peers.Count}"
+            + ((Restrictions.Count + Peers.Count > 0)
+                ? $", Res = {Restrictions.Count + Peers.Count}"
+                : string.Empty);
 
         public static Cell New(Constraint constraint) => new(constraint.Cell)
         {
             Candidates = constraint.Candidates,
             Peers = constraint.Set,
-            Restrictions = [.. constraint.Restrictions],
+            Restrictions = [..constraint.Restrictions.Where(r => r is not Pair)],
+            PairRestrictions = constraint.Restrictions.OfType<Pair>()
+                .GroupBy(p => p.Other)
+                .ToDictionary(p => p.Key, p => p.ToImmutableArray()),
         };
     }
 }

@@ -54,15 +54,25 @@ public static partial class Solver
 
             foreach (var res in ctx.Restrictions)
             {
-                if (res is Pair pair)
-                {
-                    after &= pair.Restrict(context);
-                }
-                else
-                {
-                    after &= res.Restrict(cells);
-                }
+               after &= res.Restrict(cells);
             }
+            foreach (var (other, restrictions) in ctx.PairRestrictions)
+            {
+                var alloweds = Candidates.None;
+
+                foreach (var val in context[other].Candidates)
+                {
+                    var allowed = Candidates._1_to_9;
+
+                    foreach (var res in restrictions)
+                        allowed &= res.Restrict(val);
+
+                    alloweds |= allowed;
+                }
+
+                after &= alloweds;
+            }
+
             if (befor != after)
             {
                 ctx.Candidates = after;

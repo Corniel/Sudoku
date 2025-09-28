@@ -16,13 +16,13 @@ public class Cracking_the_Cryptic
     [TestCaseSource(nameof(Fasts))]
     public void Fast(Puzzle puzzle)
     {
-        puzzle.Constraints.Should().BeValidFor(puzzle.Solution);
+       puzzle.Constraints.Should().BeValidFor(puzzle.Solution);
 
-        var solved = puzzle.Solve();
+       var solved = puzzle.Solve();
 
-        Console.WriteLine(solved);
+       Console.WriteLine(solved);
 
-        solved.Should().Be(puzzle.Solution, puzzle.Constraints);
+       solved.Should().Be(puzzle.Solution, puzzle.Constraints);
     }
 
     [Explicit]

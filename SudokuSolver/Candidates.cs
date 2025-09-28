@@ -15,9 +15,22 @@ public readonly struct Candidates(uint bits) : IEquatable<Candidates>, IReadOnly
 
     public static readonly Candidates None;
 
+    /// <summary>Digits 1 up to 9.</summary>
     public static readonly Candidates _1_to_9 = new(Mask);
 
+    /// <summary>Digits 1, 2, 3, (low digits).</summary>
+    public static readonly Candidates _123 = [1, 2, 3];
+
+    /// <summary>Digits 4, 5, 6, (mid digits).</summary>
+    public static readonly Candidates _456 = [4, 5, 6];
+
+    /// <summary>Digits 7, 8, 9, (hi digits).</summary>
+    public static readonly Candidates _789 = [7, 8, 9];
+
+    /// <summary>Digits 2, 4, 6, 8 (even digits).</summary>
     public static readonly Candidates Even = [2, 4, 6, 8];
+
+    /// <summary>Digits 1, 3, 5, 7, 9 (odd digits).</summary>
     public static readonly Candidates Odd = [1, 3, 5, 7, 9];
 
     public static Candidates New(int value) => new(1U << value);

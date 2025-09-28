@@ -67,7 +67,7 @@ public sealed class _2024_12_08 : CtcPuzzle
         {
             public override double Bits => Info.Avg(6.5);
 
-            protected override Candidates Restrict(int value) => Lookup[value];
+            public override Candidates Restrict(int value) => Lookup[value];
 
             private static readonly ImmutableArray<Candidates> Lookup =
             [

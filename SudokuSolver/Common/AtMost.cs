@@ -21,6 +21,6 @@ public sealed class AtMost(Pos one, Pos two, int sum) : Rule
 
         public int Sum { get; } = sum;
 
-        protected override Candidates Restrict(int value) => Candidates.AtMost(Sum - value);
+        public override Candidates Restrict(int value) => Candidates.AtMost(Sum - value);
     }
 }

@@ -8,6 +8,8 @@ public sealed record ReduceOptions
 
     public bool NakedPairs { get; init; }
 
+    public bool Intersection { get; init; }
+
     public bool Restrictions { get; init; }
 
     public bool Backtracker { get; init; }
@@ -21,6 +23,7 @@ public sealed record ReduceOptions
         NakedSingles = true,
         NakedPairs = true,
         Hidden = true,
+        Intersection = true,
         Restrictions = true,
         Backtracker = true,
     };

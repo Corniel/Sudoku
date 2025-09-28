@@ -35,6 +35,7 @@ public static partial class Solver
             reduce = options.NakedSingles && NakedSingles(cells, context);
             reduce |= options.NakedPairs && NakedPairs(cells, context);
             reduce |= options.Hidden && Hidden(cells, context);
+            reduce |= options.Intersection && Intersection(cells, context);
             reduce |= options.Restrictions && Restrict(cells, context);
         }
         while (reduce);

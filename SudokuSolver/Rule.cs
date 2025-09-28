@@ -17,6 +17,9 @@ public abstract class Rule : IReadOnlyCollection<Pos>
     /// <inheritdoc />
     public int Count => Cells.Count;
 
+    /// <summary>Indicates that the rule descibes a house (a set of 9 cells).</summary>
+    public bool IsHouse => IsSet && Count is _9;
+
     /// <summary>The restrictions (other than being peers).</summary>
     public abstract ImmutableArray<Restriction> Restrictions { get; }
 

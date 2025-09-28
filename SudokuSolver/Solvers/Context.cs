@@ -8,10 +8,10 @@ public sealed class Context(Rules rules)
 {
     private readonly Cell[] cells = [.. rules.ToArray().Select(Cell.New)];
 
-    public Rules Rules { get; } = rules;
+    public ImmutableArray<Rule> Rules { get; } = [..rules];
 
     /// <summary>Gets all houses (e.a. sets with size 9).</summary>
-    public ImmutableArray<Rule> Houses { get; } = [.. rules.Where(r => r.IsSet && r.Count == _9)];
+    public ImmutableArray<Rule> Houses { get; } = [.. rules.Where(r => r.IsHouse)];
 
     public Cell this[Pos cell] => cells[cell];
 

@@ -219,13 +219,15 @@ public class SudokuPad_app
 
 public class Puzzle_bank
 {
-    private static readonly ImmutableArray<Puzzle> Easys = [.. PuzzleBankPuzzle.Easy.Take(100)];
+    private const int Take = 100;
 
-    private static readonly ImmutableArray<Puzzle> Mediums = [.. PuzzleBankPuzzle.Medium.Take(100)];
+    private static readonly ImmutableArray<Puzzle> Easys = [.. PuzzleBankPuzzle.Easy.Take(Take)];
 
-    private static readonly ImmutableArray<Puzzle> Hards = [.. PuzzleBankPuzzle.Hard.Take(100)];
+    private static readonly ImmutableArray<Puzzle> Mediums = [.. PuzzleBankPuzzle.Medium.Take(Take)];
 
-    private static readonly ImmutableArray<Puzzle> Diabolicals = [.. PuzzleBankPuzzle.Diabolical.Take(100)];
+    private static readonly ImmutableArray<Puzzle> Hards = [.. PuzzleBankPuzzle.Hard.Take(Take)];
+
+    private static readonly ImmutableArray<Puzzle> Diabolicals = [.. PuzzleBankPuzzle.Diabolical.Take(Take)];
 
     private static readonly ImmutableArray<Puzzle> AntiKnights =
    [
@@ -301,7 +303,7 @@ public class Puzzle_bank
     private static void Solve(Puzzle puzzle, Rules? rules = null)
     {
         var cs = rules ?? Rules.Standard;
-        var solved = Solver.Solve(puzzle.Clues, cs, ReduceOptions.All);
+        var solved = Solver.Solve(puzzle.Clues, cs, ReduceOptions.All with { Backtracker = false });
         solved.Should().BeSolved(rules);
     }
 }

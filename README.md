@@ -191,26 +191,27 @@ channel dedicated to solving world-class puzzles (their wording, not mine). With
 the extra [constraints](#Constraint) implemented, the solver has been
 able to solve the following puzzles (so far):
 
-| Date       | Puzzle                                                          | Speed     |
-|:----------:|---------------------------------------------------------------- |:----------|
-| 2025-09-15 | [Studious](Puzzles/CrackingTheCryptic/2025_09_15.cs)            |  46.00 ms |
-| 2025-09-13 | [Royalty](Puzzles/CrackingTheCryptic/2025_09_13.cs)             | 271.40 ms |
-| 2025-09-09 | [Seylla](Puzzles/CrackingTheCryptic/2025_09_09.cs)              |  45.60 s  |
-| 2025-09-08 | [Four at a Time](Puzzles/CrackingTheCryptic/2025_09_08.cs)      |   3.11 s  |
-| 2025-09-04 | [Packing Problem](Puzzles/CrackingTheCryptic/2025_09_04.cs)     |  16.12 s  |
-| 2025-08-21 | [Miracle Of Eleven](Puzzles/CrackingTheCryptic/2025_08_21.cs)   |   6.17 ms |
-| 2025-08-19 | [Pile Of 15](Puzzles/CrackingTheCryptic/2025_08_19.cs)          |   3.67 ms |
-| 2025-08-07 | [Unstable Seesaws](Puzzles/CrackingTheCryptic/2025_08_07.cs)    |   1.89 m  |
-| 2025-05-21 | [Stepped Thermos](Puzzles/CrackingTheCryptic/2025_05_21.cs)     | 208.41 ms |
-| 2025-05-11 | [Quadrants](Puzzles/CrackingTheCryptic/2025_05_11.cs)           |  16.97 ms |
-| 2025-05-02 | [Arrows v.s. Thermos](Puzzles/CrackingTheCryptic/2025_05_02.cs) | 296.50 µs |
-| 2025-03-25 | [Rapuzzle](Puzzles/CrackingTheCryptic/2025_03_25.cs)            |  36.00 ms |
-| 2024-12-08 | [Fortune Cookie II](Puzzles/CrackingTheCryptic/2024_12_08.cs)   |   1.10 s  |
-| 2024-09-29 | [3 In the Corner](Puzzles/CrackingTheCryptic/2024_09_29.cs)     |        ?  |
-| 2024-01-08 | [Tulpenblüte](Puzzles/CrackingTheCryptic/2024_01_08.cs)         |   2.18 ms |
-| 2022-03-13 | [The Trident](Puzzles/CrackingTheCryptic/2022_03_13.cs)         |  58.51 s  |
-| 2020-09-30 | [Classic Sudoku!](Puzzles/CrackingTheCryptic/2020_09_30_1_.cs)  |  26.75 µs |
-| 2020-09-30 | [Tatooine Sunset](Puzzles/CrackingTheCryptic/2022_09_30.cs)     |  36.94 µs |
+| Date       | Puzzle                                                          | Speed  |
+|:----------:|---------------------------------------------------------------- |:-------|
+| 2025-09-15 | [Studious](Puzzles/CrackingTheCryptic/2025_09_15.cs)            |  46 ms |
+| 2025-09-13 | [Royalty](Puzzles/CrackingTheCryptic/2025_09_13.cs)             | 271 ms |
+| 2025-09-09 | [Seylla](Puzzles/CrackingTheCryptic/2025_09_09.cs)              |  45 s  |
+| 2025-09-08 | [Four at a Time](Puzzles/CrackingTheCryptic/2025_09_08.cs)      |   3 s  |
+| 2025-09-04 | [Packing Problem](Puzzles/CrackingTheCryptic/2025_09_04.cs)     |  16 s  |
+| 2025-08-21 | [Miracle Of Eleven](Puzzles/CrackingTheCryptic/2025_08_21.cs)   |   6 ms |
+| 2025-08-19 | [Pile Of 15](Puzzles/CrackingTheCryptic/2025_08_19.cs)          |   3 ms |
+| 2025-08-07 | [Unstable Seesaws](Puzzles/CrackingTheCryptic/2025_08_07.cs)    |   1 m  |
+| 2025-05-21 | [Stepped Thermos](Puzzles/CrackingTheCryptic/2025_05_21.cs)     | 208 ms |
+| 2025-05-11 | [Quadrants](Puzzles/CrackingTheCryptic/2025_05_11.cs)           |  16 ms |
+| 2025-05-02 | [Arrows v.s. Thermos](Puzzles/CrackingTheCryptic/2025_05_02.cs) | 296 µs |
+| 2025-03-25 | [Rapuzzle](Puzzles/CrackingTheCryptic/2025_03_25.cs)            |  36 ms |
+| 2024-12-08 | [Fortune Cookie II](Puzzles/CrackingTheCryptic/2024_12_08.cs)   |   1 s  |
+| 2024-09-29 | [3 In the Corner](Puzzles/CrackingTheCryptic/2024_09_29.cs)     |     ?  |
+| 2024-01-08 | [Tulpenblüte](Puzzles/CrackingTheCryptic/2024_01_08.cs)         |   2 ms |
+| 2022-03-13 | [The Trident](Puzzles/CrackingTheCryptic/2022_03_13.cs)         |  58 s  |
+| 2021-10-06 | [Dutch Whispers](Puzzles/CrackingTheCryptic/2021_10_06.cs)      |   5 ms |
+| 2020-09-30 | [Classic Sudoku!](Puzzles/CrackingTheCryptic/2020_09_30_1_.cs)  |  26 µs |
+| 2020-09-30 | [Tatooine Sunset](Puzzles/CrackingTheCryptic/2022_09_30.cs)     |  36 µs |
 
 ## Models
 

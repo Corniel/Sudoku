@@ -1,4 +1,3 @@
-using SudokuSolver.Restrictions;
 using System.Runtime.CompilerServices;
 
 namespace SudokuSolver.Solvers;
@@ -19,6 +18,7 @@ public static partial class Solver
 
         cells[cell] = value;
         context.Singles |= cell;
+        context[cell].Candidates = Candidates.New(value);
         return true;
     }
 

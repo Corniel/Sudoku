@@ -8,10 +8,11 @@ public static partial class Solver
     private static bool Hidden(Cells cells, Context rules)
     {
         var reduce = false;
-        var hidden = new PosSet[_9 + 1];
 
         foreach (var house in rules.Houses)
         {
+            var hidden = new PosSet[_9 + 1];
+
             foreach (var p in house)
             {
                 foreach (var v in rules[p].Candidates)
@@ -30,13 +31,13 @@ public static partial class Solver
                 else if (count is 2)
                 {
                     var pair = hidden[val];
-                    reduce |= Pair(val, pair, house);
+                    reduce |= Pair(hidden, val, pair, house);
                 }
             }
         }
         return reduce;
 
-        bool Pair(int val, PosSet pair, Rule house)
+        bool Pair(PosSet[] hidden, int val, PosSet pair, Rule house)
         {
             for (var s = val + 1; s <= _9; s++)
             {

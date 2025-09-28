@@ -26,7 +26,7 @@ public class Solving
 
         foreach (var clue in Clues)
         {
-            solved += SudokuSolver.Solvers.ReferenceSolver.Solve(clue)[0, 0];
+            solved += ReferenceSolver.Solve(clue)[0, 0];
         }
         return solved;
     }
@@ -59,7 +59,7 @@ public class Solving
     public int Hidden()
     {
         var solved = 0;
-        var options = new ReduceOptions { NakedSingles = true, Hidden = true };
+        var options = new ReduceOptions { NakedSingles = true, Hidden = true, Backtracker = true };
 
         foreach (var clue in Clues)
         {
@@ -72,7 +72,7 @@ public class Solving
     public int Pairs()
     {
         var solved = 0;
-        var options = new ReduceOptions { NakedSingles = true, NakedPairs = true };
+        var options = new ReduceOptions { NakedSingles = true, NakedPairs = true, Backtracker = true };
 
         foreach (var clue in Clues)
         {

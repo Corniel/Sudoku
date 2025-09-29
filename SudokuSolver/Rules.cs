@@ -64,4 +64,15 @@ public readonly partial struct Rules(ImmutableArray<Rule> rules, Constraint[] ce
         }
         return new(all, copy);
     }
+
+    public static Rules operator +(Rules rules, IEnumerable<Restriction> add)
+    {
+        var copy = rules.ToArray();
+
+        foreach (var res in add)
+        {
+            copy[res.AppliesTo] += res;
+        }
+        return new(rules.Collection, copy);
+    }
 }

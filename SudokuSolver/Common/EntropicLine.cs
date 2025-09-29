@@ -16,7 +16,7 @@ public sealed class EntropicLine(ImmutableArray<Pos> cells) : Rule
         {
             for (var s = f + 1; s < cells.Length; s++)
             {
-                if((s - f) % 3 == 0)
+                if ((s - f) % 3 == 0)
                 {
                     yield return new Same(cells[f], cells[s]);
                     yield return new Same(cells[s], cells[f]);

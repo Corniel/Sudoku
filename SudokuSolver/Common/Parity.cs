@@ -3,23 +3,18 @@ using SudokuSolver.Restrictions;
 
 namespace SudokuSolver.Common;
 
-public sealed class Parity(ImmutableArray<Pos> evens, ImmutableArray<Pos> odds) : Rule
+public static class Parity
 {
-    public override bool IsSet => false;
-
-    public override PosSet Cells { get; } = [.. evens, .. odds];
-
-    public override ImmutableArray<Restriction> Restrictions { get; } =
-    [
-        .. evens.Select(c => new Mask(c, Candidates.Even)),
-        .. odds.Select(c => new Mask(c, Candidates.Odd)),
-    ];
-
-    public static Parity Parse(string str)
+    public static IEnumerable<Mask> Parse(string str)
     {
         var cages = NamedCage.Parse(str);
         var even = cages.FirstOrDefault(c => c.Name is 'E')?.Cells ?? [];
         var odd = cages.FirstOrDefault(c => c.Name is 'O')?.Cells ?? [];
-        return new(even, odd);
+
+        return
+        [
+            .. even.Select(cell => new Mask(cell, Candidates.Even)),
+            .. odd.Select(cell => new Mask(cell, Candidates.Odd)),
+        ];
     }
 }

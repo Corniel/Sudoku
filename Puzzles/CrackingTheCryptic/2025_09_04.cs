@@ -8,7 +8,7 @@ public sealed class _2025_09_04 : CtcPuzzle
     public override string Title => "Packing Problem";
     public override string? Author => "clover!";
     public override Uri? Url => new("https://youtu.be/OMqUAduLZfI");
-
+    public override O Duration => O.s1000;
     public override Clues Clues { get; } = Clues.None;
 
     public override Cells Solution { get; } = Cells.Parse("""

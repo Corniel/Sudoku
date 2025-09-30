@@ -2,12 +2,8 @@ using SudokuSolver.Restrictions;
 
 namespace SudokuSolver.Common;
 
-public sealed class AtMost(Pos one, Pos two, int sum) : Rule
+public sealed class AtMost(Pos one, Pos two, int sum) : Rule(one, two)
 {
-    public override bool IsSet => false;
-
-    public override PosSet Cells { get; } = [one, two];
-
     public override ImmutableArray<Restriction> Restrictions { get; } =
     [
         new Reducer(one, two, sum),

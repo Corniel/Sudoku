@@ -93,12 +93,8 @@ public sealed class _2025_05_21 : CtcPuzzle
         ...|...|...
         """);
 
-    public sealed class NonConsecutive(PosSet cells) : Rule
+    public sealed class NonConsecutive(PosSet cells) : Set([..cells])
     {
-        public override bool IsSet => true;
-
-        public override PosSet Cells { get; } = cells;
-
         public override ImmutableArray<Restriction> Restrictions { get; } = Reducer.Reducers([.. cells]);
 
         public sealed class Reducer(Pos appliesTo, ImmutableArray<Pos> others) : Group(appliesTo, others)

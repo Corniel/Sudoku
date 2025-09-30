@@ -2,12 +2,8 @@ using SudokuSolver.Restrictions;
 
 namespace SudokuSolver.Common;
 
-public sealed class NonConsecutive(Pos one, Pos two) : Rule
+public sealed class NonConsecutive(Pos one, Pos two) : Set(one, two)
 {
-    public override bool IsSet => true;
-
-    public override PosSet Cells { get; } = [one, two];
-
     public override ImmutableArray<Restriction> Restrictions { get; } =
     [
         new DeltaMin(one, two, 2),

@@ -2,7 +2,7 @@ using SudokuSolver.Restrictions;
 
 namespace SudokuSolver.Common;
 
-public sealed class Arrow(ImmutableArray<Pos> cells, bool isSet = false) : Rule
+public sealed class Arrow(ImmutableArray<Pos> cells, bool isSet = false) : Rule(cells)
 {
     public static Arrow ParseSet(string str) => Parse(str, true);
 
@@ -13,8 +13,6 @@ public sealed class Arrow(ImmutableArray<Pos> cells, bool isSet = false) : Rule
     }
 
     public override bool IsSet { get; } = isSet;
-
-    public override PosSet Cells { get; } = [.. cells];
 
     public override ImmutableArray<Restriction> Restrictions { get; } =
     [

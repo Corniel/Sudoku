@@ -27,11 +27,9 @@ public sealed class _2025_09_04 : CtcPuzzle
 
     public override Rules Constraints { get; } = Rules.Standard + Cages();
 
-    public sealed class Cage(PosSet cells, bool isSet) : Rule
+    public sealed class Cage(PosSet cells, bool isSet) : Rule([.. cells])
     {
         public override bool IsSet { get; } = isSet;
-
-        public override PosSet Cells { get; } = cells;
 
         public override ImmutableArray<Restriction> Restrictions { get; } = [.. Reducer.Create([.. cells], isSet)];
 

@@ -67,12 +67,8 @@ public sealed class _2025_05_11 : CtcPuzzle
         }
     }
 
-    public sealed class Region(ImmutableArray<Pos> cells) : Rule
+    public sealed class Region(ImmutableArray<Pos> cells) : Rule(cells)
     {
-        public override bool IsSet => false;
-
-        public override PosSet Cells { get; } = [.. cells];
-
         public override ImmutableArray<Restriction> Restrictions { get; } =
         [
             .. cells.Select(c => new Reduce(c, cells.Remove(c))),

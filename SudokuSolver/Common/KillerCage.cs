@@ -3,13 +3,9 @@ using SudokuSolver.Restrictions;
 namespace SudokuSolver.Common;
 
 [SuppressMessage("Clarity", "S4050", Justification = "We only need the - operator")]
-public sealed partial class KillerCage(int sum, PosSet cells) : Rule, FixedSum
+public sealed partial class KillerCage(int sum, PosSet cells) : Set([..cells]), FixedSum
 {
     public int Sum { get; } = sum;
-
-    public override bool IsSet => true;
-
-    public override PosSet Cells { get; } = cells;
 
     public override ImmutableArray<Restriction> Restrictions { get; } = [.. Reducers(sum, cells)];
 

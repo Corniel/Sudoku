@@ -51,17 +51,9 @@ public sealed class _2024_12_08 : CtcPuzzle
         }
     }
 
-    public sealed class Not7Nor13(Pos a, Pos b) : Rule
+    public sealed class Not7Nor13(Pos a, Pos b) : Set(a, b)
     {
-        public override bool IsSet => true;
-
-        public override PosSet Cells { get; } = [a, b];
-
-        public override ImmutableArray<Restriction> Restrictions { get; } =
-        [
-            new Reduce(a, b),
-            new Reduce(b, a),
-        ];
+        public override ImmutableArray<Restriction> Restrictions { get; } = [new Reduce(a, b), new Reduce(b, a)];
 
         public sealed class Reduce(Pos appliesTo, Pos other) : Pair(appliesTo, other)
         {

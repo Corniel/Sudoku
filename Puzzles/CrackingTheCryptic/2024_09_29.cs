@@ -58,12 +58,8 @@ public sealed class _2024_09_29 : CtcPuzzle
         }
     }
 
-    public sealed class AtLeast3(Pos a, Pos b) : Rule
+    public sealed class AtLeast3(Pos a, Pos b) : Rule(a, b)
     {
-        public override bool IsSet => false;
-
-        public override PosSet Cells { get; } = [a, b];
-
         public override ImmutableArray<Restriction> Restrictions { get; } =
         [
             new Reduce(a, b),

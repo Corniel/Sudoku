@@ -89,12 +89,8 @@ public sealed class _2025_09_08 : CtcPuzzle
         174|983|562
         """);
 
-    public sealed class SlowThermometer(ImmutableArray<Pos> cells) : Rule
+    public sealed class SlowThermometer(ImmutableArray<Pos> cells) : Rule(cells)
     {
-        public override bool IsSet => false;
-
-        public override PosSet Cells { get; } = [.. cells];
-
         public override ImmutableArray<Restriction> Restrictions { get; }
             = [.. cells.Select((c, i) => new Reduce(c, cells[..i], cells[(i+1)..]))];
 

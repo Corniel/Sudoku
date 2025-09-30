@@ -3,16 +3,16 @@ namespace SudokuSolver;
 /// <summary>A constraint.</summary>
 [DebuggerDisplay("{GetType().Name}{DebuggerDisplay}, Count = {Count}, Restrictions = {Restrictions.Length}")]
 [DebuggerTypeProxy(typeof(Diagnostics.CollectionDebugView))]
-public abstract class Rule : IReadOnlyCollection<Pos>
+public abstract class Rule(params ImmutableArray<Pos> cells) : IReadOnlyCollection<Pos>
 {
     /// <summary>
     /// Indicates that all cells are part of the same set, and therefor must
     /// have different values.
     /// </summary>
-    public abstract bool IsSet { get; }
+    public virtual bool IsSet { get; }
 
     /// <summary>The cells bound to the constraint.</summary>
-    public abstract PosSet Cells { get; }
+    public PosSet Cells { get; } = [..cells];
 
     /// <inheritdoc />
     public int Count => Cells.Count;

@@ -7,12 +7,8 @@ namespace SudokuSolver.Common;
 /// value then all previous ones.
 /// </summary>
 [DebuggerDisplay("{ToString()}")]
-public sealed class Thermometer(ImmutableArray<Pos> path) : Rule
+public sealed class Thermometer(ImmutableArray<Pos> path) : Set(path)
 {
-    public override bool IsSet => true;
-
-    public override PosSet Cells { get; } = [.. path];
-
     public override ImmutableArray<Restriction> Restrictions { get; } = [.. Reducers(path)];
 
     public override string ToString() => $"Thermo: {string.Join(" < ", Restrictions.Select(r => r.AppliesTo).Distinct())}";

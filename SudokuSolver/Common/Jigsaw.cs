@@ -3,9 +3,9 @@ using SudokuSolver.Parsing;
 namespace SudokuSolver.Common;
 
 /// <summary>
-/// Represents an irregular (jigsaw) house, as an alternative to <see cref="Box"/>es.
+/// Represents an irregular (jigsaw) house, as an alternative to <see cref="Houses.Box"/>es.
 /// </summary>
-public sealed class Jigsaw(PosSet cells) : Set(cells)
+public sealed class Jigsaw(PosSet cells) : Set([..cells])
 {
     public override string ToString() => $"Jigsaw = {string.Join(", ", Cells)}";
 

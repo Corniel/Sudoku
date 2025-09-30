@@ -2,12 +2,8 @@ using SudokuSolver.Restrictions;
 
 namespace SudokuSolver.Common;
 
-public sealed class DutchWhisper(ImmutableArray<Pos> cells) : Rule
+public sealed class DutchWhisper(ImmutableArray<Pos> cells) : Rule(cells)
 {
-    public override bool IsSet => false;
-
-    public override PosSet Cells { get; } = [.. cells];
-
     public override ImmutableArray<Restriction> Restrictions { get; } = [..Init(cells)];
 
     private static IEnumerable<Neighbors> Init(ImmutableArray<Pos> cells)

@@ -2,12 +2,8 @@ using SudokuSolver.Restrictions;
 
 namespace SudokuSolver.Common;
 
-public sealed class RenbanLine(ImmutableArray<Pos> cells) : Rule
+public sealed class RenbanLine(ImmutableArray<Pos> cells) : Set(cells)
 {
-    public override bool IsSet => true;
-
-    public override PosSet Cells { get; } = [.. cells];
-
     public override ImmutableArray<Restriction> Restrictions { get; } = [.. Pairs(cells)];
 
     private static IEnumerable<DeltaMax> Pairs(ImmutableArray<Pos> cells)

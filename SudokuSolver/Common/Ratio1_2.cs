@@ -2,12 +2,8 @@ using SudokuSolver.Restrictions;
 
 namespace SudokuSolver.Common;
 
-public sealed class Ratio1_2(Pos a, Pos b) : Rule
+public sealed class Ratio1_2(Pos a, Pos b) : Set(a, b)
 {
-    public override bool IsSet => true;
-
-    public override PosSet Cells { get; } = [a, b];
-
     public override ImmutableArray<Restriction> Restrictions { get; } =
     [
         new Reduce(a, b),

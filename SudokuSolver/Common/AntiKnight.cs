@@ -3,7 +3,7 @@ using System.Numerics;
 namespace SudokuSolver.Common;
 
 /// <summary>Cells on a (chess) knight distance must have different digits.</summary>
-public sealed class AntiKnight(Pos p1, Pos p2) : Set(PosSet.New(p1, p2))
+public sealed class AntiKnight(Pos p1, Pos p2) : Set(p1, p2)
 {
     public static readonly ImmutableArray<AntiKnight> All = [.. Init()];
 

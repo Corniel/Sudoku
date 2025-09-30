@@ -2,12 +2,8 @@ using SudokuSolver.Restrictions;
 
 namespace SudokuSolver.Common;
 
-public sealed class EntropicLine(ImmutableArray<Pos> cells) : Rule
+public sealed class EntropicLine(ImmutableArray<Pos> cells) : Rule(cells)
 {
-    public override bool IsSet => false;
-
-    public override PosSet Cells { get; } = [.. cells];
-
     public override ImmutableArray<Restriction> Restrictions { get; } = [.. Init(cells)];
 
     private static IEnumerable<Restriction> Init(ImmutableArray<Pos> cells)

@@ -2,6 +2,8 @@ namespace SudokuSolver.Solvers;
 
 public sealed record ReduceOptions
 {
+    public bool AddCages { get; init; }
+
     public bool NakedSingles { get; init; }
 
     public bool Hidden { get; init; }
@@ -20,6 +22,7 @@ public sealed record ReduceOptions
 
     public static readonly ReduceOptions All = new()
     {
+        AddCages = true,
         NakedSingles = true,
         NakedPairs = true,
         Hidden = true,

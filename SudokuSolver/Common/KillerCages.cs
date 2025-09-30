@@ -9,7 +9,7 @@ public static partial class KillerCages
     {
         if (NamedCage.Parse(str) is { Length: > 0 } cs)
         {
-            return Process([.. cs.Select(c => new KillerCage(c.Sum, [.. c.Cells]))]);
+            return [.. cs.Select(c => new KillerCage(c.Sum, [.. c.Cells]))];
         }
         else if (Line().Matches(str) is { Count: > 0 } lines)
         {
@@ -26,30 +26,9 @@ public static partial class KillerCages
                 cages.Add(new KillerCage(sum, cells));
             }
 
-            return Process(cages);
+            return [.. cages];
         }
         throw new FormatException();
-    }
-
-    private static ImmutableArray<Rule> Process(List<KillerCage> cages)
-    {
-        List<KillerCage> inverses = [];
-
-        foreach (var r in Rules.Standard)
-        {
-            var house = new KillerCage(45, r.Cells);
-
-            foreach (var cage in cages)
-            {
-                house -= cage;
-            }
-            if (house.Sum is > 0 and < 45)
-            {
-                inverses.Add(house);
-            }
-        }
-
-        return [.. Rules.Standard, .. cages, .. inverses];
     }
 
     [GeneratedRegex(@"(?<Sum>[0-9]{1,2})\s*=(?<Pos>.*?\((?<Row>[0-8]{1,2}),\s*(?<Col>[0-8]{1,2})\))+", RegexOptions.CultureInvariant)]

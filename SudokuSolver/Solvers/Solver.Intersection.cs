@@ -5,7 +5,7 @@ namespace SudokuSolver.Solvers;
 public static partial class Solver
 {
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool Intersection(Cells cells, Context context)
+    private static bool Intersection(Context context)
     {
         var reduce = false;
 

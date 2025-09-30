@@ -29,13 +29,15 @@ public static partial class Solver
             }
         }
 
+        if (options.AddCages) AddCages(cells, context);
+
         bool reduce;
         do
         {
             reduce = options.NakedSingles && NakedSingles(cells, context);
             reduce |= options.NakedPairs && NakedPairs(cells, context);
             reduce |= options.Hidden && Hidden(cells, context);
-            reduce |= options.Intersection && Intersection(cells, context);
+            reduce |= options.Intersection && Intersection(context);
             reduce |= options.Restrictions && Restrict(cells, context);
         }
         while (reduce);

@@ -1,5 +1,3 @@
-using SudokuSolver.Solvers;
-
 namespace SudokuSolver.Restrictions;
 
 /// <summary>Describes a restriction between two cells.</summary>

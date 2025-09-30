@@ -1,10 +1,9 @@
-using SudokuSolver.Generics;
 using SudokuSolver.Restrictions;
 
 namespace SudokuSolver.Common;
 
 [SuppressMessage("Clarity", "S4050", Justification = "We only need the - operator")]
-public sealed partial class KillerCage(int sum, PosSet cells) : Rule
+public sealed partial class KillerCage(int sum, PosSet cells) : Rule, FixedSum
 {
     public int Sum { get; } = sum;
 

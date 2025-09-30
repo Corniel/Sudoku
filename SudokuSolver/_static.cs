@@ -7,6 +7,9 @@ public static class Statics
     /// <summary>Is 9.</summary>
     public const int _9 = 9;
 
+    /// <summary>Is 45.</summary>
+    public const int _45 = 45;
+
     /// <summary>Is 9 * 9 (81).</summary>
     public const int _9x9 = _9 * _9;
 

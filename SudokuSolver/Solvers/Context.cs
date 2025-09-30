@@ -8,7 +8,7 @@ public sealed class Context(Rules rules)
 {
     private readonly Cell[] cells = [.. rules.ToArray().Select(Cell.New)];
 
-    public ImmutableArray<Rule> Rules { get; } = [..rules];
+    public List<Rule> Rules { get; } = [.. rules];
 
     /// <summary>Gets all houses (e.a. sets with size 9).</summary>
     public ImmutableArray<Rule> Houses { get; } = [.. rules.Where(r => r.IsHouse)];
@@ -59,7 +59,7 @@ public sealed class Context(Rules rules)
         {
             Candidates = constraint.Candidates,
             Peers = constraint.Set,
-            Restrictions = [..constraint.Restrictions.Where(r => r is not Pair)],
+            Restrictions = [.. constraint.Restrictions.Where(r => r is not Pair)],
             PairRestrictions = constraint.Restrictions.OfType<Pair>()
                 .GroupBy(p => p.Other)
                 .ToDictionary(p => p.Key, p => p.ToImmutableArray()),

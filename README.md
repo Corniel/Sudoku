@@ -204,6 +204,7 @@ able to solve the following puzzles (so far):
 | 2025-05-21 | [Stepped Thermos](Puzzles/CrackingTheCryptic/2025_05_21.cs)     | 208 ms |
 | 2025-05-11 | [Quadrants](Puzzles/CrackingTheCryptic/2025_05_11.cs)           |  16 ms |
 | 2025-05-02 | [Arrows v.s. Thermos](Puzzles/CrackingTheCryptic/2025_05_02.cs) | 296 µs |
+| 2025-01-07 | [Sort of Miraculous](Puzzles/CrackingTheCryptic/2025_01_07.cs)  |   1 s  |
 | 2025-03-25 | [Rapuzzle](Puzzles/CrackingTheCryptic/2025_03_25.cs)            |  36 ms |
 | 2024-12-08 | [Fortune Cookie II](Puzzles/CrackingTheCryptic/2024_12_08.cs)   |   1 s  |
 | 2024-09-29 | [3 In the Corner](Puzzles/CrackingTheCryptic/2024_09_29.cs)     |     ?  |

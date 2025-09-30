@@ -2,6 +2,8 @@ namespace SudokuSolver.Common;
 
 public abstract class Set(PosSet cells) : Rule
 {
+    protected Set(ImmutableArray<Pos> cells) : this(PosSet.New([.. cells])) { }
+
     /// <inheritdoc />
     public override bool IsSet => true;
 

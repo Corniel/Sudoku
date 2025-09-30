@@ -213,6 +213,7 @@ able to solve the following puzzles (so far):
 | 2021-10-06 | [Dutch Whispers](Puzzles/CrackingTheCryptic/2021_10_06.cs)      |   5 ms |
 | 2020-09-30 | [Classic Sudoku!](Puzzles/CrackingTheCryptic/2020_09_30_1_.cs)  |  26 µs |
 | 2020-09-30 | [Tatooine Sunset](Puzzles/CrackingTheCryptic/2022_09_30.cs)     |  36 µs |
+| 2019-05-09 | [Jigsaw Sudoku](Puzzles/CrackingTheCryptic/2021_05_09.cs)       | 113 ms |
 
 ## Models
 

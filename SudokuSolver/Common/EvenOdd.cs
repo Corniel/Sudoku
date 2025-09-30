@@ -3,7 +3,7 @@ using SudokuSolver.Restrictions;
 
 namespace SudokuSolver.Common;
 
-public static class Parity
+public static class EvenOdd
 {
     public static IEnumerable<Mask> Parse(string str)
     {

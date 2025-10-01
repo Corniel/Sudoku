@@ -9,9 +9,7 @@ public sealed class _2025_01_07 : CtcPuzzle
     public override string Title => "Sort of Miraculous";
     public override string? Author => "apetersen";
     public override Uri? Url => new("https://youtu.be/ztFZssfrEp4");
-    public override O Duration => O.s;
-
-    public override Clues Clues { get; } = Clues.None;
+    public override O Duration => O.ms100;
 
     public override Cells Solution { get; } = Cells.Parse("""
         246|579|813

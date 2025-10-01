@@ -8,6 +8,7 @@ public sealed class _2024_09_29 : CtcPuzzle
     public override string Title => "3 In the Corner";
     public override string? Author => "James Kopp";
     public override Uri? Url => new("https://youtu.be/x6RrwaOb0Iw");
+    public override O Duration => O.oo;
 
     // TODO: remove the arrow: it has not been specified, but could be deduced
     // by a hint that is not defined in a constraint

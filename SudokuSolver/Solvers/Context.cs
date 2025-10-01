@@ -1,4 +1,5 @@
 using SudokuSolver.Diagnostics;
+using SudokuSolver.Houses;
 using SudokuSolver.Restrictions;
 
 namespace SudokuSolver.Solvers;
@@ -13,11 +14,22 @@ public sealed class Context(Rules rules)
     /// <summary>Gets all houses (e.a. sets with size 9).</summary>
     public ImmutableArray<Rule> Houses { get; } = [.. rules.Where(r => r.IsHouse)];
 
+    /// <summary>Gets all rows.</summary>
+    public ImmutableArray<Row> Rows { get; } = [.. rules.OfType<Row>()];
+
+    /// <summary>Gets all cols.</summary>
+    public ImmutableArray<Col> Cols { get; } = [.. rules.OfType<Col>()];
+
     public Cell this[Pos cell] => cells[cell];
 
+    /// <summary>All (resolved) cells with single value.</summary>
     public PosSet Singles { get; set; }
 
+    /// <summary>All non-resolved cells.</summary>
     public PosSet Todos => ~Singles;
+
+    /// <summary>Indicates that value is can not occur in any of the cells.</summary>
+    public bool CanNotOccur(int value, PosSet cells) => !cells.Any(cell => this[cell].Candidates.Contains(value));
 
     [Mutable]
     public sealed class Cell(Pos cell)

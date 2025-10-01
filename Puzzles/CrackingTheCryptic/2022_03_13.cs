@@ -6,7 +6,7 @@ public sealed class _2022_03_13 : CtcPuzzle
     public override string Title => "The Trident";
     public override string? Author => "GBPack";
     public override Uri? Url => new("https://youtu.be/sOSrJCXdSCQ");
-    public override O Duration => O.Unknown;
+    public override O Duration => O.oo;
 
     public override Cells Solution { get; } = Cells.Parse("""
         579|264|813

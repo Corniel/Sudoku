@@ -38,6 +38,8 @@ public static partial class Solver
             reduce |= options.NakedPairs && NakedPairs(cells, context);
             reduce |= options.Hidden && Hidden(cells, context);
             reduce |= options.Intersection && Intersection(context);
+            reduce |= options.XWing && XWing(context);
+            reduce |= options.Swordfish && Swordfish(context);
             reduce |= options.Restrictions && Restrict(cells, context);
         }
         while (reduce);

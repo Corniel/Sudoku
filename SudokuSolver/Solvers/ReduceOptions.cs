@@ -12,6 +12,10 @@ public sealed record ReduceOptions
 
     public bool Intersection { get; init; }
 
+    public bool XWing { get; init; }
+
+    public bool Swordfish { get; init; }
+
     public bool Restrictions { get; init; }
 
     public bool Backtracker { get; init; }
@@ -27,6 +31,8 @@ public sealed record ReduceOptions
         NakedPairs = true,
         Hidden = true,
         Intersection = true,
+        XWing = true,
+        Swordfish = true,
         Restrictions = true,
         Backtracker = true,
     };

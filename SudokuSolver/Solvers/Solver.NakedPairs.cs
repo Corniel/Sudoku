@@ -5,7 +5,7 @@ namespace SudokuSolver.Solvers;
 public static partial class Solver
 {
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool NakedPairs(Cells cells, Context context)
+    private static bool NakedPairs(Context context)
     {
         var reduce = false;
 
@@ -23,7 +23,7 @@ public static partial class Solver
                     reduce |= Pair(ctx.Pos, pair, checks, set.Cells ^ context.Singles);
                 }
             }
-         }
+        }
 
         return reduce;
 
@@ -32,9 +32,7 @@ public static partial class Solver
             foreach (var other in checks)
             {
                 if (context[other].Candidates == pair)
-                {
                     return Remove([cell, other], pair, cleans, context);
-                }
             }
             return false;
         }

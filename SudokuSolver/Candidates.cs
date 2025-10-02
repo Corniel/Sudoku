@@ -81,6 +81,10 @@ public readonly struct Candidates(uint bits) : IEquatable<Candidates>, IReadOnly
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public bool Contains(int value) => (Bits & (1u << value)) is not 0;
 
+    /// <inheritdoc cref="IReadOnlySet{T}.IsSubsetOf(IEnumerable{T})" />
+    [Pure]
+    public bool IsSubsetOf(Candidates other) => (other.Bits & Bits) == Bits;
+
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public int First() => BitOperations.TrailingZeroCount(Bits) & 15;
 

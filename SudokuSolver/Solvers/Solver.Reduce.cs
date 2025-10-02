@@ -35,12 +35,15 @@ public static partial class Solver
         do
         {
             reduce = options.NakedSingles && NakedSingles(cells, context);
-            reduce |= options.NakedPairs && NakedPairs(cells, context);
+            reduce |= options.NakedPairs && NakedPairs(context);
+            reduce |= options.NakedTriples && NakedTriples(context);
+            reduce |= options.NakedQuads && NakedQuads(context);
             reduce |= options.Hidden && Hidden(cells, context);
             reduce |= options.Intersection && Intersection(context);
-            reduce |= options.XWing && XWing(context);
-            reduce |= options.Swordfish && Swordfish(context);
             reduce |= options.Restrictions && Restrict(cells, context);
+            reduce = reduce || (options.XWing && XWing(context));
+            reduce = reduce || (options.Swordfish && Swordfish(context));
+            reduce = reduce || (options.Jellyfish && Jellyfish(context));
         }
         while (reduce);
     }

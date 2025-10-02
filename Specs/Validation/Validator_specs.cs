@@ -73,9 +73,12 @@ public class Solves
     [TestCase("nakedsingles"/*.*/, _none, _none, 1_480, 5_724)]
     [TestCase("hidden"/*.......*/, _none, 1_466, 9_265, _all_)]
     [TestCase("nakedpairs"/*...*/, _none, 2_580, 9_511, _all_)]
-    [TestCase("intersection"/*.*/, _none, 4_139, _all_, _all_)]
-    [TestCase("x-wing"/*.......*/, _none, 4_824, _all_, _all_)]
-    [TestCase("swordfish"/*....*/, _none, 4_830, _all_, _all_)]
+    [TestCase("nakedtriples"/*.*/, _none, 2_593, 9_512, _all_)]
+    [TestCase("nakedquads"/*...*/, _none, 2_599, 9_512, _all_)]
+    [TestCase("intersection"/*.*/, _none, 4_149, _all_, _all_)]
+    [TestCase("x-wing"/*.......*/, _none, 4_833, _all_, _all_)]
+    [TestCase("swordfish"/*....*/, _none, 4_837, _all_, _all_)]
+    [TestCase("jellyfish"/*....*/, _none, 4_837, _all_, _all_)]
     public void Using(string options, int diabolical, int hard, int medium, int easy)
     {
         Solve(Options[options])
@@ -102,9 +105,12 @@ public class Solves
         ["nakedsingles"/*.*/] = new() { NakedSingles = true },
         ["hidden"/*.......*/] = new() { NakedSingles = true, Hidden = true },
         ["nakedpairs"/*...*/] = new() { NakedSingles = true, Hidden = true, NakedPairs = true },
-        ["intersection"/*.*/] = new() { NakedSingles = true, Hidden = true, NakedPairs = true, Intersection = true },
-        ["x-wing"/*.......*/] = new() { NakedSingles = true, Hidden = true, NakedPairs = true, Intersection = true, XWing = true },
-        ["swordfish"/*....*/] = new() { NakedSingles = true, Hidden = true, NakedPairs = true, Intersection = true, XWing = true, Swordfish = true },
+        ["nakedtriples"/*.*/] = new() { NakedSingles = true, Hidden = true, NakedPairs = true, NakedTriples = true },
+        ["nakedquads"/*...*/] = new() { NakedSingles = true, Hidden = true, NakedPairs = true, NakedTriples = true, NakedQuads = true },
+        ["intersection"/*.*/] = new() { NakedSingles = true, Hidden = true, NakedPairs = true, NakedTriples = true, NakedQuads = true, Intersection = true },
+        ["x-wing"/*.......*/] = new() { NakedSingles = true, Hidden = true, NakedPairs = true, NakedTriples = true, NakedQuads = true, Intersection = true, XWing = true },
+        ["swordfish"/*....*/] = new() { NakedSingles = true, Hidden = true, NakedPairs = true, NakedTriples = true, NakedQuads = true, Intersection = true, XWing = true, Swordfish = true },
+        ["jellyfish"/*....*/] = new() { NakedSingles = true, Hidden = true, NakedPairs = true, NakedTriples = true, NakedQuads = true, Intersection = true, XWing = true, Swordfish = true, Jellyfish = true },
     };
 
     private const int _none = 0;

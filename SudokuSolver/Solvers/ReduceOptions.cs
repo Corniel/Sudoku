@@ -10,13 +10,19 @@ public sealed record ReduceOptions
 
     public bool NakedPairs { get; init; }
 
+    public bool NakedTriples { get; init; }
+
+    public bool NakedQuads { get; init; }
+
     public bool Intersection { get; init; }
+
+    public bool Restrictions { get; init; }
 
     public bool XWing { get; init; }
 
     public bool Swordfish { get; init; }
 
-    public bool Restrictions { get; init; }
+    public bool Jellyfish { get; init; }
 
     public bool Backtracker { get; init; }
 
@@ -29,11 +35,14 @@ public sealed record ReduceOptions
         AddCages = true,
         NakedSingles = true,
         NakedPairs = true,
+        NakedTriples = true,
+        NakedQuads = true,
         Hidden = true,
         Intersection = true,
+        Restrictions = true,
         XWing = true,
         Swordfish = true,
-        Restrictions = true,
+        Jellyfish = false,
         Backtracker = true,
     };
 }

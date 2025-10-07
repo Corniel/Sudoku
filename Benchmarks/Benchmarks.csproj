@@ -13,5 +13,16 @@
     <ProjectReference Include="../Puzzles/Puzzles.csproj" />
     <ProjectReference Include="../SudokuSolver/SudokuSolver.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <PackageVersion Update="DotNetProjectFile.Analyzers" Version="1.7.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="DotNetProjectFile.Analyzers">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
   
 </Project>

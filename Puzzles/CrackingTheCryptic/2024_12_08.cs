@@ -56,8 +56,6 @@ public sealed class _2024_12_08 : CtcPuzzle
 
         public sealed class Reduce(Pos appliesTo, Pos other) : Pair(appliesTo, other)
         {
-            public override double Bits => Info.Avg(6.5);
-
             public override Candidates Restrict(int value) => Lookup[value];
 
             private static readonly ImmutableArray<Candidates> Lookup =

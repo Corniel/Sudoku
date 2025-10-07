@@ -1,3 +1,4 @@
+using SudokuSolver.Generics;
 using SudokuSolver.Restrictions;
 
 namespace SudokuSolver.Common;
@@ -28,11 +29,9 @@ public sealed class EntropicLine(ImmutableArray<Pos> cells) : Rule(cells)
 
     public sealed class Same(Pos appliesTo, Pos other) : Pair(appliesTo, other)
     {
-        public override double Bits => Info.Avg(3);
+        public override Candidates Restrict(Candidates other) => Lookup[other];
 
-        public override Candidates Restrict(int value) => Lookup[value];
-
-        private static readonly ImmutableArray<Candidates> Lookup =
+        private static readonly CandidateLookup<Candidates> Lookup = Init(
         [
             Candidates._1_to_9,
 
@@ -47,16 +46,14 @@ public sealed class EntropicLine(ImmutableArray<Pos> cells) : Rule(cells)
             Candidates._789,
             Candidates._789,
             Candidates._789,
-        ];
+        ]);
     }
 
     public sealed class Different(Pos appliesTo, Pos other) : Pair(appliesTo, other)
     {
-        public override double Bits => Info.Avg(6);
+        public override Candidates Restrict(Candidates other) => Lookup[other];
 
-        public override Candidates Restrict(int value) => Lookup[value];
-
-        private static readonly ImmutableArray<Candidates> Lookup =
+        private static readonly CandidateLookup<Candidates> Lookup = Init(
         [
             Candidates._1_to_9,
 
@@ -71,6 +68,6 @@ public sealed class EntropicLine(ImmutableArray<Pos> cells) : Rule(cells)
             ~Candidates._789,
             ~Candidates._789,
             ~Candidates._789,
-        ];
+        ]);
     }
 }

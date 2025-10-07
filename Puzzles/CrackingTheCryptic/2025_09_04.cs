@@ -34,14 +34,12 @@ public sealed class _2025_09_04 : CtcPuzzle
 
         public sealed class Reducer(Pos appliesTo, ImmutableArray<Pos> others, ImmutableArray<Candidates> lookup) : Group(appliesTo, others)
         {
-            public override double Bits => 3 * Info.Avg(1.9);
-
             public ImmutableArray<Candidates> Candidates { get; } = lookup;
 
-            public override Candidates Restrict(Cells cells) => Candidates[0
-                + cells[Others[0]] * 1
-                + cells[Others[1]] * 10
-                + cells[Others[2]] * 100];
+            public override Candidates Restrict(Graph graph) => Candidates[0
+                + graph[Others[0]].Value * 1
+                + graph[Others[1]].Value * 10
+                + graph[Others[2]].Value * 100];
 
             public static IEnumerable<Reducer> Create(ImmutableArray<Pos> cells, bool isSet) =>
             [

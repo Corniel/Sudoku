@@ -1,6 +1,5 @@
 namespace SudokuSolver;
 
-[DebuggerDisplay("{ToString()} ({Index})")]
 public readonly struct Pos(int i) : IEquatable<Pos>
 {
     public static AllIterator All => new();

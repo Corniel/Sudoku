@@ -6,8 +6,8 @@ public sealed class _2025_03_25 : CtcPuzzle
 {
     public override string Title => "Rapuzzle";
     public override string? Author => "Scojo";
-    public override Uri? Url => new("https://youtu.beL9qq8cyQ5M");
-    public override O Duration => O.ms;
+    public override Uri? Url => new("https://youtu.be/-L9qq8cyQ5M");
+    public override O Duration => O.s100;
 
     public override Clues Clues { get; } = Clues.Parse("""
         ...|.2.|...

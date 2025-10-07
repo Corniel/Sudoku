@@ -8,7 +8,7 @@ public sealed class _2021_10_06 : CtcPuzzle
     public override string Title => "Dutch Whispers";
     public override string? Author => "Aad van de Wetering";
     public override Uri? Url => new("https://youtu.be/6pAQYHf42Ik");
-    public override O Duration => O.μs100;
+    public override O Duration => O.oo;
 
     public override Clues Clues { get; } = Clues.Parse("""
         ...|...|...

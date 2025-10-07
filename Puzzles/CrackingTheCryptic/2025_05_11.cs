@@ -61,7 +61,7 @@ public sealed class _2025_05_11 : CtcPuzzle
             {
                 PosSet cells = [p, n, w, p - 10];
 
-                if (!circles.Any(cells.Contains))
+                if (circles.NotAny(cells.Contains))
                     yield return new Region([.. cells]);
             }
         }
@@ -76,13 +76,11 @@ public sealed class _2025_05_11 : CtcPuzzle
 
         public sealed class Reduce(Pos appliesTo, ImmutableArray<Pos> others) : Group(appliesTo, others)
         {
-            public override double Bits => Info.Avg(2.925);
-
-            public override Candidates Restrict(Cells cells)
+            public override Candidates Restrict(Graph graph)
             {
                 var sum = 0;
 
-                foreach (var val in Others.Select(o => cells[o]))
+                foreach (var val in Others.Select(o => graph[o].Value))
                 {
                     if (val is 0) return Candidates._1_to_9;
                     sum += val;

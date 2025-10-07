@@ -63,14 +63,14 @@ public sealed class _2025_01_07 : CtcPuzzle
 
         protected abstract bool Restricted(int value);
 
-        protected Candidates Restrict(Cells cells, int min, int max)
-            => Allowed[Index] & Candidates.Between(Min(cells, min), Max(cells, max));
+        protected Candidates Restrict(Graph graph, int min, int max)
+            => Allowed[Index] & Candidates.Between(Min(graph, min), Max(graph, max));
 
-        protected int Min(Cells cells, int min)
+        protected int Min(Graph graph, int min)
         {
             for (var i = 0; i < Index; i++)
             {
-                var val = cells[Others[i]];
+                var val = graph[Others[i]].Value;
 
                 if (Restricted(val))
                     min = Math.Max(min, val);
@@ -78,11 +78,11 @@ public sealed class _2025_01_07 : CtcPuzzle
             return min + 1;
         }
 
-        protected int Max(Cells cells, int max)
+        protected int Max(Graph graph, int max)
         {
             for (var i = Index + 1; i < _9; i++)
             {
-                var val = cells[Others[i]];
+                var val = graph[Others[i]].Value;
 
                 if (Restricted(val))
                     max = Math.Min(max, val);
@@ -94,10 +94,8 @@ public sealed class _2025_01_07 : CtcPuzzle
     private sealed class EvenCell(Pos appliesTo, int index, ImmutableArray<Pos> cells)
             : BoxCell(appliesTo, index, cells, Evens)
     {
-        public override double Bits => Info.Avg(Allowed[Index].Count / 20d);
-
-        public override Candidates Restrict(Cells cells)
-            => Restrict(cells, -1, 11) | Candidates.Odd;
+        public override Candidates Restrict(Graph graph)
+            => Restrict(graph, -1, 11) | Candidates.Odd;
 
         protected override bool Restricted(int value) => value is not 0 && value.IsEven();
     }
@@ -105,10 +103,8 @@ public sealed class _2025_01_07 : CtcPuzzle
     private sealed class OddCell(Pos appliesTo, int index, ImmutableArray<Pos> cells)
             : BoxCell(appliesTo, index, cells, Odds)
     {
-        public override double Bits => Info.Avg(Allowed[Index].Count / 20d);
-
-        public override Candidates Restrict(Cells cells)
-            => Restrict(cells, 0, 10) | Candidates.Even;
+        public override Candidates Restrict(Graph graph)
+            => Restrict(graph, 0, 10) | Candidates.Even;
 
         protected override bool Restricted(int value) => value.IsOdd();
     }

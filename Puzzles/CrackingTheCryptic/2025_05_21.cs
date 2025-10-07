@@ -99,11 +99,9 @@ public sealed class _2025_05_21 : CtcPuzzle
 
         public sealed class Reducer(Pos appliesTo, ImmutableArray<Pos> others) : Group(appliesTo, others)
         {
-            public override double Bits => 2 * Info.Avg(6);
-
-            public override Candidates Restrict(Cells cells)
+            public override Candidates Restrict(Graph graph)
             {
-                var index = Candidates.New(cells[Others[0]], cells[Others[1]]);
+                var index = Candidates.New(graph[Others[0]].Value, graph[Others[1]].Value);
                 return Loookup[index.GetHashCode()];
             }
 

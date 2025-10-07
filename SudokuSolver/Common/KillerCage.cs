@@ -38,8 +38,6 @@ public sealed partial class KillerCage(int sum, PosSet cells) : Set([..cells]), 
     {
         public int Sum { get; } = sum;
 
-        public override double Bits => Infos[Others.Length + 1][Sum];
-
-        public override Candidates Restrict(Cells cells) => Restrict(cells, Sum);
+        public override Candidates Restrict(Graph graph) => Restrict(graph, Sum);
     }
 }

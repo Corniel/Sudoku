@@ -1,4 +1,3 @@
-using System.Globalization;
 using System.IO;
 using System.Text;
 
@@ -123,7 +122,7 @@ public class Generates
 
         for (var sum = Min(cells); sum <= Max(cells); sum++)
         {
-            writer.Write($"## {sum} {GetInfo(cells, sum).ToString("0.0000", CultureInfo.InvariantCulture)}\n");
+            writer.Write($"## {sum}\n");
 
             foreach (var known in Candidates.All.Where(c => c.Count < cells).OrderByDescending(c => c.Count))
             {
@@ -153,22 +152,6 @@ public class Generates
         writer.Flush();
         file.Refresh();
         file.Exists.Should().BeTrue();
-    }
-
-    private static double GetInfo(int cells, int sum)
-    {
-        var cs = Candidates.None;
-
-        foreach (var combo in Candidates.All.Where(c => c.Count == cells && c.Sum() == sum))
-            cs |= combo;
-
-        double count = cs.Count;
-        double cmin1 = count - 1;
-
-        var info = Info.Bits((cmin1 / count) + (1d / count * cmin1 / count))
-            - Info.Peer(9);
-
-        return info * (cells - 1);
     }
 
     static int Min(int unknown) => Enumerable.Range(1, unknown).Sum();

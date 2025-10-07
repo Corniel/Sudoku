@@ -14,8 +14,6 @@ public sealed class Ratio1_2(Pos a, Pos b) : Set(a, b)
 
     public sealed class Reduce(Pos appliesTo, Pos other) : Pair(appliesTo, other)
     {
-        public override double Bits => bits;
-
         public override Candidates Restrict(int value) => Lookup[value];
 
         private static readonly ImmutableArray<Candidates> Lookup =
@@ -31,7 +29,5 @@ public sealed class Ratio1_2(Pos a, Pos b) : Set(a, b)
             /* 8 */ [4],
             /* 9 */ default,
         ];
-
-        private static readonly double bits = Info.Avg(1.7);
     }
 }

@@ -34,10 +34,10 @@ public readonly struct Cells : IEquatable<Cells>
             {
                 sb.Append(this[row, col] is 0 ? '.' : (char)(this[row, col] + '0'));
 
-                if (col is 2 or 5) sb.Append('|');
+                if (col is 2 or 5) sb.Append('│');
             }
             if (row is not 8) sb.Append('\n');
-            if (row is 2 or 5) sb.Append("---+---+---\n");
+            if (row is 2 or 5) sb.Append("───┼───┼───\n");
         }
 
         return sb.ToString();

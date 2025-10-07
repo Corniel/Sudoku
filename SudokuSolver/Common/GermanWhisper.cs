@@ -1,3 +1,4 @@
+using SudokuSolver.Generics;
 using SudokuSolver.Restrictions;
 
 namespace SudokuSolver.Common;
@@ -33,14 +34,11 @@ public sealed class GermanWhisper(ImmutableArray<Pos> cells) : Rule(cells)
 
     private sealed class Toggle(Pos appliesTo, Pos neighbor) : Pair(appliesTo, neighbor)
     {
-        public override double Bits { get; } = Info.Avg(4);
-
         public override string ToString() => $"Toggle: {AppliesTo}, {Other}";
 
-        public override Candidates Restrict(int value) => Allowed[value];
+        public override Candidates Restrict(Candidates other) => Allowed[other];
 
-        private static readonly ImmutableArray<Candidates> Allowed =
-        [
+        private static readonly CandidateLookup<Candidates> Allowed = Init([
             /* ? */ [1, 2, 3, 4, 6, 7, 8, 9],
             /* 1 */ [6, 7, 8, 9],
             /* 2 */ [6, 7, 8, 9],
@@ -51,19 +49,16 @@ public sealed class GermanWhisper(ImmutableArray<Pos> cells) : Rule(cells)
             /* 7 */ [1, 2, 3, 4],
             /* 8 */ [1, 2, 3, 4],
             /* 9 */ [1, 2, 3, 4],
-        ];
+        ]);
     }
 
     private sealed class NoToggle(Pos appliesTo, Pos neighbor) : Pair(appliesTo, neighbor)
     {
-        public override double Bits { get; } = Info.Avg(4);
-
         public override string ToString() => $"No toggle: {AppliesTo}, {Other}";
 
-        public override Candidates Restrict(int value) => Allowed[value];
+        public override Candidates Restrict(Candidates other) => Allowed[other];
 
-        private static readonly ImmutableArray<Candidates> Allowed =
-        [
+        private static readonly CandidateLookup<Candidates> Allowed = Init([
             /* ? */ [1, 2, 3, 4, 6, 7, 8, 9],
             /* 1 */ [1, 2, 3, 4],
             /* 2 */ [1, 2, 3, 4],
@@ -74,6 +69,6 @@ public sealed class GermanWhisper(ImmutableArray<Pos> cells) : Rule(cells)
             /* 7 */ [6, 7, 8, 9],
             /* 8 */ [6, 7, 8, 9],
             /* 9 */ [6, 7, 8, 9],
-        ];
+        ]);
     }
 }

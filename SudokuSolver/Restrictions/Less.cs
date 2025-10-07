@@ -5,7 +5,5 @@ public sealed class Less(Pos appliesTo, Pos other, int delta) : Pair(appliesTo, 
 {
     public int Delta { get; } = delta;
 
-    public override double Bits => Info.Avg(9 - Delta);
-
-    public override Candidates Restrict(int value) => Candidates.AtMost((value is 0 ? _9 : value) - Delta);
+    public override Candidates Restrict(Candidates other) => Candidates.AtMost(other.Last() - Delta);
 }

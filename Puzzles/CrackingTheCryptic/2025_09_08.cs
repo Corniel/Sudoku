@@ -104,12 +104,10 @@ public sealed class _2025_09_08 : CtcPuzzle
             
             public ImmutableArray<Pos> After { get; } = after;
 
-            public double Bits => Info.Avg(2);
-
-            public Candidates Restrict(Cells cells)
+            public Candidates Restrict(Graph graph)
             {
-                var bef = Step.Walk(Before, cells);
-                var aft = Step.Walk(After, cells);
+                var bef = Step.Walk(Before, graph);
+                var aft = Step.Walk(After, graph);
 
                 // ASC based on after
                 if (aft.Sign > 0)
@@ -154,13 +152,13 @@ public sealed class _2025_09_08 : CtcPuzzle
 
     private readonly record struct Step(int First, int Sign)
     {
-        public static Step Walk(ImmutableArray<Pos> steps, Cells cells)
+        public static Step Walk(ImmutableArray<Pos> steps, Graph graph)
         {
             var first = 0;
 
             foreach (var step in steps)
             {
-                var next = cells[step];
+                var next = graph[step].Value;
 
                 if (next is not 0 && next != first)
                 {

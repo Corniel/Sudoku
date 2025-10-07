@@ -11,5 +11,5 @@ public sealed class Peers(Pos appliesTo, PosSet set) : Restriction
     public double Bits => 0;
 
     /// <inheritdoc />
-    public Candidates Restrict(Cells cells) => Candidates._1_to_9;
+    public Candidates Restrict(Graph graph) => Candidates._1_to_9;
 }

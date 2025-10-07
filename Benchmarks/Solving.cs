@@ -16,18 +16,17 @@ public class Solving
 
     public ImmutableArray<Clues> Clues => Config == nameof(Diabolical) ? Diabolical : Hard;
 
-    [Params(nameof(Easy), nameof(Medium), nameof(Hard), nameof(Diabolical))]
+    [Params(/*nameof(Easy), nameof(Medium), nameof(Hard), */nameof(Diabolical))]
     public string Config { get; set; } = nameof(Diabolical);
 
-    [Benchmark]
+    //[Benchmark]
     public int Reference()
     {
         var solved = 0;
 
         foreach (var clue in Clues)
-        {
             solved += ReferenceSolver.Solve(clue)[0, 0];
-        }
+
         return solved;
     }
 
@@ -37,21 +36,19 @@ public class Solving
         var solved = 0;
 
         foreach (var clue in Clues)
-        {
             solved += Solver.Solve(clue, Rules.Standard, ReduceOptions.Default)[Pos.O];
-        }
+
         return solved;
     }
 
-    [Benchmark]
-    public int No_pre_processing()
+    //[Benchmark]
+    public int Backtracking()
     {
         var solved = 0;
 
         foreach (var clue in Clues)
-        {
             solved += Solver.Solve(clue, Rules.Standard, ReduceOptions.Backtracking)[Pos.O];
-        }
+
         return solved;
     }
 
@@ -59,25 +56,31 @@ public class Solving
     public int Hidden()
     {
         var solved = 0;
-        var options = new ReduceOptions { NakedSingles = true, Hidden = true, Backtracker = true };
+        var options = new ReduceOptions { HiddenSingles = true, Backtracker = true };
 
         foreach (var clue in Clues)
-        {
             solved += Solver.Solve(clue, Rules.Standard, options)[Pos.O];
-        }
+
         return solved;
     }
 
-    [Benchmark]
-    public int Pairs()
+   // [Benchmark]
+    public int Simple()
     {
         var solved = 0;
-        var options = new ReduceOptions { NakedSingles = true, NakedPairs = true, Backtracker = true };
+        var options = new ReduceOptions 
+        {
+            HiddenSingles = true,
+            HiddenPairs = true,
+            NakedPairs = true,
+            NakedTriples = true,
+            PointingCandidates = true,
+            Backtracker = true 
+        };
 
         foreach (var clue in Clues)
-        {
             solved += Solver.Solve(clue, Rules.Standard, options)[Pos.O];
-        }
+
         return solved;
     }
 
@@ -85,17 +88,17 @@ public class Solving
     public int All()
     {
         var solved = 0;
+        var options = ReduceOptions.All with { Restrictions = false };
 
         foreach (var clue in Clues)
-        {
-            solved += Solver.Solve(clue, Rules.Standard, ReduceOptions.All)[Pos.O];
-        }
+            solved += Solver.Solve(clue, Rules.Standard, options)[Pos.O];
+
         return solved;
     }
 
     private static ImmutableArray<Clues> Set(ImmutableArray<PuzzleBankPuzzle> puzzles, int take = 1000) =>
     [
-       .. puzzles
+        .. puzzles
             .OrderByDescending(p => p.Level)
             .Take(take)
             .Select(p => p.Clues)

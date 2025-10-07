@@ -4,13 +4,9 @@ public sealed class DeltaMax(Pos appliesTo, Pos other, int delta) : Pair(applies
 {
     public int Delta { get; } = delta;
 
-    public override double Bits => Infos[Delta];
-
     public override Candidates Restrict(int value) => Lookup[Delta][value];
 
     public static readonly ImmutableArray<ImmutableArray<Candidates>> Lookup = lookup();
-
-    public static readonly ImmutableArray<double> Infos = infos();
 
     private static ImmutableArray<ImmutableArray<Candidates>> lookup()
     {
@@ -28,16 +24,5 @@ public sealed class DeltaMax(Pos appliesTo, Pos other, int delta) : Pair(applies
         }
 
         return [..look];
-    }
-
-    private static ImmutableArray<double> infos()
-    {
-        var bits = new double[_9];
-        var look = lookup();
-
-        for (var dt = 1; dt < _9; dt++)
-            bits[dt] = Info.Avg(look[dt].Sum(v => v.Count) / 10d);
-
-        return [.. bits];
     }
 }

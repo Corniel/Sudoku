@@ -10,7 +10,7 @@ public sealed class Mask(Pos appliesTo, Candidates mask) : Restriction
     public double Bits => 0;
 
     /// <inheritdoc />
-    public Candidates Restrict(Cells cells) => mask;
+    public Candidates Restrict(Graph graph) => mask;
 
     /// <inheritdoc />
     public override string ToString() => $"{AppliesTo} => {mask}";

@@ -32,14 +32,12 @@ public sealed class Arrow(ImmutableArray<Pos> cells, bool isSet = false) : Rule(
 
     private sealed class Circle(Pos circle, ImmutableArray<Pos> shaft) : Group(circle, shaft)
     {
-        public override double Bits => Info.Avg(_9 - Others.Length);
-
-        public override Candidates Restrict(Cells cells)
+         public override Candidates Restrict(Graph graph)
         {
             var min = 0;
             var max = 0;
 
-            foreach (var val in Others.Select(o => cells[o]))
+            foreach (var val in Others.Select(o => graph[o].Value))
             {
                 if (val is 0)
                 {
@@ -58,41 +56,43 @@ public sealed class Arrow(ImmutableArray<Pos> cells, bool isSet = false) : Rule(
 
     private sealed class CircleSet(Pos circle, ImmutableArray<Pos> shaft) : Group(circle, shaft)
     {
-        public override double Bits => Info.Avg(_9 - Others.Length);
-
-        public override Candidates Restrict(Cells cells)
+        public override Candidates Restrict(Graph graph)
         {
             var known = Candidates.None;
+            var unknw = Candidates.None;
 
-            foreach (var val in Others.Select(o => cells[o]))
-                known |= val;
+            foreach (var other in Others)
+            {
+                var val = graph[other].Value;
+                if (val is 0)
+                {
+                    unknw |= graph[other].Candidates;
+                }
+                else
+                {
+                    known |= val;
+                }
+            }
 
-            var min = known;
-            var max = known;
+            var min = known.Sum();
+            var max = known.Sum();
+            var missing = Others.Length - known.Count;
+            min += unknw.Take(missing).Sum();
+            max += unknw.Skip(unknw.Count - missing).Sum();
 
-            var add = 1;
-            while (min.Count < Others.Length)
-                min |= add++;
-
-            add = _9;
-            while (max.Count < Others.Length)
-                max |= add--;
-
-            return Candidates.Between(min.Sum(), max.Sum());
+            return Candidates.Between(min, max);
         }
     }
 
     private sealed class Shaft(Pos sum, Pos appliesTo, ImmutableArray<Pos> others) : Group(appliesTo, others)
     {
-        public override double Bits => Info.Avg(9d / Others.Length);
-
         public Pos Sum { get; } = sum;
 
         public int Size => Others.Length + 1;
 
-        public override Candidates Restrict(Cells cells)
+        public override Candidates Restrict(Graph graph)
         {
-            var s = cells[Sum];
+            var s = graph[Sum].Value;
 
             if (s is not 0 && s < Size)
             {
@@ -102,7 +102,7 @@ public sealed class Arrow(ImmutableArray<Pos> cells, bool isSet = false) : Rule(
             var min = 0;
             var max = 0;
 
-            foreach (var val in Others.Select(o => cells[o]))
+            foreach (var val in Others.Select(o => graph[o].Value))
             {
                 if (val is 0)
                 {
@@ -133,23 +133,21 @@ public sealed class Arrow(ImmutableArray<Pos> cells, bool isSet = false) : Rule(
 
         public int Minimum { get; } = triangle(others.Length + 1);
 
-        public override double Bits => Infos[Others.Length + 1][_9];
-
-        public override Candidates Restrict(Cells cells)
+        public override Candidates Restrict(Graph graph)
         {
-            var sum_ = cells[Sum];
+            var sum_ = graph[Sum].Value;
 
             if (sum_ is 0)
             {
                 var candidates = Candidates.None;
 
                 for (var s_ = Minimum; s_ <= _9; s_++)
-                    candidates |= Restrict(cells, s_);
+                    candidates |= Restrict(graph, s_);
 
                 return candidates;
             }
             else if (sum_ < Minimum) return Candidates.None;
-            else return Restrict(cells, sum_);
+            else return Restrict(graph, sum_);
         }
     }
 }

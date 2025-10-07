@@ -5,7 +5,7 @@ namespace SudokuSolver;
 public readonly partial struct Rules
 {
     /// <summary>An empty set of rules.</summary>
-    public static readonly Rules None = new([], [.. range(_9x9).Select(p => Constraint.None(new Pos(p)))]);
+    public static readonly Rules None = new([], []);
 
     /// <summary>The basic set of rules (rows and columns only).</summary>
     public static readonly Rules Basic = None + Row.All + Col.All;

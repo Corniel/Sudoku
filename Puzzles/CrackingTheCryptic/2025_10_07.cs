@@ -7,7 +7,7 @@ public sealed class _2025_10_07 : CtcPuzzle
     public override string Title => "Golden Arrow";
     public override string? Author => "James Kopp";
     public override Uri? Url => new("https://youtu.be/Y23x1sGzWJo");
-    public override O Duration => O.Unknown;
+    public override O Duration => O.ms10;
 
     public override Cells Solution { get; } = Cells.Parse("""
         582│941│736

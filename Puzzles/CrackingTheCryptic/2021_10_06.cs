@@ -8,7 +8,7 @@ public sealed class _2021_10_06 : CtcPuzzle
     public override string Title => "Dutch Whispers";
     public override string? Author => "Aad van de Wetering";
     public override Uri? Url => new("https://youtu.be/6pAQYHf42Ik");
-    public override O Duration => O.oo;
+    public override O Duration => O.Unknown;
 
     public override Clues Clues { get; } = Clues.Parse("""
         ...|...|...
@@ -25,17 +25,17 @@ public sealed class _2021_10_06 : CtcPuzzle
         """);
 
     public override Cells Solution { get; } = Cells.Parse("""
-        481|627|395
-        296|534|817
-        375|819|642
-        ---+---+---
-        843|172|569
-        152|986|473
-        967|453|281
-        ---+---+---
-        519|268|734
-        634|795|128
-        728|341|956
+        481│627│395
+        697│345│218
+        325│891│647
+        ───┼───┼───
+        964│172│853
+        153│986│472
+        278│453│961
+        ───┼───┼───
+        519│268│734
+        836│714│529
+        742│539│186
         """);
 
     public override Rules Constraints { get; } =

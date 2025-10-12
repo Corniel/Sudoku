@@ -26,7 +26,7 @@ public sealed class AntiKing(Pos p1, Pos p2) : Set(p1, p2)
         {
             var (r1, c1) = p1;
             var (r2, c2) = p2;
-            return (r1 - r2).Sqr() + (c1 - c2).Sqr() == 1;
+            return ((r1 - r2).Sqr() + (c1 - c2).Sqr()) is 1 or 2;
         }
     }
 }

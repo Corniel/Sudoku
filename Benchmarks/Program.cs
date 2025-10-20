@@ -4,9 +4,7 @@ public static class Program
 {
     public static void Main()
     {
-        //Cracking_the_Cryptic.Run();
-
-        _ = BenchmarkDotNet.Running.BenchmarkRunner.Run<Solving>();
+        Cracking_the_Cryptic.Run();
     }
 
     public static void Other()

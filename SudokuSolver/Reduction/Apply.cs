@@ -21,10 +21,6 @@ public static class Apply
                 {
                     var allowed = Candidates._1_to_9;
 
-                    // As peers can not have the same value.
-                    if (node.Peers.Contains(other))
-                        allowed ^= val;
-
                     foreach (var restriction in restrictions)
                         allowed &= restriction.Restrict(val);
 

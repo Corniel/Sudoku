@@ -4,11 +4,12 @@ namespace SudokuSolver.Reduction;
 [DebuggerTypeProxy(typeof(Diagnostics.CollectionDebugView))]
 public readonly struct Backtracker(Graph graph, ImmutableArray<Node> nodes, int head = 0) : IReadOnlyCollection<Node>
 {
-    public static Backtracker New(Graph graph)
+    public static Backtracker New(Graph graph, bool log)
     {
         var queue = new Node[graph.Todo.Count];
         var todos = graph.Todo;
         var count = 0;
+        var score = new double[_9x9];
 
         PosSet[] houses = [..graph.Houses.Select(h => h.Cells & graph.Todo).OrderBy(h => h.Count)];
 
@@ -42,7 +43,11 @@ public readonly struct Backtracker(Graph graph, ImmutableArray<Node> nodes, int 
                 }
 
                 foreach (var node in cs.Select(c => graph[c]))
-                    test *= (double)node.Candidates.Count * node.Peers.Count / node.Links.Count;
+                {
+                    var sc = (double)node.Candidates.Count * node.Peers.Count / node.Links.Count;
+                    score[node.Cell] = sc;
+                    test *= sc;
+                }
 
                 if (test < best)
                 {
@@ -51,8 +56,14 @@ public readonly struct Backtracker(Graph graph, ImmutableArray<Node> nodes, int 
                 }
             }
 
+#if DEBUG
+            if (log) Console.WriteLine($"House = {hous.Count}, F = {hous.Select(p => score[p]).Product():0.0}");
+#endif
             foreach (var cell in hous.OrderBy(c => graph[c].Candidates.Count))
             {
+#if DEBUG
+                if (log) Console.WriteLine($"{cell}, Candidates = {graph[cell].Candidates.Count}, Links {graph[cell].Links.Count}, F = {score[cell]:0.000}");
+#endif
                 todos ^= cell;
                 queue[count++] = graph[cell].Freeze(todos);
             }

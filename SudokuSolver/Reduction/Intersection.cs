@@ -4,7 +4,6 @@ namespace SudokuSolver.Reduction;
 
 public static class Intersection
 {
-    
     public static void XWing(Graph graph)
     {
         foreach (var rows in graph.Rows.Take2())

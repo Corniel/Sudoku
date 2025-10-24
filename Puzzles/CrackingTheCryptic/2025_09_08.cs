@@ -104,6 +104,8 @@ public sealed class _2025_09_08 : CtcPuzzle
             
             public ImmutableArray<Pos> After { get; } = after;
 
+            public PosSet Links { get; } = [.. before, .. after];
+
             public Candidates Restrict(Graph graph)
             {
                 var bef = Step.Walk(Before, graph);

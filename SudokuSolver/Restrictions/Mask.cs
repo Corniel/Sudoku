@@ -7,7 +7,7 @@ public sealed class Mask(Pos appliesTo, Candidates mask) : Restriction
     public Pos AppliesTo { get; } = appliesTo;
 
     /// <inheritdoc />
-    public double Bits => 0;
+    public PosSet Links => PosSet.Empty;
 
     /// <inheritdoc />
     public Candidates Restrict(Graph graph) => mask;

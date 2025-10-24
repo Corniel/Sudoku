@@ -8,7 +8,7 @@ public sealed class Peers(Pos appliesTo, PosSet set) : Restriction
     public PosSet Set { get; } = set;
 
     /// <inheritdoc />
-    public double Bits => 0;
+    public PosSet Links { get; } = set ^ appliesTo;
 
     /// <inheritdoc />
     public Candidates Restrict(Graph graph) => Candidates._1_to_9;

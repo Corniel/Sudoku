@@ -5,11 +5,14 @@ namespace SudokuSolver.Restrictions;
 /// <summary>Describes a restriction between two cells.</summary>
 public abstract class Pair(Pos appliesTo, Pos other) : Restriction
 {
-    /// <summary>The cell that is bound to the restriction.</summary>
+    /// <inheritdoc />
     public Pos AppliesTo { get; } = appliesTo;
 
     /// <summary>The other cell that defines the restriction.</summary>
     public Pos Other { get; } = other;
+
+    /// <inheritdoc />
+    public PosSet Links { get; } = [other];
 
     /// <inheritdoc />
     public Candidates Restrict(Graph graph) => Restrict(graph.Test(Other));

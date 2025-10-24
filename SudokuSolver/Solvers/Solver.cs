@@ -37,7 +37,7 @@ public static partial class Solver
 #endif
 
         if (options.Backtracker && graph.Todo.HasAny)
-            _ = Backtracker.New(graph).Solve();
+            _ = Backtracker.New(graph, options.Log).Solve();
 
         return graph.Cells;
     }

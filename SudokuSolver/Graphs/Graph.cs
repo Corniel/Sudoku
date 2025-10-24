@@ -198,6 +198,7 @@ public sealed class Graph : IReadOnlyCollection<Node>
             {
                 graph.Restricted |= restriction.AppliesTo;
                 graph[restriction.AppliesTo].Restrictions.Add(restriction);
+                graph[restriction.AppliesTo].Links |= restriction.Links;
 
                 if (restriction is Pair pair)
                 {

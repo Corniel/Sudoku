@@ -1,5 +1,6 @@
 using BenchmarkDotNet.Attributes;
 using Puzzles.PuzzleBank;
+using Sudoku;
 using SudokuSolver;
 using SudokuSolver.Solvers;
 using System.Collections.Immutable;
@@ -19,13 +20,13 @@ public class Solving
     [Params(/*nameof(Easy), nameof(Medium), nameof(Hard), */nameof(Diabolical))]
     public string Config { get; set; } = nameof(Diabolical);
 
-    //[Benchmark]
+    [Benchmark]
     public int Reference()
     {
         var solved = 0;
 
         foreach (var clue in Clues)
-            solved += ReferenceSolver.Solve(clue)[0, 0];
+            solved += global::Reference.Solver.Solve(clue)[0, 0];
 
         return solved;
     }
@@ -41,7 +42,7 @@ public class Solving
         return solved;
     }
 
-    //[Benchmark]
+    [Benchmark]
     public int Backtracking()
     {
         var solved = 0;
@@ -64,7 +65,7 @@ public class Solving
         return solved;
     }
 
-   // [Benchmark]
+    [Benchmark]
     public int Simple()
     {
         var solved = 0;

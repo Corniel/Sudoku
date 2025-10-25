@@ -1,16 +1,8 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
-  <ItemGroup>
-    <EmbeddedResource Include="Restrictions/*.md" />
-  </ItemGroup>
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup Label="Analyzers">
     <PackageReference PrivateAssets="all" Include="Qowaiv.Analyzers.CSharp" />
     <PackageReference PrivateAssets="all" Include="StyleCop.Analyzers.Unstable" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="../Sudoku/Sudoku.csproj" />
   </ItemGroup>
 
 </Project>

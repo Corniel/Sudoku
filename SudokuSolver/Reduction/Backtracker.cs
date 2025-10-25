@@ -1,7 +1,7 @@
 namespace SudokuSolver.Reduction;
 
 [DebuggerDisplay("Count = {Count}")]
-[DebuggerTypeProxy(typeof(Diagnostics.CollectionDebugView))]
+[DebuggerTypeProxy(typeof(CollectionDebugView))]
 public readonly struct Backtracker(Graph graph, ImmutableArray<Node> nodes, int head = 0) : IReadOnlyCollection<Node>
 {
     public static Backtracker New(Graph graph, bool log)

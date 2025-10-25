@@ -1,6 +1,6 @@
-using SudokuSolver.Generics;
+using Sudoku.Generics;
 
-namespace SudokuSolver;
+namespace Sudoku;
 
 public static class Combinations
 {

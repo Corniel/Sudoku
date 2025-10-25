@@ -1,4 +1,4 @@
-using SudokuSolver.Diagnostics;
+using Sudoku.Diagnostics;
 using SudokuSolver.Houses;
 using SudokuSolver.Restrictions;
 using System.Data;

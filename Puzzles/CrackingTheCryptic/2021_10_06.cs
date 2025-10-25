@@ -1,4 +1,3 @@
-
 using SudokuSolver.Houses;
 
 namespace Puzzles.CrackingTheCryptic;

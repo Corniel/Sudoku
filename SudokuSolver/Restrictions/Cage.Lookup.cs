@@ -1,4 +1,4 @@
-using SudokuSolver.Generics;
+using Sudoku.Generics;
 using System.Globalization;
 using System.IO;
 

@@ -9,7 +9,7 @@
   <PropertyGroup Label="Compiler options">
     <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
-    <LangVersion>preview</LangVersion>
+    <LangVersion>14</LangVersion>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 

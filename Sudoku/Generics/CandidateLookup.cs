@@ -1,4 +1,4 @@
-namespace SudokuSolver.Generics;
+namespace Sudoku.Generics;
 
 public sealed class CandidateLookup<T>
 {

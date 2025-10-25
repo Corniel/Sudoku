@@ -1,4 +1,4 @@
-namespace SudokuSolver.Generics;
+namespace Sudoku.Generics;
 
 /// <summary>A fixed queue.</summary>
 [DebuggerDisplay("Count = {Count}")]

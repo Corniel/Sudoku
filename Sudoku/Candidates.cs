@@ -1,7 +1,7 @@
 using System.Diagnostics.Contracts;
 using System.Numerics;
 
-namespace SudokuSolver;
+namespace Sudoku;
 
 /// <summary>All possible candidate digits for a cell.</summary>
 [CollectionBuilder(typeof(Candidates), nameof(New))]

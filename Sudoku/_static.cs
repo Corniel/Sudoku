@@ -1,4 +1,4 @@
-namespace SudokuSolver;
+namespace Sudoku;
 
 public static class Statics
 {

@@ -1,4 +1,3 @@
-using SudokuSolver.Diagnostics;
 using SudokuSolver.Restrictions;
 
 namespace SudokuSolver.Graphs;

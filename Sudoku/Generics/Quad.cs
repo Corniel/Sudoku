@@ -1,4 +1,4 @@
-namespace SudokuSolver.Generics;
+namespace Sudoku.Generics;
 
 public readonly struct Quad<T>(T one, T two, T thr, T four)
 {

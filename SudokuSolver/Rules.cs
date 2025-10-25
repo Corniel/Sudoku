@@ -2,7 +2,7 @@ namespace SudokuSolver;
 
 /// <summary>A set of rules that apply when solving a set of <see cref="Clues"/>.</summary>
 [DebuggerDisplay("Count = {Count}")]
-[DebuggerTypeProxy(typeof(Diagnostics.CollectionDebugView))]
+[DebuggerTypeProxy(typeof(CollectionDebugView))]
 public readonly partial struct Rules(ImmutableArray<Rule> rules, ImmutableArray<Restriction> restrictions) : IReadOnlyCollection<Rule>
 {
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]

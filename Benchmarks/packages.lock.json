@@ -4,11 +4,11 @@
     "net9.0": {
       "BenchmarkDotNet": {
         "type": "Direct",
-        "requested": "[0.15.2, )",
-        "resolved": "0.15.2",
-        "contentHash": "5vl4nQFUGTKgOVE5LNoLpv/X/wFQ7wE5yiaJAXCpzgNtUADtfEwbuufKI4o5E2De0VTXNEeom5Hnv8S8vuBZtg==",
+        "requested": "[0.15.4, )",
+        "resolved": "0.15.4",
+        "contentHash": "hGHlCCf0HL5b1LvjXb84ZEAVw45Hl9lt4+0gLxaJ4Ty+GagIE8fH+GnzJc3w5MVscghd5NpTNmvwWub1Qg4foQ==",
         "dependencies": {
-          "BenchmarkDotNet.Annotations": "0.15.2",
+          "BenchmarkDotNet.Annotations": "0.15.4",
           "CommandLineParser": "2.9.1",
           "Gee.External.Capstone": "2.3.0",
           "Iced": "1.21.0",
@@ -22,9 +22,9 @@
       },
       "DotNetProjectFile.Analyzers": {
         "type": "Direct",
-        "requested": "[1.7.1, )",
-        "resolved": "1.7.1",
-        "contentHash": "UdFWpLkSL8QFje40D4He2kpQBWwUBEuNVzknBTQVQZ6NraH1qf25IHBmfYXJi8Z+kueby1BCpFDZOXlrYz40Rw=="
+        "requested": "[1.8.0, )",
+        "resolved": "1.8.0",
+        "contentHash": "Gtu1uwGjnzKe8YbBGzdghpaZAe3O3jpSd5Z49xTmGYYXdoHVdrHNZCGHTHlytRAFsTa5GhjYfbepAUItwqyVdQ=="
       },
       "SonarAnalyzer.CSharp": {
         "type": "Direct",
@@ -34,8 +34,8 @@
       },
       "BenchmarkDotNet.Annotations": {
         "type": "Transitive",
-        "resolved": "0.15.2",
-        "contentHash": "a7rVlVmXQRrp3J+HF/FtjwiFcshU6BAuv6U1xtAbqCUYepOEnNGaPeOFvy4It17QZwwofm6U/GAfW3JrFMXszg=="
+        "resolved": "0.15.4",
+        "contentHash": "jLwEHO8EfrsVNNH9Lc4dHMmwD8TON8y8mGQLjqUbSZygQoAIjq6xwNz0bYIVNFl0aUhPgAd/1lnSz8uvUFoMPg=="
       },
       "CommandLineParser": {
         "type": "Transitive",
@@ -246,8 +246,20 @@
           "SudokuSolver": "[1.0.0, )"
         }
       },
-      "sudokusolver": {
+      "reference": {
+        "type": "Project",
+        "dependencies": {
+          "Sudoku": "[1.0.0, )"
+        }
+      },
+      "sudoku": {
         "type": "Project"
+      },
+      "sudokusolver": {
+        "type": "Project",
+        "dependencies": {
+          "Sudoku": "[1.0.0, )"
+        }
       }
     }
   }

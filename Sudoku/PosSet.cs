@@ -1,6 +1,6 @@
 using System.Diagnostics.Contracts;
 
-namespace SudokuSolver;
+namespace Sudoku;
 
 [CollectionBuilder(typeof(PosSet), nameof(New))]
 [DebuggerDisplay("Count = {Count}")]

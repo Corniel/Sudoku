@@ -16,12 +16,6 @@
       },
       "sudoku": {
         "type": "Project"
-      },
-      "sudokusolver": {
-        "type": "Project",
-        "dependencies": {
-          "Sudoku": "[1.0.0, )"
-        }
       }
     }
   }

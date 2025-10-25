@@ -1,4 +1,4 @@
-namespace SudokuSolver;
+namespace Sudoku;
 
 public readonly struct Pos(int i) : IEquatable<Pos>
 {

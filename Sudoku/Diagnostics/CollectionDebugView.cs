@@ -1,11 +1,11 @@
 #pragma warning disable S2365
 // Properties should not make collection or array copies
 
-namespace SudokuSolver.Diagnostics;
+namespace Sudoku.Diagnostics;
 
 /// <summary>Allows the debugger to display collections.</summary>
 [ExcludeFromCodeCoverage(Justification = "Debugger purposes only")]
-internal sealed class CollectionDebugView(IEnumerable enumeration)
+public sealed class CollectionDebugView(IEnumerable enumeration)
 {
     /// <summary>A reference to the enumeration to display.</summary>
     private readonly IEnumerable enumeration = enumeration;

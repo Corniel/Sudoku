@@ -1,4 +1,6 @@
-namespace SudokuSolver.Solvers;
+using Sudoku;
+
+namespace Reference;
 
 /// <summary>
 /// Straight-forward multi-demensional aray based backtracking Sudoku solver.
@@ -6,7 +8,7 @@ namespace SudokuSolver.Solvers;
 /// <remarks>
 /// See; https://www.geeksforgeeks.org/dsa/sudoku-backtracking-7/.
 /// </remarks>
-public static class ReferenceSolver
+public static class Solver
 {
     public static Cells Solve(Clues clues)
     {

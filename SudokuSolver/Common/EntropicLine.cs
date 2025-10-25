@@ -1,4 +1,4 @@
-using SudokuSolver.Generics;
+using Sudoku.Generics;
 using SudokuSolver.Restrictions;
 
 namespace SudokuSolver.Common;

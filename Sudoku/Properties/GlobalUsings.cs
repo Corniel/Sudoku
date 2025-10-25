@@ -1,6 +1,3 @@
-global using Sudoku;
-global using Sudoku.Diagnostics;
-global using SudokuSolver.Graphs;
 global using System;
 global using System.Collections;
 global using System.Collections.Generic;

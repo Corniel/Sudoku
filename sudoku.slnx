@@ -1,7 +1,11 @@
 <Solution>
+  <Folder Name="/Solvers/">
+    <Project Path="Reference/Reference.csproj" />
+    <Project Path="SudokuSolver/SudokuSolver.csproj" />
+  </Folder>
   <Project Path=".net.csproj" />
   <Project Path="Benchmarks/Benchmarks.csproj" />
-  <Project Path="Specs/Specs.csproj" />
   <Project Path="Puzzles/Puzzles.csproj" />
-  <Project Path="SudokuSolver/SudokuSolver.csproj" />
+  <Project Path="Specs/Specs.csproj" />
+  <Project Path="Sudoku/Sudoku.csproj" />
 </Solution>

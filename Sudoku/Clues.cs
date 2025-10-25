@@ -1,4 +1,4 @@
- namespace SudokuSolver;
+ namespace Sudoku;
 
 [DebuggerDisplay("Count = {Count}")]
 [DebuggerTypeProxy(typeof(Diagnostics.CollectionDebugView))]

@@ -7,6 +7,8 @@
 
   <ItemGroup>
     <ProjectReference Include="../Puzzles/Puzzles.csproj" />
+    <ProjectReference Include="../Reference/Reference.csproj" />
+    <ProjectReference Include="../Sudoku/Sudoku.csproj" />
     <ProjectReference Include="../SudokuSolver/SudokuSolver.csproj" />
   </ItemGroup>
 
@@ -24,17 +26,6 @@
   <ItemGroup Label="Analyzers">
     <PackageReference PrivateAssets="all" Include="AwesomeAssertions.Analyzers" />
     <PackageReference PrivateAssets="all" Include="NUnit.Analyzers" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageVersion Update="DotNetProjectFile.Analyzers" Version="1.7.1.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Update="DotNetProjectFile.Analyzers">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-    </PackageReference>
   </ItemGroup>
   
 </Project>

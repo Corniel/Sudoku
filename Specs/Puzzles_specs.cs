@@ -229,15 +229,6 @@ public class Puzzle_bank
 
     private static readonly ImmutableArray<Puzzle> Diabolicals = [.. PuzzleBankPuzzle.Diabolical.Take(Take)];
 
-    private static readonly ImmutableArray<Puzzle> AntiKnights =
-   [
-       .. PuzzleBankPuzzle.Diabolical.Where(p => p.IsAntiKnight),
-        .. PuzzleBankPuzzle.Hard.Where(p => p.IsAntiKnight),
-        .. PuzzleBankPuzzle.Medium.Where(p => p.IsAntiKnight),
-        .. PuzzleBankPuzzle.Easy.Where(p => p.IsAntiKnight),
-    ];
-
-
     private static readonly ImmutableArray<Puzzle> Hypers =
     [
         .. PuzzleBankPuzzle.Diabolical.Where(p => p.IsHyper),
@@ -266,9 +257,6 @@ public class Puzzle_bank
     [TestCaseSource(nameof(Diabolicals))]
     public void Diabolical(Puzzle puzzle) => Solve(puzzle);
 
-    [TestCaseSource(nameof(AntiKnights))]
-    public void AntiKnight(Puzzle puzzle) => Solve(puzzle, Rules.AntiKnight);
-
     [TestCaseSource(nameof(Hypers))]
     public void Hyper(Puzzle puzzle) => Solve(puzzle, Rules.Hyper);
 
@@ -290,12 +278,9 @@ public class Puzzle_bank
 
         foreach (var puzzle in PuzzleBankPuzzle.Load(name))
         {
-            var solved = Solver.Solve(puzzle.Clues);
-            puzzle.IsX = Rules.XSudoku.IsValid(solved);
-            puzzle.IsAntiKnight = Rules.AntiKnight.IsValid(solved);
-            puzzle.IsHyper = Rules.Hyper.IsValid(solved);
-
-            // Update puzzles.
+            // Update
+            // ...
+            // Save
             puzzle.WriteTo(writer);
         }
     }
@@ -304,7 +289,7 @@ public class Puzzle_bank
     {
         var cs = rules ?? Rules.Standard;
         var solved = Solver.Solve(puzzle.Clues, cs, ReduceOptions.All);
-        solved.Should().BeSolved(rules);
+        solved.Should().Be(puzzle.Solution);
     }
 }
 

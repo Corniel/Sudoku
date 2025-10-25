@@ -7,22 +7,24 @@ namespace Puzzles.PuzzleBank;
 /// <remarks>
 /// See: https://github.com/grantm/sudoku-exchange-puzzle-bank.
 /// </remarks>
-public sealed class PuzzleBankPuzzle(string title, Clues clues) : Puzzle
+public sealed class PuzzleBankPuzzle(string title, Clues clues, Cells solution) : Puzzle
 {
     public override string Title { get; } = title;
 
     public override Clues Clues { get; } = clues;
 
+    public override Cells Solution { get; } = solution;
+
     public decimal Level { get; init; }
 
     /// <summary>Indicates that the puzzle also meets the <see cref="Rules.AntiKnight"/> constraints.</summary>
-    public bool IsAntiKnight { get; set; }
+    public bool IsAntiKnight { get; init; }
 
     /// <summary>Indicates that the puzzle also meets the <see cref="Rules.Hyper"/> constraints.</summary>
-    public bool IsHyper { get; set; }
+    public bool IsHyper { get; init; }
 
     /// <summary>Indicates that the puzzle also meets the <see cref="Rules.XSudoku"/> constraints.</summary>
-    public bool IsX { get; set; }
+    public bool IsX { get; init; }
 
     public static ImmutableArray<PuzzleBankPuzzle> Easy => [.. Load(nameof(Easy))];
 
@@ -32,7 +34,7 @@ public sealed class PuzzleBankPuzzle(string title, Clues clues) : Puzzle
 
     public static ImmutableArray<PuzzleBankPuzzle> Diabolical => [..Load(nameof(Diabolical))];
 
-    public override string ToString() => $"{Title} ({Level:0.0})";
+    public override string ToString() => string.Create(CultureInfo.InvariantCulture, $"{Title} ({Level:0.0})");
 
     /// <summary>Writes a puzzle as a single line to a stream writer.</summary>
     /// <remarks>Helps to update the file(s) if needed.</remarks>
@@ -43,6 +45,11 @@ public sealed class PuzzleBankPuzzle(string title, Clues clues) : Puzzle
         for (var p = Pos.O; p < _9x9; p++)
         {
             writer.Write(Clues.FirstOrDefault(c => c.Pos == p).Value);
+        }
+        writer.Write(' ');
+        for (var p = Pos.O; p < _9x9; p++)
+        {
+            writer.Write(Solution[p]);
         }
         writer.Write($" {Level.ToString("0.0", CultureInfo.InvariantCulture),4}");
         if (IsAntiKnight || IsHyper || IsX)
@@ -62,13 +69,13 @@ public sealed class PuzzleBankPuzzle(string title, Clues clues) : Puzzle
 
         while (reader.ReadLine() is { } line)
         {
-            if (line.Split(' ', StringSplitOptions.RemoveEmptyEntries) is { Length: >= 3 } parts)
+            if (line.Split(' ', StringSplitOptions.RemoveEmptyEntries) is { Length: >= 4 } parts)
             {
-                var variants = parts.Length > 3 ? parts[3] : string.Empty;
+                var variants = parts.Length > 4 ? parts[4] : string.Empty;
 
-                yield return new PuzzleBankPuzzle(parts[0], Clues.Parse(parts[1]))
+                yield return new PuzzleBankPuzzle(parts[0], Clues.Parse(parts[1]), Cells.Parse(parts[2]))
                 {
-                    Level = decimal.Parse(parts[2], CultureInfo.InvariantCulture),
+                    Level = decimal.Parse(parts[3], CultureInfo.InvariantCulture),
                     IsAntiKnight = variants.Contains('N'),
                     IsHyper = variants.Contains('h'),
                     IsX = variants.Contains('x'),

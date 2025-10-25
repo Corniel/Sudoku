@@ -6,13 +6,6 @@ public sealed class CellsAssertions(Cells subject)
 
     public Cells Subject { get; } = subject;
 
-    public void BeSolved(Rules? rules = null)
-    {
-        var reference = Reference.Solver.Solve(Clues.Parse(Subject.ToString()));
-
-        Be(reference, rules);
-    }
-
     public void Be(string expected, Rules? rules = null)
         => Be(Cells.Parse(expected), rules);
 

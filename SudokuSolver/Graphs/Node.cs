@@ -35,8 +35,6 @@ public sealed class Node
 
     public Dictionary<Pos, List<Pair>> PairedRestrictions { get; } = [];
 
-    public IEnumerable<Node> Nodes => Peers.Select(peer => Root.Nodes[peer]);
-
     private void SetCanidates(Candidates next, Candidates curr)
     {
         if (curr == next || value is not 0) return;
@@ -48,22 +46,11 @@ public sealed class Node
         {
             value = Candidates.First();
             Root.Todo ^= Cell;
-            var nodes = Nodes;
-            Peers = default;
 
-            foreach (var peer in nodes)
-                peer.Candidates ^= next;
-        }
-        else
-        {
-            foreach (var peer in Nodes)
-            {
-                if ((peer.Candidates & next).HasNone)
-                {
-                    peer.Peers ^= this.Cell;
-                    this.Peers ^= peer.Cell;
-                }
-            }
+            foreach (var peer in Peers)
+                Root.Nodes[peer].Candidates ^= next;
+
+            Peers = default;
         }
     }
 

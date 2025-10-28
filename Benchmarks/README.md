@@ -10,36 +10,32 @@ Test all 512 possible states of `Values`.
 ## Solvers
 Tested on 1000 puzzles. Results per puzzle.
 
-| Method       | Config     | Mean       | Ratio |
-|------------- |----------- |-----------:|------:|
-| Reference    | Diabolical | 2,464.0 us |  5.42 |
-| Default      | Diabolical |   455.7 us |  1.00 |
-| Backtracking | Diabolical |   632.5 us |  1.39 |
-| Hidden       | Diabolical |   427.9 us |  0.94 |
-| Pairs        | Diabolical |   670.8 us |  1.47 |
-| Simple       | Diabolical |   488.6 us |  1.07 |
-| All          | Diabolical |   575.3 us |  1.26 |
-|              |            |            |       |
-| Reference    | Hard       | 1,140.3 us |  8.93 |
-| Default      | Hard       |   127.9 us |  1.00 |
-| Backtracking | Hard       |   223.6 us |  1.75 |
-| Hidden       | Hard       |   124.6 us |  0.98 |
-| Pairs        | Hard       |   199.0 us |  1.56 |
-| Simple       | Hard       |   161.7 us |  1.27 |
-| All          | Hard       |   252.0 us |  1.97 |
-|              |            |            |       |
-| Reference    | Medium     | 1,150.4 us |  9.48 |
-| Default      | Medium     |   121.4 us |  1.00 |
-| Backtracking | Medium     |   222.7 us |  1.84 |
-| Hidden       | Medium     |   120.4 us |  0.99 |
-| Pairs        | Medium     |   203.5 us |  1.68 |
-| Simple       | Medium     |   160.6 us |  1.32 |
-| All          | Medium     |   255.3 us |  2.10 |
-|              |            |            |       |
-| Reference    | Easy       | 1,136.4 us |  9.28 |
-| Default      | Easy       |   122.5 us |  1.00 |
-| Backtracking | Easy       |   225.7 us |  1.84 |
-| Hidden       | Easy       |   120.4 us |  0.98 |
-| Pairs        | Easy       |   196.5 us |  1.61 |
-| Simple       | Easy       |   162.0 us |  1.32 |
-| All          | Easy       |   256.8 us |  2.10 |
+| Method       | Config     | Mean        | Ratio |
+|------------- |----------- |------------:|------:|
+| Reference    | Diabolical | 2,472.49 us | 23.31 |
+| Dancing      | Diabolical |    82.86 us |  0.78 |
+| Default      | Diabolical |   106.09 us |  1.00 |
+| Backtracking | Diabolical |   129.26 us |  1.22 |
+| Simple       | Diabolical |   177.52 us |  1.67 |
+| All          | Diabolical |   379.71 us |  3.58 |
+|              |            |             |       |
+| Reference    | Hard       | 1,131.37 us | 23.38 |
+| Dancing      | Hard       |    66.36 us |  1.37 |
+| Default      | Hard       |    48.40 us |  1.00 |
+| Backtracking | Hard       |    61.19 us |  1.26 |
+| Simple       | Hard       |   117.80 us |  2.43 |
+| All          | Hard       |   284.44 us |  5.88 |
+|              |            |             |       |
+| Reference    | Medium     | 1,149.13 us | 22.89 |
+| Dancing      | Medium     |    64.24 us |  1.28 |
+| Default      | Medium     |    50.23 us |  1.00 |
+| Backtracking | Medium     |    60.43 us |  1.20 |
+| Simple       | Medium     |   116.65 us |  2.32 |
+| All          | Medium     |   290.64 us |  5.79 |
+|              |            |             |       |
+| Reference    | Easy       | 1,130.10 us | 22.65 |
+| Dancing      | Easy       |    66.21 us |  1.33 |
+| Default      | Easy       |    49.89 us |  1.00 |
+| Backtracking | Easy       |    61.69 us |  1.24 |
+| Simple       | Easy       |   120.04 us |  2.41 |
+| All          | Easy       |   290.36 us |  5.82 |

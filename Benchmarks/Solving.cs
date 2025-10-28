@@ -1,4 +1,5 @@
 using BenchmarkDotNet.Attributes;
+using DancingLinks;
 using Puzzles.PuzzleBank;
 using Sudoku;
 using SudokuSolver;
@@ -17,7 +18,7 @@ public class Solving
 
     public ImmutableArray<Clues> Clues => Config == nameof(Diabolical) ? Diabolical : Hard;
 
-    [Params(/*nameof(Easy), nameof(Medium), nameof(Hard), */nameof(Diabolical))]
+    [Params(nameof(Easy), nameof(Medium), nameof(Hard), nameof(Diabolical))]
     public string Config { get; set; } = nameof(Diabolical);
 
     [Benchmark]
@@ -27,6 +28,17 @@ public class Solving
 
         foreach (var clue in Clues)
             solved += global::Reference.Solver.Solve(clue)[0, 0];
+
+        return solved;
+    }
+
+    [Benchmark]
+    public int Dancing()
+    {
+        var solved = 0;
+
+        foreach (var clue in Clues)
+            solved += DlxSolver.Solve(clue)[0, 0];
 
         return solved;
     }
@@ -49,18 +61,6 @@ public class Solving
 
         foreach (var clue in Clues)
             solved += Solver.Solve(clue, Rules.Standard, ReduceOptions.Backtracking)[Pos.O];
-
-        return solved;
-    }
-
-    [Benchmark]
-    public int Hidden()
-    {
-        var solved = 0;
-        var options = new ReduceOptions { HiddenSingles = true, Backtracker = true };
-
-        foreach (var clue in Clues)
-            solved += Solver.Solve(clue, Rules.Standard, options)[Pos.O];
 
         return solved;
     }

@@ -4,6 +4,7 @@
 namespace Sudoku.Diagnostics;
 
 /// <summary>Allows the debugger to display collections.</summary>
+[Mutable]
 [ExcludeFromCodeCoverage(Justification = "Debugger purposes only")]
 public sealed class CollectionDebugView(IEnumerable enumeration)
 {

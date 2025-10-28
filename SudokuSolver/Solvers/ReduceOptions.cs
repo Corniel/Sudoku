@@ -34,7 +34,7 @@ public sealed record ReduceOptions
 
     public static readonly ReduceOptions Backtracking = new() { Backtracker = true };
 
-    public static readonly ReduceOptions Default = new() { HiddenSingles = true, NakedPairs = true, Backtracker = true, };
+    public static readonly ReduceOptions Default = new() { HiddenSingles = true, Backtracker = true, };
 
     public static readonly ReduceOptions All = new()
     {

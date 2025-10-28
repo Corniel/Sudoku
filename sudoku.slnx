@@ -1,5 +1,6 @@
 <Solution>
   <Folder Name="/Solvers/">
+    <Project Path="DancingLinks/DancingLinks.csproj" />
     <Project Path="Reference/Reference.csproj" />
     <Project Path="SudokuSolver/SudokuSolver.csproj" />
   </Folder>

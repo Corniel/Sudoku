@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="../DancingLinks/DancingLinks.csproj" />
     <ProjectReference Include="../Puzzles/Puzzles.csproj" />
     <ProjectReference Include="../Reference/Reference.csproj" />
     <ProjectReference Include="../SudokuSolver/SudokuSolver.csproj" />

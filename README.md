@@ -5,7 +5,12 @@ My attempt to write a [Sudoku](https://en.wikipedia.org/wiki/Sudoku) solver.
 The approach of my solver is that I specify both [clues](#Clues) and the
 (potentially custom) [constraints](#Constraint) to apply when trying to solve
 the puzzle. By doing so, my solver can solve a wide variety Sudoku variants.
- 
+
+## Dancing Links Solver
+Donald Knuth's [Dancing Links](https://en.wikipedia.org/wiki/Dancing_links)
+[algorithm](https://en.wikipedia.org/wiki/Knuth%27s_Algorithm_X) solves Sudoku
+puzzles in an ellagant way. Apply this strategy also to variants is less trivial.
+
 ## Suported variants
 
 ### Standard Sudoku

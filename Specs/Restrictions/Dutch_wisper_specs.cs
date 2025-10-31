@@ -1,4 +1,4 @@
-using SudokuSolver.Common;
+using Sudoku.Common;
 
 namespace Specs.Restrictions.Dutch_wisper_specs;
 
@@ -86,26 +86,26 @@ public class Neighbors
     [Test]
     public void Generate()
     {
-        var lookup = new Candidates[10][];
+        var lookup = new Digits[10][];
         lookup[0] = [];
 
         for (var val = 1; val <= 9; val++)
         {
 
-            var candidates = new Candidates[4];
-            candidates[0] |= val;
+            var digits = new Digits[4];
+            digits[0] |= val;
 
             for (var i = 1; i < 4; i++)
             {
-                foreach (var v in candidates[i - 1])
+                foreach (var v in digits[i - 1])
                 {
-                    candidates[i] |= Allowed[v];
+                    digits[i] |= Allowed[v];
                 }
             }
-            lookup[val] = candidates;
+            lookup[val] = digits;
         }
 
-        Console.WriteLine("private static readonly ImmutableArray<ImmutableArray<Candidates>> Allowed =");
+        Console.WriteLine("private static readonly ImmutableArray<ImmutableArray<Digits>> Allowed =");
         Console.WriteLine("[");
         for (var skip = 1; skip < 4; skip++)
         {
@@ -120,7 +120,7 @@ public class Neighbors
         Console.WriteLine("]");
     }
 
-    private static readonly ImmutableArray<Candidates> Allowed =
+    private static readonly ImmutableArray<Digits> Allowed =
     [
         /* ? */ [1, 2, 3, 4, 6, 7, 8, 9],
         /* 1 */ [5, 6, 7, 8, 9],

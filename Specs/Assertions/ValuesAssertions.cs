@@ -2,11 +2,11 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace AwesomeAssertions;
 
-internal sealed class ValuesAssertions(Candidates subject)
+internal sealed class ValuesAssertions(Digits subject)
 {
-    public Candidates Subject { get; } = subject;
+    public Digits Subject { get; } = subject;
 
-    public void Be(Candidates expected, [StringSyntax("CompositeFormat")] string because = "", params object[] becauseArgs)
+    public void Be(Digits expected, [StringSyntax("CompositeFormat")] string because = "", params object[] becauseArgs)
     {
         ((object)Subject).Should().Be(expected, because, becauseArgs);
     }

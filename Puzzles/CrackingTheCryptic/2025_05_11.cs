@@ -1,4 +1,4 @@
-using SudokuSolver.Restrictions;
+using Sudoku.Restrictions;
 
 namespace Puzzles.CrackingTheCryptic;
 
@@ -76,19 +76,19 @@ public sealed class _2025_05_11 : CtcPuzzle
 
         public sealed class Reduce(Pos appliesTo, ImmutableArray<Pos> others) : Group(appliesTo, others)
         {
-            public override Candidates Restrict(Graph graph)
+            public override Digits Restrict(SudokuCells graph)
             {
                 var sum = 0;
 
-                foreach (var val in Others.Select(o => graph[o].Value))
+                foreach (var val in Others.Select(o => graph[o].Digit))
                 {
-                    if (val is 0) return Candidates._1_to_9;
+                    if (val is 0) return Digits._1_to_9;
                     sum += val;
                 }
                 return Allowed[sum % 4];
             }
 
-            private static readonly ImmutableArray<Candidates> Allowed =
+            private static readonly ImmutableArray<Digits> Allowed =
             [
                 [4, 8],
                 [3, 7],

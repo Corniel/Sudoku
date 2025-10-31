@@ -1,5 +1,3 @@
-using SudokuSolver.Solvers;
-
 namespace Puzzles;
 
 public abstract class Puzzle
@@ -18,11 +16,7 @@ public abstract class Puzzle
 
     public virtual Cells Solution { get; } = Cells.Empty;
 
-    public virtual ReduceOptions Options => ReduceOptions.All;
-
     public override string ToString() => Title;
-
-    public Cells Solve() => Solver.Solve(Clues, Constraints, Options);
 
     public static ImmutableArray<Puzzle> Collect(Predicate<Puzzle> predicate) => [.. typeof(Puzzle)
         .Assembly

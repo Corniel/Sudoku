@@ -1,4 +1,4 @@
-using SudokuSolver.Common;
+using Sudoku.Common;
 
 namespace Specs.Restrictions.Arrow_specs;
 

@@ -173,7 +173,7 @@
       "puzzles": {
         "type": "Project",
         "dependencies": {
-          "SudokuSolver": "[1.0.0, )"
+          "Sudoku": "[1.0.0, )"
         }
       },
       "reference": {

@@ -80,7 +80,7 @@ public readonly struct Cells : IEquatable<Cells>
 
         foreach (var cell in Clues.Parse(str))
         {
-            vals[cell.Pos] = cell.Value;
+            vals[cell.Pos] = cell.Digit;
         }
         return new(vals);
     }

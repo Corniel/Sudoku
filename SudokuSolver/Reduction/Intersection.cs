@@ -1,6 +1,6 @@
-using SudokuSolver.Houses;
+using Sudoku.Houses;
 
-namespace SudokuSolver.Reduction;
+namespace Sudoku.Reduction;
 
 public static class Intersection
 {
@@ -23,11 +23,11 @@ public static class Intersection
         // we can skip those.
         if ((xwing & graph.Todo) != xwing) return;
 
-        var candidates = Candidates._1_to_9;
+        var digits = Digits._1_to_9;
         foreach (var cell in xwing)
-            candidates &= graph[cell].Candidates;
+            digits &= graph[cell].Digits;
 
-        foreach (var value in candidates)
+        foreach (var value in digits)
         {
             var lockRow = graph.DoesNotOccur(value, (r1.Cells | r2.Cells) ^ xwing);
             var lockCol = graph.DoesNotOccur(value, (c1.Cells | c2.Cells) ^ xwing);
@@ -35,12 +35,12 @@ public static class Intersection
             if (lockRow && !lockCol)
             {
                 foreach (var cell in (c1.Cells | c2.Cells) ^ xwing)
-                    graph[cell].Candidates ^= value;
+                    graph[cell].Digits ^= value;
             }
             else if (lockCol && !lockRow)
             {
                 foreach (var cell in (r1.Cells | r2.Cells) ^ xwing)
-                    graph[cell].Candidates ^= value;
+                    graph[cell].Digits ^= value;
             }
         }
     }
@@ -73,25 +73,24 @@ public static class Intersection
         // we can skip those.
         if ((fish & graph.Todo) != fish) return;
 
-        var candidates = Candidates._1_to_9;
+        var digits = Digits._1_to_9;
         foreach (var cell in fish)
-            candidates &= graph[cell].Candidates;
+            digits &= graph[cell].Digits;
 
-        foreach (var value in candidates)
+        foreach (var value in digits)
         {
             var lockRow = graph.DoesNotOccur(value, (r1.Cells | r2.Cells | r3.Cells) ^ fish);
             var lockCol = graph.DoesNotOccur(value, (c1.Cells | c2.Cells | c3.Cells) ^ fish);
             if (lockRow && !lockCol)
             {
                 foreach (var cell in (c1.Cells | c2.Cells) ^ fish)
-                    graph[cell].Candidates ^= value;
+                    graph[cell].Digits ^= value;
             }
             else if (lockCol && !lockRow)
             {
                 foreach (var cell in (r1.Cells | r2.Cells) ^ fish)
-                    graph[cell].Candidates ^= value;
+                    graph[cell].Digits ^= value;
             }
         }
     }
-
 }

@@ -1,12 +1,12 @@
-using SudokuSolver.Restrictions;
+using Sudoku.Restrictions;
 
 namespace SudokuSolver.Validation;
 
-public sealed class Violation(int value, Candidates allowed, Pos cell, Rule constraint, Restriction? restriction = null)
+public sealed class Violation(int value, Digits allowed, Pos cell, Rule constraint, Restriction? restriction = null)
 {
     public int Value { get; } = value;
 
-    public Candidates Allowed { get; } = allowed;
+    public Digits Allowed { get; } = allowed;
 
     public Pos Cell { get; } = cell;
 

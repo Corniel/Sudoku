@@ -1,4 +1,4 @@
-using SudokuSolver.Restrictions;
+using Sudoku.Restrictions;
 
 namespace Puzzles.CrackingTheCryptic;
 
@@ -56,20 +56,20 @@ public sealed class _2024_12_08 : CtcPuzzle
 
         public sealed class Reduce(Pos appliesTo, Pos other) : Pair(appliesTo, other)
         {
-            public override Candidates Restrict(int value) => Lookup[value];
+            public override Digits Restrict(int value) => Lookup[value];
 
-            private static readonly ImmutableArray<Candidates> Lookup =
+            private static readonly ImmutableArray<Digits> Lookup =
             [
-                /* 0 */ Candidates._1_to_9,
-                /* 1 */ (Candidates._1_to_9 ^ 1) ^ 6,
-                /* 2 */ (Candidates._1_to_9 ^ 2) ^ 5,
-                /* 3 */ (Candidates._1_to_9 ^ 3) ^ 4,
-                /* 4 */ ((Candidates._1_to_9 ^ 4) ^ 3) ^ 9,
-                /* 5 */ ((Candidates._1_to_9 ^ 5) ^ 2) ^ 8,
-                /* 6 */ ((Candidates._1_to_9 ^ 6) ^ 1) ^ 7,
-                /* 7 */ (Candidates._1_to_9 ^ 7) ^ 6,
-                /* 8 */ (Candidates._1_to_9 ^ 8) ^ 5,
-                /* 9 */ (Candidates._1_to_9 ^ 9) ^ 4,
+                /* 0 */ Digits._1_to_9,
+                /* 1 */ (Digits._1_to_9 ^ 1) ^ 6,
+                /* 2 */ (Digits._1_to_9 ^ 2) ^ 5,
+                /* 3 */ (Digits._1_to_9 ^ 3) ^ 4,
+                /* 4 */ ((Digits._1_to_9 ^ 4) ^ 3) ^ 9,
+                /* 5 */ ((Digits._1_to_9 ^ 5) ^ 2) ^ 8,
+                /* 6 */ ((Digits._1_to_9 ^ 6) ^ 1) ^ 7,
+                /* 7 */ (Digits._1_to_9 ^ 7) ^ 6,
+                /* 8 */ (Digits._1_to_9 ^ 8) ^ 5,
+                /* 9 */ (Digits._1_to_9 ^ 9) ^ 4,
             ];
         }
     }

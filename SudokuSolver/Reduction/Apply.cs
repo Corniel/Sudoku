@@ -1,4 +1,4 @@
-namespace SudokuSolver.Reduction;
+namespace Sudoku.Reduction;
 
 public static class Apply
 {
@@ -8,28 +8,28 @@ public static class Apply
         {
             var node = graph[cell];
 
-            var candidates = node.Candidates;
+            var digits = node.Digits;
 
             foreach (var restriction in node.Restrictions)
-                candidates &= restriction.Restrict(graph);
+                digits &= restriction.Restrict(graph);
 
             foreach (var (other, restrictions) in node.PairedRestrictions)
             {
-                var paired = Candidates.None;
+                var paired = Digits.None;
 
-                foreach (var val in graph[other].Candidates)
+                foreach (var val in graph[other].Digits)
                 {
-                    var allowed = Candidates._1_to_9;
+                    var allowed = Digits._1_to_9;
 
                     foreach (var restriction in restrictions)
                         allowed &= restriction.Restrict(val);
 
                     paired |= allowed;
                 }
-                candidates &= paired;
+                digits &= paired;
             }
 
-            node.Candidates &= candidates;
+            node.Digits &= digits;
         }
     }
 }

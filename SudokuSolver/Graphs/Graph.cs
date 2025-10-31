@@ -1,14 +1,13 @@
-using Sudoku.Diagnostics;
-using SudokuSolver.Houses;
-using SudokuSolver.Restrictions;
-using System.Data;
+using Sudoku;
+using Sudoku.Houses;
+using Sudoku.Restrictions;
 
 namespace SudokuSolver.Graphs;
 
 [Mutable]
 [DebuggerTypeProxy(typeof(CollectionDebugView))]
 [DebuggerDisplay("Count = {Count}, Version = {Version}, Todo = {Todo.Count}")]
-public sealed class Graph : IReadOnlyCollection<Node>
+public sealed class Graph : IReadOnlyCollection<Node>, SudokuCells
 {
     public static Graph Empty => new(new());
 
@@ -41,14 +40,16 @@ public sealed class Graph : IReadOnlyCollection<Node>
     /// <summary>Gets all cols.</summary>
     public ImmutableArray<Col> Cols { get; set; } = [];
 
-    public Node this[Pos cell] => Root.Nodes[cell];
+    public Node this[Pos pos] => Root.Nodes[pos];
 
-    public Candidates Test(Pos cell)
+    SudokuCell SudokuCells.this[Pos pos] => Root.Nodes[pos];
+
+    public Digits Test(Pos pos)
     {
-        var value = this[cell].Value;
+        var value = this[pos].Digit;
         return value is not 0
-            ? [value] 
-            : this[cell].Candidates;
+            ? [value]
+            : this[pos].Digits;
     }
 
     public Cells Cells
@@ -58,7 +59,7 @@ public sealed class Graph : IReadOnlyCollection<Node>
             var cells = Cells.Empty;
 
             foreach (var node in this)
-                cells[node.Cell] = node.Value;
+                cells[node.Pos] = node.Digit;
 
             return cells;
         }
@@ -66,14 +67,14 @@ public sealed class Graph : IReadOnlyCollection<Node>
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public bool DoesNotOccur(int value, PosSet cells)
-        => cells.NotAny(cell => Root.Nodes[cell].Candidates.Contains(value));
+        => cells.NotAny(cell => Root.Nodes[cell].Digits.Contains(value));
 
     public PosSet[] Assignments(PosSet set)
     {
         var assignments = new PosSet[_9 + 1];
 
         foreach (var cell in set & Todo)
-            foreach (var value in this[cell].Candidates)
+            foreach (var value in this[cell].Digits)
                 assignments[value] |= cell;
 
         return assignments;
@@ -88,26 +89,26 @@ public sealed class Graph : IReadOnlyCollection<Node>
             var i = start++;
 
             var node = this[set[i++]];
-            var candidates = node.Candidates;
+            var digits = node.Digits;
 
-            if (candidates.Count > size) continue;
+            if (digits.Count > size) continue;
 
-            var cells = PosSet.New(node.Cell);
+            var cells = PosSet.New(node.Pos);
 
             while (i < set.Length)
             {
                 var next = this[set[i++]];
 
-                var test = candidates | next.Candidates;
+                var test = digits | next.Digits;
 
                 if (test.Count > size) continue;
 
-                candidates = test;
-                cells |= next.Cell;
+                digits = test;
+                cells |= next.Pos;
 
-                if (candidates.Count == size && cells.Count == size)
+                if (digits.Count == size && cells.Count == size)
                 {
-                    yield return new(candidates, cells);
+                    yield return new(digits, cells);
                 }
             }
         }
@@ -139,17 +140,17 @@ public sealed class Graph : IReadOnlyCollection<Node>
 
         void Block(Node node, int offset)
         {
-            if (node.Value is not 0)
+            if (node.Digit is not 0)
             {
                 sb.Append(offset is 3
-                    ? $" ({node.Value}) "
+                    ? $" ({node.Digit}) "
                     : "     ");
             }
             else
             {
                 for (var val = offset + 1; val <= offset + 3; val++)
                 {
-                    sb.Append(node.Candidates.Contains(val) ? val : ".");
+                    sb.Append(node.Digits.Contains(val) ? val : ".");
 
                     if (val - offset is 1 or 2) sb.Append(' ');
                 }
@@ -192,7 +193,7 @@ public sealed class Graph : IReadOnlyCollection<Node>
         {
             if (restriction is Mask mask)
             {
-                graph[restriction.AppliesTo].Candidates &= mask.Restrict(graph);
+                graph[restriction.AppliesTo].Digits &= mask.Restrict(graph);
             }
             else
             {
@@ -215,7 +216,7 @@ public sealed class Graph : IReadOnlyCollection<Node>
     public static Graph operator &(Graph graph, Clues clues)
     {
         foreach (var clue in clues)
-            graph[clue.Pos].Candidates = [clue.Value];
+            graph[clue.Pos].Digits = [clue.Digit];
 
         return graph;
     }

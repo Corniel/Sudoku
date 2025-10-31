@@ -1,4 +1,4 @@
-namespace SudokuSolver.Reduction;
+namespace Sudoku.Reduction;
 
 [DebuggerDisplay("Count = {Count}")]
 [DebuggerTypeProxy(typeof(CollectionDebugView))]
@@ -44,8 +44,8 @@ public readonly struct Backtracker(Graph graph, ImmutableArray<Node> nodes, int 
 
                 foreach (var node in cs.Select(c => graph[c]))
                 {
-                    var sc = (double)node.Candidates.Count * node.Peers.Count / node.Links.Count;
-                    score[node.Cell] = sc;
+                    var sc = (double)node.Digits.Count * node.Peers.Count / node.Links.Count;
+                    score[node.Pos] = sc;
                     test *= sc;
                 }
 
@@ -59,10 +59,10 @@ public readonly struct Backtracker(Graph graph, ImmutableArray<Node> nodes, int 
 #if DEBUG
             if (log) Console.WriteLine($"House = {hous.Count}, F = {hous.Select(p => score[p]).Product():0.0}");
 #endif
-            foreach (var cell in hous.OrderBy(c => graph[c].Candidates.Count))
+            foreach (var cell in hous.OrderBy(c => graph[c].Digits.Count))
             {
 #if DEBUG
-                if (log) Console.WriteLine($"{cell}, Candidates = {graph[cell].Candidates.Count}, Links {graph[cell].Links.Count}, F = {score[cell]:0.000}");
+                if (log) Console.WriteLine($"{cell}, Digits = {graph[cell].Digits.Count}, Links {graph[cell].Links.Count}, F = {score[cell]:0.000}");
 #endif
                 todos ^= cell;
                 queue[count++] = graph[cell].Freeze(todos);
@@ -88,17 +88,17 @@ public readonly struct Backtracker(Graph graph, ImmutableArray<Node> nodes, int 
 
         var node = Peek();
 
-        var candidates = node.Candidates;
+        var digits = node.Digits;
 
         foreach (var peer in node.Backgtracking)
-            candidates ^= Graph[peer].Value;
+            digits ^= Graph[peer].Digit;
 
         foreach (var restriction in node.Restrictions)
-            candidates &= restriction.Restrict(Graph);
+            digits &= restriction.Restrict(Graph);
 
-        foreach (var candidate in candidates)
+        foreach (var digit in digits)
         {
-            node.Test(candidate);
+            node.Test(digit);
 
             if (Dequeue().Solve())
             {

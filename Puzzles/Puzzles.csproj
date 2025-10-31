@@ -6,7 +6,7 @@
   </ItemGroup>
   
   <ItemGroup>
-    <ProjectReference Include="../SudokuSolver/SudokuSolver.csproj" />
+    <ProjectReference Include="../Sudoku/Sudoku.csproj" />
   </ItemGroup>
  
 </Project>

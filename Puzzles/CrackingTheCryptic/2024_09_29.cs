@@ -1,5 +1,5 @@
-using SudokuSolver.Houses;
-using SudokuSolver.Restrictions;
+using Sudoku.Houses;
+using Sudoku.Restrictions;
 
 namespace Puzzles.CrackingTheCryptic;
 
@@ -69,10 +69,10 @@ public sealed class _2024_09_29 : CtcPuzzle
 
         public sealed class Reduce(Pos appliesTo, Pos other) : Pair(appliesTo, other)
         {
-            public override Candidates Restrict(int value)
+            public override Digits Restrict(int value)
                 => value is 0
-                ? Candidates._1_to_9
-                : ~Candidates.Between(value - 2, value + 2);
+                ? Digits._1_to_9
+                : ~Digits.Between(value - 2, value + 2);
         }
     }
 }

@@ -1,33 +1,33 @@
-using SudokuSolver.Restrictions;
+using Sudoku.Restrictions;
 
 namespace SudokuSolver.Graphs;
 
 [Mutable]
-public sealed class Node
+public sealed class Node : SudokuCell
 {
     internal Node(Pos cell, Root root)
     {
-        Cell = cell;
+        Pos = cell;
         Root = root;
     }
 
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly Root Root;
 
-    public Pos Cell { get; }
+    public Pos Pos { get; }
 
     public PosSet Links { get; set; }
 
     public PosSet Peers { get; set; }
 
-    public Candidates Candidates
+    public Digits Digits
     {
-        get => candidates;
-        set => SetCanidates(value, candidates);
+        get => digits;
+        set => SetCanidates(value, digits);
     }
 
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    private Candidates candidates = Candidates._1_to_9;
+    private Digits digits = Digits._1_to_9;
 
     public ImmutableArray<Pos> Backgtracking { get; set; } = [];
 
@@ -35,30 +35,30 @@ public sealed class Node
 
     public Dictionary<Pos, List<Pair>> PairedRestrictions { get; } = [];
 
-    private void SetCanidates(Candidates next, Candidates curr)
+    private void SetCanidates(Digits next, Digits curr)
     {
-        if (curr == next || value is not 0) return;
+        if (curr == next || digit is not 0) return;
 
         Root.Version++;
-        candidates = next;
+        digits = next;
 
-        if (Candidates.HasSingle)
+        if (Digits.HasSingle)
         {
-            value = Candidates.First();
-            Root.Todo ^= Cell;
+            digit = Digits.First();
+            Root.Todo ^= Pos;
 
             foreach (var peer in Peers)
-                Root.Nodes[peer].Candidates ^= next;
+                Root.Nodes[peer].Digits ^= next;
 
             Peers = default;
         }
     }
 
-    public int Value => value;
+    public int Digit => digit;
 
-    public void Test(int test) => value = test;
+    public void Test(int test) => digit = test;
 
-    public void Reset() => value = 0;
+    public void Reset() => digit = 0;
 
     public Node Freeze(PosSet todo)
     {
@@ -67,10 +67,10 @@ public sealed class Node
     }
 
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    private int value;
+    private int digit;
 
     /// <inheritdoc />
-    public override string ToString() => Value is 0
-        ? $"[{Cell}] Candidates = {Candidates}, Peers = {Peers.Count}, Links = {Links.Count}"
-        : $"[{Cell}] Value = {Value}, Links = {Links.Count}";
+    public override string ToString() => Digit is 0
+        ? $"[{Pos}] Digits = {Digits}, Peers = {Peers.Count}, Links = {Links.Count}"
+        : $"[{Pos}] Digit = {Digit}, Links = {Links.Count}";
 }

@@ -44,7 +44,7 @@ public sealed class PuzzleBankPuzzle(string title, Clues clues, Cells solution) 
         writer.Write(' ');
         for (var p = Pos.O; p < _9x9; p++)
         {
-            writer.Write(Clues.FirstOrDefault(c => c.Pos == p).Value);
+            writer.Write(Clues.FirstOrDefault(c => c.Pos == p).Digit);
         }
         writer.Write(' ');
         for (var p = Pos.O; p < _9x9; p++)

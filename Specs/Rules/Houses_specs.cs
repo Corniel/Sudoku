@@ -1,4 +1,4 @@
-using SudokuSolver.Houses;
+using Sudoku.Houses;
 
 namespace Specs.Houses_specs;
 

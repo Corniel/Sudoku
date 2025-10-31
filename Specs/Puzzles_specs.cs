@@ -288,8 +288,7 @@ public class Puzzle_bank
 
     private static void Solve(Puzzle puzzle, Rules? rules = null)
     {
-        var cs = rules ?? Rules.Standard;
-        var solved = DlxSolver.Solve(puzzle.Clues);  //Solver.Solve(puzzle.Clues, cs, ReduceOptions.All);
+        var solved = puzzle.Solve(rules ?? Rules.Standard);
         solved.Should().Be(puzzle.Solution);
     }
 }

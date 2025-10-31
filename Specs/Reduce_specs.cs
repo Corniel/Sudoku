@@ -16,7 +16,7 @@ public class Reduce_specs
         [TestCase("hidden triples"/*......*/, _none, 29_43, 95_53, _all_)]
         [TestCase("naked quads"/*.........*/, 00_05, 30_14, 95_71, _all_)]
         [TestCase("hidden quads"/*........*/, 00_05, 30_13, 95_71, _all_)]
-        [TestCase("pointing candidates"/*.*/, _none, 41_39, _all_, _all_)]
+        [TestCase("pointing digits"/*.*/, _none, 41_39, _all_, _all_)]
         [TestCase("X-Wing"/*..............*/, 00_13, 50_88, _all_, _all_)]
         [TestCase("Swordfish"/*...........*/, 00_13, 50_90, _all_, _all_)]
         public void Using(string options, int diabolical, int hard, int medium, int easy)
@@ -41,17 +41,17 @@ public class Reduce_specs
 
         private static readonly Dictionary<string, ReduceOptions> Options = new()
         {
-            ["clues"/*...............*/] = new(),
-            ["hidden singles"/*......*/] = new() { HiddenSingles = true },
-            ["naked pairs"/*.........*/] = new() { HiddenSingles = true, NakedPairs = true },
-            ["hidden pairs"/*........*/] = new() { HiddenSingles = true, HiddenPairs = true },
-            ["naked triples"/*.......*/] = new() { HiddenSingles = true, NakedPairs = true, HiddenPairs = true, NakedTriples = true },
-            ["hidden triples"/*......*/] = new() { HiddenSingles = true, NakedPairs = true, HiddenPairs = true, HiddenTriples = true },
-            ["naked quads"/*.........*/] = new() { HiddenSingles = true, NakedPairs = true, HiddenPairs = true, NakedTriples = true, HiddenTriples = true, NakedQuads = true },
-            ["hidden quads"/*........*/] = new() { HiddenSingles = true, NakedPairs = true, HiddenPairs = true, NakedTriples = true, HiddenTriples = true, HiddenQuads = true },
-            ["pointing candidates"/*.*/] = new() { HiddenSingles = true, NakedPairs = true, HiddenPairs = true, PointingCandidates = true },
-            ["X-Wing"/*..............*/] = new() { HiddenSingles = true, NakedPairs = true, HiddenPairs = true, PointingCandidates = true, NakedTriples = true, HiddenTriples = true, NakedQuads = true, HiddenQuads = true, XWing = true },
-            ["Swordfish"/*...........*/] = new() { HiddenSingles = true, NakedPairs = true, HiddenPairs = true, PointingCandidates = true, NakedTriples = true, HiddenTriples = true, NakedQuads = true, HiddenQuads = true, XWing = true, Swordfish = true },
+            ["clues"/*...........*/] = new(),
+            ["hidden singles"/*..*/] = new() { HiddenSingles = true },
+            ["naked pairs"/*.....*/] = new() { HiddenSingles = true, NakedPairs = true },
+            ["hidden pairs"/*....*/] = new() { HiddenSingles = true, HiddenPairs = true },
+            ["naked triples"/*...*/] = new() { HiddenSingles = true, NakedPairs = true, HiddenPairs = true, NakedTriples = true },
+            ["hidden triples"/*..*/] = new() { HiddenSingles = true, NakedPairs = true, HiddenPairs = true, HiddenTriples = true },
+            ["naked quads"/*.....*/] = new() { HiddenSingles = true, NakedPairs = true, HiddenPairs = true, NakedTriples = true, HiddenTriples = true, NakedQuads = true },
+            ["hidden quads"/*....*/] = new() { HiddenSingles = true, NakedPairs = true, HiddenPairs = true, NakedTriples = true, HiddenTriples = true, HiddenQuads = true },
+            ["pointing digits"/*.*/] = new() { HiddenSingles = true, NakedPairs = true, HiddenPairs = true, PointingDigits = true },
+            ["X-Wing"/*..........*/] = new() { HiddenSingles = true, NakedPairs = true, HiddenPairs = true, PointingDigits = true, NakedTriples = true, HiddenTriples = true, NakedQuads = true, HiddenQuads = true, XWing = true },
+            ["Swordfish"/*.......*/] = new() { HiddenSingles = true, NakedPairs = true, HiddenPairs = true, PointingDigits = true, NakedTriples = true, HiddenTriples = true, NakedQuads = true, HiddenQuads = true, XWing = true, Swordfish = true },
         };
 
         private const int _none = 0;

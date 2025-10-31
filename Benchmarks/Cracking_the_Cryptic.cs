@@ -1,5 +1,6 @@
 using Puzzles;
 using Puzzles.CrackingTheCryptic;
+using SudokuSolver;
 using System;
 using System.Diagnostics;
 using System.Linq;
@@ -33,7 +34,7 @@ public static class Cracking_the_Cryptic
         for (var a = 0; a < 10 && total < TimeSpan.FromMinutes(3); a++)
         {
             sw.Restart();
-            var solution = puzzle.Solve();
+            var solution = Solver.Solve(puzzle.Clues, puzzle.Constraints, ReduceOptions.All);
             sw.Stop();
 
             if (puzzle.Solution != solution)

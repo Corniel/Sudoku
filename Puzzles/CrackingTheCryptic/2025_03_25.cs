@@ -1,4 +1,4 @@
-using SudokuSolver.Parsing;
+using Sudoku.Parsing;
 
 namespace Puzzles.CrackingTheCryptic;
 

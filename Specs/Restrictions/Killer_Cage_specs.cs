@@ -97,7 +97,7 @@ public class Generates
     [TestCase(1 + 2 + 3 + 4 + 5 + 6 + 7 + 8, /*.*/ 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9, 8)]
     public void lookup_for_sum(int min, int max, int bits)
     {
-        var lookups = SudokuSolver.Restrictions.Cage.Lookup[bits];
+        var lookups = Sudoku.Restrictions.Cage.Lookup[bits];
 
         lookups[..(min - 1)].Should().AllSatisfy(l => l.Should().BeNull());
         lookups[min..].Should().AllSatisfy(l => l.Should().NotBeNull());
@@ -124,27 +124,27 @@ public class Generates
         {
             writer.Write($"## {sum}\n");
 
-            foreach (var known in Candidates.All.Where(c => c.Count < cells).OrderByDescending(c => c.Count))
+            foreach (var known in Digits.All.Where(c => c.Count < cells).OrderByDescending(c => c.Count))
             {
                 var missing = sum - known.Sum();
                 var unknown = cells - known.Count;
-                var candidates = Candidates.None;
+                var digits = Digits.None;
 
                 // check for bitcount, sum, and not overlapping already used digits
-                foreach (var option in Candidates.All
+                foreach (var option in Digits.All
                     .Where(c
                         => c.Count == unknown
                         && c.Sum() == missing
-                        && ((known & c) == Candidates.None)))
+                        && ((known & c) == Digits.None)))
                 {
-                    candidates |= option;
+                    digits |= option;
                 }
 
-                candidates ^= known;
+                digits ^= known;
 
-                if (candidates.HasAny)
+                if (digits.HasAny)
                 {
-                    writer.Write($"{known}={candidates}\n".Replace(",", string.Empty).Replace("[", string.Empty).Replace("]", string.Empty));
+                    writer.Write($"{known}={digits}\n".Replace(",", string.Empty).Replace("[", string.Empty).Replace("]", string.Empty));
                 }
             }
         }

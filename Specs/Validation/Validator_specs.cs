@@ -1,5 +1,5 @@
-using SudokuSolver.Common;
-using SudokuSolver.Houses;
+using Sudoku.Common;
+using Sudoku.Houses;
 
 namespace Specs.Validation.Validator_specs;
 
@@ -57,7 +57,7 @@ public class Invalidates
         {
             Cell = new Pos(0, 0),
             Value = 5,
-            Allowed = Candidates.None,
+            Allowed = Digits.None,
             Constraint = new Pos[] { (0, 0), (0, 1) },
             Restriction = new { Sum = 3 },
         });

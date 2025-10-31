@@ -1,7 +1,7 @@
-using SudokuSolver.Common;
-using SudokuSolver.Restrictions;
+using Sudoku.Common;
+using Sudoku.Restrictions;
 
-namespace SudokuSolver.Reduction;
+namespace Sudoku.Reduction;
 
 public static class Add
 {
@@ -25,7 +25,7 @@ public static class Add
 
             foreach (var cell in cage)
             {
-                var value = graph[cell].Value;
+                var value = graph[cell].Digit;
                 if (value is not 0)
                 {
                     sum -= value;
@@ -34,7 +34,7 @@ public static class Add
             }
 
             if (cage.HasSingle)
-                graph[cage.First()].Candidates = [sum];
+                graph[cage.First()].Digits = [sum];
             else if (sum is > 0 and < _45)
                 cages.Add(new KillerCage(sum, cage));
         }

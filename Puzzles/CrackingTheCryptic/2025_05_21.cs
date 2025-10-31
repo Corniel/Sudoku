@@ -1,4 +1,4 @@
-using SudokuSolver.Restrictions;
+using Sudoku.Restrictions;
 
 namespace Puzzles.CrackingTheCryptic;
 
@@ -99,9 +99,9 @@ public sealed class _2025_05_21 : CtcPuzzle
 
         public sealed class Reducer(Pos appliesTo, ImmutableArray<Pos> others) : Group(appliesTo, others)
         {
-            public override Candidates Restrict(Graph graph)
+            public override Digits Restrict(SudokuCells graph)
             {
-                var index = Candidates.New(graph[Others[0]].Value, graph[Others[1]].Value);
+                var index = Digits.New(graph[Others[0]].Digit, graph[Others[1]].Digit);
                 return Loookup[index.GetHashCode()];
             }
 
@@ -112,31 +112,31 @@ public sealed class _2025_05_21 : CtcPuzzle
                 new Reducer(cells[2], cells.Remove(cells[2])),
             ];
 
-            private static readonly ImmutableArray<Candidates> Loookup = Init();
+            private static readonly ImmutableArray<Digits> Loookup = Init();
 
-            private static ImmutableArray<Candidates> Init()
+            private static ImmutableArray<Digits> Init()
             {
-                var lookup = new Candidates[1 << 9 + 1];
+                var lookup = new Digits[1 << 9 + 1];
 
-                lookup[0] = Candidates._1_to_9;
+                lookup[0] = Digits._1_to_9;
 
                 for (var i = 0; i < 9; i++)
                 {
-                    lookup[1 << i] = Candidates._1_to_9;
+                    lookup[1 << i] = Digits._1_to_9;
                 }
 
                 for (var i = 1; i <= 9; i++)
                 {
                     for (var j = i; j <= 9; j++)
                     {
-                        var index = Candidates.New(i, j).GetHashCode();
+                        var index = Digits.New(i, j).GetHashCode();
 
                         lookup[index] = (j - i) switch
                         {
-                            0 => ~Candidates.New(i),
-                            1 => ~Candidates.Between(i - 1, j + 1),
-                            2 => ~Candidates.Between(i - 0, j + 0),
-                            _ => Candidates._1_to_9,
+                            0 => ~Digits.New(i),
+                            1 => ~Digits.Between(i - 1, j + 1),
+                            2 => ~Digits.Between(i - 0, j + 0),
+                            _ => Digits._1_to_9,
                         };
                     }
                 }

@@ -1,9 +1,6 @@
 using BenchmarkDotNet.Attributes;
-using DancingLinks;
 using Puzzles.PuzzleBank;
 using Sudoku;
-using SudokuSolver;
-using SudokuSolver.Solvers;
 using System.Collections.Immutable;
 using System.Linq;
 
@@ -33,54 +30,34 @@ public class Solving
     }
 
     [Benchmark]
-    public int Dancing()
+    public int DLX()
     {
         var solved = 0;
 
         foreach (var clue in Clues)
-            solved += DlxSolver.Solve(clue)[0, 0];
+            solved += Dlx.DlxSolver.Solve(clue)[0, 0];
 
         return solved;
     }
 
     [Benchmark(Baseline = true)]
+    public int Dancing()
+    {
+        var solved = 0;
+
+        foreach (var clue in Clues)
+            solved += DancingLinks.LinksSolver.Solve(clue, Rules.Standard)[0, 0];
+
+        return solved;
+    }
+
+    [Benchmark]
     public int Default()
     {
         var solved = 0;
 
         foreach (var clue in Clues)
-            solved += Solver.Solve(clue, Rules.Standard, ReduceOptions.Default)[Pos.O];
-
-        return solved;
-    }
-
-    [Benchmark]
-    public int Backtracking()
-    {
-        var solved = 0;
-
-        foreach (var clue in Clues)
-            solved += Solver.Solve(clue, Rules.Standard, ReduceOptions.Backtracking)[Pos.O];
-
-        return solved;
-    }
-
-    [Benchmark]
-    public int Simple()
-    {
-        var solved = 0;
-        var options = new ReduceOptions 
-        {
-            HiddenSingles = true,
-            HiddenPairs = true,
-            NakedPairs = true,
-            NakedTriples = true,
-            PointingCandidates = true,
-            Backtracker = true 
-        };
-
-        foreach (var clue in Clues)
-            solved += Solver.Solve(clue, Rules.Standard, options)[Pos.O];
+            solved += SudokuSolver.Solver.Solve(clue, Rules.Standard, SudokuSolver.ReduceOptions.Default)[Pos.O];
 
         return solved;
     }
@@ -89,10 +66,10 @@ public class Solving
     public int All()
     {
         var solved = 0;
-        var options = ReduceOptions.All with { Restrictions = false };
+        var options = SudokuSolver.ReduceOptions.All with { Restrictions = false };
 
         foreach (var clue in Clues)
-            solved += Solver.Solve(clue, Rules.Standard, options)[Pos.O];
+            solved += SudokuSolver.Solver.Solve(clue, Rules.Standard, options)[Pos.O];
 
         return solved;
     }

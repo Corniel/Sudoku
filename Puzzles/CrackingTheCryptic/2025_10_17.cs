@@ -1,4 +1,4 @@
-using SudokuSolver.Restrictions;
+using Sudoku.Restrictions;
 
 namespace Puzzles.CrackingTheCryptic;
 
@@ -59,20 +59,20 @@ public sealed class _2025_10_17 : CtcPuzzle
 
     public sealed class Sum10(Pos appliesTo, Pos other) : Pair(appliesTo, other)
     {
-        public override Candidates Restrict(int value) => [10 - value];
+        public override Digits Restrict(int value) => [10 - value];
     }
 
     public sealed class Max13(Pos appliesTo, Pos other) : Pair(appliesTo, other)
     {
-        public override Candidates Restrict(int value) => Restrictions[value];
+        public override Digits Restrict(int value) => Restrictions[value];
 
-        private static readonly ImmutableArray<Candidates> Restrictions =
+        private static readonly ImmutableArray<Digits> Restrictions =
         [
-            /* 0 */ Candidates._1_to_9,
-            /* 1 */ Candidates._1_to_9,
-            /* 2 */ Candidates._1_to_9,
-            /* 3 */ Candidates._1_to_9,
-            /* 4 */ Candidates._1_to_9,
+            /* 0 */ Digits._1_to_9,
+            /* 1 */ Digits._1_to_9,
+            /* 2 */ Digits._1_to_9,
+            /* 3 */ Digits._1_to_9,
+            /* 4 */ Digits._1_to_9,
             /* 5 */ [1, 2, 3, 4, 5, 6, 7, 8],
             /* 6 */ [1, 2, 3, 4, 5, 6, 7],
             /* 7 */ [1, 2, 3, 4, 5, 6],

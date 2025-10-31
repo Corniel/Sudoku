@@ -17,22 +17,22 @@ public static class Validator
     {
         if (rule.IsSet)
         {
-            var values = Candidates.None;
+            var values = Digits.None;
             foreach (var cell in rule.Cells)
             {
-                var value = graph[cell].Value;
+                var value = graph[cell].Digit;
 
                 if (value is not 0 && values.Contains(value))
                 {
-                    yield return new Violation(value, Candidates._1_to_9 ^ value, cell, rule);
+                    yield return new Violation(value, Digits._1_to_9 ^ value, cell, rule);
                 }
-                values |= graph[cell].Value;
+                values |= graph[cell].Digit;
             }
         }
 
         foreach (var res in rule.Restrictions)
         {
-            var value = graph[res.AppliesTo].Value;
+            var value = graph[res.AppliesTo].Digit;
 
             if (value is 0) continue;
 

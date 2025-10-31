@@ -5,7 +5,7 @@ public sealed class _2025_09_13 : CtcPuzzle
     public override string Title => "Royalty";
     public override string? Author => "zetamath";
     public override Uri? Url => new("https://youtu.be/uyTSKJ1DB6c");
-    public override O Duration => O.ms10;
+    public override O Duration => O.s1000;
 
     public override Clues Clues { get; } = Clues.Parse("""
         ...|...|.8.

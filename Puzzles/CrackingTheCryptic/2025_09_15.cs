@@ -6,7 +6,7 @@ public sealed class _2025_09_15 : CtcPuzzle
     public override string Title => "Studious";
     public override string? Author => "James Sinclair";
     public override Uri? Url => new("https://youtu.be/qEGLhzb_IZE");
-    public override O Duration => O.ms10;
+    public override O Duration => O.s100;
 
     public override Cells Solution { get; } = Cells.Parse("""
         728|645|391

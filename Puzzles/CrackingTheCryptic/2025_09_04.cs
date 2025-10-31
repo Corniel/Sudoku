@@ -1,5 +1,5 @@
-using SudokuSolver.Parsing;
-using SudokuSolver.Restrictions;
+using Sudoku.Parsing;
+using Sudoku.Restrictions;
 
 namespace Puzzles.CrackingTheCryptic;
 
@@ -32,14 +32,14 @@ public sealed class _2025_09_04 : CtcPuzzle
 
         public override ImmutableArray<Restriction> Restrictions { get; } = [.. Reducer.Create([.. cells], isSet)];
 
-        public sealed class Reducer(Pos appliesTo, ImmutableArray<Pos> others, ImmutableArray<Candidates> lookup) : Group(appliesTo, others)
+        public sealed class Reducer(Pos appliesTo, ImmutableArray<Pos> others, ImmutableArray<Digits> lookup) : Group(appliesTo, others)
         {
-            public ImmutableArray<Candidates> Candidates { get; } = lookup;
+            public ImmutableArray<Digits> Digits { get; } = lookup;
 
-            public override Candidates Restrict(Graph graph) => Candidates[0
-                + graph[Others[0]].Value * 1
-                + graph[Others[1]].Value * 10
-                + graph[Others[2]].Value * 100];
+            public override Digits Restrict(SudokuCells graph) => Digits[0
+                + graph[Others[0]].Digit * 1
+                + graph[Others[1]].Digit * 10
+                + graph[Others[2]].Digit * 100];
 
             public static IEnumerable<Reducer> Create(ImmutableArray<Pos> cells, bool isSet) =>
             [
@@ -55,7 +55,7 @@ public sealed class _2025_09_04 : CtcPuzzle
     {
         private readonly ImmutableArray<int> Values = [a, b, c, total];
 
-        public readonly Candidates Candidates = [a, b, c, total];
+        public readonly Digits Digits = [a, b, c, total];
 
         public bool Matches(params ReadOnlySpan<int> other)
         {
@@ -94,7 +94,7 @@ public sealed class _2025_09_04 : CtcPuzzle
         public override string ToString() => $"{Values[0]} + {Values[1]} + {Values[2]} = {Values[3]}";
     }
 
-    public static readonly ImmutableArray<Candidates> Sets = [.. Lookup(
+    public static readonly ImmutableArray<Digits> Sets = [.. Lookup(
     [
         new(1, 2, 3, 6),
         new(1, 2, 4, 7),
@@ -105,7 +105,7 @@ public sealed class _2025_09_04 : CtcPuzzle
         new(2, 3, 4, 9),
      ])];
 
-    public static readonly ImmutableArray<Candidates> NonSets = [.. Lookup(
+    public static readonly ImmutableArray<Digits> NonSets = [.. Lookup(
     [
         new(1, 2, 3, 6),
         new(1, 2, 4, 7),
@@ -129,9 +129,9 @@ public sealed class _2025_09_04 : CtcPuzzle
     ],
     false)];
 
-    public static Candidates[] Lookup(ImmutableArray<Sum> sums, bool isSet = true)
+    public static Digits[] Lookup(ImmutableArray<Sum> sums, bool isSet = true)
     {
-        var lookup = new Candidates[1000];
+        var lookup = new Digits[1000];
         
         for (var i = 0; i <= 999; i++)
         {
@@ -143,7 +143,7 @@ public sealed class _2025_09_04 : CtcPuzzle
             Array.Sort(abc);
 
             foreach (var sum in sums.Where(s => s.Matches(abc)))
-                lookup[i] |= sum.Candidates;
+                lookup[i] |= sum.Digits;
             
             if (isSet)
                 lookup[i] ^= [a, b, c];

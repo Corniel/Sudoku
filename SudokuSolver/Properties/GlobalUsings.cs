@@ -1,4 +1,5 @@
 global using Sudoku;
+global using Sudoku.Contracts;
 global using Sudoku.Diagnostics;
 global using SudokuSolver.Graphs;
 global using System;

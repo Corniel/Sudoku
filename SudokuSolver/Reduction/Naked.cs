@@ -1,4 +1,4 @@
-namespace SudokuSolver.Reduction;
+namespace Sudoku.Reduction;
 
 public static class Naked
 {
@@ -11,7 +11,7 @@ public static class Naked
             foreach (var pair in graph.NakedCells([.. updates], 2))
             {
                 foreach (var update in updates ^ pair.Cells)
-                    graph[update].Candidates ^= pair.Candidates;
+                    graph[update].Digits ^= pair.Digits;
             }
         }
     }
@@ -25,7 +25,7 @@ public static class Naked
             foreach (var triple in graph.NakedCells([.. updates], 3))
             {
                 foreach (var update in updates ^ triple.Cells)
-                    graph[update].Candidates ^= triple.Candidates;
+                    graph[update].Digits ^= triple.Digits;
             }
         }
     }
@@ -39,7 +39,7 @@ public static class Naked
             foreach (var triple in graph.NakedCells([.. updates], 4))
             {
                 foreach (var update in updates ^ triple.Cells)
-                    graph[update].Candidates ^= triple.Candidates;
+                    graph[update].Digits ^= triple.Digits;
             }
         }
     }

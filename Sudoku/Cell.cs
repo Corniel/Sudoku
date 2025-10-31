@@ -1,32 +1,32 @@
 namespace Sudoku;
 
-public readonly struct Cell(Pos pos, int value) : IEquatable<Cell>
+public readonly struct Cell(Pos pos, int digit) : IEquatable<Cell>
 {
     public readonly Pos Pos = pos;
 
-    public readonly int Value = value;
+    public readonly int Digit = digit;
 
-    public void Deconstruct(out int row, out int col, out int value)
+    public void Deconstruct(out int row, out int col, out int digit)
     {
         (row, col) = Pos;
-        value = Value;
+        digit = Digit;
     }
 
-    public void Deconstruct(out Pos pos, out int value)
+    public void Deconstruct(out Pos pos, out int digit)
     {
         pos = Pos;
-        value = Value;
+        digit = Digit;
     }
 
     /// <inheritdoc />
     public override bool Equals(object? obj) => obj is Cell other && other.Equals(this);
 
     /// <inheritdoc />
-    public bool Equals(Cell other) => Pos == other.Pos && Value == other.Value;
+    public bool Equals(Cell other) => Pos == other.Pos && Digit == other.Digit;
 
     /// <inheritdoc />
-    public override int GetHashCode() => (int)Pos | (Value << 7);
+    public override int GetHashCode() => (int)Pos | (Digit << 7);
 
     /// <inheritdoc />
-    public override string ToString() => $"{Pos} = {(Value is 0 ? "?" : Value.ToString())}";
+    public override string ToString() => $"{Pos} = {(Digit is 0 ? "?" : Digit.ToString())}";
 }

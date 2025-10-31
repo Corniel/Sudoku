@@ -94,7 +94,7 @@ public sealed class _2025_09_08 : CtcPuzzle
         public override ImmutableArray<Restriction> Restrictions { get; }
             = [.. cells.Select((c, i) => new Reduce(c, cells[..i], cells[(i+1)..]))];
 
-        public static SlowThermometer Parse(string str) => new([.. Clues.Parse(str).OrderBy(c => c.Value).Select(c => c.Pos)]);
+        public static SlowThermometer Parse(string str) => new([.. Clues.Parse(str).OrderBy(c => c.Digit).Select(c => c.Pos)]);
 
         public sealed class Reduce(Pos appliesTo, ImmutableArray<Pos> before, ImmutableArray<Pos> after) : Restriction
         {
@@ -106,7 +106,7 @@ public sealed class _2025_09_08 : CtcPuzzle
 
             public PosSet Links { get; } = [.. before, .. after];
 
-            public Candidates Restrict(Graph graph)
+            public Digits Restrict(SudokuCells graph)
             {
                 var bef = Step.Walk(Before, graph);
                 var aft = Step.Walk(After, graph);
@@ -114,29 +114,29 @@ public sealed class _2025_09_08 : CtcPuzzle
                 // ASC based on after
                 if (aft.Sign > 0)
                 {
-                    return Candidates.Between(bef.First, aft.First);
+                    return Digits.Between(bef.First, aft.First);
                 }
 
                 // DESC based on before
                 if (bef.Sign > 0)
                 {
-                    return Candidates.Between(aft.First, bef.First);
+                    return Digits.Between(aft.First, bef.First);
                 }
 
                 // DESC based on after.
                 if (aft.Sign < 0)
                 {
                     return bef.First is 0
-                        ? Candidates.AtLeast(aft.First)
-                        : Candidates.Between(aft.First, bef.First);
+                        ? Digits.AtLeast(aft.First)
+                        : Digits.Between(aft.First, bef.First);
                 }
 
                 // ASC based on before
                 if (bef.Sign < 0)
                 {
                     return aft.First is 0
-                        ? Candidates.AtLeast(bef.First)
-                        : Candidates.Between(bef.First, aft.First);
+                        ? Digits.AtLeast(bef.First)
+                        : Digits.Between(bef.First, aft.First);
                 }
 
                 if (aft.First is not 0 && bef.First is not 0)
@@ -144,23 +144,23 @@ public sealed class _2025_09_08 : CtcPuzzle
                     var min = aft.First;
                     var max = bef.First;
                     if (max < min) (min, max) = (max, min);
-                    return Candidates.Between(min, max);
+                    return Digits.Between(min, max);
                 }
 
-                return Candidates._1_to_9;
+                return Digits._1_to_9;
             }
         }
     }
 
     private readonly record struct Step(int First, int Sign)
     {
-        public static Step Walk(ImmutableArray<Pos> steps, Graph graph)
+        public static Step Walk(ImmutableArray<Pos> steps, SudokuCells graph)
         {
             var first = 0;
 
             foreach (var step in steps)
             {
-                var next = graph[step].Value;
+                var next = graph[step].Digit;
 
                 if (next is not 0 && next != first)
                 {

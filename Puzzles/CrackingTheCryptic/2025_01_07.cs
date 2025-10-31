@@ -1,5 +1,5 @@
-using SudokuSolver.Houses;
-using SudokuSolver.Restrictions;
+using Sudoku.Houses;
+using Sudoku.Restrictions;
 using System.Numerics;
 
 namespace Puzzles.CrackingTheCryptic;
@@ -55,22 +55,22 @@ public sealed class _2025_01_07 : CtcPuzzle
         ];
     }
 
-    private abstract class BoxCell(Pos appliesTo, int index, ImmutableArray<Pos> others, ImmutableArray<Candidates> allowed) : Group(appliesTo, others)
+    private abstract class BoxCell(Pos appliesTo, int index, ImmutableArray<Pos> others, ImmutableArray<Digits> allowed) : Group(appliesTo, others)
     {
         public int Index { get; } = index;
 
-        protected ImmutableArray<Candidates> Allowed { get; } = allowed;
+        protected ImmutableArray<Digits> Allowed { get; } = allowed;
 
         protected abstract bool Restricted(int value);
 
-        protected Candidates Restrict(Graph graph, int min, int max)
-            => Allowed[Index] & Candidates.Between(Min(graph, min), Max(graph, max));
+        protected Digits Restrict(SudokuCells graph, int min, int max)
+            => Allowed[Index] & Digits.Between(Min(graph, min), Max(graph, max));
 
-        protected int Min(Graph graph, int min)
+        protected int Min(SudokuCells graph, int min)
         {
             for (var i = 0; i < Index; i++)
             {
-                var val = graph[Others[i]].Value;
+                var val = graph[Others[i]].Digit;
 
                 if (Restricted(val))
                     min = Math.Max(min, val);
@@ -78,11 +78,11 @@ public sealed class _2025_01_07 : CtcPuzzle
             return min + 1;
         }
 
-        protected int Max(Graph graph, int max)
+        protected int Max(SudokuCells graph, int max)
         {
             for (var i = Index + 1; i < _9; i++)
             {
-                var val = graph[Others[i]].Value;
+                var val = graph[Others[i]].Digit;
 
                 if (Restricted(val))
                     max = Math.Min(max, val);
@@ -94,8 +94,8 @@ public sealed class _2025_01_07 : CtcPuzzle
     private sealed class EvenCell(Pos appliesTo, int index, ImmutableArray<Pos> cells)
             : BoxCell(appliesTo, index, cells, Evens)
     {
-        public override Candidates Restrict(Graph graph)
-            => Restrict(graph, -1, 11) | Candidates.Odd;
+        public override Digits Restrict(SudokuCells graph)
+            => Restrict(graph, -1, 11) | Digits.Odd;
 
         protected override bool Restricted(int value) => value is not 0 && value.IsEven();
     }
@@ -103,13 +103,13 @@ public sealed class _2025_01_07 : CtcPuzzle
     private sealed class OddCell(Pos appliesTo, int index, ImmutableArray<Pos> cells)
             : BoxCell(appliesTo, index, cells, Odds)
     {
-        public override Candidates Restrict(Graph graph)
-            => Restrict(graph, 0, 10) | Candidates.Even;
+        public override Digits Restrict(SudokuCells graph)
+            => Restrict(graph, 0, 10) | Digits.Even;
 
         protected override bool Restricted(int value) => value.IsOdd();
     }
 
-    private static readonly ImmutableArray<Candidates> Evens =
+    private static readonly ImmutableArray<Digits> Evens =
     [
         /* 0 */ [2],
         /* 1 */ [2, 4],
@@ -122,7 +122,7 @@ public sealed class _2025_01_07 : CtcPuzzle
         /* 8 */ [8],
     ];
 
-    private static readonly ImmutableArray<Candidates> Odds =
+    private static readonly ImmutableArray<Digits> Odds =
     [
         /* 0 */ [1],
         /* 1 */ [1, 3],

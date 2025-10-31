@@ -246,10 +246,16 @@
           "Sudoku": "[1.0.0, )"
         }
       },
+      "dlx": {
+        "type": "Project",
+        "dependencies": {
+          "Sudoku": "[1.0.0, )"
+        }
+      },
       "puzzles": {
         "type": "Project",
         "dependencies": {
-          "SudokuSolver": "[1.0.0, )"
+          "Sudoku": "[1.0.0, )"
         }
       },
       "reference": {

@@ -216,6 +216,7 @@ able to solve the following puzzles (so far):
 | 2025-01-07 | [Sort of Miraculous](Puzzles/CrackingTheCryptic/2025_01_07.cs)  |   726.8 ms  |
 | 2024-12-09 | [Elbow Join](Puzzles/CrackingTheCryptic/2024_12_09.cs)          |    26.4 min |
 | 2024-12-08 | [Fortune Cookie II](Puzzles/CrackingTheCryptic/2024_12_08.cs)   | 8,992.1 ms  |
+| 2024-11-18 | [80](Puzzles/CrackingTheCryptic/2024_11_18.cs)                  | 1,049.3 µs  |
 | 2024-09-29 | [3 In the Corner](Puzzles/CrackingTheCryptic/2024_09_29.cs)     |          ?  |
 | 2024-01-08 | [Tulpenblüte](Puzzles/CrackingTheCryptic/2024_01_08.cs)         |   194.5 ms  |
 | 2022-05-03 | [The Dutch Miracle](Puzzles/CrackingTheCryptic/2022_05_03.cs)   |   459.0 µs  |

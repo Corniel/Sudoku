@@ -10,7 +10,7 @@ public sealed class Mask(Pos appliesTo, Digits mask) : Restriction
     public PosSet Links => PosSet.Empty;
 
     /// <inheritdoc />
-    public Digits Restrict(SudokuCells graph) => mask;
+    public Digits Restrict(SudokuCells cells) => mask;
 
     /// <inheritdoc />
     public override string ToString() => $"{AppliesTo} => {mask}";

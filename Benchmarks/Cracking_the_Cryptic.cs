@@ -8,11 +8,13 @@ namespace Benchmarks;
 
 public static class Cracking_the_Cryptic
 {
-    public static void Run()
+    public static void Run(Predicate<Puzzle>? run = null)
     {
+        run ??= p => true;
+
         foreach (var puzzle in CtcPuzzle.All.OrderByDescending(p => p.GetType().Name))
         {
-            if (puzzle.Duration == O.oo)
+            if (puzzle.Duration == O.oo || !run(puzzle))
             {
                 Console.WriteLine(Format(puzzle, "skipped"));
             }
@@ -30,7 +32,7 @@ public static class Cracking_the_Cryptic
 
         var total = TimeSpan.Zero;
 
-        for (var a = 0; a < 10 && total < TimeSpan.FromMinutes(3); a++)
+        for (var a = 0; a < 100 && total < TimeSpan.FromMinutes(3); a++)
         {
             sw.Restart();
             var solution = DynamicSolver.Solver.Solve(puzzle.Clues, puzzle.Constraints);

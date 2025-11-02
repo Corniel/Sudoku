@@ -22,14 +22,14 @@ public abstract class Pair(Pos appliesTo, Pos other) : Restriction
     {
         var digits = Digits.None;
 
-        foreach (var val in other)
-            digits |= Restrict(val);
+        foreach (var digit in other)
+            digits |= Restrict(digit);
 
         return digits;
     }
 
     /// <inheritdoc cref="Restriction.Restrict(SudokuCells)" />
-    public virtual Digits Restrict(int value) => Restrict([value]);
+    public virtual Digits Restrict(int digit) => Restrict([digit]);
 
     /// <inheritdoc />
     public override string ToString() => $"{AppliesTo} => {Other}";

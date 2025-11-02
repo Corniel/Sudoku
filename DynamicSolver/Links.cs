@@ -1,3 +1,5 @@
+using Sudoku.Restrictions;
+
 namespace DynamicSolver;
 
 [Mutable]
@@ -16,8 +18,13 @@ public sealed class Links : IReadOnlyCollection<Link>, SudokuCells
                 links[peer].Peers |= set ^ peer;
 
         foreach (var restriction in rules.Restrictions)
+        {
             foreach (var other in restriction.Links)
                 links[other].Restrictions.Add(restriction);
+
+            if (restriction is Mask mask)
+                links[mask.AppliesTo].Digits &= mask.Restrict(links);
+        }
 
         foreach (var (cell, value) in clues)
         {

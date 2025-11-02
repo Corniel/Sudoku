@@ -15,7 +15,7 @@ public abstract class Pair(Pos appliesTo, Pos other) : Restriction
     public PosSet Links { get; } = [other];
 
     /// <inheritdoc />
-    public Digits Restrict(SudokuCells graph) => Restrict(graph.Test(Other));
+    public Digits Restrict(SudokuCells graph) => Restrict(graph[Other].Digits);
 
     /// <inheritdoc cref="Restriction.Restrict(SudokuCells)" />
     public virtual Digits Restrict(Digits other)

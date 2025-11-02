@@ -1,5 +1,6 @@
 using Puzzles;
 using Puzzles.PuzzleBank;
+using StrategyBased;
 
 namespace Specs.Reduce_specs;
 
@@ -33,10 +34,10 @@ public class Reduce_specs
 
         private static Dictionary<string, int> Solve(ReduceOptions options) => new()
         {
-            [nameof(Diabolicals)] = Diabolicals.Count(p => Solver.Solve(p.Clues, p.Constraints, options).IsSolved),
-            [nameof(Hards)] = Hards.Count(p => Solver.Solve(p.Clues, p.Constraints, options).IsSolved),
-            [nameof(Mediums)] = Mediums.Count(p => Solver.Solve(p.Clues, p.Constraints, options).IsSolved),
-            [nameof(Easys)] = Easys.Count(p => Solver.Solve(p.Clues, p.Constraints, options).IsSolved),
+            [nameof(Diabolicals)] = Diabolicals.Count(p => StrategyBasedSolver.Solve(p.Clues, p.Constraints, options).IsSolved),
+            [nameof(Hards)] = Hards.Count(p => StrategyBasedSolver.Solve(p.Clues, p.Constraints, options).IsSolved),
+            [nameof(Mediums)] = Mediums.Count(p => StrategyBasedSolver.Solve(p.Clues, p.Constraints, options).IsSolved),
+            [nameof(Easys)] = Easys.Count(p => StrategyBasedSolver.Solve(p.Clues, p.Constraints, options).IsSolved),
         };
 
         private static readonly Dictionary<string, ReduceOptions> Options = new()

@@ -1,5 +1,3 @@
-using System.Numerics;
-
 namespace Sudoku.Common;
 
 /// <summary>Cells on a (chess) knight distance must have different digits.</summary>

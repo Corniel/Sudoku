@@ -1,3 +1,5 @@
+using System.Linq;
+
 namespace Sudoku;
 
 public readonly struct Cells : IEquatable<Cells>
@@ -73,6 +75,16 @@ public readonly struct Cells : IEquatable<Cells>
     public static bool operator ==(Cells l, Cells r) => l.Equals(r);
 
     public static bool operator !=(Cells l, Cells r) => !(l == r);
+
+    /// <summary>Creates cells based on <see cref="SudokuCells"/>.</summary>
+    public static Cells New(SudokuCells cells)
+    {
+        var cs = Empty;
+        foreach (var pos in Pos.All)
+            cs[pos] = cells[pos].Digit;
+
+        return cs;
+    }
 
     public static Cells Parse(string str)
     {

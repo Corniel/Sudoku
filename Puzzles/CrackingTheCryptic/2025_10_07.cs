@@ -7,21 +7,7 @@ public sealed class _2025_10_07 : CtcPuzzle
     public override string Title => "Golden Arrow";
     public override string? Author => "James Kopp";
     public override Uri? Url => new("https://youtu.be/Y23x1sGzWJo");
-    public override O Duration => O.ms10;
-
-    public override Cells Solution { get; } = Cells.Parse("""
-        582│941│736
-        736│582│941
-        941│736│582
-        ───┼───┼───
-        658│294│173
-        173│658│294
-        294│173│658
-        ───┼───┼───
-        365│829│417
-        417│365│829
-        829│417│365
-        """);
+    public override O Duration => O.μs100;
 
     public override Clues Clues { get; } = Clues.Parse("""
         ...│..1│...
@@ -35,6 +21,20 @@ public sealed class _2025_10_07 : CtcPuzzle
         ...│...│...
         ...│...│...
         ...│...│...
+        """);
+
+    public override Cells Solution { get; } = Cells.Parse("""
+        582│941│736
+        736│582│941
+        941│736│582
+        ───┼───┼───
+        658│294│173
+        173│658│294
+        294│173│658
+        ───┼───┼───
+        365│829│417
+        417│365│829
+        829│417│365
         """);
 
     public override Rules Constraints { get; }
@@ -106,23 +106,6 @@ public sealed class _2025_10_07 : CtcPuzzle
                 9 => [5],
                 _ => Digits.None,
             };
-        }
-
-        internal static void Generate()
-        {
-            foreach (var digits in Digits.All.Where(c => c.Count is 6))
-            {
-                var sum = digits.Sum();
-                var ten = sum / 10;
-                var one = sum % 10;
-                var sm_ = Digits.New(ten, one);
-
-                var okay = sm_.Count is 2 && (digits | sm_).Count is 8 && Math.Abs(ten - one) >= 4;
-                if (okay)
-                {
-                    Console.WriteLine($"{sum} = {digits}");
-                }
-            }
         }
     }
 }

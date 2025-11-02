@@ -1,9 +1,9 @@
-using DancingLinks;
 using Puzzles;
 using Puzzles.CrackingTheCryptic;
 using Puzzles.Killer;
 using Puzzles.PuzzleBank;
 using Puzzles.SudokuPad;
+using StrategyBased;
 using System.IO;
 using System.Text;
 
@@ -19,10 +19,8 @@ public class Cracking_the_Cryptic
     {
         puzzle.Constraints.Should().BeValidFor(puzzle.Solution);
 
-        var solved = puzzle.Solve();
-
+        var solved = TestSolver.Solve(puzzle);
         Console.WriteLine(solved);
-
         solved.Should().Be(puzzle.Solution, puzzle.Constraints);
     }
 
@@ -31,7 +29,8 @@ public class Cracking_the_Cryptic
     public void Slow(Puzzle puzzle)
     {
         puzzle.Constraints.Should().BeValidFor(puzzle.Solution);
-        var solved = puzzle.Solve();
+        var solved = TestSolver.Solve(puzzle);
+        Console.WriteLine(solved);
         solved.Should().Be(puzzle.Solution, puzzle.Constraints);
     }
 }
@@ -39,7 +38,7 @@ public class Cracking_the_Cryptic
 public class Anti_Knight
 {
     [Test]
-    public void Solves() => Solver.Solve(
+    public void Solves() => TestSolver.Solve(
       Clues.Parse("""
             ...|5..|...
             ...|..4|...
@@ -72,7 +71,7 @@ public class Anti_Knight
 public class Hyper_Sudoku
 {
     [Test]
-    public void Solves() => Solver.Solve(
+    public void Solves() => TestSolver.Solve(
         Clues.Parse("""
             .4.|...|..9
             9..|...|8..
@@ -121,7 +120,7 @@ public class Jigsaw_Sudokud
             GGJ|JJJ|HHH
             """);
 
-        Solver.Solve(
+        StrategyBasedSolver.Solve(
           Clues.Parse("""
             4..|7.9|.2.
             ...|.2.|...
@@ -160,7 +159,7 @@ public class Killer_Sudoku
     [TestCaseSource(nameof(Puzzles))]
     public void Puzzle(Puzzle puzzle)
     {
-        var solved = puzzle.Solve();
+        var solved = TestSolver.Solve(puzzle);
 
         solved.ToString().Should().NotContain(".");
 
@@ -173,7 +172,7 @@ public class Killer_Sudoku
 public class X_Sudoku
 {
     [Test]
-    public void Solves() => Solver.Solve(
+    public void Solves() => TestSolver.Solve(
             Clues.Parse("""
             .1.|2.3|.4.
             8..|...|6.5
@@ -210,7 +209,7 @@ public class SudokuPad_app
     [TestCaseSource(nameof(Puzzles))]
     public void Puzzle(Puzzle puzzle)
     {
-        var solved = puzzle.Solve();
+        var solved = TestSolver.Solve(puzzle);
 
         solved.Should().Be(puzzle.Solution);
 
@@ -288,7 +287,7 @@ public class Puzzle_bank
 
     private static void Solve(Puzzle puzzle, Rules? rules = null)
     {
-        var solved = puzzle.Solve(rules ?? Rules.Standard);
+        var solved =  TestSolver.Solve(puzzle.Clues, rules ?? Rules.Standard);
         solved.Should().Be(puzzle.Solution);
     }
 }
@@ -312,7 +311,7 @@ public class Other
             ...|.8.|.79
             """);
 
-        Solver.Solve(clues).Should().Be("""
+        TestSolver.Solve(clues).Should().Be("""
             534|678|912
             672|195|348
             198|342|567
@@ -344,7 +343,7 @@ public class Other
             .9.|...|4..
             """);
 
-        Solver.Solve(clues).Should().Be("""
+        TestSolver.Solve(clues).Should().Be("""
             812|753|649
             943|682|175
             675|491|283

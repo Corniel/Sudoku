@@ -70,7 +70,7 @@ public partial class Cage
 
             while (reader.ReadLine() is { } line)
             {
-                if (line.StartsWith("## ") && line.Split(' ') is { Length: > 2} split)
+                if (line.StartsWith("## ") && line.Split(' ') is { Length: > 2 } split)
                 {
                     sum = int.Parse(split[1]);
                     var info = double.Parse(split[2], CultureInfo.InvariantCulture);

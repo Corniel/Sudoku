@@ -13,7 +13,7 @@ public abstract class Group(Pos appliesTo, ImmutableArray<Pos> others) : Restric
     public PosSet Links { get; } = [..others];
 
     /// <inheritdoc />
-    public abstract Digits Restrict(SudokuCells graph);
+    public abstract Digits Restrict(SudokuCells cells);
 
     /// <inheritdoc />
     public override string ToString() => $"{AppliesTo} => {Others}";

@@ -12,26 +12,26 @@ Tested on 1000 puzzles. Results per puzzle.
 
 | Method    | Config     | Mean        | Ratio |
 |---------- |----------- |------------:|------:|
-| Reference | Diabolical | 2,448.36 us | 33.47 |
-| DLX       | Diabolical |    85.08 us |  1.16 |
-| Dancing   | Diabolical |    73.14 us |  1.00 |
-| Default   | Diabolical |   104.15 us |  1.42 |
-| All       | Diabolical |   384.61 us |  5.26 |
+| Reference | Diabolical | 2,517.51 us | 33.07 |
+| DLX       | Diabolical |    85.41 us |  1.12 |
+| Dynamic   | Diabolical |    76.15 us |  1.00 |
+| Default   | Diabolical |   108.77 us |  1.43 |
+| All       | Diabolical |   381.40 us |  5.01 |
 |           |            |             |       |
-| Reference | Hard       | 1,153.27 us | 40.49 |
-| DLX       | Hard       |    64.49 us |  2.26 |
-| Dancing   | Hard       |    28.50 us |  1.00 |
-| Default   | Hard       |    49.66 us |  1.74 |
-| All       | Hard       |   293.96 us | 10.32 |
+| Reference | Hard       | 1,144.52 us | 42.86 |
+| DLX       | Hard       |    65.44 us |  2.45 |
+| Dynamic   | Hard       |    26.71 us |  1.00 |
+| Default   | Hard       |    50.38 us |  1.89 |
+| All       | Hard       |   289.95 us | 10.86 |
 |           |            |             |       |
-| Reference | Medium     | 1,129.05 us | 40.67 |
-| DLX       | Medium     |    63.97 us |  2.30 |
-| Dancing   | Medium     |    27.76 us |  1.00 |
-| Default   | Medium     |    50.43 us |  1.82 |
-| All       | Medium     |   284.69 us | 10.26 |
+| Reference | Medium     | 1,122.50 us | 42.53 |
+| DLX       | Medium     |    66.72 us |  2.53 |
+| Dynamic   | Medium     |    26.40 us |  1.00 |
+| Default   | Medium     |    49.67 us |  1.88 |
+| All       | Medium     |   295.99 us | 11.21 |
 |           |            |             |       |
-| Reference | Easy       | 1,133.79 us | 40.51 |
-| DLX       | Easy       |    64.57 us |  2.31 |
-| Dancing   | Easy       |    27.99 us |  1.00 |
-| Default   | Easy       |    49.28 us |  1.76 |
-| All       | Easy       |   290.71 us | 10.39 |
+| Reference | Easy       | 1,135.28 us | 42.01 |
+| DLX       | Easy       |    65.82 us |  2.44 |
+| Dynamic   | Easy       |    27.03 us |  1.00 |
+| Default   | Easy       |    49.86 us |  1.85 |
+| All       | Easy       |   300.53 us | 11.12 |

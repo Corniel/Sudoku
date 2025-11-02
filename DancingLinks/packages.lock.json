@@ -29,7 +29,7 @@
       "sudoku": {
         "type": "Project"
       },
-      "sudokusolver": {
+      "StrategyBased": {
         "type": "Project",
         "dependencies": {
           "Sudoku": "[1.0.0, )"

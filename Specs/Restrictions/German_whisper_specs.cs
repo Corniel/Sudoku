@@ -1,3 +1,4 @@
+using DynamicSolver;
 using Sudoku.Common;
 
 namespace Specs.Restrictions.German_whisper_specs;
@@ -35,7 +36,7 @@ public class Parses
             ...|...|...
             """);
 
-        var solved = Solver.Solve(clues, wispers);
+        var solved = TestSolver.Solve(clues, wispers);
 
         solved.Should().Be("""
             352|186|794

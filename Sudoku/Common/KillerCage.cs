@@ -38,6 +38,6 @@ public sealed partial class KillerCage(int sum, PosSet cells) : Set([..cells]), 
     {
         public int Sum { get; } = sum;
 
-        public override Digits Restrict(SudokuCells graph) => Restrict(graph, Sum);
+        public override Digits Restrict(SudokuCells cells) => Restrict(cells, Sum);
     }
 }

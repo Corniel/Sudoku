@@ -1,6 +1,5 @@
 using BenchmarkDotNet.Attributes;
 using Sudoku;
-using SudokuSolver;
 using System.Collections.Immutable;
 using System.Linq;
 

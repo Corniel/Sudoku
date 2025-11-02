@@ -7,6 +7,20 @@ public sealed class _2025_08_07 : CtcPuzzle
     public override Uri? Url => new("https://youtu.be/OUlAVsaWnDQ");
     public override O Duration => O.s;
 
+    public override Clues Clues => Clues.Parse("""
+        ...|...|..1
+        ...|...|...
+        ...|...|...
+        ---+---+---
+        ...|...|...
+        ...|.3.|...
+        ...|...|...
+        ---+---+---
+        ...|...|...
+        ...|...|.6.
+        ...|...|...
+        """);
+
     public override Rules Constraints { get; } =
         Rules.Killer("""
         ...|...|..1
@@ -52,16 +66,16 @@ public sealed class _2025_08_07 : CtcPuzzle
         """);
 
     public override Cells Solution { get; } = Cells.Parse("""
-        296|784|351
-        341|295|876
-        578|163|492
-        ---+---+---
-        483|652|917
-        617|839|245
-        952|417|683
-        ---+---+---
-        764|528|139
-        829|371|564
-        135|946|728
+        296│784│351
+        341│295│876
+        578│163│492
+        ───┼───┼───
+        483│652│917
+        617│839│245
+        952│417│683
+        ───┼───┼───
+        764│528│139
+        829│371│564
+        135│946│728
         """);
 }

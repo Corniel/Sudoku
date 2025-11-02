@@ -10,11 +10,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="../DancingLinks/DancingLinks.csproj" />
-    <ProjectReference Include="../Dlx/Dlx.csproj" />
     <ProjectReference Include="../Puzzles/Puzzles.csproj" />
+    <ProjectReference Include="../Sudoku/Sudoku.csproj" />
+  </ItemGroup>
+
+  <ItemGroup Label="Solvers">
+    <ProjectReference Include="../Dlx/Dlx.csproj" />
+    <ProjectReference Include="../DynamicSolver/DynamicSolver.csproj" />
     <ProjectReference Include="../Reference/Reference.csproj" />
-    <ProjectReference Include="../SudokuSolver/SudokuSolver.csproj" />
+    <ProjectReference Include="../StrategyBased/StrategyBased.csproj" />
   </ItemGroup>
 
 </Project>

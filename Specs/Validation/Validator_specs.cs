@@ -1,5 +1,7 @@
+using DynamicSolver;
 using Sudoku.Common;
 using Sudoku.Houses;
+using Sudoku.Validation;
 
 namespace Specs.Validation.Validator_specs;
 
@@ -49,7 +51,7 @@ public class Invalidates
             372|516|948
             """);
 
-        ImmutableArray<Rule> rules = [new KillerCage(3, [(0, 0), (0, 1)])];
+        var rules = Rules.Standard + [new KillerCage(3, [(0, 0), (0, 1)])];
 
         var violation = rules.Validate(solution).First();
 

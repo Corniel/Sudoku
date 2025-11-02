@@ -4,11 +4,11 @@
     "net9.0": {
       "BenchmarkDotNet": {
         "type": "Direct",
-        "requested": "[0.15.4, )",
-        "resolved": "0.15.4",
-        "contentHash": "hGHlCCf0HL5b1LvjXb84ZEAVw45Hl9lt4+0gLxaJ4Ty+GagIE8fH+GnzJc3w5MVscghd5NpTNmvwWub1Qg4foQ==",
+        "requested": "[0.15.5, )",
+        "resolved": "0.15.5",
+        "contentHash": "ZJOtQQAlExGtWQEKxV+M/9vFkvVC3hchqSYkx3ahZgMcnonkQTm1N0OHHuxMSCHaLksIm0nfXfGApzf5lw324A==",
         "dependencies": {
-          "BenchmarkDotNet.Annotations": "0.15.4",
+          "BenchmarkDotNet.Annotations": "0.15.5",
           "CommandLineParser": "2.9.1",
           "Gee.External.Capstone": "2.3.0",
           "Iced": "1.21.0",
@@ -16,7 +16,7 @@
           "Microsoft.Diagnostics.Runtime": "3.1.512801",
           "Microsoft.Diagnostics.Tracing.TraceEvent": "3.1.21",
           "Microsoft.DotNet.PlatformAbstractions": "3.1.6",
-          "Perfolizer": "[0.5.3]",
+          "Perfolizer": "[0.5.4]",
           "System.Management": "9.0.5"
         }
       },
@@ -34,8 +34,8 @@
       },
       "BenchmarkDotNet.Annotations": {
         "type": "Transitive",
-        "resolved": "0.15.4",
-        "contentHash": "jLwEHO8EfrsVNNH9Lc4dHMmwD8TON8y8mGQLjqUbSZygQoAIjq6xwNz0bYIVNFl0aUhPgAd/1lnSz8uvUFoMPg=="
+        "resolved": "0.15.5",
+        "contentHash": "bHjxshChHjDMiZpnRyiwWQXG0Qtja4XwSeNKORpcdgV3ZPH+mb821mPUztwo0XUnmOiPh/3LS2nu1sMMOWfC+Q=="
       },
       "CommandLineParser": {
         "type": "Transitive",
@@ -177,8 +177,8 @@
       },
       "Perfolizer": {
         "type": "Transitive",
-        "resolved": "0.5.3",
-        "contentHash": "EhHo0s4y+tHJKhZHgQvPgFWhAhnQpHHuFzutRzfqfv5z763wvhzXh849ZtpVePQNxXWoFafh1Ta2tZgnSIVsYQ=="
+        "resolved": "0.5.4",
+        "contentHash": "/XrpvBRzl20yza7VQZYVBlgCGTfVA81MHRUa+0HyGNYDvnLiDGlXRBh7OydMdrLwC8lnH6Vp9C6B+GMJf0v+Ug=="
       },
       "System.CodeDom": {
         "type": "Transitive",
@@ -240,13 +240,13 @@
         "resolved": "8.0.5",
         "contentHash": "0f1B50Ss7rqxXiaBJyzUu9bWFOO2/zSlifZ/UNMdiIpDYe4cY4LQQicP4nirK1OS31I43rn062UIJ1Q9bpmHpg=="
       },
-      "dancinglinks": {
+      "dlx": {
         "type": "Project",
         "dependencies": {
           "Sudoku": "[1.0.0, )"
         }
       },
-      "dlx": {
+      "dynamicsolver": {
         "type": "Project",
         "dependencies": {
           "Sudoku": "[1.0.0, )"
@@ -264,14 +264,14 @@
           "Sudoku": "[1.0.0, )"
         }
       },
-      "sudoku": {
-        "type": "Project"
-      },
-      "sudokusolver": {
+      "strategybased": {
         "type": "Project",
         "dependencies": {
           "Sudoku": "[1.0.0, )"
         }
+      },
+      "sudoku": {
+        "type": "Project"
       }
     }
   }

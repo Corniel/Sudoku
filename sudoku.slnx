@@ -1,9 +1,9 @@
 <Solution>
   <Folder Name="/Solvers/">
-    <Project Path="DancingLinks/DancingLinks.csproj" />
-    <Project Path="Dlx/Dlx.csproj" Id="d2015be0-bd8f-49b5-9f69-fb029c514605" />
+    <Project Path="Dlx/Dlx.csproj" />
+    <Project Path="DynamicSolver/DynamicSolver.csproj" />
     <Project Path="Reference/Reference.csproj" />
-    <Project Path="SudokuSolver/SudokuSolver.csproj" />
+    <Project Path="StrategyBased/StrategyBased.csproj" />
   </Folder>
   <Project Path=".net.csproj" />
   <Project Path="Benchmarks/Benchmarks.csproj" />

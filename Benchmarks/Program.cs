@@ -4,14 +4,14 @@ public static class Program
 {
     public static void Main()
     {
-        _ = BenchmarkDotNet.Running.BenchmarkRunner.Run<Solving>();
+        Cracking_the_Cryptic.Run();
     }
 
     public static void Other()
     {
         Cracking_the_Cryptic.Run();
+        _ = BenchmarkDotNet.Running.BenchmarkRunner.Run<DigitIterator>();
         _ = BenchmarkDotNet.Running.BenchmarkRunner.Run<Position.Iterate>();
         _ = BenchmarkDotNet.Running.BenchmarkRunner.Run<Solving>();
-        _ = BenchmarkDotNet.Running.BenchmarkRunner.Run<ValueIterator>();
     }
 }

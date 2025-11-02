@@ -41,35 +41,12 @@ public class Solving
     }
 
     [Benchmark(Baseline = true)]
-    public int Dancing()
+    public int Dynamic()
     {
         var solved = 0;
 
         foreach (var clue in Clues)
-            solved += DancingLinks.LinksSolver.Solve(clue, Rules.Standard)[0, 0];
-
-        return solved;
-    }
-
-    [Benchmark]
-    public int Default()
-    {
-        var solved = 0;
-
-        foreach (var clue in Clues)
-            solved += SudokuSolver.Solver.Solve(clue, Rules.Standard, SudokuSolver.ReduceOptions.Default)[Pos.O];
-
-        return solved;
-    }
-
-    [Benchmark]
-    public int All()
-    {
-        var solved = 0;
-        var options = SudokuSolver.ReduceOptions.All with { Restrictions = false };
-
-        foreach (var clue in Clues)
-            solved += SudokuSolver.Solver.Solve(clue, Rules.Standard, options)[Pos.O];
+            solved += DynamicSolver.Solver.Solve(clue, Rules.Standard)[0, 0];
 
         return solved;
     }

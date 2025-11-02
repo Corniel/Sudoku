@@ -10,5 +10,5 @@ public interface Restriction
     PosSet Links { get; }
 
     /// <summary>The remaining digits based on the restriction.</summary>
-    Digits Restrict(SudokuCells graph);
+    Digits Restrict(SudokuCells cells);
 }

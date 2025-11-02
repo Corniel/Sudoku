@@ -1,6 +1,5 @@
 using Sudoku.Houses;
 using Sudoku.Restrictions;
-using System.Numerics;
 
 namespace Puzzles.CrackingTheCryptic;
 
@@ -9,7 +8,7 @@ public sealed class _2025_01_07 : CtcPuzzle
     public override string Title => "Sort of Miraculous";
     public override string? Author => "apetersen";
     public override Uri? Url => new("https://youtu.be/ztFZssfrEp4");
-    public override O Duration => O.ms100;
+    public override O Duration => O.ms10;
 
     public override Cells Solution { get; } = Cells.Parse("""
         246|579|813
@@ -94,8 +93,8 @@ public sealed class _2025_01_07 : CtcPuzzle
     private sealed class EvenCell(Pos appliesTo, int index, ImmutableArray<Pos> cells)
             : BoxCell(appliesTo, index, cells, Evens)
     {
-        public override Digits Restrict(SudokuCells graph)
-            => Restrict(graph, -1, 11) | Digits.Odd;
+        public override Digits Restrict(SudokuCells cells)
+            => Restrict(cells, -1, 11) | Digits.Odd;
 
         protected override bool Restricted(int value) => value is not 0 && value.IsEven();
     }
@@ -103,8 +102,8 @@ public sealed class _2025_01_07 : CtcPuzzle
     private sealed class OddCell(Pos appliesTo, int index, ImmutableArray<Pos> cells)
             : BoxCell(appliesTo, index, cells, Odds)
     {
-        public override Digits Restrict(SudokuCells graph)
-            => Restrict(graph, 0, 10) | Digits.Even;
+        public override Digits Restrict(SudokuCells cells)
+            => Restrict(cells, 0, 10) | Digits.Even;
 
         protected override bool Restricted(int value) => value.IsOdd();
     }

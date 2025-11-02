@@ -246,7 +246,7 @@ public class Parses
             ...|...|.3.
             """);
 
-        var solution = Solver.Solve(clues, rules);
+        var solution = TestSolver.Solve(clues, rules);
 
         solution.Should().Be("""
             965|481|327

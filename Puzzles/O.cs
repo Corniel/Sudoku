@@ -38,8 +38,11 @@ public enum O
     /// <summary>100 seconds.</summary>
     s100 = 11,
 
-    /// <summary>1000 seconds (15 minutes).</summary>
+    /// <summary>1,000 seconds (15 minutes).</summary>
     s1000 = 12,
+
+    /// <summary>10,000 seconds (2 hours and 45 minutes).</summary>
+    s10000 = 13,
 
     /// <summary>Infinitally (not finished).</summary>
     oo = int.MaxValue,

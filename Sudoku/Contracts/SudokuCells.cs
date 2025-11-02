@@ -5,7 +5,4 @@ public interface SudokuCells
 {
     /// <summary>Gets the cell for a specific position.</summary>
     SudokuCell this[Pos pos] { get; }
-
-    [Obsolete]
-    Digits Test(Pos pos);
 }

@@ -32,23 +32,15 @@ public sealed class Arrow(ImmutableArray<Pos> cells, bool isSet = false) : Rule(
 
     private sealed class Circle(Pos circle, ImmutableArray<Pos> shaft) : Group(circle, shaft)
     {
-         public override Digits Restrict(SudokuCells graph)
+         public override Digits Restrict(SudokuCells cells)
         {
             var min = 0;
             var max = 0;
 
-            foreach (var val in Others.Select(o => graph[o].Digit))
+            foreach (var digits in Others.Select(o => cells[o].Digits))
             {
-                if (val is 0)
-                {
-                    min += 1;
-                    max += _9;
-                }
-                else
-                {
-                    min += val;
-                    max += val;
-                }
+                min += digits.First();
+                max += digits.Last();
             }
             return Digits.Between(min, max);
         }
@@ -56,23 +48,9 @@ public sealed class Arrow(ImmutableArray<Pos> cells, bool isSet = false) : Rule(
 
     private sealed class CircleSet(Pos circle, ImmutableArray<Pos> shaft) : Group(circle, shaft)
     {
-        public override Digits Restrict(SudokuCells graph)
+        public override Digits Restrict(SudokuCells cells)
         {
-            var known = Digits.None;
-            var unknw = Digits.None;
-
-            foreach (var other in Others)
-            {
-                var val = graph[other].Digit;
-                if (val is 0)
-                {
-                    unknw |= graph[other].Digits;
-                }
-                else
-                {
-                    known |= val;
-                }
-            }
+            var (known, unknw) = Sums(Others, cells);
 
             var min = known.Sum();
             var max = known.Sum();
@@ -90,9 +68,9 @@ public sealed class Arrow(ImmutableArray<Pos> cells, bool isSet = false) : Rule(
 
         public int Size => Others.Length + 1;
 
-        public override Digits Restrict(SudokuCells graph)
+        public override Digits Restrict(SudokuCells cells)
         {
-            var s = graph[Sum].Digit;
+            var s = cells[Sum].Digit;
 
             if (s is not 0 && s < Size)
             {
@@ -102,18 +80,10 @@ public sealed class Arrow(ImmutableArray<Pos> cells, bool isSet = false) : Rule(
             var min = 0;
             var max = 0;
 
-            foreach (var val in Others.Select(o => graph[o].Digit))
+            foreach (var digits in Others.Select(o => cells[o].Digits))
             {
-                if (val is 0)
-                {
-                    min += 1;
-                    max += _9;
-                }
-                else
-                {
-                    min += val;
-                    max += val;
-                }
+                min += digits.First();
+                max += digits.Last();
             }
 
             var sums = s is 0 ? Digits.AtLeast(Size) : [s];
@@ -133,21 +103,39 @@ public sealed class Arrow(ImmutableArray<Pos> cells, bool isSet = false) : Rule(
 
         public int Minimum { get; } = triangle(others.Length + 1);
 
-        public override Digits Restrict(SudokuCells graph)
+        public override Digits Restrict(SudokuCells cells)
         {
-            var sum_ = graph[Sum].Digit;
+            var sum_ = cells[Sum].Digit;
 
             if (sum_ is 0)
             {
                 var digits = Digits.None;
 
                 for (var s_ = Minimum; s_ <= _9; s_++)
-                    digits |= Restrict(graph, s_);
+                    digits |= Restrict(cells, s_);
 
                 return digits;
             }
             else if (sum_ < Minimum) return Digits.None;
-            else return Restrict(graph, sum_);
+            else return Restrict(cells, sum_);
         }
     }
+
+    private static Summed Sums(IEnumerable<Pos> sum, SudokuCells cells)
+    {
+        Digits known = Digits.None;
+        Digits unknw = Digits.None;
+
+        foreach (var digits in sum.Select(c => cells[c].Digits))
+        {
+            if (digits.HasSingle)
+                known |= digits;
+            else
+                unknw |= digits;
+        }
+
+        return new(known, unknw);
+    }
+
+    private readonly record struct Summed(Digits Known, Digits Unknown);
 }

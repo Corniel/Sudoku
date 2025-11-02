@@ -6,47 +6,57 @@ public sealed class _2019_05_09 : CtcPuzzle
     public override string Title => "Jigsaw Sudoku";
     public override string? Author => "?";
     public override Uri? Url => new("https://youtu.be/wuduuLVGKDQ");
-    public override O Duration => O.oo;
+    public override O Duration => O.ms;
 
     public override Clues Clues { get; } = Clues.Parse("""
-        3..|...|..7
-        1..|...|..5
-        ...|.68|...
-        ---+---+---
-        ..5|.19|...
-        ...|9..|...
-        ...|...|..2
-        ---+---+---
-        8..|...|...
-        ...|235|..1
-        ...|...|.9.
+        3 . . . . . .|.|7
+        -+-+---+ +-+ | |
+        1|.|. .|.|.|.|.|5
+         | |   +-+ +-+ |
+        .|.|. . 6 8|. .|.
+         | |   +---+   |
+        .|.|5 .|1 9 . .|.
+         | +---+---+-+ |
+        .|. . 9|. .|.|.|.
+         +-+ +-+   | +-+
+        . .|.|. . .|. . 2
+           | +-+   +---+-
+        8 .|. .|. 3 . .|.
+         +-+---+-+-----+
+        .|. . 2 3|5 . . 1
+        -+       |
+        . . . . .|. . 9 .
         """);
 
     public override Rules Constraints { get; } = Rules.Jigsaw("""
-        AAA|AAA|ACH
-        BDQ|QAQ|ACH
-        BDQ|QQQ|CCH
-        ---+---+---
-        BDQ|QCC|CCH
-        BDD|DGG|HCH
-        BBD|GGG|HHH
-        ---+---+---
-        BBD|DGG|GGF
-        BEE|EEF|FFF
-        EEE|EEF|FFF
+        A A A A A A A|C|H
+        -+-+---+ +-+ | |
+        B|D|Q Q|A|Q|A|C|H
+         | |   +-+ +-+ |
+        B|D|Q Q Q Q|C C|H
+         | |   +---+   |
+        B|D|Q Q|C C C C|H
+         | +---+---+-+ |
+        B|D D D|G G|H|C|H
+         +-+ +-+   | +-+
+        B B|D|G G G|H H H
+           | +-+   +---+-
+        B B|D D|G G G G|F
+         +-+---+-+-----+
+        B|E E E E|F F F F
+        -+       |
+        E E E E E|F F F F
         """);
 
     public override Cells Solution { get; } = Cells.Parse("""
-        364|891|527
-        189|374|265
-        542|168|739
-        ---+---+---
-        625|719|843
-        217|983|456
-        973|456|182
-        ---+---+---
-        836|527|914
-        498|235|671
-        751|642|398
+        364891527
+        189374265
+        542168739
+        625719843
+        213987456
+        937456182
+        876523914
+        498235671
+        751642398
         """);
 }

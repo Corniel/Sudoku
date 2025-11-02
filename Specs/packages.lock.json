@@ -4,9 +4,9 @@
     "net9.0": {
       "AwesomeAssertions": {
         "type": "Direct",
-        "requested": "[9.2.1, )",
-        "resolved": "9.2.1",
-        "contentHash": "lbwhyQNXxxEGx4oCbFqNfFy2DsywsvNhN6qoOjY4wwhMgI2L9+YrxjyF/M0io99yrvWV1Cjj12LP2QGcC43Uhw=="
+        "requested": "[9.3.0, )",
+        "resolved": "9.3.0",
+        "contentHash": "8lGLYap2ec2gNLgjf2xKZaKLpQ7j36oJvrYzBVVpNAumqnxRdevqqhEF66qxE92f8y2+zsbQ061DeHG61ZhzaQ=="
       },
       "AwesomeAssertions.Analyzers": {
         "type": "Direct",
@@ -44,9 +44,9 @@
       },
       "NUnit.Analyzers": {
         "type": "Direct",
-        "requested": "[4.10.0, )",
-        "resolved": "4.10.0",
-        "contentHash": "w0DLq/bYgjUOugReSDJEOC3E9gOtVw85AJhVQoMk06+Kas2HdJMX0ojMjt+FoN8+38FIKlAppNOuHacIBkXJTQ=="
+        "requested": "[4.11.2, )",
+        "resolved": "4.11.2",
+        "contentHash": "D9w1tsxMyBAsINY2yyIaS59V9W4iGtuPyHs+9enuhmDAaCsSOitJKha4TUPENCAd2LrylCawur0YhCJoLMHBJA=="
       },
       "NUnit3TestAdapter": {
         "type": "Direct",
@@ -164,7 +164,13 @@
           "System.Collections.Immutable": "8.0.0"
         }
       },
-      "dancinglinks": {
+      "dlx": {
+        "type": "Project",
+        "dependencies": {
+          "Sudoku": "[1.0.0, )"
+        }
+      },
+      "dynamicsolver": {
         "type": "Project",
         "dependencies": {
           "Sudoku": "[1.0.0, )"
@@ -182,14 +188,14 @@
           "Sudoku": "[1.0.0, )"
         }
       },
-      "sudoku": {
-        "type": "Project"
-      },
-      "sudokusolver": {
+      "strategybased": {
         "type": "Project",
         "dependencies": {
           "Sudoku": "[1.0.0, )"
         }
+      },
+      "sudoku": {
+        "type": "Project"
       }
     }
   }

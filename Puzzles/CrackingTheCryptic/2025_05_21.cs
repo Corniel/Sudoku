@@ -7,7 +7,7 @@ public sealed class _2025_05_21 : CtcPuzzle
     public override string Title => "Stepped Themos";
     public override string? Author => "Aad van de Wetering";
     public override Uri? Url => new("https://youtu.be/AdSOJQ3huN0");
-    public override O Duration => O.ms;
+    public override O Duration => O.μs100;
 
     public override Clues Clues { get; } = Clues.Parse("""
         ...|...|...
@@ -99,9 +99,9 @@ public sealed class _2025_05_21 : CtcPuzzle
 
         public sealed class Reducer(Pos appliesTo, ImmutableArray<Pos> others) : Group(appliesTo, others)
         {
-            public override Digits Restrict(SudokuCells graph)
+            public override Digits Restrict(SudokuCells cells)
             {
-                var index = Digits.New(graph[Others[0]].Digit, graph[Others[1]].Digit);
+                var index = Digits.New(cells[Others[0]].Digit, cells[Others[1]].Digit);
                 return Loookup[index.GetHashCode()];
             }
 

@@ -5,7 +5,7 @@ public sealed class _2025_09_08 : CtcPuzzle
     public override string Title => "Four at a Time";
     public override string? Author => "Aad van de Wetering";
     public override Uri? Url => new("https://youtu.be/9LDrEYKa-aQ");
-    public override O Duration => O.s;
+    public override O Duration => O.s10;
 
     public override Clues Clues { get; } = Clues.Parse("""
         ...|...|...

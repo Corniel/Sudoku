@@ -7,7 +7,7 @@ public sealed class _2025_05_11 : CtcPuzzle
     public override string Title => "Quadrants";
     public override string? Author => "Supware";
     public override Uri? Url => new("https://youtu.be/IEO4oA2-TTQ");
-    public override O Duration => O.s;
+    public override O Duration => O.ms100;
 
     public override Clues Clues { get; } = Clues.Parse("""
         .2.|...|...
@@ -76,11 +76,11 @@ public sealed class _2025_05_11 : CtcPuzzle
 
         public sealed class Reduce(Pos appliesTo, ImmutableArray<Pos> others) : Group(appliesTo, others)
         {
-            public override Digits Restrict(SudokuCells graph)
+            public override Digits Restrict(SudokuCells cells)
             {
                 var sum = 0;
 
-                foreach (var val in Others.Select(o => graph[o].Digit))
+                foreach (var val in Others.Select(o => cells[o].Digit))
                 {
                     if (val is 0) return Digits._1_to_9;
                     sum += val;

@@ -1,3 +1,4 @@
+using DynamicSolver;
 using Sudoku.Common;
 
 namespace Specs.Restrictions.Dutch_wisper_specs;
@@ -63,7 +64,7 @@ public class Solves
             aZY|XWV|UTS
             """);
 
-        var solved = Solver.Solve(clues, rules);
+        var solved = TestSolver.Solve(clues, rules);
 
         solved.Should().Be("""
             495|162|738
@@ -118,6 +119,8 @@ public class Neighbors
             Console.WriteLine("    ],");
         }
         Console.WriteLine("]");
+
+        Assert.Inconclusive();
     }
 
     private static readonly ImmutableArray<Digits> Allowed =

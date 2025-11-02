@@ -1,3 +1,4 @@
+using DynamicSolver;
 using System.IO;
 using System.Text;
 
@@ -33,7 +34,7 @@ public class Parses
             b = 13  c = 17
             """);
 
-        var solution = Solver.Solve(Clues.None, rules);
+        var solution = TestSolver.Solve(Clues.None, rules);
 
         solution.Should().Be("""
             215|647|398
@@ -68,7 +69,7 @@ public class Parses
             27=(1,7)+(1,8)+(2,7)+(2,8)
             """);
 
-        var solution = Solver.Solve(Clues.None, rules);
+        var solution = TestSolver.Solve(Clues.None, rules);
 
         solution.Should().Be("""
             892|463|571
@@ -114,7 +115,7 @@ public class Generates
     [TestCase(8)]
     public void lookup(int cells)
     {
-        var file = new FileInfo($"./../../../../SudokuSolver/Restrictions/Cage_{cells}.md");
+        var file = new FileInfo($"./../../../../Sudoku/Restrictions/Cage_{cells}.md");
 
         using var writer = new StreamWriter(file.FullName, false, new UTF8Encoding(false));
 

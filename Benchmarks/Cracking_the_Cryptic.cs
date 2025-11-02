@@ -1,6 +1,5 @@
 using Puzzles;
 using Puzzles.CrackingTheCryptic;
-using SudokuSolver;
 using System;
 using System.Diagnostics;
 using System.Linq;
@@ -34,7 +33,7 @@ public static class Cracking_the_Cryptic
         for (var a = 0; a < 10 && total < TimeSpan.FromMinutes(3); a++)
         {
             sw.Restart();
-            var solution = Solver.Solve(puzzle.Clues, puzzle.Constraints, ReduceOptions.All);
+            var solution = DynamicSolver.Solver.Solve(puzzle.Clues, puzzle.Constraints);
             sw.Stop();
 
             if (puzzle.Solution != solution)
@@ -49,7 +48,13 @@ public static class Cracking_the_Cryptic
             total += sw.Elapsed;
         }
 
-        Console.WriteLine($"\r{Format(puzzle, best.Format())}");
+        Console.Write($"\r{Format(puzzle, best.Format())}");
+
+        if (best.O() != puzzle.Duration)
+        {
+            Console.Write($" [{best.O()} != {puzzle.Duration}]");
+        }
+        Console.WriteLine();
     }
 
     private static string Format(Puzzle puzzle, string txt)

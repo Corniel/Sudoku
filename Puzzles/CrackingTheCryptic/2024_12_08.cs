@@ -1,12 +1,13 @@
-using Sudoku.Restrictions;
-
 namespace Puzzles.CrackingTheCryptic;
 
 public sealed class _2024_12_08 : CtcPuzzle
 {
     public override string Title => "Forune Cookie II";
+
     public override string? Author => "pieguy";
+
     public override Uri? Url => new("https://youtu.be/gD7gio1xuvU");
+
     public override O Duration => O.ms10;
 
     public override Rules Constraints { get; } =

@@ -2,7 +2,7 @@ using Sudoku.Common;
 
 namespace Sudoku.Houses;
 
-public abstract class House(int index, PosSet cells) : Set([..cells])
+public abstract class House(int index, PosSet cells) : Set([.. cells])
 {
     /// <summary>The index of the house.</summary>
     public int Index { get; } = index;

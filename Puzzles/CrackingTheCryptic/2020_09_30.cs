@@ -1,10 +1,11 @@
-
 namespace Puzzles.CrackingTheCryptic;
 
 public sealed class _2020_09_30 : CtcPuzzle
 {
     public override string Title => "Tatooine Sunset";
+
     public override string? Author => "Philip Newman";
+
     public override Uri? Url => new("https://youtu.be/V38qsL1cmFs");
 
     public override O Duration => O.μs10;

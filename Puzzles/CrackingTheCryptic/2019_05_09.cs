@@ -1,11 +1,13 @@
-
 namespace Puzzles.CrackingTheCryptic;
 
 public sealed class _2019_05_09 : CtcPuzzle
 {
     public override string Title => "Jigsaw Sudoku";
+
     public override string? Author => "?";
+
     public override Uri? Url => new("https://youtu.be/wuduuLVGKDQ");
+
     public override O Duration => O.ms;
 
     public override Clues Clues { get; } = Clues.Parse("""

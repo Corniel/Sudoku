@@ -30,9 +30,9 @@ public sealed class PuzzleBankPuzzle(string title, Clues clues, Cells solution) 
 
     public static ImmutableArray<PuzzleBankPuzzle> Medium => [.. Load(nameof(Medium))];
 
-    public static ImmutableArray<PuzzleBankPuzzle> Hard => [..Load(nameof(Hard))];
+    public static ImmutableArray<PuzzleBankPuzzle> Hard => [.. Load(nameof(Hard))];
 
-    public static ImmutableArray<PuzzleBankPuzzle> Diabolical => [..Load(nameof(Diabolical))];
+    public static ImmutableArray<PuzzleBankPuzzle> Diabolical => [.. Load(nameof(Diabolical))];
 
     public override string ToString() => string.Create(CultureInfo.InvariantCulture, $"{Title} ({Level:0.0})");
 

@@ -17,7 +17,7 @@ public class Parses
             4..|5..|..7
             .6.|...|1..
             3..|69.|.52");
-        
+
         cells.ToString().Should().HaveLength(131);
     }
 }

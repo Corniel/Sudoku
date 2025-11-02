@@ -23,6 +23,6 @@ public sealed class DeltaMin(Pos appliesTo, Pos other, int delta) : Pair(applies
             look[dt] = [.. digits];
         }
 
-        return [..look];
+        return [.. look];
     }
 }

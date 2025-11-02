@@ -14,6 +14,17 @@ public class Cracking_the_Cryptic
     private static readonly ImmutableArray<Puzzle> Fasts = [.. CtcPuzzle.All.Where(p => p.Duration is <= O.ms100)];
     private static readonly ImmutableArray<Puzzle> Slows = [.. CtcPuzzle.All.Where(p => p.Duration is > O.ms100)];
 
+    [Test]
+    public void Work_in_progress()
+    {
+        var puzzle = new _2025_11_01();
+        puzzle.Constraints.Should().BeValidFor(puzzle.Solution);
+
+        var solved = TestSolver.Solve(puzzle);
+        Console.WriteLine(solved);
+        solved.Should().Be(puzzle.Solution, puzzle.Constraints);
+    }
+
     [TestCaseSource(nameof(Fasts))]
     public void Fast(Puzzle puzzle)
     {
@@ -287,7 +298,7 @@ public class Puzzle_bank
 
     private static void Solve(Puzzle puzzle, Rules? rules = null)
     {
-        var solved =  TestSolver.Solve(puzzle.Clues, rules ?? Rules.Standard);
+        var solved = TestSolver.Solve(puzzle.Clues, rules ?? Rules.Standard);
         solved.Should().Be(puzzle.Solution);
     }
 }

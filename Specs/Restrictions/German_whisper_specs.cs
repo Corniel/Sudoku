@@ -1,4 +1,3 @@
-using DynamicSolver;
 using Sudoku.Common;
 
 namespace Specs.Restrictions.German_whisper_specs;

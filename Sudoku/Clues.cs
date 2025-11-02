@@ -1,4 +1,4 @@
- namespace Sudoku;
+namespace Sudoku;
 
 [DebuggerDisplay("Count = {Count}")]
 [DebuggerTypeProxy(typeof(Diagnostics.CollectionDebugView))]
@@ -37,6 +37,6 @@ public readonly struct Clues(ImmutableArray<Cell> cells) : IReadOnlyCollection<C
             }
         }
 
-        return new([..cells[..i]]);
+        return new([.. cells[..i]]);
     }
 }

@@ -10,7 +10,7 @@ public abstract class Group(Pos appliesTo, ImmutableArray<Pos> others) : Restric
     public ImmutableArray<Pos> Others { get; } = others;
 
     /// <inheritdoc />
-    public PosSet Links { get; } = [..others];
+    public PosSet Links { get; } = [.. others];
 
     /// <inheritdoc />
     public abstract Digits Restrict(SudokuCells cells);

@@ -3,8 +3,11 @@ namespace Puzzles.CrackingTheCryptic;
 public sealed class _2025_09_08 : CtcPuzzle
 {
     public override string Title => "Four at a Time";
+
     public override string? Author => "Aad van de Wetering";
+
     public override Uri? Url => new("https://youtu.be/9LDrEYKa-aQ");
+
     public override O Duration => O.s10;
 
     public override Clues Clues { get; } = Clues.Parse("""
@@ -75,6 +78,7 @@ public sealed class _2025_09_08 : CtcPuzzle
             ...|...|.6.
             ...|...|..7
             """);
+
     public override Cells Solution { get; } = Cells.Parse("""
         961|437|258
         485|269|173
@@ -92,16 +96,16 @@ public sealed class _2025_09_08 : CtcPuzzle
     public sealed class SlowThermometer(ImmutableArray<Pos> cells) : Rule(cells)
     {
         public override ImmutableArray<Restriction> Restrictions { get; }
-            = [.. cells.Select((c, i) => new Reduce(c, cells[..i], cells[(i+1)..]))];
+            = [.. cells.Select((c, i) => new Reduce(c, cells[..i], cells[(i + 1)..]))];
 
         public static SlowThermometer Parse(string str) => new([.. Clues.Parse(str).OrderBy(c => c.Digit).Select(c => c.Pos)]);
 
         public sealed class Reduce(Pos appliesTo, ImmutableArray<Pos> before, ImmutableArray<Pos> after) : Restriction
         {
             public Pos AppliesTo { get; } = appliesTo;
-            
+
             public ImmutableArray<Pos> Before { get; } = [.. before.Reverse()];
-            
+
             public ImmutableArray<Pos> After { get; } = after;
 
             public PosSet Links { get; } = [.. before, .. after];

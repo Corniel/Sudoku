@@ -198,8 +198,9 @@ able to solve the following puzzles (so far):
 
 | Date       | Puzzle                                                          |       Speed |
 |:----------:|---------------------------------------------------------------- |------------:|
-| 2025-10-17 | [Who’s Afraid Of 13](Puzzles/CrackingTheCryptic/2025_10_17.cs)  |    15.5 ms  |
-| 2025-10-07 | [Golden Arrow](Puzzles/CrackingTheCryptic/2025_10_07.cs)        |    30.7 ms  |
+| 2025-11-01 | [Parity Patrol 101](Puzzles/CrackingTheCryptic/2025_11_01.cs)   | 6,078.4 ms  |
+| 2025-10-17 | [Who’s Afraid Of 13](Puzzles/CrackingTheCryptic/2025_10_17.cs)  |   385.3 µs  |
+| 2025-10-07 | [Golden Arrow](Puzzles/CrackingTheCryptic/2025_10_07.cs)        |    95.6 µs  |
 | 2025-09-15 | [Studious](Puzzles/CrackingTheCryptic/2025_09_15.cs)            |    18.3 ms  |
 | 2025-09-13 | [Royalty](Puzzles/CrackingTheCryptic/2025_09_13.cs)             |    91.6 ms  |
 | 2025-09-09 | [Seylla](Puzzles/CrackingTheCryptic/2025_09_09.cs)              |   159.8 s   |

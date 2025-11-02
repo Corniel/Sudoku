@@ -3,8 +3,11 @@ namespace Puzzles.CrackingTheCryptic;
 public sealed class _2025_09_09 : CtcPuzzle
 {
     public override string Title => "Seylla";
+
     public override string? Author => "Phistomefel";
+
     public override Uri? Url => new("https://youtu.be/DF0f15tya5Q");
+
     public override O Duration => O.s100;
 
     public override Cells Solution { get; } = Cells.Parse("""
@@ -21,8 +24,8 @@ public sealed class _2025_09_09 : CtcPuzzle
         172|856|934
         """);
 
-     public override Rules Constraints { get; } = 
-        Rules.Killer("""
+    public override Rules Constraints { get; } =
+       Rules.Killer("""
         AAA|...|BB.
         ...|CC.|...
         .DD|...|EEE

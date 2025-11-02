@@ -1,12 +1,13 @@
-using Sudoku.Restrictions;
-
 namespace Puzzles.CrackingTheCryptic;
 
 public sealed class _2025_05_21 : CtcPuzzle
 {
     public override string Title => "Stepped Themos";
+
     public override string? Author => "Aad van de Wetering";
+
     public override Uri? Url => new("https://youtu.be/AdSOJQ3huN0");
+
     public override O Duration => O.μs100;
 
     public override Clues Clues { get; } = Clues.Parse("""
@@ -93,7 +94,7 @@ public sealed class _2025_05_21 : CtcPuzzle
         ...|...|...
         """);
 
-    public sealed class NonConsecutive(PosSet cells) : Set([..cells])
+    public sealed class NonConsecutive(PosSet cells) : Set([.. cells])
     {
         public override ImmutableArray<Restriction> Restrictions { get; } = Reducer.Reducers([.. cells]);
 

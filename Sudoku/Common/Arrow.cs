@@ -32,7 +32,7 @@ public sealed class Arrow(ImmutableArray<Pos> cells, bool isSet = false) : Rule(
 
     private sealed class Circle(Pos circle, ImmutableArray<Pos> shaft) : Group(circle, shaft)
     {
-         public override Digits Restrict(SudokuCells cells)
+        public override Digits Restrict(SudokuCells cells)
         {
             var min = 0;
             var max = 0;

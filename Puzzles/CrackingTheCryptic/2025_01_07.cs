@@ -1,13 +1,15 @@
 using Sudoku.Houses;
-using Sudoku.Restrictions;
 
 namespace Puzzles.CrackingTheCryptic;
 
 public sealed class _2025_01_07 : CtcPuzzle
 {
     public override string Title => "Sort of Miraculous";
+
     public override string? Author => "apetersen";
+
     public override Uri? Url => new("https://youtu.be/ztFZssfrEp4");
+
     public override O Duration => O.ms10;
 
     public override Cells Solution { get; } = Cells.Parse("""
@@ -28,7 +30,7 @@ public sealed class _2025_01_07 : CtcPuzzle
         Rules.AntiKnight
         + new Ratio1_2((0, 2), (1, 2))
         + Boxes();
-    
+
 
     private static IEnumerable<Rule> Boxes()
     {

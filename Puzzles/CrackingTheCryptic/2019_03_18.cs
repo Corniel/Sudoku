@@ -3,8 +3,11 @@ namespace Puzzles.CrackingTheCryptic;
 public sealed class _2019_03_18 : CtcPuzzle
 {
     public override string Title => "X-Wing Sudoku";
+
     public override string? Author => "?";
+
     public override Uri? Url => new("https://youtu.be/az2M0V9QCXk");
+
     public override O Duration => O.μs100;
 
     public override Clues Clues { get; } = Clues.Parse("""

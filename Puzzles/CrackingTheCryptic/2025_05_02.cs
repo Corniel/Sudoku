@@ -1,11 +1,13 @@
-
 namespace Puzzles.CrackingTheCryptic;
 
 public sealed class _2025_05_02 : CtcPuzzle
 {
     public override string Title => "Arrows v.s. Thermo";
+
     public override string? Author => "Aad van de Wetering";
+
     public override Uri? Url => new("https://youtu.be/kjKeq8fTyS8");
+
     public override O Duration => O.ms;
 
     public override Clues Clues { get; } = Clues.Parse("""
@@ -97,6 +99,7 @@ public sealed class _2025_05_02 : CtcPuzzle
             ...|...|...
             """),
     ];
+
     private static IEnumerable<Arrow> ArrowsLo() =>
     [
         Arrow.ParseSet("""

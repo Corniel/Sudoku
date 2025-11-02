@@ -5,7 +5,7 @@ namespace Sudoku.Common;
 
 public sealed class DutchWhisper(ImmutableArray<Pos> cells) : Rule(cells)
 {
-    public override ImmutableArray<Restriction> Restrictions { get; } = [..Init(cells)];
+    public override ImmutableArray<Restriction> Restrictions { get; } = [.. Init(cells)];
 
     private static IEnumerable<Neighbors> Init(ImmutableArray<Pos> cells)
     {

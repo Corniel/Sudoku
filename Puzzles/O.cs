@@ -4,13 +4,13 @@ namespace Puzzles;
 public enum O
 {
     Unknown = 0,
-    
+
     /// <summary>10 nanoseconds.</summary>
     ns10 = 1,
-    
+
     /// <summary>100 nanoseconds.</summary>
     ns100 = 2,
-    
+
     /// <summary>1 microsecond.</summary>
     μs = 3,
 

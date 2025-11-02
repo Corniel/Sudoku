@@ -1,13 +1,15 @@
 using Sudoku.Houses;
-using Sudoku.Restrictions;
 
 namespace Puzzles.CrackingTheCryptic;
 
 public sealed class _2024_09_29 : CtcPuzzle
 {
     public override string Title => "3 In the Corner";
+
     public override string? Author => "James Kopp";
+
     public override Uri? Url => new("https://youtu.be/x6RrwaOb0Iw");
+
     public override O Duration => O.oo;
 
     // TODO: remove the arrow: it has not been specified, but could be deduced
@@ -46,14 +48,14 @@ public sealed class _2024_09_29 : CtcPuzzle
 
     private static IEnumerable<Rule> AtLeast3s()
     {
-       foreach(var box in Box.All)
+        foreach (var box in Box.All)
         {
             foreach (var c in box)
             {
                 if (c.W() is { } w && box.Cells.Contains(w))
                     yield return new AtLeast3(c, w);
 
-                if(c.S() is { } s && box.Cells.Contains(s))
+                if (c.S() is { } s && box.Cells.Contains(s))
                     yield return new AtLeast3(c, s);
             }
         }

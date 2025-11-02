@@ -10,7 +10,7 @@ internal sealed class ConstraintsAssertions(IEnumerable<Rule> subject)
     public IEnumerable<Rule> Subject { get; } = subject;
 
     public void BeValidFor(Cells cells) => BeValidFor(new CellsWrapper(cells));
-    
+
     public void BeValidFor(SudokuCells cells)
     {
         var violations = Subject.Validate(cells).ToArray();

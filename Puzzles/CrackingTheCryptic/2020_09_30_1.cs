@@ -1,11 +1,13 @@
-
 namespace Puzzles.CrackingTheCryptic;
 
 public sealed class _2020_09_30_1 : CtcPuzzle
 {
     public override string Title => "Classic Sudoku!";
+
     public override string? Author => "Rimu Takamura";
+
     public override Uri? Url => new("https://youtu.be/V38qsL1cmFs");
+
     public override O Duration => O.μs10;
 
     public override Clues Clues { get; } = Clues.Parse("""

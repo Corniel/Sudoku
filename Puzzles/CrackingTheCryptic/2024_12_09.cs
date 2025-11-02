@@ -3,8 +3,11 @@ namespace Puzzles.CrackingTheCryptic;
 public sealed class _2024_12_09 : CtcPuzzle
 {
     public override string Title => "Elbow Joint";
+
     public override string? Author => "Arachno";
+
     public override Uri? Url => new("https://youtu.be/fhAJVxU0v6Q");
+
     public override O Duration => O.s;
 
     public override Cells Solution { get; } = Cells.Parse("""
@@ -20,7 +23,7 @@ public sealed class _2024_12_09 : CtcPuzzle
         156│423│789
         298│756│134
         """);
-    
+
     public override Rules Constraints { get; } =
         Rules.Standard
         + Thermometers.Parse("""

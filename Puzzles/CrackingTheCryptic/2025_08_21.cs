@@ -3,8 +3,11 @@ namespace Puzzles.CrackingTheCryptic;
 public sealed class _2025_08_21 : CtcPuzzle
 {
     public override string Title => "Miracle Of Eleven";
+
     public override string? Author => "Aad van de Wetering";
+
     public override Uri? Url => new("https://youtu.be/OzzuJUU6g84");
+
     public override O Duration => O.μs100;
 
     public override Clues Clues { get; } = Clues.Parse("""
@@ -35,10 +38,10 @@ public sealed class _2025_08_21 : CtcPuzzle
         936|841|752
         """);
 
-     public override Rules Constraints { get; } =
-        Rules.Standard
-        + AtMost11s()
-        + NonConsecutives();
+    public override Rules Constraints { get; } =
+       Rules.Standard
+       + AtMost11s()
+       + NonConsecutives();
 
     public static IEnumerable<AtMost> AtMost11s()
     {
@@ -56,7 +59,7 @@ public sealed class _2025_08_21 : CtcPuzzle
 
     private static IEnumerable<NonConsecutive> NonConsecutives()
     {
-        foreach(var pos in Pos.All)
+        foreach (var pos in Pos.All)
         {
             if (pos.N() is { } n) yield return new NonConsecutive(pos, n);
             if (pos.W() is { } w) yield return new NonConsecutive(pos, w);

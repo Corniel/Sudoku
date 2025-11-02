@@ -6,9 +6,9 @@ namespace Sudoku.Restrictions;
 
 public partial class Cage
 {
-    public static readonly ImmutableArray<DigitLookup<Digits>[]> Lookup = [..Init()];
+    public static readonly ImmutableArray<DigitLookup<Digits>[]> Lookup = [.. Init()];
 
-    public static readonly ImmutableArray<double[]> Infos = [..GetInfos()];
+    public static readonly ImmutableArray<double[]> Infos = [.. GetInfos()];
 
     private static DigitLookup<Digits>[][] Init()
     {

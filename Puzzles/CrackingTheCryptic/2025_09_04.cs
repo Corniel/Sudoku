@@ -1,13 +1,15 @@
 using Sudoku.Parsing;
-using Sudoku.Restrictions;
 
 namespace Puzzles.CrackingTheCryptic;
 
 public sealed class _2025_09_04 : CtcPuzzle
 {
     public override string Title => "Packing Problem";
+
     public override string? Author => "clover!";
+
     public override Uri? Url => new("https://youtu.be/OMqUAduLZfI");
+
     public override O Duration => O.s100;
 
     public override Cells Solution { get; } = Cells.Parse("""
@@ -141,14 +143,14 @@ public sealed class _2025_09_04 : CtcPuzzle
             [1, 3, 4, 8],
             [1, 3, 5, 9],
             [2, 3, 4, 9],
-            
+
             [1, 1, 2, 4],
             [1, 1, 3, 5],
             [1, 1, 4, 6],
             [1, 1, 5, 7],
             [1, 1, 6, 8],
             [1, 1, 7, 9],
-            
+
             [1, 2, 2, 5],
             [1, 3, 3, 7],
             [1, 4, 4, 9],

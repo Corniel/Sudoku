@@ -3,7 +3,9 @@ namespace Puzzles.CrackingTheCryptic;
 public sealed class _2021_07_26 : CtcPuzzle
 {
     public override string Title => "Classic Sudoku";
+
     public override string? Author => "Topy Linkala";
+
     public override Uri? Url => new("https://youtu.be/uWgu-HOm5to");
 
     public override O Duration => O.μs10;

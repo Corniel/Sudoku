@@ -3,8 +3,11 @@ namespace Puzzles.CrackingTheCryptic;
 public sealed class _2025_08_07 : CtcPuzzle
 {
     public override string Title => "Unstable Seesaws";
+
     public override string? Author => "Game_puzzles & Piatato";
+
     public override Uri? Url => new("https://youtu.be/OUlAVsaWnDQ");
+
     public override O Duration => O.s;
 
     public override Clues Clues => Clues.Parse("""

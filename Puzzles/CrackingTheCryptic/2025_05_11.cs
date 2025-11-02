@@ -1,12 +1,13 @@
-using Sudoku.Restrictions;
-
 namespace Puzzles.CrackingTheCryptic;
 
 public sealed class _2025_05_11 : CtcPuzzle
 {
     public override string Title => "Quadrants";
+
     public override string? Author => "Supware";
+
     public override Uri? Url => new("https://youtu.be/IEO4oA2-TTQ");
+
     public override O Duration => O.ms100;
 
     public override Clues Clues { get; } = Clues.Parse("""
@@ -55,7 +56,7 @@ public sealed class _2025_05_11 : CtcPuzzle
             ...|...|..1
             """).Select(c => c.Pos)];
 
-        foreach(var p in Pos.All)
+        foreach (var p in Pos.All)
         {
             if (p.N() is { } n && p.W() is { } w)
             {

@@ -5,8 +5,11 @@ namespace Puzzles.CrackingTheCryptic;
 public sealed class _2025_03_25 : CtcPuzzle
 {
     public override string Title => "Rapuzzle";
+
     public override string? Author => "Scojo";
+
     public override Uri? Url => new("https://youtu.be/-L9qq8cyQ5M");
+
     public override O Duration => O.ms;
 
     public override Clues Clues { get; } = Clues.Parse("""
@@ -72,7 +75,7 @@ public sealed class _2025_03_25 : CtcPuzzle
             TTT|...|...
             """).Single();
 
-        foreach(var t in tower.Cells)
+        foreach (var t in tower.Cells)
         {
             if (t.N() is { } n && !tower.Cells.Contains(n))
                 yield return new Thermometer([n, t]);

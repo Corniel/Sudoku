@@ -1,5 +1,3 @@
-using System.Linq;
-
 namespace Sudoku;
 
 public readonly struct Cells : IEquatable<Cells>

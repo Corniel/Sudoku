@@ -1,13 +1,14 @@
-using Sudoku.Restrictions;
-
 namespace Puzzles.CrackingTheCryptic;
 
 public sealed class _2025_10_17 : CtcPuzzle
 {
     public override string Title => "Who’s Afraid Of 13";
+
     public override string? Author => "Aad van de Wetering";
+
     public override Uri? Url => new("https://youtu.be/z39UKC3Y8Po");
-    public override O Duration => O.ms;
+
+    public override O Duration => O.μs100;
 
     public override Cells Solution { get; } = Cells.Parse("""
         843│917│625

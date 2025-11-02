@@ -12,7 +12,7 @@ public abstract class Rule(params ImmutableArray<Pos> cells) : IReadOnlyCollecti
     public virtual bool IsSet { get; }
 
     /// <summary>The cells bound to the constraint.</summary>
-    public PosSet Cells { get; } = [..cells];
+    public PosSet Cells { get; } = [.. cells];
 
     /// <inheritdoc />
     public int Count => Cells.Count;

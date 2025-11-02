@@ -214,6 +214,7 @@ able to solve the following puzzles (so far):
 | 2025-05-02 | [Arrows v.s. Thermos](Puzzles/CrackingTheCryptic/2025_05_02.cs) |   515.1 µs  |
 | 2025-03-25 | [Rapuzzle](Puzzles/CrackingTheCryptic/2025_03_25.cs)            | 2,686.6 µs  |
 | 2025-01-07 | [Sort of Miraculous](Puzzles/CrackingTheCryptic/2025_01_07.cs)  |   726.8 ms  |
+| 2024-12-24 | [Arrow Thermo 2](Puzzles/CrackingTheCryptic/2024_12_24.cs)      | 2,191.3 ms  |
 | 2024-12-09 | [Elbow Join](Puzzles/CrackingTheCryptic/2024_12_09.cs)          |    26.4 min |
 | 2024-12-08 | [Fortune Cookie II](Puzzles/CrackingTheCryptic/2024_12_08.cs)   | 8,992.1 ms  |
 | 2024-11-18 | [80](Puzzles/CrackingTheCryptic/2024_11_18.cs)                  | 1,049.3 µs  |

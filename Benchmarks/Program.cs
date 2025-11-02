@@ -4,7 +4,7 @@ public static class Program
 {
     public static void Main()
     {
-        Cracking_the_Cryptic.Run();
+        Cracking_the_Cryptic.Run(p => p.Title == "Arrow Thermo 2");
     }
 
     public static void Other()

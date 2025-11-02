@@ -1,5 +1,3 @@
-using Sudoku.Parsing;
-
 namespace Puzzles.CrackingTheCryptic;
 
 public sealed class _2025_09_04 : CtcPuzzle

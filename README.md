@@ -218,6 +218,7 @@ able to solve the following puzzles (so far):
 | 2024-12-08 | [Fortune Cookie II](Puzzles/CrackingTheCryptic/2024_12_08.cs)   | 8,992.1 ms  |
 | 2024-09-29 | [3 In the Corner](Puzzles/CrackingTheCryptic/2024_09_29.cs)     |          ?  |
 | 2024-01-08 | [Tulpenblüte](Puzzles/CrackingTheCryptic/2024_01_08.cs)         |   194.5 ms  |
+| 2022-05-03 | [The Dutch Miracle](Puzzles/CrackingTheCryptic/2022_05_03.cs)   |   459.0 µs  |
 | 2022-03-13 | [The Trident](Puzzles/CrackingTheCryptic/2022_03_13.cs)         |          ?  |
 | 2021-10-06 | [Dutch Whispers](Puzzles/CrackingTheCryptic/2021_10_06.cs)      |   208.4 µs  |
 | 2020-09-30 | [Classic Sudoku!](Puzzles/CrackingTheCryptic/2020_09_30_1_.cs)  |    77.7 µs  |

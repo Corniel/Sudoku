@@ -3,8 +3,10 @@ using Sudoku.Restrictions;
 
 namespace Sudoku.Common;
 
-public sealed class DutchWhisper(ImmutableArray<Pos> cells) : Rule(cells)
+public sealed class DutchWhisper(ImmutableArray<Pos> cells, bool isSet = false) : Rule(cells)
 {
+    public override bool IsSet { get; } = isSet;
+
     public override ImmutableArray<Restriction> Restrictions { get; } = [.. Init(cells)];
 
     private static IEnumerable<Neighbors> Init(ImmutableArray<Pos> cells)

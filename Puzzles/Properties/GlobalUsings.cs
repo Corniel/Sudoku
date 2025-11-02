@@ -1,6 +1,7 @@
 global using Sudoku;
 global using Sudoku.Common;
 global using Sudoku.Contracts;
+global using Sudoku.Parsing;
 global using Sudoku.Restrictions;
 global using System;
 global using System.Collections.Generic;

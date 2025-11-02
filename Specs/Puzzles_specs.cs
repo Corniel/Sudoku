@@ -17,7 +17,7 @@ public class Cracking_the_Cryptic
     [Test]
     public void Work_in_progress()
     {
-        var puzzle = new _2025_11_01();
+        var puzzle = new _2022_05_03();
         puzzle.Constraints.Should().BeValidFor(puzzle.Solution);
 
         var solved = TestSolver.Solve(puzzle);

@@ -1,4 +1,5 @@
 global using Sudoku.Contracts;
+global using Sudoku.Parsing;
 global using System;
 global using System.Collections;
 global using System.Collections.Generic;

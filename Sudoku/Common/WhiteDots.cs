@@ -1,5 +1,3 @@
-using Sudoku.Parsing;
-
 namespace Sudoku.Common;
 
 public static class WhiteDots

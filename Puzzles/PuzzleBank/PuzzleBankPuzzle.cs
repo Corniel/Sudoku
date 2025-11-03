@@ -4,12 +4,11 @@ using System.IO;
 namespace Puzzles.PuzzleBank;
 
 /// <summary>Sudoku exchange puzzle bank.</summary>
-/// <remarks>
-/// See: https://github.com/grantm/sudoku-exchange-puzzle-bank.
-/// </remarks>
 public sealed class PuzzleBankPuzzle(string title, Clues clues, Cells solution) : Puzzle
 {
     public override string Title { get; } = title;
+
+    public override Uri? Url => new("https://github.com/grantm/sudoku-exchange-puzzle-bank");
 
     public override Clues Clues { get; } = clues;
 

@@ -10,7 +10,9 @@ namespace Reference;
 /// </remarks>
 public static class Solver
 {
-    public static Cells Solve(Clues clues)
+    public static Cells Solve(Clues clues) => Raw(clues).ToCells();
+
+    public static int[,] Raw(Clues clues)
     {
         var mat = new int[9, 9];
         foreach (var (r, c, v) in clues)
@@ -19,7 +21,7 @@ public static class Solver
         }
 
         Solve(mat, 0, 0);
-        return mat.ToCells();
+        return mat;
     }
 
     // Function to solve the Sudoku problem

@@ -5,16 +5,21 @@ public static class DlxSolver
 {
     public static Cells Solve(Clues clues)
     {
-        var nodes = Nodes(clues);
-        var rows = new Stack<Node>();
         var cells = Cells.Empty;
 
-        if (!Solve(nodes, rows)) return cells;
-
-        foreach (var cell in rows.Select(r => r.Cell))
+        foreach (var cell in Raw(clues).Select(r => r.Cell))
             cells[cell.Pos] = cell.Digit;
 
         return cells;
+    }
+
+    public static Stack<Node> Raw(Clues clues)
+    {
+        var nodes = Nodes(clues);
+        var rows = new Stack<Node>();
+
+        if (!Solve(nodes, rows)) return [];
+        return rows;
     }
 
     private static bool Solve(Nodes nodes, Stack<Node> rows)

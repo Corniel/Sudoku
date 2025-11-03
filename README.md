@@ -270,3 +270,20 @@ latter is preferred.
 The `Restricton` is defined on a [cell](#Cell), with a referenced to other
 involved cells. It is able, based on a given state of [cells](#Cells), to
 return a (restricted) set of [digits](#Digits).
+
+## Test sets
+Both [Kaggle](https://www.kaggle.com/datasets/rohanrao/sudoku/) as
+[Sudoku Exchange(https://github.com/grantm/sudoku-exchange-puzzle-bank) published
+test sets containing zillions of generated puzzles to solve.
+
+| Set                 | Puzzles |   Dynamic Solver     |       Knuth's DLX            |     Reference backtracker      |
+|:--------------------|--------:|----------:|---------:|----------:|---------:|------:|---------:|------------:|------:|
+| Kaggle (300k)[1]    | 300,000 | 64.67 k/s | 15.46 µs | 15.37 k/s | 65.05 µs |  4.21 | 2.06 k/s |   486.46 µs | 31.46 |
+| Exchange (easy)     | 100,000 | 85.31 k/s | 11.72 µs | 16.90 k/s | 59.16 µs |  5.05 | 1.53 k/s |   655.43 µs | 55.91 |
+| Exchange (medium)   | 352,643 | 48.68 k/s | 20.54 µs | 15.61 k/s | 64.05 µs |  3.12 | 0.81 k/s | 1,237.18 µs | 60.22 |
+| Exchange (hard)     | 183,357 | 36.13 k/s | 27.68 µs | 14.96 k/s | 66.85 µs |  2.42 | 0.76 k/s | 1,308.55 µs | 47.28 |
+| Exchange (diabolic) | 119,681 | 28.58 k/s | 34.99 µs | 14.44 k/s | 69.25 µs |  1.98 | 0.72 k/s | 1,396.18 µs | 39.91 |
+| Exchange (1000)[2]  |   1,000 | 12.76 k/s | 78.39 µs | 11.37 k/s | 87.96 µs |  1.12 | 0.41 k/s | 2,429.74 µs | 31.00 |
+
+* [1] From the 9M puzzles (with an overkill of given digits) only the hardest 300k haven been chosen
+* [2] The hardest 1000 of the diabolic set

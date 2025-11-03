@@ -210,7 +210,8 @@ able to solve the following puzzles (so far):
 | 2025-05-21 | [Stepped Thermos](Puzzles/CrackingTheCryptic/2025_05_21.cs)        | 2,759.3 µs  |
 | 2025-05-11 | [Quadrants](Puzzles/CrackingTheCryptic/2025_05_11.cs)              | 1,558.2 ms  |
 | 2025-05-02 | [Arrows v.s. Thermos](Puzzles/CrackingTheCryptic/2025_05_02.cs)    |   515.1 µs  |
-| 2025-03-25 | [Rapuzzle](Puzzles/CrackingTheCryptic/2025_03_25.cs)               | 2,686.6 µs  |
+| 2025-04-23 | [Indifferent Neighbours](Puzzles/CrackingTheCryptic/2025_24_23.cs) | 1,183.9 µs  |
+| 2025-03-25 | [Rapuzzle](Puzzles/CrackingTheCryptic/2025_03_25.cs)               | 7,876.9 µs  |
 | 2025-01-07 | [Sort of Miraculous](Puzzles/CrackingTheCryptic/2025_01_07.cs)     |   726.8 ms  |
 | 2024-12-24 | [Arrow Thermo 2](Puzzles/CrackingTheCryptic/2024_12_24.cs)         | 2,191.3 ms  |
 | 2024-12-09 | [Elbow Join](Puzzles/CrackingTheCryptic/2024_12_09.cs)             |    26.4 min |

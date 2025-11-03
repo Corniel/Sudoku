@@ -17,7 +17,7 @@ public class Cracking_the_Cryptic
     [Test]
     public void Work_in_progress()
     {
-        var puzzle = new _2021_01_06();
+        var puzzle = new _2025_03_25();
         var solved = DynamicSolver.Solver.Raw(puzzle.Clues, puzzle.Constraints);
         Console.WriteLine(Cells.New(solved));
         puzzle.Constraints.Should().BeValidFor(solved);

@@ -4,6 +4,12 @@ public sealed class Box(int index) : House(index, box(index))
 {
     public static readonly ImmutableArray<Box> All = [.. range().Select(i => new Box(i))];
 
+    public static int IndexOf(Pos pos)
+    {
+        var (r, c) = pos;
+        return ((r / 3) * 3) + (c / 3);
+    }
+
     private static PosSet box(int i)
     {
         var box = PosSet.Empty;

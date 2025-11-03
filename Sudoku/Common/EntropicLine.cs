@@ -1,4 +1,3 @@
-using Sudoku.Generics;
 using Sudoku.Restrictions;
 
 namespace Sudoku.Common;
@@ -20,54 +19,62 @@ public sealed class EntropicLine(ImmutableArray<Pos> cells) : Rule(cells)
                 }
                 else
                 {
-                    yield return new Different(cells[f], cells[s]);
-                    yield return new Different(cells[s], cells[f]);
+                    yield return new Neighbors(cells[f], cells[s]);
+                    yield return new Neighbors(cells[s], cells[f]);
                 }
             }
         }
     }
 
-    public sealed class Same(Pos appliesTo, Pos other) : Pair(appliesTo, other)
+    public sealed class Same(Pos appliesTo, Pos other) : Paired(appliesTo, other)
     {
-        public override Digits Restrict(Digits other) => Lookup[other];
-
-        private static readonly DigitLookup<Digits> Lookup = Init(
-        [
-            Digits._1_to_9,
-
-            Digits._123,
-            Digits._123,
-            Digits._123,
-
-            Digits._456,
-            Digits._456,
-            Digits._456,
-
-            Digits._789,
-            Digits._789,
-            Digits._789,
-        ]);
+        protected override Digits Restrict(Groups range) => range switch
+        {
+            Groups._123 => Digits._123,
+            Groups._456 => Digits._456,
+            Groups._789 => Digits._789,
+            Groups._123 | Groups._456 => ~Digits._789,
+            Groups._123 | Groups._789 => ~Digits._456,
+            Groups._456 | Groups._789 => ~Digits._123,
+            _ => Digits._1_to_9,
+        };
     }
 
-    public sealed class Different(Pos appliesTo, Pos other) : Pair(appliesTo, other)
+    public sealed class Neighbors(Pos appliesTo, Pos other) : Paired(appliesTo, other)
     {
-        public override Digits Restrict(Digits other) => Lookup[other];
+        protected override Digits Restrict(Groups range) => range switch
+        {
+            Groups._123 => ~Digits._123,
+            Groups._456 => ~Digits._456,
+            Groups._789 => ~Digits._789,
+            Groups._123 | Groups._456 => Digits._789,
+            Groups._123 | Groups._789 => Digits._456,
+            Groups._456 | Groups._789 => Digits._123,
+            _ => Digits._1_to_9,
+        };
+    }
 
-        private static readonly DigitLookup<Digits> Lookup = Init(
-        [
-            Digits._1_to_9,
+    public abstract class Paired(Pos appliesTo, Pos other) : Pair(appliesTo, other)
+    {
+        public sealed override Digits Restrict(Digits other)
+        {
+            var range = Groups.None;
+            if ((other & Digits._123).HasAny) range |= Groups._123;
+            if ((other & Digits._456).HasAny) range |= Groups._456;
+            if ((other & Digits._789).HasAny) range |= Groups._789;
 
-            ~Digits._123,
-            ~Digits._123,
-            ~Digits._123,
+            return Restrict(range);
+        }
 
-            ~Digits._456,
-            ~Digits._456,
-            ~Digits._456,
+        protected abstract Digits Restrict(Groups range);
+    }
 
-            ~Digits._789,
-            ~Digits._789,
-            ~Digits._789,
-        ]);
+    [Flags]
+    public enum Groups
+    {
+        None = 0,
+        _123 = 1,
+        _456 = 2,
+        _789 = 4,
     }
 }

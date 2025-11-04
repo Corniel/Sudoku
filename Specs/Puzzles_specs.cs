@@ -17,7 +17,7 @@ public class Cracking_the_Cryptic
     [Test]
     public void Work_in_progress()
     {
-        var puzzle = new _2025_03_25();
+        var puzzle = new _2025_09_05();
         var solved = DynamicSolver.Solver.Raw(puzzle.Clues, puzzle.Constraints);
         Console.WriteLine(Cells.New(solved));
         puzzle.Constraints.Should().BeValidFor(solved);
@@ -28,9 +28,12 @@ public class Cracking_the_Cryptic
     {
         puzzle.Constraints.Should().BeValidFor(puzzle.Solution);
 
-        var solved = TestSolver.Solve(puzzle);
-        Console.WriteLine(solved);
-        solved.Should().Be(puzzle.Solution, puzzle.Constraints);
+        foreach (var solved in DynamicSolver.Solver.SolveAll(puzzle.Clues, puzzle.Constraints))
+        {
+            Console.WriteLine(solved);
+            Console.WriteLine();
+            solved.Should().Be(puzzle.Solution, puzzle.Constraints);
+        }
     }
 
     [Explicit]

@@ -1,5 +1,3 @@
-using System;
-
 namespace DynamicSolver;
 
 public static class Solver

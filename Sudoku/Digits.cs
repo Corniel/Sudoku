@@ -75,7 +75,7 @@ public readonly struct Digits(uint bits) : IEquatable<Digits>, IReadOnlyCollecti
     /// <inheritdoc />
     public int Count => BitOperations.PopCount(Bits);
 
-    public override string ToString() => $"[{string.Join(',', this)}]";
+    public override string ToString() => $"[{string.Join(',', GetEnumerator())}]";
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public bool Contains(int value) => (Bits & (1u << value)) is not 0;

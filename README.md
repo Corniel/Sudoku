@@ -203,6 +203,7 @@ able to solve the following puzzles (so far):
 | 2025-09-13 | [Royalty](Puzzles/CrackingTheCryptic/2025_09_13.cs)                |    91.6 ms  |
 | 2025-09-09 | [Seylla](Puzzles/CrackingTheCryptic/2025_09_09.cs)                 |   159.8 s   |
 | 2025-09-08 | [Four at a Time](Puzzles/CrackingTheCryptic/2025_09_08.cs)         | 3,591.7 ms  |
+| 2025-09-05 | [Besties 2](Puzzles/CrackingTheCryptic/2025_09_05.cs)              |   196.7 ms  |
 | 2025-09-04 | [Packing Problem](Puzzles/CrackingTheCryptic/2025_09_04.cs)        | 1,084.3 s   |
 | 2025-08-21 | [Miracle Of Eleven](Puzzles/CrackingTheCryptic/2025_08_21.cs)      | 4,366.4 µs  |
 | 2025-08-19 | [Pile Of 15](Puzzles/CrackingTheCryptic/2025_08_19.cs)             | 2,257.1 ms  |

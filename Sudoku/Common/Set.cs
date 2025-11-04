@@ -1,6 +1,6 @@
 namespace Sudoku.Common;
 
-public abstract class Set(params ImmutableArray<Pos> cells) : Rule(cells)
+public class Set(params ImmutableArray<Pos> cells) : Rule(cells)
 {
     /// <inheritdoc />
     public sealed override bool IsSet => true;

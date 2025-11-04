@@ -1,4 +1,3 @@
-
 using Sudoku.Houses;
 
 namespace Puzzles.CrackingTheCryptic;
@@ -11,7 +10,7 @@ public sealed class _2020_04_12 : CtcPuzzle
 
     public override Uri? Url => new("https://youtu.be/hAyZ9K2EBF0");
 
-    public override O Duration => O.Unknown;
+    public override O Duration => O.μs100;
 
     public override Clues Clues { get; } = Clues.Parse("""
         ...│...│...

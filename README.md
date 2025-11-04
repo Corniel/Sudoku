@@ -221,6 +221,7 @@ able to solve the following puzzles (so far):
 | 2024-09-29 | [3 In the Corner](Puzzles/CrackingTheCryptic/2024_09_29.cs)        |          ?  |
 | 2024-01-08 | [Tulpenblüte](Puzzles/CrackingTheCryptic/2024_01_08.cs)            |    17.8 ms  |
 | 2022-05-03 | [The Dutch Miracle](Puzzles/CrackingTheCryptic/2022_05_03.cs)      |    99.8 µs  |
+| 2022-04-27 | [The Aquarium](Puzzles/CrackingTheCryptic/2022_04_27.cs)           |    46.9 s   |
 | 2022-03-13 | [The Trident](Puzzles/CrackingTheCryptic/2022_03_13.cs)            |          ?  |
 | 2021-10-06 | [Dutch Whispers](Puzzles/CrackingTheCryptic/2021_10_06.cs)         |   208.4 µs  |
 | 2021-01-06 | [Non-consecutive Killer](Puzzles/CrackingTheCryptic/2021_01_06.cs) | 1,050.0 ms  |

@@ -10,11 +10,25 @@ public readonly struct Ints(Int128 bits) : IReadOnlyCollection<int>
     /// <summary>Only contains a zero.</summary>
     public static readonly Ints Zero = new(Int128.One);
 
+    /// <summary>Only contains 1-9.</summary>
+    public static readonly Ints _1_9 = new(Digits._1_to_9.Bits);
+
+    /// <summary>Numbers between 1 and 128.</summary>
+    public static readonly Ints All = new(Int128.MaxValue);
+
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly Int128 Bits = bits;
 
     /// <inheritdoc />
     public int Count => (int)Int128.PopCount(Bits);
+
+    public bool HasNone => Bits == 0;
+
+    public bool HasSingle => (Bits & (Bits - 1)) == 0 && Bits != 0;
+
+    public bool HasAny => Bits != 0;
+
+    public bool HasMultiple => (Bits & (Bits - 1)) != 0;
 
     /// <summary>Gets all ints that are valid digits.</summary>
     public Digits Digits => new((uint)Bits);
@@ -27,6 +41,8 @@ public readonly struct Ints(Int128 bits) : IReadOnlyCollection<int>
 
     /// <inheritdoc />
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+    public static Ints operator &(Ints left, Ints right) => new(left.Bits & right.Bits);
 
     public static Ints operator -(Ints ints, Digits digits)
     {

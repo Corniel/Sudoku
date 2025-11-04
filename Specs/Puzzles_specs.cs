@@ -17,10 +17,11 @@ public class Cracking_the_Cryptic
     [Test]
     public void Work_in_progress()
     {
-        var puzzle = new _2024_04_06();
+        var puzzle = new _2024_11_18();
         var solved = DynamicSolver.Solver.Raw(puzzle.Clues, puzzle.Constraints);
         Console.WriteLine(Cells.New(solved));
         puzzle.Constraints.Should().BeValidFor(solved);
+        //puzzle.Constraints.Should().BeValidFor(puzzle.Solution);
     }
 
     [TestCaseSource(nameof(Fasts))]

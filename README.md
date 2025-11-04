@@ -217,7 +217,8 @@ able to solve the following puzzles (so far):
 | 2024-12-24 | [Arrow Thermo 2](Puzzles/CrackingTheCryptic/2024_12_24.cs)         |   241.7 ms  |
 | 2024-12-09 | [Elbow Join](Puzzles/CrackingTheCryptic/2024_12_09.cs)             | 1,579.5 ms  |
 | 2024-12-08 | [Fortune Cookie II](Puzzles/CrackingTheCryptic/2024_12_08.cs)      | 8,992.1 ms  |
-| 2024-11-18 | [80](Puzzles/CrackingTheCryptic/2024_11_18.cs)                     | 1,049.3 µs  |
+| 2024-11-18 | [Equivalenee](Puzzles/CrackingTheCryptic/2024_11_18.cs)            |   573.2 ms  |
+| 2024-11-16 | [80](Puzzles/CrackingTheCryptic/2024_11_16.cs)                     | 1,049.3 µs  |
 | 2024-09-29 | [3 In the Corner](Puzzles/CrackingTheCryptic/2024_09_29.cs)        |          ?  |
 | 2024-04-06 | [Seesaw](Puzzles/CrackingTheCryptic/2024_04_06.cs)                 |    17.8 ms  |
 | 2024-01-08 | [Tulpenblüte](Puzzles/CrackingTheCryptic/2024_01_08.cs)            |    17.8 ms  |

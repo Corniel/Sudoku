@@ -230,6 +230,7 @@ able to solve the following puzzles (so far):
 | 2020-09-30 | [Classic Sudoku!](Puzzles/CrackingTheCryptic/2020_09_30_1_.cs)     |    77.7 µs  |
 | 2020-09-30 | [Tatooine Sunset](Puzzles/CrackingTheCryptic/2020_09_30.cs)        |    77.3 µs  |
 | 2020-04-12 | [Magic Square Sudoku](Puzzles/CrackingTheCryptic/2020_04_12.cs)    |   350.5 µs  |
+| 2019-08-29 | [New York Times](Puzzles/CrackingTheCryptic/2019_08_29.cs)         |    66.0 µs  |
 | 2019-05-09 | [Jigsaw Sudoku](Puzzles/CrackingTheCryptic/2019_05_09.cs)          | 1,698.4 µs  |
 | 2019-03-18 | [X-Wing Sudoku](Puzzles/CrackingTheCryptic/2019_03_18.cs)          |   136.7 µs  |
 

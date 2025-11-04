@@ -8,7 +8,7 @@ public abstract class Puzzle
 
     public virtual Uri? Url { get; }
 
-    public virtual O Duration { get; } = O.oo;
+    public virtual O Duration { get; } = O.Unknown;
 
     public abstract Clues Clues { get; }
 

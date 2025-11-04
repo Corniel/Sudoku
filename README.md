@@ -225,8 +225,10 @@ able to solve the following puzzles (so far):
 | 2021-10-06 | [Dutch Whispers](Puzzles/CrackingTheCryptic/2021_10_06.cs)         |   208.4 µs  |
 | 2021-01-06 | [Non-consecutive Killer](Puzzles/CrackingTheCryptic/2021_01_06.cs) | 1,050.0 ms  |
 | 2020-09-30 | [Classic Sudoku!](Puzzles/CrackingTheCryptic/2020_09_30_1_.cs)     |    77.7 µs  |
-| 2020-09-30 | [Tatooine Sunset](Puzzles/CrackingTheCryptic/2022_09_30.cs)        |    77.3 µs  |
-| 2019-05-09 | [Jigsaw Sudoku](Puzzles/CrackingTheCryptic/2021_05_09.cs)          | 1,698.4 µs  |
+| 2020-09-30 | [Tatooine Sunset](Puzzles/CrackingTheCryptic/2020_09_30.cs)        |    77.3 µs  |
+| 2020-04-12 | [Magic Square Sudoku](Puzzles/CrackingTheCryptic/2020_04_12.cs)    |   350.5 µs  |
+| 2019-05-09 | [Jigsaw Sudoku](Puzzles/CrackingTheCryptic/2019_05_09.cs)          | 1,698.4 µs  |
+| 2019-03-18 | [X-Wing Sudoku](Puzzles/CrackingTheCryptic/2019_03_18.cs)          |   136.7 µs  |
 
 ## Models
 

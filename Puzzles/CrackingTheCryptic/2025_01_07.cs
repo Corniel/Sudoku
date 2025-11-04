@@ -31,7 +31,6 @@ public sealed class _2025_01_07 : CtcPuzzle
         + new Ratio1_2((0, 2), (1, 2))
         + Boxes();
 
-
     private static IEnumerable<Rule> Boxes()
     {
         foreach (var b in Box.All)

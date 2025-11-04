@@ -10,11 +10,17 @@ public abstract class Group(Pos appliesTo, ImmutableArray<Pos> others) : Restric
     public ImmutableArray<Pos> Others { get; } = others;
 
     /// <inheritdoc />
-    public PosSet Links { get; } = [.. others];
+    public virtual PosSet Links { get; } = [.. others];
 
     /// <inheritdoc />
     public abstract Digits Restrict(SudokuCells cells);
 
     /// <inheritdoc />
     public override string ToString() => $"{AppliesTo} => {Others}";
+
+    public static IEnumerable<T> Select<T>(PosSet positions, Func<Pos, ImmutableArray<Pos>, T> selector) => Select(positions.ToImmutableArray(), selector);
+
+    public static IEnumerable<T> Select<T>(ImmutableArray<Pos> positions, Func<Pos, ImmutableArray<Pos>, T> selector)
+        => positions
+        .Select((pos, index) => selector(pos, positions.RemoveAt(index)));
 }

@@ -82,36 +82,14 @@ public sealed class _2024_11_18 : CtcPuzzle
 
     private sealed class Product(Pos appliesTo, ImmutableArray<Pos> others) : Group(appliesTo, others)
     {
-        private HashSet<int> Curr = [];
-        private HashSet<int> Next = [];
-
         public override Digits Restrict(SudokuCells cells)
         {
-            Curr.Clear();
-            Next.Clear();
-            Next.Add(80);
+            Ints product = [80];
 
             foreach (var digits in Others.Select(o => cells[o].Digits))
-            {
-                (Curr, Next) = (Next, Curr);
+                product /= digits;
 
-                foreach (var product in Curr)
-                {
-                    foreach (var digit in digits)
-                    {
-                        if (Math.DivRem(product, digit) is { Remainder: 0 } factor)
-                            Next.Add(factor.Quotient);
-                    }
-                }
-
-                Curr.Clear();
-            }
-            var allowed = Digits.None;
-
-            foreach (var f in Next.Where(x => x < _9))
-                allowed |= f;
-
-            return allowed;
+            return product.Digits;
         }
     }
 

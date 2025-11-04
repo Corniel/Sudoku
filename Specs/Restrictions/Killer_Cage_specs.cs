@@ -1,6 +1,3 @@
-using System.IO;
-using System.Text;
-
 namespace Specs.Restrictions.Killer_Cage_specs;
 
 public class Parses
@@ -84,77 +81,4 @@ public class Parses
             137|945|826
             """);
     }
-}
-
-public class Generates
-{
-    [TestCase(1 + 2, /*.................................................*/ 8 + 9, 2)]
-    [TestCase(1 + 2 + 3, /*.........................................*/ 7 + 8 + 9, 3)]
-    [TestCase(1 + 2 + 3 + 4, /*.................................*/ 6 + 7 + 8 + 9, 4)]
-    [TestCase(1 + 2 + 3 + 4 + 5, /*.........................*/ 5 + 6 + 7 + 8 + 9, 5)]
-    [TestCase(1 + 2 + 3 + 4 + 5 + 6, /*.................*/ 4 + 5 + 6 + 7 + 8 + 9, 6)]
-    [TestCase(1 + 2 + 3 + 4 + 5 + 6 + 7, /*.........*/ 3 + 4 + 5 + 6 + 7 + 8 + 9, 7)]
-    [TestCase(1 + 2 + 3 + 4 + 5 + 6 + 7 + 8, /*.*/ 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9, 8)]
-    public void lookup_for_sum(int min, int max, int bits)
-    {
-        var lookups = Sudoku.Restrictions.Cage.Lookup[bits];
-
-        lookups[..(min - 1)].Should().AllSatisfy(l => l.Should().BeNull());
-        lookups[min..].Should().AllSatisfy(l => l.Should().NotBeNull());
-        lookups.Should().HaveCount(max + 1);
-    }
-
-    [Explicit]
-    [TestCase(2)]
-    [TestCase(3)]
-    [TestCase(4)]
-    [TestCase(5)]
-    [TestCase(6)]
-    [TestCase(7)]
-    [TestCase(8)]
-    public void lookup(int cells)
-    {
-        var file = new FileInfo($"./../../../../Sudoku/Restrictions/Cage_{cells}.md");
-
-        using var writer = new StreamWriter(file.FullName, false, new UTF8Encoding(false));
-
-        Console.WriteLine(file.FullName);
-
-        for (var sum = Min(cells); sum <= Max(cells); sum++)
-        {
-            writer.Write($"## {sum}\n");
-
-            foreach (var known in Digits.All.Where(c => c.Count < cells).OrderByDescending(c => c.Count))
-            {
-                var missing = sum - known.Sum();
-                var unknown = cells - known.Count;
-                var digits = Digits.None;
-
-                // check for bitcount, sum, and not overlapping already used digits
-                foreach (var option in Digits.All
-                    .Where(c
-                        => c.Count == unknown
-                        && c.Sum() == missing
-                        && ((known & c) == Digits.None)))
-                {
-                    digits |= option;
-                }
-
-                digits ^= known;
-
-                if (digits.HasAny)
-                {
-                    writer.Write($"{known}={digits}\n".Replace(",", string.Empty).Replace("[", string.Empty).Replace("]", string.Empty));
-                }
-            }
-        }
-
-        writer.Flush();
-        file.Refresh();
-        file.Exists.Should().BeTrue();
-    }
-
-    static int Min(int unknown) => Enumerable.Range(1, unknown).Sum();
-
-    static int Max(int unknown) => Enumerable.Range(0, unknown).Sum(i => 9 - i);
 }

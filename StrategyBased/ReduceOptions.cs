@@ -2,8 +2,6 @@ namespace StrategyBased;
 
 public sealed record ReduceOptions
 {
-    public bool AddCages { get; init; }
-
     public bool HiddenSingles { get; init; }
 
     public bool HiddenPairs { get; init; }
@@ -34,7 +32,6 @@ public sealed record ReduceOptions
 
     public static readonly ReduceOptions All = new()
     {
-        AddCages = true,
         NakedPairs = true,
         NakedTriples = true,
         NakedQuads = true,

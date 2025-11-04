@@ -49,12 +49,6 @@ public sealed class _2025_09_04 : CtcPuzzle
             new Cage(cells[1], cells.Remove(cells[1])),
             new Cage(cells[2], cells.Remove(cells[2])),
             new Cage(cells[3], cells.Remove(cells[3])),
-            //new Low(cells[0], cells[1]), new Low(cells[1], cells[0]),
-            //new Low(cells[0], cells[2]), new Low(cells[2], cells[0]),
-            //new Low(cells[0], cells[3]), new Low(cells[3], cells[0]),
-            //new Low(cells[1], cells[2]), new Low(cells[2], cells[1]),
-            //new Low(cells[1], cells[3]), new Low(cells[3], cells[1]),
-            //new Low(cells[2], cells[3]), new Low(cells[3], cells[2]),
         ];
 
         public override Digits Restrict(SudokuCells cells)

@@ -2,7 +2,7 @@ namespace Sudoku.Common;
 
 public static class Arrows
 {
-    public static IEnumerable<Arrow> ParseSets(string str)
+    public static IEnumerable<Arrow> Parse(string str)
         => Lines.Parse(str)
-        .Select(line => new Arrow(line, true));
+        .Select(line => new Arrow(line));
 }

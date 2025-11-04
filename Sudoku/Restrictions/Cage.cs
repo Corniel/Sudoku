@@ -1,14 +1,16 @@
 namespace Sudoku.Restrictions;
 
-public abstract partial class Cage(Pos appliesTo, ImmutableArray<Pos> others) : Group(appliesTo, others)
+public sealed class Cage(Pos appliesTo, ImmutableArray<Pos> others, Ints sum) : Group(appliesTo, others)
 {
-    protected Digits Restrict(SudokuCells graph, int sum)
+    public Ints Sum { get; } = sum;
+
+    public override Digits Restrict(SudokuCells cells)
     {
-        var known = Digits.None;
+        var total = Sum;
 
         foreach (var cell in Others)
-            known |= graph[cell].Digit;
+            total -= cells[cell].Digits;
 
-        return Lookup[Others.Length + 1][sum][known];
+        return total.Digits;
     }
 }

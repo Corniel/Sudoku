@@ -12,8 +12,6 @@ public static partial class StrategyBasedSolver
 
         var graph = Nodes.Empty & rules & clues;
 
-        _ = options.AddCages && graph & Add.Cages;
-
         bool reduce;
         do
         {

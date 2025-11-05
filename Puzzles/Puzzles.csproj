@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <EmbeddedResource Include="Killer/*.md" />
+    <EmbeddedResource Include="NewYorkTimes/*.txt" />
     <EmbeddedResource Include="PuzzleBank/*.txt" />
   </ItemGroup>
   

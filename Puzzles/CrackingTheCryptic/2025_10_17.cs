@@ -60,12 +60,12 @@ public sealed class _2025_10_17 : CtcPuzzle
 
     public sealed class Sum10(Pos appliesTo, Pos other) : Pair(appliesTo, other)
     {
-        public override Digits Restrict(int value) => [10 - value];
+        public override Digits Restrict(int digit) => [10 - digit];
     }
 
     public sealed class Max13(Pos appliesTo, Pos other) : Pair(appliesTo, other)
     {
-        public override Digits Restrict(int value) => Restrictions[value];
+        public override Digits Restrict(int digit) => Restrictions[digit];
 
         private static readonly ImmutableArray<Digits> Restrictions =
         [

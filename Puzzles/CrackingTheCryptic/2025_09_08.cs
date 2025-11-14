@@ -110,10 +110,10 @@ public sealed class _2025_09_08 : CtcPuzzle
 
             public PosSet Links { get; } = [.. before, .. after];
 
-            public Digits Restrict(SudokuCells graph)
+            public Digits Restrict(SudokuCells cells)
             {
-                var bef = Step.Walk(Before, graph);
-                var aft = Step.Walk(After, graph);
+                var bef = Step.Walk(Before, cells);
+                var aft = Step.Walk(After, cells);
 
                 // ASC based on after
                 if (aft.Sign > 0)

@@ -1,6 +1,6 @@
 namespace Puzzles.CrackingTheCryptic;
 
-public class _2025_08_19 : CtcPuzzle
+public sealed class _2025_08_19 : CtcPuzzle
 {
     public override string Title => "Pile of 15";
 

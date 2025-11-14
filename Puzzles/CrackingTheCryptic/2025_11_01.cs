@@ -1,4 +1,3 @@
-
 namespace Puzzles.CrackingTheCryptic;
 
 public sealed class _2025_11_01 : CtcPuzzle
@@ -65,7 +64,6 @@ public sealed class _2025_11_01 : CtcPuzzle
             if (pos.W() is { } w && pos.E() is { } e)
                 yield return new(pos, [w, e]);
         }
-        yield break;
     }
 
     public sealed class ParityCheck(Pos appliesTo, ImmutableArray<Pos> others) : Group(appliesTo, others)

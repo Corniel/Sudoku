@@ -31,4 +31,8 @@ public readonly partial struct Rules(ImmutableArray<Rule> rules, ImmutableArray<
     public static Rules operator +(Rules rules, IEnumerable<Restriction> add) => new(
         rules.Collection,
         rules.Restrictions.AddRange(add));
+
+    public static Rules operator +(Rules rules, Restriction add) => new(
+        rules.Collection,
+        rules.Restrictions.Add(add));
 }

@@ -40,7 +40,7 @@ public sealed class _2021_01_06 : CtcPuzzle
 
     public override Rules Constraints { get; } =
         Rules.Standard
-        + NonConsecutives()
+        + NonConsecutives.Orthogonally()
         + Jigsaw.Parse("""
         aaa│ccc│ddd
         a.b│c6c│dSd
@@ -54,13 +54,4 @@ public sealed class _2021_01_06 : CtcPuzzle
         f.f│.H.│HQQ
         f.f│HH.│QQQ
         """);
-
-    private static IEnumerable<NonConsecutive> NonConsecutives()
-    {
-        foreach (var pos in Pos.All)
-        {
-            if (pos.N() is { } n) yield return new NonConsecutive(pos, n);
-            if (pos.W() is { } w) yield return new NonConsecutive(pos, w);
-        }
-    }
 }

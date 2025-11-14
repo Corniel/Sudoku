@@ -24,7 +24,6 @@ public sealed class _2022_03_13 : CtcPuzzle
         486|172|935
         """);
 
-
     public override Rules Constraints { get; } =
         Rules.Standard
         + Jigsaw.Parse("""

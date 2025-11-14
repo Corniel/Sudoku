@@ -70,7 +70,6 @@ public sealed class _2025_09_04 : CtcPuzzle
 
                     if (overlap.HasSingle)
                         match ^= overlap;
-
                     else if (other.HasSingle) return Digits.None;
                 }
 

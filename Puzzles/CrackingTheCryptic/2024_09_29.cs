@@ -71,10 +71,10 @@ public sealed class _2024_09_29 : CtcPuzzle
 
         public sealed class Reduce(Pos appliesTo, Pos other) : Pair(appliesTo, other)
         {
-            public override Digits Restrict(int value)
-                => value is 0
+            public override Digits Restrict(int digits)
+                => digits is 0
                 ? Digits._1_to_9
-                : ~Digits.Between(value - 2, value + 2);
+                : ~Digits.Between(digits - 2, digits + 2);
         }
     }
 }

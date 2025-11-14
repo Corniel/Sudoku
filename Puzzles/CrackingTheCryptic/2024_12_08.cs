@@ -57,7 +57,7 @@ public sealed class _2024_12_08 : CtcPuzzle
 
         public sealed class Reduce(Pos appliesTo, Pos other) : Pair(appliesTo, other)
         {
-            public override Digits Restrict(int value) => Lookup[value];
+            public override Digits Restrict(int Digits) => Lookup[Digits];
 
             private static readonly ImmutableArray<Digits> Lookup =
             [

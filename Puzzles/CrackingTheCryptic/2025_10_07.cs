@@ -39,9 +39,8 @@ public sealed class _2025_10_07 : CtcPuzzle
         """);
 
     public override Rules Constraints { get; }
-        = Rules.Standard
+        = Rules.AntiKnight
         + AntiKing.All
-        + AntiKnight.All
         + DutchWhispers.Parse("""
             ...│...│...
             ...│...│...
@@ -89,7 +88,7 @@ public sealed class _2025_10_07 : CtcPuzzle
 
         private sealed class Shaft(Pos appliesTo, Pos other) : Pair(appliesTo, other)
         {
-            public override Digits Restrict(int value) => value switch
+            public override Digits Restrict(int digit) => digit switch
             {
                 7 => [1, 3, 4, 5, 6, 8],
                 8 => [1, 3, 4, 5, 6, 9],
@@ -100,7 +99,7 @@ public sealed class _2025_10_07 : CtcPuzzle
 
         private sealed class Center(Pos appliesTo, Pos other) : Pair(appliesTo, other)
         {
-            public override Digits Restrict(int value) => value switch
+            public override Digits Restrict(int digit) => digit switch
             {
                 7 => [9],
                 8 => [7],

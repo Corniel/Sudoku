@@ -12,8 +12,8 @@ public static class EvenOdd
 
         return
         [
-            .. even.Select(cell => new Mask(cell, Digits.Even)),
-            .. odd.Select(cell => new Mask(cell, Digits.Odd)),
+            .. even.Select(Mask.Even),
+            .. odd.Select(Mask.Odd),
         ];
     }
 }

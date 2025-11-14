@@ -3,7 +3,7 @@ using Sudoku;
 using System.Collections.Immutable;
 using System.Linq;
 
-namespace Benchmarks;
+namespace Benchmark;
 
 public class Position
 {

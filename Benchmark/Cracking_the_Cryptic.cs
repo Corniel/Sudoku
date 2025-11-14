@@ -4,7 +4,7 @@ using System;
 using System.Diagnostics;
 using System.Linq;
 
-namespace Benchmarks;
+namespace Benchmark;
 
 public static class Cracking_the_Cryptic
 {

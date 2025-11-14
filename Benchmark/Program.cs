@@ -1,4 +1,4 @@
-namespace Benchmarks;
+namespace Benchmark;
 
 public static class Program
 {

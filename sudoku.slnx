@@ -6,7 +6,7 @@
     <Project Path="StrategyBased/StrategyBased.csproj" />
   </Folder>
   <Project Path=".net.csproj" />
-  <Project Path="Benchmarks/Benchmarks.csproj" />
+  <Project Path="Benchmark/Benchmark.csproj" />
   <Project Path="Puzzles/Puzzles.csproj" />
   <Project Path="Specs/Specs.csproj" />
   <Project Path="Sudoku/Sudoku.csproj" />

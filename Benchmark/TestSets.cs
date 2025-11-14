@@ -10,7 +10,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 
-namespace Benchmarks;
+namespace Benchmark;
 
 public static class TestSets
 {

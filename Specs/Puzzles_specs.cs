@@ -10,13 +10,15 @@ namespace Specs.Puzzles_specs;
 
 public class Cracking_the_Cryptic
 {
-    private static readonly ImmutableArray<Puzzle> Fasts = [.. CtcPuzzle.All.Where(p => p.Duration is <= O.ms100)];
-    private static readonly ImmutableArray<Puzzle> Slows = [.. CtcPuzzle.All.Where(p => p.Duration is > O.ms100)];
+    private static readonly ImmutableArray<Puzzle> Unknowns = [.. CtcPuzzle.All.Where(p => p.Duration is O.Unknown)];
+    private static readonly ImmutableArray<Puzzle> Fasts = [.. CtcPuzzle.All.Where(p => p.Duration is <= O.ms100 and not O.Unknown)];
+    private static readonly ImmutableArray<Puzzle> Slows = [.. CtcPuzzle.All.Where(p => p.Duration is > O.ms100 and not O.oo)];
+    private static readonly ImmutableArray<Puzzle> Unsolvables = [.. CtcPuzzle.All.Where(p => p.Duration is  O.oo)];
 
     [Test]
     public void Work_in_progress()
     {
-        var puzzle = new _2025_12_12();
+        var puzzle = new _2025_09_25();
 
         if (puzzle.Solution.IsSolved)
             puzzle.Constraints.Should().BeValidFor(puzzle.Solution);
@@ -30,22 +32,22 @@ public class Cracking_the_Cryptic
             puzzle.Constraints.Should().BeValidFor(solved);
     }
 
-    [TestCaseSource(nameof(Fasts))]
-    public void Fast(Puzzle puzzle)
-    {
-        puzzle.Constraints.Should().BeValidFor(puzzle.Solution);
 
-        foreach (var solved in DynamicSolver.Solver.SolveAll(puzzle.Clues, puzzle.Constraints))
-        {
-            Console.WriteLine(solved);
-            Console.WriteLine();
-            solved.Should().Be(puzzle.Solution, puzzle.Constraints);
-        }
-    }
+    [TestCaseSource(nameof(Unknowns))]
+    public void Unknown(Puzzle puzzle) => Solve(puzzle);
+
+    [TestCaseSource(nameof(Fasts))]
+    public void Fast(Puzzle puzzle) => Solve(puzzle);
 
     [Explicit]
     [TestCaseSource(nameof(Slows))]
-    public void Slow(Puzzle puzzle)
+    public void Slow(Puzzle puzzle) => Solve(puzzle);
+
+    [Explicit]
+    [TestCaseSource(nameof(Unsolvables))]
+    public void Unsolvable(Puzzle puzzle) => Solve(puzzle);
+
+    private static void Solve(Puzzle puzzle)
     {
         puzzle.Constraints.Should().BeValidFor(puzzle.Solution);
         var solved = TestSolver.Solve(puzzle);

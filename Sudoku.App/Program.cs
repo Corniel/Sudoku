@@ -17,7 +17,7 @@ public static class Program
             Generator.Generate(size, seed);
         }
         else if (args[0] == "ctc")
-            Cracking_the_Cryptic.Run();
+            Cracking_the_Cryptic.Run(p => p.Duration is Puzzles.O.Unknown);
 
         else if (args[0] == "test")
             TestSets.SolveAll(dlx: false, refr: false);

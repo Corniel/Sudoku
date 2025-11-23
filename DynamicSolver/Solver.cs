@@ -127,7 +127,8 @@ public static class Solver
 
             if (valid && link.Restrictions is { Count: > 0 } res)
             {
-                var restrictions = res.Where(x => todos.Contains(x.AppliesTo)).GetEnumerator();
+                var check = todos | pos;
+                var restrictions = res.Where(x => check.Contains(x.AppliesTo)).GetEnumerator();
 
                 while (valid && restrictions.MoveNext())
                 {

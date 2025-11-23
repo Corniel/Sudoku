@@ -8,35 +8,42 @@ public sealed class SumsOfTen(Pos appliesTo, ImmutableArray<Pos> line) : Restric
 
     public PosSet Links { get; } = [.. line];
 
+    private readonly Ints Mask = appliesTo == line[^1] ? M10 : M1_10;
+
     public Digits Restrict(SudokuCells cells)
     {
-        Ints total = Ints.Zero;
-        Ints check = Ints.Zero;
+        var allow = Digits.None;
+        var total = Ints.Zero;
 
-        foreach (var digits in Line.Select(c => cells[c].Digits))
+        foreach (var pos in Line)
         {
+            var digits = cells[pos].Digits;
+
+            if (pos == AppliesTo)
+            {
+                foreach (var digit in digits.Where(d => ((total + d) & Mask).HasAny))
+                    allow |= digit;
+
+                digits = allow;
+            }
+
             total += digits;
-            Ints temp = default;
+            total &= M1_10;
 
-            foreach (var digit in digits)
-                temp |= check + digit;
-
-            // Group of 10 rule is broken.
-            if ((temp & Mask).HasNone)
+            if (total.HasNone)
                 return Digits.None;
 
-            check = temp % 10;
+            total %= 10;
         }
 
-        // The total is not correct.
-        if (!(total % 10).Contains(0))
-            return Digits.None;
-
-        var other = (total - cells[AppliesTo].Digits) % 10;
-        var allowed = Ten - other;
-        return allowed.Digits;
+        // The total is correct.
+        return total.First() is 0
+            ? allow
+            : Digits.None;
     }
 
-    private static readonly Ints Ten = Ints.New(10);
-    private static readonly Ints Mask = Ints.New(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+    public override string ToString() => $"Sums-of-10[{AppliesTo}]: Length = {Line.Length}, {string.Join(", ", Line)}";
+
+    private static readonly Ints M10 = Ints.New(10);
+    private static readonly Ints M1_10 = Ints.New(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 }

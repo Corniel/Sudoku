@@ -196,16 +196,17 @@ able to solve the following puzzles (so far):
 
 | Date       | Puzzle                                                                  |      Speed |
 |:----------:|-------------------------------------------------------------------------|-----------:|
-| 2025-12-11 | [Crossroads On Another World](Puzzles/CrackingTheCryptic/2025_12_12.cs) | 7,533.2 µs |
+| 2025-12-11 | [Crossroads On Another World](Puzzles/CrackingTheCryptic/2025_12_12.cs) | 1,488.4 µs |
 | 2025-12-11 | [Fallen Mast In A Storm](Puzzles/CrackingTheCryptic/2025_12_11.cs)      |    24.0 ms |
 | 2025-12-08 | [Heavy Is The Crown](Puzzles/CrackingTheCryptic/2025_12_08.cs)          |    79.9 ms |
 | 2025-11-28 | [Brink](Puzzles/CrackingTheCryptic/2025_11_28.cs)                       |   107.2 s  |
 | 2025-11-25 | [Simple Miracle](Puzzles/CrackingTheCryptic/2025_11_25.cs)              |   128.8 ms |
-| 2025-11-17 | [wicked](Puzzles/CrackingTheCryptic/2025_11_17.cs)                      |   299.4 ms |
+| 2025-11-17 | [wicked](Puzzles/CrackingTheCryptic/2025_11_17.cs)                      |   258.7 ms |
 | 2025-11-14 | [Braiding Sweetgrass](Puzzles/CrackingTheCryptic/2025_11_14.cs)         | 9,347.6 µs |
 | 2025-11-01 | [Parity Patrol 101](Puzzles/CrackingTheCryptic/2025_11_01.cs)           | 5,067.6 ms |
 | 2025-10-17 | [Who’s Afraid Of 13](Puzzles/CrackingTheCryptic/2025_10_17.cs)          |   259.7 µs |
 | 2025-10-07 | [Golden Arrow](Puzzles/CrackingTheCryptic/2025_10_07.cs)                |    29.3 µs |
+| 2025-09-25 | [Threads Of Silence](Puzzles/CrackingTheCryptic/2025_09_25.cs)          | 2,017.4 ms |
 | 2025-09-18 | [Diagonality](Puzzles/CrackingTheCryptic/2025_09_18.cs)                 |    19.9 ms |
 | 2025-09-15 | [Studious](Puzzles/CrackingTheCryptic/2025_09_15.cs)                    |   799.6 ms |
 | 2025-09-13 | [Royalty](Puzzles/CrackingTheCryptic/2025_09_13.cs)                     | 2,340.7 ms |
@@ -215,13 +216,13 @@ able to solve the following puzzles (so far):
 | 2025-09-04 | [Packing Problem](Puzzles/CrackingTheCryptic/2025_09_04.cs)             |   140.2 s  |
 | 2025-08-21 | [Miracle Of Eleven](Puzzles/CrackingTheCryptic/2025_08_21.cs)           | 3,987.0 µs |
 | 2025-08-19 | [Pile Of 15](Puzzles/CrackingTheCryptic/2025_08_19.cs)                  |   270.7 ms |
-| 2025-08-07 | [Unstable Seesaws](Puzzles/CrackingTheCryptic/2025_08_07.cs)            |   416.9 ms |
+| 2025-08-07 | [Unstable Seesaws](Puzzles/CrackingTheCryptic/2025_08_07.cs)            |   394.8 ms |
 | 2025-05-21 | [Stepped Thermos](Puzzles/CrackingTheCryptic/2025_05_21.cs)             |   183.3 µs |
 | 2025-05-11 | [Quadrants](Puzzles/CrackingTheCryptic/2025_05_11.cs)                   |    15.8 s  |
 | 2025-05-02 | [Arrows v.s. Thermos](Puzzles/CrackingTheCryptic/2025_05_02.cs)         |   464.7 µs |
 | 2025-04-23 | [Indifferent Neighbours](Puzzles/CrackingTheCryptic/2025_24_23.cs)      |   304.1 µs |
-| 2025-03-25 | [Rapuzzle](Puzzles/CrackingTheCryptic/2025_03_25.cs)                    | 6,823.7 µs |
-| 2025-01-31 | [ZL GW DA](Puzzles/CrackingTheCryptic/2025_01_31.cs)                    | 1,720.4 ms |
+| 2025-03-25 | [Rapuzzle](Puzzles/CrackingTheCryptic/2025_03_25.cs)                    | 6,030.6 µs |
+| 2025-01-31 | [ZL GW DA](Puzzles/CrackingTheCryptic/2025_01_31.cs)                    | 1,637.0 ms |
 | 2025-01-07 | [Sort of Miraculous](Puzzles/CrackingTheCryptic/2025_01_07.cs)          |    13.4 ms |
 | 2024-12-24 | [Arrow Thermo 2](Puzzles/CrackingTheCryptic/2024_12_24.cs)              |   141.4 ms |
 | 2024-12-09 | [Elbow Join](Puzzles/CrackingTheCryptic/2024_12_09.cs)                  | 1,527.3 ms |
@@ -230,9 +231,9 @@ able to solve the following puzzles (so far):
 | 2024-11-16 | [80](Puzzles/CrackingTheCryptic/2024_11_16.cs)                          |   958.3 µs |
 | 2024-09-29 | [3 In the Corner](Puzzles/CrackingTheCryptic/2024_09_29.cs)             |       ?    |
 | 2024-04-06 | [Seesaw](Puzzles/CrackingTheCryptic/2024_04_06.cs)                      |    15.6 s  |
-| 2024-01-08 | [Tulpenblüte](Puzzles/CrackingTheCryptic/2024_01_08.cs)                 |    11.2 ms |
+| 2024-01-08 | [Tulpenblüte](Puzzles/CrackingTheCryptic/2024_01_08.cs)                 | 8,695.9 ms |
 | 2022-05-03 | [The Dutch Miracle](Puzzles/CrackingTheCryptic/2022_05_03.cs)           |    71.9 µs |
-| 2022-04-27 | [The Aquarium](Puzzles/CrackingTheCryptic/2022_04_27.cs)                |    32.2 s  |
+| 2022-04-27 | [The Aquarium](Puzzles/CrackingTheCryptic/2022_04_27.cs)                |    31.1 s  |
 | 2022-03-13 | [The Trident](Puzzles/CrackingTheCryptic/2022_03_13.cs)                 |       ?    |
 | 2021-10-06 | [Dutch Whispers](Puzzles/CrackingTheCryptic/2021_10_06.cs)              |    55.9 µs |
 | 2021-04-11 | [Third Times The Charm](Puzzles/CrackingTheCryptic/2021_04_11.cs)       |   958.0 s  |

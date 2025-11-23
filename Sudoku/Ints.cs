@@ -1,7 +1,6 @@
 namespace Sudoku;
 
 [CollectionBuilder(typeof(Ints), nameof(New))]
-[DebuggerDisplay("Count = {Count}")]
 [DebuggerTypeProxy(typeof(Diagnostics.CollectionDebugView))]
 public readonly struct Ints(Int128 bits) : IReadOnlyCollection<int>
 {
@@ -30,6 +29,9 @@ public readonly struct Ints(Int128 bits) : IReadOnlyCollection<int>
 
     /// <summary>Gets all ints that are valid digits.</summary>
     public Digits Digits => new((uint)Bits);
+
+    /// <inheritdoc />
+    public override string ToString() => string.Join(", ", this);
 
     /// <inheritdoc cref="IEnumerable{TagList}.GetEnumerator()" />
     public Iterator GetEnumerator() => new(Bits);

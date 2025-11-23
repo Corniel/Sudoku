@@ -1,5 +1,3 @@
-using System.Diagnostics.Contracts;
-
 namespace Sudoku;
 
 [CollectionBuilder(typeof(PosSet), nameof(New))]

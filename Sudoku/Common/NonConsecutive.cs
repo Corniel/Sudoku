@@ -6,7 +6,10 @@ public sealed class NonConsecutive(Pos one, Pos two) : Set(one, two)
 {
     public override ImmutableArray<Restriction> Restrictions { get; } =
     [
-        new DeltaMin(one, two, 2),
-        new DeltaMin(two, one, 2),
+        .. new LookupPair(one, two, Lookup).Couple()
     ];
+
+    public override string ToString() => $"{Cells.First()} != {Cells.Last()} ± 1";
+
+    private static readonly LookupDigits Lookup = LookupPair.Init(d => ~Digits.Between(d - 1, d + 1));
 }

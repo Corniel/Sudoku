@@ -82,30 +82,24 @@ public sealed class _2025_10_07 : CtcPuzzle
             // 29 = [1,3,4,6,7,8]
             new Mask(cells[0], [2]),
             new Mask(cells[1], [7, 8, 9]),
-            new Center((4, 4), cells[1]),
-            .. cells[2..].Select(cell => new Shaft(cell, cells[1])),
+            new LookupPair((4, 4), cells[1], Center),
+            .. cells[2..].Select(cell => new LookupPair(cell, cells[1], Shaft)),
         ];
-
-        private sealed class Shaft(Pos appliesTo, Pos other) : Pair(appliesTo, other)
-        {
-            public override Digits Restrict(int digit) => digit switch
-            {
-                7 => [1, 3, 4, 5, 6, 8],
-                8 => [1, 3, 4, 5, 6, 9],
-                9 => [1, 3, 4, 6, 7, 8],
-                _ => Digits.None,
-            };
-        }
-
-        private sealed class Center(Pos appliesTo, Pos other) : Pair(appliesTo, other)
-        {
-            public override Digits Restrict(int digit) => digit switch
-            {
-                7 => [9],
-                8 => [7],
-                9 => [5],
-                _ => Digits.None,
-            };
-        }
     }
+
+    private static readonly LookupDigits Center = LookupPair.Init(d => d switch
+    {
+        7 => [9],
+        8 => [7],
+        9 => [5],
+        _ => Digits.None,
+    });
+
+    private static readonly LookupDigits Shaft = LookupPair.Init(d => d switch
+    {
+        7 => [1, 3, 4, 5, 6, 8],
+        8 => [1, 3, 4, 5, 6, 9],
+        9 => [1, 3, 4, 6, 7, 8],
+        _ => Digits.None,
+    });
 }

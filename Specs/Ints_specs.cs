@@ -60,3 +60,16 @@ public class Divides
                 80 / 8));
     }
 }
+
+public class Modulo
+{
+    [Test]
+    public void @int()
+    {
+        Ints ints = [1, 2, 3, 5, 10, 11, 15, 25, 56];
+        var modulo = ints % 10;
+
+        modulo.Should().BeEquivalentTo(
+            Ints.New(0, 1, 2, 3, 5, 6));
+    }
+}

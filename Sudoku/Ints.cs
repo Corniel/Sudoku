@@ -1,5 +1,3 @@
-using System.Diagnostics.Contracts;
-
 namespace Sudoku;
 
 [CollectionBuilder(typeof(Ints), nameof(New))]
@@ -44,6 +42,14 @@ public readonly struct Ints(Int128 bits) : IReadOnlyCollection<int>
 
     public static Ints operator &(Ints left, Ints right) => new(left.Bits & right.Bits);
 
+    public static Ints operator -(Ints ints, Ints digits)
+    {
+        var bits = Int128.Zero;
+        foreach (var digit in digits)
+            bits |= ints.Bits >> digit;
+        return new(bits);
+    }
+
     public static Ints operator -(Ints ints, Digits digits)
     {
         var bits = Int128.Zero;
@@ -72,6 +78,14 @@ public readonly struct Ints(Int128 bits) : IReadOnlyCollection<int>
                     bits |= Int128.One << factor.Quotient;
             }
         }
+        return new(bits);
+    }
+
+    public static Ints operator %(Ints ints, int modulo)
+    {
+        var bits = Int128.Zero;
+        foreach (var i in ints)
+            bits |= Int128.One << (i % modulo);
         return new(bits);
     }
 

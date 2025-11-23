@@ -2,11 +2,14 @@ namespace Sudoku.Validation;
 
 public static class Validator
 {
-    public static IEnumerable<Violation> Validate(this IEnumerable<Rule> rules, Cells cells)
+    public static IEnumerable<Violation> Validate(this Rules rules, Cells cells)
        => rules.Validate(new CellsWrapper(cells));
 
-    public static IEnumerable<Violation> Validate(this IEnumerable<Rule> rules, SudokuCells cells)
-        => rules.SelectMany(rule => rule.Validate(cells));
+    public static IEnumerable<Violation> Validate(this Rules rules, SudokuCells cells) =>
+    [
+        .. rules.SelectMany(rule => rule.Validate(cells)),
+        .. rules.Restrictions.SelectMany(res => res.Validate(cells)),
+    ];
 
     /// <summary>Validates that the digits in the cell are compliant with the constraint.</summary>
     public static IEnumerable<Violation> Validate(this Rule rule, SudokuCells cells)
@@ -14,33 +17,32 @@ public static class Validator
         if (rule.IsSet)
         {
             var values = Digits.None;
+
             foreach (var cell in rule.Cells)
             {
-                var value = cells[cell].Digit;
+                var digits = cells[cell].Digits;
 
-                if (value is not 0 && values.Contains(value))
+                if (digits.HasSingle && (values & digits).HasAny)
                 {
-                    yield return new Violation(value, Digits._1_to_9 ^ value, cell, rule);
+                    yield return new Violation(digits, Digits._1_to_9 ^ digits, cell, rule);
                 }
                 values |= cells[cell].Digit;
             }
         }
+    }
 
-        foreach (var res in rule.Restrictions)
+    /// <summary>Validates that the digits in the cell are compliant with the constraint.</summary>
+    public static IEnumerable<Violation> Validate(this Restriction restriction, SudokuCells cells)
+    {
+        var digits = cells[restriction.AppliesTo].Digits;
+        var allowed = restriction.Restrict(cells);
+
+        if ((digits & allowed).HasNone)
         {
-            var value = cells[res.AppliesTo].Digit;
-
-            if (value is 0) continue;
-
-            var allowed = res.Restrict(cells);
-
-            if (!allowed.Contains(value))
-            {
-                yield return new Violation(value, allowed, res.AppliesTo, rule, res);
-            }
+            yield return new Violation(digits, allowed, restriction.AppliesTo, null, restriction);
         }
     }
 
-    public static bool IsValid(this IEnumerable<Rule> rules, SudokuCells cells)
+    public static bool IsValid(this Rules rules, SudokuCells cells)
         => !rules.Validate(cells).Any();
 }

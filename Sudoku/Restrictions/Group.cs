@@ -16,7 +16,7 @@ public abstract class Group(Pos appliesTo, ImmutableArray<Pos> others) : Restric
     public abstract Digits Restrict(SudokuCells cells);
 
     /// <inheritdoc />
-    public override string ToString() => $"{AppliesTo} => {Others}";
+    public override string ToString() => $"({GetType().Name}) {AppliesTo} => [{string.Join(',', Others)}]";
 
     public static IEnumerable<T> Select<T>(PosSet positions, Func<Pos, ImmutableArray<Pos>, T> selector) => Select(positions.ToImmutableArray(), selector);
 

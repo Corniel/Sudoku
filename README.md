@@ -196,44 +196,44 @@ able to solve the following puzzles (so far):
 
 | Date       | Puzzle                                                             |       Speed |
 |:----------:|--------------------------------------------------------------------|------------:|
-| 2025-11-14 | [Braiding Sweetgrass](Puzzles/CrackingTheCryptic/2025_11_14.cs)    | 9,659.7 µs  |
+| 2025-11-14 | [Braiding Sweetgrass](Puzzles/CrackingTheCryptic/2025_11_14.cs)    | 9,602.0 µs  |
 | 2025-11-01 | [Parity Patrol 101](Puzzles/CrackingTheCryptic/2025_11_01.cs)      | 5,399.0 ms  |
-| 2025-10-17 | [Who’s Afraid Of 13](Puzzles/CrackingTheCryptic/2025_10_17.cs)     |   385.3 µs  |
-| 2025-10-07 | [Golden Arrow](Puzzles/CrackingTheCryptic/2025_10_07.cs)           |    95.6 µs  |
-| 2025-09-15 | [Studious](Puzzles/CrackingTheCryptic/2025_09_15.cs)               |    18.3 ms  |
-| 2025-09-13 | [Royalty](Puzzles/CrackingTheCryptic/2025_09_13.cs)                |    91.6 ms  |
+| 2025-10-17 | [Who’s Afraid Of 13](Puzzles/CrackingTheCryptic/2025_10_17.cs)     |   259.7 µs  |
+| 2025-10-07 | [Golden Arrow](Puzzles/CrackingTheCryptic/2025_10_07.cs)           |    29.3 µs  |
+| 2025-09-15 | [Studious](Puzzles/CrackingTheCryptic/2025_09_15.cs)               | 1,039.9 ms  |
+| 2025-09-13 | [Royalty](Puzzles/CrackingTheCryptic/2025_09_13.cs)                | 2,340.7 ms  |
 | 2025-09-09 | [Seylla](Puzzles/CrackingTheCryptic/2025_09_09.cs)                 |   159.8 s   |
-| 2025-09-08 | [Four at a Time](Puzzles/CrackingTheCryptic/2025_09_08.cs)         | 3,591.7 ms  |
-| 2025-09-05 | [Besties 2](Puzzles/CrackingTheCryptic/2025_09_05.cs)              |   196.7 ms  |
-| 2025-09-04 | [Packing Problem](Puzzles/CrackingTheCryptic/2025_09_04.cs)        | 1,084.3 s   |
-| 2025-08-21 | [Miracle Of Eleven](Puzzles/CrackingTheCryptic/2025_08_21.cs)      | 4,366.4 µs  |
-| 2025-08-19 | [Pile Of 15](Puzzles/CrackingTheCryptic/2025_08_19.cs)             | 2,257.1 ms  |
-| 2025-08-07 | [Unstable Seesaws](Puzzles/CrackingTheCryptic/2025_08_07.cs)       | 1,078.4 ms  |
-| 2025-05-21 | [Stepped Thermos](Puzzles/CrackingTheCryptic/2025_05_21.cs)        | 2,759.3 µs  |
-| 2025-05-11 | [Quadrants](Puzzles/CrackingTheCryptic/2025_05_11.cs)              | 1,558.2 ms  |
-| 2025-05-02 | [Arrows v.s. Thermos](Puzzles/CrackingTheCryptic/2025_05_02.cs)    |   515.1 µs  |
-| 2025-04-23 | [Indifferent Neighbours](Puzzles/CrackingTheCryptic/2025_24_23.cs) |   946.6 µs  |
-| 2025-03-25 | [Rapuzzle](Puzzles/CrackingTheCryptic/2025_03_25.cs)               | 7,876.9 µs  |
-| 2025-01-07 | [Sort of Miraculous](Puzzles/CrackingTheCryptic/2025_01_07.cs)     |   726.8 ms  |
-| 2024-12-24 | [Arrow Thermo 2](Puzzles/CrackingTheCryptic/2024_12_24.cs)         |   241.7 ms  |
-| 2024-12-09 | [Elbow Join](Puzzles/CrackingTheCryptic/2024_12_09.cs)             | 1,579.5 ms  |
-| 2024-12-08 | [Fortune Cookie II](Puzzles/CrackingTheCryptic/2024_12_08.cs)      | 8,992.1 ms  |
-| 2024-11-18 | [Equivalenee](Puzzles/CrackingTheCryptic/2024_11_18.cs)            |   573.2 ms  |
-| 2024-11-16 | [80](Puzzles/CrackingTheCryptic/2024_11_16.cs)                     | 1,049.3 µs  |
-| 2024-09-29 | [3 In the Corner](Puzzles/CrackingTheCryptic/2024_09_29.cs)        |          ?  |
-| 2024-04-06 | [Seesaw](Puzzles/CrackingTheCryptic/2024_04_06.cs)                 |    17.8 ms  |
-| 2024-01-08 | [Tulpenblüte](Puzzles/CrackingTheCryptic/2024_01_08.cs)            |    17.8 ms  |
-| 2022-05-03 | [The Dutch Miracle](Puzzles/CrackingTheCryptic/2022_05_03.cs)      |    99.8 µs  |
-| 2022-04-27 | [The Aquarium](Puzzles/CrackingTheCryptic/2022_04_27.cs)           |    46.9 s   |
-| 2022-03-13 | [The Trident](Puzzles/CrackingTheCryptic/2022_03_13.cs)            |          ?  |
-| 2021-10-06 | [Dutch Whispers](Puzzles/CrackingTheCryptic/2021_10_06.cs)         |   208.4 µs  |
-| 2021-01-06 | [Non-consecutive Killer](Puzzles/CrackingTheCryptic/2021_01_06.cs) | 1,050.0 ms  |
-| 2020-09-30 | [Classic Sudoku!](Puzzles/CrackingTheCryptic/2020_09_30_1_.cs)     |    77.7 µs  |
-| 2020-09-30 | [Tatooine Sunset](Puzzles/CrackingTheCryptic/2020_09_30.cs)        |    77.3 µs  |
-| 2020-04-12 | [Magic Square Sudoku](Puzzles/CrackingTheCryptic/2020_04_12.cs)    |   350.5 µs  |
-| 2019-08-29 | [New York Times](Puzzles/CrackingTheCryptic/2019_08_29.cs)         |    66.0 µs  |
-| 2019-05-09 | [Jigsaw Sudoku](Puzzles/CrackingTheCryptic/2019_05_09.cs)          | 1,698.4 µs  |
-| 2019-03-18 | [X-Wing Sudoku](Puzzles/CrackingTheCryptic/2019_03_18.cs)          |   136.7 µs  |
+| 2025-09-08 | [Four at a Time](Puzzles/CrackingTheCryptic/2025_09_08.cs)         |    25.6 s   |
+| 2025-09-05 | [Besties 2](Puzzles/CrackingTheCryptic/2025_09_05.cs)              |   187.6 ms  |
+| 2025-09-04 | [Packing Problem](Puzzles/CrackingTheCryptic/2025_09_04.cs)        |   140.2 s   |
+| 2025-08-21 | [Miracle Of Eleven](Puzzles/CrackingTheCryptic/2025_08_21.cs)      | 3,987.0 µs  |
+| 2025-08-19 | [Pile Of 15](Puzzles/CrackingTheCryptic/2025_08_19.cs)             | 2,136.5 ms  |
+| 2025-08-07 | [Unstable Seesaws](Puzzles/CrackingTheCryptic/2025_08_07.cs)       | 5,166.3 ms  |
+| 2025-05-21 | [Stepped Thermos](Puzzles/CrackingTheCryptic/2025_05_21.cs)        |   183.3 µs  |
+| 2025-05-11 | [Quadrants](Puzzles/CrackingTheCryptic/2025_05_11.cs)              |    15.8 s   |
+| 2025-05-02 | [Arrows v.s. Thermos](Puzzles/CrackingTheCryptic/2025_05_02.cs)    |   508.2 µs  |
+| 2025-04-23 | [Indifferent Neighbours](Puzzles/CrackingTheCryptic/2025_24_23.cs) |   310.0 µs  |
+| 2025-03-25 | [Rapuzzle](Puzzles/CrackingTheCryptic/2025_03_25.cs)               | 7,606.5 µs  |
+| 2025-01-07 | [Sort of Miraculous](Puzzles/CrackingTheCryptic/2025_01_07.cs)     |    16.1 ms  |
+| 2024-12-24 | [Arrow Thermo 2](Puzzles/CrackingTheCryptic/2024_12_24.cs)         |   230.7 ms  |
+| 2024-12-09 | [Elbow Join](Puzzles/CrackingTheCryptic/2024_12_09.cs)             | 1,542.3 ms  |
+| 2024-12-08 | [Fortune Cookie II](Puzzles/CrackingTheCryptic/2024_12_08.cs)      |    12.0 ms  |
+| 2024-11-18 | [Equivalenee](Puzzles/CrackingTheCryptic/2024_11_18.cs)            |   558.9 ms  |
+| 2024-11-16 | [80](Puzzles/CrackingTheCryptic/2024_11_16.cs)                     |   958.3 µs  |
+| 2024-09-29 | [3 In the Corner](Puzzles/CrackingTheCryptic/2024_09_29.cs)        |       ?     |
+| 2024-04-06 | [Seesaw](Puzzles/CrackingTheCryptic/2024_04_06.cs)                 |       ?     |
+| 2024-01-08 | [Tulpenblüte](Puzzles/CrackingTheCryptic/2024_01_08.cs)            |    11.2 ms  |
+| 2022-05-03 | [The Dutch Miracle](Puzzles/CrackingTheCryptic/2022_05_03.cs)      |    78.2 µs  |
+| 2022-04-27 | [The Aquarium](Puzzles/CrackingTheCryptic/2022_04_27.cs)           |    32.2 s   |
+| 2022-03-13 | [The Trident](Puzzles/CrackingTheCryptic/2022_03_13.cs)            |       ?     |
+| 2021-10-06 | [Dutch Whispers](Puzzles/CrackingTheCryptic/2021_10_06.cs)         |    55.9 µs  |
+| 2021-01-06 | [Non-consecutive Killer](Puzzles/CrackingTheCryptic/2021_01_06.cs) | 1,094.5 ms  |
+| 2020-09-30 | [Classic Sudoku!](Puzzles/CrackingTheCryptic/2020_09_30_1_.cs)     |    39.9 µs  |
+| 2020-09-30 | [Tatooine Sunset](Puzzles/CrackingTheCryptic/2020_09_30.cs)        |    20.3 µs  |
+| 2020-04-12 | [Magic Square Sudoku](Puzzles/CrackingTheCryptic/2020_04_12.cs)    |   268.2 µs  |
+| 2019-08-29 | [New York Times](Puzzles/CrackingTheCryptic/2019_08_29.cs)         |    29.7 µs  |
+| 2019-05-09 | [Jigsaw Sudoku](Puzzles/CrackingTheCryptic/2019_05_09.cs)          | 5,158.5 µs  |
+| 2019-03-18 | [X-Wing Sudoku](Puzzles/CrackingTheCryptic/2019_03_18.cs)          |    99.5 µs  |
 
 ## Models
 

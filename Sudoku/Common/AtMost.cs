@@ -2,19 +2,13 @@ using Sudoku.Restrictions;
 
 namespace Sudoku.Common;
 
-public sealed class AtMost(Pos one, Pos two, int sum) : Rule(one, two)
+public static class AtMost
 {
-    public override ImmutableArray<Restriction> Restrictions { get; } =
+    public static Couple<Pair> New(Pos one, Pos two, int sum)
+        => new LookupPair(one, two, Lookups[sum]).Couple();
+
+    public static readonly ImmutableArray<LookupDigits> Lookups =
     [
-        new Reducer(one, two, sum),
-        new Reducer(two, one, sum),
+        .. range(_9 + _9).Select(sum => LookupPair.Init(d => Digits.AtMost(sum - d)))
     ];
-
-    [DebuggerDisplay("{AppliesTo} + {Other} <= {Sum}")]
-    public sealed class Reducer(Pos appliesTo, Pos other, int sum) : Pair(appliesTo, other)
-    {
-        public int Sum { get; } = sum;
-
-        public override Digits Restrict(int value) => Digits.AtMost(Sum - value);
-    }
 }

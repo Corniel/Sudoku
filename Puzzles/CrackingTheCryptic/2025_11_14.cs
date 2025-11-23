@@ -1,5 +1,3 @@
-using Sudoku.Generics;
-
 namespace Puzzles.CrackingTheCryptic;
 
 public sealed class _2025_11_14 : CtcPuzzle
@@ -82,11 +80,11 @@ public sealed class _2025_11_14 : CtcPuzzle
                 return Lookup[digits];
             }
 
-            private static readonly DigitLookup<Digits> Lookup = Init();
+            private static readonly LookupDigits Lookup = Init();
 
-            private static DigitLookup<Digits> Init()
+            private static LookupDigits Init()
             {
-                var lookup = new DigitLookup<Digits>();
+                var lookup = new LookupDigits();
                 Digits[] groups =
                 [
                     [1, 4, 7],

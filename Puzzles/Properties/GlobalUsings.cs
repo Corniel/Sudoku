@@ -8,3 +8,4 @@ global using System.Collections.Generic;
 global using System.Collections.Immutable;
 global using System.Linq;
 global using static Sudoku.Statics;
+global using LookupDigits = Sudoku.Generics.DigitLookup<Sudoku.Digits>;

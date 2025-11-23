@@ -60,7 +60,7 @@ public class Invalidates
             Value = 5,
             Allowed = Digits.None,
             Constraint = new Pos[] { (0, 0), (0, 1) },
-            Restriction = new { Sum = 3 },
+            Restriction = new { Sum = Ints.New(3) },
         });
     }
 }

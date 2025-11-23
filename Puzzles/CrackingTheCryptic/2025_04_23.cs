@@ -47,15 +47,10 @@ public sealed class _2025_04_23 : CtcPuzzle
 
     private static IEnumerable<Twin> FixedNeigbors() => Pos.All
         .Where(a => a.N() is { } && a.E() is { } && Box.IndexOf(a) != Box.IndexOf(a - 8))
-        .Select(a => new Twin(a, a - 8));
+        .SelectMany(a => Twins.New(a, a - 8));
 
-    private static IEnumerable<EntropicLine.Neighbors> GroupOf3s()
-    {
-        for (var pos = Pos.O; pos < _9x9; pos += 3)
-        {
-            yield return new(pos + 0, pos + 1);
-            yield return new(pos + 0, pos + 2);
-            yield return new(pos + 1, pos + 2);
-        }
-    }
+    private static IEnumerable<Restriction> GroupOf3s()
+        => range(_9x9 / 3)
+        .Select(p => new Pos(p * 3))
+        .SelectMany(p => EntropicLine.New([p, p + 1, p + 2]));
 }

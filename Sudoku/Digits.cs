@@ -1,4 +1,3 @@
-using System.Diagnostics.Contracts;
 using System.Numerics;
 
 namespace Sudoku;
@@ -34,12 +33,22 @@ public readonly struct Digits(uint bits) : IEquatable<Digits>, IReadOnlyCollecti
 
     public static Digits New(int value) => new(1U << value);
 
-    public static Digits New(params ReadOnlySpan<int> values)
+    public static Digits New(params ReadOnlySpan<int> digits)
     {
         var vals = 0U;
 
-        foreach (var v in values)
-            vals |= 1U << v;
+        foreach (var d in digits)
+            vals |= 1U << d;
+
+        return new(vals);
+    }
+
+    public static Digits New(IEnumerable<Digits> digits)
+    {
+        var vals = 0U;
+
+        foreach (var d in digits.SelectMany(d => d))
+            vals |= 1U << d;
 
         return new(vals);
     }

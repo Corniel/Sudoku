@@ -23,7 +23,7 @@ public sealed class StepTracer : IReadOnlyCollection<Step>
         {
             nodes[cell].Digits = next;
 #if DEBUG
-            Stack[Count++] = new(cell, curr, next);
+            Stack[Count++] = new(cell, curr, next, mask);
 #else
             Stack[Count++] = new(cell, curr);
 #endif

@@ -46,35 +46,18 @@ public sealed class _2024_09_29 : CtcPuzzle
         372|516|948
         """);
 
-    private static IEnumerable<Rule> AtLeast3s()
+    private static IEnumerable<Pair> AtLeast3s()
     {
         foreach (var box in Box.All)
         {
             foreach (var c in box)
             {
                 if (c.W() is { } w && box.Cells.Contains(w))
-                    yield return new AtLeast3(c, w);
+                    yield return DeltaMin.New(c, w, 3).One;
 
                 if (c.S() is { } s && box.Cells.Contains(s))
-                    yield return new AtLeast3(c, s);
+                    yield return DeltaMin.New(c, s, 3).One;
             }
-        }
-    }
-
-    public sealed class AtLeast3(Pos a, Pos b) : Rule(a, b)
-    {
-        public override ImmutableArray<Restriction> Restrictions { get; } =
-        [
-            new Reduce(a, b),
-            new Reduce(b, a),
-        ];
-
-        public sealed class Reduce(Pos appliesTo, Pos other) : Pair(appliesTo, other)
-        {
-            public override Digits Restrict(int digits)
-                => digits is 0
-                ? Digits._1_to_9
-                : ~Digits.Between(digits - 2, digits + 2);
         }
     }
 }

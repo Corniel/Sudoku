@@ -25,9 +25,20 @@ public sealed class Thermometer(ImmutableArray<Pos> path) : Set(path)
         {
             for (var s = f + 1; s < path.Length; s++)
             {
-                yield return new Less(path[f], path[s], s - f);
-                yield return new More(path[s], path[f], s - f);
+                var delta = s - f;
+                yield return new LookupPair(path[f], path[s], Less[delta]);
+                yield return new LookupPair(path[s], path[f], More[delta]);
             }
         }
     }
+
+    private static readonly ImmutableArray<LookupDigits> Less =
+    [
+        .. range(_9).Select(delta => LookupPair.Init(d => Digits.AtMost(d - delta)))
+    ];
+
+    private static readonly ImmutableArray<LookupDigits> More =
+    [
+        .. range(_9).Select(delta => LookupPair.Init(d => Digits.AtLeast(d + delta)))
+    ];
 }

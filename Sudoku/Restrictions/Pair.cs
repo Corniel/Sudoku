@@ -1,5 +1,3 @@
-using Sudoku.Generics;
-
 namespace Sudoku.Restrictions;
 
 /// <summary>Describes a restriction between two cells.</summary>
@@ -15,7 +13,7 @@ public abstract class Pair(Pos appliesTo, Pos other) : Restriction
     public PosSet Links { get; } = [other];
 
     /// <inheritdoc />
-    public Digits Restrict(SudokuCells graph) => Restrict(graph[Other].Digits);
+    public Digits Restrict(SudokuCells cells) => Restrict(cells[Other].Digits);
 
     /// <inheritdoc cref="Restriction.Restrict(SudokuCells)" />
     public virtual Digits Restrict(Digits other)
@@ -33,15 +31,4 @@ public abstract class Pair(Pos appliesTo, Pos other) : Restriction
 
     /// <inheritdoc />
     public override string ToString() => $"{AppliesTo} => {Other}";
-
-    public static DigitLookup<Digits> Init(Digits[] byValue)
-    {
-        var lookup = new DigitLookup<Digits>();
-
-        foreach (var digits in Digits.All)
-            foreach (var value in digits)
-                lookup[digits] |= byValue[value];
-
-        return lookup;
-    }
 }

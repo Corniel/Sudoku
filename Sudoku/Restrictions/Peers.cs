@@ -11,5 +11,5 @@ public sealed class Peers(Pos appliesTo, PosSet set) : Restriction
     public PosSet Links { get; } = set ^ appliesTo;
 
     /// <inheritdoc />
-    public Digits Restrict(SudokuCells graph) => Digits._1_to_9;
+    public Digits Restrict(SudokuCells cells) => Digits._1_to_9;
 }

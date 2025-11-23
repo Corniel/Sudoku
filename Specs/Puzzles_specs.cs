@@ -21,7 +21,7 @@ public class Cracking_the_Cryptic
         var solved = DynamicSolver.Solver.Raw(puzzle.Clues, puzzle.Constraints);
         Console.WriteLine(Cells.New(solved));
         puzzle.Constraints.Should().BeValidFor(solved);
-        //puzzle.Constraints.Should().BeValidFor(puzzle.Solution);
+        puzzle.Constraints.Should().BeValidFor(puzzle.Solution);
     }
 
     [TestCaseSource(nameof(Fasts))]

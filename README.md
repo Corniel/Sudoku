@@ -215,6 +215,7 @@ able to solve the following puzzles (so far):
 | 2025-04-23 | [Indifferent Neighbours](Puzzles/CrackingTheCryptic/2025_24_23.cs) |   310.0 µs  |
 | 2025-03-25 | [Rapuzzle](Puzzles/CrackingTheCryptic/2025_03_25.cs)               | 7,606.5 µs  |
 | 2025-01-07 | [Sort of Miraculous](Puzzles/CrackingTheCryptic/2025_01_07.cs)     |    16.1 ms  |
+| 2025-01-31 | [ZL GW DA](Puzzles/CrackingTheCryptic/2025_01_31.cs)               | 1,720.4 ms  |
 | 2024-12-24 | [Arrow Thermo 2](Puzzles/CrackingTheCryptic/2024_12_24.cs)         |   230.7 ms  |
 | 2024-12-09 | [Elbow Join](Puzzles/CrackingTheCryptic/2024_12_09.cs)             | 1,542.3 ms  |
 | 2024-12-08 | [Fortune Cookie II](Puzzles/CrackingTheCryptic/2024_12_08.cs)      |    12.0 ms  |

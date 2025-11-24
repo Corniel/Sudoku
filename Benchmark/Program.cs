@@ -4,7 +4,7 @@ public static class Program
 {
     public static void Main()
     {
-        Cracking_the_Cryptic.Run(p => p.Duration <= Puzzles.O.s100);
+        Cracking_the_Cryptic.Run(p => p.Duration == Puzzles.O.Unknown);
     }
 
     public static void Other()

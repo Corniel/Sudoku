@@ -9,7 +9,7 @@ public sealed class KillerPuzzle(string title, Rules rules) : Puzzle
 
     public override Clues Clues { get; } = Clues.None;
 
-    public override Rules Constraints { get; } = rules;
+    public override Rules Constraints { get; } = rules + KillerCages.Extend;
 
     public static IEnumerable<KillerPuzzle> Load()
     {

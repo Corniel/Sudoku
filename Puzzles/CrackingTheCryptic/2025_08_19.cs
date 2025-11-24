@@ -8,7 +8,21 @@ public sealed class _2025_08_19 : CtcPuzzle
 
     public override Uri? Url => new("https://youtu.be/stUFi592gxk");
 
-    public override O Duration => O.s;
+    public override O Duration => O.ms100;
+
+    public override Cells Solution { get; } = Cells.Parse("""
+        736|948|152
+        145|326|897
+        829|751|436
+        ---+---+---
+        671|432|589
+        394|685|271
+        582|197|364
+        ---+---+---
+        467|813|925
+        213|579|648
+        958|264|713
+        """);
 
     public override Rules Constraints { get; } =
         Rules.Killer("""
@@ -28,19 +42,6 @@ public sealed class _2025_08_19 : CtcPuzzle
         F = 15  G = 15  H = 15  I = 15  J = 15
         K = 15  L = 15  M = 15  N = 15
         z = 12  x = 18
-        """);
-
-    public override Cells Solution { get; } = Cells.Parse("""
-        736|948|152
-        145|326|897
-        829|751|436
-        ---+---+---
-        671|432|589
-        394|685|271
-        582|197|364
-        ---+---+---
-        467|813|925
-        213|579|648
-        958|264|713
-        """);
+        """)
+        + KillerCages.Extend;
 }

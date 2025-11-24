@@ -8,7 +8,7 @@ public sealed class _2025_09_09 : CtcPuzzle
 
     public override Uri? Url => new("https://youtu.be/DF0f15tya5Q");
 
-    public override O Duration => O.s1000;
+    public override O Duration => O.s;
 
     public override Cells Solution { get; } = Cells.Parse("""
         531|498|267
@@ -41,5 +41,6 @@ public sealed class _2025_09_09 : CtcPuzzle
         A = 9   B = 8   C = 8   D = 14  E = 18
         F = 11  G = 11  H = 6   I = 15  J = 18  K = 18  L = 27
         M = 10  N = 23  O = 10
-        """);
+        """)
+        + KillerCages.Extend;
 }

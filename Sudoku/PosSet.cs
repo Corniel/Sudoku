@@ -29,6 +29,12 @@ public readonly struct PosSet(Int128 bits) : IEquatable<PosSet>, IReadOnlyCollec
     [Pure]
     public bool IsSubsetOf(PosSet other) => (other.Bits & Bits) == Bits;
 
+    /// <inheritdoc cref="IReadOnlySet{T}.IsProperSubsetOf(IEnumerable{T})(IEnumerable{T})" />
+    [Pure]
+    public bool IsProperSubsetOf(PosSet other)
+        => other.Bits != Bits
+        && IsSubsetOf(other);
+
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Pos First() => HasNone ? Pos.Invalid : new((int)Int128.TrailingZeroCount(Bits));
 

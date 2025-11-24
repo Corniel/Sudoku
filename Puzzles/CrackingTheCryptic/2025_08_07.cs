@@ -8,7 +8,7 @@ public sealed class _2025_08_07 : CtcPuzzle
 
     public override Uri? Url => new("https://youtu.be/OUlAVsaWnDQ");
 
-    public override O Duration => O.s;
+    public override O Duration => O.ms100;
 
     public override Clues Clues => Clues.Parse("""
         ...|...|..1
@@ -39,7 +39,6 @@ public sealed class _2025_08_07 : CtcPuzzle
         ...|...|...
         A = 21  B = 21  C = 20  D = 22
         """)
-
         + WhiteDots.Parse("""
         B..|AA.|...
         B..|...|...
@@ -53,7 +52,6 @@ public sealed class _2025_08_07 : CtcPuzzle
         .F.|...|...
         .F.|...|...
         """)
-
         + GermanWhispers.Parse("""
         87.|...|...
         .6.|...|...
@@ -66,7 +64,8 @@ public sealed class _2025_08_07 : CtcPuzzle
         ...|...|BEH
         23.|...|...
         1..|KL.|...
-        """);
+        """)
+        + KillerCages.Extend;
 
     public override Cells Solution { get; } = Cells.Parse("""
         296│784│351

@@ -4,6 +4,50 @@ namespace Sudoku.Common;
 
 public static partial class KillerCages
 {
+    /// <summary>Extend the rules with extra cages.</summary>
+    [Pure]
+    public static Rules Extend(Rules rules)
+    {
+        var houses = rules.Sets.Where(s => s.Count is _9).ToArray();
+        var cages = rules.OfType<KillerCage>().ToArray();
+        var found = new List<KillerCage>();
+
+        // Make use of the fact that houses sum up to 45
+        foreach (var house in houses)
+        {
+            var cage = house;
+            var sum = _45;
+
+            foreach (var c in cages.Where(c => c.Cells.IsSubsetOf(cage)))
+            {
+                cage ^= c.Cells;
+                sum -= c.Sum;
+            }
+            if (sum is > 0 and < _45)
+                found.Add(new KillerCage(sum, cage));
+        }
+
+        // Check if we can make use some cages we just found
+        var count = found.Count;
+        for (var i = 0; i < count; i++)
+        {
+            var cage = found[i];
+            foreach (var c in cages)
+            {
+                if ((cage.Cells & c.Cells) is { HasAny: true } overlay)
+                {
+                    // c is a proper subset of cage
+                    if (c.Cells == overlay)
+                        found.Add(new(cage.Sum - c.Sum, cage.Cells ^ c.Cells));
+                    else if (cage.Cells == overlay)
+                        found.Add(new(c.Sum - cage.Sum, c.Cells ^ cage.Cells));
+                }
+            }
+        }
+
+        return rules + found;
+    }
+
     public static ImmutableArray<Rule> Parse(string str, bool isSet = true)
     {
         if (NamedCage.Parse(str) is { Length: > 0 } cs)

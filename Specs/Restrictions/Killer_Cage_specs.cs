@@ -1,3 +1,5 @@
+using Sudoku.Common;
+
 namespace Specs.Restrictions.Killer_Cage_specs;
 
 public class Parses
@@ -28,7 +30,8 @@ public class Parses
             V = 6   W = 10  X = 14
             Y = 8   Z = 16  a = 15
             b = 13  c = 17
-            """);
+            """)
+            + KillerCages.Extend;
 
         var solution = TestSolver.Solve(Clues.None, rules);
 
@@ -63,7 +66,8 @@ public class Parses
             16=(0,4)+(1,4)+(1,5)+(1,6)
             16=(0,5)+(0,6)+(0,7)+(0,8)
             27=(1,7)+(1,8)+(2,7)+(2,8)
-            """);
+            """)
+            + KillerCages.Extend;
 
         var solution = TestSolver.Solve(Clues.None, rules);
 

@@ -21,7 +21,8 @@ public sealed class NewYorkTimesPuzzle(DateOnly date, Clues clues, Cells solutio
         writer.Write(' ');
         for (var p = Pos.O; p < _9x9; p++)
         {
-            writer.Write(Clues.FirstOrDefault(c => c.Pos == p).Digit);
+            var digit = Clues.FirstOrDefault(c => c.Pos == p).Digit;
+            writer.Write(digit is 0 ? '.' : (char)(digit + '0'));
         }
         writer.Write(' ');
         for (var p = Pos.O; p < _9x9; p++)

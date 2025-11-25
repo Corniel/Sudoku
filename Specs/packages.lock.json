@@ -172,6 +172,12 @@
       },
       "sudoku": {
         "type": "Project"
+      },
+      "sudoku.app": {
+        "type": "Project",
+        "dependencies": {
+          "Puzzles": "[1.0.0, )"
+        }
       }
     }
   }

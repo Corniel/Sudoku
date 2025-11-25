@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <RootNamespace>Specs</RootNamespace>
@@ -6,8 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="App/Content.html" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="../Puzzles/Puzzles.csproj" />
     <ProjectReference Include="../Sudoku/Sudoku.csproj" />
+    <ProjectReference Include="../Sudoku.App/Sudoku.App.csproj" />
   </ItemGroup>
 
   <ItemGroup Label="Solvers">

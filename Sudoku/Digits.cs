@@ -43,6 +43,16 @@ public readonly struct Digits(uint bits) : IEquatable<Digits>, IReadOnlyCollecti
         return new(vals);
     }
 
+    public static Digits New(IEnumerable<int> digits)
+    {
+        var vals = 0U;
+
+        foreach (var d in digits)
+            vals |= 1U << d;
+
+        return new(vals);
+    }
+
     public static Digits New(IEnumerable<Digits> digits)
     {
         var vals = 0U;

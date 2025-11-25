@@ -14,6 +14,7 @@ public sealed partial class KillerCage(int sum, PosSet cells) : Set([.. cells])
     {
         _ when sum is 0 => [],
         1 => [new Mask(cells.First(), [sum])],
+        2 => Sudoku.Restrictions.Sum.New(cells.First(), cells.Last(), sum),
         9 => [],
         _ => Group.Select(cells, (appliesTo, others) => new Cage(appliesTo, others, [sum])),
     };

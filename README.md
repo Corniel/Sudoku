@@ -196,6 +196,7 @@ able to solve the following puzzles (so far):
 
 | Date       | Puzzle                                                             |      Speed |
 |:----------:|--------------------------------------------------------------------|-----------:|
+| 2025-11-17 | [wicked](Puzzles/CrackingTheCryptic/2025_11_17.cs)                 |   299.4 ms |
 | 2025-11-14 | [Braiding Sweetgrass](Puzzles/CrackingTheCryptic/2025_11_14.cs)    | 9,347.6 µs |
 | 2025-11-01 | [Parity Patrol 101](Puzzles/CrackingTheCryptic/2025_11_01.cs)      | 5,067.6 ms |
 | 2025-10-17 | [Who’s Afraid Of 13](Puzzles/CrackingTheCryptic/2025_10_17.cs)     |   259.7 µs |

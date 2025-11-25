@@ -1,3 +1,4 @@
+using Sudoku.Restrictions;
 using System.Text.RegularExpressions;
 
 namespace Sudoku.Common;
@@ -45,8 +46,21 @@ public static partial class KillerCages
             }
         }
 
-        return rules + found;
+        return rules + found + Masks([.. cages, .. found], rules.Sets);
     }
+
+    private static IEnumerable<Mask> Masks(IEnumerable<KillerCage> cages, IEnumerable<PosSet> sets) => cages
+        .Where(c
+            => c.Count is 2
+            && c.Sum.IsEven()
+            && sets.Any(s => c.Cells.IsSubsetOf(s)))
+        .SelectMany(Masks);
+
+    private static IEnumerable<Mask> Masks(KillerCage c) =>
+    [
+        new Mask(c.Cells.First(), ~Digits.New(c.Sum / 2)),
+        new Mask(c.Cells.Last(), ~Digits.New(c.Sum / 2)),
+    ];
 
     public static ImmutableArray<Rule> Parse(string str, bool isSet = true)
     {

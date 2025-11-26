@@ -1,0 +1,73 @@
+
+namespace Puzzles.CrackingTheCryptic;
+
+public sealed class _2025_11_25: CtcPuzzle
+{
+    public override string Title => "Simple Miracle";
+
+    public override string? Author => "Aad van de Wetering";
+
+    public override Uri? Url => new("https://youtu.be/4fwsRuKC6EY");
+
+    public override O Duration => O.ms100;
+
+    public override Cells Solution { get; } = Cells.Parse("""
+        837│261│594
+        261│594│837
+        594│837│261
+        ───┼───┼───
+        159│483│726
+        483│726│159
+        726│159│483
+        ───┼───┼───
+        372│615│948
+        615│948│372
+        948│372│615
+        """);
+
+    public override Clues Clues { get; } = Clues.Parse("""
+        ...│...│...
+        ...│...│...
+        ...│...│...
+        ───┼───┼───
+        ...│...│...
+        ...│...│...
+        ...│...│...
+        ───┼───┼───
+        ...│...│...
+        .1.│...│...
+        ...│..2│...
+        """);
+
+    public override Rules Constraints { get; } =
+        Rules.AntiKnight
+        + Digonals();
+
+    public static IEnumerable<Pair> Digonals()
+    {
+        foreach (var diagonal in Diagonals.NESWs)
+        {
+            var cells = diagonal.ToArray();
+            for (var i = 1; i < cells.Length; i++)
+            {
+                var couple = new LookupPair(cells[i], cells[i - 1], Lookup).Couple();
+                yield return couple.One;
+                yield return couple.Two;
+            }
+        }
+    }
+
+    private static readonly LookupDigits Lookup = LookupPair.Init(
+    [
+        Digits.None,
+        /* 1 */ [2, 9],
+        /* 2 */ [1, 3],
+        /* 3 */ [2, 4],
+        /* 4 */ [3, 5],
+        /* 5 */ [4, 6],
+        /* 6 */ [5, 7],
+        /* 7 */ [6, 8],
+        /* 8 */ [7, 9],
+        /* 9 */ [1, 8],
+    ]);
+}

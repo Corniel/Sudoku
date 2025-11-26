@@ -1,44 +1,42 @@
-using StrategyBased;
-
-namespace Sudoku.Reduction;
+namespace StrategyBased.Reductions;
 
 public static class Pointing
 {
-    public static void Digits(Nodes graph)
+    public static void Digits(Nodes cells)
     {
-        foreach (var houses in graph.Houses.Take2())
-            Digits(houses.One, houses.Two, graph);
+        foreach (var houses in cells.Houses.Take2())
+            Digits(houses.One, houses.Two, cells);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static void Digits(Rule r1, Rule r2, Nodes graph)
+    private static void Digits(Rule r1, Rule r2, Nodes cells)
     {
-        var inter = r1.Cells & r2.Cells & graph.Todo;
+        var inter = r1.Cells & r2.Cells & cells.Todo;
 
         // we can skip those.
         if (!inter.HasMultiple) return;
 
         var digits = new int[_9 + 1];
         foreach (var cell in inter)
-            foreach (var val in graph[cell].Digits)
+            foreach (var val in cells[cell].Digits)
                 digits[val]++;
 
         for (var value = 1; value <= _9; value++)
         {
             if (digits[value] is 0) continue;
 
-            var lockRow = graph.DoesNotOccur(value, r1.Cells ^ inter);
-            var lockCol = graph.DoesNotOccur(value, r2.Cells ^ inter);
+            var lockRow = cells.DoesNotOccur(value, r1.Cells ^ inter);
+            var lockCol = cells.DoesNotOccur(value, r2.Cells ^ inter);
 
             if (lockRow && !lockCol)
             {
                 foreach (var cell in r2.Cells ^ inter)
-                    graph[cell].Digits ^= value;
+                    cells[cell].Digits ^= value;
             }
             else if (lockCol && !lockRow)
             {
                 foreach (var cell in r1.Cells ^ inter)
-                    graph[cell].Digits ^= value;
+                    cells[cell].Digits ^= value;
             }
         }
     }

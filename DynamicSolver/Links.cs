@@ -6,7 +6,7 @@ namespace DynamicSolver;
 [DebuggerTypeProxy(typeof(CollectionDebugView))]
 public sealed class Links : IReadOnlyCollection<Link>, SudokuCells
 {
-    public static Links New(Clues clues, Rules rules)
+    public static Links New(IEnumerable<Cell> clues, Rules rules)
     {
         var links = new Links();
 

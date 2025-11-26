@@ -1,3 +1,5 @@
+using System.IO;
+
 namespace Sudoku;
 
 public readonly struct Cells : IEquatable<Cells>
@@ -22,6 +24,23 @@ public readonly struct Cells : IEquatable<Cells>
 
     /// <summary>Indicates that all values have been resolved.</summary>
     public bool IsSolved => Values.All(v => v is not 0);
+
+    /// <summary>The number of solved cells.</summary>
+    public int Solved => Values.Count(v => v is not 0);
+
+    [Pure]
+    public Cells Copy()
+    {
+        var copy = new int[_9x9];
+        Array.Copy(Values, copy, _9x9);
+        return new(copy);
+    }
+
+    public void WriteTo(StreamWriter writer)
+    {
+        for (var p = Pos.O; p < _9x9; p++)
+            writer.Write(Values[p]);
+    }
 
     /// <summary>Represents the Sudoku state as string.</summary>
     public override string ToString()
@@ -73,6 +92,16 @@ public readonly struct Cells : IEquatable<Cells>
     public static bool operator ==(Cells l, Cells r) => l.Equals(r);
 
     public static bool operator !=(Cells l, Cells r) => !(l == r);
+
+    /// <summary>Creates cells based on <see cref="Clues"/>.</summary>
+    public static Cells New(Clues clues)
+    {
+        var cs = Empty;
+        foreach (var clue in clues)
+            cs[clue.Pos] = clue.Digit;
+
+        return cs;
+    }
 
     /// <summary>Creates cells based on <see cref="SudokuCells"/>.</summary>
     public static Cells New(SudokuCells cells)

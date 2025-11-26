@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <RootNamespace>Specs</RootNamespace>
@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="../Generator/Generator.csproj" />
     <ProjectReference Include="../Puzzles/Puzzles.csproj" />
     <ProjectReference Include="../Sudoku/Sudoku.csproj" />
     <ProjectReference Include="../Sudoku.App/Sudoku.App.csproj" />

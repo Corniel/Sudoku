@@ -47,24 +47,18 @@ public sealed class Node : SudokuCell
             digit = Digits.First();
             Root.Todo ^= Pos;
 
-            foreach (var peer in Peers)
-                Root.Nodes[peer].Digits ^= next;
+            foreach (var pos in Peers)
+            {
+                var peer = Root.Nodes[pos];
+                peer.Digits ^= next;
+                peer.Peers ^= Pos;
+            }
 
             Peers = default;
         }
     }
 
     public int Digit => digit;
-
-    public void Test(int test) => digit = test;
-
-    public void Reset() => digit = 0;
-
-    public Node Freeze(PosSet todo)
-    {
-        Backgtracking = [.. Peers ^ todo];
-        return this;
-    }
 
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private int digit;

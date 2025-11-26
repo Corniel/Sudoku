@@ -3,7 +3,6 @@ using Puzzles.CrackingTheCryptic;
 using Puzzles.Killer;
 using Puzzles.PuzzleBank;
 using Puzzles.SudokuPad;
-using StrategyBased;
 using System.IO;
 using System.Text;
 
@@ -134,7 +133,7 @@ public class Jigsaw_Sudokud
             GGJ|JJJ|HHH
             """);
 
-        StrategyBasedSolver.Solve(
+        TestSolver.Solve(
           Clues.Parse("""
             4..|7.9|.2.
             ...|.2.|...

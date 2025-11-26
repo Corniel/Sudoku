@@ -152,6 +152,13 @@
           "Sudoku": "[1.0.0, )"
         }
       },
+      "generator": {
+        "type": "Project",
+        "dependencies": {
+          "StrategyBased": "[1.0.0, )",
+          "Sudoku": "[1.0.0, )"
+        }
+      },
       "puzzles": {
         "type": "Project",
         "dependencies": {
@@ -176,6 +183,7 @@
       "sudoku.app": {
         "type": "Project",
         "dependencies": {
+          "Generator": "[1.0.0, )",
           "Puzzles": "[1.0.0, )"
         }
       }

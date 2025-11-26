@@ -147,64 +147,69 @@ public sealed class Nodes : IReadOnlyCollection<Node>, SudokuCells
         };
     }
 
-    public static Nodes operator &(Nodes graph, Rules rules)
+    public static Nodes operator &(Nodes nodes, Rules rules)
     {
-        graph.Houses = graph.Houses.AddRange(rules.Where(r => r.IsHouse));
-        graph.Rows = graph.Rows.AddRange(rules.OfType<Row>());
-        graph.Cols = graph.Cols.AddRange(rules.OfType<Col>());
+        nodes.Houses = nodes.Houses.AddRange(rules.Where(r => r.IsHouse));
+        nodes.Rows = nodes.Rows.AddRange(rules.OfType<Row>());
+        nodes.Cols = nodes.Cols.AddRange(rules.OfType<Col>());
 
         foreach (var rule in rules.OrderByDescending(r => r.Count))
         {
-            graph.Rules += rule;
+            nodes.Rules += rule;
 
             foreach (var cell in rule.Cells)
-                graph[cell].Links |= rule.Cells;
+                nodes[cell].Links |= rule.Cells;
 
             if (rule.IsSet)
             {
                 foreach (var cell in rule.Cells)
-                    graph[cell].Peers |= rule.Cells;
+                    nodes[cell].Peers |= rule.Cells;
             }
+        }
+        foreach(var node in nodes)
+        {
+            node.Peers ^= node.Pos;
+            node.Links ^= node.Pos;
         }
 
         foreach (var restriction in rules.Restrictions)
         {
             if (restriction is Mask mask)
             {
-                graph[restriction.AppliesTo].Digits &= mask.Restrict(graph);
+                nodes[restriction.AppliesTo].Digits &= mask.Restrict(nodes);
             }
             else
             {
-                graph.Restricted |= restriction.AppliesTo;
-                graph[restriction.AppliesTo].Restrictions.Add(restriction);
-                graph[restriction.AppliesTo].Links |= restriction.Links;
+                nodes.Restricted |= restriction.AppliesTo;
+                nodes[restriction.AppliesTo].Restrictions.Add(restriction);
+                nodes[restriction.AppliesTo].Links |= restriction.Links;
 
                 if (restriction is Pair pair)
                 {
-                    var paired = graph[pair.AppliesTo].PairedRestrictions;
+                    var paired = nodes[pair.AppliesTo].PairedRestrictions;
                     paired.TryAdd(pair.Other, []);
                     paired[pair.Other].Add(pair);
                 }
             }
         }
 
-        return graph;
+        return nodes;
     }
 
-    public static Nodes operator &(Nodes graph, Clues clues)
+    public static Nodes operator &(Nodes nodes, Clues clues)
     {
         foreach (var clue in clues)
-            graph[clue.Pos].Digits = [clue.Digit];
+            nodes[clue.Pos].Digits = [clue.Digit];
 
-        return graph;
+        return nodes;
     }
 
-    public static bool operator &(Nodes graph, Action<Nodes> reduce)
+    public static bool operator &(Nodes nodes, Reduce reduce)
     {
-        if (graph.Todo.HasNone) return false;
-        var version = graph.Version;
-        reduce(graph);
-        return version != graph.Version;
+        if (nodes.Todo.HasNone) return false;
+        var version = nodes.Version;
+        reduce(nodes);
+        return version != nodes.Version;
     }
 
     /// <inheritdoc />

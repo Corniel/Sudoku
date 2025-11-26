@@ -4,7 +4,7 @@ public static class Program
 {
     public static void Main()
     {
-        Cracking_the_Cryptic.Run(p => p.Duration == Puzzles.O.Unknown);
+        _ = BenchmarkDotNet.Running.BenchmarkRunner.Run<Generation>();
     }
 
     public static void Other()
@@ -12,6 +12,7 @@ public static class Program
         Cracking_the_Cryptic.Run(p => p.Duration is Puzzles.O.Unknown);
         TestSets.SolveAll();
         _ = BenchmarkDotNet.Running.BenchmarkRunner.Run<DigitIterator>();
+        _ = BenchmarkDotNet.Running.BenchmarkRunner.Run<Generation>();
         _ = BenchmarkDotNet.Running.BenchmarkRunner.Run<Position.Iterate>();
     }
 }

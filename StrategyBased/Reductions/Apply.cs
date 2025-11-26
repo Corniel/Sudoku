@@ -1,6 +1,4 @@
-using StrategyBased;
-
-namespace Sudoku.Reduction;
+namespace StrategyBased.Reductions;
 
 public static class Apply
 {

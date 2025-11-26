@@ -4,7 +4,7 @@ namespace Sudoku;
 
 [DebuggerDisplay("Count = {Count}")]
 [DebuggerTypeProxy(typeof(Diagnostics.CollectionDebugView))]
-public readonly struct Clues : IReadOnlyCollection<Cell>
+public readonly struct Clues : IReadOnlyCollection<Cell>, IEquatable<Clues>
 {
     public Clues(ImmutableArray<Cell> cells) => Cells = cells;
 
@@ -26,6 +26,31 @@ public readonly struct Clues : IReadOnlyCollection<Cell>
             var digit = Cells.FirstOrDefault(c => c.Pos == p).Digit;
             writer.Write(digit is 0 ? '.' : (char)(digit + '0'));
         }
+    }
+
+    /// <inheritdoc />
+    public override bool Equals(object? obj) => obj is Clues other && Equals(other);
+
+    /// <inheritdoc />
+    public bool Equals(Clues other)
+    {
+        if (Count != other.Count) return false;
+
+        for (var i = 0; i < Count; i++)
+            if (!Cells[i].Equals(other.Cells[i])) return false;
+
+        return true;
+    }
+
+    /// <inheritdoc />
+    public override int GetHashCode()
+    {
+        var hash = 0;
+
+        for (var i = 0; i < Count; i++)
+            hash = (hash * 13) ^ Cells[i].GetHashCode();
+
+        return hash;
     }
 
     /// <inheritdoc />
@@ -54,4 +79,6 @@ public readonly struct Clues : IReadOnlyCollection<Cell>
 
         return new(cells[..i]);
     }
+
+    
 }

@@ -10,7 +10,7 @@ public class Puzzle_characteristics
         var boxes = new int[10];
         var clues = new int[81];
 
-        foreach(var cl in Puzzles.PuzzleBank.PuzzleBankPuzzle.Diabolical.Select(p => p.Clues))
+        foreach (var cl in Puzzles.PuzzleBank.PuzzleBankPuzzle.Diabolical.Select(p => p.Clues))
         {
             var box = Digits.None;
 

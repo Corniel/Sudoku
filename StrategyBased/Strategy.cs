@@ -13,11 +13,11 @@ public sealed record Strategy(StrategyType Type, Reduce Reduce)
         [StrategyType.HiddenPairs] /*....*/ = Hidden.Pairs,
         [StrategyType.HiddenTriples] /*..*/ = Hidden.Triples,
         [StrategyType.HiddenQuads] /*....*/ = Hidden.Quads,
-        
+
         [StrategyType.NakedPairs] /*.....*/ = Naked.Pairs,
         [StrategyType.NakedTriples] /*...*/ = Naked.Triples,
         [StrategyType.NakedQuads] /*.....*/ = Naked.Quads,
-        
+
         [StrategyType.PointingDigits] /*.*/ = Pointing.Digits,
 
         [StrategyType.XWing] /*..........*/ = Intersection.XWing,

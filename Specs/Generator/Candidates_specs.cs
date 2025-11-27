@@ -8,7 +8,7 @@ public class Generates
     public void Puzzles()
     {
         var random = new Random(17);
-        new Grids( random).Take(100)
+        new Grids(random).Take(100)
             .Should().AllSatisfy(cells =>
             {
                 Rules.Standard.Should().BeValidFor(cells);

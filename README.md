@@ -236,10 +236,15 @@ able to solve the following puzzles (so far):
 | 2020-09-30 | [Tatooine Sunset](Puzzles/CrackingTheCryptic/2020_09_30.cs)        |    20.3 µs |
 | 2020-04-13 | [Killer Sudoku](Puzzles/CrackingTheCryptic/2020_04_13.cs)          |   368.3 ms |
 | 2020-04-12 | [Magic Square Sudoku](Puzzles/CrackingTheCryptic/2020_04_12.cs)    |   268.2 µs |
+| 2020-01-19 | [New York Times](Puzzles/CrackingTheCryptic/2020_01_19.cs)         |   338.2 µs |
 | 2019-08-29 | [New York Times](Puzzles/CrackingTheCryptic/2019_08_29.cs)         |    29.7 µs |
 | 2019-05-09 | [Jigsaw Sudoku](Puzzles/CrackingTheCryptic/2019_05_09.cs)          | 5,158.5 µs |
 | 2019-03-18 | [X-Wing Sudoku](Puzzles/CrackingTheCryptic/2019_03_18.cs)          |    99.5 µs |
-| 2017-08-26 | [Killer Sudoku](Puzzles/CrackingTheCryptic/2019_03_18.cs)          |   708.9 µs |
+| 2019-02-01 | [New York Times](Puzzles/CrackingTheCryptic/2019_02_01.cs)         |   173.5 µs |
+| 2017-09-23 | [Diabolic](Puzzles/CrackingTheCryptic/2017_09_23.cs)               |   512.6 µs |
+| 2017-09-18 | [Super Fiendish](Puzzles/CrackingTheCryptic/2017_09_18.cs)         |   311.0 µs |
+| 2017-08-31 | [Super Fiendish](Puzzles/CrackingTheCryptic/2017_08_31.cs)         | 1,028.2 µs |
+| 2017-08-26 | [Killer Sudoku](Puzzles/CrackingTheCryptic/2017_08_06.cs)          |   708.9 µs |
 
 ## Models
 

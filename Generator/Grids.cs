@@ -37,10 +37,10 @@ public sealed class Grids(Random rnd) : IEnumerator<Cells>, IEnumerable<Cells>
         Shuffle(Cols.AsSpan(3, 3));
         Shuffle(Cols.AsSpan(6, 3));
 
-        for(var r = 0; r < 9; r++)
+        for (var r = 0; r < 9; r++)
         {
             var row = Rows[r];
-            for(var c = 0; c < 9; c++)
+            for (var c = 0; c < 9; c++)
             {
                 current[r, c] = Lookup[row, Cols[c]];
             }

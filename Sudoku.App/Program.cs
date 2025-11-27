@@ -11,7 +11,7 @@ public static class Program
         else if (args[0] == "gen")
         {
             var size = args.Length > 1 && int.TryParse(args[1], out var val0) ? val0 : 1000;
-            var seed =  args.Length > 2  && int.TryParse(args[2], out var val1) ? val1 : Random.Shared.Next();
+            var seed = args.Length > 2 && int.TryParse(args[2], out var val1) ? val1 : Random.Shared.Next();
             Generator.Generate(size, seed);
         }
         else

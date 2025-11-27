@@ -40,7 +40,7 @@ public static class NewYorkTimesCollector
 
         var clues = new Clues([.. puzzle.puzzle_data.puzzle.Select((d, p) => new Cell(new Pos(p), d)).Where(c => c.Digit is not 0)]);
         var solution = Cells.Empty;
-        
+
         for (Pos p = Pos.O; p < _9x9; p++)
             solution[p] = puzzle.puzzle_data.solution[p];
 

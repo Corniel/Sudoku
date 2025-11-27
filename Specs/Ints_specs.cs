@@ -37,7 +37,7 @@ public class Subtracts
         var subtract = ints - [2, 4];
         subtract.Should().BeEquivalentTo(
             Ints.New(
-                42 - 4, 
+                42 - 4,
                 42 - 2,
                 43 - 4,
                 43 - 2));

@@ -53,7 +53,7 @@ public sealed class PuzzleGenerator(ReduceOptions options, Random rnd)
         var clues = new Clues(done.Select(p => new Cell(p, solution[p])));
         var nodes = Nodes.Empty;
         var solved = new StrategyBasedSolver(nodes & Rules & clues, Options);
-        
+
         foreach (var strategy in solved)
             StrategyTypes.Add(strategy.Type);
 
@@ -171,7 +171,7 @@ public sealed class PuzzleGenerator(ReduceOptions options, Random rnd)
     {
         public int Count => Digits.Count;
 
-        public int CompareTo(Overlay other)=> Count.CompareTo(other.Count);
+        public int CompareTo(Overlay other) => Count.CompareTo(other.Count);
     }
 
     private readonly record struct Candidate(Cells Solution, PosSet Clues);
@@ -184,7 +184,7 @@ public sealed class PuzzleGenerator(ReduceOptions options, Random rnd)
 
     private static readonly ImmutableArray<PosSet> Masks =
     [
-        .. PosSet.All.Select(cell => 
+        .. PosSet.All.Select(cell =>
         {
             var (r, c) = cell;
             return Row.All[r].Cells

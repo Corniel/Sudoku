@@ -45,7 +45,7 @@ public sealed class _2024_11_18 : CtcPuzzle
         var cages = new List<Cage>();
 
         foreach (var n in named)
-            cages.AddRange(new Cage([..n.Cells], cages));
+            cages.AddRange(new Cage([.. n.Cells], cages));
 
         return cages;
     }

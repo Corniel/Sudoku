@@ -4,7 +4,7 @@ namespace Sudoku.Common;
 
 public sealed class Consecutive(Pos one, Pos two) : Set(one, two)
 {
-    public override ImmutableArray<Restriction> Restrictions { get; } = 
+    public override ImmutableArray<Restriction> Restrictions { get; } =
     [
         .. new LookupPair(one, two, Lookup).Couple()
     ];

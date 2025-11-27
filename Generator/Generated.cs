@@ -16,7 +16,7 @@ public sealed record Generated : IComparable<Generated>
 
     public StrategyType Hardest => Strategies.Max();
 
-    public int CompareTo(Generated? other) 
+    public int CompareTo(Generated? other)
         => Hardest.CompareTo(other!.Hardest) switch
         {
             0 => Strategies.Length.CompareTo(other.Strategies.Length) switch

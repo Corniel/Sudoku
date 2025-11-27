@@ -166,7 +166,7 @@ public sealed class Nodes : IReadOnlyCollection<Node>, SudokuCells
                     nodes[cell].Peers |= rule.Cells;
             }
         }
-        foreach(var node in nodes)
+        foreach (var node in nodes)
         {
             node.Peers ^= node.Pos;
             node.Links ^= node.Pos;

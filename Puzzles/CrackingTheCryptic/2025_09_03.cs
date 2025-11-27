@@ -68,6 +68,6 @@ public sealed class _2025_09_03 : CtcPuzzle
             return allowed;
         }
 
-        private static readonly ImmutableArray<Ints> Sqrs = [..range(0, _9 + 1).Select(d => Ints.New(d.Sqr()))];
+        private static readonly ImmutableArray<Ints> Sqrs = [.. range(0, _9 + 1).Select(d => Ints.New(d.Sqr()))];
     }
 }

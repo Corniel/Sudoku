@@ -1,7 +1,6 @@
-
 namespace Puzzles.CrackingTheCryptic;
 
-public sealed class _2025_11_25: CtcPuzzle
+public sealed class _2025_11_25 : CtcPuzzle
 {
     public override string Title => "Simple Miracle";
 

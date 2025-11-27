@@ -80,5 +80,5 @@ public readonly struct Clues : IReadOnlyCollection<Cell>, IEquatable<Clues>
         return new(cells[..i]);
     }
 
-    
+
 }

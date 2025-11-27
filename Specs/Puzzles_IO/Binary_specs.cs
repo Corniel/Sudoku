@@ -18,6 +18,6 @@ public class Writes
 
         var copy = BinaryPuzzle.Load(stream);
 
-       copy.Should().Be(puzzle);
+        copy.Should().Be(puzzle);
     }
 }

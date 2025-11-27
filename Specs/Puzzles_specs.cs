@@ -16,7 +16,7 @@ public class Cracking_the_Cryptic
     [Test]
     public void Work_in_progress()
     {
-        var puzzle = new _2025_11_25();
+        var puzzle = new _2020_01_19();
 
         if (puzzle.Solution.IsSolved)
             puzzle.Constraints.Should().BeValidFor(puzzle.Solution);
@@ -24,7 +24,9 @@ public class Cracking_the_Cryptic
         var solved = DynamicSolver.Solver.Raw(puzzle.Clues, puzzle.Constraints);
         Console.WriteLine(Cells.New(solved));
         puzzle.Constraints.Should().BeValidFor(solved);
-        
+
+        if (puzzle.Solution.IsSolved)
+            Cells.New(solved).Should().Be(puzzle.Solution);
     }
 
     [TestCaseSource(nameof(Fasts))]

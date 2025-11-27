@@ -7,5 +7,9 @@ public abstract class CtcPuzzle : Puzzle
 
     public override Clues Clues { get; } = Clues.None;
 
+    public virtual bool IsStandard => false;
+
     public static ImmutableArray<Puzzle> All => Collect(p => p is CtcPuzzle);
+
+    public static IEnumerable<Puzzle> Standards => All.Where(p => ((CtcPuzzle)p).IsStandard);
 }

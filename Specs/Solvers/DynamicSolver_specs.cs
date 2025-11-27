@@ -1,6 +1,6 @@
 namespace Specs.Solvers.DynamicSolver_specs;
 
-public  class Solves
+public class Solves
 {
     [Test]
     public void Without_Clues()

@@ -10,6 +10,8 @@ public sealed class _2020_09_30 : CtcPuzzle
 
     public override O Duration => O.μs10;
 
+    public override bool IsStandard => true;
+
     public override Clues Clues { get; } = Clues.Parse("""
         ...|...|...
         ..9|8..|..7

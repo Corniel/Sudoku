@@ -10,6 +10,9 @@ public readonly struct Couple<T>(T one, T two) : IReadOnlyCollection<T>
     /// <inheritdoc />
     public int Count => 2;
 
+    /// <summary>Deconstructs the couple.</summary>
+    public void Deconstruct(out T one, out T two) => (one, two) = (One, Two);
+
     /// <inheritdoc />
     [Pure]
     public IEnumerator<T> GetEnumerator()

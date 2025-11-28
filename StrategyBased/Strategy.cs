@@ -20,8 +20,11 @@ public sealed record Strategy(StrategyType Type, Reduce Reduce)
 
         [StrategyType.PointingDigits] /*.*/ = Pointing.Digits,
 
-        [StrategyType.XWing] /*..........*/ = Intersection.XWing,
-        [StrategyType.Swordfish] /*......*/ = Intersection.Swordfish,
+        [StrategyType.XWing] /*..........*/ = SingleDigit.XWing,
+        [StrategyType.Skyscraper] /*.....*/ = SingleDigit.Skyscraper,
+        [StrategyType.TwoStringKite] /*..*/ = SingleDigit.TwoStringKite,
+        [StrategyType.Swordfish] /*......*/ = SingleDigit.Swordfish,
+        [StrategyType.Jellyfish] /*......*/ = SingleDigit.Jellyfish,
     }
     .ToFrozenDictionary();
 }

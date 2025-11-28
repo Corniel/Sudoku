@@ -1,5 +1,3 @@
-using Sudoku.Generics;
-
 namespace Sudoku;
 
 public static class Combinations
@@ -26,15 +24,5 @@ public static class Combinations
                 for (var t = s + 1; t < source.Count - 1; t++)
                     for (var v = t + 1; v < source.Count; v++)
                         yield return new(source[f], source[s], source[t], source[v]);
-    }
-
-    public static IReadOnlyList<int> WithMax(this PosSet[] assignments, int maxCount)
-    {
-        return [.. assignments
-            .Select((set, val) => (set, val))
-            .Where(x => Max(x.set.Count, maxCount))
-            .Select(x => x.val)];
-
-        bool Max(int count, int max) => count >= 2 && count <= max;
     }
 }

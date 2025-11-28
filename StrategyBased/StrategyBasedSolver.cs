@@ -23,7 +23,19 @@ public sealed class StrategyBasedSolver(Nodes nodes, ReduceOptions options) : IE
 
     public bool MoveNext()
     {
-        foreach (var strategy in Options.Strategies)
+        var reduced = false;
+        var first = Options.Strategies[0];
+
+        // Merge attempts on the first strategy.
+        while (Nodes & first.Reduce)
+        {
+            Current = new SolveResult(first.Type, Nodes);
+            reduced = true;
+        }
+
+        if (reduced) return true;
+
+        foreach (var strategy in Options.Strategies.Skip(1))
         {
             if (Nodes & strategy.Reduce)
             {

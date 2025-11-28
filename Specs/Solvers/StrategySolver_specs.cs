@@ -3,6 +3,7 @@ using Puzzles.NewYorkTimes;
 using Puzzles.PuzzleBank;
 using StrategyBased;
 using Sudoku.Contracts;
+using System.Collections.Frozen;
 using static StrategyBased.StrategyType;
 
 namespace Specs.Solvers.StrategySolver_specs;
@@ -13,20 +14,27 @@ public class Solves
     [Test]
     public void Communicating_used_stagies()
     {
-        var puzzle = NewYorkTimesPuzzle.Hard[0];
+        var puzzle = new NewYorkTimesPuzzle(
+            new(2019, 01, 31),
+            Clues.Parse(".2......5..4.7...1....3.....7..2.9..4.....3.....6....8.56....1....3..7.29..8....."),
+            Cells.Parse("729481635364579281185236479678123954412958367593647128256794813841365792937812546"));
+
         var solver = new StrategyBasedSolver(puzzle.Clues, puzzle.Constraints, ReduceOptions.All);
         var steps = solver.Select(r => new Step(r.Type, r.Cells)).ToList();
 #if DEBUG
         foreach (var step in steps)
         {
-            Console.WriteLine($"{step.Type}\n{step.Cells}\n");
+            Console.WriteLine($$"""new { Cells = new { Solved = {{step.Cells.Solved}} }, Type = {{step.Type}} },""");
         }
 #endif
         steps.Should().BeEquivalentTo(
         [
-            new { Cells = new { Solved = 30 }, Type = HiddenSingles },
-            new { Cells = new { Solved = 36 }, Type = PointingDigits },
-            new { Cells = new { Solved = 51 }, Type = HiddenSingles },
+            new { Cells = new { Solved = 23 }, Type = HiddenSingles },
+            new { Cells = new { Solved = 23 }, Type = PointingDigits },
+            new { Cells = new { Solved = 23 }, Type = HiddenPairs },
+            new { Cells = new { Solved = 47 }, Type = HiddenSingles },
+            new { Cells = new { Solved = 47 }, Type = PointingDigits },
+            new { Cells = new { Solved = 47 }, Type = HiddenPairs },
             new { Cells = new { Solved = 81 }, Type = HiddenSingles },
         ]);
     }
@@ -46,51 +54,88 @@ public class Solves
         }
     });
 
-    [TestCase("clues"/*...........*/, _none, _none, 14_80, 57_24)]
-    [TestCase("hidden singles"/*..*/, _none, _none, 71_23, _all_)]
-    [TestCase("naked pairs"/*.....*/, _none, 16_53, 90_72, _all_)]
-    [TestCase("hidden pairs"/*....*/, _none, 14_66, 92_65, _all_)]
-    [TestCase("naked triples"/*...*/, _none, 29_53, 95_65, _all_)]
-    [TestCase("hidden triples"/*..*/, _none, 29_43, 95_53, _all_)]
-    [TestCase("naked quads"/*.....*/, 00_05, 30_14, 95_71, _all_)]
-    [TestCase("hidden quads"/*....*/, 00_05, 30_13, 95_71, _all_)]
-    [TestCase("pointing digits"/*.*/, _none, 41_39, _all_, _all_)]
-    [TestCase("X-Wing"/*..........*/, 00_13, 50_88, _all_, _all_)]
-    [TestCase("Swordfish"/*.......*/, 00_13, 50_90, _all_, _all_)]
-    public void Using(string options, int diabolical, int hard, int medium, int easy)
+    //                                   solv    h1     pd     h2     n2     xwing   h3    n3    sky    sfish   h4      n4   jfish
+    [TestCase(nameof(Easys), /*.......*/ _all_, 42_76, _none, _none, _none, _none, _none, _none, _none, _none, _none, _none, _none)]
+    [TestCase(nameof(Mediums), /*.....*/ _all_, 85_18, 27_93, 04_64, _none, _none, _none, _none, _none, _none, _none, _none, _none)]
+    [TestCase(nameof(Hards), /*.......*/ 59_57, 99_90, 88_67, 47_54, 13_42, 15_82, 05_41, 00_79, 15_68, 02_06, 00_08, _none, 00_05)]
+    [TestCase(nameof(Diabolicals), /*.*/ 00_21, 99_51, 90_16, 45_25, 13_49, 13_62, 06_95, 01_22, 15_19, 02_39, 00_63, 00_03, 00_35)]
+    public void Using(
+        string collection,
+        int solved,
+        int hiddenSingles,
+        int pointingDigits,
+        int hiddenPairs,
+        int nakedPairs,
+        int xwing,
+        int hiddenTriples,
+        int nakedTriples,
+        int skyscraper,
+        int swordfish,
+        int hiddenQuads,
+        int nakedQuads,
+        int jellyfish)
     {
-        var solved = Solve(Options[options]);
-        solved.Should().BeEquivalentTo(new Dictionary<string, int>
+        var options = new ReduceOptions
+        (
+            HiddenSingles,
+            PointingDigits,
+            HiddenPairs,
+            NakedPairs,
+            XWing,
+            HiddenTriples,
+            NakedTriples,
+            Skyscraper,
+            TwoStringKite,
+            Swordfish,
+            HiddenQuads,
+            NakedQuads,
+            Jellyfish
+        );
+
+        var puzzles = Sets[collection];
+        var results = options.Strategies.ToDictionary(s => s.Type, _ => 0);
+
+        var solutions = 0;
+        var wrong = 0;
+        foreach (var puzzle in puzzles)
         {
-            [nameof(Diabolicals)] = diabolical,
-            [nameof(Hards)] = hard,
-            [nameof(Mediums)] = medium,
-            [nameof(Easys)] = easy,
+            var solver = new StrategyBasedSolver(Nodes.Empty & puzzle.Constraints & puzzle.Clues, options);
+
+            foreach (var type in solver.Select(r => r.Type).Distinct())
+                results[type]++;
+
+            if (solver.Nodes.IsSolved)
+            {
+                wrong += puzzle.Solution == Cells.New(solver.Nodes) ? 0 : 1;
+                solutions++;
+            }
+        }
+       
+        Console.WriteLine($"Solved: {solutions:00_00}");
+        foreach(var kvp in  results)
+        {
+            Console.WriteLine($"{kvp.Key,-20}: {kvp.Value:00_00}");
+        }
+
+        wrong.Should().Be(0);
+        solutions.Should().Be(solved);
+        results.Should().BeEquivalentTo(new Dictionary<StrategyType, int>()
+        {
+            [HiddenSingles] = hiddenSingles,
+            [PointingDigits] = pointingDigits,
+            [HiddenPairs] = hiddenPairs,
+            [NakedPairs] = nakedPairs,
+            [XWing] = xwing,
+            [HiddenTriples] = hiddenTriples,
+            [NakedTriples] = nakedTriples,
+            [Skyscraper] = skyscraper,
+            [TwoStringKite] = 0,
+            [Swordfish] = swordfish,
+            [HiddenQuads] = hiddenQuads,
+            [NakedQuads] = nakedQuads,
+            [Jellyfish] = jellyfish,
         });
     }
-
-    private static Dictionary<string, int> Solve(ReduceOptions options) => new()
-    {
-        [nameof(Diabolicals)] = Diabolicals.Count(p => StrategyBasedSolver.Solve(p.Clues, p.Constraints, options).IsSolved),
-        [nameof(Hards)] = Hards.Count(p => StrategyBasedSolver.Solve(p.Clues, p.Constraints, options).IsSolved),
-        [nameof(Mediums)] = Mediums.Count(p => StrategyBasedSolver.Solve(p.Clues, p.Constraints, options).IsSolved),
-        [nameof(Easys)] = Easys.Count(p => StrategyBasedSolver.Solve(p.Clues, p.Constraints, options).IsSolved),
-    };
-
-    private static readonly Dictionary<string, ReduceOptions> Options = new()
-    {
-        ["clues"/*...........*/] = new(),
-        ["hidden singles"/*..*/] = new(HiddenSingles),
-        ["naked pairs"/*.....*/] = new(HiddenSingles, NakedPairs),
-        ["hidden pairs"/*....*/] = new(HiddenSingles, HiddenPairs),
-        ["naked triples"/*...*/] = new(HiddenSingles, NakedPairs, HiddenPairs, NakedTriples),
-        ["hidden triples"/*..*/] = new(HiddenSingles, NakedPairs, HiddenPairs, HiddenTriples),
-        ["naked quads"/*.....*/] = new(HiddenSingles, NakedPairs, HiddenPairs, NakedTriples, HiddenTriples, NakedQuads),
-        ["hidden quads"/*....*/] = new(HiddenSingles, NakedPairs, HiddenPairs, NakedTriples, HiddenTriples, HiddenQuads),
-        ["pointing digits"/*.*/] = new(HiddenSingles, NakedPairs, HiddenPairs, PointingDigits),
-        ["X-Wing"/*..........*/] = new(HiddenSingles, NakedPairs, HiddenPairs, PointingDigits, NakedTriples, HiddenTriples, NakedQuads, HiddenQuads, XWing),
-        ["Swordfish"/*.......*/] = new(HiddenSingles, NakedPairs, HiddenPairs, PointingDigits, NakedTriples, HiddenTriples, NakedQuads, HiddenQuads, XWing, Swordfish),
-    };
 
     private const int _none = 0;
     private const int _all_ = Take;
@@ -103,4 +148,13 @@ public class Solves
     private static readonly ImmutableArray<Puzzle> Hards = [.. PuzzleBankPuzzle.Hard.Take(Take)];
 
     private static readonly ImmutableArray<Puzzle> Diabolicals = [.. PuzzleBankPuzzle.Diabolical.Take(Take)];
+
+    public static readonly FrozenDictionary<string, ImmutableArray<Puzzle>> Sets = new Dictionary<string, ImmutableArray<Puzzle>>()
+    {
+        [nameof(Easys)] = Easys,
+        [nameof(Mediums)] = Mediums,
+        [nameof(Hards)] = Hards,
+        [nameof(Diabolicals)] = Diabolicals,
+    }
+    .ToFrozenDictionary();
 }

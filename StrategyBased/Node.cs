@@ -58,7 +58,11 @@ public sealed class Node : SudokuCell
         }
     }
 
-    public int Digit => digit;
+    public int Digit
+    {
+        set => Digits = Digits.New(value);
+        get => digit;
+    }
 
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private int digit;

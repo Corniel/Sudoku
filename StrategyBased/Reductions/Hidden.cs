@@ -1,112 +1,94 @@
 namespace StrategyBased.Reductions;
 
-public static class Hidden
+public static partial class Hidden
 {
-    public static void Single(Nodes cells)
+    public static void Single(Nodes nodes)
     {
-        foreach (var house in cells.Houses)
-        {
-            var count = cells.Assignments(house.Cells);
-
-            for (var val = 1; val <= _9; val++)
-                if (count[val] is { HasSingle: true } single)
-                    cells[single.First()].Digits = [val];
-        }
+        foreach(var house in nodes.Houses)
+            foreach (var hidden in House(nodes, house, 1))
+                nodes[hidden.Peers.First()].Digit = hidden.Digit;
     }
 
-    public static void Pairs(Nodes cells)
+    public static void Pairs(Nodes nodes)
     {
-        foreach (var house in cells.Houses)
-            Pair(house, cells);
+        foreach (var house in nodes.Houses)
+            Pair(nodes, house);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static void Pair(Rule house, Nodes cells)
+    private static void Pair(Nodes nodes, Rule house)
     {
-        var assignments = cells.Assignments(house.Cells);
+        Cache.Clear();
+        Cache.AddRange(House(nodes, house, 2));
 
-        foreach (var digits in Combinations.Take2(assignments.WithMax(2))
-            .Select(pair => Digits.New(pair.One, pair.Two)))
+        foreach (var (one, two) in Cache.Take2())
         {
-            var pair = PosSet.Empty;
-
-            foreach (var value in digits)
-                pair |= assignments[value];
-
-            if (pair.Count is 2)
+            if (one.Peers == two.Peers)
             {
-                var others = (house.Cells & cells.Todo) ^ pair;
+                Digits digits = [one.Digit, two.Digit];
 
-                foreach (var update in pair)
-                    cells[update].Digits &= digits;
+                foreach (var hidden in one.Peers)
+                    nodes[hidden].Digits &= digits;
 
-                foreach (var update in others)
-                    cells[update].Digits ^= digits;
+                foreach (var other in (one.Cells & nodes.Todo) ^ one.Peers)
+                    nodes[other].Digits ^= digits;
             }
         }
     }
 
-    public static void Triples(Nodes cells)
+    public static void Triples(Nodes nodes)
     {
-        foreach (var house in cells.Houses)
-            Triple(house, cells);
+        foreach (var house in nodes.Houses)
+            Triple(nodes, house);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static void Triple(Rule house, Nodes cells)
+    private static void Triple(Nodes nodes, Rule house)
     {
-        var assignments = cells.Assignments(house.Cells);
+        Cache.Clear();
+        Cache.AddRange(House(nodes, house, 2, 3));
 
-        foreach (var digits in Combinations.Take3(assignments.WithMax(3))
-            .Select(triple => Digits.New(triple.One, triple.Two, triple.Thr)))
+        foreach (var (one, two, thr) in Cache.Take3())
         {
-            var triple = PosSet.Empty;
-
-            foreach (var value in digits)
-                triple |= assignments[value];
-
-            if (triple.Count is 3)
+            if ((one.Peers | two.Peers | thr.Peers) is { Count: 3 } hidden)
             {
-                var others = (house.Cells & cells.Todo) ^ triple;
+                Digits digits = [one.Digit, two.Digit, thr.Digit];
 
-                foreach (var update in triple)
-                    cells[update].Digits &= digits;
+                foreach (var self in hidden)
+                    nodes[self].Digits &= digits;
 
-                foreach (var update in others)
-                    cells[update].Digits ^= digits;
+                foreach (var other in (one.Cells & nodes.Todo) ^ hidden)
+                    nodes[other].Digits ^= digits;
             }
         }
     }
 
-    public static void Quads(Nodes cells)
+    public static void Quads(Nodes nodes)
     {
-        foreach (var house in cells.Houses)
-            Quad(house, cells);
+        foreach (var house in nodes.Houses)
+            Quad(nodes, house);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static void Quad(Rule house, Nodes cells)
+    private static void Quad(Nodes nodes, Rule house)
     {
-        var assignments = cells.Assignments(house.Cells);
+        Cache.Clear();
+        Cache.AddRange(House(nodes, house, 2, 4));
 
-        foreach (var digits in Combinations.Take4(assignments.WithMax(4))
-            .Select(quad => Digits.New(quad.One, quad.Two, quad.Thr, quad.For)))
+        foreach (var (one, two, thr, fur) in Cache.Take4())
         {
-            var quad = PosSet.Empty;
-
-            foreach (var value in digits)
-                quad |= assignments[value];
-
-            if (quad.Count is 4)
+            if ((one.Peers | two.Peers | thr.Peers | fur.Peers) is { Count: 4 } hidden)
             {
-                var others = (house.Cells & cells.Todo) ^ quad;
+                Digits digits = [one.Digit, two.Digit, thr.Digit, fur.Digit];
 
-                foreach (var update in quad)
-                    cells[update].Digits &= digits;
+                foreach (var self in hidden)
+                    nodes[self].Digits &= digits;
 
-                foreach (var update in others)
-                    cells[update].Digits ^= digits;
+                foreach (var other in (one.Cells & nodes.Todo) ^ hidden)
+                    nodes[other].Digits ^= digits;
             }
         }
     }
+
+    private static readonly List<HiddenCells> Cache = [];
 }

@@ -47,17 +47,6 @@ public sealed class Nodes : IReadOnlyCollection<Node>, SudokuCells
     public bool DoesNotOccur(int value, PosSet cells)
         => cells.NotAny(cell => Root.Nodes[cell].Digits.Contains(value));
 
-    public PosSet[] Assignments(PosSet set)
-    {
-        var assignments = new PosSet[_9 + 1];
-
-        foreach (var cell in set & Todo)
-            foreach (var value in this[cell].Digits)
-                assignments[value] |= cell;
-
-        return assignments;
-    }
-
     public IEnumerable<CandidatesCells> NakedCells(ImmutableArray<Pos> set, int size)
     {
         var start = 0;

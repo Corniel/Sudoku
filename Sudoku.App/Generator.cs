@@ -1,7 +1,10 @@
 using Generator;
 using StrategyBased;
+using System.Collections.Frozen;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.IO;
+using System.Reflection;
 
 namespace Sudoku.App;
 
@@ -22,17 +25,33 @@ public static class Generator
         {
             count++;
 
-            var writer = candidate.Strategies.Max() switch
-            {
-                StrategyType.HiddenSingles => easy,
-                var max when max <= StrategyType.HiddenPairs => medium,
-                _ => hard,
-            };
+            var writer = hard;
+            //candidate.Strategies.Max() switch
+            //{
+            //    StrategyType.HiddenSingles => easy,
+            //    > StrategyType.HiddenPairs when candidate.Strategies.Length > 
+            //    var max when max <= StrategyType.HiddenPairs => medium,
+            //    _ => hard,
+            //};
 
-            candidate.Clues.WriteTo(writer);
-            writer.Write(' ');
-            candidate.Solution.WriteTo(writer);
-            writer.Write('\n');
+            if (candidate.Strategies.Contains(StrategyType.HiddenSingles)
+                && candidate.Strategies.Count(s =>s > StrategyType.HiddenPairs) > 1)
+            {
+
+                candidate.Clues.WriteTo(writer);
+                writer.Write(' ');
+                candidate.Solution.WriteTo(writer);
+
+                foreach (var strat in candidate.Strategies)
+                {
+                    if (Labels.TryGetValue(strat, out var label))
+                    {
+                        writer.Write(' ');
+                        writer.Write(label);
+                    }
+                }
+                writer.Write('\n');
+            }
 
             if ((count % 1000) == 0 || count == size)
             {
@@ -78,4 +97,11 @@ public static class Generator
 
         return range(start, end - start + 1);
     }
+
+    private static readonly FrozenDictionary<StrategyType, string> Labels = Enum.GetValues<StrategyType>()
+        .Select(t => KeyValuePair.Create(t, typeof(StrategyType)
+            .GetField(t.ToString())!
+            .GetCustomAttribute<DisplayAttribute>()?.Name ?? string.Empty))
+        .Where(kvp => kvp.Value.Length > 0)
+        .ToFrozenDictionary();
 }

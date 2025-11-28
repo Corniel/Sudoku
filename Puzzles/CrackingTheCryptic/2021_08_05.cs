@@ -53,5 +53,4 @@ public sealed class _2021_08_05 : CtcPuzzle
             .s.│m.p│.v.
             t.n│...│q.w
             """);
-
 }

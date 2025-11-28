@@ -23,10 +23,16 @@ public sealed record ReduceOptions()
             StrategyType.HiddenTriples,
             StrategyType.NakedTriples,
 
+            StrategyType.Skyscraper,
+            StrategyType.TwoStringKite,
+
+
             StrategyType.Swordfish,
 
             StrategyType.HiddenQuads,
             StrategyType.NakedQuads,
+
+            StrategyType.Jellyfish,
         ],
     };
 

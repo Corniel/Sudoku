@@ -36,7 +36,7 @@ public sealed class GeneratedPuzzle(Clues clues, Cells solution) : Puzzle, IEqua
         while (reader.ReadLine() is { } line)
         {
             var parts = line.Split(' ');
-            if (parts.Length is 2 && parts[0].Length is _9x9 && parts[1].Length is _9x9)
+            if (parts.Length >= 2 && parts[0].Length is _9x9 && parts[1].Length is _9x9)
             {
                 set.Add(new(Clues.Parse(parts[0]), Cells.Parse(parts[1])));
             }

@@ -14,6 +14,38 @@ public readonly struct Pos(int i) : IEquatable<Pos>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly int Index = i;
 
+    public int Row => rows[Index];
+
+    public int Col => cols[Index];
+
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    private static readonly ImmutableArray<int> rows =
+    [
+        0,0,0,0,0,0,0,0,0,
+        1,1,1,1,1,1,1,1,1,
+        2,2,2,2,2,2,2,2,2,
+        3,3,3,3,3,3,3,3,3,
+        4,4,4,4,4,4,4,4,4,
+        5,5,5,5,5,5,5,5,5,
+        6,6,6,6,6,6,6,6,6,
+        7,7,7,7,7,7,7,7,7,
+        8,8,8,8,8,8,8,8,8,
+    ];
+
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    private static readonly ImmutableArray<int> cols =
+    [
+        0,1,2,3,4,5,6,7,8,
+        0,1,2,3,4,5,6,7,8,
+        0,1,2,3,4,5,6,7,8,
+        0,1,2,3,4,5,6,7,8,
+        0,1,2,3,4,5,6,7,8,
+        0,1,2,3,4,5,6,7,8,
+        0,1,2,3,4,5,6,7,8,
+        0,1,2,3,4,5,6,7,8,
+        0,1,2,3,4,5,6,7,8,
+    ];
+
     public Pos? N()
     {
         var r = Index / _9;
@@ -39,7 +71,7 @@ public readonly struct Pos(int i) : IEquatable<Pos>
     }
 
     /// <summary>Deconstructs the position in a row and column component.</summary>
-    public void Deconstruct(out int row, out int col) => (row, col) = Math.DivRem(Index, _9);
+    public void Deconstruct(out int row, out int col) => (row, col) = (Row, Col);
 
     /// <inheritdoc />
     public override bool Equals(object? obj) => obj is Pos other && Equals(other);

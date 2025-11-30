@@ -4,12 +4,6 @@ namespace Sudoku.Common;
 
 public sealed class Arrow(ImmutableArray<Pos> cells) : Rule(cells)
 {
-    public static Arrow Parse(string str)
-    {
-        var path = Clues.Parse(str);
-        return new([.. path.OrderBy(c => c.Digit).Select(c => c.Pos)]);
-    }
-
     public override ImmutableArray<Restriction> Restrictions { get; } =
     [
         new Circle(cells[0], cells[1..]),

@@ -204,7 +204,7 @@ able to solve the following puzzles (so far):
 | 2025-10-17 | [Who’s Afraid Of 13](Puzzles/CrackingTheCryptic/2025_10_17.cs)     |   259.7 µs |
 | 2025-10-07 | [Golden Arrow](Puzzles/CrackingTheCryptic/2025_10_07.cs)           |    29.3 µs |
 | 2025-09-18 | [Diagonality](Puzzles/CrackingTheCryptic/2025_09_18.cs)            |    19.9 ms |
-| 2025-09-15 | [Studious](Puzzles/CrackingTheCryptic/2025_09_15.cs)               | 1,039.9 ms |
+| 2025-09-15 | [Studious](Puzzles/CrackingTheCryptic/2025_09_15.cs)               |   799.6 ms |
 | 2025-09-13 | [Royalty](Puzzles/CrackingTheCryptic/2025_09_13.cs)                | 2,340.7 ms |
 | 2025-09-09 | [Seylla](Puzzles/CrackingTheCryptic/2025_09_09.cs)                 | 7,595.4 ms |
 | 2025-09-08 | [Four at a Time](Puzzles/CrackingTheCryptic/2025_09_08.cs)         |    25.6 s  |
@@ -215,12 +215,12 @@ able to solve the following puzzles (so far):
 | 2025-08-07 | [Unstable Seesaws](Puzzles/CrackingTheCryptic/2025_08_07.cs)       |   416.9 ms |
 | 2025-05-21 | [Stepped Thermos](Puzzles/CrackingTheCryptic/2025_05_21.cs)        |   183.3 µs |
 | 2025-05-11 | [Quadrants](Puzzles/CrackingTheCryptic/2025_05_11.cs)              |    15.8 s  |
-| 2025-05-02 | [Arrows v.s. Thermos](Puzzles/CrackingTheCryptic/2025_05_02.cs)    |   508.2 µs |
+| 2025-05-02 | [Arrows v.s. Thermos](Puzzles/CrackingTheCryptic/2025_05_02.cs)    |   464.7 µs |
 | 2025-04-23 | [Indifferent Neighbours](Puzzles/CrackingTheCryptic/2025_24_23.cs) |   310.0 µs |
 | 2025-03-25 | [Rapuzzle](Puzzles/CrackingTheCryptic/2025_03_25.cs)               | 7,606.5 µs |
 | 2025-01-07 | [Sort of Miraculous](Puzzles/CrackingTheCryptic/2025_01_07.cs)     |    16.1 ms |
 | 2025-01-31 | [ZL GW DA](Puzzles/CrackingTheCryptic/2025_01_31.cs)               | 1,720.4 ms |
-| 2024-12-24 | [Arrow Thermo 2](Puzzles/CrackingTheCryptic/2024_12_24.cs)         |   230.7 ms |
+| 2024-12-24 | [Arrow Thermo 2](Puzzles/CrackingTheCryptic/2024_12_24.cs)         |   141.4 ms |
 | 2024-12-09 | [Elbow Join](Puzzles/CrackingTheCryptic/2024_12_09.cs)             | 1,542.3 ms |
 | 2024-12-08 | [Fortune Cookie II](Puzzles/CrackingTheCryptic/2024_12_08.cs)      |    12.0 ms |
 | 2024-11-18 | [Equivalenee](Puzzles/CrackingTheCryptic/2024_11_18.cs)            |   558.9 ms |
@@ -232,16 +232,20 @@ able to solve the following puzzles (so far):
 | 2022-04-27 | [The Aquarium](Puzzles/CrackingTheCryptic/2022_04_27.cs)           |    32.2 s  |
 | 2022-03-13 | [The Trident](Puzzles/CrackingTheCryptic/2022_03_13.cs)            |       ?    |
 | 2021-10-06 | [Dutch Whispers](Puzzles/CrackingTheCryptic/2021_10_06.cs)         |    55.9 µs |
+| 2021-04-11 | [Third Times The Charm](Puzzles/CrackingTheCryptic/2021_04_11.cs)  | 1,026.9 s  |
 | 2021-01-06 | [Non-consecutive Killer](Puzzles/CrackingTheCryptic/2021_01_06.cs) | 1,094.5 ms |
 | 2020-09-30 | [Classic Sudoku!](Puzzles/CrackingTheCryptic/2020_09_30_1_.cs)     |    39.9 µs |
 | 2020-09-30 | [Tatooine Sunset](Puzzles/CrackingTheCryptic/2020_09_30.cs)        |    20.3 µs |
 | 2020-04-13 | [Killer Sudoku](Puzzles/CrackingTheCryptic/2020_04_13.cs)          |   368.3 ms |
 | 2020-04-12 | [Magic Square Sudoku](Puzzles/CrackingTheCryptic/2020_04_12.cs)    |   268.2 µs |
 | 2020-01-19 | [New York Times](Puzzles/CrackingTheCryptic/2020_01_19.cs)         |   338.2 µs |
-| 2019-08-29 | [New York Times](Puzzles/CrackingTheCryptic/2019_08_29.cs)         |    29.7 µs |
+| 2019-09-26 | [New York Times](Puzzles/CrackingTheCryptic/2019_09_26.cs)         |    29.7 µs |
+| 2019-08-29 | [New York Times](Puzzles/CrackingTheCryptic/2019_08_29.cs)         |   545.1 µs |
 | 2019-05-09 | [Jigsaw Sudoku](Puzzles/CrackingTheCryptic/2019_05_09.cs)          | 5,158.5 µs |
 | 2019-03-18 | [X-Wing Sudoku](Puzzles/CrackingTheCryptic/2019_03_18.cs)          |    99.5 µs |
 | 2019-02-01 | [New York Times](Puzzles/CrackingTheCryptic/2019_02_01.cs)         |   173.5 µs |
+| 2018-09-19 | [New York Times](Puzzles/CrackingTheCryptic/2018_09_19.cs)         |   460.8 µs |
+| 2018-06-07 | [New York Times](Puzzles/CrackingTheCryptic/2018_06_07.cs)         |   412.7 µs |
 | 2017-09-23 | [Diabolic](Puzzles/CrackingTheCryptic/2017_09_23.cs)               |   512.6 µs |
 | 2017-09-18 | [Super Fiendish](Puzzles/CrackingTheCryptic/2017_09_18.cs)         |   311.0 µs |
 | 2017-08-31 | [Super Fiendish](Puzzles/CrackingTheCryptic/2017_08_31.cs)         | 1,028.2 µs |

@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <PackageReference Include="AwesomeAssertions" />
+    <PackageReference Include="MathNet.Numerics" />
     <PackageReference Include="NUnit" />
   </ItemGroup>
 

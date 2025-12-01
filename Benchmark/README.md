@@ -7,6 +7,13 @@ Test all 512 possible states of `Digits`.
 |------- |---------:|
 | Sum    | 1.209 us |
 
+## Binary conversions
+To convert cells from and to an `Int128`.
+| Binary   | Mean     |
+|--------- |---------:|
+| ToInt128 | 444.1 ns |
+| ToCells  | 943.7 ns |
+
 ## Generation
 
 ### Grids

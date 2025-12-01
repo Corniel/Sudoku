@@ -3,16 +3,16 @@ namespace Sudoku;
 [CollectionBuilder(typeof(PosSet), nameof(New))]
 [DebuggerDisplay("Count = {Count}")]
 [DebuggerTypeProxy(typeof(Diagnostics.CollectionDebugView))]
-public readonly struct PosSet(Int128 bits) : IEquatable<PosSet>, IReadOnlyCollection<Pos>
+public readonly struct PosSet(UInt128 bits) : IEquatable<PosSet>, IReadOnlyCollection<Pos>
 {
     public static readonly PosSet Empty;
 
-    public static readonly PosSet All = new((Int128.One << _9x9) - 1);
+    public static readonly PosSet All = new((UInt128.One << _9x9) - 1);
 
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    private readonly Int128 Bits = bits;
+    private readonly UInt128 Bits = bits;
 
-    public int Count => (int)Int128.PopCount(Bits);
+    public int Count => (int)UInt128.PopCount(Bits);
 
     public bool HasNone => Bits == 0;
 
@@ -23,7 +23,7 @@ public readonly struct PosSet(Int128 bits) : IEquatable<PosSet>, IReadOnlyCollec
     public bool HasMultiple => (Bits & (Bits - 1)) != 0;
 
     [Pure]
-    public bool Contains(Pos pos) => (Bits & (Int128.One << pos)) != 0;
+    public bool Contains(Pos pos) => (Bits & (UInt128.One << pos)) != 0;
 
     /// <inheritdoc cref="IReadOnlySet{T}.IsSubsetOf(IEnumerable{T})" />
     [Pure]
@@ -36,10 +36,10 @@ public readonly struct PosSet(Int128 bits) : IEquatable<PosSet>, IReadOnlyCollec
         && IsSubsetOf(other);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public Pos First() => HasNone ? Pos.Invalid : new((int)Int128.TrailingZeroCount(Bits));
+    public Pos First() => HasNone ? Pos.Invalid : new((int)UInt128.TrailingZeroCount(Bits));
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public Pos Last() => HasNone ? Pos.Invalid : new((int)Int128.Log2(Bits));
+    public Pos Last() => HasNone ? Pos.Invalid : new((int)UInt128.Log2(Bits));
 
     [Pure]
     public PosSet AddRange(IEnumerable<Pos> positions)
@@ -47,9 +47,8 @@ public readonly struct PosSet(Int128 bits) : IEquatable<PosSet>, IReadOnlyCollec
         var m = Bits;
 
         foreach (var pos in positions)
-        {
-            m |= Int128.One << pos;
-        }
+            m |= UInt128.One << pos;
+
         return new(m);
     }
 
@@ -59,9 +58,8 @@ public readonly struct PosSet(Int128 bits) : IEquatable<PosSet>, IReadOnlyCollec
         var cells = Cells.Empty;
 
         foreach (var (row, col) in this)
-        {
             cells[row, col] = 1;
-        }
+
         return cells.ToString();
     }
 
@@ -77,11 +75,11 @@ public readonly struct PosSet(Int128 bits) : IEquatable<PosSet>, IReadOnlyCollec
     [Pure]
     public static PosSet New(params IEnumerable<Pos> positions)
     {
-        Int128 bits = 0;
+        UInt128 bits = 0;
+
         foreach (var pos in positions)
-        {
-            bits |= Int128.One << pos;
-        }
+            bits |= UInt128.One << pos;
+
         return new PosSet(bits);
     }
 
@@ -89,11 +87,11 @@ public readonly struct PosSet(Int128 bits) : IEquatable<PosSet>, IReadOnlyCollec
     [OverloadResolutionPriority(1)]
     public static PosSet New(params ReadOnlySpan<Pos> positions)
     {
-        Int128 bits = 0;
+        UInt128 bits = 0;
+
         foreach (var pos in positions)
-        {
-            bits |= Int128.One << pos;
-        }
+            bits |= UInt128.One << pos;
+
         return new PosSet(bits);
     }
 
@@ -103,9 +101,9 @@ public readonly struct PosSet(Int128 bits) : IEquatable<PosSet>, IReadOnlyCollec
 
     public static PosSet operator ~(PosSet set) => new(~set.Bits & All.Bits);
 
-    public static PosSet operator |(PosSet set, Pos pos) => new(set.Bits | Int128.One << pos);
+    public static PosSet operator |(PosSet set, Pos pos) => new(set.Bits | UInt128.One << pos);
 
-    public static PosSet operator ^(PosSet set, Pos pos) => new(set.Bits & ~(Int128.One << pos));
+    public static PosSet operator ^(PosSet set, Pos pos) => new(set.Bits & ~(UInt128.One << pos));
 
     public static PosSet operator |(PosSet l, PosSet r) => new(l.Bits | r.Bits);
 
@@ -119,9 +117,9 @@ public readonly struct PosSet(Int128 bits) : IEquatable<PosSet>, IReadOnlyCollec
 
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-    public struct Iterator(Int128 mask) : IEnumerator<Pos>, IEnumerable<Pos>
+    public struct Iterator(UInt128 mask) : IEnumerator<Pos>, IEnumerable<Pos>
     {
-        private Int128 Mask = mask;
+        private UInt128 Mask = mask;
 
         public Pos Current { get; private set; } = new(-1);
 
@@ -131,7 +129,7 @@ public readonly struct PosSet(Int128 bits) : IEquatable<PosSet>, IReadOnlyCollec
         {
             if (Mask == 0) return false;
 
-            var trailing = (int)Int128.TrailingZeroCount(Mask) + 1;
+            var trailing = (int)UInt128.TrailingZeroCount(Mask) + 1;
             Mask >>= trailing;
 
             Current += trailing;

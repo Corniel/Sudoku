@@ -124,6 +124,50 @@ public static class SingleDigit
         }
     }
 
+    public static void Crane(Nodes nodes)
+    {
+        Lines.Clear();
+        Line2.Clear();
+
+        foreach (var row in nodes.Rows)
+            Lines.AddRange(Hidden.Row(nodes, row, 2));
+
+        foreach (var col in nodes.Cols)
+            Lines.AddRange(Hidden.Col(nodes, col, 2));
+
+        foreach (var house in nodes.Houses.Where(h => h is not Row or Col))
+            Line2.AddRange(Hidden.House(nodes, house, 2));
+
+        foreach (var row in Lines)
+            foreach (var col in Line2)
+                Crane(nodes, row, col);
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private static void Crane(Nodes nodes, HiddenCells line, HiddenCells house)
+    {
+        if (line.Digit != house.Digit || (line.Peers | house.Peers) is not { Count: 4 } crane) return;
+
+        foreach (var ln in line.Peers)
+        {
+            // The weak link are the cells where the col xor the row allign.
+            foreach (var hs in house.Peers.Where(o => o.Row == ln.Row ^ o.Col == ln.Col))
+            {
+                PosSet weak = [ln, hs];
+
+                var others = crane ^ weak;
+                var shared = nodes.Todo ^ weak;
+
+                foreach (var o in others)
+                    shared &= nodes[o].Peers;
+
+                foreach (var o in shared)
+                    nodes[o].Digits ^= line.Digit;
+            }
+        }
+    }
+
+
     public static void Swordfish(Nodes nodes)
     {
         Lines.Clear();

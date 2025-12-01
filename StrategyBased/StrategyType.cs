@@ -32,15 +32,18 @@ public enum StrategyType
     [Display(Name = "kite")]
     TwoStringKite/*...*/ = 10,
 
+    [Display(Name = "crane")]
+    Crane/*...........*/ = 11,
+
     [Display(Name = "sfish")]
-    Swordfish /*......*/ = 11,
+    Swordfish /*......*/ = 12,
 
     [Display(Name = "h4")]
-    HiddenQuads /*....*/ = 12,
+    HiddenQuads /*....*/ = 13,
 
     [Display(Name = "n4")]
-    NakedQuads /*.....*/ = 13,
+    NakedQuads /*.....*/ = 14,
 
     [Display(Name = "jfish")]
-    Jellyfish /*......*/ = 14,
+    Jellyfish /*......*/ = 15,
 }

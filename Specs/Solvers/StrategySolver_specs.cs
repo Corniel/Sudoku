@@ -54,11 +54,11 @@ public class Solves
         }
     });
 
-    //                                   solv    h1     pd     h2     n2     xwing   h3    n3    sky     kite  sfish   h4      n4   jfish
-    [TestCase(nameof(Easys), /*.......*/ _all_, 42_76, _none, _none, _none, _none, _none, _none, _none, _none, _none, _none, _none, _none)]
-    [TestCase(nameof(Mediums), /*.....*/ _all_, 85_18, 27_93, 04_64, _none, _none, _none, _none, _none, _none, _none, _none, _none, _none)]
-    [TestCase(nameof(Hards), /*.......*/ 67_31, 99_90, 89_11, 48_26, 14_12, 16_74, 05_55, 00_80, 16_80, 16_92, 01_75, 00_09, _none, 00_06)]
-    [TestCase(nameof(Diabolicals), /*.*/ 00_26, 99_52, 90_58, 45_70, 13_91, 14_23, 07_26, 01_29, 15_49, 28_95, 02_43, 00_64, 00_03, 00_36)]
+    //                                   solv    h1     pd     h2     n2     xwing   h3    n3    sky     kite  crane  sfish    h4     n4   jfish
+    [TestCase(nameof(Easys), /*.......*/ _all_, 42_76, _none, _none, _none, _none, _none, _none, _none, _none, _none, _none, _none, _none, _none)]
+    [TestCase(nameof(Mediums), /*.....*/ _all_, 85_18, 27_93, 04_64, _none, _none, _none, _none, _none, _none, _none, _none, _none, _none, _none)]
+    [TestCase(nameof(Hards), /*.......*/ 67_59, 99_90, 89_16, 48_33, 14_14, 16_82, 05_57, 00_80, 16_84, 16_95, 02_24, 01_75, 00_08, _none, 00_04)]
+    [TestCase(nameof(Diabolicals), /*.*/ 00_27, 99_52, 90_64, 45_82, 14_00, 14_44, 07_31, 01_29, 15_53, 29_03, 05_96, 02_46, 00_64, 00_03, 00_36)]
     public void Using(
         string collection,
         int solved,
@@ -71,6 +71,7 @@ public class Solves
         int nakedTriples,
         int skyscraper,
         int kite,
+        int crane,
         int swordfish,
         int hiddenQuads,
         int nakedQuads,
@@ -87,6 +88,7 @@ public class Solves
             NakedTriples,
             Skyscraper,
             TwoStringKite,
+            Crane,
             Swordfish,
             HiddenQuads,
             NakedQuads,
@@ -111,9 +113,9 @@ public class Solves
                 solutions++;
             }
         }
-       
+
         Console.WriteLine($"Solved: {solutions:00_00}");
-        foreach(var kvp in  results)
+        foreach (var kvp in results)
         {
             Console.WriteLine($"{kvp.Key,-20}: {kvp.Value:00_00}");
         }
@@ -131,6 +133,7 @@ public class Solves
             [NakedTriples] = nakedTriples,
             [Skyscraper] = skyscraper,
             [TwoStringKite] = kite,
+            [Crane] = crane,
             [Swordfish] = swordfish,
             [HiddenQuads] = hiddenQuads,
             [NakedQuads] = nakedQuads,

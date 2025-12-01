@@ -25,7 +25,7 @@ public sealed record ReduceOptions()
 
             StrategyType.Skyscraper,
             StrategyType.TwoStringKite,
-
+            StrategyType.Crane,
 
             StrategyType.Swordfish,
 

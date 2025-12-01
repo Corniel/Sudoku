@@ -54,11 +54,11 @@ public class Solves
         }
     });
 
-    //                                   solv    h1     pd     h2     n2     xwing   h3    n3    sky    sfish   h4      n4   jfish
-    [TestCase(nameof(Easys), /*.......*/ _all_, 42_76, _none, _none, _none, _none, _none, _none, _none, _none, _none, _none, _none)]
-    [TestCase(nameof(Mediums), /*.....*/ _all_, 85_18, 27_93, 04_64, _none, _none, _none, _none, _none, _none, _none, _none, _none)]
-    [TestCase(nameof(Hards), /*.......*/ 59_57, 99_90, 88_67, 47_54, 13_42, 15_82, 05_41, 00_79, 15_68, 02_06, 00_08, _none, 00_05)]
-    [TestCase(nameof(Diabolicals), /*.*/ 00_21, 99_51, 90_16, 45_25, 13_49, 13_62, 06_95, 01_22, 15_19, 02_39, 00_63, 00_03, 00_35)]
+    //                                   solv    h1     pd     h2     n2     xwing   h3    n3    sky     kite  sfish   h4      n4   jfish
+    [TestCase(nameof(Easys), /*.......*/ _all_, 42_76, _none, _none, _none, _none, _none, _none, _none, _none, _none, _none, _none, _none)]
+    [TestCase(nameof(Mediums), /*.....*/ _all_, 85_18, 27_93, 04_64, _none, _none, _none, _none, _none, _none, _none, _none, _none, _none)]
+    [TestCase(nameof(Hards), /*.......*/ 67_31, 99_90, 89_11, 48_26, 14_12, 16_74, 05_55, 00_80, 16_80, 16_92, 01_75, 00_09, _none, 00_06)]
+    [TestCase(nameof(Diabolicals), /*.*/ 00_26, 99_52, 90_58, 45_70, 13_91, 14_23, 07_26, 01_29, 15_49, 28_95, 02_43, 00_64, 00_03, 00_36)]
     public void Using(
         string collection,
         int solved,
@@ -70,6 +70,7 @@ public class Solves
         int hiddenTriples,
         int nakedTriples,
         int skyscraper,
+        int kite,
         int swordfish,
         int hiddenQuads,
         int nakedQuads,
@@ -129,7 +130,7 @@ public class Solves
             [HiddenTriples] = hiddenTriples,
             [NakedTriples] = nakedTriples,
             [Skyscraper] = skyscraper,
-            [TwoStringKite] = 0,
+            [TwoStringKite] = kite,
             [Swordfish] = swordfish,
             [HiddenQuads] = hiddenQuads,
             [NakedQuads] = nakedQuads,

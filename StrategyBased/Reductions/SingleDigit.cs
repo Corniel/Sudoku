@@ -78,7 +78,51 @@ public static class SingleDigit
         }
     }
 
-    public static void TwoStringKite(Nodes nodes) { }
+    public static void TwoStringKite(Nodes nodes)
+    {
+        Lines.Clear();
+
+        foreach (var row in nodes.Rows)
+            Lines.AddRange(Hidden.Row(nodes, row, 2));
+
+        Line2.Clear();
+
+        foreach (var col in nodes.Cols)
+            Line2.AddRange(Hidden.Col(nodes, col, 2));
+
+        foreach (var row in Lines)
+            foreach (var col in Line2)
+                TwoStringKite(nodes, row, col);
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private static void TwoStringKite(Nodes nodes, HiddenCells row, HiddenCells col)
+    {
+        if (row.Digit != col.Digit || (row.Peers | col.Peers) is not { Count: 4 } kite) return;
+
+        foreach (var house in nodes.Houses.Where(h => h is not Row or Col && (h.Cells & kite).Count is 2))
+        {
+            foreach (var r in row.Peers)
+            {
+                foreach (var c in col.Peers)
+                {
+                    PosSet weak = [r, c];
+
+                    if ((house.Cells & weak).Count is 2)
+                    {
+                        var others = kite ^ weak;
+                        var shared = nodes.Todo ^ weak;
+
+                        foreach (var o in others)
+                            shared &= nodes[o].Peers;
+
+                        foreach (var o in shared)
+                            nodes[o].Digits ^= row.Digit;
+                    }
+                }
+            }
+        }
+    }
 
     public static void Swordfish(Nodes nodes)
     {
@@ -149,6 +193,7 @@ public static class SingleDigit
     }
 
     private static readonly List<HiddenCells> Lines = [];
+    private static readonly List<HiddenCells> Line2 = [];
 
     private static Col GetCol(int index) => Col.All[index];
     private static Row GetRow(int index) => Row.All[index];

@@ -3,19 +3,17 @@ using Puzzles.CrackingTheCryptic;
 using Puzzles.Kaggle;
 using Puzzles.NewYorkTimes;
 using Puzzles.PuzzleBank;
-using Sudoku;
-using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
-using System.Linq;
 
-namespace Benchmark;
+namespace Sudoku.App;
 
 public static class TestSets
 {
+    private static readonly DirectoryInfo Root = new(Path.Combine(typeof(TestSets).Assembly.Location, "../../../../../"));
+
     public static void SolveAll(
         bool dlx = true,
         bool refr = true)
@@ -30,7 +28,7 @@ public static class TestSets
             new("Exchange (hard)", [.. PuzzleBankPuzzle.Hard.Select(p => p.Clues)]),
             new("Exchange (diabolic)", [.. PuzzleBankPuzzle.Diabolical.Select(p => p.Clues)]),
             new("Exchange (1000*)", [.. PuzzleBankPuzzle.Diabolical.OrderByDescending(p => p.Level).Select(p => p.Clues).Take(1000)]),
-            new("Generated (hard)", [..GeneratedPuzzle.Load(new FileInfo("../../../../../sudoku-puzzles/generated.hard.txt")).Select(p => p.Clues)]),
+            new("Generated (hard)", [..GeneratedPuzzle.Load(new FileInfo(Path.Combine(Root.FullName, "../sudoku-puzzles/generated.hard.txt"))).Select(p => p.Clues)]),
             new("New York Times", [.. NewYorkTimesPuzzle.Hard.Select(p => p.Clues)]),
             new("Cracking the Cryptic", [.. CtcPuzzle.Standards.Select(p => p.Clues)]),
         ];
@@ -91,7 +89,7 @@ public static class TestSets
     private static TestSet Kaggle()
     {
         var clues = new List<Clues>();
-        using var reader = new StreamReader("../../../../../sudoku-kaggle/sudoku.csv");
+        using var reader = new StreamReader(Path.Combine(Root.FullName, "../sudoku-kaggle/sudoku.csv"));
         clues.AddRange(KagglePuzzle.Load(reader).Select(p => p.Clues));
         return new("Kaggle (300k)", [.. clues.OrderBy(c => c.Count).Take(300_000)]);
     }

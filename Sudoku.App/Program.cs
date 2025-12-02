@@ -6,15 +6,24 @@ public static class Program
     {
         if (args is not { Length: > 0 })
             Console.WriteLine("No command");
+
         else if (args[0] == "nyt")
             Console.WriteLine($"Downloaded NYT {await NewYorkTimesCollector.Load():yyy-MM-dd}");
+
         else if (args[0] == "gen")
         {
             var size = args.Length > 1 && int.TryParse(args[1], out var val0) ? val0 : 1000;
             var seed = args.Length > 2 && int.TryParse(args[2], out var val1) ? val1 : Random.Shared.Next();
             Generator.Generate(size, seed);
         }
+        else if (args[0] == "ctc")
+            Cracking_the_Cryptic.Run();
+
+        else if (args[0] == "test")
+            TestSets.SolveAll(dlx: false, refr: false);
+
         else
             Console.WriteLine($"Unknown command '{args[0]}'");
     }
+
 }

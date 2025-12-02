@@ -8,7 +8,7 @@ public sealed class _2017_08_31 : CtcPuzzle
 
     public override Uri? Url => new("https://youtu.be/nrz4rhbaVR0");
 
-    public override O Duration => O.ms;
+    public override O Duration => O.μs10;
 
     public override bool IsStandard => true;
 

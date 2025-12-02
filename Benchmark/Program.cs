@@ -4,13 +4,11 @@ public static class Program
 {
     public static void Main()
     {
-        TestSets.SolveAll(dlx: false, refr: false);
+        _ = BenchmarkDotNet.Running.BenchmarkRunner.Run<BinaryConversion>();
     }
 
     public static void Other()
     {
-        Cracking_the_Cryptic.Run(p => p.Duration is Puzzles.O.Unknown);
-        TestSets.SolveAll();
         _ = BenchmarkDotNet.Running.BenchmarkRunner.Run<BinaryConversion>();
         _ = BenchmarkDotNet.Running.BenchmarkRunner.Run<DigitIterator>();
         _ = BenchmarkDotNet.Running.BenchmarkRunner.Run<Generation>();

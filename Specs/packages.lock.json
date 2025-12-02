@@ -189,8 +189,12 @@
       "sudoku.app": {
         "type": "Project",
         "dependencies": {
+          "Dlx": "[1.0.0, )",
+          "DynamicSolver": "[1.0.0, )",
           "Generator": "[1.0.0, )",
-          "Puzzles": "[1.0.0, )"
+          "Puzzles": "[1.0.0, )",
+          "Reference": "[1.0.0, )",
+          "StrategyBased": "[1.0.0, )"
         }
       }
     }

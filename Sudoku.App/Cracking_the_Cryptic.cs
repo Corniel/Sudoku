@@ -1,20 +1,18 @@
 using Puzzles;
 using Puzzles.CrackingTheCryptic;
-using System;
 using System.Diagnostics;
-using System.Linq;
 
-namespace Benchmark;
+namespace Sudoku.App;
 
 public static class Cracking_the_Cryptic
 {
     public static void Run(Predicate<Puzzle>? run = null)
     {
-        run ??= p => true;
+        run ??= p => p.Duration is not O.oo;
 
         foreach (var puzzle in CtcPuzzle.All.OrderByDescending(p => p.GetType().Name))
         {
-            if (puzzle.Duration == O.oo || !run(puzzle))
+            if (!run(puzzle))
             {
                 Console.WriteLine(Format(puzzle, "skipped"));
             }

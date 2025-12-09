@@ -37,6 +37,11 @@ public sealed class NewYorkTimesPuzzle(DateOnly date, Clues clues, Cells solutio
     public static IEnumerable<NewYorkTimesPuzzle> Load(string file)
     {
         using var stream = typeof(NewYorkTimesPuzzle).Assembly.GetManifestResourceStream($"Puzzles.NewYorkTimes.{file}.txt")!;
+        return Load(stream);
+    }
+
+    public static IEnumerable<NewYorkTimesPuzzle> Load(Stream stream)
+    {
         using var reader = new StreamReader(stream);
 
         while (reader.ReadLine() is { } line)

@@ -16,7 +16,9 @@ public static class NewYorkTimesCollector
         var content = await client.GetStringAsync(Url);
         var puzzle = Parse(content);
 
-        var puzzles = NewYorkTimesPuzzle.Hard.ToList();
+        using var stream = new FileStream(Path, FileMode.Open, FileAccess.Read);
+        var puzzles = NewYorkTimesPuzzle.Load(stream).ToList();
+        stream.Close();
 
         if (!puzzles.Any(p => p.Date == puzzle.Date))
         {

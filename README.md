@@ -196,6 +196,7 @@ able to solve the following puzzles (so far):
 
 | Date       | Puzzle                                                             |      Speed |
 |:----------:|--------------------------------------------------------------------|-----------:|
+| 2025-12-08 | [Heavy Is The Crown](Puzzles/CrackingTheCryptic/2025_12_08.cs)     |    79.9 ms |
 | 2025-11-28 | [Brink](Puzzles/CrackingTheCryptic/2025_11_28.cs)                  |   107.2 s  |
 | 2025-11-25 | [Simple Miracle](Puzzles/CrackingTheCryptic/2025_11_25.cs)         |   128.8 ms |
 | 2025-11-17 | [wicked](Puzzles/CrackingTheCryptic/2025_11_17.cs)                 |   299.4 ms |

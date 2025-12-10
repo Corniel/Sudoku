@@ -18,8 +18,10 @@ public abstract class Group(Pos appliesTo, ImmutableArray<Pos> others) : Restric
     /// <inheritdoc />
     public override string ToString() => $"({GetType().Name}) {AppliesTo} => [{string.Join(',', Others)}]";
 
+    [Pure]
     public static IEnumerable<T> Select<T>(PosSet positions, Func<Pos, ImmutableArray<Pos>, T> selector) => Select(positions.ToImmutableArray(), selector);
 
+    [Pure]
     public static IEnumerable<T> Select<T>(ImmutableArray<Pos> positions, Func<Pos, ImmutableArray<Pos>, T> selector)
         => positions
         .Select((pos, index) => selector(pos, positions.RemoveAt(index)));

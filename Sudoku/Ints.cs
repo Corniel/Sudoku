@@ -42,27 +42,37 @@ public readonly struct Ints(Int128 bits) : IReadOnlyCollection<int>
 
     public static Ints operator &(Ints left, Ints right) => new(left.Bits & right.Bits);
 
-    public static Ints operator -(Ints ints, Ints digits)
+    public static Ints operator |(Ints left, Ints right) => new(left.Bits | right.Bits);
+
+    public static Ints operator -(Ints left, Ints right)
     {
         var bits = Int128.Zero;
-        foreach (var digit in digits)
-            bits |= ints.Bits >> digit;
+        foreach (var digit in right)
+            bits |= left.Bits >> digit;
         return new(bits);
     }
 
-    public static Ints operator -(Ints ints, Digits digits)
+    public static Ints operator -(Ints left, Digits right)
     {
         var bits = Int128.Zero;
-        foreach (var digit in digits)
-            bits |= ints.Bits >> digit;
+        foreach (var digit in right)
+            bits |= left.Bits >> digit;
         return new(bits);
     }
 
-    public static Ints operator +(Ints ints, Digits digits)
+    public static Ints operator +(Ints left, Digits right)
     {
         var bits = Int128.Zero;
-        foreach (var digit in digits)
-            bits |= ints.Bits << digit;
+        foreach (var digit in right)
+            bits |= left.Bits << digit;
+        return new(bits);
+    }
+
+    public static Ints operator +(Ints left, Ints right)
+    {
+        var bits = Int128.Zero;
+        foreach (var digit in right)
+            bits |= left.Bits << digit;
         return new(bits);
     }
 

@@ -65,6 +65,6 @@ public sealed partial record NamedCage()
         Sum = int.Parse(m.Groups[nameof(Sum)].Value),
     };
 
-    [GeneratedRegex(@"(?<Name>[A-Za-z])\s*=\s*(?<Sum>[0-9]{1,2})", RegexOptions.CultureInvariant | RegexOptions.ExplicitCapture)]
+    [GeneratedRegex(@"(?<Name>[A-Za-z])\s*=\s*(?<Sum>[0-9]{1,4})", RegexOptions.CultureInvariant | RegexOptions.ExplicitCapture)]
     private static partial Regex Pattern();
 }

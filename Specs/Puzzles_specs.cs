@@ -16,17 +16,18 @@ public class Cracking_the_Cryptic
     [Test]
     public void Work_in_progress()
     {
-        var puzzle = new _2025_12_08();
+        var puzzle = new _2025_12_11();
 
         if (puzzle.Solution.IsSolved)
             puzzle.Constraints.Should().BeValidFor(puzzle.Solution);
 
         var solved = DynamicSolver.Solver.Raw(puzzle.Clues, puzzle.Constraints);
         Console.WriteLine(Cells.New(solved));
-        puzzle.Constraints.Should().BeValidFor(solved);
 
         if (puzzle.Solution.IsSolved)
-            Cells.New(solved).Should().Be(puzzle.Solution);
+            Cells.New(solved).Should().Be(puzzle.Solution, puzzle.Constraints);
+        else
+            puzzle.Constraints.Should().BeValidFor(solved);
     }
 
     [TestCaseSource(nameof(Fasts))]

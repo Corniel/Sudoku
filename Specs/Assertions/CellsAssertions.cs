@@ -13,7 +13,7 @@ public sealed class CellsAssertions(Cells subject)
     {
         rules ??= Rules.Standard;
 
-        ((Rules)rules).Should().BeValidFor(expected);
+        ((Rules)rules).Should().BeValidFor(Subject);
 
         Chain
             .ForCondition(Subject.Equals(expected))

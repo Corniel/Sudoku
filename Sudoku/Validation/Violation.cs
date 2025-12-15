@@ -12,5 +12,5 @@ public sealed class Violation(Digits value, Digits allowed, Pos cell, Rule? cons
 
     public Restriction? Restriction { get; } = restriction;
 
-    public override string ToString() => $"{Cell} = {Digits}, Allowed = {Allowed}, Constraint = {Constraint}, Restrction = {Restriction}";
+    public override string ToString() => $"{Cell} = {Digits}, Allowed = {Allowed}, Constraint = {Constraint}, Restriction = {Restriction}";
 }

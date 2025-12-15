@@ -60,6 +60,8 @@ public readonly struct Ints(Int128 bits) : IReadOnlyCollection<int>
         return new(bits);
     }
 
+    public static Ints operator +(Ints left, int right) => new(left.Bits << right);
+
     public static Ints operator +(Ints left, Digits right)
     {
         var bits = Int128.Zero;

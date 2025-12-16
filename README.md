@@ -235,7 +235,7 @@ able to solve the following puzzles (so far):
 | 2024-01-08 | [Tulpenblüte](Puzzles/CrackingTheCryptic/2024_01_08.cs)                 | 8,695.9 ms |
 | 2022-05-03 | [The Dutch Miracle](Puzzles/CrackingTheCryptic/2022_05_03.cs)           |    71.9 µs |
 | 2022-04-27 | [The Aquarium](Puzzles/CrackingTheCryptic/2022_04_27.cs)                |    31.1 s  |
-| 2022-03-13 | [The Trident](Puzzles/CrackingTheCryptic/2022_03_13.cs)                 |       ?    |
+| 2022-03-13 | [The Trident](Puzzles/CrackingTheCryptic/2022_03_13.cs)                 | 6,752.5 ms |
 | 2021-10-06 | [Dutch Whispers](Puzzles/CrackingTheCryptic/2021_10_06.cs)              |    55.9 µs |
 | 2021-04-11 | [Third Times The Charm](Puzzles/CrackingTheCryptic/2021_04_11.cs)       |   958.0 s  |
 | 2021-01-06 | [Non-consecutive Killer](Puzzles/CrackingTheCryptic/2021_01_06.cs)      | 1,094.5 ms |

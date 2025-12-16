@@ -17,7 +17,14 @@ public static class Program
             Generator.Generate(size, seed);
         }
         else if (args[0] == "ctc")
-            Cracking_the_Cryptic.Run(p => p.Duration is Puzzles.O.Unknown);
+        {
+            switch ((args.Length > 1 ? args[1] : string.Empty))
+            {
+                case "?": Cracking_the_Cryptic.Run(p => p.Duration is Puzzles.O.Unknown); break;
+                case "oo": Cracking_the_Cryptic.Run(p => p.Duration is Puzzles.O.oo); break;
+                default: Cracking_the_Cryptic.Run(); break;
+            }
+        }
 
         else if (args[0] == "test")
             TestSets.SolveAll(dlx: false, refr: false);

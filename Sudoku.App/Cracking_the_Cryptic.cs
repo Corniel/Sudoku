@@ -6,20 +6,15 @@ namespace Sudoku.App;
 
 public static class Cracking_the_Cryptic
 {
-    public static void Run(Predicate<Puzzle>? run = null)
+    public static void Run(Func<Puzzle, bool>? run = null)
     {
-        run ??= p => p.Duration is not O.oo;
+        var selected = run ?? (p => p.Duration is not O.oo);
 
-        foreach (var puzzle in CtcPuzzle.All.OrderByDescending(p => p.GetType().Name))
+        foreach (var puzzle in CtcPuzzle.All
+            .Where(selected)
+            .OrderByDescending(p => p.GetType().Name))
         {
-            if (!run(puzzle))
-            {
-                Console.WriteLine(Format(puzzle, "skipped"));
-            }
-            else
-            {
-                Test(puzzle);
-            }
+            Test(puzzle);
         }
     }
 
@@ -29,6 +24,8 @@ public static class Cracking_the_Cryptic
         var best = TimeSpan.MaxValue;
 
         var total = TimeSpan.Zero;
+
+        Console.Write($"\r{Format(puzzle, "..")}");
 
         for (var a = 0; a < 100 && total < TimeSpan.FromMinutes(3); a++)
         {

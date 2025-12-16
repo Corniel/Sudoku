@@ -237,6 +237,7 @@ able to solve the following puzzles (so far):
 | 2022-04-27 | [The Aquarium](Puzzles/CrackingTheCryptic/2022_04_27.cs)                |    31.1 s  |
 | 2022-03-13 | [The Trident](Puzzles/CrackingTheCryptic/2022_03_13.cs)                 | 6,752.5 ms |
 | 2021-10-06 | [Dutch Whispers](Puzzles/CrackingTheCryptic/2021_10_06.cs)              |    55.9 µs |
+| 2021-08-05 | [Checkerboard](Puzzles/CrackingTheCryptic/2021_08_05.cs)                | 2,292.5 s  |
 | 2021-04-11 | [Third Times The Charm](Puzzles/CrackingTheCryptic/2021_04_11.cs)       |   958.0 s  |
 | 2021-01-06 | [Non-consecutive Killer](Puzzles/CrackingTheCryptic/2021_01_06.cs)      | 1,094.5 ms |
 | 2020-09-30 | [Classic Sudoku!](Puzzles/CrackingTheCryptic/2020_09_30_1_.cs)          |    39.3 µs |

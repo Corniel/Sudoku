@@ -6,8 +6,10 @@ public sealed class CellsWrapper(Cells cells) : SudokuCells
 
     public SudokuCell this[Pos pos] => new CellWrapper(pos, Cells[pos]);
 
+    public static CellsWrapper Parse(string s) => new(Cells.Parse(s));
+
     private readonly record struct CellWrapper(Pos Pos, int Digit) : SudokuCell
     {
-        public Digits Digits => [Digit];
+        public Digits Digits => Digit is 0 ? Digits._1_to_9 : [Digit];
     }
 }

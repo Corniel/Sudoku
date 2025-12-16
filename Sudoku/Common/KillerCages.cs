@@ -82,17 +82,20 @@ public static partial class KillerCages
     }
 
     private static IEnumerable<Mask> Masks(IEnumerable<KillerCage> cages, IEnumerable<PosSet> sets) => cages
-        .Where(c
-            => c.Count is 2
-            && c.Sum.IsEven()
-            && sets.Any(s => c.Cells.IsSubsetOf(s)))
+        .Where(c => sets.Any(s => c.Cells.IsSubsetOf(s)))
         .SelectMany(Masks);
 
-    private static IEnumerable<Mask> Masks(KillerCage c) =>
-    [
-        new Mask(c.Cells.First(), ~Digits.New(c.Sum / 2)),
-        new Mask(c.Cells.Last(), ~Digits.New(c.Sum / 2)),
-    ];
+    private static IEnumerable<Mask> Masks(KillerCage c)
+    {
+        var digits = Digits.None;
+
+        foreach (var combo in Digits.All.Where(x => x.Count == c.Count))
+            if (combo.Sum() == c.Sum) digits |= combo;
+
+        return digits == Digits._1_to_9
+            ? []
+            : c.Cells.Select(x => new Mask(x, digits));
+    }
 
     [GeneratedRegex(@"(?<Sum>[0-9]{1,2})\s*=(?<Pos>.*?\((?<Row>[0-8]{1,2}),\s*(?<Col>[0-8]{1,2})\))+", RegexOptions.CultureInvariant)]
     private static partial Regex Line();

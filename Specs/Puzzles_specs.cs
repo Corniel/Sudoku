@@ -18,7 +18,7 @@ public class Cracking_the_Cryptic
     [Test]
     public void Work_in_progress()
     {
-        var puzzle = new _2022_03_13();
+        var puzzle = new _2025_12_15();
 
         if (puzzle.Solution.IsSolved)
             puzzle.Constraints.Should().BeValidFor(puzzle.Solution);
@@ -31,7 +31,6 @@ public class Cracking_the_Cryptic
         else
             puzzle.Constraints.Should().BeValidFor(solved);
     }
-
 
     [TestCaseSource(nameof(Unknowns))]
     public void Unknown(Puzzle puzzle) => Solve(puzzle);

@@ -35,6 +35,10 @@ public readonly struct PosSet(UInt128 bits) : IEquatable<PosSet>, IReadOnlyColle
         => other.Bits != Bits
         && IsSubsetOf(other);
 
+    /// <inheritdoc cref="IReadOnlySet{T}.Overlaps(IEnumerable{T})(IEnumerable{T})" />
+    [Pure]
+    public bool Overlaps(PosSet other) => (other.Bits & Bits) != 0;
+
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Pos First() => HasNone ? Pos.Invalid : new((int)UInt128.TrailingZeroCount(Bits));
 

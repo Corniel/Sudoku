@@ -196,7 +196,8 @@ able to solve the following puzzles (so far):
 
 | Date       | Puzzle                                                                  |      Speed |
 |:----------:|-------------------------------------------------------------------------|-----------:|
-| 2025-12-11 | [Crossroads On Another World](Puzzles/CrackingTheCryptic/2025_12_12.cs) | 1,433.6 µs |
+| 2025-12-15 | [For Daniël.](Puzzles/CrackingTheCryptic/2025_12_15.cs)                 | 8,105.2 µs |
+| 2025-12-12 | [Crossroads On Another World](Puzzles/CrackingTheCryptic/2025_12_12.cs) | 1,433.6 µs |
 | 2025-12-11 | [Fallen Mast In A Storm](Puzzles/CrackingTheCryptic/2025_12_11.cs)      |    24.0 ms |
 | 2025-12-08 | [Heavy Is The Crown](Puzzles/CrackingTheCryptic/2025_12_08.cs)          |    63.8 ms |
 | 2025-12-07 | [Odd Way To Even Out](Puzzles/CrackingTheCryptic/2025_12_07.cs)         | 1,284.8 s  |

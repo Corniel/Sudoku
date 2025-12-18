@@ -196,6 +196,7 @@ able to solve the following puzzles (so far):
 
 | Date       | Puzzle                                                                  |      Speed |
 |:----------:|-------------------------------------------------------------------------|-----------:|
+| 2025-12-17 | [The Fireflies' Pairing](Puzzles/CrackingTheCryptic/2025_12_17.cs)      |   749.9 µs |
 | 2025-12-15 | [For Daniël.](Puzzles/CrackingTheCryptic/2025_12_15.cs)                 | 8,105.2 µs |
 | 2025-12-12 | [Crossroads On Another World](Puzzles/CrackingTheCryptic/2025_12_12.cs) | 1,433.6 µs |
 | 2025-12-11 | [Fallen Mast In A Storm](Puzzles/CrackingTheCryptic/2025_12_11.cs)      |    24.0 ms |

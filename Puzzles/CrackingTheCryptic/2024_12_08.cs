@@ -44,11 +44,7 @@ public sealed class _2024_12_08 : CtcPuzzle
 
     public static IEnumerable<Not7Nor13> Not7Nor13s()
     {
-        foreach (var p in Pos.All)
-        {
-            if (p.N() is { } n) yield return new Not7Nor13(p, n);
-            if (p.W() is { } w) yield return new Not7Nor13(p, w);
-        }
+        return Dominos.All.Select(p => new Not7Nor13(p.A, p.B));
     }
 
     public sealed class Not7Nor13(Pos a, Pos b) : Set(a, b)

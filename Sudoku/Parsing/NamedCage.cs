@@ -10,6 +10,8 @@ public sealed partial record NamedCage()
 
     public ImmutableArray<Pos> Cells { get; init; } = [];
 
+    public PosSet Set => [.. Cells];
+
     public override string ToString()
         => Sum is 0
         ? $"{Name} = ?, {string.Join(", ", Cells)}"

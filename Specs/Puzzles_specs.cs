@@ -1,6 +1,7 @@
 using Puzzles;
 using Puzzles.CrackingTheCryptic;
 using Puzzles.Killer;
+using Puzzles.NewYorkTimes;
 using Puzzles.PuzzleBank;
 using Puzzles.SudokuPad;
 using System.IO;
@@ -23,13 +24,17 @@ public class Cracking_the_Cryptic
         if (puzzle.Solution.IsSolved)
             puzzle.Constraints.Should().BeValidFor(puzzle.Solution);
 
-        var solved = DynamicSolver.Solver.Raw(puzzle.Clues, puzzle.Constraints);
-        Console.WriteLine(Cells.New(solved));
+        var solver = DynamicSolver.Solver.Iterate(puzzle.Clues, puzzle.Constraints);
+        solver.MoveNext();
+        var solved = Cells.New(solver.Current);
+        Console.WriteLine(solved);
 
         if (puzzle.Solution.IsSolved)
-            Cells.New(solved).Should().Be(puzzle.Solution, puzzle.Constraints);
+            solved.Should().Be(puzzle.Solution, puzzle.Constraints);
         else
             puzzle.Constraints.Should().BeValidFor(solved);
+
+        solver.MoveNext().Should().BeFalse("Solution should be unique");
     }
 
     [TestCaseSource(nameof(Unknowns))]
@@ -50,7 +55,6 @@ public class Cracking_the_Cryptic
     {
         puzzle.Constraints.Should().BeValidFor(puzzle.Solution);
         var solved = TestSolver.Solve(puzzle);
-        Console.WriteLine(solved);
         solved.Should().Be(puzzle.Solution, puzzle.Constraints);
     }
 }
@@ -188,6 +192,27 @@ public class Killer_Sudoku
         Console.WriteLine(solved);
     }
 }
+
+public class New_York_Times
+{
+    private static readonly ImmutableArray<Puzzle> Puzzles = [.. NewYorkTimesPuzzle.Hard];
+
+    [Test]
+    public void Can_be_loaded()
+    {
+        Func<ImmutableArray<NewYorkTimesPuzzle>> load = () => NewYorkTimesPuzzle.Hard;
+        load.Should().NotThrow();
+    }
+
+    [TestCaseSource(nameof(Puzzles))]
+    public void Puzzle(Puzzle puzzle)
+    {
+        puzzle.Constraints.Should().BeValidFor(puzzle.Solution);
+        var solved = TestSolver.Solve(puzzle);
+        solved.Should().Be(puzzle.Solution, puzzle.Constraints);
+    }
+}
+
 
 public class X_Sudoku
 {

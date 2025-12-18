@@ -3,21 +3,21 @@ namespace DynamicSolver;
 [DebuggerDisplay("Count = {Count}")]
 [DebuggerTypeProxy(typeof(CollectionDebugView))]
 [Mutable]
-public sealed class StepTracer : IReadOnlyCollection<Step>
+public sealed class StepTracer(int size = 1024) : IReadOnlyCollection<Step>
 {
-    private readonly Step[] Stack = new Step[1024];
+    private readonly Step[] Stack = new Step[size];
 
     /// <inheritdoc />
     public int Count { get; private set; }
 
-    public Tracker Track(Links nodes, Pos cell, Digits mask)
+    public bool Track(Links nodes, Pos cell, Digits mask)
     {
         var curr = nodes[cell].Digits;
         var next = curr & mask;
 
         if (next == Digits.None)
         {
-            return Tracker.Invalid;
+            return false;
         }
         else if (next != curr)
         {
@@ -27,17 +27,13 @@ public sealed class StepTracer : IReadOnlyCollection<Step>
 #else
             Stack[Count++] = new(cell, curr);
 #endif
-            return Tracker.One;
         }
-        else
-        {
-            return Tracker.Zero;
-        }
+        return true;
     }
 
-    public void Rollback(Links nodes, int steps)
+    public void Rollback(Links nodes)
     {
-        while (steps-- > 0)
+        while (Count > 0)
         {
             var step = Stack[--Count];
             nodes[step.Cell].Digits = step.Prev;

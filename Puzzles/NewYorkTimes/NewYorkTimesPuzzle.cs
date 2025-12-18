@@ -34,25 +34,28 @@ public sealed class NewYorkTimesPuzzle(DateOnly date, Clues clues, Cells solutio
 
     public static ImmutableArray<NewYorkTimesPuzzle> Hard => [.. Load(nameof(Hard))];
 
-    public static IEnumerable<NewYorkTimesPuzzle> Load(string file)
+    public static ImmutableArray<NewYorkTimesPuzzle> Load(string file)
     {
         using var stream = typeof(NewYorkTimesPuzzle).Assembly.GetManifestResourceStream($"Puzzles.NewYorkTimes.{file}.txt")!;
         return Load(stream);
     }
 
-    public static IEnumerable<NewYorkTimesPuzzle> Load(Stream stream)
+    public static ImmutableArray<NewYorkTimesPuzzle> Load(Stream stream)
     {
+        var puzzles = new List<NewYorkTimesPuzzle>();
+
         using var reader = new StreamReader(stream);
 
         while (reader.ReadLine() is { } line)
         {
             if (line.Split(' ', StringSplitOptions.RemoveEmptyEntries) is { Length: 3 } parts)
             {
-                yield return new NewYorkTimesPuzzle(
+                puzzles.Add(new(
                     DateOnly.Parse(parts[0], CultureInfo.InvariantCulture),
                     Clues.Parse(parts[1]),
-                    Cells.Parse(parts[2]));
+                    Cells.Parse(parts[2])));
             }
         }
+        return [.. puzzles.OrderBy(p => p.Date)];
     }
 }

@@ -308,14 +308,17 @@ Both [Kaggle](https://www.kaggle.com/datasets/rohanrao/sudoku/) as
 [Sudoku Exchange(https://github.com/grantm/sudoku-exchange-puzzle-bank) published
 test sets containing zillions of generated puzzles to solve.
 
-| Set                 | Puzzles |   Dynamic Solver    ||       Knuth's DLX          |||     Reference backtracker    |||
-|:--------------------|--------:|----------:|---------:|----------:|---------:|------:|---------:|------------:|------:|
-| Kaggle (300k)[1]    | 300,000 | 64.67 k/s | 15.46 µs | 15.37 k/s | 65.05 µs |  4.21 | 2.06 k/s |   486.46 µs | 31.46 |
-| Exchange (easy)     | 100,000 | 85.31 k/s | 11.72 µs | 16.90 k/s | 59.16 µs |  5.05 | 1.53 k/s |   655.43 µs | 55.91 |
-| Exchange (medium)   | 352,643 | 48.68 k/s | 20.54 µs | 15.61 k/s | 64.05 µs |  3.12 | 0.81 k/s | 1,237.18 µs | 60.22 |
-| Exchange (hard)     | 183,357 | 36.13 k/s | 27.68 µs | 14.96 k/s | 66.85 µs |  2.42 | 0.76 k/s | 1,308.55 µs | 47.28 |
-| Exchange (diabolic) | 119,681 | 28.58 k/s | 34.99 µs | 14.44 k/s | 69.25 µs |  1.98 | 0.72 k/s | 1,396.18 µs | 39.91 |
-| Exchange (1000)[2]  |   1,000 | 12.76 k/s | 78.39 µs | 11.37 k/s | 87.96 µs |  1.12 | 0.41 k/s | 2,429.74 µs | 31.00 |
+| Set                  | Puzzles |   Dynamic Solver    ||       Knuth's DLX         |||      Reference backtracker    |||
+|:---------------------|--------:|----------:|---------:|----------:|---------:|-----:|---------:|------------:|-------:|
+| Kaggle (300k)[1]     | 300,000 | 68.27 k/s | 14.65 µs | 15.11 k/s | 66.19 µs | 4.52 | 1.89 k/s |    528.54 µs|  36.08 |
+| Exchange (easy)      | 100,000 | 86.93 k/s | 11.50 µs | 15.32 k/s | 65.29 µs | 5.68 | 1.41 k/s |    707.56 µs|  61.51 |
+| Exchange (medium)    | 352,643 | 48.29 k/s | 20.71 µs | 14.25 k/s | 70.17 µs | 3.39 | 0.74 k/s |  1,343.19 µs|  64.86 |
+| Exchange (hard)      | 183,357 | 36.63 k/s | 27.30 µs | 13.93 k/s | 71.76 µs | 2.63 | 0.71 k/s |  1,405.15 µs|  51.47 |
+| Exchange (diabolic)  | 119,681 | 28.33 k/s | 35.29 µs | 13.33 k/s | 75.01 µs | 2.13 | 0.66 k/s |  1,506.20 µs|  42.68 |
+| Exchange (1000*)[2]  |   1,000 | 12.02 k/s | 83.22 µs | 10.04 k/s | 99.64 µs | 1.20 | 0.37 k/s |  2,696.88 µs|  32.41 |
+| Generated (hard)     | 149,579 | 33.28 k/s | 30.05 µs | 14.04 k/s | 71.24 µs | 2.37 | 1.03 k/s |    974.65 µs|  32.43 |
+| New York Times       |     713 | 10.87 k/s | 92.01 µs | 12.00 k/s | 83.32 µs | 0.91 | 0.10 k/s |  9,662.02 µs| 105.00 |
+| Cracking the Cryptic |      13 | 10.00 k/s | 99.97 µs | 13.13 k/s | 76.14 µs | 0.76 | 0.07 k/s | 14,125.58 µs| 141.30 |
 
 * [1] From the 9M puzzles (with an overkill of given digits) only the hardest 300k haven been chosen
 * [2] The hardest 1000 of the diabolic set

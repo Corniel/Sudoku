@@ -4,15 +4,17 @@ namespace Specs;
 
 internal static class TestSolver
 {
-    public static Cells Solve(Puzzle puzzle, TestSolverType solver = TestSolverType.DynamicSolver)
+    private const SolverType Default = SolverType.Dynamic;
+
+    public static Cells Solve(Puzzle puzzle, SolverType solver = Default)
         => Solve(puzzle.Clues, puzzle.Constraints, solver);
 
-    public static Cells Solve(Clues clues, Rules? rules = null, TestSolverType solver = TestSolverType.DynamicSolver) => solver switch
+    public static Cells Solve(Clues clues, Rules? rules = null, SolverType solver = Default) => solver switch
     {
-        TestSolverType.DynamicSolver => DynamicSolver.Solver.Solve(clues, rules ?? Rules.Standard),
-        TestSolverType.Dlx => Dlx.DlxSolver.Solve(clues),
-        TestSolverType.Reference => Reference.Solver.Solve(clues),
-        TestSolverType.StrategyBased => StrategyBased.StrategyBasedSolver.Solve(clues),
+        SolverType.Dynamic => DynamicSolver.Solver.Solve(clues, rules ?? Rules.Standard),
+        SolverType.Dlx => Dlx.DlxSolver.Solve(clues),
+        SolverType.Reference => Reference.Solver.Solve(clues),
+        SolverType.StrategyBased => StrategyBased.StrategyBasedSolver.Solve(clues),
         _ => throw new ArgumentOutOfRangeException(nameof(solver), $"'{solver}' is an unknown/unsuported solver type"),
     };
 }

@@ -1,9 +1,11 @@
+using DynamicSolver;
 using Puzzles;
 using Puzzles.CrackingTheCryptic;
 using Puzzles.Killer;
 using Puzzles.NewYorkTimes;
 using Puzzles.PuzzleBank;
 using Puzzles.SudokuPad;
+using Specs.Tools;
 using System.IO;
 using System.Text;
 
@@ -14,17 +16,19 @@ public class Cracking_the_Cryptic
     private static readonly ImmutableArray<Puzzle> Unknowns = [.. CtcPuzzle.All.Where(p => p.Duration is O.Unknown)];
     private static readonly ImmutableArray<Puzzle> Fasts = [.. CtcPuzzle.All.Where(p => p.Duration is <= O.ms100 and not O.Unknown)];
     private static readonly ImmutableArray<Puzzle> Slows = [.. CtcPuzzle.All.Where(p => p.Duration is > O.ms100 and not O.oo)];
-    private static readonly ImmutableArray<Puzzle> Unsolvables = [.. CtcPuzzle.All.Where(p => p.Duration is  O.oo)];
+    private static readonly ImmutableArray<Puzzle> Unsolvables = [.. CtcPuzzle.All.Where(p => p.Duration is O.oo)];
 
     [Test]
     public void Work_in_progress()
     {
-        var puzzle = new _2025_12_17();
+        using var _ = Logger.Options();
+
+        var puzzle = new _2025_11_28();
 
         if (puzzle.Solution.IsSolved)
             puzzle.Constraints.Should().BeValidFor(puzzle.Solution);
 
-        var solver = DynamicSolver.Solver.Iterate(puzzle.Clues, puzzle.Constraints);
+        var solver = Solver.Iterate(puzzle.Clues, puzzle.Constraints);
         solver.MoveNext();
         var solved = Cells.New(solver.Current);
         Console.WriteLine(solved);
@@ -53,8 +57,11 @@ public class Cracking_the_Cryptic
 
     private static void Solve(Puzzle puzzle)
     {
+        using var _ = Logger.Options();
+
         puzzle.Constraints.Should().BeValidFor(puzzle.Solution);
         var solved = TestSolver.Solve(puzzle);
+        Console.WriteLine(solved);
         solved.Should().Be(puzzle.Solution, puzzle.Constraints);
     }
 }
@@ -183,6 +190,9 @@ public class Killer_Sudoku
     [TestCaseSource(nameof(Puzzles))]
     public void Puzzle(Puzzle puzzle)
     {
+        using var _ = Logger.Options();
+
+
         var solved = TestSolver.Solve(puzzle);
 
         solved.ToString().Should().NotContain(".");
@@ -332,6 +342,8 @@ public class Puzzle_bank
 
     private static void Solve(Puzzle puzzle, Rules? rules = null)
     {
+        using var _ = Logger.Options();
+
         var solved = TestSolver.Solve(puzzle.Clues, rules ?? Rules.Standard);
         solved.Should().Be(puzzle.Solution);
     }

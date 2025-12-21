@@ -1,3 +1,5 @@
+using System.Collections.Immutable;
+
 namespace DynamicSolver;
 
 public sealed class Iterator : IEnumerator<Links>, IEnumerable<Links>
@@ -35,18 +37,21 @@ public sealed class Iterator : IEnumerator<Links>, IEnumerable<Links>
                 if (valid && link.Restrictions is { Count: > 0 } res)
                 {
                     var check = todo | link.Pos;
-                    var restrictions = res.Where(x => check.Contains(x.AppliesTo)).GetEnumerator();
+                    var restrictions = res.GetEnumerator();
 
                     while (valid && restrictions.MoveNext())
-                        valid = trac.Track(Links, restrictions.Current.AppliesTo, restrictions.Current.Restrict(Links));
+                    {
+                        var restriction = restrictions.Current;
+                        if (!check.Contains(restriction.AppliesTo)) continue;
+                        valid = trac.Track(Links, restriction.AppliesTo, restrictions.Current.Restrict(Links));
+                    }
                 }
 
                 if (valid)
                 {
                     if (todo.HasNone) return true;
 
-                    var next = NextCell(todo);
-                    state = Stack.Push(Links[next], todo ^ next);
+                    state = Stack.Push(NextState(todo));
                     (link, todo, trac) = state;
                 }
                 else trac.Rollback(Links);
@@ -58,57 +63,56 @@ public sealed class Iterator : IEnumerator<Links>, IEnumerable<Links>
         return false;
     }
 
-    private Pos NextCell(PosSet todos)
+    private Stack.StateInfo NextState(PosSet todos)
     {
-        var cell = Pos.O;
-        var best = int.MaxValue;
-        var constraints = false;
+        var cell = Links[Pos.O];
+        var best = double.MinValue;
+        var opts = 0;
 
         foreach (var todo in todos)
         {
             var link = Links[todo];
-            var test = link.Digits.Count;
-            if (test < best)
+            var count = link.Digits.Count;
+
+            if (count is 1)
             {
-                if (test is 1) return todo;
-
-                best = test;
-                cell = todo;
-                constraints |= link.Restrictions.Count is not 0;
+                Options[1]++;
+                return new(link, link.Digits, todos ^ todo);
             }
-        }
-        if (best < 3 || todos.Count < 30 || !constraints) return cell;
 
-        best = int.MinValue;
+            var test = ((Counts[count] + link.Bits) * 2.5) + (link.Peers & todos).Count;
 
-        foreach (var todo in todos)
-        {
-            var link = Links[todo];
-            var test = (link.Restrictions.Count * 3) - link.Digits.Count;
             if (test > best)
             {
+                opts = count;
                 best = test;
-                cell = todo;
+                cell = link;
             }
         }
 
-        return cell;
+        Options[opts]++;
+
+        return new(cell, cell.Digits, todos ^ cell.Pos);
     }
 
-    private PosSet Prepare(PosSet todos)
+    private static readonly ImmutableArray<int> Counts = [0, 0, 10_000, 8, 6, 4, 3, 2, 1, 0];
+
+    public static readonly long[] Options = new long[_9 + 2];
+
+    private PosSet Prepare()
     {
         do
         {
             Tracer.Clear();
-            foreach (var pos in todos)
+            foreach (var pos in Links.Todos)
             {
                 var link = Links[pos];
+
                 if (link.Digits.HasSingle)
                 {
-                    todos ^= pos;
                     var mask = ~link.Digits;
 
-                    foreach (var peer in link.Peers & todos)
+                    foreach (var peer in link.Peers & Links.Todos)
                         Tracer.Track(Links, peer, mask);
                 }
 
@@ -117,7 +121,7 @@ public sealed class Iterator : IEnumerator<Links>, IEnumerable<Links>
             }
         }
         while (Tracer.Count is not 0);
-        return todos;
+        return Links.Todos;
     }
 
     /// <inheritdoc />
@@ -134,11 +138,12 @@ public sealed class Iterator : IEnumerator<Links>, IEnumerable<Links>
 
     public Iterator Set(Clues clues, Rules rules)
     {
+        Options[0]++;
         Stack.Reset();
         Links = Links.New(clues, rules);
-        var todos = Prepare(Links.Todos);
-        var first = NextCell(todos);
-        Stack.Push(Links[first], todos ^ first);
+        var todos = Prepare();
+        var state = todos.HasNone ? new(Links[Pos.O], Links[Pos.O].Digits, todos) : NextState(todos);
+        Stack.Push(state);
         return this;
     }
 }

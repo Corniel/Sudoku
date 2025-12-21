@@ -10,7 +10,6 @@ public readonly partial struct Rules(ImmutableArray<Rule> rules, ImmutableArray<
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly ImmutableArray<Rule> Collection = rules;
 
-    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     public readonly ImmutableArray<Restriction> Restrictions = restrictions;
 
     /// <inheritdoc />

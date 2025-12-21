@@ -22,6 +22,7 @@ public static class Program
             {
                 case "?": Cracking_the_Cryptic.Run(p => p.Duration is Puzzles.O.Unknown); break;
                 case "oo": Cracking_the_Cryptic.Run(p => p.Duration is Puzzles.O.oo); break;
+                case "100": Cracking_the_Cryptic.Run(p => p.Duration <= Puzzles.O.s100); break;
                 default: Cracking_the_Cryptic.Run(); break;
             }
         }

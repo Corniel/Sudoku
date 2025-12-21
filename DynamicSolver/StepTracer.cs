@@ -12,16 +12,14 @@ public sealed class StepTracer(int size = 1024) : IReadOnlyCollection<Step>
 
     public bool Track(Links nodes, Pos cell, Digits mask)
     {
-        var curr = nodes[cell].Digits;
+        var link = nodes[cell];
+        var curr = link.Digits;
         var next = curr & mask;
 
-        if (next == Digits.None)
-        {
-            return false;
-        }
+        if (next == Digits.None) return false;
         else if (next != curr)
         {
-            nodes[cell].Digits = next;
+            link.Digits = next;
 #if DEBUG
             Stack[Count++] = new(cell, curr, next, mask);
 #else

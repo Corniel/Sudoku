@@ -20,6 +20,8 @@ public sealed class Link(Pos pos) : SudokuCell
 
     public List<Restriction> Restrictions { get; } = [];
 
+    public double Bits { get; set; }
+
     /// <inheritdoc />
     public override string ToString() => $"{Pos} = {Digits}";
 }

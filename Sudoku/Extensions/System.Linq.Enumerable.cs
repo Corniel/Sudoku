@@ -1,3 +1,5 @@
+using Sudoku.Restrictions;
+
 namespace System.Linq;
 
 public static class EnumerableExtensions
@@ -20,4 +22,6 @@ public static class EnumerableExtensions
         }
         return null;
     }
+
+    public static IEnumerable<Pair> Couples(this IEnumerable<LookupPair> pairs) => pairs.SelectMany(p => p.Couple());
 }

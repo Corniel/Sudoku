@@ -3,6 +3,7 @@ using System.Collections.Immutable;
 
 namespace DynamicSolver;
 
+[Mutable]
 [DebuggerTypeProxy(typeof(CollectionDebugView))]
 [DebuggerDisplay("Count = {Count}")]
 public sealed class Stack : IReadOnlyCollection<Stack.State>
@@ -14,7 +15,7 @@ public sealed class Stack : IReadOnlyCollection<Stack.State>
 
     public State Current => States[Count];
 
-    public State Push(Link link, PosSet todo) => States[++Count].Set(link, todo);
+    public State Push(StateInfo state) => States[++Count].Set(state);
 
     public State Pop() => States[Count--];
 
@@ -50,17 +51,19 @@ public sealed class Stack : IReadOnlyCollection<Stack.State>
 
         public override string ToString() => $"{Link.Pos}, [{string.Join(',', Digits)}] ({Step}), Todo = {Todo.Count}";
 
-        public State Set(Link link, PosSet todo)
+        public State Set(StateInfo state)
         {
-            Link = link;
-            Todo = todo;
-            Digits = link.Digits;
+            Link = state.Link;
+            Todo = state.Todo;
+            Digits = state.Digits;
             Steps = Lookup[Digits];
             Step = Steps.Length;
             Tracer.Clear();
             return this;
         }
     }
+
+    public readonly record struct StateInfo(Link Link, Digits Digits, PosSet Todo);
 
     private static readonly DigitLookup<ImmutableArray<int>> Lookup = Init();
 

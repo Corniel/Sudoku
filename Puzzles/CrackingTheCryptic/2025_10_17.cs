@@ -43,42 +43,14 @@ public sealed class _2025_10_17 : CtcPuzzle
         + Sum10s()
         + Max13s();
 
-    private static IEnumerable<Sum10> Sum10s()
+    private static IEnumerable<LookupPair> Sum10s()
         => range(_9x9)
-        .Select(p => new Sum10(new(p), new(_9x9 - p - 1)));
+        .Select(p => new LookupPair(new(p), new(_9x9 - p - 1), Sum10));
 
-    private static IEnumerable<Max13> Max13s()
-    {
-        foreach (var p in Pos.All)
-        {
-            if (p.N() is { } n) yield return new Max13(p, n);
-            if (p.E() is { } e) yield return new Max13(p, e);
-            if (p.S() is { } s) yield return new Max13(p, s);
-            if (p.W() is { } w) yield return new Max13(p, w);
-        }
-    }
+    private static IEnumerable<Pair> Max13s()
+        => Dominos.All.Select(dom => new LookupPair(dom.A, dom.B, Max13)).Couples();
 
-    public sealed class Sum10(Pos appliesTo, Pos other) : Pair(appliesTo, other)
-    {
-        public override Digits Restrict(int digit) => [10 - digit];
-    }
+    private static readonly LookupDigits Sum10 = LookupPair.Init(d => [10 - d]);
 
-    public sealed class Max13(Pos appliesTo, Pos other) : Pair(appliesTo, other)
-    {
-        public override Digits Restrict(int digit) => Restrictions[digit];
-
-        private static readonly ImmutableArray<Digits> Restrictions =
-        [
-            /* 0 */ Digits._1_to_9,
-            /* 1 */ Digits._1_to_9,
-            /* 2 */ Digits._1_to_9,
-            /* 3 */ Digits._1_to_9,
-            /* 4 */ Digits._1_to_9,
-            /* 5 */ [1, 2, 3, 4, 5, 6, 7, 8],
-            /* 6 */ [1, 2, 3, 4, 5, 6, 7],
-            /* 7 */ [1, 2, 3, 4, 5, 6],
-            /* 8 */ [1, 2, 3, 4, 5],
-            /* 9 */ [1, 2, 3, 4],
-        ];
-    }
+    private static readonly LookupDigits Max13 = LookupPair.Init(d => Digits.AtMost(13 - d));
 }

@@ -1,4 +1,5 @@
 using Sudoku.Restrictions;
+using System.Diagnostics.Contracts;
 
 namespace DynamicSolver;
 
@@ -20,7 +21,11 @@ public sealed class Links : IReadOnlyCollection<Link>, SudokuCells
         foreach (var restriction in rules.Restrictions)
         {
             foreach (var other in restriction.Links)
-                links[other].Restrictions.Add(restriction);
+            {
+                var othr = links[other];
+                othr.Restrictions.Add(restriction);
+                othr.Bits += 1;
+            }
 
             if (restriction is Mask mask)
                 links[mask.AppliesTo].Digits &= mask.Restrict(links);
@@ -28,12 +33,17 @@ public sealed class Links : IReadOnlyCollection<Link>, SudokuCells
 
         foreach (var (cell, value) in clues)
         {
-            var node = links[cell];
-            node.Digits = [value];
+            var link = links[cell];
+            link.Digits = [value];
             links.Todos ^= cell;
 
-            foreach (var peer in node.Peers)
+            // Exclude clue from peers.
+            foreach (var peer in link.Peers)
                 links[peer].Digits ^= value;
+
+            // Execute restrictions where clue is involved.
+            foreach (var res in link.Restrictions)
+                links[res.AppliesTo].Digits &= res.Restrict(links);
         }
 
         return links;
@@ -58,6 +68,7 @@ public sealed class Links : IReadOnlyCollection<Link>, SudokuCells
     /// <inheritdoc />
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
+    [Pure]
     public string Log()
     {
         var sb = new StringBuilder();

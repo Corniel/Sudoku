@@ -56,7 +56,7 @@ public class Solves
 
         var total = decimal.Round(1m * Iterator.Options.Sum() / puzzles.Length, 2);
 
-        total.Should().Be(14_135.75m);
+        total.Should().Be(26_214.27m);
     }
 
     [Test]

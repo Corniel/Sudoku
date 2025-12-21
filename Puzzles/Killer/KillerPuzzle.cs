@@ -1,3 +1,4 @@
+using Microsoft.VisualBasic;
 using Puzzles.PuzzleBank;
 using System.IO;
 
@@ -11,7 +12,7 @@ public sealed class KillerPuzzle(string title, Rules rules) : Puzzle
 
     public override Rules Constraints { get; } = rules + KillerCages.Extend;
 
-    public static IEnumerable<KillerPuzzle> Load()
+    public static IEnumerable<Puzzle> Load()
     {
         foreach (var name in typeof(PuzzleBankPuzzle).Assembly.GetManifestResourceNames().Where(n => n.StartsWith("Puzzles.Killer.")))
         {
@@ -22,5 +23,9 @@ public sealed class KillerPuzzle(string title, Rules rules) : Puzzle
 
             yield return new KillerPuzzle(name.Split('.')[^2], rules);
         }
+
+        yield return new CrackingTheCryptic._2017_08_26();
+        yield return new CrackingTheCryptic._2020_04_13();
+        yield return new CrackingTheCryptic._2021_07_10();
     }
 }

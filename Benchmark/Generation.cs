@@ -10,7 +10,7 @@ namespace Benchmark;
 public class Generation
 {
     private static readonly Grids grids = new(new Random(42));
-    private static readonly PuzzleGenerator generator = new PuzzleGenerator(ReduceOptions.All, new Random(42));
+    private static readonly PuzzleGenerator generator = new(ReduceOptions.All, new Random(42));
 
     [Benchmark]
     public int Grids()

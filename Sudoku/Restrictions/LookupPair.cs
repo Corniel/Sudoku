@@ -74,18 +74,6 @@ public sealed class LookupPair(Pos appliesTo, Pos other, LookupDigits lookup) : 
             lookup[digits] = classes.FirstOrNone(cls => (digits ^ cls).HasNone) is { } cls
                 ? allowed ^ cls
                 : allowed;
-
-            //if(
-
-            //foreach (var cls in classes)
-            //{
-            //    var inverse = digits ^ cls;
-            //    if (inverse.HasNone)
-            //    {
-            //        lookup[digits] = ;
-            //        break;
-            //    }
-            //}
         }
 
         return lookup;

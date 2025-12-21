@@ -117,7 +117,7 @@ public sealed class _2025_05_21 : CtcPuzzle
 
             private static ImmutableArray<Digits> Init()
             {
-                var lookup = new Digits[1 << 9 + 1];
+                var lookup = new Digits[1 << (_9 + 1)];
 
                 lookup[0] = Digits._1_to_9;
 

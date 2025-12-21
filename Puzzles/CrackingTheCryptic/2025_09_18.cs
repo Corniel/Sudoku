@@ -54,6 +54,7 @@ public sealed class _2025_09_18 : CtcPuzzle
         ...│D..│...
         """)
         + Diagonal()
+
         // As a consquense of the above two
         + RenbanLines.Parse("""
         ...│A..│...

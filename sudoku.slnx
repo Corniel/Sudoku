@@ -10,6 +10,6 @@
   <Project Path="Generator/Generator.csproj" />
   <Project Path="Puzzles/Puzzles.csproj" />
   <Project Path="Specs/Specs.csproj" />
-  <Project Path="Sudoku.App/Sudoku.App.csproj" Id="ffa7655c-ce44-4669-ae1a-49b39105c42c" />
   <Project Path="Sudoku/Sudoku.csproj" />
+  <Project Path="Sudoku.App/Sudoku.App.csproj" />
 </Solution>

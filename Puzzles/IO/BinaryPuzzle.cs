@@ -41,7 +41,7 @@ public sealed class BinaryPuzzle(Clues clues, Cells solution) : Puzzle, IEquatab
             clu |= UInt128.One << pos;
 
         // the cells ande first clue
-        BitConverter.TryWriteBytes(bytes, num | (clu << (13 * 8 - 1)));
+        BitConverter.TryWriteBytes(bytes, num | (clu << ((13 * 8) - 1)));
         stream.Write(bytes.AsSpan(..13));
 
         // All except the first clue

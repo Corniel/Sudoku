@@ -1,5 +1,6 @@
 namespace Sudoku.Common;
 
+[Inheritable]
 public class Set(params ImmutableArray<Pos> cells) : Rule(cells)
 {
     /// <inheritdoc />

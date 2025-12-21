@@ -1,6 +1,5 @@
 using DynamicSolver;
 using Sudoku.Common;
-using Sudoku.Validation;
 
 namespace Specs.Common.SumOfTen_specs;
 

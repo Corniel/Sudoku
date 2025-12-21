@@ -74,12 +74,15 @@ public sealed class _2025_10_07 : CtcPuzzle
         public static GoldenArrow Parse(string str)
             => Sudoku.Parsing.Lines.Parse(str).Select(line => new GoldenArrow(line)).Single();
 
+        /// <inheritdoc />
+        /// <remarks>
+        /// The only sums possible:
+        /// 27 = [1,3,4,5,6,8]
+        /// 28 = [1,3,4,5,6,9]
+        /// 29 = [1,3,4,6,7,8].
+        /// </remarks>
         public override ImmutableArray<Restriction> Restrictions { get; } =
         [
-            // The only sums possible:
-            // 27 = [1,3,4,5,6,8]
-            // 28 = [1,3,4,5,6,9]
-            // 29 = [1,3,4,6,7,8]
             new Mask(cells[0], [2]),
             new Mask(cells[1], [7, 8, 9]),
             new LookupPair((4, 4), cells[1], Center),

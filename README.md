@@ -209,6 +209,7 @@ able to solve the following puzzles (so far):
 | 2025-11-14 | [Braiding Sweetgrass](Puzzles/CrackingTheCryptic/2025_11_14.cs)         | 7,059.6 µs |
 | 2025-11-01 | [Parity Patrol 101](Puzzles/CrackingTheCryptic/2025_11_01.cs)           |    34.3 ms |
 | 2025-10-17 | [Who’s Afraid Of 13](Puzzles/CrackingTheCryptic/2025_10_17.cs)          |    48.6 µs |
+| 2025-10-13 | [Wanddeko](Puzzles/CrackingTheCryptic/2025_10_13.cs)                    |  227.6 ms |
 | 2025-10-07 | [Golden Arrow](Puzzles/CrackingTheCryptic/2025_10_07.cs)                |    22.8 µs |
 | 2025-09-25 | [Threads Of Silence](Puzzles/CrackingTheCryptic/2025_09_25.cs)          | 1,819.6 ms |
 | 2025-09-18 | [Diagonality](Puzzles/CrackingTheCryptic/2025_09_18.cs)                 | 3,795.6 µs |

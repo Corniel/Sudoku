@@ -16,7 +16,11 @@ public sealed class StepTracer(int size = 1024) : IReadOnlyCollection<Step>
         var curr = link.Digits;
         var next = curr & mask;
 
-        if (next == Digits.None) return false;
+        if (next == Digits.None)
+        {
+            link.Bits += Pars.Inconsistency;
+            return false;
+        }
         else if (next != curr)
         {
             link.Digits = next;

@@ -1,5 +1,3 @@
-using System.Collections.Immutable;
-
 namespace DynamicSolver;
 
 public sealed class Iterator : IEnumerator<Links>, IEnumerable<Links>
@@ -42,8 +40,8 @@ public sealed class Iterator : IEnumerator<Links>, IEnumerable<Links>
                     while (valid && restrictions.MoveNext())
                     {
                         var restriction = restrictions.Current;
-                        if (!check.Contains(restriction.AppliesTo)) continue;
-                        valid = trac.Track(Links, restriction.AppliesTo, restrictions.Current.Restrict(Links));
+                        valid = !check.Contains(restriction.AppliesTo)
+                            || trac.Track(Links, restriction.AppliesTo, restrictions.Current.Restrict(Links));
                     }
                 }
 
@@ -80,7 +78,10 @@ public sealed class Iterator : IEnumerator<Links>, IEnumerable<Links>
                 return new(link, link.Digits, todos ^ todo);
             }
 
-            var test = ((Counts[count] + link.Bits) * 2.5) + (link.Peers & todos).Count;
+            var test = 0
+                + Pars.Counts[count]
+                + link.Bits
+                + ((link.Peers & todos).Count * Pars.Peers);
 
             if (test > best)
             {
@@ -94,8 +95,6 @@ public sealed class Iterator : IEnumerator<Links>, IEnumerable<Links>
 
         return new(cell, cell.Digits, todos ^ cell.Pos);
     }
-
-    private static readonly ImmutableArray<int> Counts = [0, 0, 10_000, 8, 6, 4, 3, 2, 1, 0];
 
     public static readonly long[] Options = new long[_9 + 2];
 

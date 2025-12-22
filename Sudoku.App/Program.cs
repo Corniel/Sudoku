@@ -1,3 +1,5 @@
+using Puzzles.CrackingTheCryptic;
+
 namespace Sudoku.App;
 
 public static class Program
@@ -20,6 +22,7 @@ public static class Program
         {
             switch ((args.Length > 1 ? args[1] : string.Empty))
             {
+                case "classic": Cracking_the_Cryptic.Run(p => p is CtcPuzzle ctc && ctc.IsClassic); break;
                 case "?": Cracking_the_Cryptic.Run(p => p.Duration is Puzzles.O.Unknown); break;
                 case "oo": Cracking_the_Cryptic.Run(p => p.Duration is Puzzles.O.oo); break;
                 case "100": Cracking_the_Cryptic.Run(p => p.Duration <= Puzzles.O.s100); break;

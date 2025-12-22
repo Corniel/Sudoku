@@ -188,10 +188,8 @@ public class Roundtrips
 
         var num = Binary.ToUInt128(cells);
         var bac = Binary.TolCells(num);
-        //bac.Should().Be(cells);
+        bac.Should().Be(cells);
     }
-
-    
 }
 
 file static class Log

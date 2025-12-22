@@ -30,7 +30,7 @@ public static class TestSets
             new("Exchange (1000*)", [.. PuzzleBankPuzzle.Diabolical.OrderByDescending(p => p.Level).Select(p => p.Clues).Take(1000)]),
             new("Generated (hard)", [..GeneratedPuzzle.Load(new FileInfo(Path.Combine(Root.FullName, "../sudoku-puzzles/generated.hard.txt"))).Select(p => p.Clues)]),
             new("New York Times", [.. NewYorkTimesPuzzle.Hard.Select(p => p.Clues)]),
-            new("Cracking the Cryptic", [.. CtcPuzzle.Standards.Select(p => p.Clues)]),
+            new("Cracking the Cryptic", [.. CtcPuzzle.Classics.Select(p => p.Clues)]),
         ];
 
         var sw = new Stopwatch();
@@ -81,10 +81,10 @@ public static class TestSets
     }
 
     private static void Log(Stopwatch sw, TestSet set)
-        => Console.Write($"| {set.Clues.Length / sw.Elapsed.TotalMilliseconds,8:#,##0.00} k/s | {sw.Elapsed.TotalMicroseconds / set.Clues.Length,8:#,##0.00} μs");
+        => Console.Write($"| {set.Clues.Length / sw.Elapsed.TotalMilliseconds,10:#,##0.00} k/s | {sw.Elapsed.TotalMicroseconds / set.Clues.Length,9:#,##0.00} μs ");
 
     private static void Log(Stopwatch sw, TimeSpan reference)
-        => Console.Write($"| {sw.Elapsed.TotalSeconds / reference.TotalSeconds,5:0.00} ");
+        => Console.Write($"| {sw.Elapsed.TotalSeconds / reference.TotalSeconds,6:0.00} ");
 
     private static TestSet Kaggle()
     {

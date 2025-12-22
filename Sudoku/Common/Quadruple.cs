@@ -9,9 +9,6 @@ public sealed class Quadruple(Pos appliesTo, ImmutableArray<Pos> others, Digits 
     /// <inheritdoc />
     public override Digits Restrict(SudokuCells cells)
     {
-        var self = cells[AppliesTo].Digits;
-        var others = Others.Select(o => cells[o].Digits).ToArray();
-
         var missing = Digits;
 
         foreach (var o in Others)

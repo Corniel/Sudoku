@@ -5,6 +5,7 @@ namespace Dlx;
 /// This node keeps track of both left and right and up and down.
 /// </remarks>
 [Mutable]
+[Inheritable]
 public class Node
 {
     public Node()

@@ -13,75 +13,69 @@ public class Solves
     [Test]
     public void Without_Clues()
     {
+        using var _ = Logger.Options();
+
         var cells = Solver.Solve(Clues.None, Rules.Standard);
-        cells.Should().Be("""
-            123│456│789
-            456│789│123
-            789│123│456
-            ───┼───┼───
-            261│894│375
-            894│537│261
-            375│261│948
-            ───┼───┼───
-            612│378│594
-            947│615│832
-            538│942│617
-            """);
+        cells.IsSolved.Should().BeTrue();
     }
 
     [Test]
-    public void standard_Diabolical()
-    {
-        var puzzles = PuzzleBankPuzzle.Diabolical.Take(10_000).ToArray();
-
-        using var _ = Logger.Options();
-
-        foreach (var puzzle in puzzles)
-            TestSolver.Solve(puzzle);
-
-        var total = decimal.Round(1m * Iterator.Options.Sum() / puzzles.Length, 2);
-
-        total.Should().Be(214.47m);
-    }
+    public void standard_Easy() => Run(70.29, PuzzleBankPuzzle.Easy.Take(5_000));
 
     [Test]
-    public void Killer_sudoku()
-    {
-        var puzzles = KillerPuzzle.Load().ToArray();
-
-        using var _ = Logger.Options();
-
-        foreach (var puzzle in puzzles)
-            TestSolver.Solve(puzzle);
-
-        var total = decimal.Round(1m * Iterator.Options.Sum() / puzzles.Length, 2);
-
-        total.Should().Be(26_214.27m);
-    }
+    public void standard_Medium() => Run(117.56, PuzzleBankPuzzle.Medium.Take(5_000));
 
     [Test]
-    public void Fantacy_()
-    {
-        Puzzle[] puzzles =
+    public void Standard_Hard() => Run(155.00, PuzzleBankPuzzle.Hard.Take(5_000));
+    
+    [Test]
+    public void Standard_Diabolical() => Run(198.34, PuzzleBankPuzzle.Diabolical.Take(5_000));
+
+    [Test]
+    public void Standard_hardest() => Run(
+        449.18,
+        [
+            .. PuzzleBankPuzzle.Diabolical.OrderByDescending(p => p.Level).Take(1_000),
+            .. CtcPuzzle.Classics
+        ]);
+
+    [Test]
+    public void Killer() => Run(4_482.09, KillerPuzzle.Load());
+
+    [Test]
+    public void Fantacy() => Run(
+        132_167.82,
         [
             new _2020_04_12(),
             new _2024_11_18(),
+            new _2024_12_09(),
             new _2025_03_25(),
             new _2025_08_07(),
+            new _2025_09_03(),
             new _2025_11_17(),
             new _2025_12_11(),
+            new _2025_12_12(),
             new _2025_12_15(),
             new _2025_12_17(),
-        ];
+        ],
+        true);
 
+    static void Run(double avg, IEnumerable<Puzzle> puzzles, bool logPuzzles = false)
+    {
         using var _ = Logger.Options();
 
+        var count = 0;
 
         foreach (var puzzle in puzzles)
+        {
+            if (logPuzzles) Console.WriteLine(puzzle);
+
             TestSolver.Solve(puzzle);
+            count++;
+        }
 
-        var total = decimal.Round(1m * Iterator.Options.Sum() / puzzles.Length, 2);
+        var total = decimal.Round(1m * Iterator.Options.Sum() / count, 2);
 
-        total.Should().Be(126_623.12M);
+        total.Should().Be((decimal)avg);
     }
 }

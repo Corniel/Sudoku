@@ -24,7 +24,7 @@ public sealed class Links : IReadOnlyCollection<Link>, SudokuCells
             {
                 var othr = links[other];
                 othr.Restrictions.Add(restriction);
-                othr.Bits += 1;
+                othr.Bits += Pars.Bits;
             }
 
             if (restriction is Mask mask)

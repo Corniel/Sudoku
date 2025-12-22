@@ -204,6 +204,7 @@ able to solve the following puzzles (so far):
 | 2025-12-07 | [Odd Way To Even Out](Puzzles/CrackingTheCryptic/2025_12_07.cs)         | 1,141.7 ms |
 | 2025-11-28 | [Brink](Puzzles/CrackingTheCryptic/2025_11_28.cs)                       |    28.0 ms |
 | 2025-11-25 | [Simple Miracle](Puzzles/CrackingTheCryptic/2025_11_25.cs)              |   811.5 µs |
+| 2025-11-23 | [Ice Breaker](Puzzles/CrackingTheCryptic/2025_11_23.cs)                 |    69.5 ms |
 | 2025-11-17 | [wicked](Puzzles/CrackingTheCryptic/2025_11_17.cs)                      |    20.2 ms |
 | 2025-11-14 | [Braiding Sweetgrass](Puzzles/CrackingTheCryptic/2025_11_14.cs)         | 7,059.6 µs |
 | 2025-11-01 | [Parity Patrol 101](Puzzles/CrackingTheCryptic/2025_11_01.cs)           |    34.3 ms |
@@ -258,7 +259,7 @@ able to solve the following puzzles (so far):
 | 2019-05-09 | [Jigsaw Sudoku](Puzzles/CrackingTheCryptic/2019_05_09.cs)               | 3,932.0 µs |
 | 2019-03-18 | [X-Wing Sudoku](Puzzles/CrackingTheCryptic/2019_03_18.cs)               |    36.6 µs |
 | 2019-02-01 | [New York Times](Puzzles/CrackingTheCryptic/2019_02_01.cs)              |    43.5 µs |
-| 2019-01-15 | [Hard Sudoku](Puzzles/CrackingTheCryptic/2019_01_15.cs)                 |    90.2 µs |
+| 2019-01-15 | [Hard Sudoku](Puzzles/CrackingTheCryptic/2019_01_15.cs)                 |    52.9 µs |
 | 2018-09-19 | [New York Times](Puzzles/CrackingTheCryptic/2018_09_19.cs)              | 8,600.0 ns |
 | 2018-06-07 | [New York Times](Puzzles/CrackingTheCryptic/2018_06_07.cs)              |    93.2 µs |
 | 2017-09-23 | [Diabolic](Puzzles/CrackingTheCryptic/2017_09_23.cs)                    |    23.0 µs |

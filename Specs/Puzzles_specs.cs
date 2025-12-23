@@ -23,7 +23,7 @@ public class Cracking_the_Cryptic
     {
         using var _ = Logger.Options();
 
-        var puzzle = new _2025_12_20();
+        var puzzle = new _2023_01_15();
 
         if (puzzle.Solution.IsSolved)
             puzzle.Constraints.Should().BeValidFor(puzzle.Solution);

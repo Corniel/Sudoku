@@ -27,7 +27,7 @@ public static class Cracking_the_Cryptic
 
         Console.Write($"\r{Format(puzzle, "..")}");
 
-        for (var a = 0; a < 100 && total < TimeSpan.FromMinutes(3); a++)
+        for (var a = 0; a < 1000 && total < TimeSpan.FromMinutes(3); a++)
         {
             sw.Restart();
             var solution = DynamicSolver.Solver.Solve(puzzle.Clues, puzzle.Constraints);

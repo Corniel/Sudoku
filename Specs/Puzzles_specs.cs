@@ -23,7 +23,7 @@ public class Cracking_the_Cryptic
     {
         using var _ = Logger.Options();
 
-        var puzzle = new _2019_01_15();
+        var puzzle = new _2025_12_20();
 
         if (puzzle.Solution.IsSolved)
             puzzle.Constraints.Should().BeValidFor(puzzle.Solution);
@@ -354,6 +354,8 @@ public class Other
     [Test]
     public void Wikipedia_example()
     {
+        using var _ = Logger.Options();
+
         var clues = Clues.Parse("""
             53.|.7.|...
             6..|195|...
@@ -384,8 +386,10 @@ public class Other
     }
 
     [Test]
-    public void worlds_ardest_Studoku_according_The_Telegraph()
+    public void worlds_hardest_Studoku_according_The_Telegraph()
     {
+        using var _ = Logger.Options();
+
         var clues = Clues.Parse("""
             8..|...|...
             ..3|6..|...

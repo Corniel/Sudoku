@@ -196,6 +196,7 @@ able to solve the following puzzles (so far):
 
 | Date       | Puzzle                                                                  |      Speed |
 |:----------:|-------------------------------------------------------------------------|-----------:|
+| 2025-12-20 | [Zebra Knights](Puzzles/CrackingTheCryptic/2025_12_20.cs)               |   192.2 µs |
 | 2025-12-17 | [The Fireflies' Pairing](Puzzles/CrackingTheCryptic/2025_12_17.cs)      |   363.5 µs |
 | 2025-12-15 | [For Daniël.](Puzzles/CrackingTheCryptic/2025_12_15.cs)                 | 3,444.7 µs |
 | 2025-12-12 | [Crossroads On Another World](Puzzles/CrackingTheCryptic/2025_12_12.cs) |    32.4 ms |

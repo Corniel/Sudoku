@@ -14,89 +14,72 @@ public static class Generator
     {
         var random = new Random(seed ?? size);
         var generator = new PuzzleGenerator(ReduceOptions.All, random);
+        using var writer = new StreamWriter("c:/TEMP/sudoku.generated.txt", true);
 
-        using var easy = new StreamWriter("c:/TEMP/sudoku.easy.txt", true);
-        using var medium = new StreamWriter("c:/TEMP/sudoku.medium.txt", true);
-        using var hard = new StreamWriter("c:/TEMP/sudoku.hard.txt", true);
-
+        var attempts = 0;
         var count = 0;
 
-        foreach (var candidate in generator.Take(size))
+        var clues = new int[_9x9];
+        var strategies = Enum.GetValues<StrategyType>().ToDictionary(t => t, _ => 0);
+
+        foreach (var candidate in generator)
         {
+            attempts++;
+            if (!candidate.IsChallenging()) continue;
+
             count++;
 
-            var writer = hard;
-            //candidate.Strategies.Max() switch
-            //{
-            //    StrategyType.HiddenSingles => easy,
-            //    > StrategyType.HiddenPairs when candidate.Strategies.Length > 
-            //    var max when max <= StrategyType.HiddenPairs => medium,
-            //    _ => hard,
-            //};
+            candidate.Clues.WriteTo(writer);
+            writer.Write(' ');
+            candidate.Solution.WriteTo(writer);
 
-            if (candidate.Strategies.Contains(StrategyType.HiddenSingles)
-                && candidate.Strategies.Count(s =>s > StrategyType.HiddenPairs) > 1)
+            foreach (var strat in candidate.Strategies)
             {
-
-                candidate.Clues.WriteTo(writer);
-                writer.Write(' ');
-                candidate.Solution.WriteTo(writer);
-
-                foreach (var strat in candidate.Strategies)
+                if (Labels.TryGetValue(strat, out var label))
                 {
-                    if (Labels.TryGetValue(strat, out var label))
-                    {
-                        writer.Write(' ');
-                        writer.Write(label);
-                    }
+                    writer.Write(' ');
+                    writer.Write(label);
                 }
-                writer.Write('\n');
             }
+            writer.Write('\n');
+            writer.Flush();
 
-            if ((count % 1000) == 0 || count == size)
-            {
-                easy.Flush();
-                medium.Flush();
-                hard.Flush();
+            foreach (var strat in candidate.Strategies.Distinct())
+                strategies[strat]++;
 
-                var stats = generator.Stats;
+            clues[candidate.Clues.Count]++;
 
-                Console.Clear();
-                Console.WriteLine("# Strategies");
-                foreach (var i in stats.Strategies.NonZero())
-                {
-                    Console.WriteLine($"{(StrategyType)i,-14} => {stats.Strategies[i],8:#,##0}");
-                }
-                Console.WriteLine("# Fetches");
-                foreach (var i in stats.Tries.NonZero())
-                {
-                    Console.WriteLine($"{i} => {stats.Fetches[i],13:#,##0} out {stats.Tries[i],13:#,##0}");
-                }
+            Console.Clear();
+            Console.WriteLine($"Generated: {count:#,##0} ({100m * count / attempts:0.00}% out of {attempts:#,##0})");
+            Console.WriteLine();
 
-                Console.WriteLine("# Reductions");
-                foreach (var i in stats.Reductions.NonZero())
-                {
-                    Console.WriteLine($"{i,2} => {stats.Reductions[i],13:#,##0}");
-                }
-                Console.WriteLine("# Clue Counts");
-                foreach (var i in stats.ClueCounts.NonZero())
-                {
-                    Console.WriteLine($"{i,2} => {stats.ClueCounts[i],13:#,##0}");
-                }
-                Console.CursorTop = 0;
-            }
+            foreach (var (strat, cnt) in strategies
+                .Where(kvp => kvp.Key is not StrategyType.None)
+                .OrderByDescending(kvp => kvp.Value))
+                Console.WriteLine($"{strat,-14} {cnt,8:#,##0} ({100m * cnt / count:0.00}%)");
+
+            Console.WriteLine();
+
+            var min = clues.Index().First(x => x.Item > 0).Index;
+            var max = clues.Index().Last(x => x.Item > 0).Index;
+
+            for (var i = min; i <= max; i++)
+                Console.WriteLine($"{i}: {clues[i],8:#,##0}");
+
+            Console.CursorTop = 0;
+
+            if (size == count) return;
         }
     }
 
-    private static IEnumerable<int> NonZero(this int[] numbers)
-    {
-        var start = 0;
-        while (numbers[start] is 0) start++;
-        var end = numbers.Length - 1;
-        while (numbers[end] is 0) end--;
-
-        return range(start, end - start + 1);
-    }
+    /// <summary>
+    /// Requires:
+    /// * Hidden Singles.
+    /// * At least two strategies more advanced then hidden pairs.
+    /// </summary>
+    private static bool IsChallenging(this Generated candidate)
+        => candidate.Strategies.Contains(StrategyType.HiddenSingles)
+        && candidate.Strategies.Count(s => s > StrategyType.HiddenPairs) > 1;
 
     private static readonly FrozenDictionary<StrategyType, string> Labels = Enum.GetValues<StrategyType>()
         .Select(t => KeyValuePair.Create(t, typeof(StrategyType)

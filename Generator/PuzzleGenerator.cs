@@ -36,10 +36,6 @@ public sealed class PuzzleGenerator(ReduceOptions options, Random rnd)
 
             done = NextOverlays(solution, done);
             done = ApplyOverlays(solution, done);
-
-            Stats.Reductions[size - done.Count]++;
-            Stats.ClueCounts[done.Count]++;
-
             Current = NextGenerated(solution, done);
         }
         while (Current.Strategies.Length < 2);
@@ -56,9 +52,6 @@ public sealed class PuzzleGenerator(ReduceOptions options, Random rnd)
 
         foreach (var strategy in solved)
             StrategyTypes.Add(strategy.Type);
-
-        foreach (var strategy in Current.Strategies)
-            Stats.Strategies[(int)strategy]++;
 
         return new()
         {
@@ -82,16 +75,8 @@ public sealed class PuzzleGenerator(ReduceOptions options, Random rnd)
             var testr = new StrategyBasedSolver(nodes & Rules & clues, Options);
             while (testr.MoveNext()) {/* Solve what can be solved. */ }
 
-            Stats.Tries[overlay.Count]++;
-
             if (!nodes.IsSolved)
-            {
                 done |= overlay.Pos;
-            }
-            else
-            {
-                Stats.Fetches[overlay.Count]++;
-            }
         }
         return done;
     }
@@ -107,15 +92,9 @@ public sealed class PuzzleGenerator(ReduceOptions options, Random rnd)
 
             // The shared clues give all but one hint, so this one can be removed.
             if (other.Count is 1)
-            {
-                Stats.Tries[1]++;
-                Stats.Fetches[1]++;
                 done ^= cell;
-            }
             else if (other.Count < 8)
-            {
                 Overlays.Add(new(cell, shared, other));
-            }
         }
         Overlays.Sort();
 
@@ -193,6 +172,4 @@ public sealed class PuzzleGenerator(ReduceOptions options, Random rnd)
                 ^ cell;
         })
     ];
-
-    public readonly GeneratorStats Stats = new();
 }

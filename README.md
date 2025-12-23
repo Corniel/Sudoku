@@ -251,6 +251,7 @@ able to solve the following puzzles (so far):
 | 2021-01-06 | [Non-consecutive Killer](Puzzles/CrackingTheCryptic/2021_01_06.cs)      |   192.2 ms |
 | 2020-09-30 | [Classic Sudoku!](Puzzles/CrackingTheCryptic/2020_09_30_1_.cs)          |    10.7 µs |
 | 2020-09-30 | [Tatooine Sunset](Puzzles/CrackingTheCryptic/2020_09_30.cs)             |    19.4 µs |
+| 2020-09-18 | [Patto Patto](Puzzles/CrackingTheCryptic/2020_09_18.cs)                 |   125.2 µs |
 | 2020-09-15 | [Sudoku XV](Puzzles/CrackingTheCryptic/2020_09_30.cs)                   |    98.9 µs |
 | 2020-04-13 | [Killer Sudoku](Puzzles/CrackingTheCryptic/2020_04_13.cs)               | 3,302.2 µs |
 | 2020-04-12 | [Magic Square Sudoku](Puzzles/CrackingTheCryptic/2020_04_12.cs)         |   290.9 µs |

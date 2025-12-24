@@ -25,6 +25,8 @@ public sealed record Strategy(StrategyType Type, Reduce Reduce)
         [StrategyType.TwoStringKite] /*..*/ = SingleDigit.TwoStringKite,
         [StrategyType.Crane] /*..........*/ = SingleDigit.Crane,
 
+        [StrategyType.XYWing] /*.........*/ = Wings.XY,
+
         [StrategyType.Swordfish] /*......*/ = SingleDigit.Swordfish,
         [StrategyType.Jellyfish] /*......*/ = SingleDigit.Jellyfish,
     }

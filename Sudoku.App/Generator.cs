@@ -1,4 +1,5 @@
 using Generator;
+using Puzzles;
 using StrategyBased;
 using System.Collections.Frozen;
 using System.Collections.Generic;
@@ -10,19 +11,37 @@ namespace Sudoku.App;
 
 public static class Generator
 {
+    private static readonly DirectoryInfo Root = new(Path.Combine(typeof(TestSets).Assembly.Location, "../../../../../"));
+
+    public static void ReApply()
+    {
+        var generator = new PuzzleGenerator(ReduceOptions.All, new());
+        using var writer = new StreamWriter("c:/TEMP/sudoku.generated.txt", true);
+
+        var candidates = GeneratedPuzzle.Load(new FileInfo(Path.Combine(Root.FullName, "../sudoku-puzzles/generated.hard.txt")))
+            .Select(puzzle => generator.ReApply(puzzle.Solution, puzzle.Clues));
+
+        Generate(candidates, writer);
+    }
+
     public static void Generate(int size, int? seed = null)
     {
         var random = new Random(seed ?? size);
         var generator = new PuzzleGenerator(ReduceOptions.All, random);
         using var writer = new StreamWriter("c:/TEMP/sudoku.generated.txt", true);
 
+        Generate(generator, writer, size);
+    }
+
+    private static void Generate(IEnumerable<Generated> candidates, StreamWriter writer, int size = int.MaxValue)
+    {
         var attempts = 0;
         var count = 0;
 
         var clues = new int[_9x9];
         var strategies = Enum.GetValues<StrategyType>().ToDictionary(t => t, _ => 0);
 
-        foreach (var candidate in generator)
+        foreach (var candidate in candidates)
         {
             attempts++;
             if (!candidate.IsChallenging()) continue;
@@ -56,7 +75,7 @@ public static class Generator
             foreach (var (strat, cnt) in strategies
                 .Where(kvp => kvp.Key is not StrategyType.None)
                 .OrderByDescending(kvp => kvp.Value))
-                Console.WriteLine($"{strat,-14} {cnt,8:#,##0} ({100m * cnt / count:0.00}%)");
+                Console.WriteLine($"{strat,-14} {cnt,8:#,##0} {100m * cnt / count,6:0.00}%");
 
             Console.WriteLine();
 
@@ -78,8 +97,8 @@ public static class Generator
     /// * At least two strategies more advanced then hidden pairs.
     /// </summary>
     private static bool IsChallenging(this Generated candidate)
-        => candidate.Strategies.Contains(StrategyType.HiddenSingles)
-        && candidate.Strategies.Count(s => s > StrategyType.HiddenPairs) > 1;
+        => candidate.Strategies.Count(s => s  is > StrategyType.NakedSingles and < StrategyType.HiddenTriples) > 1
+        && candidate.Strategies.Count(s => s >= StrategyType.HiddenTriples) > 1;
 
     private static readonly FrozenDictionary<StrategyType, string> Labels = Enum.GetValues<StrategyType>()
         .Select(t => KeyValuePair.Create(t, typeof(StrategyType)

@@ -19,6 +19,7 @@ public sealed record ReduceOptions()
 
             StrategyType.NakedPairs,
             StrategyType.XWing,
+            StrategyType.XYWing,
 
             StrategyType.HiddenTriples,
             StrategyType.NakedTriples,

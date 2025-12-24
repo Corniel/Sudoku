@@ -11,6 +11,9 @@ public static class Program
 
         else if (args[0] == "nyt")
             Console.WriteLine($"Downloaded NYT {await NewYorkTimesCollector.Load():yyy-MM-dd}");
+        
+        else if (args[0] == "reapply")
+            Generator.ReApply();
 
         else if (args[0] == "gen")
         {

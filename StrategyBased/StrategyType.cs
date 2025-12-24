@@ -12,38 +12,41 @@ public enum StrategyType
     PointingDigits /*.*/ = 03,
 
     [Display(Name = "h2")]
-    HiddenPairs /*....*/ = 04,
+    HiddenPairs /*....*/,
 
     [Display(Name = "n2")]
-    NakedPairs /*.....*/ = 05,
+    NakedPairs /*.....*/,
 
     [Display(Name = "xwing")]
-    XWing /*..........*/ = 06,
+    XWing /*..........*/,
+
+    [Display(Name = "xywing")]
+    XYWing,
 
     [Display(Name = "h3")]
-    HiddenTriples /*..*/ = 07,
+    HiddenTriples /*..*/,
     
     [Display(Name = "n3")]
-    NakedTriples /*...*/ = 08,
+    NakedTriples /*...*/,
 
     [Display(Name = "sky")]
-    Skyscraper /*.....*/ = 09,
+    Skyscraper /*.....*/,
 
     [Display(Name = "kite")]
-    TwoStringKite/*...*/ = 10,
+    TwoStringKite/*...*/,
 
     [Display(Name = "crane")]
-    Crane/*...........*/ = 11,
+    Crane/*...........*/,
 
     [Display(Name = "sfish")]
-    Swordfish /*......*/ = 12,
+    Swordfish /*......*/,
 
     [Display(Name = "h4")]
-    HiddenQuads /*....*/ = 13,
+    HiddenQuads /*....*/,
 
     [Display(Name = "n4")]
-    NakedQuads /*.....*/ = 14,
+    NakedQuads /*.....*/,
 
     [Display(Name = "jfish")]
-    Jellyfish /*......*/ = 15,
+    Jellyfish /*......*/,
 }

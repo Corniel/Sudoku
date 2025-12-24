@@ -26,14 +26,19 @@ public sealed class PuzzleGenerator(ReduceOptions options, Random rnd)
 
     object IEnumerator.Current => Current;
 
+    public Generated ReApply(Cells solution, Clues clues)
+    {
+        PosSet done = [.. clues.Select(c => c.Pos)];
+        done = NextOverlays(solution, done);
+        done = ApplyOverlays(solution, done);
+        return NextGenerated(solution, done);
+    }
+
     public bool MoveNext()
     {
         do
         {
             var (solution, done) = NextCandidate();
-
-            var size = done.Count;
-
             done = NextOverlays(solution, done);
             done = ApplyOverlays(solution, done);
             Current = NextGenerated(solution, done);

@@ -11,19 +11,14 @@ using System.Text;
 
 namespace Specs.Puzzles_specs;
 
-public class Cracking_the_Cryptic
+public class Work_in_progress
 {
-    private static readonly ImmutableArray<Puzzle> Unknowns = [.. CtcPuzzle.All.Where(p => p.Duration is O.Unknown)];
-    private static readonly ImmutableArray<Puzzle> Fasts = [.. CtcPuzzle.All.Where(p => p.Duration is <= O.ms100 and not O.Unknown)];
-    private static readonly ImmutableArray<Puzzle> Slows = [.. CtcPuzzle.All.Where(p => p.Duration is > O.ms100 and not O.oo)];
-    private static readonly ImmutableArray<Puzzle> Unsolvables = [.. CtcPuzzle.All.Where(p => p.Duration is O.oo)];
-
     [Test]
-    public void Work_in_progress()
+    public void Cracking_the_Cryptic()
     {
         using var _ = Logger.Options();
 
-        var puzzle = new _2023_01_15();
+        var puzzle = new _2025_12_24();
 
         if (puzzle.Solution.IsSolved)
             puzzle.Constraints.Should().BeValidFor(puzzle.Solution);
@@ -40,6 +35,14 @@ public class Cracking_the_Cryptic
 
         solver.MoveNext().Should().BeFalse("Solution should be unique");
     }
+}
+
+public class Cracking_the_Cryptic
+{
+    private static readonly ImmutableArray<Puzzle> Unknowns = [.. CtcPuzzle.All.Where(p => p.Duration is O.Unknown)];
+    private static readonly ImmutableArray<Puzzle> Fasts = [.. CtcPuzzle.All.Where(p => p.Duration is <= O.ms100 and not O.Unknown)];
+    private static readonly ImmutableArray<Puzzle> Slows = [.. CtcPuzzle.All.Where(p => p.Duration is > O.ms100 and not O.oo)];
+    private static readonly ImmutableArray<Puzzle> Unsolvables = [.. CtcPuzzle.All.Where(p => p.Duration is O.oo)];
 
     [TestCaseSource(nameof(Unknowns))]
     public void Unknown(Puzzle puzzle) => Solve(puzzle);

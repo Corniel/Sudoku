@@ -55,50 +55,12 @@ public class Solves
         }
     });
 
-    //                                   solv    h1     pd     h2     n2    xwing  xywing   h3    n3    sky     kite  crane, sfish    h4     n4   jfish
-    [TestCase(nameof(Easys), /*.......*/ _all_, 42_76, _none, _none, _none, _none, _none, _none, _none, _none, _none, _none, _none, _none, _none, _none)]
-    [TestCase(nameof(Mediums), /*.....*/ _all_, 85_18, 27_93, 04_64, _none, _none, _none, _none, _none, _none, _none, _none, _none, _none, _none, _none)]
-    [TestCase(nameof(Hards), /*.......*/ 78_62, 99_90, 89_29, 48_71, 14_42, 16_89, 20_12, 04_83, 00_74, 14_86, 13_89, 01_79, 01_39, 00_05, _none, 00_03)]
-    [TestCase(nameof(Diabolicals), /*.*/ 00_57, 99_53, 90_95, 46_52, 14_56, 14_75, 15_54, 07_32, 01_26, 15_77, 29_13, 05_90, 02_50, 00_65, 00_03, 00_38)]
-    public void Using(
-        string collection,
-        int solved,
-        int hiddenSingles,
-        int pointingDigits,
-        int hiddenPairs,
-        int nakedPairs,
-        int xwing,
-        int xywing,
-        int hiddenTriples,
-        int nakedTriples,
-        int skyscraper,
-        int kite,
-        int crane,
-        int swordfish,
-        int hiddenQuads,
-        int nakedQuads,
-        int jellyfish)
-    {
-        var options = new ReduceOptions
-        (
-            HiddenSingles,
-            PointingDigits,
-            HiddenPairs,
-            NakedPairs,
-            XWing,
-            XYWing,
-            HiddenTriples,
-            NakedTriples,
-            Skyscraper,
-            TwoStringKite,
-            Crane,
-            Swordfish,
-            HiddenQuads,
-            NakedQuads,
-            Jellyfish
-        );
 
-        var puzzles = Sets[collection];
+    [TestCaseSource(nameof(Usings))]
+    public void Using(Techniques t)
+    { 
+        var options = ReduceOptions.All;
+        var puzzles = Sets[t.Set];
         var results = options.Strategies.ToDictionary(s => s.Type, _ => 0);
 
         var solutions = 0;
@@ -118,35 +80,36 @@ public class Solves
         }
 
         Console.WriteLine($"Solved: {solutions:00_00}");
+        var max = results.Keys.Select(k => k.ToString().Length).Max();
         foreach (var kvp in results)
         {
-            Console.WriteLine($"{kvp.Key,-20}: {kvp.Value:00_00}");
+            var dots = new string('.', max - kvp.Key.ToString().Length);
+            Console.WriteLine($"{kvp.Key} /*{dots}.*/ = {kvp.Value:00_00},");
         }
 
         wrong.Should().Be(0);
-        solutions.Should().Be(solved);
+        solutions.Should().Be(t.Solved);
         results.Should().BeEquivalentTo(new Dictionary<StrategyType, int>()
         {
-            [HiddenSingles] = hiddenSingles,
-            [PointingDigits] = pointingDigits,
-            [HiddenPairs] = hiddenPairs,
-            [NakedPairs] = nakedPairs,
-            [XWing] = xwing,
-            [XYWing] = xywing,
-            [HiddenTriples] = hiddenTriples,
-            [NakedTriples] = nakedTriples,
-            [Skyscraper] = skyscraper,
-            [TwoStringKite] = kite,
-            [Crane] = crane,
-            [Swordfish] = swordfish,
-            [HiddenQuads] = hiddenQuads,
-            [NakedQuads] = nakedQuads,
-            [Jellyfish] = jellyfish,
+            [HiddenSingles] = t.HiddenSingles,
+            [PointingDigits] = t.PointingDigits,
+            [HiddenPairs] = t.HiddenPairs,
+            [NakedPairs] = t.NakedPairs,
+            [XWing] = t.XWing,
+            [HiddenTriples] = t.HiddenTriples,
+            [NakedTriples] = t.NakedTriples,
+            [Skyscraper] = t.Skyscraper,
+            [TwoStringKite] = t.TwoStringKite,
+            [Crane] = t.Crane,
+            [XYWing] = t.XYWing,
+            [Swordfish] = t.Swordfish,
+            [WWing] = t.WWing,
+            [HiddenQuads] = t.HiddenQuads,
+            [NakedQuads] = t.NakedQuads,
+            [Jellyfish] = t.Jellyfish,
         });
     }
 
-    private const int _none = 0;
-    private const int _all_ = Take;
     private const int Take = 10_000;
 
     private static readonly ImmutableArray<Puzzle> Easys = [.. PuzzleBankPuzzle.Easy.Take(Take)];
@@ -165,4 +128,77 @@ public class Solves
         [nameof(Diabolicals)] = Diabolicals,
     }
     .ToFrozenDictionary();
+
+
+    private const int _all_ = Take;
+
+    private static readonly Techniques[] Usings =
+    [
+        new() { Set = nameof(Easys), Solved = _all_, HiddenSingles = 42_76 },
+        new() { Set = nameof(Mediums), Solved = _all_, HiddenSingles = 85_18, PointingDigits = 27_93, HiddenPairs = 04_64 },
+        new() 
+        {
+            Set = nameof(Hards),
+            Solved /*.........*/ = 85_53,
+            HiddenSingles /*..*/ = 99_90,
+            PointingDigits /*.*/ = 89_40,
+            HiddenPairs /*....*/ = 48_84,
+            NakedPairs /*.....*/ = 14_65,
+            XWing /*..........*/ = 17_47,
+            HiddenTriples /*..*/ = 05_67,
+            NakedTriples /*...*/ = 00_86,
+            Skyscraper /*.....*/ = 17_74,
+            TwoStringKite /*..*/ = 17_51,
+            Crane /*..........*/ = 02_45,
+            XYWing /*.........*/ = 15_66,
+            Swordfish /*......*/ = 01_43,
+            WWing /*..........*/ = 09_94,
+            HiddenQuads /*....*/ = 00_05,
+            NakedQuads /*.....*/ = 00_00,
+            Jellyfish /*......*/ = 00_01,
+        },
+        new()
+        {
+            Set = nameof(Diabolicals),
+            Solved /*.........*/ = 13_44,
+            HiddenSingles /*..*/ = 99_54,
+            PointingDigits /*.*/ = 91_27,
+            HiddenPairs /*....*/ = 47_18,
+            NakedPairs /*.....*/ = 14_93,
+            XWing /*..........*/ = 15_44,
+            HiddenTriples /*..*/ = 07_65,
+            NakedTriples /*...*/ = 01_38,
+            Skyscraper /*.....*/ = 16_82,
+            TwoStringKite /*..*/ = 30_74,
+            Crane /*..........*/ = 06_56,
+            XYWing /*.........*/ = 16_30,
+            Swordfish /*......*/ = 02_61,
+            WWing /*..........*/ = 28_75,
+            HiddenQuads /*....*/ = 00_58,
+            NakedQuads /*.....*/ = 00_03,
+            Jellyfish /*......*/ = 00_25,
+        },
+    ];
+
+    public sealed record Techniques
+    {
+        public required string Set { get; init; }
+        public required int Solved { get; init; }
+        public int HiddenSingles { get; init; }
+        public int PointingDigits { get; init; }
+        public int HiddenPairs { get; init; }
+        public int NakedPairs { get; init; }
+        public int XWing { get; init; }
+        public int HiddenTriples { get; init; }
+        public int NakedTriples { get; init; }
+        public int Skyscraper { get; init; }
+        public int TwoStringKite { get; init; }
+        public int Crane { get; init; }
+        public int XYWing { get; init; }
+        public int Swordfish { get; init; }
+        public int WWing { get; init; }
+        public int HiddenQuads { get; init; }
+        public int NakedQuads { get; init; }
+        public int Jellyfish { get; init; }
+    }
 }

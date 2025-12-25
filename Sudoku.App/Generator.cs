@@ -97,8 +97,10 @@ public static class Generator
     /// * At least two strategies more advanced then hidden pairs.
     /// </summary>
     private static bool IsChallenging(this Generated candidate)
-        => candidate.Strategies.Count(s => s  is > StrategyType.NakedSingles and < StrategyType.HiddenTriples) > 1
-        && candidate.Strategies.Count(s => s >= StrategyType.HiddenTriples) > 1;
+        => candidate.Strategies.Count(s => s  is > StrategyType.NakedSingles and < Level) > 1
+        && candidate.Strategies.Count(s => s >= Level) > 1;
+
+    private const StrategyType Level = StrategyType.XWing;
 
     private static readonly FrozenDictionary<StrategyType, string> Labels = Enum.GetValues<StrategyType>()
         .Select(t => KeyValuePair.Create(t, typeof(StrategyType)

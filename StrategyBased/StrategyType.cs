@@ -22,7 +22,7 @@ public enum StrategyType
 
     [Display(Name = "xywing")]
     XYWing,
-
+        
     [Display(Name = "h3")]
     HiddenTriples /*..*/,
     
@@ -40,6 +40,9 @@ public enum StrategyType
 
     [Display(Name = "sfish")]
     Swordfish /*......*/,
+
+    [Display(Name = "wwing")]
+    WWing,
 
     [Display(Name = "h4")]
     HiddenQuads /*....*/,

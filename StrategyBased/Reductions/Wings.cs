@@ -1,10 +1,8 @@
-using System.Net.NetworkInformation;
-
 namespace StrategyBased.Reductions;
 
 public static class Wings
 {
-    /// <summary>Spots XY Wings (also known as Y Wings).</summary>
+    /// <summary>Spots XY-Wings (also known as Y-Wings).</summary>
     /// <remarks>
     /// See: https://sudoku.coach/en/learn/y-wing.
     /// </remarks>
@@ -13,7 +11,7 @@ public static class Wings
         Pairs.Clear();
         Pairs.AddRange(nodes.Where(c => c.Digits.Count is 2));
 
-        foreach(var (one, two) in Pairs.Take2())
+        foreach (var (one, two) in Pairs.Take2())
             XY(one, two, nodes);
     }
 
@@ -23,7 +21,7 @@ public static class Wings
         // Find to Pivot and wing.
         if (!(one.Digits & two.Digits).HasSingle || one.Peers.Contains(two.Pos)) return;
 
-        foreach(var pivot in Pairs)
+        foreach (var pivot in Pairs)
         {
             // Skip doubles
             if (pivot.Digits == one.Digits
@@ -42,6 +40,52 @@ public static class Wings
 
                 return;
             }
+        }
+    }
+
+    /// <summary>Spots W-Wings.</summary>
+    /// <remarks>
+    /// See: https://sudoku.coach/en/learn/w-wing.
+    /// </remarks>
+    public static void W(Nodes nodes)
+    {
+        Pairs.Clear();
+        Pairs.AddRange(nodes.Where(c => c.Digits.Count is 2));
+
+        foreach (var (one, two) in Pairs.Take2())
+            W(one, two, nodes);
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private static void W(Node one, Node two, Nodes nodes)
+    {
+        // A pair that does not see each other but sees at least some cells
+        if (one.Digits != two.Digits ||
+            one.Peers.Contains(two.Pos) ||
+            (one.Links & two.Links) is not { HasAny: true } shared) return;
+
+        var combined = one.Peers | two.Peers;
+
+        foreach (var digit in one.Digits)
+        {
+            if (nodes.Houses.Any(h => IsInconsistent(h.Cells, digit)))
+            {
+                foreach (var share in shared)
+                    nodes[share].Digits ^= one.Digits ^ digit;
+
+                break;
+            }
+        }
+
+        // Setting the digit will lead to an inconsistency
+        // if the part of the box that is not shared does not conain
+        // the tested digit.
+        bool IsInconsistent(PosSet house, int digit)
+        {
+            // Only consider houses (boxes) that can be seen by both nodes.
+            return (one.Links & house).HasAny 
+                && (two.Links & house).HasAny
+                && (house ^ combined).NotAny(cell => nodes[cell].Digits.Contains(digit));
         }
     }
 

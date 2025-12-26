@@ -18,7 +18,7 @@ public class Work_in_progress
     {
         using var _ = Logger.Options();
 
-        var puzzle = new _2025_12_24();
+        var puzzle = new _2025_12_25();
 
         if (puzzle.Solution.IsSolved)
             puzzle.Constraints.Should().BeValidFor(puzzle.Solution);

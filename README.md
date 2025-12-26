@@ -18,17 +18,17 @@ Obviously, standard Suduko's are supported.
 
 ``` csharp
 var clues = Clues.Parse("""
-    8..│...│...
-    ..3│6..│...
-    .7.│.9.│2..
-    ───┼───┼───
-    .5.│..7│...
-    ...│.45│7..
-    ...│1..│.3.
-    ───┼───┼───
-    ..1│...│.68
-    ..8│5..│.1.
-    .9.│...│4..
+    8..|...|...
+    ..3|6..|...
+    .7.|.9.|2..
+    ---+---+---  
+    .5.|..7|...
+    ...|.45|7..
+    ...|1..|.3.
+    ---+---+---─
+    ..1|...|.68
+    ..8|5..|.1.
+    .9.|...|4..
     """);
 
 var solution = Solver.Solve(clues);
@@ -40,17 +40,17 @@ share a digit when they are on (chess) knight distance:
 
 ``` csharp
 var clues = Clues.Parse("""
-    ...│5..│...
-    ...│..4│...
-    .58│...│.2.
-    ───┼───┼───
-    ...│..9│...
-    .6.│...│..5
-    ...│1..│3..
-    ───┼───┼───
-    ..3│..2│4..
-    6..│.78│...
-    .9.│...│..1
+    ...|5..|...
+    ...|..4|...
+    .58|...|.2.
+    ---+---+---─
+    ...|..9|...
+    .6.|...|..5
+    ...|1..|3..
+    ---+---+---─
+    ..3|..2|4..
+    6..|.78|...
+    .9.|...|..1
     """);
 
 var solution = Solver.Solve(clues, Rules.AntiKnight);
@@ -59,30 +59,30 @@ var solution = Solver.Solve(clues, Rules.AntiKnight);
 Hyper Sudoku (also called Windoku) adds for extra 3x3 regions:
 
 ``` csharp
-...│...│...
-.11│1.2│22.
-.11│1.2│22.
-───┼───┼───
-.11│1.2│22.
-...│...│...
-.33│3.4│44.
-───┼───┼───
-.33│3.4│44.
-.33│3.4│44.
-...│...│...
+...|...|...
+.11|1.2|22.
+.11|1.2|22.
+---+---+---─
+.11|1.2|22.
+...|...|...
+.33|3.4|44.
+---+---+---─
+.33|3.4|44.
+.33|3.4|44.
+...|...|...
 
 var clues = Clues.Parse("""
-    .4.│...│..9
-    9..│...│8..
-    .1.│3..│...
-    ───┼───┼───
-    ...│4.2│..8
-    ...│.3.│...
-    ...│...│7.5
-    ───┼───┼───
-    ...│.9.│...
-    .67│..4│...
-    ...│..5│4..
+    .4.|...|..9
+    9..|...|8..
+    .1.|3..|...
+    ---+---+---─
+    ...|4.2|..8
+    ...|.3.|...
+    ...|...|7.5
+    ---+---+---─
+    ...|.9.|...
+    .67|..4|...
+    ...|..5|4..
     """);
 
 var solution = Solver.Solve(clues, Rules.Hyper);
@@ -93,31 +93,31 @@ Jigsaw Sudoku has irreguarly shared boxes instead of the standard 3x3 boxes.
 
 ``` csharp
 var clues = Clues.Parse("""
-    4..│7.9│.2.
-    ...│.2.│...
-    .9.│..8│...
-    ───┼───┼───
-    1.4│...│3..
-    7..│4.1│..2
-    ..2│...│1.3
-    ───┼───┼───
-    ...│6..│.1.
-    ...│.4.│...
-    .1.│2..│.45
+    4..|7.9|.2.
+    ...|.2.|...
+    .9.|..8|...
+    ---+---+---─
+    1.4|...|3..
+    7..|4.1|..2
+    ..2|...|1.3
+    ---+---+---─
+    ...|6..|.1.
+    ...|.4.|...
+    .1.|2..|.45
     """);
 
 var solution = Solver.Solve(clues, Rules.Jigsaw("""
-    AAA│BBB│BCC
-    AAA│BBB│BCC
-    AAD│DEB│CCC 
-    ───┼───┼───        
-    ADD│DEE│FCC
-    DDD│EEE│FFF
-    GGD│EEF│FFH
-    ───┼───┼───
-    GGG│JEF│FHH
-    GGJ│JJJ│HHH
-    GGJ│JJJ│HHH
+    AAA|BBB|BCC
+    AAA|BBB|BCC
+    AAD|DEB|CCC 
+    ---+---+---─        
+    ADD|DEE|FCC
+    DDD|EEE|FFF
+    GGD|EEF|FFH
+    ---+---+---─
+    GGG|JEF|FHH
+    GGJ|JJJ|HHH
+    GGJ|JJJ|HHH
     """));
 ```
 
@@ -128,17 +128,17 @@ two support formats that seem logical:
 
 ``` csharp
 var rules = KillerCages.Parse("""
-    AAB│BBC│DEF
-    GGH│HCC│DEF
-    GGI│ICJ│KKF
-    ───┼───┼───
-    LMM│INJ│KOF
-    LPP│QNJ│OOR
-    SPT│QNU│VVR
-    ───┼───┼───
-    STT│QWU│UXX
-    SYZ│WWa│aXX
-    SYZ│Wbb│bcc
+    AAB|BBC|DEF
+    GGH|HCC|DEF
+    GGI|ICJ|KKF
+    ---+---+---─
+    LMM|INJ|KOF
+    LPP|QNJ|OOR
+    SPT|QNU|VVR
+    ---+---+---─
+    STT|QWU|UXX
+    SYZ|WWa|aXX
+    SYZ|Wbb|bcc
 
     A = 3   B = 15  C = 22  D = 4
     E = 16  F = 15  G = 25  H = 17
@@ -172,17 +172,17 @@ With X-Sudoku, the to diagonals are also considered [houses](#House).
 
 ``` csharp
 var clues = Clues.Parse("""
-    .1.│2.3│.4.
-    8..│...│6.5
-    .7.│...│...
-    ───┼───┼───
-    4..│...│..6
-    ...│...│...
-    2..│...│..7
-    ───┼───┼───
-    ...│...│.9.
-    7.9│...│..8
-    .2.│3.4│.5.
+    .1.|2.3|.4.
+    8..|...|6.5
+    .7.|...|...
+    ---+---+---─
+    4..|...|..6
+    ...|...|...
+    2..|...|..7
+    ---+---+---─
+    ...|...|.9.
+    7.9|...|..8
+    .2.|3.4|.5.
     """);
 
 var solution = Solver.Solve(clues, Rules.XSudoku);
@@ -196,6 +196,7 @@ able to solve the following puzzles (so far):
 
 | Date       | Puzzle                                                                  |      Speed |
 |:----------:|-------------------------------------------------------------------------|-----------:|
+| 2025-12-25 | [Xmas 2025](Puzzles/CrackingTheCryptic/2025_12_25.cs)                   | 4,846.8 µs |
 | 2025-12-24 | [Star Of Bethlehem](Puzzles/CrackingTheCryptic/2025_12_24.cs)           | 5,372.1 µs |
 | 2025-12-20 | [Zebra Knights](Puzzles/CrackingTheCryptic/2025_12_20.cs)               |   192.2 µs |
 | 2025-12-17 | [The Fireflies' Pairing](Puzzles/CrackingTheCryptic/2025_12_17.cs)      |   363.5 µs |
@@ -294,7 +295,7 @@ The `Digits` contain all possible digits for a specified [cell](#Cell).
 The underlying `uint` ranges from `0` (no options) to `0b_111_111_111_0` when
 all 9 digits are set. A single digit flag is calculated by
 `1 << digit`, hence the zero-th bit will allways be zero. Using bit
-operators (such as `&`, `│`, `^`, and `~`) it allows manipulation of the
+operators (such as `&`, `|`, `^`, and `~`) it allows manipulation of the
 digits.
 
 ### House

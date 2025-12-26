@@ -23,6 +23,9 @@ public readonly struct Indexes(uint bits) : IEquatable<Indexes>, IReadOnlyCollec
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public int Last() => BitOperations.Log2(Bits);
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public bool Contains(int value) => (Bits & (1u << value)) is not 0;
+
     /// <inheritdoc />
     public override bool Equals(object? obj) => obj is Indexes other && Equals(other);
 
@@ -46,6 +49,10 @@ public readonly struct Indexes(uint bits) : IEquatable<Indexes>, IReadOnlyCollec
     public static Indexes operator ^(Indexes l, Indexes r) => new(l.Bits & ~r.Bits);
 
     public static Indexes operator ^(Indexes indexes, int index) => new(indexes.Bits & ~(1U << index));
+
+    public static Indexes operator +(Indexes indexes, int up) => new(indexes.Bits << up);
+
+    public static Indexes operator -(Indexes indexes, int dw) => new(indexes.Bits >> dw);
 
     public Iterator GetEnumerator() => new(Bits);
 

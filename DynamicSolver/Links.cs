@@ -27,6 +27,9 @@ public sealed class Links : IReadOnlyCollection<Link>, SudokuCells
                 othr.Bits += Pars.Bits;
             }
 
+            if (restriction is Peers peers)
+                links[peers.AppliesTo].Peers |= peers.Links;
+
             if (restriction is Mask mask)
                 links[mask.AppliesTo].Digits &= mask.Restrict(links);
         }

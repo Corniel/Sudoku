@@ -252,6 +252,7 @@ able to solve the following puzzles (so far):
 | 2020-07-26 | [Classic Sudoku](Puzzles/CrackingTheCryptic/2020_07_26.cs)              |    12.7 µs |
 | 2021-07-10 | [White Room](Puzzles/CrackingTheCryptic/2021_07_10.cs)                  | 3,447.2 µs |
 | 2021-04-11 | [Third Times The Charm](Puzzles/CrackingTheCryptic/2021_04_11.cs)       |   538.1 ms |
+| 2021-02-29 | [Mounted Archery 3](Puzzles/CrackingTheCryptic/2021_01_27.cs)           | 5,898.9 µs |
 | 2021-01-06 | [Non-consecutive Killer](Puzzles/CrackingTheCryptic/2021_01_06.cs)      |   192.2 ms |
 | 2020-09-30 | [Classic Sudoku!](Puzzles/CrackingTheCryptic/2020_09_30_1_.cs)          |    10.7 µs |
 | 2020-09-30 | [Tatooine Sunset](Puzzles/CrackingTheCryptic/2020_09_30.cs)             |    19.4 µs |

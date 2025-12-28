@@ -249,8 +249,8 @@ able to solve the following puzzles (so far):
 | 2021-10-06 | [Dutch Whispers](Puzzles/CrackingTheCryptic/2021_10_06.cs)              |    54.6 µs |
 | 2021-08-15 | [Steering Wheel](Puzzles/CrackingTheCryptic/2021_08_15.cs)              |   236.1 µs |
 | 2021-08-05 | [Checkerboard](Puzzles/CrackingTheCryptic/2021_08_05.cs)                |   267.1 s  |
-| 2020-07-26 | [Classic Sudoku](Puzzles/CrackingTheCryptic/2020_07_26.cs)              |    12.7 µs |
 | 2021-07-10 | [White Room](Puzzles/CrackingTheCryptic/2021_07_10.cs)                  | 3,447.2 µs |
+| 2021-05-01 | [Wave Particals](Puzzles/CrackingTheCryptic/2021_05_01.cs)              |    81.3 ms |
 | 2021-04-11 | [Third Times The Charm](Puzzles/CrackingTheCryptic/2021_04_11.cs)       |   538.1 ms |
 | 2021-02-29 | [Mounted Archery 3](Puzzles/CrackingTheCryptic/2021_01_27.cs)           | 5,898.9 µs |
 | 2021-01-06 | [Non-consecutive Killer](Puzzles/CrackingTheCryptic/2021_01_06.cs)      |   192.2 ms |
@@ -258,6 +258,7 @@ able to solve the following puzzles (so far):
 | 2020-09-30 | [Tatooine Sunset](Puzzles/CrackingTheCryptic/2020_09_30.cs)             |    19.4 µs |
 | 2020-09-18 | [Patto Patto](Puzzles/CrackingTheCryptic/2020_09_18.cs)                 |   125.2 µs |
 | 2020-09-15 | [Sudoku XV](Puzzles/CrackingTheCryptic/2020_09_15.cs)                   |    98.9 µs |
+| 2020-07-26 | [Classic Sudoku](Puzzles/CrackingTheCryptic/2020_07_26.cs)              |    12.7 µs |
 | 2020-05-15 | [Equal Sudoku](Puzzles/CrackingTheCryptic/2020_05_15.cs)                |    17.9 ms |
 | 2020-04-13 | [Killer Sudoku](Puzzles/CrackingTheCryptic/2020_04_13.cs)               | 3,302.2 µs |
 | 2020-04-12 | [Magic Square Sudoku](Puzzles/CrackingTheCryptic/2020_04_12.cs)         |   290.9 µs |

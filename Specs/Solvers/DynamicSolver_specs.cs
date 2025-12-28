@@ -33,7 +33,7 @@ public class Solves
 
     [Test]
     public void Standard_hardest() => Run(
-        449.18,
+        448.18,
         [
             .. PuzzleBankPuzzle.Diabolical.OrderByDescending(p => p.Level).Take(1_000),
             .. CtcPuzzle.Classics
@@ -44,7 +44,7 @@ public class Solves
 
     [Test]
     public void Fantacy() => Run(
-        132_167.82,
+        132_268.45,
         [
             new _2020_04_12(),
             new _2024_11_18(),

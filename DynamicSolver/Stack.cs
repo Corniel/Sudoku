@@ -15,6 +15,18 @@ public sealed class Stack : IReadOnlyCollection<Stack.State>
 
     public State Current => States[Count];
 
+    public bool AllLast
+    {
+        get
+        {
+            for (var c = 1; c < Count; c++)
+                if (!States[c].IsLast) return false;
+            return true;
+        }
+    }
+
+    public State Set(StateInfo state) => States[Count].Set(state);
+
     public State Push(StateInfo state) => States[++Count].Set(state);
 
     public State Pop() => States[Count--];
@@ -39,6 +51,8 @@ public sealed class Stack : IReadOnlyCollection<Stack.State>
         private ImmutableArray<int> Steps { get; set; }
 
         private int Step = 0;
+
+        public bool IsLast => Step is 0;
 
         public void Deconstruct(out Link link, out PosSet todo, out StepTracer tracer) => (link, todo, tracer) = (Link, Todo, Tracer);
 

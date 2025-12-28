@@ -52,7 +52,29 @@ public sealed class Iterator : IEnumerator<Links>, IEnumerable<Links>
                     state = Stack.Push(NextState(todo));
                     (link, todo, trac) = state;
                 }
-                else trac.Rollback(Links);
+
+                // When there are a lot of options we potentially want to
+                // reconsider the link to test based on the insights gain while
+                // executing the state.
+                //
+                // We store the insight that the tested digit will never be
+                // valid, and is therefore removed from the digits.
+                if (state.Digits.Count > 4 && Stack.Count is 1)
+                {
+                    trac.Rollback(Links);
+
+                    link.Digits = state.Digits ^ digit;
+
+                    foreach (var restriction in link.Restrictions)
+                        Links[restriction.AppliesTo].Digits &= restriction.Restrict(Links);
+
+                    state = Stack.Set(NextState(todo | link.Pos));
+                    (link, todo, trac) = state;
+                }
+                else
+                {
+                    trac.Rollback(Links);
+                }
             }
 
             link.Digits = state.Digits;

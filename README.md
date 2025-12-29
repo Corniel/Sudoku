@@ -196,6 +196,7 @@ able to solve the following puzzles (so far):
 
 | Date       | Puzzle                                                                  |      Speed |
 |:----------:|-------------------------------------------------------------------------|-----------:|
+| 2025-12-27 | [Tinsel & Baubles](Puzzles/CrackingTheCryptic/2025_12_27.cs)            |   559.7 ms |
 | 2025-12-25 | [Xmas 2025](Puzzles/CrackingTheCryptic/2025_12_25.cs)                   | 4,846.8 µs |
 | 2025-12-24 | [Star Of Bethlehem](Puzzles/CrackingTheCryptic/2025_12_24.cs)           | 5,372.1 µs |
 | 2025-12-22 | [Arrow Renban Sudoku](Puzzles/CrackingTheCryptic/2025_12_22.cs)         |    19.6 ms |
@@ -213,7 +214,7 @@ able to solve the following puzzles (so far):
 | 2025-11-14 | [Braiding Sweetgrass](Puzzles/CrackingTheCryptic/2025_11_14.cs)         | 7,059.6 µs |
 | 2025-11-01 | [Parity Patrol 101](Puzzles/CrackingTheCryptic/2025_11_01.cs)           |    34.3 ms |
 | 2025-10-17 | [Who’s Afraid Of 13](Puzzles/CrackingTheCryptic/2025_10_17.cs)          |    48.6 µs |
-| 2025-10-13 | [Wanddeko](Puzzles/CrackingTheCryptic/2025_10_13.cs)                    |  227.6 ms |
+| 2025-10-13 | [Wanddeko](Puzzles/CrackingTheCryptic/2025_10_13.cs)                    |   227.6 ms |
 | 2025-10-07 | [Golden Arrow](Puzzles/CrackingTheCryptic/2025_10_07.cs)                |    22.8 µs |
 | 2025-09-25 | [Threads Of Silence](Puzzles/CrackingTheCryptic/2025_09_25.cs)          | 1,819.6 ms |
 | 2025-09-18 | [Diagonality](Puzzles/CrackingTheCryptic/2025_09_18.cs)                 | 3,795.6 µs |

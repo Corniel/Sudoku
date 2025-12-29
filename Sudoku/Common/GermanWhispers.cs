@@ -32,16 +32,46 @@ public static class GermanWhispers
             + lines.SelectMany(line => Masks(line, rules));
     };
 
+    /// <summary>
+    /// Gets the masks for indvidual cells.
+    /// </summary>
+    /// <remarks>
+    /// Not allowed
+    /// * 5
+    /// * 4 or 6
+    ///   when both neighbors are in the same set:
+    ///   94? or 14?
+    /// * 1 or 9
+    ///   when all 3 previous and next 3 are in the same set. 
+    /// </remarks>
     private static IEnumerable<Mask> Masks(ImmutableArray<Pos> line, Rules rules)
     {
-        for (var i = 1; i < line.Length - 1; i++)
+        return range(line.Length)
+            .Select(i => new Mask(line[i], digits(i)));
+
+        Digits digits(int i)
         {
-            var pos = line[i];
-            PosSet group = [line[i - 1], pos, line[i + 1]];
-            if (rules.Sets.Any(group.IsSubsetOf))
-                yield return new Mask(pos, _123789);
+            var mask = _12346789;
+            if (i >= 1 && i < line.Length - 1)
+            {
+                var pos = line[i];
+                PosSet group = [line[i - 1], pos, line[i + 1]];
+                if (rules.Sets.Any(group.IsSubsetOf))
+                    mask ^= _46;
+            }
+            if (i >= 3 && i < line.Length - 3)
+            {
+                var pos = line[i];
+                PosSet group = [line[i - 3], line[i - 2], line[i - 1], pos, line[i + 1], line[i + 2], line[i + 3]];
+
+                if (rules.Sets.Any(group.IsSubsetOf))
+                    mask ^= _19;
+            }
+            return mask;
         }
     }
 
-    private static readonly Digits _123789 = [1, 2, 3, 7, 8, 9];
+    private static readonly Digits _19 = [1, 9];
+    private static readonly Digits _46 = [4, 6];
+    private static readonly Digits _12346789 = [1, 2, 3, 4, 6, 7, 8, 9];
 }

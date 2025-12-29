@@ -1,4 +1,3 @@
-using Generator;
 using Puzzles;
 using Puzzles.NewYorkTimes;
 using Puzzles.PuzzleBank;
@@ -149,7 +148,7 @@ public class Roundtrips
     [Test]
     public void without_issues()
     {
-        foreach(var cells in new Grids(new()).Take(1000))
+        foreach (var cells in PuzzleBankPuzzle.Diabolical.Take(1000).Select(p => p.Solution))
         {
             var num = Binary.ToUInt128(cells);
             var bac = Binary.TolCells(num);

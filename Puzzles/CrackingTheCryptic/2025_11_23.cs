@@ -1,4 +1,3 @@
-
 namespace Puzzles.CrackingTheCryptic;
 
 public sealed class _2025_11_23 : CtcPuzzle

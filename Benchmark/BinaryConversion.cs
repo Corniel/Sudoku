@@ -21,7 +21,7 @@ public class BinaryConversion
 
     public BinaryConversion()
     {
-        Cells = [.. new Grids(new()).Take(1_000_000)];
+        Cells = [.. PuzzleBankPuzzle.Diabolical.Take(1000).Select(p => p.Solution)];
         Nums = [.. Cells.Select(Binary.ToUInt128)];
         Puzzles = [.. PuzzleBankPuzzle.Diabolical.Take(1000).Select(p => new BinaryPuzzle(p))];
         foreach (var puzzle in Puzzles)

@@ -7,10 +7,8 @@ namespace Generator;
 public sealed class PuzzleGenerator(ReduceOptions options, Random rnd)
     : IEnumerator<Generated>, IEnumerable<Generated>
 {
-
     private readonly Rules Rules = Rules.Standard;
     private readonly ReduceOptions Options = options;
-    private readonly Grids Candidates = new(rnd);
     private readonly Random Rnd = rnd;
     private readonly Pos[][] Boxes = [.. Box.All.Select(box => box.ToArray())];
     private readonly List<Overlay> Overlays = [];
@@ -36,15 +34,10 @@ public sealed class PuzzleGenerator(ReduceOptions options, Random rnd)
 
     public bool MoveNext()
     {
-        do
-        {
-            var (solution, done) = NextCandidate();
-            done = NextOverlays(solution, done);
-            done = ApplyOverlays(solution, done);
-            Current = NextGenerated(solution, done);
-        }
-        while (Current.Strategies.Length < 2);
-
+        var (solution, done) = NextCandidate();
+        done = NextOverlays(solution, done);
+        done = ApplyOverlays(solution, done);
+        Current = NextGenerated(solution, done);
         return true;
     }
 
@@ -108,8 +101,7 @@ public sealed class PuzzleGenerator(ReduceOptions options, Random rnd)
 
     private Candidate NextCandidate()
     {
-        Candidates.MoveNext();
-        var solution = Candidates.Current;
+        var solution = NextGrid();
         var clues = PosSet.Empty;
         Rnd.Shuffle(Boxes);
 
@@ -131,9 +123,50 @@ public sealed class PuzzleGenerator(ReduceOptions options, Random rnd)
             var clue = new Cell(node.Pos, solution[node.Pos]);
             node.Digits = Digits.New(clue.Digit);
 
-            while (solver.MoveNext()) {/* Solve what can be solved. */ }
+            while (solver.MoveNext()) { /* Solve what can be solved. */ }
         }
         return new(solution, clues);
+    }
+
+    private Cells NextGrid() => NextNodes() is { } nodes
+        ? Cells.New(nodes)
+        : NextGrid();
+
+    private Nodes? NextNodes()
+    {
+        var nodes = Nodes.Empty & Rules;
+        var solver = new StrategyBasedSolver(nodes, TestOptions);
+
+        while (!nodes.IsSolved)
+        {
+            if (NextNode() is not { } node)
+                return null;
+
+            node.Digits = NextDigits(node.Digits);
+
+            while (solver.MoveNext()) { /* Solve what can be solved. */ }
+        }
+        return nodes;
+
+        Digits NextDigits(Digits digits)
+           => Digits.New(digits.Skip(Rnd.Next(digits.Count)).First());
+
+        Node? NextNode()
+        {
+            var best = int.MaxValue;
+            var next = nodes[Pos.O];
+            
+            foreach (var node in nodes)
+            {
+                var test = node.Digits.Count;
+                if (test is 0)
+                    return null;
+                else if (test > 1 && test < best)
+                    (best, next) = (test, node);
+            }
+
+            return next;
+        }
     }
 
     private int Weight(Node node)

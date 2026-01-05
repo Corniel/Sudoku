@@ -196,7 +196,7 @@ able to solve the following puzzles (so far):
 
 | Date       | Puzzle                                                                  |      Speed |
 |:----------:|-------------------------------------------------------------------------|-----------:|
-| 2025-12-27 | [Tinsel & Baubles](Puzzles/CrackingTheCryptic/2025_12_27.cs)            |   559.7 ms |
+| 2025-12-27 | [Tinsel & Baubles](Puzzles/CrackingTheCryptic/2025_12_27.cs)            |   554.3 ms |
 | 2025-12-25 | [Xmas 2025](Puzzles/CrackingTheCryptic/2025_12_25.cs)                   | 4,846.8 µs |
 | 2025-12-24 | [Star Of Bethlehem](Puzzles/CrackingTheCryptic/2025_12_24.cs)           | 5,372.1 µs |
 | 2025-12-22 | [Arrow Renban Sudoku](Puzzles/CrackingTheCryptic/2025_12_22.cs)         |    19.6 ms |
@@ -255,6 +255,7 @@ able to solve the following puzzles (so far):
 | 2021-04-19 | [Archers And Arrows](Puzzles/CrackingTheCryptic/2021_04_19.cs)          | 6,941.6 µs |
 | 2021-04-11 | [Third Times The Charm](Puzzles/CrackingTheCryptic/2021_04_11.cs)       |   538.1 ms |
 | 2021-02-29 | [Mounted Archery 3](Puzzles/CrackingTheCryptic/2021_01_27.cs)           | 5,898.9 µs |
+| 2021-01-19 | [German Whispers](Puzzles/CrackingTheCryptic/2021_01_19.cs)             |  637.3 µs |
 | 2021-01-06 | [Non-consecutive Killer](Puzzles/CrackingTheCryptic/2021_01_06.cs)      |   192.2 ms |
 | 2020-09-30 | [Classic Sudoku!](Puzzles/CrackingTheCryptic/2020_09_30_1_.cs)          |    10.7 µs |
 | 2020-09-30 | [Tatooine Sunset](Puzzles/CrackingTheCryptic/2020_09_30.cs)             |    19.4 µs |

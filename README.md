@@ -207,6 +207,7 @@ able to solve the following puzzles (so far):
 | 2025-12-11 | [Fallen Mast In A Storm](Puzzles/CrackingTheCryptic/2025_12_11.cs)      | 4,956.5 µs |
 | 2025-12-08 | [Heavy Is The Crown](Puzzles/CrackingTheCryptic/2025_12_08.cs)          | 5,866.3 µs |
 | 2025-12-07 | [Odd Way To Even Out](Puzzles/CrackingTheCryptic/2025_12_07.cs)         | 1,141.7 ms |
+| 2025-12-04 | [Lockdown](Puzzles/CrackingTheCryptic/2025_12_04.cs)                    | 4,331.1 ms |
 | 2025-11-28 | [Brink](Puzzles/CrackingTheCryptic/2025_11_28.cs)                       |    28.0 ms |
 | 2025-11-25 | [Simple Miracle](Puzzles/CrackingTheCryptic/2025_11_25.cs)              |   811.5 µs |
 | 2025-11-23 | [Ice Breaker](Puzzles/CrackingTheCryptic/2025_11_23.cs)                 |    69.5 ms |

@@ -196,6 +196,7 @@ able to solve the following puzzles (so far):
 
 | Date       | Puzzle                                                                  |      Speed |
 |:----------:|-------------------------------------------------------------------------|-----------:|
+| 2025-12-31 | [Venice](Puzzles/CrackingTheCryptic/2025_12_31.cs)                      |   133.5 ms |
 | 2025-12-27 | [Tinsel & Baubles](Puzzles/CrackingTheCryptic/2025_12_27.cs)            |   554.3 ms |
 | 2025-12-25 | [Xmas 2025](Puzzles/CrackingTheCryptic/2025_12_25.cs)                   | 4,846.8 µs |
 | 2025-12-24 | [Star Of Bethlehem](Puzzles/CrackingTheCryptic/2025_12_24.cs)           | 5,372.1 µs |

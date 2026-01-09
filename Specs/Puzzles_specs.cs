@@ -18,7 +18,7 @@ public class Work_in_progress
     {
         using var _ = Logger.Options();
 
-        var puzzle = new _2025_12_04();
+        var puzzle = new _2026_01_08();
 
         if (puzzle.Solution.IsSolved)
             puzzle.Constraints.Should().BeValidFor(puzzle.Solution);
@@ -32,6 +32,8 @@ public class Work_in_progress
             solved.Should().Be(puzzle.Solution, puzzle.Constraints);
         else
             puzzle.Constraints.Should().BeValidFor(solved);
+
+        solved.IsSolved.Should().BeTrue();
 
         solver.MoveNext().Should().BeFalse("Solution should be unique");
     }

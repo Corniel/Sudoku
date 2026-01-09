@@ -30,6 +30,18 @@ public sealed class _2019_05_09 : CtcPuzzle
         . . . . .|. . 9 .
         """);
 
+    public override Cells Solution { get; } = Cells.Parse("""
+        364891527
+        189374265
+        542168739
+        625719843
+        213987456
+        937456182
+        876523914
+        498235671
+        751642398
+        """);
+
     public override Rules Constraints { get; } = Rules.Jigsaw("""
         A A A A A A A|C|H
         -+-+---+ +-+ | |
@@ -48,17 +60,5 @@ public sealed class _2019_05_09 : CtcPuzzle
         B|E E E E|F F F F
         -+       |
         E E E E E|F F F F
-        """);
-
-    public override Cells Solution { get; } = Cells.Parse("""
-        364891527
-        189374265
-        542168739
-        625719843
-        213987456
-        937456182
-        876523914
-        498235671
-        751642398
         """);
 }

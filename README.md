@@ -196,7 +196,7 @@ able to solve the following puzzles (so far):
 
 | Date       | Puzzle                                                                  |      Speed |
 |:----------:|-------------------------------------------------------------------------|-----------:|
-| 2026-01-08 | [Paper Snowflake](Puzzles/CrackingTheCryptic/2026/2026-01-08.cs)        | 1,251.0 µs |
+| 2026-01-08 | [Paper Snowflake](Puzzles/CrackingTheCryptic/2026/2026-01-08.cs)        | 7,428.3 µs |
 | 2025-12-31 | [Venice](Puzzles/CrackingTheCryptic/2025_12_31.cs)                      |   133.5 ms |
 | 2025-12-27 | [Tinsel & Baubles](Puzzles/CrackingTheCryptic/2025_12_27.cs)            |   554.3 ms |
 | 2025-12-25 | [Xmas 2025](Puzzles/CrackingTheCryptic/2025_12_25.cs)                   | 4,846.8 µs |
@@ -273,7 +273,8 @@ able to solve the following puzzles (so far):
 | 2019-11-27 | [Non-consecutive Anti-Knight](Puzzles/CrackingTheCryptic/2019_11_27.cs) |   249.1 µs |
 | 2019-09-26 | [New York Times](Puzzles/CrackingTheCryptic/2019_09_26.cs)              |    27.0 µs |
 | 2019-08-29 | [New York Times](Puzzles/CrackingTheCryptic/2019_08_29.cs)              |    28.7 µs |
-| 2019-05-09 | [Jigsaw Sudoku](Puzzles/CrackingTheCryptic/2019_05_09.cs)               | 3,932.0 µs |
+| 2019-05-09 | [Jigsaw Sudoku](Puzzles/CrackingTheCryptic/2019/2019-05-09.cs)          | 3,932.0 µs |
+| 2019-04-19 | [Jigsaw Sudoku](Puzzles/CrackingTheCryptic/2019/2019-04-19.cs)          | 7,428.3 µs |
 | 2019-03-18 | [X-Wing Sudoku](Puzzles/CrackingTheCryptic/2019_03_18.cs)               |    36.6 µs |
 | 2019-02-01 | [New York Times](Puzzles/CrackingTheCryptic/2019_02_01.cs)              |    43.5 µs |
 | 2019-01-15 | [Hard Sudoku](Puzzles/CrackingTheCryptic/2019_01_15.cs)                 |    52.9 µs |

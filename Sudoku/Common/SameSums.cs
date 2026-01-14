@@ -18,6 +18,9 @@ public static partial class SameSums
         {
             var names = match.ToString().Where(char.IsAsciiLetter).ToArray();
 
+            if (names.Any(n => !groups.ContainsKey(n)))
+                throw new FormatException($"The '{string.Concat(names)}' group is not fully coverted");
+
             foreach (var res in SameSum.Create([..names.Select(n => groups[n].ToImmutableArray())]))
                 yield return res;
         }

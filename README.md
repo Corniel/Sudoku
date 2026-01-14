@@ -196,6 +196,7 @@ able to solve the following puzzles (so far):
 
 | Date       | Puzzle                                                                  |      Speed |
 |:----------:|-------------------------------------------------------------------------|-----------:|
+| 2026-01-13 | [Quality Street](Puzzles/CrackingTheCryptic/2026/2026-01-13.cs)         |   195.3 ms |
 | 2026-01-08 | [Paper Snowflake](Puzzles/CrackingTheCryptic/2026/2026-01-08.cs)        | 7,428.3 µs |
 | 2025-12-31 | [Venice](Puzzles/CrackingTheCryptic/2025_12_31.cs)                      |   133.5 ms |
 | 2025-12-27 | [Tinsel & Baubles](Puzzles/CrackingTheCryptic/2025_12_27.cs)            |   554.3 ms |

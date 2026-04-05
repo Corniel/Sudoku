@@ -273,6 +273,7 @@ able to solve the following puzzles (so far):
 | 2020-04-12 | [Magic Square Sudoku](Puzzles/CrackingTheCryptic/2020/2020-04-12.cs)         |   290.9 µs |
 | 2020-02-19 | [Classic Sudoku](Puzzles/CrackingTheCryptic/2020/2020-02-19.cs)              |   188.1 µs |
 | 2020-01-19 | [New York Times](Puzzles/CrackingTheCryptic/2020/2020-01-19.cs)              |    52.0 µs |
+| 2020-01-11 | [<= 5](Puzzles/CrackingTheCryptic/2020/2020-01-11.cs)                        |   602.9 µs |
 | 2019-11-27 | [Non-consecutive Anti-Knight](Puzzles/CrackingTheCryptic/2019/2019-11-27.cs) |   249.1 µs |
 | 2019-09-26 | [New York Times](Puzzles/CrackingTheCryptic/2019/2019-09-26.cs)              |    27.0 µs |
 | 2019-08-29 | [New York Times](Puzzles/CrackingTheCryptic/2019/2019-08-29.cs)              |    28.7 µs |

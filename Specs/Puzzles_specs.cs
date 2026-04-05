@@ -35,7 +35,22 @@ public class Work_in_progress
 
         solved.IsSolved.Should().BeTrue();
 
-        solver.MoveNext().Should().BeFalse("Solution should be unique");
+        var id = 1;
+        if (solver.MoveNext())
+        {
+            var found = true;
+            do
+            {
+                solved = Cells.New(solver.Current);
+                Console.WriteLine();
+                Console.WriteLine($"{id++}.");
+                Console.WriteLine(solved);
+                found = solver.MoveNext();
+            }
+            while (found);
+
+            true.Should().BeFalse("Solution should be unique");
+        }
     }
 }
 

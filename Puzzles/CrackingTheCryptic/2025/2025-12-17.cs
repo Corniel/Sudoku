@@ -89,7 +89,7 @@ public sealed class _2025_12_17 : CtcPuzzle
 
         PosSet[] golden = [.. hor.Select(h => h.Set), .. ver.Select(v => v.Set)];
 
-        foreach (var p in Dominos.All)
+        foreach (var p in Dominos.Ort)
         {
             var sums = p switch
             {

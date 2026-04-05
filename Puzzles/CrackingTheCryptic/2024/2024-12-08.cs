@@ -42,7 +42,7 @@ public sealed class _2024_12_08 : CtcPuzzle
         632|415|798
         """);
 
-    public static IEnumerable<Not7Nor13> Not7Nor13s() => Dominos.All.Select(p => new Not7Nor13(p.A, p.B));
+    public static IEnumerable<Not7Nor13> Not7Nor13s() => Dominos.Ort.Select(p => new Not7Nor13(p.A, p.B));
 
     public sealed class Not7Nor13(Pos a, Pos b) : Set(a, b)
     {

@@ -8,7 +8,7 @@ public sealed class _2020_01_11 : CtcPuzzle
 
     public override Uri? Url => new("https://youtu.be/ZU5fSDHJq8k");
 
-    public override O Duration => O.Unknown;
+    public override O Duration => O.μs100;
 
     public override Clues Clues { get; } = Clues.Parse("""
         ...│...│..1
@@ -40,5 +40,5 @@ public sealed class _2020_01_11 : CtcPuzzle
 
     public override Rules Constraints { get; }
         = Rules.Standard
-        + Dominos.All.SelectMany(d => DeltaMax.New(d, 5));
+        + Dominos.Ort.SelectMany(d => DeltaMax.New(d, 5));
 }

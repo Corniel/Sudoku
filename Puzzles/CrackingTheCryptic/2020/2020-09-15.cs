@@ -72,7 +72,7 @@ public sealed class _2020_09_15 : CtcPuzzle
         ...│...│...
         """).Select(c => PosSet.New(c.Cells)).ToArray();
 
-        return Dominos.All
+        return Dominos.Ort
             .Where(d => !cages.Contains(d.Set))
             .Select(d => new LookupPair(d.A, d.B, Not5_10))
             .Couples();

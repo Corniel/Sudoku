@@ -48,7 +48,7 @@ public sealed class _2025_10_17 : CtcPuzzle
         .Select(p => new LookupPair(new(p), new(_9x9 - p - 1), Sum10));
 
     private static IEnumerable<Pair> Max13s()
-        => Dominos.All.Select(dom => new LookupPair(dom.A, dom.B, Max13)).Couples();
+        => Dominos.Ort.Select(dom => new LookupPair(dom.A, dom.B, Max13)).Couples();
 
     private static readonly LookupDigits Sum10 = LookupPair.Init(d => [10 - d]);
 

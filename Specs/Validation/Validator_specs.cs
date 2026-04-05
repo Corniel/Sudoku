@@ -1,5 +1,4 @@
 using Sudoku.Common;
-using Sudoku.Houses;
 using Sudoku.Validation;
 
 namespace Specs.Validation.Validator_specs;
@@ -28,8 +27,8 @@ public class Invalidates
         violation.Should().BeEquivalentTo(new
         {
             Cell = new Pos(3, 1),
-            Value = 5,
-            Constraint = Col.All[1],
+            Digits = Digits.New(5),
+            Allowed = Digits._1_to_9 ^ 5,
         });
     }
 
@@ -57,10 +56,8 @@ public class Invalidates
         violation.Should().BeEquivalentTo(new
         {
             Cell = new Pos(0, 0),
-            Value = 5,
+            Digits = Digits.New(5),
             Allowed = Digits.None,
-            Constraint = new Pos[] { (0, 0), (0, 1) },
-            Restriction = new { Sum = Ints.New(3) },
         });
     }
 }

@@ -1,7 +1,7 @@
 namespace Sudoku.Generics;
 
 [DebuggerDisplay("Count = 2")]
-[DebuggerTypeProxy(typeof(Diagnostics.CollectionDebugView))]
+[DebuggerTypeProxy(typeof(CollectionDebugView))]
 public readonly struct Couple<T>(T one, T two) : IReadOnlyCollection<T>
 {
     public readonly T One = one;

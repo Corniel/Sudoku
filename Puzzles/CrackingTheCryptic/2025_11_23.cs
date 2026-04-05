@@ -75,6 +75,7 @@ public sealed class _2025_11_23 : CtcPuzzle
             foreach (var c in Others)
             {
                 var d = cells[c].Digit;
+
                 // Too many of the specfied digit.
                 if (Counts[d]++ >= d && d != 0)
                     return Digits.None;
@@ -82,6 +83,7 @@ public sealed class _2025_11_23 : CtcPuzzle
 
             var allowed = Digits.None;
             for (var d = 1; d <= _9; d++)
+
                 // Allow the digits with 'space' left.
                 if (Counts[d] < d)
                     allowed |= d;

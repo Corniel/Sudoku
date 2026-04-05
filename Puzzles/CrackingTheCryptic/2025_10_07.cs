@@ -72,7 +72,7 @@ public sealed class _2025_10_07 : CtcPuzzle
     public sealed class GoldenArrow(ImmutableArray<Pos> cells) : Rule
     {
         public static GoldenArrow Parse(string str)
-            => Sudoku.Parsing.Lines.Parse(str).Select(line => new GoldenArrow(line)).Single();
+            => Lines.Parse(str).Select(line => new GoldenArrow(line)).Single();
 
         /// <inheritdoc />
         /// <remarks>

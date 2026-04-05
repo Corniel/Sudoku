@@ -1,3 +1,4 @@
+#pragma warning disable S1210 // IComparable is just implemented to sort things.
 using StrategyBased;
 using System.Diagnostics;
 

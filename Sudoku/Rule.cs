@@ -2,7 +2,7 @@ namespace Sudoku;
 
 /// <summary>A constraint.</summary>
 [DebuggerDisplay("{GetType().Name}{DebuggerDisplay}, Count = {Count}, Restrictions = {Restrictions.Length}")]
-[DebuggerTypeProxy(typeof(Diagnostics.CollectionDebugView))]
+[DebuggerTypeProxy(typeof(CollectionDebugView))]
 public abstract class Rule(params ImmutableArray<Pos> cells) : IReadOnlyCollection<Pos>
 {
     /// <summary>

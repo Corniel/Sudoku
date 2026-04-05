@@ -3,7 +3,7 @@ using System.IO;
 namespace Sudoku;
 
 [DebuggerDisplay("Count = {Count}")]
-[DebuggerTypeProxy(typeof(Diagnostics.CollectionDebugView))]
+[DebuggerTypeProxy(typeof(CollectionDebugView))]
 public readonly struct Clues : IReadOnlyCollection<Cell>, IEquatable<Clues>
 {
     public Clues(ImmutableArray<Cell> cells) => Cells = cells;

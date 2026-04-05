@@ -2,6 +2,7 @@ using Puzzles.NewYorkTimes;
 using System.IO;
 using System.Net.Http;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace Sudoku.App;
 
@@ -40,13 +41,13 @@ public static class NewYorkTimesCollector
 
         var puzzle = JsonSerializer.Deserialize<Content>(span)!.hard;
 
-        var clues = new Clues([.. puzzle.puzzle_data.puzzle.Select((d, p) => new Cell(new Pos(p), d)).Where(c => c.Digit is not 0)]);
+        var clues = new Clues([.. puzzle.Data.puzzle.Select((d, p) => new Cell(new Pos(p), d)).Where(c => c.Digit is not 0)]);
         var solution = Cells.Empty;
 
         for (Pos p = Pos.O; p < _9x9; p++)
-            solution[p] = puzzle.puzzle_data.solution[p];
+            solution[p] = puzzle.Data.solution[p];
 
-        return new(puzzle.print_date, clues, solution);
+        return new(puzzle.PrintDate, clues, solution);
     }
 
     private sealed class Content
@@ -55,10 +56,17 @@ public static class NewYorkTimesCollector
     }
     private sealed class Puzzle
     {
-        public DateOnly print_date { get; init; }
-        public int puzzle_id { get; init; }
-        public string difficulty { get; init; } = string.Empty;
-        public PuzzleData puzzle_data { get; init; } = new();
+        [JsonPropertyName("print_date")]
+        public DateOnly PrintDate { get; init; }
+
+        [JsonPropertyName("puzzle_id")]
+        public int Id { get; init; }
+
+        [JsonPropertyName("difficulty")]
+        public string Difficulty { get; init; } = string.Empty;
+
+        [JsonPropertyName("puzzle_data")]
+        public PuzzleData Data { get; init; } = new();
     }
     private sealed class PuzzleData
     {

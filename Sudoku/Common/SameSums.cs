@@ -1,6 +1,4 @@
-using Sudoku.Restrictions;
 using System.Text.RegularExpressions;
-using Group = Sudoku.Restrictions.Group;
 
 namespace Sudoku.Common;
 

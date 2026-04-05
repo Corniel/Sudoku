@@ -1,5 +1,4 @@
 using BenchmarkDotNet.Attributes;
-using Generator;
 using Puzzles.IO;
 using Puzzles.PuzzleBank;
 using Sudoku;

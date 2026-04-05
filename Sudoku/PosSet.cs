@@ -2,7 +2,7 @@ namespace Sudoku;
 
 [CollectionBuilder(typeof(PosSet), nameof(New))]
 [DebuggerDisplay("Count = {Count}")]
-[DebuggerTypeProxy(typeof(Diagnostics.CollectionDebugView))]
+[DebuggerTypeProxy(typeof(CollectionDebugView))]
 public readonly struct PosSet(UInt128 bits) : IEquatable<PosSet>, IReadOnlyCollection<Pos>
 {
     public static readonly PosSet Empty;

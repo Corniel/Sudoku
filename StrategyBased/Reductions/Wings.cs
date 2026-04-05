@@ -72,8 +72,7 @@ public static class Wings
             {
                 foreach (var share in shared)
                     nodes[share].Digits ^= one.Digits ^ digit;
-
-                break;
+                return;
             }
         }
 

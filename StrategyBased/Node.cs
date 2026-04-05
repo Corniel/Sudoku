@@ -60,7 +60,10 @@ public sealed class Node : SudokuCell
 
     public int Digit
     {
+#pragma warning disable S4275 // Getters and setters should access the expected fields
+        // this in inteneded.
         set => Digits = Digits.New(value);
+#pragma warning restore S4275 // Getters and setters should access the expected fields
         get => digit;
     }
 

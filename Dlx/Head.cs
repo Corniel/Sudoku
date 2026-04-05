@@ -7,7 +7,7 @@ public sealed class Head : Node
     /// <summary>A root header.</summary>
     public static Head Root => new();
 
-    private Head() { Type = HeadType.Root; }
+    private Head() => Type = HeadType.Root;
 
     public Head(HeadType type, int index, int digit, Head root)
     {

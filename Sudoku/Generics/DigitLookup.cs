@@ -1,7 +1,7 @@
 namespace Sudoku.Generics;
 
 [DebuggerDisplay("Count = {Count}")]
-[DebuggerTypeProxy(typeof(Diagnostics.CollectionDebugView))]
+[DebuggerTypeProxy(typeof(CollectionDebugView))]
 public sealed class DigitLookup<T> : IReadOnlyCollection<DigitLookup<T>.LookupValue>
 {
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]

@@ -2,7 +2,7 @@ namespace Sudoku.Generics;
 
 /// <summary>A fixed queue.</summary>
 [DebuggerDisplay("Count = {Count}")]
-[DebuggerTypeProxy(typeof(Diagnostics.CollectionDebugView))]
+[DebuggerTypeProxy(typeof(CollectionDebugView))]
 public struct FixedQueue<T>() : IReadOnlyCollection<T>
 {
     private readonly T[] Queue = new T[_9x9];

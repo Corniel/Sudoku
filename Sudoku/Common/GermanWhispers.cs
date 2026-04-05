@@ -42,7 +42,7 @@ public static class GermanWhispers
     ///   when both neighbors are in the same set:
     ///   94? or 14?
     /// * 1 or 9
-    ///   when all 3 previous and next 3 are in the same set. 
+    ///   when all 3 previous and next 3 are in the same set.
     /// </remarks>
     private static IEnumerable<Mask> Masks(ImmutableArray<Pos> line, Rules rules)
     {

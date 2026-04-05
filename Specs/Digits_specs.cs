@@ -147,28 +147,20 @@ public class Maths
     [TestCase(4, 5, 4 + 5)]
     [TestCase(0, 5, 0)]
     [TestCase(5, 5, 0)]
-    public void Adds(int l, int r, int sum)
-    {
-        (Digits.New(l) + r).Should().Be([sum]);
-    }
+    public void Adds(int l, int r, int sum) => (Digits.New(l) + r).Should().Be([sum]);
 
     [Test]
-    public void Adds_many()
-        => (Digits.New(1, 3, 4) + 2).Should().Be([3, 5, 6]);
+    public void Adds_many() => (Digits.New(1, 3, 4) + 2).Should().Be([3, 5, 6]);
 
     [TestCase(5, 0, 5 - 0)]
     [TestCase(2, 1, 2 - 1)]
     [TestCase(5, 3, 5 - 3)]
     [TestCase(9, 6, 9 - 6)]
     [TestCase(5, 5, 0)]
-    public void Subtracts(int l, int r, int sum)
-    {
-        (Digits.New(l) - r).Should().Be([sum]);
-    }
+    public void Subtracts(int l, int r, int sum) => (Digits.New(l) - r).Should().Be([sum]);
 
     [Test]
-    public void Subtracts_many()
-        => (Digits.New(3, 4) - 2).Should().Be([1, 2]);
+    public void Subtracts_many() => (Digits.New(3, 4) - 2).Should().Be([1, 2]);
 }
 
 public class All

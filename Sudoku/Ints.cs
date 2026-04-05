@@ -1,7 +1,7 @@
 namespace Sudoku;
 
 [CollectionBuilder(typeof(Ints), nameof(New))]
-[DebuggerTypeProxy(typeof(Diagnostics.CollectionDebugView))]
+[DebuggerTypeProxy(typeof(CollectionDebugView))]
 public readonly struct Ints(Int128 bits) : IReadOnlyCollection<int>
 {
     /// <summary>Only contains a zero.</summary>

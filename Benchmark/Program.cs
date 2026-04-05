@@ -3,9 +3,7 @@ namespace Benchmark;
 public static class Program
 {
     public static void Main()
-    {
-        _ = BenchmarkDotNet.Running.BenchmarkRunner.Run<BinaryConversion>();
-    }
+        => BenchmarkDotNet.Running.BenchmarkRunner.Run<BinaryConversion>();
 
     public static void Other()
     {

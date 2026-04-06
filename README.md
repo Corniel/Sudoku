@@ -247,6 +247,7 @@ able to solve the following puzzles (so far):
 | 2024-11-16 | [80](Puzzles/CrackingTheCryptic/2024/2024-11-16.cs)                          |   560.8 µs |
 | 2024-09-29 | [3 In the Corner](Puzzles/CrackingTheCryptic/2024/2024-09-29.cs)             |       ?    |
 | 2024-04-06 | [Seesaw](Puzzles/CrackingTheCryptic/2024/2024-04-06.cs)                      | 4,097.8 ms |
+| 2024-02-21 | [Confiable](Puzzles/CrackingTheCryptic/2024/2024-02-21.cs)                   | 3,892.9 µs |
 | 2024-01-08 | [Tulpenblüte](Puzzles/CrackingTheCryptic/2024/2024-01-08.cs)                 | 4,889.0 µs |
 | 2023-01-15 | [Arbitrary Code Execution](Puzzles/CrackingTheCryptic/2023/2023-01-15.cs)    |    30.7 µs |
 | 2022-11-21 | [Can't Teach An Old Dog...](Puzzles/CrackingTheCryptic/2022/2022-11-21.cs)   |   184.0 µs |

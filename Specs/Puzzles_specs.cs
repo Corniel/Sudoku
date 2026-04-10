@@ -18,7 +18,7 @@ public class Work_in_progress
     {
         using var _ = Logger.Options();
 
-        var puzzle = new _2026_04_08();
+        var puzzle = new _2026_04_09();
 
         if (puzzle.Solution.IsSolved)
             puzzle.Constraints.Should().BeValidFor(puzzle.Solution);
@@ -35,8 +35,8 @@ public class Work_in_progress
 
         solved.IsSolved.Should().BeTrue();
 
-        var id = 1;
-        if (solver.MoveNext())
+        var id = 2;
+        if (solver.MoveNext() && id < 100)
         {
             var found = true;
             do
@@ -49,7 +49,7 @@ public class Work_in_progress
             }
             while (found);
 
-            true.Should().BeFalse("Solution should be unique");
+            true.Should().BeFalse($"Solution should be unique, but found {id}");
         }
     }
 }

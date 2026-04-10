@@ -2,7 +2,7 @@ using Sudoku.Restrictions;
 
 namespace Sudoku.Common;
 
-public sealed class RenbanLine(ImmutableArray<Pos> cells) : Set(cells)
+public sealed class RenbanLine(params ImmutableArray<Pos> cells) : Set(cells)
 {
     public override ImmutableArray<Restriction> Restrictions { get; } = [.. Pairs(cells)];
 

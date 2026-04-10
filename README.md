@@ -196,7 +196,8 @@ able to solve the following puzzles (so far):
 
 | Date       | Puzzle                                                                       |      Speed |
 |:----------:|------------------------------------------------------------------------------|-----------:|
-| 2026-04-08 | [Colorful Whispers](Puzzles/CrackingTheCryptic/2026/2026-04-04.cs)           |   242.2 µs |
+| 2026-04-09 | [Mayan Ruins](Puzzles/CrackingTheCryptic/2026/2026-04-09.cs)                 | 2,340.8 µs |
+| 2026-04-08 | [Colorful Whispers](Puzzles/CrackingTheCryptic/2026/2026-04-08.cs)           |   242.2 µs |
 | 2026-04-04 | [Farrago](Puzzles/CrackingTheCryptic/2026/2026-04-04.cs)                     |   105.1 ms |
 | 2026-02-25 | [XII](Puzzles/CrackingTheCryptic/2026/2026-02-15.cs)                         |   154.2 µs |
 | 2026-01-13 | [Quality Street](Puzzles/CrackingTheCryptic/2026/2026-01-13.cs)              |   195.3 ms |

@@ -8,6 +8,9 @@ public sealed class RenbanLine(params ImmutableArray<Pos> cells) : Set(cells)
 
     private static IEnumerable<Pair> Pairs(ImmutableArray<Pos> cells)
     {
+        // If the length is _9, there are not othere restrictions.
+        if (cells.Length is _9) yield break;
+
         var delta = cells.Length - 1;
         for (var f = 0; f < delta; f++)
         {

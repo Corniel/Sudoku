@@ -24,8 +24,8 @@ public sealed class _2026_01_13 : CtcPuzzle
         215│347│869
         """);
 
-    public override Rules Constraints { get; }
-        = Rules.XSudoku
+    protected override Rules GetConstraints()
+        => Rules.XSudoku
         + SameSums.Parse("""
         ...│Gk.│l..
         ..F│..k│l..

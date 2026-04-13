@@ -38,7 +38,7 @@ public sealed class _2020_01_11 : CtcPuzzle
         958│726│413
         """);
 
-    public override Rules Constraints { get; }
-        = Rules.Standard
+    protected override Rules GetConstraints()
+        => Rules.Standard
         + Dominos.Ort.SelectMany(d => DeltaMax.New(d, 5));
 }

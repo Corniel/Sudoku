@@ -24,7 +24,7 @@ public sealed class _2025_09_08 : CtcPuzzle
         ...|...|5..
         """);
 
-    public override Rules Constraints { get; } =
+    protected override Rules GetConstraints() =>
         Rules.Standard
         + SlowThermometer.Parse("""
             1..|...|...

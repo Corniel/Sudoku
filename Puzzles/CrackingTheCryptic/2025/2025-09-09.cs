@@ -24,7 +24,7 @@ public sealed class _2025_09_09 : CtcPuzzle
         172|856|934
         """);
 
-    public override Rules Constraints { get; } =
+    protected override Rules GetConstraints() =>
        Rules.Killer("""
         AAA|...|BB.
         ...|CC.|...

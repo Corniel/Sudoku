@@ -24,7 +24,7 @@ public sealed class _2022_04_27 : CtcPuzzle
         136│952│748
         """);
 
-    public override Rules Constraints { get; } =
+    protected override Rules GetConstraints() =>
         Rules.Standard
         + Box(0, 0) + Box(0, 3) + Box(0, 6)
         + Box(3, 0) + Box(3, 3) + Box(3, 6)

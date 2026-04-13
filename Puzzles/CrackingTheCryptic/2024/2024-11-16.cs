@@ -38,36 +38,35 @@ public sealed class _2024_11_16 : CtcPuzzle
         674│985│213
         """);
 
-    public override Rules Constraints { get; }
-        = Rules.Standard
+    protected override Rules GetConstraints()
+        => Rules.Standard
         + new Sums()
         + Products.Parse("""
-            ..A│AA.│...
-            ..B│...│.X.
-            .B.│...│X..
-            ───┼───┼───
-            B..│..X│...
-            ...│.X.│...
-            ...│X..│..b
-            ───┼───┼───
-            ..X│...│.b.
-            .X.│...│b..
-            ...│.aa│a..
-            """)
+        ..A│AA.│...
+        ..B│...│.X.
+        .B.│...│X..
+        ───┼───┼───
+        B..│..X│...
+        ...│.X.│...
+        ...│X..│..b
+        ───┼───┼───
+        ..X│...│.b.
+        .X.│...│b..
+        ...│.aa│a..
+        """)
         + Products.Parse("""
-            ...│.A.│...
-            ...│..A│...
-            ...│...│A..
-            ───┼───┼───
-            ...│X..│.A.
-            a..│.X.│..A
-            .a.│..X│...
-            ───┼───┼───
-            ..a│...│...
-            ...│a..│...
-            ...│.a.│...
-            """)
-        ;
+        ...│.A.│...
+        ...│..A│...
+        ...│...│A..
+        ───┼───┼───
+        ...│X..│.A.
+        a..│.X.│..A
+        .a.│..X│...
+        ───┼───┼───
+        ..a│...│...
+        ...│a..│...
+        ...│.a.│...
+        """);
 
     private sealed class Products(ImmutableArray<Pos> cells) : Rule(cells)
     {

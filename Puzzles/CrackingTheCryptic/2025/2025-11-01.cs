@@ -24,22 +24,22 @@ public sealed class _2025_11_01 : CtcPuzzle
         362│587│419
         """);
 
-    public override Rules Constraints { get; }
-        = Rules.Killer("""
-            ...│AAA│.BB
-            CC.│DDE│EFF
-            ..G│..E│...
-            ───┼───┼───
-            .GG│...│HHH
-            .II│JJJ│HK.
-            ..I│..L│.KK
-            ───┼───┼───
-            ...│.LL│...
-            MMN│...│OOO
-            ..N│NN.│...
-            A = 13  B = 11  C = 8   D = 12  E = 17  F = 8   G = 18  H = 20
-            I = 12  J = 24  K = 14  L = 12  M = 9   N = 24  O = 21
-            """)
+    protected override Rules GetConstraints()
+        => Rules.Killer("""
+        ...│AAA│.BB
+        CC.│DDE│EFF
+        ..G│..E│...
+        ───┼───┼───
+        .GG│...│HHH
+        .II│JJJ│HK.
+        ..I│..L│.KK
+        ───┼───┼───
+        ...│.LL│...
+        MMN│...│OOO
+        ..N│NN.│...
+        A = 13  B = 11  C = 8   D = 12  E = 17  F = 8   G = 18  H = 20
+        I = 12  J = 24  K = 14  L = 12  M = 9   N = 24  O = 21
+        """)
         + Checks();
 
     private static IEnumerable<ParityCheck> Checks()

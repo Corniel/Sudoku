@@ -38,8 +38,8 @@ public sealed class _2025_09_25 : CtcPuzzle
         624│593│187
         """);
 
-    public override Rules Constraints { get; }
-        = Rules.Standard
+    protected override Rules GetConstraints()
+        => Rules.Standard
         + Yellow()
         + ZipLines.Parse("""
             ...│...│...

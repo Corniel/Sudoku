@@ -38,7 +38,7 @@ public sealed class _2025_11_25 : CtcPuzzle
         ...│..2│...
         """);
 
-    public override Rules Constraints { get; } =
+    protected override Rules GetConstraints() =>
         Rules.AntiKnight
         + Digonals();
 

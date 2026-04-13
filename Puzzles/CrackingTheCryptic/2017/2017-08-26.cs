@@ -24,23 +24,23 @@ public sealed class _2017_08_26 : CtcPuzzle
         549│867│312
         """);
 
-    public override Rules Constraints { get; }
-        = Rules.Killer("""
-            AAA│BBC│CCC
-            AEE│FFG│HHH
-            DEL│FFG│IIJ
-            ───┼───┼───
-            DEL│FNG│OIJ
-            KKL│MNO│ORJ
-            SKL│MNP│PRU
-            ───┼───┼───
-            SSM│MNQ│QUU
-            VST│TTT│YYY
-            VVV│WWW│WXX
+    protected override Rules GetConstraints()
+        => Rules.Killer("""
+        AAA│BBC│CCC
+        AEE│FFG│HHH
+        DEL│FFG│IIJ
+        ───┼───┼───
+        DEL│FNG│OIJ
+        KKL│MNO│ORJ
+        SKL│MNP│PRU
+        ───┼───┼───
+        SSM│MNQ│QUU
+        VST│TTT│YYY
+        VVV│WWW│WXX
 
-            A = 21  B = 11  C = 22  D = 13  E = 15  F = 25  G = 16  H = 18
-            I = 8   J = 9   K = 21  L = 17  M = 10  N = 21  O = 20  P = 14
-            Q = 11  R = 8   S = 17  T = 21  U = 24  V = 20  W = 24  X = 3  Y = 16
-            """)
+        A = 21  B = 11  C = 22  D = 13  E = 15  F = 25  G = 16  H = 18
+        I = 8   J = 9   K = 21  L = 17  M = 10  N = 21  O = 20  P = 14
+        Q = 11  R = 8   S = 17  T = 21  U = 24  V = 20  W = 24  X = 3  Y = 16
+        """)
         + KillerCages.Extend;
 }

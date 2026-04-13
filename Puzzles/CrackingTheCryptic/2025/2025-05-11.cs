@@ -24,7 +24,7 @@ public sealed class _2025_05_11 : CtcPuzzle
         ...|...|...
         """);
 
-    public override Rules Constraints { get; } = Rules.Standard + Regions();
+    protected override Rules GetConstraints() => Rules.Standard + Regions();
 
     public override Cells Solution { get; } = Cells.Parse("""
         526|839|174

@@ -24,8 +24,8 @@ public sealed class _2026_01_08 : CtcPuzzle
         864│173│529
         """);
 
-    public override Rules Constraints { get; }
-        = Rules.Standard
+    protected override Rules GetConstraints()
+        => Rules.Standard
         + Arrows.Parse("""
         .lk│...│...
         ...│j..│...

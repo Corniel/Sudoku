@@ -24,22 +24,22 @@ public sealed class _2025_09_03 : CtcPuzzle
         821│956│437
         """);
 
-    public override Rules Constraints { get; }
-        = Rules.Standard
-         + NamedCage.Parse("""
-            .AA│A..│...
-            AAx│...│.CC
-            Axx│xx.│CC.
-            ───┼───┼───
-            A.x│xxC│...
-            ..x│xCC│..D
-            ...│CCz│..D
-            ───┼───┼───
-            ..C│..z│z.D
-            .CC│...│..D
-            C..│.DD│DD.
-            """)
-            .SelectMany(named => Group.Select(named.Cells, (a, o) => new Line(a, o)));
+    protected override Rules GetConstraints()
+        => Rules.Standard
+        + NamedCage.Parse("""
+        .AA│A..│...
+        AAx│...│.CC
+        Axx│xx.│CC.
+        ───┼───┼───
+        A.x│xxC│...
+        ..x│xCC│..D
+        ...│CCz│..D
+        ───┼───┼───
+        ..C│..z│z.D
+        .CC│...│..D
+        C..│.DD│DD.
+        """)
+        .SelectMany(named => Group.Select(named.Cells, (a, o) => new Line(a, o)));
 
     public sealed class Line(Pos appliesTo, ImmutableArray<Pos> others) : Group(appliesTo, others)
     {

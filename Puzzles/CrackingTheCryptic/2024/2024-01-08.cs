@@ -38,7 +38,7 @@ public sealed class _2024_01_08 : CtcPuzzle
         352|419|867
         """);
 
-    public override Rules Constraints { get; } =
+    protected override Rules GetConstraints() =>
         Rules.Standard
 
         + RenbanLines.Parse("""

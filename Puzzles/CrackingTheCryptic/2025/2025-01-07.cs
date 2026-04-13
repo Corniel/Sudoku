@@ -26,7 +26,7 @@ public sealed class _2025_01_07 : CtcPuzzle
         792|135|468
         """);
 
-    public override Rules Constraints { get; } =
+    protected override Rules GetConstraints() =>
         Rules.AntiKnight
         + new Ratio1_2((0, 2), (1, 2))
         + Boxes();

@@ -42,7 +42,7 @@ public sealed class _2019_05_09 : CtcPuzzle
         751642398
         """);
 
-    public override Rules Constraints { get; } = Rules.Jigsaw("""
+    protected override Rules GetConstraints() => Rules.Jigsaw("""
         A A A A A A A|C|H
         -+-+---+ +-+ | |
         B|D|Q Q|A|Q|A|C|H

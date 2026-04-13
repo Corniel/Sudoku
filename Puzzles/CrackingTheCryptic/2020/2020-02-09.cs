@@ -8,7 +8,7 @@ public sealed class _2020_02_09 : CtcPuzzle
 
     public override Uri? Url => new("https://youtu.be/lgJYOuVk910");
 
-    public override O Duration => O.μs100;
+    public override O Duration => O.Unknown;
 
     public override Clues Clues { get; } = Clues.Parse("""
         .4.│...│.1.
@@ -38,9 +38,9 @@ public sealed class _2020_02_09 : CtcPuzzle
         512│367│498
         """);
 
-    public override Rules Constraints { get; }
-       = Rules.Standard
-       + Thermometers.Parse("""
+    protected override Rules GetConstraints()
+        => Rules.Standard
+        + Thermometers.Parse("""
         ...│D.H│...
         ..C│.E.│I..
         .B.│..F│.J.

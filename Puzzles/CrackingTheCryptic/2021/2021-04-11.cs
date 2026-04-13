@@ -24,7 +24,7 @@ public sealed class _2021_04_11 : CtcPuzzle
         723│486│519
         """);
 
-    public override Rules Constraints { get; } =
+    protected override Rules GetConstraints() =>
         Rules.XSudoku
         + Arrows.Parse("""
         ...│...│HI.

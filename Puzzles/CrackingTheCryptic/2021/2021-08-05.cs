@@ -38,7 +38,7 @@ public sealed class _2021_08_05 : CtcPuzzle
         976│431│825
         """);
 
-    public override Rules Constraints { get; } =
+    protected override Rules GetConstraints() =>
         Rules.Standard
         + Thermometers.Parse("""
             T.N│...│Q.W

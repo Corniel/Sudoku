@@ -24,22 +24,22 @@ public sealed class _2025_12_31 : CtcPuzzle
         591│687│342
         """);
 
-    public override Rules Constraints { get; }
-        = Rules.Standard
+    protected override Rules GetConstraints()
+        => Rules.Standard
         + SameSums.Parse("""
-            AXX│YYY│ZZZ
-            Aaa│bbb│...
-            Acc│ddo│ppp
-            ───┼───┼───
-            Bee│ffq│rrr
-            ggg│hhC│EG.
-            iii│jjC│EGI
-            ───┼───┼───
-            ..k│llD│FHJ
-            mmm│nss│tHJ
-            ...│..u│vv.
+        AXX│YYY│ZZZ
+        Aaa│bbb│...
+        Acc│ddo│ppp
+        ───┼───┼───
+        Bee│ffq│rrr
+        ggg│hhC│EG.
+        iii│jjC│EGI
+        ───┼───┼───
+        ..k│llD│FHJ
+        mmm│nss│tHJ
+        ...│..u│vv.
 
-            A=B C=D E=F G=H I=J X=Y=Z
-            a=b c=d e=f g=h i=j k=l m=n o=p q=r s=t u=v
-            """);
+        A=B C=D E=F G=H I=J X=Y=Z
+        a=b c=d e=f g=h i=j k=l m=n o=p q=r s=t u=v
+        """);
 }

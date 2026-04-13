@@ -40,7 +40,7 @@ public sealed class _2021_10_06 : CtcPuzzle
         742│539│186
         """);
 
-    public override Rules Constraints { get; } =
+    protected override Rules GetConstraints() =>
         Rules.AntiKing
         + Diagonal.NE_SW
         + Diagonal.NW_SE

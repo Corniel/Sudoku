@@ -26,8 +26,8 @@ public sealed class _2025_12_25 : CtcPuzzle
         635│782│419
         """);
 
-    public override Rules Constraints { get; }
-        = Rules.Standard
+    protected override Rules GetConstraints()
+        => Rules.Standard
         + Sandwitch.New(Col.All[1].Cells, 2)
         + Sandwitch.New(Col.All[2].Cells, 0)
         + Sandwitch.New(Col.All[3].Cells, 2)

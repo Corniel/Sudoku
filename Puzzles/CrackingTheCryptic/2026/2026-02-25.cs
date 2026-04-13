@@ -34,8 +34,8 @@ public sealed class _2026_02_25 : CtcPuzzle
         .6.....5.
         """);
 
-    public override Rules Constraints { get; }
-        = Rules.Basic
+    protected override Rules GetConstraints()
+        => Rules.Basic
         + Twins.Parse("""
         ..AB.CDEF
         ..BA.DCFE

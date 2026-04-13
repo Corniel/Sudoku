@@ -28,7 +28,7 @@ public sealed class _2024_09_29 : CtcPuzzle
         3..|...|...
         """);
 
-    public override Rules Constraints { get; } =
+    protected override Rules GetConstraints() =>
         Rules.Standard
         + AtLeast3s();
 

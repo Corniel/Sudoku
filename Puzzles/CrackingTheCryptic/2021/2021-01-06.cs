@@ -38,7 +38,7 @@ public sealed class _2021_01_06 : CtcPuzzle
         793│518│624
         """);
 
-    public override Rules Constraints { get; } =
+    protected override Rules GetConstraints() =>
         Rules.Standard
         + NonConsecutives.Orthogonally()
         + Jigsaw.Parse("""

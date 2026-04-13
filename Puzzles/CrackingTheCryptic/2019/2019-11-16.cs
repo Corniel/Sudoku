@@ -53,8 +53,8 @@ public sealed class _2019_11_16 : CtcPuzzle
         7│3│2│5 4 6│8 9 1
         """);
 
-    public override Rules Constraints { get; }
-        = Rules.Jigsaw("""
+    protected override Rules GetConstraints()
+        => Rules.Jigsaw("""
         a a a│b b b│c│X│c
         ─┐   │     │ └─┘ 
         X│a a│b b b│c c c

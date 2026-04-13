@@ -38,8 +38,8 @@ public sealed class _2025_10_07 : CtcPuzzle
         829│417│365
         """);
 
-    public override Rules Constraints { get; }
-        = Rules.AntiKnight
+    protected override Rules GetConstraints()
+        => Rules.AntiKnight
         + AntiKing.All
         + DutchWhispers.Parse("""
             ...│...│...

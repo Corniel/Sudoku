@@ -38,7 +38,7 @@ public sealed class _2025_08_21 : CtcPuzzle
         936│841│752
         """);
 
-    public override Rules Constraints { get; } =
+    protected override Rules GetConstraints() =>
        Rules.Standard
        + AtMost11s()
        + NonConsecutives.Orthogonally();

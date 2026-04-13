@@ -24,8 +24,8 @@ public sealed class _2021_02_27 : CtcPuzzle
         496│528│173
         """);
 
-    public override Rules Constraints { get; }
-        = Rules.AntiKnight
+    protected override Rules GetConstraints()
+        => Rules.AntiKnight
         + Twins.Parse("""
         ...│...│...
         ..D│...│...

@@ -24,8 +24,8 @@ public sealed class _2020_04_13 : CtcPuzzle
         159│768│432
         """);
 
-    public override Rules Constraints { get; }
-        = Rules.Killer("""
+    protected override Rules GetConstraints()
+        => Rules.Killer("""
         AAE│JKK│KNO
         AAE│JKG│GNO
         AAD│DBB│GOO

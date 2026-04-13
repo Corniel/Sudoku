@@ -24,7 +24,7 @@ public sealed class _2024_11_18 : CtcPuzzle
         219│736│584
         """);
 
-    public override Rules Constraints { get; } = Rules.Standard + Cages();
+    protected override Rules GetConstraints() => Rules.Standard + Cages();
 
     private static List<Cage> Cages()
     {

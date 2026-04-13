@@ -22,37 +22,37 @@ public sealed class _2025_11_14 : CtcPuzzle
         8 4 6 2 7 9 5 1 3
         """);
 
-    public override Rules Constraints { get; }
-        = Rules.Jigsaw("""
-            AAAAACEGG
-            ABBBBCEGI
-            ABCCCCEGI
-            ABCDDDEGI
-            ABCDEEEGI
-            BBCDEFFGI
-            DDDDEFGGI
-            FFFFFFHHI
-            HHHHHHHII
-            """)
+    protected override Rules GetConstraints()
+        => Rules.Jigsaw("""
+        AAAAACEGG
+        ABBBBCEGI
+        ABCCCCEGI
+        ABCDDDEGI
+        ABCDEEEGI
+        BBCDEFFGI
+        DDDDEFGGI
+        FFFFFFHHI
+        HHHHHHHII
+        """)
         + AntiKnight.All
         + NonConsecutives.Orthogonally()
         + Squares()
         + KillerCages.Parse(
-            """
-            .A.│...│...
-            A..│...│...
-            ...│...│...
-            ───┼───┼───
-            ...│...│...
-            ...│...│..B
-            ...│...│.B.
-            ───┼───┼───
-            ...│...│B..
-            ...│..B│...
-            ...│.B.│...
-            A = 9  B = 21
-            """,
-            false)
+        """
+        .A.│...│...
+        A..│...│...
+        ...│...│...
+        ───┼───┼───
+        ...│...│...
+        ...│...│..B
+        ...│...│.B.
+        ───┼───┼───
+        ...│...│B..
+        ...│..B│...
+        ...│.B.│...
+        A = 9  B = 21
+        """,
+        false)
         + Mask.Odd((8, 4));
 
     private static IEnumerable<Square> Squares()

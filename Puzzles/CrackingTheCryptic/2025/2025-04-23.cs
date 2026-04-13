@@ -26,8 +26,8 @@ public sealed class _2025_04_23 : CtcPuzzle
         1..│...│..5
         """);
 
-    public override Rules Constraints { get; }
-        = Rules.AntiKnight
+    protected override Rules GetConstraints()
+        => Rules.AntiKnight
         + FixedNeigbors()
         + GroupOf3s();
 

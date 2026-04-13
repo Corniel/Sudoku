@@ -38,7 +38,7 @@ public sealed class _2022_08_10 : CtcPuzzle
         273│849│516
         """);
 
-    public override Rules Constraints { get; }
-        = Rules.XSudoku
+    protected override Rules GetConstraints()
+        => Rules.XSudoku
         + Dominos.Dig.SelectMany(d => NonConsecutive.New(d));
 }

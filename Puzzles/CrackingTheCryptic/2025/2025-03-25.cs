@@ -38,7 +38,7 @@ public sealed class _2025_03_25 : CtcPuzzle
         763│254│819
         """);
 
-    public override Rules Constraints { get; } =
+    protected override Rules GetConstraints() =>
         Rules.AntiKnight
         + Tower()
         + EntropicLines.Parse("""

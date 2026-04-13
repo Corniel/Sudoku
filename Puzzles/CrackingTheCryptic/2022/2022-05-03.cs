@@ -38,8 +38,8 @@ public sealed class _2022_05_03 : CtcPuzzle
         132│854│679
         """);
 
-    public override Rules Constraints { get; }
-        = Rules.Standard
+    protected override Rules GetConstraints()
+        => Rules.Standard
         + NamedCage.Parse("""
             .BCDEFGHI
             BCDEFGHIJ

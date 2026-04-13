@@ -43,8 +43,8 @@ public sealed class _2020_05_15 : CtcPuzzle
         962│758│431
         """);
 
-    public override Rules Constraints { get; }
-        = Rules.Standard
+    protected override Rules GetConstraints()
+        => Rules.Standard
         + NamedCage.Parse("""
         BBG│GGG│GHH
         BCF│AAG│GHH

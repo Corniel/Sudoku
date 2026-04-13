@@ -24,8 +24,8 @@ public sealed class _2019_04_19 : CtcPuzzle
         357│619│284
         """);
 
-    public override Rules Constraints { get; }
-        = Rules.AntiKnight
+    protected override Rules GetConstraints()
+        => Rules.AntiKnight
         + Arrows.Parse("""
             ...│...│...
             ...│...│...

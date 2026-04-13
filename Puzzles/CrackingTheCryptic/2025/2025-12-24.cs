@@ -24,8 +24,8 @@ public sealed class _2025_12_24 : CtcPuzzle
         651│392│847
         """);
 
-    public override Rules Constraints { get; }
-        = Rules.Standard
+    protected override Rules GetConstraints()
+        => Rules.Standard
         + DutchWhispers.Parse("""
         ..a│...│A..
         .b.│...│.B.

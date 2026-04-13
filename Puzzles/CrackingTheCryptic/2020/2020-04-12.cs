@@ -40,8 +40,8 @@ public sealed class _2020_04_12 : CtcPuzzle
         198│345│762
         """);
 
-    public override Rules Constraints { get; }
-        = Rules.AntiKnight
+    protected override Rules GetConstraints()
+        => Rules.AntiKnight
         + Diagonal.NW_SE
         + Diagonal.NE_SW
         + MagicSquare.SelectMany(line => Group.Select(line, (a, o) => new Cage(a, o, [15])));

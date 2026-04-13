@@ -24,8 +24,8 @@ public sealed class _2026_04_08 : CtcPuzzle
         623│187│945
         """);
 
-    public override Rules Constraints { get; }
-        = Rules.Standard
+    protected override Rules GetConstraints()
+        => Rules.Standard
         + GermanWhispers.Parse("""
         .HK│...│...
         .IL│.PQ│R.T

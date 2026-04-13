@@ -38,8 +38,8 @@ public sealed class _2020_09_15 : CtcPuzzle
         631│792│584
         """);
 
-    public override Rules Constraints { get; }
-        = Rules.Killer("""
+    protected override Rules GetConstraints()
+        => Rules.Killer("""
         ..B│.E.│H..
         .AB│DEG│HJ.
         .AC│DFG│IJ.

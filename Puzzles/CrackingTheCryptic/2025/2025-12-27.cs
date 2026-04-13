@@ -52,11 +52,10 @@ public sealed class _2025_12_27 : CtcPuzzle
         ..b│cde│f.K
         """;
 
-    public override Rules Constraints { get; }
-        = Rules.Standard
+    protected override Rules GetConstraints()
+        => Rules.Standard
         + GermanWhispers.Parse(Tinsels)
-        + GetBaubles()
-        ;
+        + GetBaubles();
 
     private static IEnumerable<Restriction> GetBaubles()
     {

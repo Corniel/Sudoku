@@ -24,7 +24,7 @@ public sealed class _2025_09_04 : CtcPuzzle
         429|875|136
         """);
 
-    public override Rules Constraints { get; } = Rules.Standard + Cages();
+    protected override Rules GetConstraints() => Rules.Standard + Cages();
 
     private static IEnumerable<Restriction> Cages() => NamedCage.Parse("""
         ...|.BB|BBC

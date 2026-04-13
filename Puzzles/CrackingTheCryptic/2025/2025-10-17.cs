@@ -38,8 +38,8 @@ public sealed class _2025_10_17 : CtcPuzzle
         ...│...│...
         """);
 
-    public override Rules Constraints { get; }
-        = Rules.Standard
+    protected override Rules GetConstraints()
+        => Rules.Standard
         + Sum10s()
         + Max13s();
 

@@ -10,7 +10,7 @@ public sealed class _2024_12_08 : CtcPuzzle
 
     public override O Duration => O.ms;
 
-    public override Rules Constraints { get; } =
+    protected override Rules GetConstraints() =>
         Rules.Standard
         + new Ratio1_2((4, 3), (5, 3))
         + Not7Nor13s()

@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 namespace Puzzles;
 
 public abstract class Puzzle
@@ -12,9 +14,14 @@ public abstract class Puzzle
 
     public abstract Clues Clues { get; }
 
-    public virtual Rules Constraints { get; } = Rules.Standard;
+    public Rules Constraints => constraints ??= GetConstraints();
+
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    private Rules? constraints;
 
     public virtual Cells Solution { get; } = Cells.Empty;
+
+    protected virtual Rules GetConstraints() => Rules.Standard;
 
     public override string ToString() => Title;
 

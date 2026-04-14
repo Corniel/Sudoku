@@ -54,6 +54,7 @@ var clues = Clues.Parse("""
     """);
 
 var solution = Solver.Solve(clues, Rules.AntiKnight);
+```
 
 ### Hyper Sudoku
 Hyper Sudoku (also called Windoku) adds for extra 3x3 regions:
@@ -270,7 +271,8 @@ able to solve the following puzzles (so far):
 | 2021-02-29 | [Mounted Archery 3](Puzzles/CrackingTheCryptic/2021/2021-01-27.cs)           | 5,898.9 µs |
 | 2021-01-19 | [German Whispers](Puzzles/CrackingTheCryptic/2021/2021-01-19.cs)             |   637.3 µs |
 | 2021-01-06 | [Non-consecutive Killer](Puzzles/CrackingTheCryptic/2021/2021-01-06.cs)      |   192.2 ms |
-| 2020-09-30 | [Classic Sudoku!](Puzzles/CrackingTheCryptic/2020/2020-09-30-1-.cs)          |    10.7 µs |
+| 2020-12-30 | [Dotless Kropki Sudoku X](Puzzles/CrackingTheCryptic/2020/2020-12-30.cs)     |   874.8 µs |
+| 2020-09-30 | [Classic Sudoku!](Puzzles/CrackingTheCryptic/2020/2020-09-30-1.cs)           |    10.7 µs |
 | 2020-09-30 | [Tatooine Sunset](Puzzles/CrackingTheCryptic/2020/2020-09-30.cs)             |    19.4 µs |
 | 2020-09-18 | [Patto Patto](Puzzles/CrackingTheCryptic/2020/2020-09-18.cs)                 |   125.2 µs |
 | 2020-09-15 | [Sudoku XV](Puzzles/CrackingTheCryptic/2020/2020-09-15.cs)                   |    98.9 µs |

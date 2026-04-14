@@ -2,6 +2,8 @@ namespace Sudoku.Restrictions;
 
 public sealed class LookupPair(Pos appliesTo, Pos other, LookupDigits lookup) : Pair(appliesTo, other)
 {
+    public LookupPair(Domino domino, LookupDigits lookup) : this(domino.A, domino.B, lookup) { }
+
     private readonly LookupDigits Lookup = lookup;
 
     /// <inheritdoc />

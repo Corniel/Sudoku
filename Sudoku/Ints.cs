@@ -13,6 +13,23 @@ public readonly struct Ints(Int128 bits) : IReadOnlyCollection<int>
     /// <summary>Numbers between 1 and 128.</summary>
     public static readonly Ints All = new(Int128.MaxValue);
 
+    /// <summary>Square numbers [1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121].</summary>
+    public static readonly Ints SquareNumbers = [1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121];
+
+    public static readonly ImmutableArray<Ints> Triangles =
+    [
+        [],
+        [.. range(1, 9)],
+        [.. range(1 + 2, /*...........................................*/ 8 + 9)],
+        [.. range(1 + 2 + 3, /*...................................*/ 7 + 8 + 9)],
+        [.. range(1 + 2 + 3 + 4,  /*..........................*/ 6 + 7 + 8 + 9)],
+        [.. range(1 + 2 + 3 + 4 + 5, /*...................*/ 5 + 6 + 7 + 8 + 9)],
+        [.. range(1 + 2 + 3 + 4 + 5 + 6, /*...........*/ 4 + 5 + 6 + 7 + 8 + 9)],
+        [.. range(1 + 2 + 3 + 4 + 5 + 6 + 7, /*...*/ 3 + 4 + 5 + 6 + 7 + 8 + 9)],
+        [.. range(1 + 2 + 3 + 4 + 5 + 6 + 7 + 8, 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9)],
+        [45],
+    ];
+
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly Int128 Bits = bits;
 

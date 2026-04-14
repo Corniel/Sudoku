@@ -278,6 +278,7 @@ able to solve the following puzzles (so far):
 | 2020-05-15 | [Equal Sudoku](Puzzles/CrackingTheCryptic/2020/2020-05-15.cs)                |    17.9 ms |
 | 2020-04-13 | [Killer Sudoku](Puzzles/CrackingTheCryptic/2020/2020-04-13.cs)               | 3,302.2 µs |
 | 2020-04-12 | [Magic Square Sudoku](Puzzles/CrackingTheCryptic/2020/2020-04-12.cs)         |   290.9 µs |
+| 2020-03-14 | [Pi](Puzzles/CrackingTheCryptic/2020/2020-03-14.cs)                          |    51.1 µs |
 | 2020-02-19 | [Classic Sudoku](Puzzles/CrackingTheCryptic/2020/2020-02-19.cs)              |   188.1 µs |
 | 2020-02-09 | [Thermo Sudoku](Puzzles/CrackingTheCryptic/2020/2020-02-09.cs)               |   120.8 µs |
 | 2020-01-19 | [New York Times](Puzzles/CrackingTheCryptic/2020/2020-01-19.cs)              |    52.0 µs |

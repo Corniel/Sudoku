@@ -290,6 +290,7 @@ able to solve the following puzzles (so far):
 | 2019-10-24 | [Square Killer](Puzzles/CrackingTheCryptic/2019/2019-10-24.cs)               | 5,554.2 ms |
 | 2019-09-26 | [New York Times](Puzzles/CrackingTheCryptic/2019/2019-09-26.cs)              |    27.0 µs |
 | 2019-08-29 | [New York Times](Puzzles/CrackingTheCryptic/2019/2019-08-29.cs)              |    28.7 µs |
+| 2019-05-26 | [Thermo Sudoku](Puzzles/CrackingTheCryptic/2019/2019-05-26.cs)               | 3,498.0 µs |
 | 2019-05-09 | [Jigsaw Sudoku](Puzzles/CrackingTheCryptic/2019/2019-05-09.cs)               | 3,932.0 µs |
 | 2019-04-19 | [Jigsaw Sudoku](Puzzles/CrackingTheCryptic/2019/2019-04-19.cs)               | 7,428.3 µs |
 | 2019-03-18 | [X-Wing Sudoku](Puzzles/CrackingTheCryptic/2019/2019-03-18.cs)               |    36.6 µs |

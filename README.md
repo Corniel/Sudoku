@@ -221,6 +221,7 @@ able to solve the following puzzles (so far):
 | 2025-11-28 | [Brink](Puzzles/CrackingTheCryptic/2025/2025-11-28.cs)                       |    28.0 ms |
 | 2025-11-25 | [Simple Miracle](Puzzles/CrackingTheCryptic/2025/2025-11-25.cs)              |   811.5 µs |
 | 2025-11-23 | [Ice Breaker](Puzzles/CrackingTheCryptic/2025/2025-11-23.cs)                 |    69.5 ms |
+| 2025-11-18 | [Equivalence](Puzzles/CrackingTheCryptic/2025/2025-11-18.cs)                 |    60.6 ms |
 | 2025-11-17 | [wicked](Puzzles/CrackingTheCryptic/2025/2025-11-17.cs)                      |    20.2 ms |
 | 2025-11-14 | [Braiding Sweetgrass](Puzzles/CrackingTheCryptic/2025/2025-11-14.cs)         | 7,059.6 µs |
 | 2025-11-01 | [Parity Patrol 101](Puzzles/CrackingTheCryptic/2025/2025-11-01.cs)           |    34.3 ms |
@@ -235,7 +236,7 @@ able to solve the following puzzles (so far):
 | 2025-09-08 | [Four at a Time](Puzzles/CrackingTheCryptic/2025/2025-09-08.cs)              |    73.8 ms |
 | 2025-09-05 | [Besties 2](Puzzles/CrackingTheCryptic/2025/2025-09-05.cs)                   | 2,074.1 µs |
 | 2025-09-04 | [Packing Problem](Puzzles/CrackingTheCryptic/2025/2025-09-04.cs)             |    20.3 s  |
-| 2025-09-03 | [Most Squares](Puzzles/CrackingTheCryptic/2025/2025-09-03.cs)                | 1,204.4 ms |
+| 2025-09-03 | [Most Squares](Puzzles/CrackingTheCryptic/2025/2025-09-.cs)                | 1,204.4 ms |
 | 2025-08-21 | [Miracle Of Eleven](Puzzles/CrackingTheCryptic/2025/2025-08-21.cs)           |    63.4 µs |
 | 2025-08-19 | [Pile Of 15](Puzzles/CrackingTheCryptic/2025/2025-08-19.cs)                  |    33.8 ms |
 | 2025-08-07 | [Unstable Seesaws](Puzzles/CrackingTheCryptic/2025/2025-08-07.cs)            | 5,913.9 µs |
@@ -352,7 +353,7 @@ Both [Kaggle](https://www.kaggle.com/datasets/rohanrao/sudoku/) as
 [Sudoku Exchange(https://github.com/grantm/sudoku-exchange-puzzle-bank) published
 test sets containing zillions of generated puzzles to solve.
 
-| Set                  | Puzzles |   Dynamic Solver    ||       Knuth's DLX         |||      Reference backtracker     |||
+| Set                  | Puzzles |   Dynamic Solver   | |       Knuth's DLX       | | |      Reference backtracker   | | |
 |:---------------------|--------:|----------:|---------:|----------:|---------:|-----:|---------:|-------.-----:|-------:|
 | Kaggle (300k)[1]     | 300,000 | 55.21 k/s | 18.11 µs | 14.47 k/s | 69.13 µs | 3.82 | 1.87 k/s |    534.00 µs |  29.48 |
 | Exchange (easy)      | 100,000 | 58.84 k/s | 17.00 µs | 15.54 k/s | 64.35 µs | 3.79 | 1.38 k/s |    724.43 µs |  42.62 |

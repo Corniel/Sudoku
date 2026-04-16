@@ -18,7 +18,7 @@ public class Work_in_progress
     {
         using var _ = Logger.Options();
 
-        var puzzle = new _2019_05_26();
+        var puzzle = new _2020_07_31();
 
         if (puzzle.Solution.IsSolved)
             puzzle.Constraints.Should().BeValidFor(puzzle.Solution);
@@ -36,7 +36,7 @@ public class Work_in_progress
         solved.IsSolved.Should().BeTrue();
 
         var id = 2;
-        if (solver.MoveNext() && id < 100)
+        if (solver.MoveNext())
         {
             var found = true;
             do
@@ -47,7 +47,7 @@ public class Work_in_progress
                 Console.WriteLine(solved);
                 found = solver.MoveNext();
             }
-            while (found);
+            while (found && id < 8);
 
             true.Should().BeFalse($"Solution should be unique, but found {id}");
         }

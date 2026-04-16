@@ -52,5 +52,5 @@ public sealed class _2026_04_08 : CtcPuzzle
         .yY│...│...
         .zZ│...│...
         """)
-        + new Pos(6, 7).GT((6, 6));
+        + new Pos(6, 7).LT((6, 6));
 }

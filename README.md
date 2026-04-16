@@ -277,8 +277,9 @@ able to solve the following puzzles (so far):
 | 2020-09-30 | [Tatooine Sunset](Puzzles/CrackingTheCryptic/2020/2020-09-30.cs)             |    19.4 µs |
 | 2020-09-18 | [Patto Patto](Puzzles/CrackingTheCryptic/2020/2020-09-18.cs)                 |   125.2 µs |
 | 2020-09-15 | [Sudoku XV](Puzzles/CrackingTheCryptic/2020/2020-09-15.cs)                   |    98.9 µs |
+| 2020-07-31 | [Arrow/Group Sum](Puzzles/CrackingTheCryptic/2020/2020-05-15.cs)             | 8,965.6 ms |
 | 2020-07-26 | [Classic Sudoku](Puzzles/CrackingTheCryptic/2020/2020-07-26.cs)              |    12.7 µs |
-| 2020-05-15 | [Equal Sudoku](Puzzles/CrackingTheCryptic/2020/2020-05-15.cs)                |    17.9 ms |
+| 2020-05-15 | [Equal Sudoku](Puzzles/CrackingTheCryptic/2020/2020-05-15.cs)                |   355.6 ms |
 | 2020-04-13 | [Killer Sudoku](Puzzles/CrackingTheCryptic/2020/2020-04-13.cs)               | 3,302.2 µs |
 | 2020-04-12 | [Magic Square Sudoku](Puzzles/CrackingTheCryptic/2020/2020-04-12.cs)         |   290.9 µs |
 | 2020-03-14 | [Pi](Puzzles/CrackingTheCryptic/2020/2020-03-14.cs)                          |    51.1 µs |

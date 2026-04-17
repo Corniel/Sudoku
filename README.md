@@ -257,6 +257,7 @@ able to solve the following puzzles (so far):
 | 2024-02-21 | [Confiable](Puzzles/CrackingTheCryptic/2024/2024-02-21.cs)                   | 3,892.9 µs |
 | 2024-01-08 | [Tulpenblüte](Puzzles/CrackingTheCryptic/2024/2024-01-08.cs)                 | 4,889.0 µs |
 | 2023-01-15 | [Arbitrary Code Execution](Puzzles/CrackingTheCryptic/2023/2023-01-15.cs)    |    30.7 µs |
+| 2022-12-15 | [The 15th Day Of Christmas](Puzzles/CrackingTheCryptic/2022/2022-12-15.cs)   | 2,056.3 µs |
 | 2022-11-21 | [Can't Teach An Old Dog...](Puzzles/CrackingTheCryptic/2022/2022-11-21.cs)   |   184.0 µs |
 | 2022-08-10 | [Superking](Puzzles/CrackingTheCryptic/2022/2022-08-10.cs)                   |    11.0 ms |
 | 2022-05-03 | [The Dutch Miracle](Puzzles/CrackingTheCryptic/2022/2022-05-03.cs)           |    46.2 µs |

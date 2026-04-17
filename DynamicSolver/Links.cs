@@ -20,11 +20,14 @@ public sealed class Links : IReadOnlyCollection<Link>, SudokuCells
 
         foreach (var restriction in rules.Restrictions)
         {
-            foreach (var other in restriction.Links)
+            if (restriction is not Unique)
             {
-                var othr = links[other];
-                othr.Restrictions.Add(restriction);
-                othr.Bits += Pars.Bits;
+                foreach (var other in restriction.Links)
+                {
+                    var othr = links[other];
+                    othr.Restrictions.Add(restriction);
+                    othr.Bits += Pars.Bits;
+                }
             }
 
             if (restriction is Peers peers)

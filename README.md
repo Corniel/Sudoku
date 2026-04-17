@@ -284,6 +284,7 @@ able to solve the following puzzles (so far):
 | 2020-05-15 | [Equal Sudoku](Puzzles/CrackingTheCryptic/2020/2020-05-15.cs)                |   355.6 ms |
 | 2020-05-06 | [Antiknight Kille](Puzzles/CrackingTheCryptic/2020/2020-05-06.cs)            |    11.3 ms |
 | 2020-04-22 | [CTC](Puzzles/CrackingTheCryptic/2020/2020-04-22.cs)                         |    57.9 µs |
+| 2020-04-21 | [Partial Killer](Puzzles/CrackingTheCryptic/2020/2020-04-22.cs)              |    10.2 ms |
 | 2020-04-13 | [Killer Sudoku](Puzzles/CrackingTheCryptic/2020/2020-04-13.cs)               | 3,302.2 µs |
 | 2020-04-12 | [Magic Square Sudoku](Puzzles/CrackingTheCryptic/2020/2020-04-12.cs)         |   290.9 µs |
 | 2020-03-14 | [Pi](Puzzles/CrackingTheCryptic/2020/2020-03-14.cs)                          |    51.1 µs |

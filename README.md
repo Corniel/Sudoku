@@ -274,6 +274,7 @@ able to solve the following puzzles (so far):
 | 2021-01-19 | [German Whispers](Puzzles/CrackingTheCryptic/2021/2021-01-19.cs)             |   637.3 µs |
 | 2021-01-06 | [Non-consecutive Killer](Puzzles/CrackingTheCryptic/2021/2021-01-06.cs)      |   192.2 ms |
 | 2020-12-30 | [Dotless Kropki Sudoku X](Puzzles/CrackingTheCryptic/2020/2020-12-30.cs)     |   874.8 µs |
+| 2020-10-15 | [Non-consecutive](Puzzles/CrackingTheCryptic/2020/2020-10-15.cs)             |    27.1 µs |
 | 2020-09-30 | [Classic Sudoku!](Puzzles/CrackingTheCryptic/2020/2020-09-30-1.cs)           |    10.7 µs |
 | 2020-09-30 | [Tatooine Sunset](Puzzles/CrackingTheCryptic/2020/2020-09-30.cs)             |    19.4 µs |
 | 2020-09-18 | [Patto Patto](Puzzles/CrackingTheCryptic/2020/2020-09-18.cs)                 |   125.2 µs |

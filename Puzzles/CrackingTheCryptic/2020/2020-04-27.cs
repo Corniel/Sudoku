@@ -9,7 +9,7 @@ public sealed class _2020_04_27 : CtcPuzzle
 
     public override string? Author => "Aad van de Wetering";
 
-    public override Uri? Url => new("https://youtu.be/kgpFXlBftIQ");
+    public override Uri? Url => new("https://youtu.be/ODob3WSRoyM");
 
     public override O Duration => O.μs100;
 

@@ -270,7 +270,8 @@ able to solve the following puzzles (so far):
 | 2021-05-01 | [Wave Particals](Puzzles/CrackingTheCryptic/2021/2021-05-01.cs)              |    81.3 ms |
 | 2021-04-19 | [Archers And Arrows](Puzzles/CrackingTheCryptic/2021/2021-04-19.cs)          | 6,941.6 µs |
 | 2021-04-11 | [Third Times The Charm](Puzzles/CrackingTheCryptic/2021/2021-04-11.cs)       |   538.1 ms |
-| 2021-02-29 | [Mounted Archery 3](Puzzles/CrackingTheCryptic/2021/2021-01-27.cs)           | 5,898.9 µs |
+| 2021-02-29 | [Mounted Archery 3](Puzzles/CrackingTheCryptic/2021/2021-02-29.cs)           | 5,898.9 µs |
+| 2021-02-21 | [Ten Knights](Puzzles/CrackingTheCryptic/2021/2021-02-21.cs)                 |    31.4 ms |
 | 2021-01-19 | [German Whispers](Puzzles/CrackingTheCryptic/2021/2021-01-19.cs)             |   637.3 µs |
 | 2021-01-06 | [Non-consecutive Killer](Puzzles/CrackingTheCryptic/2021/2021-01-06.cs)      |   192.2 ms |
 | 2020-12-30 | [Dotless Kropki Sudoku X](Puzzles/CrackingTheCryptic/2020/2020-12-30.cs)     |   874.8 µs |

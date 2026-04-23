@@ -23,7 +23,7 @@ public sealed class SameSum(Pos appliesTo, ImmutableArray<Pos> others, Immutable
     }
 
     [Pure]
-    public static IEnumerable<SameSum> Create(params ImmutableArray<ImmutableArray<Pos>> cages)
+    public static IEnumerable<Restriction> Create(params ImmutableArray<ImmutableArray<Pos>> cages)
     {
         for (var f = 0; f < cages.Length - 1; f++)
         {
@@ -32,11 +32,19 @@ public sealed class SameSum(Pos appliesTo, ImmutableArray<Pos> others, Immutable
                 var fst = cages[f];
                 var sec = cages[s];
 
-                foreach (var res in Select(fst, (a, o) => new SameSum(a, o, sec)))
-                    yield return res;
+                if (fst.Length is 1 && sec.Length is 1)
+                {
+                    yield return new Twin(fst[0], sec[0]);
+                    yield return new Twin(sec[0], fst[0]);
+                }
+                else
+                {
+                    foreach (var res in Select(fst, (a, o) => new SameSum(a, o, sec)))
+                        yield return res;
 
-                foreach (var res in Select(sec, (a, o) => new SameSum(a, o, fst)))
-                    yield return res;
+                    foreach (var res in Select(sec, (a, o) => new SameSum(a, o, fst)))
+                        yield return res;
+                }
             }
         }
     }

@@ -197,6 +197,7 @@ able to solve the following puzzles (so far):
 
 | Date       | Puzzle                                                                       |      Speed |
 |:----------:|------------------------------------------------------------------------------|-----------:|
+| 2026-04-18 | [Shirkflation](Puzzles/CrackingTheCryptic/2026/2026-04-18.cs)                |    39.4 ms |
 | 2026-04-09 | [Mayan Ruins](Puzzles/CrackingTheCryptic/2026/2026-04-09.cs)                 | 2,340.8 µs |
 | 2026-04-08 | [Colorful Whispers](Puzzles/CrackingTheCryptic/2026/2026-04-08.cs)           |   242.2 µs |
 | 2026-04-04 | [Farrago](Puzzles/CrackingTheCryptic/2026/2026-04-04.cs)                     |   105.1 ms |

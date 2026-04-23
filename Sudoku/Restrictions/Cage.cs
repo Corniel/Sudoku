@@ -13,4 +13,6 @@ public sealed class Cage(Pos appliesTo, ImmutableArray<Pos> others, Ints sum) : 
 
         return total.Digits;
     }
+
+    public override string ToString() => $"Cage[{Sum}] {AppliesTo} => [{string.Join(',', Others)}]";
 }

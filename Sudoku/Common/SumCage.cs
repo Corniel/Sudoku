@@ -16,7 +16,6 @@ public sealed partial class SumCage(Ints sum, PosSet cells) : Rule([.. cells])
     {
         _ when sum.HasNone => [],
         1 => [new Mask(cells.First(), sum.Digits)],
-        9 => [],
         _ => Group.Select(cells, (appliesTo, others) => new Cage(appliesTo, others, sum)),
     };
 }

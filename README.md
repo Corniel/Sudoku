@@ -269,6 +269,7 @@ able to solve the following puzzles (so far):
 | 2021-08-05 | [Checkerboard](Puzzles/CrackingTheCryptic/2021/2021-08-05.cs)                |   267.1 s  |
 | 2021-07-10 | [White Room](Puzzles/CrackingTheCryptic/2021/2021-07-10.cs)                  | 3,447.2 µs |
 | 2021-05-01 | [Wave Particals](Puzzles/CrackingTheCryptic/2021/2021-05-01.cs)              |    81.3 ms |
+| 2021-04-23 | [Wheels Of Arrows](Puzzles/CrackingTheCryptic/2021/2021-04-23.cs)            |   142.8 ms |
 | 2021-04-19 | [Archers And Arrows](Puzzles/CrackingTheCryptic/2021/2021-04-19.cs)          | 6,941.6 µs |
 | 2021-04-11 | [Third Times The Charm](Puzzles/CrackingTheCryptic/2021/2021-04-11.cs)       |   538.1 ms |
 | 2021-02-29 | [Mounted Archery 3](Puzzles/CrackingTheCryptic/2021/2021-02-29.cs)           | 5,898.9 µs |

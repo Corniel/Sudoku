@@ -1,3 +1,6 @@
+using Sudoku.Common;
+using Sudoku.Restrictions;
+
 namespace Sudoku.Houses;
 
 public static class Diagonal
@@ -11,4 +14,24 @@ public static class Diagonal
     public sealed class NWSE() : House(0, PosSet.New(range().Select(i => new Pos(i, i))));
 
     public sealed class NESW() : House(1, PosSet.New(range().Select(i => new Pos(i, _9 - i - 1))));
+
+    public static SumCage Sum(int sum, Pos first, Pos last)
+    {
+        PosSet cells = [first, last];
+
+        var (dr, dc) = (last.Row - first.Row, last.Col - first.Col);
+
+        if (Math.Abs(dr) != Math.Abs(dc)) throw new NotSupportedException($"{first} => {last} is not a diagonal");
+
+        var (r, c) = (Math.Sign(dr), Math.Sign(dc));
+
+        var add = first;
+        while (add != last)
+        {
+            add = new(add.Row + r, add.Col + c);
+            cells |= add;
+        }
+
+        return new SumCage(sum, cells);
+    }
 }

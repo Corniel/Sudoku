@@ -61,17 +61,17 @@ public sealed class _2025_12_15 : CtcPuzzle
 
     private static IEnumerable<Pair> NotTens()
     {
-        foreach (var pos in PosSet.All)
+        foreach (var o in PosSet.All)
         {
-            if (pos.E() is { } e && pos != new Pos(5, 0))
+            if (o.E() is { } e && o != pos(5, 0))
             {
-                var hor = new LookupPair(pos, e, NotTen).Couple();
+                var hor = new LookupPair(o, e, NotTen).Couple();
                 yield return hor.One;
                 yield return hor.Two;
             }
-            if (pos.S() is { } s)
+            if (o.S() is { } s)
             {
-                var ver = new LookupPair(pos, s, NotTen).Couple();
+                var ver = new LookupPair(o, s, NotTen).Couple();
                 yield return ver.One;
                 yield return ver.Two;
             }

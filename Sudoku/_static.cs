@@ -19,6 +19,8 @@ public static class Statics
 
     public static int triangle(int value) => triangles[value];
 
+    public static Pos pos(int row, int col) => new(row, col);
+
     private static readonly ImmutableArray<int> triangles =
     [
         0,

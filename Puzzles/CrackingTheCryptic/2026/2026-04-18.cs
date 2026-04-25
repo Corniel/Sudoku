@@ -40,5 +40,5 @@ public sealed class _2026_04_18 : CtcPuzzle
         ..H│.K.│...
         A=B C=D=E F=G H=I=J K=L M=N=O Q=R S=T=U
         """)
-        + new Pos(0, 0).LT((1, 0));
+        + pos(0, 0).LT(1, 0);
 }

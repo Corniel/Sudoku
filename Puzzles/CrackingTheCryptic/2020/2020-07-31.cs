@@ -69,10 +69,10 @@ public sealed class _2020_07_31 : CtcPuzzle
         ...│..D│D..
         A = 26  B = 19  C = 20  D = 25
         """).Select(c => AtLeast((KillerCage)c))
-        + new Pos(0, 3).LT((0, 4))
-        + new Pos(3, 0).GT((4, 0))
-        + new Pos(4, 8).LT((5, 8))
-        + new Pos(8, 4).GT((8, 5))
+        + pos(0, 3).LT(0, 4)
+        + pos(3, 0).GT(4, 0)
+        + pos(4, 8).LT(5, 8)
+        + pos(8, 4).GT(8, 5)
         ;
 
     private static SumCage AtMost(KillerCage cage)

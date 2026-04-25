@@ -11,9 +11,9 @@ public static class Diagonal
     /// <summary>NE-SW [(0, 8), (1, 7) ..] diagonal.</summary>
     public static readonly NESW NE_SW = new();
 
-    public sealed class NWSE() : House(0, PosSet.New(range().Select(i => new Pos(i, i))));
+    public sealed class NWSE() : House(0, PosSet.New(range().Select(i => pos(i, i))));
 
-    public sealed class NESW() : House(1, PosSet.New(range().Select(i => new Pos(i, _9 - i - 1))));
+    public sealed class NESW() : House(1, PosSet.New(range().Select(i => pos(i, _9 - i - 1))));
 
     public static SumCage Sum(int sum, Pos first, Pos last)
     {

@@ -37,6 +37,13 @@ public sealed class Links : IReadOnlyCollection<Link>, SudokuCells
                 links[mask.AppliesTo].Digits &= mask.Restrict(links);
         }
 
+        foreach (var twins in rules.Restrictions.OfType<Twin>())
+        {
+            var (a, o) = (links[twins.AppliesTo], links[twins.Other]);
+            a.Peers |= o.Peers ^ o.Pos;
+            o.Peers |= a.Peers ^ a.Pos;
+        }
+
         foreach (var (cell, value) in clues)
         {
             var link = links[cell];

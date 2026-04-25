@@ -197,6 +197,7 @@ able to solve the following puzzles (so far):
 
 | Date       | Puzzle                                                                       |      Speed |
 |:----------:|------------------------------------------------------------------------------|-----------:|
+| 2026-04-23 | [The Triple Crown](Puzzles/CrackingTheCryptic/2026/2026-04-23.cs)            |   535.7 ms |
 | 2026-04-20 | [Williwaw](Puzzles/CrackingTheCryptic/2026/2026-04-20.cs)                    |   520.9 ms |
 | 2026-04-18 | [Shirkflation](Puzzles/CrackingTheCryptic/2026/2026-04-18.cs)                |    39.4 ms |
 | 2026-04-09 | [Mayan Ruins](Puzzles/CrackingTheCryptic/2026/2026-04-09.cs)                 | 2,340.8 µs |

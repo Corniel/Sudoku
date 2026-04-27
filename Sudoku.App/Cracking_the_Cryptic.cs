@@ -55,5 +55,5 @@ public static class Cracking_the_Cryptic
     }
 
     private static string Format(Puzzle puzzle, string txt)
-        => $"{puzzle.GetType().Name[1..].Replace('_', '-')}: {puzzle.Title}: {txt}         ";
+        => $"{puzzle.GetType().Name[1..].Replace('_', '-')}: {txt,11} : {puzzle.Title,-20} ";
 }

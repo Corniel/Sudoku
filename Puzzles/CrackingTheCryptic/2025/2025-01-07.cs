@@ -1,5 +1,3 @@
-using Sudoku.Houses;
-
 namespace Puzzles.CrackingTheCryptic;
 
 public sealed class _2025_01_07 : CtcPuzzle
@@ -12,50 +10,31 @@ public sealed class _2025_01_07 : CtcPuzzle
 
     public override O Duration => O.ms10;
 
-    public override Cells Solution { get; } = Cells.Parse("""
-        246|579|813
-        813|246|579
-        579|813|246
-        ---+---+---
-        357|681|924
-        924|357|681
-        681|924|357
-        ---+---+---
-        468|792|135
-        135|468|792
-        792|135|468
+    public override Cells Solution { get; } = Cells.New("""
+        246│579│813
+        813│246│579
+        579│813│246
+        ───┼───┼───
+        357│681│924
+        924│357│681
+        681│924│357
+        ───┼───┼───
+        468│792│135
+        135│468│792
+        792│135│468
         """);
 
-    protected override Rules GetConstraints() =>
-        Rules.AntiKnight
-        + new Ratio1_2((0, 2), (1, 2))
-        + Boxes();
+    protected override RuleSet GetConstraints() =>
+        RuleSet.AntiKnight
+        + Couples.Ratio1_2((0, 2), (1, 2))
+        + Houses.Boxes.SelectMany(EvenOdd);
 
-    private static IEnumerable<Rule> Boxes()
-    {
-        foreach (var b in Box.All)
-            yield return (b.Index & 1) == 1
-                ? new EvenBox([.. b.Cells])
-                : new OddBox([.. b.Cells]);
-    }
+    private static Rules EvenOdd(Box box)
+        => (box.Index + 1).IsEven()
+        ? box.Select((c, i) => new EvenCell(c, i, [.. box]))
+        : box.Select((c, i) => new OddCell(c, i, [.. box]));
 
-    public sealed class EvenBox(ImmutableArray<Pos> cells) : Set(cells)
-    {
-        public override ImmutableArray<Restriction> Restrictions { get; } =
-        [
-            .. cells.Select((c, i) => new EvenCell(c, i, cells)),
-        ];
-    }
-
-    public sealed class OddBox(ImmutableArray<Pos> cells) : Set(cells)
-    {
-        public override ImmutableArray<Restriction> Restrictions { get; } =
-        [
-            .. cells.Select((c, i) => new OddCell(c, i, cells)),
-        ];
-    }
-
-    private abstract class BoxCell(Pos appliesTo, int index, ImmutableArray<Pos> others, ImmutableArray<Digits> allowed) : Group(appliesTo, others)
+    private abstract class BoxCell(Pos appliesTo, int index, PosArray others, ImmutableArray<Digits> allowed) : Group(appliesTo, others)
     {
         public int Index { get; } = index;
 
@@ -91,7 +70,7 @@ public sealed class _2025_01_07 : CtcPuzzle
         }
     }
 
-    private sealed class EvenCell(Pos appliesTo, int index, ImmutableArray<Pos> cells)
+    private sealed class EvenCell(Pos appliesTo, int index, PosArray cells)
             : BoxCell(appliesTo, index, cells, Evens)
     {
         public override Digits Restrict(SudokuCells cells)
@@ -100,7 +79,7 @@ public sealed class _2025_01_07 : CtcPuzzle
         protected override bool Restricted(int value) => value is not 0 && value.IsEven();
     }
 
-    private sealed class OddCell(Pos appliesTo, int index, ImmutableArray<Pos> cells)
+    private sealed class OddCell(Pos appliesTo, int index, PosArray cells)
             : BoxCell(appliesTo, index, cells, Odds)
     {
         public override Digits Restrict(SudokuCells cells)

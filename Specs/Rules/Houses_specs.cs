@@ -1,4 +1,4 @@
-using Sudoku.Houses;
+using Sudoku.Sets;
 
 namespace Specs.Houses_specs;
 
@@ -6,33 +6,42 @@ public class Rows
 {
     [Test]
     public void unique_for([Range(0, 8)] int index)
-        => Row.All[index].Should().HaveCount(9);
+        => Houses.Rows[index].Should().HaveCount(9);
 
     [Test]
     public void all_unique()
-        => Row.All.SelectMany(x => x).Should().BeEquivalentTo(Pos.All);
+        => Houses.Rows.SelectMany(x => x).Should().BeEquivalentTo(Pos.All);
 }
 
 public class Cols
 {
     [Test]
     public void unique_for([Range(0, 8)] int index)
-        => Col.All[index].Should().HaveCount(9);
+        => Houses.Cols[index].Should().HaveCount(9);
 
     [Test]
     public void all_unique()
-        => Col.All.SelectMany(x => x).Should().BeEquivalentTo(Pos.All);
+        => Houses.Cols.SelectMany(x => x).Should().BeEquivalentTo(Pos.All);
 }
 
 public class Boxes
 {
     [Test]
     public void unique_for([Range(0, 8)] int index)
-        => Box.All[index].Should().HaveCount(9);
+        => Houses.Boxes[index].Should().HaveCount(9);
 
     [Test]
     public void all_unique()
-        => Box.All.SelectMany(x => x).Should().BeEquivalentTo(Pos.All);
+        => Houses.Boxes.SelectMany(x => x).Should().BeEquivalentTo(Pos.All);
+
+    public class IndexOf
+    {
+        [Test]
+        public void All_cells_is_in_Box([Range(0, 8)] int index)
+            => Houses.Boxes[index].Should().AllSatisfy(
+                pos => Box.IndexOf(pos).Should().Be(index));
+    }
+
 }
 
 public class Diagonals

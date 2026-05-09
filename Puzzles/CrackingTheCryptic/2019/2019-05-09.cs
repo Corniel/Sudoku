@@ -10,7 +10,7 @@ public sealed class _2019_05_09 : CtcPuzzle
 
     public override O Duration => O.ms;
 
-    public override Clues Clues { get; } = Clues.Parse("""
+    public override Clues Clues { get; } = Clues.New("""
         3 . . . . . .|.|7
         -+-+---+ +-+ | |
         1|.|. .|.|.|.|.|5
@@ -30,7 +30,7 @@ public sealed class _2019_05_09 : CtcPuzzle
         . . . . .|. . 9 .
         """);
 
-    public override Cells Solution { get; } = Cells.Parse("""
+    public override Cells Solution { get; } = Cells.New("""
         364891527
         189374265
         542168739
@@ -42,7 +42,7 @@ public sealed class _2019_05_09 : CtcPuzzle
         751642398
         """);
 
-    protected override Rules GetConstraints() => Rules.Jigsaw("""
+    protected override RuleSet GetConstraints() => RuleSet.Jigsaw("""
         A A A A A A A|C|H
         -+-+---+ +-+ | |
         B|D|Q Q|A|Q|A|C|H

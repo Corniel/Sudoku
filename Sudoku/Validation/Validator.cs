@@ -2,47 +2,57 @@ namespace Sudoku.Validation;
 
 public static class Validator
 {
-    public static IEnumerable<Violation> Validate(this Rules rules, Cells cells)
+    public static IEnumerable<Violation> Validate(this RuleSet rules, Cells cells)
        => rules.Validate(new CellsWrapper(cells));
 
-    public static IEnumerable<Violation> Validate(this Rules rules, SudokuCells cells) =>
+    public static IEnumerable<Violation> Validate(this RuleSet rules, SudokuCells cells) =>
     [
-        .. rules.SelectMany(rule => rule.Validate(cells)),
+        .. rules.OfType<Set>().SelectMany(set => set.Validate(cells)),
         .. rules.Restrictions.SelectMany(res => res.Validate(cells)),
+        .. rules.Constraints.SelectMany(con => con.Validate(cells)),
     ];
 
     /// <summary>Validates that the digits in the cell are compliant with the constraint.</summary>
-    public static IEnumerable<Violation> Validate(this Rule rule, SudokuCells cells)
+    public static IEnumerable<SetViolation> Validate(this Set rule, SudokuCells cells)
     {
-        if (rule.IsSet)
+        var digits = Digits.None;
+        var violations = PosSet.Empty;
+
+        foreach (var cell in rule.Cells)
         {
-            var values = Digits.None;
+            var digit = cells[cell].Digit;
 
-            foreach (var cell in rule.Cells)
+            if (digit is not 0 && digits.Contains(digit))
             {
-                var digits = cells[cell].Digits;
-
-                if (digits.HasSingle && (values & digits).HasAny)
-                {
-                    yield return new Violation(digits, Digits._1_to_9 ^ digits, cell, rule);
-                }
-                values |= cells[cell].Digit;
+                violations |= cell;
             }
+            else digits |= digit;
+        }
+
+        if (violations.HasAny)
+        {
+            yield return new SetViolation(violations, rule);
         }
     }
 
     /// <summary>Validates that the digits in the cell are compliant with the constraint.</summary>
-    public static IEnumerable<Violation> Validate(this Restriction restriction, SudokuCells cells)
+    public static IEnumerable<RestrictionViolation> Validate(this Restriction restriction, SudokuCells cells)
     {
         var digits = cells[restriction.AppliesTo].Digits;
         var allowed = restriction.Restrict(cells);
 
         if ((digits & allowed).HasNone)
         {
-            yield return new Violation(digits, allowed, restriction.AppliesTo, null, restriction);
+            yield return new RestrictionViolation(digits, allowed, restriction.AppliesTo, restriction);
         }
     }
 
-    public static bool IsValid(this Rules rules, SudokuCells cells)
-        => !rules.Validate(cells).Any();
+    /// <summary>Validates that the digits in the cell are compliant with the constraint.</summary>
+    public static IEnumerable<ConstraintViolation> Validate(this Constraint constraint, SudokuCells cells)
+    {
+        if (!constraint.IsSatisfied(cells))
+        {
+            yield return new ConstraintViolation(constraint);
+        }
+    }
 }

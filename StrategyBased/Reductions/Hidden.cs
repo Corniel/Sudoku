@@ -16,7 +16,7 @@ public static partial class Hidden
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static void Pair(Nodes nodes, Rule house)
+    private static void Pair(Nodes nodes, House house)
     {
         Cache.Clear();
         Cache.AddRange(House(nodes, house, 2));
@@ -43,7 +43,7 @@ public static partial class Hidden
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static void Triple(Nodes nodes, Rule house)
+    private static void Triple(Nodes nodes, House house)
     {
         Cache.Clear();
         Cache.AddRange(House(nodes, house, 2, 3));
@@ -70,7 +70,7 @@ public static partial class Hidden
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static void Quad(Nodes nodes, Rule house)
+    private static void Quad(Nodes nodes, House house)
     {
         Cache.Clear();
         Cache.AddRange(House(nodes, house, 2, 4));

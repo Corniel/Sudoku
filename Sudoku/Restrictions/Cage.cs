@@ -1,6 +1,8 @@
 namespace Sudoku.Restrictions;
 
-public sealed class Cage(Pos appliesTo, ImmutableArray<Pos> others, Ints sum) : Group(appliesTo, others)
+public sealed class Cage(Pos appliesTo, PosArray others, Ints sum)
+    : Group(appliesTo, others)
+    , Summation
 {
     public Ints Sum { get; } = sum;
 

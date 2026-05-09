@@ -10,7 +10,7 @@ public sealed class _2025_10_17 : CtcPuzzle
 
     public override O Duration => O.μs10;
 
-    public override Cells Solution { get; } = Cells.Parse("""
+    public override Cells Solution { get; } = Cells.New("""
         843│917│625
         176│285│394
         925│643│817
@@ -24,7 +24,7 @@ public sealed class _2025_10_17 : CtcPuzzle
         584│391│762
         """);
 
-    public override Clues Clues { get; } = Clues.Parse("""
+    public override Clues Clues { get; } = Clues.New("""
         ...│9..│...
         ...│...│...
         ...│...│...
@@ -38,16 +38,16 @@ public sealed class _2025_10_17 : CtcPuzzle
         ...│...│...
         """);
 
-    protected override Rules GetConstraints()
-        => Rules.Standard
+    protected override RuleSet GetConstraints()
+        => RuleSet.Standard
         + Sum10s()
         + Max13s();
 
-    private static IEnumerable<LookupPair> Sum10s()
+    private static Rules Sum10s()
         => range(_9x9)
         .Select(p => new LookupPair(new(p), new(_9x9 - p - 1), Sum10));
 
-    private static IEnumerable<Pair> Max13s()
+    private static Rules Max13s()
         => Dominos.Ort.Select(dom => new LookupPair(dom.A, dom.B, Max13)).Couples();
 
     private static readonly LookupDigits Sum10 = LookupPair.Init(d => [10 - d]);

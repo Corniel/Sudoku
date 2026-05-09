@@ -3,7 +3,7 @@ My attempt to write a [Sudoku](https://en.wikipedia.org/wiki/Sudoku) solver.
 
 ## Solver
 The approach of my solver is that I specify both [clues](#Clues) and the
-(potentially custom) [constraints](#Constraint) to apply when trying to solve
+(potentially custom) [rule set](#Rule Set) to apply when trying to solve
 the puzzle. By doing so, my solver can solve a wide variety Sudoku variants.
 
 ## Dancing Links Solver
@@ -94,31 +94,27 @@ Jigsaw Sudoku has irreguarly shared boxes instead of the standard 3x3 boxes.
 
 ``` csharp
 var clues = Clues.Parse("""
-    4..|7.9|.2.
-    ...|.2.|...
-    .9.|..8|...
-    ---+---+---
-    1.4|...|3..
-    7..|4.1|..2
-    ..2|...|1.3
-    ---+---+---
-    ...|6..|.1.
-    ...|.4.|...
-    .1.|2..|.45
+    4..7.9.2.
+    ....2....
+    .9...8...
+    1.4...3..
+    7..4.1..2
+    ..2...1.3
+    ...6...1.
+    ....4....
+    .1.2...45
     """);
 
 var solution = Solver.Solve(clues, Rules.Jigsaw("""
-    AAA|BBB|BCC
-    AAA|BBB|BCC
-    AAD|DEB|CCC 
-    ---+---+---        
-    ADD|DEE|FCC
-    DDD|EEE|FFF
-    GGD|EEF|FFH
-    ---+---+---
-    GGG|JEF|FHH
-    GGJ|JJJ|HHH
-    GGJ|JJJ|HHH
+    AAABBBBCC
+    AAABBBBCC
+    AADDEBCCC 
+    ADDDEEFCC
+    DDDEEEFFF
+    GGDEEFFFH
+    GGGJEFFHH
+    GGJJJJHHH
+    GGJJJJHHH
     """));
 ```
 
@@ -128,7 +124,7 @@ As there is no standard plain text format to describe these (that I'm aware of) 
 two support formats that seem logical:
 
 ``` csharp
-var rules = KillerCages.Parse("""
+var rules = Sudoku.Common.Groups.Cage("""
     AAB|BBC|DEF
     GGH|HCC|DEF
     GGI|ICJ|KKF
@@ -150,7 +146,7 @@ var rules = KillerCages.Parse("""
     Y = 8   Z = 16  a = 15  b = 13  c = 17
 """);
 
-var rules_ = KillerCages.Parse("""
+var rules_ = Sudoku.Common.Groups.Cage("""
     27 = (0,0) + (0,1) + (1,0) + (2,0)
     13 = (0,2) + (1,1) + (1,2) + (2,1)
     15 = (0,3) + (1,3) + (2,3) + (3,3) + (4,3)
@@ -255,7 +251,7 @@ able to solve the following puzzles (so far):
 | 2024-12-08 | [Fortune Cookie II](Puzzles/CrackingTheCryptic/2024/2024-12-08.cs)           | 2,179.5 µs |
 | 2024-11-18 | [Equivalenee](Puzzles/CrackingTheCryptic/2024/2024-11-18.cs)                 |   242.5 ms |
 | 2024-11-16 | [80](Puzzles/CrackingTheCryptic/2024/2024-11-16.cs)                          |   560.8 µs |
-| 2024-09-29 | [3 In the Corner](Puzzles/CrackingTheCryptic/2024/2024-09-29.cs)             |       ?    |
+| 2024-09-29 | [3 In the Corner](Puzzles/CrackingTheCryptic/2024/2024-09-29.cs)             |   208.5 µs |
 | 2024-04-06 | [Seesaw](Puzzles/CrackingTheCryptic/2024/2024-04-06.cs)                      | 4,097.8 ms |
 | 2024-02-21 | [Confiable](Puzzles/CrackingTheCryptic/2024/2024-02-21.cs)                   | 3,892.9 µs |
 | 2024-01-08 | [Tulpenblüte](Puzzles/CrackingTheCryptic/2024/2024-01-08.cs)                 | 4,889.0 µs |
@@ -330,10 +326,6 @@ an `array`, and the digits of cells can be changed.
 ### Clues
 The `Clues` contain all given [cells](#Cell) for a puzzle.
 
-## Constraint
-The `Constraint` specfies the involved [positions](#PosSet) and the
-[restrictions](#Restriction) per involved position.
-
 ### Digits
 The `Digits` contain all possible digits for a specified [cell](#Cell).
 The underlying `uint` ranges from `0` (no options) to `0b_111_111_111_0` when
@@ -343,7 +335,7 @@ operators (such as `&`, `|`, `^`, and `~`) it allows manipulation of the
 digits.
 
 ### House
-The `House` contains all cells as [set](#PosSet) that must have unique digits.
+The `House` contains all cells as [set](#Set) that must have unique digits.
 Common houses are: rows, columns, 3x3 boxes, and diagonals.
 
 ### Position
@@ -356,12 +348,24 @@ manipulation (similar to [Digits](#Digits)). It's iterator is fast too,
 but iterating an `ImmutableArray<Pos>` is even faster, so while solving, the
 latter is preferred.
 
-### Restriction
-The `Restricton` is defined on a [cell](#Cell), with a referenced to other
-involved cells. It is able, based on a given state of [cells](#Cells), to
-return a (restricted) set of [digits](#Digits).
+## Rule
+There are 3 different types of rules:
 
-## Test sets
+### Constraint
+A `Constraint` specifies if for a specific state of the [cells](#Cells) it is
+saticfied.
+
+### Restriction
+A `Restriction` specifies the allowed [digits](#Digits) for a [cell](#Cell)
+base on the state of the [cells](#Cells).
+
+### Set
+A `Set` which group of [cells](#Cell) must have different [digits](#Digits). 
+
+## Rule Set
+A `RuleSet` is an (immutable) collection of [rules](#Rule).
+
+## Test Sets
 Both [Kaggle](https://www.kaggle.com/datasets/rohanrao/sudoku/) as
 [Sudoku Exchange(https://github.com/grantm/sudoku-exchange-puzzle-bank) published
 test sets containing zillions of generated puzzles to solve.

@@ -10,7 +10,7 @@ public sealed class _2025_11_01 : CtcPuzzle
 
     public override O Duration => O.ms10;
 
-    public override Cells Solution { get; } = Cells.Parse("""
+    public override Cells Solution { get; } = Cells.New("""
         893│625│147
         714│398│562
         526│714│893
@@ -24,8 +24,8 @@ public sealed class _2025_11_01 : CtcPuzzle
         362│587│419
         """);
 
-    protected override Rules GetConstraints()
-        => Rules.Killer("""
+    protected override RuleSet GetConstraints()
+        => RuleSet.Killer("""
         ...│AAA│.BB
         CC.│DDE│EFF
         ..G│..E│...
@@ -66,7 +66,7 @@ public sealed class _2025_11_01 : CtcPuzzle
         }
     }
 
-    public sealed class ParityCheck(Pos appliesTo, ImmutableArray<Pos> others) : Group(appliesTo, others)
+    private sealed class ParityCheck(Pos appliesTo, PosArray others) : Group(appliesTo, others)
     {
         public override Digits Restrict(SudokuCells cells)
             => (Par(cells[Others[0]].Digits), Par(cells[Others[1]].Digits)) switch

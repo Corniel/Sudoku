@@ -37,7 +37,7 @@ public sealed class GeneratedPuzzle(Clues clues, Cells solution) : Puzzle, IEqua
             var parts = line.Split(' ');
             if (parts.Length >= 2 && parts[0].Length is _9x9 && parts[1].Length is _9x9)
             {
-                set.Add(new(Clues.Parse(parts[0]), Cells.Parse(parts[1])));
+                set.Add(new(Clues.New(parts[0]), Cells.New(parts[1])));
             }
         }
         return set;

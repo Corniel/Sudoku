@@ -10,7 +10,7 @@ public sealed class _2021_07_10 : CtcPuzzle
 
     public override O Duration => O.ms;
 
-    public override Cells Solution { get; } = Cells.Parse("""
+    public override Cells Solution { get; } = Cells.New("""
         693│154│872
         815│672│394
         742│398│516
@@ -24,8 +24,8 @@ public sealed class _2021_07_10 : CtcPuzzle
         564│731│289
         """);
 
-    protected override Rules GetConstraints()
-        => Rules.Killer("""
+    protected override RuleSet GetConstraints()
+        => RuleSet.Killer("""
         ...│...│...
         .A.│..B│B..
         .A.│...│CC.

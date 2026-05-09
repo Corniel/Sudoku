@@ -10,7 +10,7 @@ public sealed class _2026_04_08 : CtcPuzzle
 
     public override O Duration => O.μs100;
 
-    public override Cells Solution { get; } = Cells.Parse("""
+    public override Cells Solution { get; } = Cells.New("""
         482│593│176
         937│618│254
         561│274│839
@@ -24,9 +24,9 @@ public sealed class _2026_04_08 : CtcPuzzle
         623│187│945
         """);
 
-    protected override Rules GetConstraints()
-        => Rules.Standard
-        + GermanWhispers.Parse("""
+    protected override RuleSet GetConstraints()
+        => RuleSet.Standard
+        + Lines.GermanWhisper("""
         .HK│...│...
         .IL│.PQ│R.T
         ..M│...│..U
@@ -39,7 +39,7 @@ public sealed class _2026_04_08 : CtcPuzzle
         E..│j..│..z
         F..│...│...
         """)
-        + DutchWhispers.Parse("""
+        + Lines.DutchWhispers("""
         A..│...│...
         B..│...│...
         C..│...│...

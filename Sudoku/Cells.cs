@@ -113,11 +113,11 @@ public readonly struct Cells : IEquatable<Cells>
         return cs;
     }
 
-    public static Cells Parse(string str)
+    public static Cells New(string str)
     {
         var vals = new int[_9x9];
 
-        foreach (var cell in Clues.Parse(str))
+        foreach (var cell in Clues.New(str))
         {
             vals[cell.Pos] = cell.Digit;
         }

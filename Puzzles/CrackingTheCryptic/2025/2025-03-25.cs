@@ -10,7 +10,7 @@ public sealed class _2025_03_25 : CtcPuzzle
 
     public override O Duration => O.μs100;
 
-    public override Clues Clues { get; } = Clues.Parse("""
+    public override Clues Clues { get; } = Clues.New("""
         ...│.2.│...
         ...│...│...
         ...│...│...
@@ -24,7 +24,7 @@ public sealed class _2025_03_25 : CtcPuzzle
         ...│...│...
         """);
 
-    public override Cells Solution { get; } = Cells.Parse("""
+    public override Cells Solution { get; } = Cells.New("""
         471│928│536
         836│571│924
         925│436│187
@@ -38,10 +38,10 @@ public sealed class _2025_03_25 : CtcPuzzle
         763│254│819
         """);
 
-    protected override Rules GetConstraints() =>
-        Rules.AntiKnight
+    protected override RuleSet GetConstraints() =>
+        RuleSet.AntiKnight
         + Tower()
-        + EntropicLines.Parse("""
+        + Lines.Entropic("""
         ...│...│...
         ...│...│...
         ...│...│...
@@ -55,9 +55,9 @@ public sealed class _2025_03_25 : CtcPuzzle
         ...│...│.L.
         """);
 
-    private static IEnumerable<Thermometer> Tower()
+    private static Rules Tower()
     {
-        var tower = NamedCage.Parse("""
+        var tower = Grid.NamedGroups("""
             .T.│...│...
             TTT│...│...
             TTT│...│...
@@ -71,16 +71,13 @@ public sealed class _2025_03_25 : CtcPuzzle
             TTT│...│...
             """).Single();
 
-        foreach (var t in tower.Cells)
-        {
-            if (t.N() is { } n && !tower.Cells.Contains(n))
-                yield return new Thermometer([n, t]);
+        return tower.Cells.SelectMany(Tower);
 
-            if (t.W() is { } w && !tower.Cells.Contains(w))
-                yield return new Thermometer([w, t]);
-
-            if (t.E() is { } e && !tower.Cells.Contains(e))
-                yield return new Thermometer([e, t]);
-        }
+        Rules Tower(Pos t) =>
+        [
+            .. t.N() is { } n && !tower.Cells.Contains(n) ? n.LT(t) : [],
+            .. t.W() is { } w && !tower.Cells.Contains(w) ? w.LT(t) : [],
+            .. t.E() is { } e && !tower.Cells.Contains(e) ? e.LT(t) : [],
+        ];
     }
 }

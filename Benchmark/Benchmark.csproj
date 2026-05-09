@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <OutputType>exe</OutputType>
+    <IsTestCode>true</IsTestCode>
     <NoWarn>CA1822</NoWarn>
   </PropertyGroup>
 

@@ -6,7 +6,7 @@ public sealed class CellsWrapper(Cells cells) : SudokuCells
 
     public SudokuCell this[Pos pos] => new CellWrapper(pos, Cells[pos]);
 
-    public static CellsWrapper Parse(string s) => new(Cells.Parse(s));
+    public static CellsWrapper Parse(string s) => new(Cells.New(s));
 
     private readonly record struct CellWrapper(Pos Pos, int Digit) : SudokuCell
     {

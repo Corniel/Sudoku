@@ -10,11 +10,17 @@ public readonly struct Ints(Int128 bits) : IReadOnlyCollection<int>
     /// <summary>Only contains 1-9.</summary>
     public static readonly Ints _1_9 = new(Digits._1_to_9.Bits);
 
+    /// <summary>Only contains 45.</summary>
+    public static readonly Ints _45 = [45];
+
     /// <summary>Numbers between 1 and 128.</summary>
     public static readonly Ints All = new(Int128.MaxValue);
 
-    /// <summary>Square numbers [1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121].</summary>
+    /// <summary>Square numbers: [1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121].</summary>
     public static readonly Ints SquareNumbers = [1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121];
+
+    /// <summary>Multiples of 10: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120].</summary>
+    public static readonly Ints Mutlple10 = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120];
 
     public static readonly ImmutableArray<Ints> Triangles =
     [
@@ -46,6 +52,9 @@ public readonly struct Ints(Int128 bits) : IReadOnlyCollection<int>
 
     /// <summary>Gets all ints that are valid digits.</summary>
     public Digits Digits => new((uint)Bits);
+
+    /// <summary>Returns true if the value is in the collection.</summary>
+    public bool Contains(int value) => (Bits & (Int128.One << value)) != 0;
 
     /// <inheritdoc />
     public override string ToString() => string.Join(", ", this);
@@ -121,6 +130,14 @@ public readonly struct Ints(Int128 bits) : IReadOnlyCollection<int>
     }
 
     public static implicit operator Ints(Digits digits) => New(digits);
+
+    public static implicit operator Ints(Range range)
+    {
+        var ints = Int128.Zero;
+        for (var i = range.Start.Value; i <= range.End.Value; i++)
+            ints |= Int128.One << i;
+        return new(ints);
+    }
 
     public static Ints New(Digits digits) => new(digits.Bits);
 

@@ -10,7 +10,7 @@ public sealed class _2022_08_10 : CtcPuzzle
 
     public override O Duration => O.ms10;
 
-    public override Clues Clues { get; } = Clues.Parse("""
+    public override Clues Clues { get; } = Clues.New("""
         ...│...│...
         ...│...│...
         7..│...│..8
@@ -24,7 +24,7 @@ public sealed class _2022_08_10 : CtcPuzzle
         ...│...│...
         """);
 
-    public override Cells Solution { get; } = Cells.Parse("""
+    public override Cells Solution { get; } = Cells.New("""
         849│516│273
         132│798│465
         765│432│198
@@ -38,7 +38,7 @@ public sealed class _2022_08_10 : CtcPuzzle
         273│849│516
         """);
 
-    protected override Rules GetConstraints()
-        => Rules.XSudoku
+    protected override RuleSet GetConstraints()
+        => RuleSet.XSudoku
         + Dominos.Dig.SelectMany(d => NonConsecutive.New(d));
 }

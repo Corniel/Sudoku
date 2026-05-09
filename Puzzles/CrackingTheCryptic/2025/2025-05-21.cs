@@ -10,7 +10,7 @@ public sealed class _2025_05_21 : CtcPuzzle
 
     public override O Duration => O.μs100;
 
-    public override Clues Clues { get; } = Clues.Parse("""
+    public override Clues Clues { get; } = Clues.New("""
         ...|...|...
         ...|...|...
         ...|...|...
@@ -24,7 +24,7 @@ public sealed class _2025_05_21 : CtcPuzzle
         ..9|...|...
         """);
 
-    public override Cells Solution { get; } = Cells.Parse("""
+    public override Cells Solution { get; } = Cells.New("""
         541|627|893
         982|531|674
         376|984|521
@@ -38,122 +38,74 @@ public sealed class _2025_05_21 : CtcPuzzle
         269|748|135
         """);
 
-    protected override Rules GetConstraints() =>
-        Rules.Standard
-        + NonConsecutive.Create()
-        + Thermometer.Parse("""
-        ...|...|...
-        ...|...|...
-        ...|...|...
-        ---+---+---
-        ...|...|...
-        ...|...|...
-        ...|1..|...
-        ---+---+---
-        ..3|2..|...
-        .54|...|...
-        .6.|...|...
-        """)
-        + Thermometer.Parse("""
-        ...|...|...
-        65.|...|...
-        .43|...|...
-        ---+---+---
-        ..2|1..|...
-        ...|...|...
-        ...|...|...
-        ---+---+---
-        ...|...|...
-        ...|...|...
-        ...|...|...
-        """)
-        + Thermometer.Parse("""
-        ...|...|.6.
-        ...|...|45.
-        ...|..2|3..
-        ---+---+---
-        ...|..1|...
-        ...|...|...
-        ...|...|...
-        ---+---+---
-        ...|...|...
-        ...|...|...
-        ...|...|...
-        """)
-        + Thermometer.Parse("""
-        ...|...|...
-        ...|...|...
-        ...|...|...
-        ---+---+---
-        ...|...|...
-        ...|...|...
-        ...|..1|2..
-        ---+---+---
-        ...|...|34.
-        ...|...|.56
-        ...|...|...
-        """);
+    protected override RuleSet GetConstraints() =>
+        RuleSet.Standard
+        + Triples().SelectMany(NonConsecutives)
+        + Lines.Thermometer("""
+         ...|...|.P.
+         FE.|...|NO.
+         .DC|..L|M..
+         ---+---+---
+         ..B|A.K|...
+         ...|...|...
+         ...|a.k|l..
+         ---+---+---
+         ..c|b..|mn.
+         .ed|...|.op
+         .f.|...|...
+         """);
 
-    public sealed class NonConsecutive(PosSet cells) : Set([.. cells])
+    private static Rules NonConsecutives(PosSet cells)
+        => Group.Select(cells, (a, o) => new NonConsecutive(a, o));
+
+    public sealed class NonConsecutive(Pos appliesTo, PosArray others) : Group(appliesTo, others)
     {
-        public override ImmutableArray<Restriction> Restrictions { get; } = Reducer.Reducers([.. cells]);
-
-        public sealed class Reducer(Pos appliesTo, ImmutableArray<Pos> others) : Group(appliesTo, others)
+        public override Digits Restrict(SudokuCells cells)
         {
-            public override Digits Restrict(SudokuCells cells)
-            {
-                var index = Digits.New(cells[Others[0]].Digit, cells[Others[1]].Digit);
-                return Loookup[index.GetHashCode()];
-            }
-
-            public static ImmutableArray<Restriction> Reducers(ImmutableArray<Pos> cells) =>
-            [
-                new Reducer(cells[0], cells.Remove(cells[0])),
-                new Reducer(cells[1], cells.Remove(cells[1])),
-                new Reducer(cells[2], cells.Remove(cells[2])),
-            ];
-
-            private static readonly ImmutableArray<Digits> Loookup = Init();
-
-            private static ImmutableArray<Digits> Init()
-            {
-                var lookup = new Digits[1 << (_9 + 1)];
-
-                lookup[0] = Digits._1_to_9;
-
-                for (var i = 0; i < 9; i++)
-                {
-                    lookup[1 << i] = Digits._1_to_9;
-                }
-
-                for (var i = 1; i <= 9; i++)
-                {
-                    for (var j = i; j <= 9; j++)
-                    {
-                        var index = Digits.New(i, j).GetHashCode();
-
-                        lookup[index] = (j - i) switch
-                        {
-                            0 => ~Digits.New(i),
-                            1 => ~Digits.Between(i - 1, j + 1),
-                            2 => ~Digits.Between(i - 0, j + 0),
-                            _ => Digits._1_to_9,
-                        };
-                    }
-                }
-                return [.. lookup];
-            }
+            var index = Digits.New(cells[Others[0]].Digit, cells[Others[1]].Digit);
+            return Loookup[index.GetHashCode()];
         }
 
-        public static IEnumerable<NonConsecutive> Create()
+        private static readonly ImmutableArray<Digits> Loookup = Init();
+
+        private static ImmutableArray<Digits> Init()
         {
-            for (var f = 0; f < _9; f++)
+            var lookup = new Digits[1 << (_9 + 1)];
+
+            lookup[0] = Digits._1_to_9;
+
+            for (var i = 0; i < 9; i++)
             {
-                for (var s = 0; s < 9; s += 3)
+                lookup[1 << i] = Digits._1_to_9;
+            }
+
+            for (var i = 1; i <= 9; i++)
+            {
+                for (var j = i; j <= 9; j++)
                 {
-                    yield return new NonConsecutive([(f, s), (f, s + 1), (f, s + 2)]);
-                    yield return new NonConsecutive([(s, f), (s + 1, f), (s + 2, f)]);
+                    var index = Digits.New(i, j).GetHashCode();
+
+                    lookup[index] = (j - i) switch
+                    {
+                        0 => ~Digits.New(i),
+                        1 => ~Digits.Between(i - 1, j + 1),
+                        2 => ~Digits.Between(i - 0, j + 0),
+                        _ => Digits._1_to_9,
+                    };
                 }
+            }
+            return [.. lookup];
+        }
+    }
+
+    private static IEnumerable<PosSet> Triples()
+    {
+        for (var f = 0; f < _9; f++)
+        {
+            for (var s = 0; s < 9; s += 3)
+            {
+                yield return PosSet.New((f, s), (f, s + 1), (f, s + 2));
+                yield return PosSet.New((s, f), (s + 1, f), (s + 2, f));
             }
         }
     }

@@ -10,7 +10,7 @@ public sealed class _2025_11_23 : CtcPuzzle
 
     public override O Duration => O.ms10;
 
-    public override Cells Solution { get; } = Cells.Parse("""
+    public override Cells Solution { get; } = Cells.New("""
         384│517│296
         576│982│134
         921│634│587
@@ -24,9 +24,9 @@ public sealed class _2025_11_23 : CtcPuzzle
         265│849│371
         """);
 
-    protected override Rules GetConstraints()
-        => Rules.Standard
-        + RenbanLines.Parse("""
+    protected override RuleSet GetConstraints()
+        => RuleSet.Standard
+        + Lines.Renban("""
         ...│...│...
         ...│...│...
         ...│...│...
@@ -39,7 +39,7 @@ public sealed class _2025_11_23 : CtcPuzzle
         ..C│...│.DD
         .CC│...│.D.
         """)
-        + GermanWhispers.Parse("""
+        + Lines.GermanWhisper("""
         ...│..A│BC.
         ..G│...│.D.
         ..H│...│.E.
@@ -52,7 +52,7 @@ public sealed class _2025_11_23 : CtcPuzzle
         .M.│...│V..
         ...│.ST│U..
         """)
-        + NamedCage.Parse("""
+        + Grid.NamedGroups("""
         ...│..X│XX.
         ..X│...│.X.
         ..X│...│XXX
@@ -66,7 +66,7 @@ public sealed class _2025_11_23 : CtcPuzzle
         .XX│.XX│XX.
         """).SelectMany(c => Group.Select(c.Cells, (a, o) => new Repeat(a, o)));
 
-    private sealed class Repeat(Pos appliesTo, ImmutableArray<Pos> others) : Group(appliesTo, others)
+    private sealed class Repeat(Pos appliesTo, PosArray others) : Group(appliesTo, others)
     {
         public override Digits Restrict(SudokuCells cells)
         {

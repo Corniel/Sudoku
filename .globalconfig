@@ -60,9 +60,8 @@ dotnet_diagnostic.NUnit2033.severity = error      # Consider using Assert.That i
 dotnet_diagnostic.Proj0006.severity = none       # Add Additional files
 dotnet_diagnostic.Proj0240.severity = none       # Enable package validation [Justification: Disallows extended contracts for newer .NET versions]
 
-dotnet_diagnostic.QW0010.severity   = none       # Use DateOnly instead of Date
-dotnet_diagnostic.QW0001.severity   = none       # Use a testable Time Provider
 dotnet_diagnostic.QW0003.severity   = none       # Decorate Pure functions
+dotnet_diagnostic.QW0016.severity   = none       # Prefer regular over positional properties
 
 dotnet_diagnostic.SA0001.severity   = none       # XML comment analasis is disabled.
 dotnet_diagnostic.SA1001.severity   = none       # Commas should not be preceded by whitespace

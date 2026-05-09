@@ -7,7 +7,7 @@ public class Parses
     [Test]
     public void cell_based_cages()
     {
-        var rules = Rules.Killer("""
+        var rules = RuleSet.Killer("""
             AAB|BBC|DEF
             GGH|HCC|DEF
             GGI|ICJ|KKF
@@ -53,7 +53,7 @@ public class Parses
     [Test, Ignore("Check outcome, it seems that multiple solutions are possible.")]
     public void cages_per_line()
     {
-        var rules = Rules.Killer("""
+        var rules = RuleSet.Killer("""
             27=(0,0)+(0,1)+(1,0)+(2,0)
             13=(0,2)+(1,1)+(1,2)+(2,1)
             15=(0,3)+(1,3)+(2,3)+(3,3)+(4,3)

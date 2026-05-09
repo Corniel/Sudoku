@@ -18,6 +18,8 @@ public sealed class Link(Pos pos) : SudokuCell
 
     public PosSet Peers { get; set; }
 
+    public List<Constraint> Constraints { get; } = [];
+
     public List<Restriction> Restrictions { get; } = [];
 
     public double Bits { get; set; }

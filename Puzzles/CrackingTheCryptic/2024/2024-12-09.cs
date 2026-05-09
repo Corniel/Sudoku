@@ -10,7 +10,7 @@ public sealed class _2024_12_09 : CtcPuzzle
 
     public override O Duration => O.ms10;
 
-    public override Cells Solution { get; } = Cells.Parse("""
+    public override Cells Solution { get; } = Cells.New("""
         617│235│498
         824│169│573
         935│874│216
@@ -24,9 +24,9 @@ public sealed class _2024_12_09 : CtcPuzzle
         298│756│134
         """);
 
-    protected override Rules GetConstraints() =>
-        Rules.Standard
-        + Thermometers.Parse("""
+    protected override RuleSet GetConstraints() =>
+        RuleSet.Standard
+        + Lines.Thermometer("""
             .A.│..b│a..
             .B.│.c.│...
             .C.│ed.│..m

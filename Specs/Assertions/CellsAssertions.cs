@@ -6,14 +6,14 @@ public sealed class CellsAssertions(Cells subject)
 
     public Cells Subject { get; } = subject;
 
-    public void Be(string expected, Rules? rules = null)
-        => Be(Cells.Parse(expected), rules);
+    public void Be(string expected, RuleSet? rules = null)
+        => Be(Cells.New(expected), rules);
 
-    public void Be(Cells expected, Rules? rules = null)
+    public void Be(Cells expected, RuleSet? rules = null)
     {
-        rules ??= Rules.Standard;
+        rules ??= RuleSet.Standard;
 
-        ((Rules)rules).Should().BeValidFor(Subject);
+        ((RuleSet)rules).Should().BeValidFor(Subject);
 
         Chain
             .ForCondition(Subject.Equals(expected))

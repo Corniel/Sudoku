@@ -1,5 +1,3 @@
-using Sudoku.Houses;
-
 namespace Puzzles.CrackingTheCryptic;
 
 public sealed class _2024_09_29 : CtcPuzzle
@@ -10,54 +8,79 @@ public sealed class _2024_09_29 : CtcPuzzle
 
     public override Uri? Url => new("https://youtu.be/x6RrwaOb0Iw");
 
-    public override O Duration => O.oo;
+    public override O Duration => O.μs100;
 
-    // TODO: remove the arrow: it has not been specified, but could be deduced
-    // by a hint that is not defined in a constraint
-    public override Clues Clues { get; } = Clues.Parse("""
-        .9.|...|...
-        ..1|...|...
-        ...|1..|...
-        ---+---+---
-        ...|...|...
-        ...|...|...
-        ...|...|1..
-        ---+---+---
-        ...|...|...
-        ...|...|...
-        3..|...|...
+    public override Cells Solution { get; } = Cells.New("""
+        594│738│261
+        261│495│837
+        837│162│594
+        ───┼───┼───
+        159│627│483
+        483│951│726
+        726│384│159
+        ───┼───┼───
+        948│273│615
+        615│849│372
+        372│516│948
         """);
 
-    protected override Rules GetConstraints() =>
-        Rules.Standard
-        + AtLeast3s();
-
-    public override Cells Solution { get; } = Cells.Parse("""
-        594|738|261
-        261|495|837
-        837|162|594
-        ---+---+---
-        159|384|726
-        726|951|483
-        483|627|159
-        ---+---+---
-        948|273|615
-        615|849|372
-        372|516|948
+    public override Clues Clues { get; } = Clues.New("""
+        ...│...│...
+        ...│...│...
+        ...│...│...
+        ───┼───┼───
+        ...│...│...
+        ...│...│...
+        ...│...│...
+        ───┼───┼───
+        ...│...│...
+        ...│...│...
+        3..│...│...
         """);
 
-    private static IEnumerable<Pair> AtLeast3s()
+    protected override RuleSet GetConstraints() =>
+        RuleSet.Standard
+        + AtLeast3s()
+        + new Arrow()
+        ;
+
+    private static Rules AtLeast3s()
+        => Dominos.Ort
+        .Where(d => Box.IndexOf(d.A) == Box.IndexOf(d.B))
+        .SelectMany(d => DeltaMin.New(d.A, d.B, 3));
+
+    private sealed class Arrow() : Constraint
     {
-        foreach (var box in Box.All)
-        {
-            foreach (var c in box)
-            {
-                if (c.W() is { } w && box.Cells.Contains(w))
-                    yield return DeltaMin.New(c, w, 3).One;
+        public PosSet Cells { get; } = [.. Arrows.SelectMany(l => l)];
 
-                if (c.S() is { } s && box.Cells.Contains(s))
-                    yield return DeltaMin.New(c, s, 3).One;
-            }
+        public bool IsSatisfied(SudokuCells cells)
+            => Arrows.Any(a => Fits(cells, a));
+
+        private static bool Fits(SudokuCells cells, PosArray arrow)
+        {
+            var point = cells[arrow[0]].Digits;
+            var shaft = Ints.Zero;
+
+            for (var i = 1; i < arrow.Length; i++)
+                shaft += cells[arrow[i]].Digits;
+
+            return (point & shaft.Digits).HasAny;
+        }
+    }
+
+    public static readonly PosArray[] Arrows = [.. Init((0, 0), (0, 1), (1, 0), (1, 1))];
+
+    private static IEnumerable<PosArray> Init(params Pos[] points)
+    {
+        foreach (var p in points)
+        {
+            var arrow = new Pos[8];
+            arrow[0] = p;
+
+            for (var i = 1; i < 8; i++)
+                arrow[i] = (p.Row + i, p.Col + i);
+
+            yield return [.. arrow];
         }
     }
 }

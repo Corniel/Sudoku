@@ -1,5 +1,3 @@
-using Sudoku.Houses;
-
 namespace Puzzles.CrackingTheCryptic;
 
 public sealed class _2020_04_12 : CtcPuzzle
@@ -12,7 +10,7 @@ public sealed class _2020_04_12 : CtcPuzzle
 
     public override O Duration => O.μs100;
 
-    public override Clues Clues { get; } = Clues.Parse("""
+    public override Clues Clues { get; } = Clues.New("""
         ...│...│...
         ...│...│...
         ...│...│...
@@ -26,7 +24,7 @@ public sealed class _2020_04_12 : CtcPuzzle
         ...│...│..2
         """);
 
-    public override Cells Solution { get; } = Cells.Parse("""
+    public override Cells Solution { get; } = Cells.New("""
         843│567│219
         275│913│846
         619│428│375
@@ -40,8 +38,8 @@ public sealed class _2020_04_12 : CtcPuzzle
         198│345│762
         """);
 
-    protected override Rules GetConstraints()
-        => Rules.AntiKnight
+    protected override RuleSet GetConstraints()
+        => RuleSet.AntiKnight
         + Diagonal.NW_SE
         + Diagonal.NE_SW
         + MagicSquare.SelectMany(line => Group.Select(line, (a, o) => new Cage(a, o, [15])));

@@ -10,11 +10,11 @@ public sealed class _2024_12_08 : CtcPuzzle
 
     public override O Duration => O.ms;
 
-    protected override Rules GetConstraints() =>
-        Rules.Standard
-        + new Ratio1_2((4, 3), (5, 3))
+    protected override RuleSet GetConstraints() =>
+        RuleSet.Standard
+        + Couples.Ratio1_2((4, 3), (5, 3))
         + Not7Nor13s()
-        + WhiteDots.Parse("""
+        + Couples.WhiteDots("""
         .AA|BBE|FCC
         DD.|..E|F..
         .GG|HH.|II.
@@ -28,7 +28,7 @@ public sealed class _2024_12_08 : CtcPuzzle
         .UU|..X|.aa
         """);
 
-    public override Cells Solution { get; } = Cells.Parse("""
+    public override Cells Solution { get; } = Cells.New("""
         421|873|965
         563|192|847
         789|564|123
@@ -42,15 +42,13 @@ public sealed class _2024_12_08 : CtcPuzzle
         632|415|798
         """);
 
-    public static IEnumerable<Not7Nor13> Not7Nor13s() => Dominos.Ort.Select(p => new Not7Nor13(p.A, p.B));
+    public static Rules Not7Nor13s() => Dominos.Ort.SelectMany(Not7Nor13s);
 
-    public sealed class Not7Nor13(Pos a, Pos b) : Set(a, b)
-    {
-        public override ImmutableArray<Restriction> Restrictions { get; } =
-        [
-            .. new LookupPair(a, b, Lookup).Couple()
-        ];
-    }
+    private static Rules Not7Nor13s(Domino domino) =>
+    [
+        new CellSet(domino, "!7 and !13"),
+        .. new LookupPair(domino.A, domino.B, Lookup).Couple(),
+    ];
 
     private static readonly LookupDigits Lookup = LookupPair.Init(
     [

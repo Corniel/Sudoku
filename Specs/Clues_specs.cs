@@ -5,7 +5,7 @@ public class Parses
     [Test]
     public void ignores_noise()
     {
-        var clues = Clues.Parse("""
+        var clues = Clues.New("""
         ...|1.2|...
         .6.|...|.7.
         ..8|...|9..

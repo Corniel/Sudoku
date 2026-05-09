@@ -1,8 +1,0 @@
-namespace Sudoku.Houses;
-
-public sealed class Col(int col) : House(col, PosSet.New(range().Select(row => pos(row, col))))
-{
-    public static readonly ImmutableArray<Col> All = [.. range().Select(i => new Col(i))];
-
-    public override string ToString() => $"Col[{Index}]";
-}

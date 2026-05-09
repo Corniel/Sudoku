@@ -3,11 +3,11 @@ using Sudoku.Validation;
 
 namespace AwesomeAssertions;
 
-internal sealed class ConstraintsAssertions(Rules subject)
+internal sealed class ConstraintsAssertions(RuleSet subject)
 {
     private readonly AssertionChain Chain = AssertionChain.GetOrCreate();
 
-    public Rules Subject { get; } = subject;
+    public RuleSet Subject { get; } = subject;
 
     public void BeValidFor(Cells cells) => BeValidFor(new CellsWrapper(cells));
 

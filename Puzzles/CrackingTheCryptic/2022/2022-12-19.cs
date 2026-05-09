@@ -10,7 +10,7 @@ public sealed class _2022_12_19 : CtcPuzzle
 
     public override O Duration => O.ms;
 
-    public override Cells Solution { get; } = Cells.Parse("""
+    public override Cells Solution { get; } = Cells.New("""
         318│459│267
         952│617│843
         647│238│519
@@ -24,8 +24,8 @@ public sealed class _2022_12_19 : CtcPuzzle
         491│876│352
         """);
 
-    protected override Rules GetConstraints()
-        => Rules.AntiKnight
+    protected override RuleSet GetConstraints()
+        => RuleSet.AntiKnight
         + PurpleLines("""
         ...│BB.│...
         A..│B..│...
@@ -39,7 +39,7 @@ public sealed class _2022_12_19 : CtcPuzzle
         ...│...│..J
         ...│II.│.JJ
         """)
-        + Thermometers.Parse("""
+        + Lines.Thermometer("""
         ...│...│...
         ...│...│...
         ...│C..│...
@@ -53,27 +53,26 @@ public sealed class _2022_12_19 : CtcPuzzle
         ...│...│...
         """);
 
-    private static IEnumerable<Restriction> PurpleLines(string str)
+    private static Rules PurpleLines(string str)
     {
-        RenbanLine[] lines = [.. RenbanLines.Parse(str)];
-        PosSet[] ln = [..lines.Select(ln => ln.Cells)];
+        PosSet[] lines = [.. Grid.NamedGroups(str).Select(group => group.Cells)];
         return lines.SelectMany(Line);
 
-        IEnumerable<Restriction> Line(RenbanLine line) =>
+        Rules Line(PosSet line) =>
         [
-            .. Group.Select(line.Cells, (a, o) => new Unique(a, o)),
-            .. Group.Select(line.Cells, (a, o) => new PurpleLine(a, o, ln)),
+            new CellSet(line, "Purple line"),
+            .. Group.Select(line, (a, o) => new PurpleLine(a, o, lines)),
         ];
     }
 
     public sealed class PurpleLine(
         Pos appliesTo,
-        ImmutableArray<Pos> others,
+        PosArray others,
         PosSet[] lines) : Group(appliesTo, [.. others, .. lines.SelectMany(l => l)])
     {
         private readonly int Size = others.Length + 1;
-        private readonly ImmutableArray<Pos> Line = others;
-        private readonly ImmutableArray<Pos>[] Lines =
+        private readonly PosArray Line = others;
+        private readonly PosArray[] Lines =
         [
             .. lines.Where(l => l.Count == others.Length + 1 && !l.Contains(appliesTo))
                 .Select(ln => ln.ToImmutableArray())

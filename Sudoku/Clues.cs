@@ -59,7 +59,7 @@ public readonly struct Clues : IReadOnlyCollection<Cell>, IEquatable<Clues>
     /// <inheritdoc />
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-    public static Clues Parse(string str)
+    public static Clues New(string str)
     {
         var cells = new Cell[_9x9];
         var p = Pos.O;

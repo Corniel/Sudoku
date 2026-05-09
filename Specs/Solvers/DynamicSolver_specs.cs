@@ -15,7 +15,7 @@ public class Solves
     {
         using var _ = Logger.Options();
 
-        var cells = Solver.Solve(Clues.None, Rules.Standard);
+        var cells = Solver.Solve(Clues.None, RuleSet.Standard);
         cells.IsSolved.Should().BeTrue();
     }
 
@@ -40,11 +40,11 @@ public class Solves
         ]);
 
     [Test]
-    public void Killer() => Run(4_482.09, KillerPuzzle.Load());
+    public void Killer() => Run(1_395.00, KillerPuzzle.Load());
 
     [Test]
     public void Fantacy() => Run(
-        132_268.45,
+        120_975.45,
         [
             new _2020_04_12(),
             new _2024_11_18(),

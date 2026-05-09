@@ -1,5 +1,3 @@
-using Sudoku.Restrictions;
-
 namespace Sudoku.Common;
 
 public static class AtMost

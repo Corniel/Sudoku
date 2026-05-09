@@ -1,4 +1,3 @@
-using Sudoku.Houses;
 using Sudoku.Restrictions;
 
 namespace StrategyBased;
@@ -28,10 +27,10 @@ public sealed class Nodes : IReadOnlyCollection<Node>, SudokuCells
 
     public PosSet Restricted { get; private set; }
 
-    public Rules Rules { get; set; } = Rules.None;
+    public RuleSet Rules { get; set; } = RuleSet.None;
 
     /// <summary>Gets all houses (e.a. sets with size 9).</summary>
-    public ImmutableArray<Rule> Houses { get; set; } = [];
+    public ImmutableArray<House> Houses { get; set; } = [];
 
     /// <summary>Gets all rows.</summary>
     public ImmutableArray<Row> Rows { get; set; } = [];
@@ -136,20 +135,20 @@ public sealed class Nodes : IReadOnlyCollection<Node>, SudokuCells
         };
     }
 
-    public static Nodes operator &(Nodes nodes, Rules rules)
+    public static Nodes operator &(Nodes nodes, RuleSet rules)
     {
-        nodes.Houses = nodes.Houses.AddRange(rules.Where(r => r.IsHouse));
+        nodes.Houses = nodes.Houses.AddRange(rules.OfType<House>());
         nodes.Rows = nodes.Rows.AddRange(rules.OfType<Row>());
         nodes.Cols = nodes.Cols.AddRange(rules.OfType<Col>());
 
-        foreach (var rule in rules.OrderByDescending(r => r.Count))
+        foreach (var rule in rules.OrderByDescending(r => r.Cells.Count))
         {
             nodes.Rules += rule;
 
             foreach (var cell in rule.Cells)
                 nodes[cell].Links |= rule.Cells;
 
-            if (rule.IsSet)
+            if (rule is Set)
             {
                 foreach (var cell in rule.Cells)
                     nodes[cell].Peers |= rule.Cells;
@@ -161,7 +160,7 @@ public sealed class Nodes : IReadOnlyCollection<Node>, SudokuCells
             node.Links ^= node.Pos;
         }
 
-        foreach (var restriction in rules.Restrictions)
+        foreach (var restriction in rules.OfType<Restriction>())
         {
             if (restriction is Mask mask)
             {
@@ -171,7 +170,7 @@ public sealed class Nodes : IReadOnlyCollection<Node>, SudokuCells
             {
                 nodes.Restricted |= restriction.AppliesTo;
                 nodes[restriction.AppliesTo].Restrictions.Add(restriction);
-                nodes[restriction.AppliesTo].Links |= restriction.Links;
+                nodes[restriction.AppliesTo].Links |= restriction.Cells;
 
                 if (restriction is Pair pair)
                 {

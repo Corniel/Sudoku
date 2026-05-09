@@ -2,12 +2,12 @@ namespace StrategyBased;
 
 public sealed class StrategyBasedSolver(Nodes nodes, ReduceOptions options) : IEnumerator<SolveResult>, IEnumerable<SolveResult>
 {
-    public StrategyBasedSolver(Clues clues, Rules rules, ReduceOptions options)
+    public StrategyBasedSolver(Clues clues, RuleSet rules, ReduceOptions options)
         : this(Nodes.Empty & rules & clues, options) { }
 
-    public static Cells Solve(Clues clues) => Solve(clues, Rules.Standard, ReduceOptions.All);
+    public static Cells Solve(Clues clues) => Solve(clues, RuleSet.Standard, ReduceOptions.All);
 
-    public static Cells Solve(Clues clues, Rules rules, ReduceOptions? options = null)
+    public static Cells Solve(Clues clues, RuleSet rules, ReduceOptions? options = null)
     {
         var solver = new StrategyBasedSolver(Nodes.Empty & rules & clues, options ?? ReduceOptions.All);
         _ = solver.LastOrDefault();

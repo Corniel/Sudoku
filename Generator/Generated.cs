@@ -11,7 +11,7 @@ public sealed record Generated : IComparable<Generated>
 
     public required Cells Solution { get; init; }
 
-    public required Rules Rules { get; init; }
+    public required RuleSet Rules { get; init; }
 
     public required ImmutableArray<StrategyType> Strategies { get; init; }
 

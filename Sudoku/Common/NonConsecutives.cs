@@ -2,9 +2,9 @@ namespace Sudoku.Common;
 
 public static class NonConsecutives
 {
-    public static IEnumerable<Restriction> Orthogonally()
+    public static Rules Orthogonally()
         => New(Dominos.Ort);
 
-    public static IEnumerable<Restriction> New(IEnumerable<Domino> dominos)
+    public static Rules New(IEnumerable<Domino> dominos)
         => dominos.SelectMany(d => NonConsecutive.New(d));
 }

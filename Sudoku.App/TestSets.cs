@@ -48,7 +48,7 @@ public static class TestSets
             sw.Restart();
             foreach (var clues in set.Clues)
             {
-                _ = DynamicSolver.Solver.Raw(clues, Rules.Standard);
+                _ = DynamicSolver.Solver.Raw(clues, RuleSet.Standard);
             }
             sw.Stop();
             Log(sw, set);

@@ -1,4 +1,4 @@
-using Sudoku.Restrictions;
+using Sudoku;
 
 namespace System.Linq;
 
@@ -24,4 +24,15 @@ public static class EnumerableExtensions
     }
 
     public static IEnumerable<Pair> Couples(this IEnumerable<LookupPair> pairs) => pairs.SelectMany(p => p.Couple());
+
+    public static IEnumerable<Domino> RoundRoubin(this IReadOnlyList<Pos> cells)
+    {
+        for (var i = 0; i < cells.Count - 1; i++)
+        {
+            for (var j = i + 1; j < cells.Count; j++)
+            {
+                yield return new(cells[i], cells[j]);
+            }
+        }
+    }
 }

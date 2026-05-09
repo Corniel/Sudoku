@@ -1,5 +1,3 @@
-using Sudoku.Generics;
-
 namespace Puzzles.CrackingTheCryptic;
 
 public sealed class _2020_12_30 : CtcPuzzle
@@ -12,7 +10,7 @@ public sealed class _2020_12_30 : CtcPuzzle
 
     public override O Duration => O.μs100;
 
-    public override Clues Clues { get; } = Clues.Parse("""
+    public override Clues Clues { get; } = Clues.New("""
         ...│...│...
         ...│...│...
         ...│...│...
@@ -26,7 +24,7 @@ public sealed class _2020_12_30 : CtcPuzzle
         ...│...│...
         """);
 
-    public override Cells Solution { get; } = Cells.Parse("""
+    public override Cells Solution { get; } = Cells.New("""
         268│174│935
         593│826│417
         741│359│682
@@ -40,8 +38,8 @@ public sealed class _2020_12_30 : CtcPuzzle
         826│417│593
         """);
 
-    protected override Rules GetConstraints()
-        => Rules.XSudoku
+    protected override RuleSet GetConstraints()
+        => RuleSet.XSudoku
         + Dominos.Ort.SelectMany(d => new LookupPair(d, Kropki).Couple());
 
     private static readonly int _ = 0;

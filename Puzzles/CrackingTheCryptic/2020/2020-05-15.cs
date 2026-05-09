@@ -10,7 +10,7 @@ public sealed class _2020_05_15 : CtcPuzzle
 
     public override O Duration => O.ms100;
 
-    public override Clues Clues { get; } = Clues.Parse("""
+    public override Clues Clues { get; } = Clues.New("""
         ...│...│...
         ...│...│...
         ...│.7.│...
@@ -24,7 +24,7 @@ public sealed class _2020_05_15 : CtcPuzzle
         ...│...│...
         """);
 
-    public override Cells Solution { get; } = Cells.Parse("""
+    public override Cells Solution { get; } = Cells.New("""
         613│582│794
         597│431│628
         824│976│315
@@ -38,9 +38,9 @@ public sealed class _2020_05_15 : CtcPuzzle
         962│758│431
         """);
 
-    protected override Rules GetConstraints()
-        => Rules.Standard
-        + NamedCage.Parse("""
+    protected override RuleSet GetConstraints()
+        => RuleSet.Standard
+        + Grid.NamedGroups("""
         BBG│GGG│GHH
         BCF│AAG│GHH
         CCF│.AA│IIH
@@ -54,7 +54,7 @@ public sealed class _2020_05_15 : CtcPuzzle
         EEK│KLM│XXX
         """).SelectMany(c => Group.Select(c.Cells, (a, o) => new Cage(a, o)));
 
-    public sealed class Cage(Pos appliesTo, ImmutableArray<Pos> others) : Group(appliesTo, others), Peers
+    public sealed class Cage(Pos appliesTo, PosArray others) : Group(appliesTo, others), Set
     {
         public override Digits Restrict(SudokuCells cells)
         {

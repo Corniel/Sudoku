@@ -1,4 +1,4 @@
-using Sudoku.Common;
+using Sudoku.Sets;
 using Sudoku.Validation;
 
 namespace Specs.Validation.Validator_specs;
@@ -8,7 +8,7 @@ public class Invalidates
     [Test]
     public void peer_violations()
     {
-        var solution = Cells.Parse("""
+        var solution = Cells.New("""
             .54|738|261
             261|495|837
             837|162|594
@@ -22,43 +22,9 @@ public class Invalidates
             372|516|948
             """);
 
-        var violation = Rules.Standard.Validate(solution).Single();
+        var violation = RuleSet.Standard.Validate(solution).Single();
 
-        violation.Should().BeEquivalentTo(new
-        {
-            Cell = new Pos(3, 1),
-            Digits = Digits.New(5),
-            Allowed = Digits._1_to_9 ^ 5,
-        });
-    }
-
-    [Test]
-    public void restriction_violations()
-    {
-        var solution = Cells.Parse("""
-            594|738|261
-            261|495|837
-            837|162|594
-            ---+---+---
-            159|384|726
-            726|951|483
-            483|627|159
-            ---+---+---
-            948|273|615
-            615|849|372
-            372|516|948
-            """);
-
-        var rules = Rules.Standard + [new KillerCage(3, [(0, 0), (0, 1)])];
-
-        var violation = rules.Validate(solution).First();
-
-        violation.Should().BeEquivalentTo(new
-        {
-            Cell = new Pos(0, 0),
-            Digits = Digits.New(5),
-            Allowed = Digits.None,
-        });
+        violation.Should().BeEquivalentTo(new SetViolation([(3, 1)], Houses.Cols[1]));
     }
 }
 

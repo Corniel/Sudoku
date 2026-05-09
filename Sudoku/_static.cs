@@ -12,6 +12,9 @@ public static class Statics
     public const int _9x9 = _9 * _9;
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static IEnumerable<int> range() => Enumerable.Range(0, _9);
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static IEnumerable<int> range(int start, int size) => Enumerable.Range(start, size);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]

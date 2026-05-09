@@ -10,50 +10,52 @@ public sealed class _2025_05_11 : CtcPuzzle
 
     public override O Duration => O.ms100;
 
-    public override Clues Clues { get; } = Clues.Parse("""
-        .2.|...|...
-        .13|...|...
-        ...|...|...
-        ---+---+---
-        ...|...|...
-        ...|...|...
-        ...|...|...
-        ---+---+---
-        ...|...|7..
-        ...|...|.89
-        ...|...|...
+    public override Clues Clues { get; } = Clues.New("""
+        .2.│...│...
+        .13│...│...
+        ...│...│...
+        ───┼───┼───
+        ...│...│...
+        ...│...│...
+        ...│...│...
+        ───┼───┼───
+        ...│...│7..
+        ...│...│.89
+        ...│...│...
         """);
 
-    protected override Rules GetConstraints() => Rules.Standard + Regions();
-
-    public override Cells Solution { get; } = Cells.Parse("""
-        526|839|174
-        813|724|695
-        479|156|823
-        ---+---+---
-        635|918|247
-        287|345|961
-        194|267|358
-        ---+---+---
-        952|483|716
-        361|572|489
-        748|691|532
+    public override Cells Solution { get; } = Cells.New("""
+        526│839│174
+        813│724│695
+        479│156│823
+        ───┼───┼───
+        635│918│247
+        287│345│961
+        194│267│358
+        ───┼───┼───
+        952│483│716
+        361│572│489
+        748│691│532
         """);
 
-    private static IEnumerable<Region> Regions()
+    protected override RuleSet GetConstraints()
+        => RuleSet.Standard
+        + Regions();
+
+    private static Rules Regions()
     {
-        PosSet circles = [.. Clues.Parse("""
-            ...|...|...
-            ...|.1.|.1.
-            ...|...|...
-            ---+---+---
-            ...|...|...
-            .1.|.1.|.1.
-            ...|...|...
-            ---+---+---
-            ...|...|...
-            .1.|.1.|...
-            ...|...|..1
+        PosSet circles = [.. Clues.New("""
+            ...│...│...
+            ...│.1.│.1.
+            ...│...│...
+            ───┼───┼───
+            ...│...│...
+            .1.│.1.│.1.
+            ...│...│...
+            ───┼───┼───
+            ...│...│...
+            .1.│.1.│...
+            ...│...│..1
             """).Select(c => c.Pos)];
 
         foreach (var p in Pos.All)
@@ -63,39 +65,34 @@ public sealed class _2025_05_11 : CtcPuzzle
                 PosSet cells = [p, n, w, p - 10];
 
                 if (circles.NotAny(cells.Contains))
-                    yield return new Region([.. cells]);
+                {
+                    foreach (var r in Group.Select(cells, (a, o) => new Region(a, o)))
+                        yield return r;
+                }
             }
         }
     }
 
-    public sealed class Region(ImmutableArray<Pos> cells) : Rule(cells)
+    private sealed class Region(Pos appliesTo, PosArray others) : Group(appliesTo, others)
     {
-        public override ImmutableArray<Restriction> Restrictions { get; } =
-        [
-            .. cells.Select(c => new Reduce(c, cells.Remove(c))),
-        ];
-
-        public sealed class Reduce(Pos appliesTo, ImmutableArray<Pos> others) : Group(appliesTo, others)
+        public override Digits Restrict(SudokuCells cells)
         {
-            public override Digits Restrict(SudokuCells cells)
+            var sum = 0;
+
+            foreach (var val in Others.Select(o => cells[o].Digit))
             {
-                var sum = 0;
-
-                foreach (var val in Others.Select(o => cells[o].Digit))
-                {
-                    if (val is 0) return Digits._1_to_9;
-                    sum += val;
-                }
-                return Allowed[sum % 4];
+                if (val is 0) return Digits._1_to_9;
+                sum += val;
             }
-
-            private static readonly ImmutableArray<Digits> Allowed =
-            [
-                [4, 8],
-                [3, 7],
-                [2, 6],
-                [1, 5, 9],
-            ];
+            return Allowed[sum % 4];
         }
+
+        private static readonly ImmutableArray<Digits> Allowed =
+        [
+            [4, 8],
+            [3, 7],
+            [2, 6],
+            [1, 5, 9],
+        ];
     }
 }

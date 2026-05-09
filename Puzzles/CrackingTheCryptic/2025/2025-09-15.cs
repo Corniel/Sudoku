@@ -10,7 +10,7 @@ public sealed class _2025_09_15 : CtcPuzzle
 
     public override O Duration => O.ms10;
 
-    public override Cells Solution { get; } = Cells.Parse("""
+    public override Cells Solution { get; } = Cells.New("""
         728|645|391
         493|182|756
         516|379|284
@@ -24,9 +24,9 @@ public sealed class _2025_09_15 : CtcPuzzle
         254|718|963
         """);
 
-    protected override Rules GetConstraints() =>
-        Rules.Standard
-        + RenbanLines.Parse("""
+    protected override RuleSet GetConstraints() =>
+        RuleSet.Standard
+        + Lines.Renban("""
         ...|...|...
         ...|...|...
         ...|.AA|...
@@ -39,7 +39,7 @@ public sealed class _2025_09_15 : CtcPuzzle
         B..|...|...
         .BB|B..|...
         """)
-        + GermanWhispers.Parse("""
+        + Lines.GermanWhisper("""
         ABC|...|HIJ
         FED|.M.|..K
         ...|N..|...
@@ -52,7 +52,7 @@ public sealed class _2025_09_15 : CtcPuzzle
         ...|...|.be
         ...|...|.af
         """)
-        + Arrows.Parse("""
+        + Lines.Arrow("""
         ...|...|...
         ...|...|...
         CBA|...|...
@@ -65,7 +65,7 @@ public sealed class _2025_09_15 : CtcPuzzle
         ...|...|...
         ...|...|...
         """)
-        + Arrows.Parse("""
+        + Lines.Arrow("""
         ...|...|...
         ...|...|...
         ...|...|...

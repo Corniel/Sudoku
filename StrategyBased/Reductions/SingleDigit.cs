@@ -1,5 +1,3 @@
-using Sudoku.Houses;
-
 namespace StrategyBased.Reductions;
 
 public static class SingleDigit
@@ -32,7 +30,7 @@ public static class SingleDigit
             var merged = one.Cells | two.Cells;
 
             foreach (var house in one.Indexes.Select(getHouse))
-                foreach (var cell in (house.Cells ^ merged) & nodes.Todo)
+                foreach (var cell in (house ^ merged) & nodes.Todo)
                     nodes[cell].Digits ^= one.Digit;
         }
     }
@@ -65,7 +63,7 @@ public static class SingleDigit
                 var shared = PosSet.Empty;
 
                 foreach (var index in walls ^ (one.Indexes & two.Indexes))
-                    shared |= getHouse(index).Cells;
+                    shared |= getHouse(index);
 
                 var others = nodes.Todo ^ (one.Peers | two.Peers);
 
@@ -100,7 +98,7 @@ public static class SingleDigit
     {
         if (row.Digit != col.Digit || (row.Peers | col.Peers) is not { Count: 4 } kite) return;
 
-        foreach (var house in nodes.Houses.Where(h => h is not Row or Col && (h.Cells & kite).Count is 2))
+        foreach (var house in nodes.Houses.Where(h => h is not Row and not Col && (h & kite).Count is 2))
         {
             foreach (var r in row.Peers)
             {
@@ -108,7 +106,7 @@ public static class SingleDigit
                 {
                     PosSet weak = [r, c];
 
-                    if ((house.Cells & weak).Count is 2)
+                    if ((house & weak).Count is 2)
                     {
                         var others = kite ^ weak;
                         var shared = nodes.Todo ^ weak;
@@ -196,7 +194,7 @@ public static class SingleDigit
                 var merged = one.Cells | two.Cells | thr.Cells;
 
                 foreach (var house in indexes.Select(getHouse))
-                    foreach (var cell in (house.Cells ^ merged) & nodes.Todo)
+                    foreach (var cell in (house ^ merged) & nodes.Todo)
                         nodes[cell].Digits ^= one.Digit;
             }
         }
@@ -230,7 +228,7 @@ public static class SingleDigit
                 var merged = one.Cells | two.Cells | thr.Cells | fur.Cells;
 
                 foreach (var house in indexes.Select(getHouse))
-                    foreach (var cell in (house.Cells ^ merged) & nodes.Todo)
+                    foreach (var cell in (house ^ merged) & nodes.Todo)
                         nodes[cell].Digits ^= one.Digit;
             }
         }
@@ -239,6 +237,6 @@ public static class SingleDigit
     private static readonly List<HiddenCells> Lines = [];
     private static readonly List<HiddenCells> Line2 = [];
 
-    private static Col GetCol(int index) => Col.All[index];
-    private static Row GetRow(int index) => Row.All[index];
+    private static Col GetCol(int index) => Houses.Cols[index];
+    private static Row GetRow(int index) => Houses.Rows[index];
 }

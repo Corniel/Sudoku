@@ -10,7 +10,7 @@ public sealed class _2025_12_27 : CtcPuzzle
 
     public override O Duration => O.ms100;
 
-    public override Clues Clues { get; } = Clues.Parse("""
+    public override Clues Clues { get; } = Clues.New("""
         ...│...│...
         ...│...│...
         ...│...│...
@@ -24,7 +24,7 @@ public sealed class _2025_12_27 : CtcPuzzle
         ...│...│...
         """);
 
-    public override Cells Solution { get; } = Cells.Parse("""
+    public override Cells Solution { get; } = Cells.New("""
         536│497│182
         849│152│376
         172│683│594
@@ -52,14 +52,14 @@ public sealed class _2025_12_27 : CtcPuzzle
         ..b│cde│f.K
         """;
 
-    protected override Rules GetConstraints()
-        => Rules.Standard
-        + GermanWhispers.Parse(Tinsels)
+    protected override RuleSet GetConstraints()
+        => RuleSet.Standard
+        + Lines.GermanWhisper(Tinsels)
         + GetBaubles();
 
-    private static IEnumerable<Restriction> GetBaubles()
+    private static Rules GetBaubles()
     {
-        var baubles = NamedCage.Parse("""
+        PosArray baubles = [.. Grid.NamedGroups("""
         ...│...│...
         ...│...│...
         ...│...│...
@@ -71,9 +71,9 @@ public sealed class _2025_12_27 : CtcPuzzle
         ...│...│...
         ...│...│...
         ...│...│...
-        """).First().Cells;
+        """).Single()];
 
-        ImmutableArray<Pos> tinsel = [.. Lines.Parse(Tinsels).SelectMany(l => l)];
+        PosArray tinsel = [.. Lines.Parse(Tinsels).SelectMany(l => l)];
 
         return
         [
@@ -82,13 +82,13 @@ public sealed class _2025_12_27 : CtcPuzzle
         ];
     }
 
-    public sealed class Bauble(Pos appliesTo, ImmutableArray<Pos> others, ImmutableArray<Pos> tinsel) : Restriction
+    public sealed class Bauble(Pos appliesTo, PosArray others, PosArray tinsel) : Restriction
     {
         public Pos AppliesTo { get; } = appliesTo;
 
-        public ImmutableArray<Pos> Tinsel { get; } = tinsel;
+        public PosArray Tinsel { get; } = tinsel;
 
-        public PosSet Links { get; } = [appliesTo, .. others, .. tinsel];
+        public PosSet Cells { get; } = [appliesTo, .. others, .. tinsel];
 
         public Digits Restrict(SudokuCells cells)
         {
@@ -120,15 +120,15 @@ public sealed class _2025_12_27 : CtcPuzzle
         }
     }
 
-    public sealed class Tinsel(Pos appliesTo, ImmutableArray<Pos> others, ImmutableArray<Pos> baubles) : Restriction
+    public sealed class Tinsel(Pos appliesTo, PosArray others, PosArray baubles) : Restriction
     {
         public Pos AppliesTo { get; } = appliesTo;
 
-        public ImmutableArray<Pos> Others { get; } = others;
+        public PosArray Others { get; } = others;
 
-        public ImmutableArray<Pos> Baubles { get; } = baubles;
+        public PosArray Baubles { get; } = baubles;
 
-        public PosSet Links { get; } = [appliesTo, .. others, .. baubles];
+        public PosSet Cells { get; } = [appliesTo, .. others, .. baubles];
 
         public Digits Restrict(SudokuCells cells)
         {

@@ -10,7 +10,7 @@ public sealed class _2026_04_09 : CtcPuzzle
 
     public override O Duration => O.ms;
 
-    public override Cells Solution { get; } = Cells.Parse("""
+    public override Cells Solution { get; } = Cells.New("""
         389│452│716
         645│173│829
         712│869│453
@@ -24,7 +24,7 @@ public sealed class _2026_04_09 : CtcPuzzle
         597│231│684
         """);
 
-    public override Clues Clues { get; } = Clues.Parse("""
+    public override Clues Clues { get; } = Clues.New("""
         ...│...│...
         ...│...│...
         ...│...│...
@@ -38,9 +38,9 @@ public sealed class _2026_04_09 : CtcPuzzle
         ...│...│...
         """);
 
-    protected override Rules GetConstraints()
-        => Rules.Standard
-        + RenbanLines.Parse("""
+    protected override RuleSet GetConstraints()
+        => RuleSet.Standard
+        + Lines.Renban("""
         ...│...│...
         ...│.A.│...
         ...│A.A│...
@@ -67,6 +67,6 @@ public sealed class _2026_04_09 : CtcPuzzle
         k.m│...│q.s
         """).SelectMany(RunOnRenban);
 
-    private static IEnumerable<RenbanLine> RunOnRenban(ImmutableArray<Pos> line)
-        => range(0, 5).Select(i => new RenbanLine(line[i..(i + 5)]));
+    private static Rules RunOnRenban(Line line)
+        => range(0, 5).SelectMany(i => Lines.Renban([.. line[i..(i + 5)]]));
 }

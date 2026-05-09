@@ -25,7 +25,7 @@ public sealed class KagglePuzzle(Clues clues, Cells solution) : Puzzle
         while (reader.ReadLine() is { } line)
         {
             if (line.Split(',', StringSplitOptions.TrimEntries) is { Length: 2 } parts)
-                yield return new(Clues.Parse(parts[0]), Cells.Parse(parts[1]));
+                yield return new(Clues.New(parts[0]), Cells.New(parts[1]));
         }
     }
 }

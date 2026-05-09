@@ -14,14 +14,14 @@ public abstract class Puzzle
 
     public abstract Clues Clues { get; }
 
-    public Rules Constraints => constraints ??= GetConstraints();
+    public RuleSet Constraints => constraints ??= GetConstraints();
 
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    private Rules? constraints;
+    private RuleSet? constraints;
 
     public virtual Cells Solution { get; } = Cells.Empty;
 
-    protected virtual Rules GetConstraints() => Rules.Standard;
+    protected virtual RuleSet GetConstraints() => RuleSet.Standard;
 
     public override string ToString() => Title;
 

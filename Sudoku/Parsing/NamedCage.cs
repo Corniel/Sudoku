@@ -8,7 +8,7 @@ public sealed partial record NamedCage()
 
     public required int Sum { get; init; }
 
-    public ImmutableArray<Pos> Cells { get; init; } = [];
+    public PosArray Cells { get; init; } = [];
 
     public PosSet Set => [.. Cells];
 

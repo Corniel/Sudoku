@@ -10,5 +10,7 @@ public static class Pars
 
     public const double Peers = 0.3;
 
-    public const double Bits = 1;
+    public const double Restrictions = 1;
+
+    public const double Constraints = 0.2;
 }

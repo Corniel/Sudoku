@@ -10,7 +10,7 @@ public sealed class _2024_11_18 : CtcPuzzle
 
     public override O Duration => O.ms100;
 
-    public override Cells Solution { get; } = Cells.Parse("""
+    public override Cells Solution { get; } = Cells.New("""
         192│845│376
         648│379│152
         735│621│498
@@ -24,11 +24,13 @@ public sealed class _2024_11_18 : CtcPuzzle
         219│736│584
         """);
 
-    protected override Rules GetConstraints() => Rules.Standard + Cages();
+    protected override RuleSet GetConstraints()
+        => RuleSet.Standard
+        + AllCages();
 
-    private static List<Cage> Cages()
+    private static Rules AllCages()
     {
-        var named = NamedCage.Parse("""
+        var groups = Grid.NamedGroups("""
             XCC│ab.│...
             XX.│abY│Y.c
             .dE│E.Y│.ec
@@ -42,47 +44,37 @@ public sealed class _2024_11_18 : CtcPuzzle
             ...│ZZG│Gkl
             """);
 
-        var cages = new List<Cage>();
+        ImmutableArray<PosArray> cages = [.. groups.Select(g => g.Cells.ToImmutableArray())];
 
-        foreach (var n in named)
-            cages.AddRange(new Cage([.. n.Cells], cages));
-
-        return cages;
+        return groups.SelectMany(gr => Group.Select(gr, (a, o) => new Reducer(a, o, cages)));
     }
 
-    public sealed class Cage(ImmutableArray<Pos> cells, List<Cage> cages) : Rule(cells)
+    private sealed class Reducer(Pos appliesTo, PosArray other, ImmutableArray<PosArray> cages)
+        : Group(appliesTo, other)
     {
-        public override ImmutableArray<Restriction> Restrictions { get; } =
-        [
-            .. Group.Select(cells, (a, o) => new Reducer(a, o, cages)),
-        ];
+        private readonly ImmutableArray<PosArray> Cages = cages;
 
-        public sealed class Reducer(Pos appliesTo, ImmutableArray<Pos> other, List<Cage> cages) : Group(appliesTo, other)
+        public override Digits Restrict(SudokuCells cells)
         {
-            private readonly IReadOnlyCollection<Cage> Cages = cages;
+            var sum = Ints.All;
+            var iterator = Cages.GetEnumerator();
+            while (sum.HasAny && iterator.MoveNext())
+                sum &= Sum(iterator.Current, cells);
 
-            public override Digits Restrict(SudokuCells cells)
-            {
-                var sum = Ints.All;
-                var iterator = Cages.GetEnumerator();
-                while (sum.HasAny && iterator.MoveNext())
-                    sum &= Sum(iterator.Current, cells);
+            foreach (var digits in Others.Select(o => cells[o].Digits))
+                sum -= digits;
 
-                foreach (var digits in Others.Select(o => cells[o].Digits))
-                    sum -= digits;
+            return sum.Digits;
+        }
 
-                return sum.Digits;
-            }
+        private static Ints Sum(PosArray cage, SudokuCells cells)
+        {
+            var sum = Ints.Zero;
 
-            private static Ints Sum(Cage cage, SudokuCells cells)
-            {
-                var sum = Ints.Zero;
+            foreach (var digits in cage.Select(c => cells[c].Digits))
+                sum += digits;
 
-                foreach (var digits in cage.Cells.Select(c => cells[c].Digits))
-                    sum += digits;
-
-                return sum;
-            }
+            return sum;
         }
     }
 }

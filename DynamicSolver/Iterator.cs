@@ -45,6 +45,10 @@ public sealed class Iterator : IEnumerator<Links>, IEnumerable<Links>
                     }
                 }
 
+                // Constraints do not reduce indvidual cells.
+                valid &= link.Constraints is not { Count: > 0 } constraints
+                    || constraints.All(c => c.IsSatisfied(Links));
+
                 if (valid)
                 {
                     if (todo.HasNone) return true;
@@ -157,7 +161,7 @@ public sealed class Iterator : IEnumerator<Links>, IEnumerable<Links>
     /// <inheritdoc />
     IEnumerator IEnumerable.GetEnumerator() => this;
 
-    public Iterator Set(Clues clues, Rules rules)
+    public Iterator Set(Clues clues, RuleSet rules)
     {
         Options[0]++;
         Stack.Reset();

@@ -1,5 +1,3 @@
-using Sudoku.Houses;
-
 namespace StrategyBased.Reductions;
 
 public static partial class Hidden
@@ -11,7 +9,7 @@ public static partial class Hidden
 
         max ??= min;
 
-        foreach (var cell in row.Cells & nodes.Todo)
+        foreach (var cell in row & nodes.Todo)
         {
             foreach (var digit in nodes[cell].Digits)
             {
@@ -25,7 +23,7 @@ public static partial class Hidden
             Digit = digit,
             Index = row.Index,
             Indexes = indexes,
-            Cells = row.Cells,
+            Cells = row,
             Peers = PosSets[digit],
         })
         .Where(hc => hc.Indexes.Count >= min && hc.Indexes.Count <= max);
@@ -38,7 +36,7 @@ public static partial class Hidden
 
         max ??= min;
 
-        foreach (var cell in col.Cells & nodes.Todo)
+        foreach (var cell in col & nodes.Todo)
         {
             foreach (var digit in nodes[cell].Digits)
             {
@@ -52,13 +50,13 @@ public static partial class Hidden
             Digit = digit,
             Index = col.Index,
             Indexes = indexes,
-            Cells = col.Cells,
+            Cells = col,
             Peers = PosSets[digit],
         })
         .Where(hc => hc.Indexes.Count >= min && hc.Indexes.Count <= max);
     }
 
-    public static IEnumerable<HiddenCells> House(Nodes nodes, Rule house, int min, int? max = null)
+    public static IEnumerable<HiddenCells> House(Nodes nodes, House house, int min, int? max = null)
     {
         if (house is Row row) return Row(nodes, row, min, max);
         if (house is Col col) return Col(nodes, col, min, max);
@@ -69,7 +67,7 @@ public static partial class Hidden
         max ??= min;
         var index = 0;
 
-        foreach (var cell in house.Cells)
+        foreach (var cell in house)
         {
             if (nodes.Todo.Contains(cell))
             {
@@ -87,7 +85,7 @@ public static partial class Hidden
             Digit = digit,
             Index = -1,
             Indexes = indexes,
-            Cells = house.Cells,
+            Cells = house,
             Peers = PosSets[digit],
         })
         .Where(hc => hc.Peers.Count >= min && hc.Peers.Count <= max);

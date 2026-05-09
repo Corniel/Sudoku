@@ -1,7 +1,9 @@
 namespace Sudoku.Restrictions;
 
 /// <summary>Describes a restriction between two cells.</summary>
-public sealed class Mask(Pos appliesTo, Digits mask) : Restriction
+public sealed class Mask(Pos appliesTo, Digits mask)
+    : Restriction
+    , Summation
 {
     public static Mask Even(Pos appliesTo) => new(appliesTo, Digits.Even);
 
@@ -11,7 +13,10 @@ public sealed class Mask(Pos appliesTo, Digits mask) : Restriction
     public Pos AppliesTo { get; } = appliesTo;
 
     /// <inheritdoc />
-    public PosSet Links => PosSet.Empty;
+    public PosSet Cells { get; } = [appliesTo];
+
+    /// <inheritdoc />
+    public Ints Sum { get; } = [.. mask];
 
     /// <inheritdoc />
     public Digits Restrict(SudokuCells cells) => mask;

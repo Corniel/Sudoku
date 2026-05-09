@@ -99,7 +99,7 @@ public class To_UIn128
     [Test]
     public void Compresses_cells()
     {
-        var cells = Cells.Parse("""
+        var cells = Cells.New("""
             127│368│594
             493│752│186
             856│491│723
@@ -159,7 +159,7 @@ public class Roundtrips
     [Test]
     public void Puzzle()
     {
-        var cells = Cells.Parse("""
+        var cells = Cells.New("""
             284│359│176
             315│627│894
             679│841│523

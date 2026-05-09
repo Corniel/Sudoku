@@ -1,5 +1,3 @@
-using Sudoku.Houses;
-
 namespace Puzzles.CrackingTheCryptic;
 
 public sealed class _2020_04_22 : CtcPuzzle
@@ -12,7 +10,7 @@ public sealed class _2020_04_22 : CtcPuzzle
 
     public override O Duration => O.μs10;
 
-    public override Clues Clues { get; } = Clues.Parse("""
+    public override Clues Clues { get; } = Clues.New("""
         ...│...│9..
         ...│...│.6.
         ...│...│...
@@ -26,7 +24,7 @@ public sealed class _2020_04_22 : CtcPuzzle
         ..5│...│...
         """);
 
-    public override Cells Solution { get; } = Cells.Parse("""
+    public override Cells Solution { get; } = Cells.New("""
         321│658│947
         457│139│862
         698│724│135
@@ -40,9 +38,9 @@ public sealed class _2020_04_22 : CtcPuzzle
         175│342│689
         """);
 
-    protected override Rules GetConstraints()
-        => Rules.AntiKnight
-        + Thermometers.Parse("""
+    protected override RuleSet GetConstraints()
+        => RuleSet.AntiKnight
+        + Lines.Thermometer("""
         CBA│...│...
         D..│...│...
         E..│.JK│...
@@ -55,7 +53,7 @@ public sealed class _2020_04_22 : CtcPuzzle
         ...│...│...
         ...│...│...
         """)
-        + Thermometers.Parse("""
+        + Lines.Thermometer("""
         ...│...│...
         ...│...│...
         ...│BA.│...
@@ -68,7 +66,7 @@ public sealed class _2020_04_22 : CtcPuzzle
         ...│...│G..
         ...│...│HIJ
         """)
-        + Thermometers.Parse("""
+        + Lines.Thermometer("""
         ...│...│...
         ...│...│...
         ...│.A.│...

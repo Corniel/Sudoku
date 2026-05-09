@@ -1,5 +1,5 @@
 using StrategyBased;
-using Sudoku.Houses;
+using Sudoku.Sets;
 using System.Diagnostics;
 
 namespace Generator;
@@ -7,10 +7,10 @@ namespace Generator;
 public sealed class PuzzleGenerator(ReduceOptions options, Random rnd)
     : IEnumerator<Generated>, IEnumerable<Generated>
 {
-    private readonly Rules Rules = Rules.Standard;
+    private readonly RuleSet Rules = RuleSet.Standard;
     private readonly ReduceOptions Options = options;
     private readonly Random Rnd = rnd;
-    private readonly Pos[][] Boxes = [.. Box.All.Select(box => box.ToArray())];
+    private readonly Pos[][] Boxes = [.. Houses.Boxes.Select(box => box.ToArray())];
     private readonly List<Overlay> Overlays = [];
     private readonly HashSet<StrategyType> StrategyTypes = [];
 
@@ -18,7 +18,7 @@ public sealed class PuzzleGenerator(ReduceOptions options, Random rnd)
     {
         Clues = Clues.None,
         Solution = Cells.Empty,
-        Rules = Rules.Standard,
+        Rules = RuleSet.Standard,
         Strategies = [StrategyType.NakedSingles]
     };
 
@@ -65,16 +65,16 @@ public sealed class PuzzleGenerator(ReduceOptions options, Random rnd)
         Clues clues;
         Nodes nodes;
 
-        foreach (var overlay in Overlays)
+        foreach (var pos in Overlays.Select(o => o.Pos))
         {
-            done ^= overlay.Pos;
+            done ^= pos;
             clues = new Clues(done.Select(p => new Cell(p, solution[p])));
             nodes = Nodes.Empty;
             var testr = new StrategyBasedSolver(nodes & Rules & clues, Options);
             while (testr.MoveNext()) {/* Solve what can be solved. */ }
 
             if (!nodes.IsSolved)
-                done |= overlay.Pos;
+                done |= pos;
         }
         return done;
     }
@@ -204,9 +204,9 @@ public sealed class PuzzleGenerator(ReduceOptions options, Random rnd)
         .. PosSet.All.Select(cell =>
         {
             var (r, c) = cell;
-            return Row.All[r].Cells
-                | Col.All[c].Cells
-                | Box.All[Box.IndexOf(cell)].Cells
+            return Houses.Rows[r].Cells
+                | Houses.Cols[c].Cells
+                | Houses.Boxes[Box.IndexOf(cell)].Cells
                 ^ cell;
         })
     ];

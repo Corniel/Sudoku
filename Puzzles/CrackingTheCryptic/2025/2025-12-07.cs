@@ -10,7 +10,7 @@ public sealed class _2025_12_07 : CtcPuzzle
 
     public override O Duration => O.s;
 
-    public override Cells Solution { get; } = Cells.Parse("""
+    public override Cells Solution { get; } = Cells.New("""
         578│631│492
         634│892│175
         291│547│368
@@ -24,8 +24,8 @@ public sealed class _2025_12_07 : CtcPuzzle
         742│163│859
         """);
 
-    protected override Rules GetConstraints()
-        => Rules.Killer("""
+    protected override RuleSet GetConstraints()
+        => RuleSet.Killer("""
         ...│..C│.DD
         ..A│A.C│...
         AAA│.CC│.BB
@@ -42,7 +42,7 @@ public sealed class _2025_12_07 : CtcPuzzle
         a = 24  b = 22  c = 14  d = 11  e = 12
         """)
 
-        + Quadruples.Parse("""
+        + Groups.Cages("""
         AA.│...│.CC
         AA.│...│.CC
         ...│.BB│...
@@ -55,8 +55,8 @@ public sealed class _2025_12_07 : CtcPuzzle
         aa.│...│.cc
         aa.│...│.cc
 
-        A = 357  B = 14  C = 579
-        a = 357  b = 23  c = 579
+        A:357 B:14 C:579
+        a:357 b:23 c:579
         """)
         + KillerCages.Extend;
 }

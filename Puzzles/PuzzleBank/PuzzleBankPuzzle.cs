@@ -16,13 +16,13 @@ public sealed class PuzzleBankPuzzle(string title, Clues clues, Cells solution) 
 
     public decimal Level { get; init; }
 
-    /// <summary>Indicates that the puzzle also meets the <see cref="Rules.AntiKnight"/> constraints.</summary>
+    /// <summary>Indicates that the puzzle also meets the <see cref="RuleSet.AntiKnight"/> constraints.</summary>
     public bool IsAntiKnight { get; init; }
 
-    /// <summary>Indicates that the puzzle also meets the <see cref="Rules.Hyper"/> constraints.</summary>
+    /// <summary>Indicates that the puzzle also meets the <see cref="RuleSet.Hyper"/> constraints.</summary>
     public bool IsHyper { get; init; }
 
-    /// <summary>Indicates that the puzzle also meets the <see cref="Rules.XSudoku"/> constraints.</summary>
+    /// <summary>Indicates that the puzzle also meets the <see cref="RuleSet.XSudoku"/> constraints.</summary>
     public bool IsX { get; init; }
 
     public static ImmutableArray<PuzzleBankPuzzle> Easy => [.. Load(nameof(Easy))];
@@ -72,7 +72,7 @@ public sealed class PuzzleBankPuzzle(string title, Clues clues, Cells solution) 
             {
                 var variants = parts.Length > 4 ? parts[4] : string.Empty;
 
-                yield return new PuzzleBankPuzzle(parts[0], Clues.Parse(parts[1]), Cells.Parse(parts[2]))
+                yield return new PuzzleBankPuzzle(parts[0], Clues.New(parts[1]), Cells.New(parts[2]))
                 {
                     Level = decimal.Parse(parts[3], CultureInfo.InvariantCulture),
                     IsAntiKnight = variants.Contains('N'),

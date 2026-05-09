@@ -10,7 +10,7 @@ public sealed class _2020_04_13 : CtcPuzzle
 
     public override O Duration => O.ms;
 
-    public override Cells Solution => Cells.Parse("""
+    public override Cells Solution => Cells.New("""
         463│915│287
         528│673│194
         971│824│653
@@ -24,8 +24,8 @@ public sealed class _2020_04_13 : CtcPuzzle
         159│768│432
         """);
 
-    protected override Rules GetConstraints()
-        => Rules.Killer("""
+    protected override RuleSet GetConstraints()
+        => RuleSet.Killer("""
         AAE│JKK│KNO
         AAE│JKG│GNO
         AAD│DBB│GOO

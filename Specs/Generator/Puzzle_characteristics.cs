@@ -1,4 +1,4 @@
-using Sudoku.Houses;
+using Sudoku.Sets;
 
 namespace Specs.Generator;
 

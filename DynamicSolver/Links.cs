@@ -7,7 +7,7 @@ namespace DynamicSolver;
 [DebuggerTypeProxy(typeof(CollectionDebugView))]
 public sealed class Links : IReadOnlyCollection<Link>, SudokuCells
 {
-    public static Links New(IEnumerable<Cell> clues, Rules rules)
+    public static Links New(IEnumerable<Cell> clues, RuleSet rules)
     {
         var links = new Links();
 
@@ -18,26 +18,36 @@ public sealed class Links : IReadOnlyCollection<Link>, SudokuCells
             foreach (var peer in set)
                 links[peer].Peers |= set ^ peer;
 
+        foreach (var constraints in rules.Constraints)
+        {
+            foreach (var cell in constraints.Cells)
+            {
+                var othr = links[cell];
+                othr.Constraints.Add(constraints);
+                othr.Bits += Pars.Constraints;
+            }
+        }
+
         foreach (var restriction in rules.Restrictions)
         {
-            if (restriction is not Unique)
+            foreach (var other in restriction.Cells ^ restriction.AppliesTo)
             {
-                foreach (var other in restriction.Links)
-                {
-                    var othr = links[other];
-                    othr.Restrictions.Add(restriction);
-                    othr.Bits += Pars.Bits;
-                }
+                var othr = links[other];
+                othr.Restrictions.Add(restriction);
+                othr.Bits += Pars.Restrictions;
             }
-
-            if (restriction is Peers peers)
-                links[peers.AppliesTo].Peers |= peers.Links;
 
             if (restriction is Mask mask)
                 links[mask.AppliesTo].Digits &= mask.Restrict(links);
         }
 
-        foreach (var twins in rules.Restrictions.OfType<Twin>())
+        foreach (var set in rules.Sets)
+        {
+            foreach (var peer in set)
+                links[peer].Peers |= set ^ peer;
+        }
+
+        foreach (var twins in rules.OfType<Twin>())
         {
             var (a, o) = (links[twins.AppliesTo], links[twins.Other]);
             a.Peers |= o.Peers ^ o.Pos;

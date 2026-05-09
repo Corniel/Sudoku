@@ -10,7 +10,7 @@ public sealed class _2020_02_09 : CtcPuzzle
 
     public override O Duration => O.μs100;
 
-    public override Clues Clues { get; } = Clues.Parse("""
+    public override Clues Clues { get; } = Clues.New("""
         .4.│...│.1.
         2..│...│..6
         ...│...│...
@@ -24,7 +24,7 @@ public sealed class _2020_02_09 : CtcPuzzle
         .1.│...│.9.
         """);
 
-    public override Cells Solution { get; } = Cells.Parse("""
+    public override Cells Solution { get; } = Cells.New("""
         847│632│519
         295│471│386
         631│598│247
@@ -38,9 +38,9 @@ public sealed class _2020_02_09 : CtcPuzzle
         512│367│498
         """);
 
-    protected override Rules GetConstraints()
-        => Rules.Standard
-        + Thermometers.Parse("""
+    protected override RuleSet GetConstraints()
+        => RuleSet.Standard
+        + Lines.Thermometer("""
         ...│D.H│...
         ..C│.E.│I..
         .B.│..F│.J.

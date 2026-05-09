@@ -10,7 +10,7 @@ public sealed class _2025_10_13 : CtcPuzzle
 
     public override O Duration => O.ms100;
 
-    public override Cells Solution { get; } = Cells.Parse("""
+    public override Cells Solution { get; } = Cells.New("""
         417│586│923
         328│914│567
         596│732│148
@@ -24,9 +24,9 @@ public sealed class _2025_10_13 : CtcPuzzle
         659│823│714
         """);
 
-    protected override Rules GetConstraints()
-        => Rules.Standard
-        + BlackDots.Parse("""
+    protected override RuleSet GetConstraints()
+        => RuleSet.Standard
+        + Couples.BlackDots("""
             ...│...│...
             ...│...│...
             ...│...│...
@@ -39,7 +39,7 @@ public sealed class _2025_10_13 : CtcPuzzle
             ...│...│...
             ...│...│...
             """)
-        + WhiteDots.Parse("""
+        + Couples.WhiteDots("""
             ...│...│...
             ..A│A..│...
             ...│..B│B..
@@ -52,7 +52,7 @@ public sealed class _2025_10_13 : CtcPuzzle
             ..F│F..│...
             ...│...│...
             """)
-        + WhiteDots.Parse("""
+        + Couples.WhiteDots("""
             ...│...│...
             ...│...│...
             .A.│B.C│.J.
@@ -93,7 +93,7 @@ public sealed class _2025_10_13 : CtcPuzzle
             ...│...│...
             """);
 
-    private static IEnumerable<LookupPair> LessThen(string str) => Lines.Parse(str).SelectMany(line =>
+    private static Rules LessThen(string str) => Lines.Parse(str).SelectMany(line =>
     {
         var (a, b) = (line[0], line[1]);
         return

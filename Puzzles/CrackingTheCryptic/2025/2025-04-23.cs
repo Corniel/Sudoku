@@ -1,5 +1,3 @@
-using Sudoku.Houses;
-
 namespace Puzzles.CrackingTheCryptic;
 
 public sealed class _2025_04_23 : CtcPuzzle
@@ -12,7 +10,7 @@ public sealed class _2025_04_23 : CtcPuzzle
 
     public override O Duration => O.μs100;
 
-    public override Clues Clues { get; } = Clues.Parse("""
+    public override Clues Clues { get; } = Clues.New("""
         9..│...│..1
         ...│.6.│...
         ...│...│...
@@ -26,12 +24,12 @@ public sealed class _2025_04_23 : CtcPuzzle
         1..│...│..5
         """);
 
-    protected override Rules GetConstraints()
-        => Rules.AntiKnight
+    protected override RuleSet GetConstraints()
+        => RuleSet.AntiKnight
         + FixedNeigbors()
         + GroupOf3s();
 
-    public override Cells Solution { get; } = Cells.Parse("""
+    public override Cells Solution { get; } = Cells.New("""
         963│742│851
         527│168│349
         841│953│762
@@ -45,11 +43,11 @@ public sealed class _2025_04_23 : CtcPuzzle
         196│374│285
         """);
 
-    private static IEnumerable<Twin> FixedNeigbors() => Pos.All
+    private static Rules FixedNeigbors() => Pos.All
         .Where(a => a.N() is { } && a.E() is { } && Box.IndexOf(a) != Box.IndexOf(a - 8))
-        .SelectMany(a => Twins.New(a, a - 8));
+        .SelectMany(a => Couples.Twin(a, a - 8));
 
-    private static IEnumerable<Restriction> GroupOf3s()
+    private static Rules GroupOf3s()
         => range(_9x9 / 3)
         .Select(p => new Pos(p * 3))
         .SelectMany(p => EntropicLine.New([p, p + 1, p + 2]));

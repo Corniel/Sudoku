@@ -17,6 +17,18 @@ public static class Dominos
     /// <summary>Gets all domino's that are vertically connected.</summary>
     public static readonly ImmutableArray<Domino> Ver = [.. Ort.Where(d => d.IsVer)];
 
+    /// <summary>Gets all posible pairings of cells as domino's.</summary>
+    public static IEnumerable<Domino> RoundRobin(IReadOnlyList<Pos> cells)
+    {
+        for (var f = 0; f < cells.Count - 1; f++)
+        {
+            for (var s = f + 1; s < cells.Count; s++)
+            {
+                yield return new(cells[f], cells[s]);
+            }
+        }
+    }
+
     private static IEnumerable<Domino> Init()
     {
         foreach (var p in Pos.All)

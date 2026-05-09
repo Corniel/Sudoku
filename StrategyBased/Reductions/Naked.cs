@@ -4,9 +4,9 @@ public static class Naked
 {
     public static void Pairs(Nodes cells)
     {
-        foreach (var set in cells.Rules.Where(r => r.IsSet))
+        foreach (var set in cells.Rules.Sets)
         {
-            var updates = set.Cells & cells.Todo;
+            var updates = set & cells.Todo;
 
             foreach (var pair in cells.NakedCells([.. updates], 2))
             {
@@ -18,9 +18,9 @@ public static class Naked
 
     public static void Triples(Nodes cells)
     {
-        foreach (var set in cells.Rules.Where(r => r.IsSet))
+        foreach (var set in cells.Rules.Sets)
         {
-            var updates = set.Cells & cells.Todo;
+            var updates = set & cells.Todo;
 
             foreach (var triple in cells.NakedCells([.. updates], 3))
             {
@@ -32,9 +32,9 @@ public static class Naked
 
     public static void Quads(Nodes cells)
     {
-        foreach (var set in cells.Rules.Where(r => r.IsSet))
+        foreach (var set in cells.Rules.Sets)
         {
-            var updates = set.Cells & cells.Todo;
+            var updates = set & cells.Todo;
 
             foreach (var triple in cells.NakedCells([.. updates], 4))
             {

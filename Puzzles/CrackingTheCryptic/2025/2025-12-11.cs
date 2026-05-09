@@ -1,5 +1,3 @@
-using Sudoku.Houses;
-
 namespace Puzzles.CrackingTheCryptic;
 
 public sealed class _2025_12_11 : CtcPuzzle
@@ -12,7 +10,7 @@ public sealed class _2025_12_11 : CtcPuzzle
 
     public override O Duration => O.ms;
 
-    public override Cells Solution { get; } = Cells.Parse("""
+    public override Cells Solution { get; } = Cells.New("""
         564│321│879
         456│132│987
         645│213│798
@@ -26,10 +24,10 @@ public sealed class _2025_12_11 : CtcPuzzle
         132│798│465
         """);
 
-    protected override Rules GetConstraints()
-        => Rules.Basic
+    protected override RuleSet GetConstraints()
+        => RuleSet.Basic
         + ThreeDisticts()
-        + SameSums.Parse("""
+        + Groups.Cages("""
         ..A│.BB│...
         a..│B..│...
         aa.│...│...
@@ -43,7 +41,7 @@ public sealed class _2025_12_11 : CtcPuzzle
         ...│...│...
         A=B a=b
         """)
-        + SameDifferences.Parse("""
+        + Lines.SameDifference("""
         A..│...│...
         .B.│...│...
         ..C│...│...
@@ -56,7 +54,7 @@ public sealed class _2025_12_11 : CtcPuzzle
         ...│...│.H.
         ...│...│..I
         """)
-        + SameDifferences.Parse("""
+        + Lines.SameDifference("""
         ...│...│..A
         ...│...│.B.
         ...│.l.│C..
@@ -71,11 +69,11 @@ public sealed class _2025_12_11 : CtcPuzzle
         """)
         ;
 
-    private static IEnumerable<Restriction> ThreeDisticts()
-        => Box.All
-        .SelectMany(box => Group.Select(box.Cells, (a, o) => new ThreeDistict(a, o)));
+    private static Rules ThreeDisticts()
+        => Houses.Boxes
+        .SelectMany(box => Group.Select(box, (a, o) => new ThreeDistict(a, o)));
 
-    private sealed class ThreeDistict(Pos appliesTo, ImmutableArray<Pos> others) : Group(appliesTo, others)
+    private sealed class ThreeDistict(Pos appliesTo, PosArray others) : Group(appliesTo, others)
     {
         public override Digits Restrict(SudokuCells cells)
         {

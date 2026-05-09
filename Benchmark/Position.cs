@@ -14,8 +14,8 @@ public class Position
 
         public Iterate()
         {
-            array = [.. Rules.Standard.Select(h => h.ToImmutableArray())];
-            posst = [.. Rules.Standard.Select(PosSet.New)];
+            array = [.. RuleSet.Standard.Sets.Select(s => s.ToImmutableArray())];
+            posst = [.. RuleSet.Standard.Sets];
         }
 
         [Benchmark]

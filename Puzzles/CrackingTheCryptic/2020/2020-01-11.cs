@@ -10,7 +10,7 @@ public sealed class _2020_01_11 : CtcPuzzle
 
     public override O Duration => O.μs100;
 
-    public override Clues Clues { get; } = Clues.Parse("""
+    public override Clues Clues { get; } = Clues.New("""
         ...│...│..1
         .8.│...│...
         ...│...│...
@@ -24,7 +24,7 @@ public sealed class _2020_01_11 : CtcPuzzle
         ...│...│...
         """);
 
-    public override Cells Solution { get; } = Cells.Parse("""
+    public override Cells Solution { get; } = Cells.New("""
         249│675│831
         385│149│672
         761│238│954
@@ -38,7 +38,7 @@ public sealed class _2020_01_11 : CtcPuzzle
         958│726│413
         """);
 
-    protected override Rules GetConstraints()
-        => Rules.Standard
+    protected override RuleSet GetConstraints()
+        => RuleSet.Standard
         + Dominos.Ort.SelectMany(d => DeltaMax.New(d, 5));
 }

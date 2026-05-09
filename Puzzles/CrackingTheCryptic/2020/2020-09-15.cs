@@ -10,7 +10,7 @@ public sealed class _2020_09_15 : CtcPuzzle
 
     public override O Duration => O.μs10;
 
-    public override Clues Clues { get; } = Clues.Parse("""
+    public override Clues Clues { get; } = Clues.New("""
         ...│...│...
         ...│...│...
         ...│...│...
@@ -24,7 +24,7 @@ public sealed class _2020_09_15 : CtcPuzzle
         ...│...│...
         """);
 
-    public override Cells Solution { get; } = Cells.Parse("""
+    public override Cells Solution { get; } = Cells.New("""
         176│524│938
         524│983│167
         983│167│245
@@ -38,8 +38,8 @@ public sealed class _2020_09_15 : CtcPuzzle
         631│792│584
         """);
 
-    protected override Rules GetConstraints()
-        => Rules.Killer("""
+    protected override RuleSet GetConstraints()
+        => RuleSet.Killer("""
         ..B│.E.│H..
         .AB│DEG│HJ.
         .AC│DFG│IJ.
@@ -56,9 +56,9 @@ public sealed class _2020_09_15 : CtcPuzzle
         + Nots()
         + KillerCages.Extend;
 
-    private static IEnumerable<Restriction> Nots()
+    private static Rules Nots()
     {
-        var cages = NamedCage.Parse("""
+        var cages = Grid.NamedGroups("""
         ..B│.E.│H..
         .AB│DEG│HJ.
         .AC│DFG│IJ.

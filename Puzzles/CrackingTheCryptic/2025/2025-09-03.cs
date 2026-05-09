@@ -10,7 +10,7 @@ public sealed class _2025_09_03 : CtcPuzzle
 
     public override O Duration => O.s;
 
-    public override Cells Solution { get; } = Cells.Parse("""
+    public override Cells Solution { get; } = Cells.New("""
         913│587│642
         456│219│378
         287│463│591
@@ -24,9 +24,9 @@ public sealed class _2025_09_03 : CtcPuzzle
         821│956│437
         """);
 
-    protected override Rules GetConstraints()
-        => Rules.Standard
-        + NamedCage.Parse("""
+    protected override RuleSet GetConstraints()
+        => RuleSet.Standard
+        + Grid.NamedGroups("""
         .AA│A..│...
         AAx│...│.CC
         Axx│xx.│CC.
@@ -41,7 +41,7 @@ public sealed class _2025_09_03 : CtcPuzzle
         """)
         .SelectMany(named => Group.Select(named.Cells, (a, o) => new Line(a, o)));
 
-    public sealed class Line(Pos appliesTo, ImmutableArray<Pos> others) : Group(appliesTo, others)
+    public sealed class Line(Pos appliesTo, PosArray others) : Group(appliesTo, others)
     {
         public override Digits Restrict(SudokuCells cells)
         {

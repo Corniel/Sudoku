@@ -1,5 +1,4 @@
 using Sudoku.Generics;
-using Sudoku.Houses;
 
 namespace Puzzles.CrackingTheCryptic;
 
@@ -13,7 +12,7 @@ public sealed class _2025_12_17 : CtcPuzzle
 
     public override O Duration => O.μs100;
 
-    public override Cells Solution { get; } = Cells.Parse("""
+    public override Cells Solution { get; } = Cells.New("""
         123│745│968
         459│168│237
         768│239│154
@@ -27,9 +26,9 @@ public sealed class _2025_12_17 : CtcPuzzle
         835│914│672
         """);
 
-    protected override Rules GetConstraints()
-        => Rules.Standard
-        + WhiteDots.Parse("""
+    protected override RuleSet GetConstraints()
+        => RuleSet.Standard
+        + Couples.WhiteDots("""
         ...│.AA│...
         ...│...│...
         ...│...│...
@@ -42,7 +41,7 @@ public sealed class _2025_12_17 : CtcPuzzle
         ...│...│...
         ...│...│...
         """)
-        + BlackDots.Parse("""
+        + Couples.BlackDots("""
         ...│...│...
         ...│...│...
         ...│...│...
@@ -57,9 +56,9 @@ public sealed class _2025_12_17 : CtcPuzzle
         """)
         + GoldenDots();
 
-    public static IEnumerable<Restriction> GoldenDots()
+    public static Rules GoldenDots()
     {
-        var hor = NamedCage.Parse("""
+        var hor = Grid.NamedGroups("""
         ..A│B..│...
         ..A│B..│.I.
         ...│...│.I.
@@ -72,7 +71,7 @@ public sealed class _2025_12_17 : CtcPuzzle
         ..D│E..│.H.
         ..D│E..│.H.
         """);
-        var ver = NamedCage.Parse("""
+        var ver = Grid.NamedGroups("""
         ...│...│...
         ...│...│...
         ...│.AA│...
@@ -86,14 +85,14 @@ public sealed class _2025_12_17 : CtcPuzzle
         .EE│...│...
         """);
 
-        PosSet[] golden = [.. hor.Select(h => h.Set), .. ver.Select(v => v.Set)];
+        PosSet[] golden = [.. hor, .. ver];
 
         foreach (var p in Dominos.Ort)
         {
             var sums = p switch
             {
                 _ when golden.Contains(p.Set) => Gold,
-                _ when Box.All.NotAny(b => p.Set.IsSubsetOf(b.Cells)) => Bord,
+                _ when Houses.Boxes.NotAny(b => p.Set.IsSubsetOf(b)) => Bord,
                 _ => Othr,
             };
 

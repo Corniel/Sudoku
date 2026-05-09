@@ -5,7 +5,7 @@ public class Parses
     [Test]
     public void Puzzles()
     {
-        var cells = Cells.Parse(@"
+        var cells = Cells.New(@"
             6..|..4|..3
             ..5|7.6|.1.
             .1.|...|7..

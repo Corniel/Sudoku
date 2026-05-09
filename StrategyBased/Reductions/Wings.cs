@@ -68,7 +68,7 @@ public static class Wings
 
         foreach (var digit in one.Digits)
         {
-            if (nodes.Houses.Any(h => IsInconsistent(h.Cells, digit)))
+            if (nodes.Houses.Any(h => IsInconsistent(h, digit)))
             {
                 foreach (var share in shared)
                     nodes[share].Digits ^= one.Digits ^ digit;

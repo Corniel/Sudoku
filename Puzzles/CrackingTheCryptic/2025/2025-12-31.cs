@@ -10,7 +10,7 @@ public sealed class _2025_12_31 : CtcPuzzle
 
     public override O Duration => O.ms100;
 
-    public override Cells Solution { get; } = Cells.Parse("""
+    public override Cells Solution { get; } = Cells.New("""
         649│238│715
         237│154│896
         158│769│234
@@ -24,9 +24,9 @@ public sealed class _2025_12_31 : CtcPuzzle
         591│687│342
         """);
 
-    protected override Rules GetConstraints()
-        => Rules.Standard
-        + SameSums.Parse("""
+    protected override RuleSet GetConstraints()
+        => RuleSet.Standard
+        + Groups.Cages("""
         AXX│YYY│ZZZ
         Aaa│bbb│...
         Acc│ddo│ppp

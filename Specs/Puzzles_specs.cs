@@ -90,7 +90,7 @@ public class Anti_Knight
 {
     [Test]
     public void Solves() => TestSolver.Solve(
-      Clues.Parse("""
+      Clues.New("""
             ...|5..|...
             ...|..4|...
             .58|...|.2.
@@ -103,7 +103,7 @@ public class Anti_Knight
             6..|.78|...
             .9.|...|..1
             """),
-          Rules.AntiKnight)
+          RuleSet.AntiKnight)
       .Should().Be("""
             926|583|714
             137|624|598
@@ -123,7 +123,7 @@ public class Hyper_Sudoku
 {
     [Test]
     public void Solves() => TestSolver.Solve(
-        Clues.Parse("""
+        Clues.New("""
             .4.|...|..9
             9..|...|8..
             .1.|3..|...
@@ -136,7 +136,7 @@ public class Hyper_Sudoku
             .67|..4|...
             ...|..5|4..
             """),
-            Rules.Hyper)
+            RuleSet.Hyper)
         .Should().Be("""
             543|168|279
             926|547|813
@@ -157,7 +157,7 @@ public class Jigsaw_Sudokud
     [Test]
     public void Solves()
     {
-        var rules = Rules.Jigsaw("""
+        var rules = RuleSet.Jigsaw("""
             AAA|BBB|BCC
             AAA|BBB|BCC
             AAD|DEB|CCC 
@@ -172,7 +172,7 @@ public class Jigsaw_Sudokud
             """);
 
         TestSolver.Solve(
-          Clues.Parse("""
+          Clues.New("""
             4..|7.9|.2.
             ...|.2.|...
             .9.|..8|...
@@ -212,7 +212,6 @@ public class Killer_Sudoku
     {
         using var _ = Logger.Options();
 
-
         var solved = TestSolver.Solve(puzzle);
 
         solved.ToString().Should().NotContain(".");
@@ -248,7 +247,7 @@ public class X_Sudoku
 {
     [Test]
     public void Solves() => TestSolver.Solve(
-            Clues.Parse("""
+            Clues.New("""
             .1.|2.3|.4.
             8..|...|6.5
             .7.|...|...
@@ -261,7 +260,7 @@ public class X_Sudoku
             7.9|...|..8
             .2.|3.4|.5.
             """),
-            Rules.XSudoku)
+            RuleSet.XSudoku)
            .Should().Be("""
             516|273|849
             832|941|675
@@ -333,10 +332,10 @@ public class Puzzle_bank
     public void Diabolical(Puzzle puzzle) => Solve(puzzle);
 
     [TestCaseSource(nameof(Hypers))]
-    public void Hyper(Puzzle puzzle) => Solve(puzzle, Rules.Hyper);
+    public void Hyper(Puzzle puzzle) => Solve(puzzle, RuleSet.Hyper);
 
     [TestCaseSource(nameof(Xs))]
-    public void XSudoku(Puzzle puzzle) => Solve(puzzle, Rules.XSudoku);
+    public void XSudoku(Puzzle puzzle) => Solve(puzzle, RuleSet.XSudoku);
 
     [Explicit("Only usefull to extend the file definitions")]
     [TestCase(nameof(Diabolical))]
@@ -360,11 +359,11 @@ public class Puzzle_bank
         }
     }
 
-    private static void Solve(Puzzle puzzle, Rules? rules = null)
+    private static void Solve(Puzzle puzzle, RuleSet? rules = null)
     {
         using var _ = Logger.Options();
 
-        var solved = TestSolver.Solve(puzzle.Clues, rules ?? Rules.Standard);
+        var solved = TestSolver.Solve(puzzle.Clues, rules ?? RuleSet.Standard);
         solved.Should().Be(puzzle.Solution);
     }
 }
@@ -376,7 +375,7 @@ public class Other
     {
         using var _ = Logger.Options();
 
-        var clues = Clues.Parse("""
+        var clues = Clues.New("""
             53.|.7.|...
             6..|195|...
             .98|...|.6.
@@ -410,7 +409,7 @@ public class Other
     {
         using var _ = Logger.Options();
 
-        var clues = Clues.Parse("""
+        var clues = Clues.New("""
             8..|...|...
             ..3|6..|...
             .7.|.9.|2..

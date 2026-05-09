@@ -10,7 +10,7 @@ public sealed class _2022_05_03 : CtcPuzzle
 
     public override O Duration => O.μs10;
 
-    public override Clues Clues { get; } = Clues.Parse("""
+    public override Clues Clues { get; } = Clues.New("""
         ...│...│...
         ...│...│...
         ...│...│...
@@ -24,7 +24,7 @@ public sealed class _2022_05_03 : CtcPuzzle
         1.2│...│...
         """);
 
-    public override Cells Solution { get; } = Cells.Parse("""
+    public override Cells Solution { get; } = Cells.New("""
         874│192│356
         396│578│124
         521│346│798
@@ -38,9 +38,9 @@ public sealed class _2022_05_03 : CtcPuzzle
         132│854│679
         """);
 
-    protected override Rules GetConstraints()
-        => Rules.Standard
-        + NamedCage.Parse("""
+    protected override RuleSet GetConstraints()
+        => RuleSet.Standard
+        + Grid.NamedGroups("""
             .BCDEFGHI
             BCDEFGHIJ
             CDEFGHIJK
@@ -50,5 +50,12 @@ public sealed class _2022_05_03 : CtcPuzzle
             GHIJKLMNO
             HIJKLMNOP
             IJKLMNOP.
-            """).Select(c => new DutchWhisper([.. c.Cells], true));
+            """)
+            .SelectMany(DutchWhisper);
+
+    private static Rules DutchWhisper(NamedGroup group) =>
+    [
+        new CellSet(group.Cells, nameof(DutchWhisper)),
+        .. Sudoku.Restrictions.DutchWhisper.New(new([..group.Cells], group.Name, group.Name)),
+    ];
 }

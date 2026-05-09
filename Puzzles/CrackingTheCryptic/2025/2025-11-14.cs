@@ -10,7 +10,7 @@ public sealed class _2025_11_14 : CtcPuzzle
 
     public override O Duration => O.ms;
 
-    public override Cells Solution => Cells.Parse("""
+    public override Cells Solution => Cells.New("""
         3 8 4 6 2 7 9 5 1
         1 3 8 4 6 2 7 9 5
         5 1 3 8 4 6 2 7 9
@@ -22,8 +22,8 @@ public sealed class _2025_11_14 : CtcPuzzle
         8 4 6 2 7 9 5 1 3
         """);
 
-    protected override Rules GetConstraints()
-        => Rules.Jigsaw("""
+    protected override RuleSet GetConstraints()
+        => RuleSet.Jigsaw("""
         AAAAACEGG
         ABBBBCEGI
         ABCCCCEGI
@@ -34,10 +34,10 @@ public sealed class _2025_11_14 : CtcPuzzle
         FFFFFFHHI
         HHHHHHHII
         """)
-        + AntiKnight.All
+        + Anti.Knight
         + NonConsecutives.Orthogonally()
         + Squares()
-        + KillerCages.Parse(
+        + Groups.Cages(
         """
         .A.│...│...
         A..│...│...
@@ -55,54 +55,49 @@ public sealed class _2025_11_14 : CtcPuzzle
         false)
         + Mask.Odd((8, 4));
 
-    private static IEnumerable<Square> Squares()
+    private static Rules Squares()
+        => Sqs().SelectMany(cells => Group.Select(cells, (a, o) => new Square(a, o)));
+
+    private static IEnumerable<PosArray> Sqs()
     {
         foreach (var pos in Pos.All)
             if (pos.N() is { } n &&
                 pos.W() is { } w &&
                 n.W() is { } nw)
-                yield return new Square([pos, n, w, nw]);
+                yield return ImmutableArray.Create(pos, n, w, nw);
     }
 
-    private sealed class Square(ImmutableArray<Pos> cells) : Rule(cells)
+    private sealed class Square(Pos appliesTo, PosArray others) : Group(appliesTo, others)
     {
-        public override ImmutableArray<Restriction> Restrictions { get; } =
-        [
-            .. Group.Select(cells, (a, o) => new Reduction(a, o))
-        ];
-
-        private sealed class Reduction(Pos appliesTo, ImmutableArray<Pos> others) : Group(appliesTo, others)
+        public override Digits Restrict(SudokuCells cells)
         {
-            public override Digits Restrict(SudokuCells cells)
-            {
-                var digits = Digits.None;
-                foreach (var o in Others) digits |= cells[o].Digits;
-                return Lookup[digits];
-            }
+            var digits = Digits.None;
+            foreach (var o in Others) digits |= cells[o].Digits;
+            return Lookup[digits];
+        }
 
-            private static readonly LookupDigits Lookup = Init();
+        private static readonly LookupDigits Lookup = Init();
 
-            private static LookupDigits Init()
-            {
-                var lookup = new LookupDigits();
-                Digits[] groups =
-                [
-                    [1, 4, 7],
-                    [2, 5, 8],
-                    [3, 6, 9],
-                ];
+        private static LookupDigits Init()
+        {
+            var lookup = new LookupDigits();
+            Digits[] groups =
+            [
+                [1, 4, 7],
+                [2, 5, 8],
+                [3, 6, 9],
+            ];
 
-                foreach (var digits in Digits.All)
-                    foreach (var group in groups)
-                        if ((digits & group).HasNone)
-                            lookup[digits] |= group;
+            foreach (var digits in Digits.All)
+                foreach (var group in groups)
+                    if ((digits & group).HasNone)
+                        lookup[digits] |= group;
 
-                foreach (var digits in Digits.All)
-                    if (lookup[digits].HasNone)
-                        lookup[digits] = Digits._1_to_9;
+            foreach (var digits in Digits.All)
+                if (lookup[digits].HasNone)
+                    lookup[digits] = Digits._1_to_9;
 
-                return lookup;
-            }
+            return lookup;
         }
     }
 }

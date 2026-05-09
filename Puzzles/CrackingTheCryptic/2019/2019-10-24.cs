@@ -10,7 +10,7 @@ public sealed class _2019_10_24 : CtcPuzzle
 
     public override O Duration => O.s;
 
-    public override Cells Solution { get; } = Cells.Parse("""
+    public override Cells Solution { get; } = Cells.New("""
         634│591│872
         821│347│596
         579│826│431
@@ -24,9 +24,9 @@ public sealed class _2019_10_24 : CtcPuzzle
         286│139│754
         """);
 
-    protected override Rules GetConstraints()
-        => Rules.Standard
-        + NamedCage.Parse("""
+    protected override RuleSet GetConstraints()
+        => RuleSet.Standard
+        + Grid.NamedGroups("""
         AAB│BCD│DEF
         GHH│CCD│EEF
         GHH│III│EJF
@@ -40,9 +40,9 @@ public sealed class _2019_10_24 : CtcPuzzle
         VVV│WWR│XXX
         """).SelectMany(Cages);
 
-    private static IEnumerable<Restriction> Cages(NamedCage cage) =>
+    private static Rules Cages(NamedGroup cage) =>
     [
-        .. Group.Select(cage.Cells, (a, o) => new Unique(a, o)),
-        .. Group.Select(cage.Cells, (a, o) => new Cage(a, o, Ints.SquareNumbers & Ints.Triangles[cage.Cells.Length])),
+        new CellSet(cage, "Cage"),
+        .. Group.Select(cage, (a, o) => new Cage(a, o, Ints.SquareNumbers & Ints.Triangles[cage.Size])),
     ];
 }

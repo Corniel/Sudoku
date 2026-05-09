@@ -12,7 +12,7 @@ public sealed class _2019_08_29 : CtcPuzzle
 
     public override bool IsClassic => true;
 
-    public override Clues Clues { get; } = Clues.Parse("""
+    public override Clues Clues { get; } = Clues.New("""
         63.│...│.81
         .2.│..3│...
         ...│.17│43.
@@ -26,7 +26,7 @@ public sealed class _2019_08_29 : CtcPuzzle
         ...│...│..9
         """);
 
-    public override Cells Solution { get; } = Cells.Parse("""
+    public override Cells Solution { get; } = Cells.New("""
         637│254│981
         124│893│756
         958│617│432

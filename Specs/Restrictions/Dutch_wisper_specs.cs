@@ -7,7 +7,7 @@ public class Solves
     [Test]
     public void Parsed()
     {
-        var clues = Clues.Parse("""
+        var clues = Clues.New("""
             ..5|.6.|7..
             ...|...|...
             ...|.3.|4.5
@@ -21,9 +21,9 @@ public class Solves
             ..6|.7.|8..
             """);
 
-        Rules rules =
-            Rules.Standard
-            + DutchWhispers.Parse("""
+        RuleSet rules =
+            RuleSet.Standard
+            + Lines.DutchWhispers("""
             ABC|DEF|GHI
             RQP|ONM|LKJ
             STU|VWX|YZa
@@ -36,7 +36,7 @@ public class Solves
             ...|...|...
             ...|...|...
             """)
-            + DutchWhispers.Parse("""
+            + Lines.DutchWhispers("""
             ...|...|...
             ...|...|...
             ...|...|...
@@ -49,7 +49,7 @@ public class Solves
             ...|...|...
             ...|...|...
             """)
-            + DutchWhispers.Parse("""
+            + Lines.DutchWhispers("""
             ...|...|...
             ...|...|...
             ...|...|...

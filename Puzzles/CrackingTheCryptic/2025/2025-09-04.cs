@@ -10,7 +10,7 @@ public sealed class _2025_09_04 : CtcPuzzle
 
     public override O Duration => O.s10;
 
-    public override Cells Solution { get; } = Cells.Parse("""
+    public override Cells Solution { get; } = Cells.New("""
         865|793|421
         743|251|869
         291|486|753
@@ -24,9 +24,9 @@ public sealed class _2025_09_04 : CtcPuzzle
         429|875|136
         """);
 
-    protected override Rules GetConstraints() => Rules.Standard + Cages();
+    protected override RuleSet GetConstraints() => RuleSet.Standard + Cages();
 
-    private static IEnumerable<Restriction> Cages() => NamedCage.Parse("""
+    private static Rules Cages() => Grid.NamedGroups("""
         ...|.BB|BBC
         .EE|DDD|..C
         EEA|AD.|.CC
@@ -41,9 +41,9 @@ public sealed class _2025_09_04 : CtcPuzzle
         """)
         .SelectMany(c => c.Name is 'A' ? Repeating.All([.. c.Cells]) : Cage.All([.. c.Cells]));
 
-    private sealed class Cage(Pos appliesTo, ImmutableArray<Pos> others) : Group(appliesTo, others)
+    private sealed class Cage(Pos appliesTo, PosArray others) : Group(appliesTo, others)
     {
-        public static IEnumerable<Restriction> All(ImmutableArray<Pos> cells) =>
+        public static Rules All(PosArray cells) =>
         [
             new Cage(cells[0], cells.Remove(cells[0])),
             new Cage(cells[1], cells.Remove(cells[1])),
@@ -89,9 +89,9 @@ public sealed class _2025_09_04 : CtcPuzzle
         ];
     }
 
-    private sealed class Repeating(Pos appliesTo, ImmutableArray<Pos> others) : Group(appliesTo, others)
+    private sealed class Repeating(Pos appliesTo, PosArray others) : Group(appliesTo, others)
     {
-        public static IEnumerable<Restriction> All(ImmutableArray<Pos> cells) =>
+        public static Rules All(PosArray cells) =>
         [
             new Repeating(cells[0], cells.Remove(cells[0])),
             new Repeating(cells[1], cells.Remove(cells[1])),

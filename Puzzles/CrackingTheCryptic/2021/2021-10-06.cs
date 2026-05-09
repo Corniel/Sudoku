@@ -1,5 +1,3 @@
-using Sudoku.Houses;
-
 namespace Puzzles.CrackingTheCryptic;
 
 public sealed class _2021_10_06 : CtcPuzzle
@@ -12,7 +10,7 @@ public sealed class _2021_10_06 : CtcPuzzle
 
     public override O Duration => O.μs10;
 
-    public override Clues Clues { get; } = Clues.Parse("""
+    public override Clues Clues { get; } = Clues.New("""
         ...|...|...
         ...|...|...
         ...|...|...
@@ -26,7 +24,7 @@ public sealed class _2021_10_06 : CtcPuzzle
         ...|...|...
         """);
 
-    public override Cells Solution { get; } = Cells.Parse("""
+    public override Cells Solution { get; } = Cells.New("""
         481│627│395
         697│345│218
         325│891│647
@@ -40,14 +38,17 @@ public sealed class _2021_10_06 : CtcPuzzle
         742│539│186
         """);
 
-    protected override Rules GetConstraints() =>
-        Rules.AntiKing
+    protected override RuleSet GetConstraints() =>
+        RuleSet.Standard
+        + Anti.King
         + Diagonal.NE_SW
         + Diagonal.NW_SE
-        + new DutchWhisper(
+        + DutchWhisper.New(new Line(
         [
             (8, 0), (7, 1), (6, 2), (5, 3), (4, 4), (3, 5), (2, 6), (1, 7), (0, 8),
             (0, 7), (0, 6), (0, 5), (0, 4), (0, 3), (0, 2), (0, 1),
             (0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6), (7, 7), (8, 8),
-        ]);
+        ],
+        'A',
+        'Z'));
 }

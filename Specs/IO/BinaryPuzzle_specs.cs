@@ -20,11 +20,11 @@ public class Writes
     [Test]
     public void Puzzle()
     {
-        var clue = Clues.Parse("12.3.....4...5......6..17....1..68..3...4..7....2...5..1....9....9....68.....9..7");
+        var clue = Clues.New("12.3.....4...5......6..17....1..68..3...4..7....2...5..1....9....9....68.....9..7");
 
         Console.WriteLine(clue);
 
-        var cells = Cells.Parse("""
+        var cells = Cells.New("""
             127│368│594
             493│752│186
             856│491│723

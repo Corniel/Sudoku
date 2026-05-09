@@ -10,7 +10,7 @@ public sealed class _2024_02_24 : CtcPuzzle
 
     public override O Duration => O.ms;
 
-    public override Cells Solution { get; } = Cells.Parse("""
+    public override Cells Solution { get; } = Cells.New("""
         968│352│714
         534│761│982
         721│489│653
@@ -24,8 +24,8 @@ public sealed class _2024_02_24 : CtcPuzzle
         143│578│269
         """);
 
-    protected override Rules GetConstraints()
-        => Rules.Killer("""
+    protected override RuleSet GetConstraints()
+        => RuleSet.Killer("""
         AA.│...│...
         A..│...│...
         ...│...│...
@@ -40,7 +40,7 @@ public sealed class _2024_02_24 : CtcPuzzle
 
         A = 20  B = 14  C = 16  D = 16  E = 22
         """)
-        + Arrows.Parse("""
+        + Lines.Arrow("""
         ..A│BC.│...
         ...│...│...
         a..│..i│..m
@@ -53,7 +53,7 @@ public sealed class _2024_02_24 : CtcPuzzle
         ...│N..│..G
         ..M│..e│fg.
         """)
-        + BlackDots.Parse("""
+        + Couples.BlackDots("""
         .A.│...│...
         .A.│...│...
         ...│...│...

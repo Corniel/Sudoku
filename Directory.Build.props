@@ -8,9 +8,8 @@
 
   <PropertyGroup Label="Compiler options">
     <TargetFramework>net10.0</TargetFramework>
-    <Nullable>enable</Nullable>
     <LangVersion>14.0</LangVersion>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <PropertyGroup Label="Diagnostics">

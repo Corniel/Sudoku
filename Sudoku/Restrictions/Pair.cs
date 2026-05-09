@@ -10,7 +10,7 @@ public abstract class Pair(Pos appliesTo, Pos other) : Restriction
     public Pos Other { get; } = other;
 
     /// <inheritdoc />
-    public PosSet Links { get; } = [other];
+    public PosSet Cells { get; } = [appliesTo, other];
 
     /// <inheritdoc />
     public Digits Restrict(SudokuCells cells) => Restrict(cells[Other].Digits);

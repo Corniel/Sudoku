@@ -10,7 +10,7 @@ public sealed class _2024_11_16 : CtcPuzzle
 
     public override O Duration => O.μs100;
 
-    public override Clues Clues { get; } = Clues.Parse("""
+    public override Clues Clues { get; } = Clues.New("""
         ...│...│...
         ...│...│...
         ...│...│...
@@ -24,7 +24,7 @@ public sealed class _2024_11_16 : CtcPuzzle
         ...│...│...
         """);
 
-    public override Cells Solution { get; } = Cells.Parse("""
+    public override Cells Solution { get; } = Cells.New("""
         132│859│467
         965│174│328
         487│362│195
@@ -38,10 +38,10 @@ public sealed class _2024_11_16 : CtcPuzzle
         674│985│213
         """);
 
-    protected override Rules GetConstraints()
-        => Rules.Standard
-        + new Sums()
-        + Products.Parse("""
+    protected override RuleSet GetConstraints()
+        => RuleSet.Standard
+        + Sums()
+        + Products("""
         ..A│AA.│...
         ..B│...│.X.
         .B.│...│X..
@@ -54,7 +54,7 @@ public sealed class _2024_11_16 : CtcPuzzle
         .X.│...│b..
         ...│.aa│a..
         """)
-        + Products.Parse("""
+        + Products("""
         ...│.A.│...
         ...│..A│...
         ...│...│A..
@@ -68,18 +68,16 @@ public sealed class _2024_11_16 : CtcPuzzle
         ...│.a.│...
         """);
 
-    private sealed class Products(ImmutableArray<Pos> cells) : Rule(cells)
-    {
-        public override ImmutableArray<Restriction> Restrictions { get; } =
-        [
-            .. cells.Select(c => new Mask(c, [1, 2, 4, 5, 8])),
-            .. cells.Select(c => new Product(c, cells.Remove(c))),
-        ];
+    private static Rules Products(string grid)
+        => Grid.NamedGroups(grid).SelectMany(Products);
 
-        public static IEnumerable<Products> Parse(string str) => NamedCage.Parse(str).Select(c => new Products(c.Cells));
-    }
+    private static Rules Products(NamedGroup cells) =>
+    [
+        .. cells.Select(c => new Mask(c, [1, 2, 4, 5, 8])),
+        .. cells.Select(c => new Product(c, cells.Cells.ToImmutableArray().Remove(c))),
+    ];
 
-    private sealed class Product(Pos appliesTo, ImmutableArray<Pos> others) : Group(appliesTo, others)
+    private sealed class Product(Pos appliesTo, PosArray others) : Group(appliesTo, others)
     {
         public override Digits Restrict(SudokuCells cells)
         {
@@ -92,28 +90,25 @@ public sealed class _2024_11_16 : CtcPuzzle
         }
     }
 
-    private sealed class Sums() : Rule([])
-    {
-        public override ImmutableArray<Restriction> Restrictions { get; } =
-        [
-            new LookupPair((0, 0), (0, 1), Prime1), new LookupPair((0, 1), (0, 0), Prime2),
-            new LookupPair((0, 7), (0, 8), Prime1), new LookupPair((0, 8), (0, 7), Prime2),
-            new LookupPair((8, 0), (8, 1), Prime1), new LookupPair((8, 1), (8, 0), Prime2),
-            new LookupPair((8, 7), (8, 8), Prime1), new LookupPair((8, 8), (8, 7), Prime2),
+    private static Rules Sums() =>
+    [
+        new LookupPair((0, 0), (0, 1), Prime1), new LookupPair((0, 1), (0, 0), Prime2),
+        new LookupPair((0, 7), (0, 8), Prime1), new LookupPair((0, 8), (0, 7), Prime2),
+        new LookupPair((8, 0), (8, 1), Prime1), new LookupPair((8, 1), (8, 0), Prime2),
+        new LookupPair((8, 7), (8, 8), Prime1), new LookupPair((8, 8), (8, 7), Prime2),
 
-            // A + B = 80
-            .. Sum.New((0, 0), (0, 7), 07),
-            .. Sum.New((0, 1), (0, 8), 10),
+        // A + B = 80
+        .. Sum.New((0, 0), (0, 7), 07),
+        .. Sum.New((0, 1), (0, 8), 10),
 
-            // A + C = 80
-            .. Sum.New((0, 0), (8, 0), 07),
-            .. Sum.New((0, 1), (8, 1), 10),
+        // A + C = 80
+        .. Sum.New((0, 0), (8, 0), 07),
+        .. Sum.New((0, 1), (8, 1), 10),
 
-            // B + D = 80
-            .. Sum.New((0, 7), (8, 7), 07),
-            .. Sum.New((0, 8), (8, 8), 10),
-        ];
-    }
+        // B + D = 80
+        .. Sum.New((0, 7), (8, 7), 07),
+        .. Sum.New((0, 8), (8, 8), 10),
+    ];
 
     private static readonly LookupDigits Prime1 = LookupPair.Init(d => d switch
     {

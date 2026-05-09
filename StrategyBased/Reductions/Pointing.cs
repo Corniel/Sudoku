@@ -9,7 +9,7 @@ public static class Pointing
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static void Digits(Rule r1, Rule r2, Nodes cells)
+    private static void Digits(House r1, House r2, Nodes cells)
     {
         var inter = r1.Cells & r2.Cells & cells.Todo;
 
@@ -25,17 +25,17 @@ public static class Pointing
         {
             if (digits[value] is 0) continue;
 
-            var lockRow = cells.DoesNotOccur(value, r1.Cells ^ inter);
-            var lockCol = cells.DoesNotOccur(value, r2.Cells ^ inter);
+            var lockRow = cells.DoesNotOccur(value, r1 ^ inter);
+            var lockCol = cells.DoesNotOccur(value, r2 ^ inter);
 
             if (lockRow && !lockCol)
             {
-                foreach (var cell in r2.Cells ^ inter)
+                foreach (var cell in r2 ^ inter)
                     cells[cell].Digits ^= value;
             }
             else if (lockCol && !lockRow)
             {
-                foreach (var cell in r1.Cells ^ inter)
+                foreach (var cell in r1 ^ inter)
                     cells[cell].Digits ^= value;
             }
         }

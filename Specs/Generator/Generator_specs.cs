@@ -13,9 +13,9 @@ public class Generates
 
         puzzles.Should().AllSatisfy(generated =>
         {
-            Rules.Standard.Should().BeValidFor(generated.Solution);
+            RuleSet.Standard.Should().BeValidFor(generated.Solution);
 
-            var solved = TestSolver.Solve(generated.Clues, Rules.Standard);
+            var solved = TestSolver.Solve(generated.Clues, RuleSet.Standard);
             solved.Should().Be(generated.Solution);
 
             Console.WriteLine();

@@ -9,9 +9,9 @@ internal static class TestSolver
     public static Cells Solve(Puzzle puzzle, SolverType solver = Default)
         => Solve(puzzle.Clues, puzzle.Constraints, solver);
 
-    public static Cells Solve(Clues clues, Rules? rules = null, SolverType solver = Default) => solver switch
+    public static Cells Solve(Clues clues, RuleSet? rules = null, SolverType solver = Default) => solver switch
     {
-        SolverType.Dynamic => DynamicSolver.Solver.Solve(clues, rules ?? Rules.Standard),
+        SolverType.Dynamic => DynamicSolver.Solver.Solve(clues, rules ?? RuleSet.Standard),
         SolverType.Dlx => Dlx.DlxSolver.Solve(clues),
         SolverType.Reference => Reference.Solver.Solve(clues),
         SolverType.StrategyBased => StrategyBased.StrategyBasedSolver.Solve(clues),

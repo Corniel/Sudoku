@@ -10,7 +10,7 @@ public sealed class _2021_01_06 : CtcPuzzle
 
     public override O Duration => O.ms100;
 
-    public override Clues Clues { get; } = Clues.Parse("""
+    public override Clues Clues { get; } = Clues.New("""
         ...│...│...
         ...│...│...
         ...│...│...
@@ -24,7 +24,7 @@ public sealed class _2021_01_06 : CtcPuzzle
         ...│...│...
         """);
 
-    public override Cells Solution { get; } = Cells.Parse("""
+    public override Cells Solution { get; } = Cells.New("""
         937│185│246
         581│462│793
         264│739│518
@@ -38,16 +38,16 @@ public sealed class _2021_01_06 : CtcPuzzle
         793│518│624
         """);
 
-    protected override Rules GetConstraints() =>
-        Rules.Standard
+    protected override RuleSet GetConstraints() =>
+        RuleSet.Standard
         + NonConsecutives.Orthogonally()
-        + Jigsaw.Parse("""
+        + Jigsaw.New("""
         aaa│ccc│ddd
-        a.b│c6c│dSd
-        aab│c6d│dSS
+        a.b│cXc│dSd
+        aab│cXd│dSS
         ───┼───┼───
-        aab│c66│d.S
-        bbb│cc6│6QS
+        aab│cXX│d.S
+        bbb│ccX│XQS
         b.b│bH.│HQS
         ───┼───┼───
         fff│fHH│HQQ

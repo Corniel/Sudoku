@@ -4,7 +4,7 @@ public static class Diagonals
 {
     public static readonly ImmutableArray<PosSet> NESWs =
     [
-        .. NamedCage.Parse("""
+        .. Grid.NamedGroups("""
         . B C D E F G H I
         B C D E F G H I J
         C D E F G H I J K
@@ -14,12 +14,12 @@ public static class Diagonals
         G H I J K L M N O
         H I J K L M N O P
         I J K L M N O P .
-        """).Select(c => PosSet.New(c.Cells))
+        """).Select(c => PosSet.New(c))
     ];
 
     public static readonly ImmutableArray<PosSet> NWSEs =
     [
-        .. NamedCage.Parse("""
+        .. Grid.NamedGroups("""
         I J K L M N O P .
         H I J K L M N O P
         G H I J K L M N O
@@ -29,6 +29,6 @@ public static class Diagonals
         C D E F G H I J K
         B C D E F G H I J
         . B C D E F G H I
-        """).Select(c => PosSet.New(c.Cells))
+        """).Select(c => PosSet.New(c))
     ];
 }

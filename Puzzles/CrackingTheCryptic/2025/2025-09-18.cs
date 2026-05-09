@@ -10,7 +10,7 @@ public sealed class _2025_09_18 : CtcPuzzle
 
     public override O Duration => O.ms;
 
-    public override Clues Clues { get; } = Clues.Parse("""
+    public override Clues Clues { get; } = Clues.New("""
         ...│...│5..
         ...│...│...
         1..│...│...
@@ -24,7 +24,7 @@ public sealed class _2025_09_18 : CtcPuzzle
         .7.│...│...
         """);
 
-    public override Cells Solution { get; } = Cells.Parse("""
+    public override Cells Solution { get; } = Cells.New("""
         482│317│569
         736│958│241
         195│624│873
@@ -38,9 +38,9 @@ public sealed class _2025_09_18 : CtcPuzzle
         873│195│624
         """);
 
-    protected override Rules GetConstraints() =>
-        Rules.Standard
-        + RenbanLines.Parse("""
+    protected override RuleSet GetConstraints() =>
+        RuleSet.Standard
+        + Lines.Renban("""
         ...│..A│...
         ...│.A.│...
         ...│A..│...
@@ -56,7 +56,7 @@ public sealed class _2025_09_18 : CtcPuzzle
         + Diagonal()
 
         // As a consquense of the above two
-        + RenbanLines.Parse("""
+        + Lines.Renban("""
         ...│A..│...
         ...│.A.│...
         ...│..A│...
@@ -70,11 +70,11 @@ public sealed class _2025_09_18 : CtcPuzzle
         ...│..D│...
         """);
 
-    private static IEnumerable<Max3Distinct> Diagonal() => Diagonals.NWSEs.Concat(Diagonals.NESWs)
+    private static Rules Diagonal() => Diagonals.NWSEs.Concat(Diagonals.NESWs)
         .Where(d => d.Count > 3)
         .SelectMany(line => Group.Select(line, (a, o) => new Max3Distinct(a, o)));
 
-    public sealed class Max3Distinct(Pos appliesTo, ImmutableArray<Pos> others) : Group(appliesTo, others)
+    public sealed class Max3Distinct(Pos appliesTo, PosArray others) : Group(appliesTo, others)
     {
         public override Digits Restrict(SudokuCells cells)
         {

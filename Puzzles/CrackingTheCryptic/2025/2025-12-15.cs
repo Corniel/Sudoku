@@ -1,5 +1,3 @@
-using Sudoku.Houses;
-
 namespace Puzzles.CrackingTheCryptic;
 
 public sealed class _2025_12_15 : CtcPuzzle
@@ -12,7 +10,7 @@ public sealed class _2025_12_15 : CtcPuzzle
 
     public override O Duration => O.ms;
 
-    public override Cells Solution { get; } = Cells.Parse("""
+    public override Cells Solution { get; } = Cells.New("""
         629│475│318
         518│923│476
         347│618│925
@@ -26,8 +24,8 @@ public sealed class _2025_12_15 : CtcPuzzle
         275│396│184
         """);
 
-    protected override Rules GetConstraints()
-        => Rules.Killer("""
+    protected override RuleSet GetConstraints()
+        => RuleSet.Killer("""
         ...│...│A..
         ...│...│A..
         ...│...│...
@@ -41,7 +39,7 @@ public sealed class _2025_12_15 : CtcPuzzle
         ...│.EE│...
         A = 7  B = 9  C = 17  D = 10  E = 15
         """)
-       + WhiteDots.Parse("""
+       + Couples.WhiteDots("""
         ...│...│...
         ...│...│..A
         ...│...│..A
@@ -59,7 +57,7 @@ public sealed class _2025_12_15 : CtcPuzzle
        + Kings()
        + KillerCages.Extend;
 
-    private static IEnumerable<Pair> NotTens()
+    private static Rules NotTens()
     {
         foreach (var o in PosSet.All)
         {
@@ -78,10 +76,10 @@ public sealed class _2025_12_15 : CtcPuzzle
         }
     }
 
-    private static IEnumerable<Pair> Knights()
+    private static Rules Knights()
     {
-        var center = Box.All[4].Cells;
-        foreach (var pair in AntiKnight.All.Select(k => k.Cells).Where(center.Overlaps))
+        var center = Houses.Boxes[4].Cells;
+        foreach (var pair in Anti.Knight.Select(k => k.Cells).Where(center.Overlaps))
         {
             var couple = new LookupPair(pair.First(), pair.Last(), DiffentParity).Couple();
             yield return couple.One;
@@ -89,9 +87,9 @@ public sealed class _2025_12_15 : CtcPuzzle
         }
     }
 
-    public static IEnumerable<Pair> Kings()
+    public static Rules Kings()
     {
-        foreach (var pair in AntiKing.All.Select(k => k.Cells))
+        foreach (var pair in Anti.King.Select(k => k.Cells))
         {
             var couple = new LookupPair(pair.First(), pair.Last(), King).Couple();
             yield return couple.One;

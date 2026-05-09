@@ -17,8 +17,8 @@ public class Solves
     {
         var puzzle = new NewYorkTimesPuzzle(
             new(2019, 01, 31),
-            Clues.Parse(".2......5..4.7...1....3.....7..2.9..4.....3.....6....8.56....1....3..7.29..8....."),
-            Cells.Parse("729481635364579281185236479678123954412958367593647128256794813841365792937812546"));
+            Clues.New(".2......5..4.7...1....3.....7..2.9..4.....3.....6....8.56....1....3..7.29..8....."),
+            Cells.New("729481635364579281185236479678123954412958367593647128256794813841365792937812546"));
 
         var solver = new StrategyBasedSolver(puzzle.Clues, puzzle.Constraints, ReduceOptions.All);
         var steps = solver.Select(r => new Step(r.Type, r.Cells)).ToList();

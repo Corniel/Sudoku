@@ -8,7 +8,7 @@ public class Detects
     public void Ws()
     {
         var nodes = Nodes.Empty;
-        var clues = Clues.Parse("""
+        var clues = Clues.New("""
             .78│.26│3..
             63.│...│...
             .5.│4..│.68
@@ -22,7 +22,7 @@ public class Detects
             ..3│5.2│...
             """);
 
-        var solver = new StrategyBasedSolver(nodes & Rules.Standard & clues, new(StrategyType.WWing));
+        var solver = new StrategyBasedSolver(nodes & RuleSet.Standard & clues, new(StrategyType.WWing));
         nodes[(3, 2)].Digits = [1, 7];
         nodes[(7, 8)].Digits = [1, 7];
 

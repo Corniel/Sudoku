@@ -52,8 +52,8 @@ public sealed class NewYorkTimesPuzzle(DateOnly date, Clues clues, Cells solutio
             {
                 puzzles.Add(new(
                     DateOnly.Parse(parts[0], CultureInfo.InvariantCulture),
-                    Clues.Parse(parts[1]),
-                    Cells.Parse(parts[2])));
+                    Clues.New(parts[1]),
+                    Cells.New(parts[2])));
             }
         }
         return [.. puzzles.OrderBy(p => p.Date)];

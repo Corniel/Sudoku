@@ -2,13 +2,13 @@ namespace Puzzles.CrackingTheCryptic;
 
 public sealed class _2020_04_21 : CtcPuzzle
 {
-    public override string Title => "Partial Killer ";
+    public override string Title => "Partial Killer";
 
     public override string? Author => "Phistomefel";
 
     public override Uri? Url => new("https://youtu.be/ZLcey7qiXv8");
 
-    public override O Duration => O.ms10;
+    public override O Duration => O.μs100;
 
     public override Cells Solution { get; } = Cells.New("""
         147│296│583
@@ -42,6 +42,5 @@ public sealed class _2020_04_21 : CtcPuzzle
         I = 22  J = 18  L = 15  K = 8   M = 7  O = 8 
         X = 12  Y = 14  Z = 10
         """)
-        + KillerCages.Extend
-        ;
+        + KillerCages.Extend;
 }

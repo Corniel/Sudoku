@@ -8,7 +8,7 @@ public sealed class _2025_03_25 : CtcPuzzle
 
     public override Uri? Url => new("https://youtu.be/-L9qq8cyQ5M");
 
-    public override O Duration => O.μs100;
+    public override O Duration => O.ms;
 
     public override Clues Clues { get; } = Clues.New("""
         ...│.2.│...

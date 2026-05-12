@@ -6,7 +6,7 @@ public static class TimeSpanExtensions
 {
     public static string Format(this TimeSpan time)
     {
-        string[] orders = ["ns", "µs", "ms", "s", "ks"];
+        string[] orders = ["ns", "µs", "ms", "s ", "ks"];
 
         var ns = time.TotalNanoseconds;
 

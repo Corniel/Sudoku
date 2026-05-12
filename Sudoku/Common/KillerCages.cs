@@ -35,7 +35,7 @@ public static partial class KillerCages
         }
 
         // We ignore big cages.
-        SumGroup[] small = [.. combos.Where(c => c.Size <= 5)];
+        SumGroup[] small = [.. combos.Where(c => c.Size <= 4)];
 
         return rules
             + small.SelectMany(c => Groups.SumCage(c.Cells, c.Sum))

@@ -199,6 +199,7 @@ able to solve the following puzzles (so far):
 | 2026-04-09 | [Mayan Ruins](Puzzles/CrackingTheCryptic/2026/2026-04-09.cs)                 | 2,340.8 µs |
 | 2026-04-08 | [Colorful Whispers](Puzzles/CrackingTheCryptic/2026/2026-04-08.cs)           |   242.2 µs |
 | 2026-04-04 | [Farrago](Puzzles/CrackingTheCryptic/2026/2026-04-04.cs)                     |   105.1 ms |
+| 2026-04-01 | [Wilkommen im Palindrom](Puzzles/CrackingTheCryptic/2026/2026-04-01.cs)      |   171.2 µs |
 | 2026-03-30 | [The X and The V Squared](Puzzles/CrackingTheCryptic/2026/2026-04-04.cs)     | 2,403.1 µs |
 | 2026-02-25 | [XII](Puzzles/CrackingTheCryptic/2026/2026-02-25.cs)                         |   154.2 µs |
 | 2026-02-20 | [Catacomb](Puzzles/CrackingTheCryptic/2026/2026-02-20.cs)                    | 2,678.2 µs |

@@ -72,6 +72,8 @@ public readonly struct Ints(Int128 bits) : IReadOnlyCollection<int>
 
     public static Ints operator |(Ints left, Ints right) => new(left.Bits | right.Bits);
 
+    public static Ints operator |(Ints left, int right) => new(left.Bits | (Int128.One << right));
+
     public static Ints operator -(Ints left, Ints right)
     {
         var bits = Int128.Zero;
@@ -106,6 +108,17 @@ public readonly struct Ints(Int128 bits) : IReadOnlyCollection<int>
         return new(bits);
     }
 
+    public static Ints operator *(Ints ints, int factor)
+    {
+        var bits = Int128.Zero;
+
+        foreach (var @int in ints.GetEnumerator())
+        {
+            bits |= Int128.One << (@int * factor);
+        }
+        return new(bits);
+    }
+
     public static Ints operator /(Ints ints, Digits digits)
     {
         var bits = Int128.Zero;
@@ -129,15 +142,11 @@ public readonly struct Ints(Int128 bits) : IReadOnlyCollection<int>
         return new(bits);
     }
 
+    public static Ints operator ^(Ints ints, int number) => new(ints.Bits ^ (Int128.One << number));
+
     public static implicit operator Ints(Digits digits) => New(digits);
 
-    public static implicit operator Ints(Range range)
-    {
-        var ints = Int128.Zero;
-        for (var i = range.Start.Value; i <= range.End.Value; i++)
-            ints |= Int128.One << i;
-        return new(ints);
-    }
+    public static implicit operator Ints(Range range) => New(range);
 
     public static Ints New(Digits digits) => new(digits.Bits);
 
@@ -151,6 +160,15 @@ public readonly struct Ints(Int128 bits) : IReadOnlyCollection<int>
             bits |= Int128.One << @int;
 
         return new(bits);
+    }
+
+    [Pure]
+    public static Ints New(Range range)
+    {
+        var ints = Int128.Zero;
+        for (var i = range.Start.Value; i <= range.End.Value; i++)
+            ints |= Int128.One << i;
+        return new(ints);
     }
 
     public struct Iterator(Int128 mask) : IEnumerator<int>, IEnumerable<int>

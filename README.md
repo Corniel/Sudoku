@@ -290,6 +290,7 @@ able to solve the following puzzles (so far):
 | 2020-09-15 | [Sudoku XV](Puzzles/CrackingTheCryptic/2024/2020-09-15.cs)                       |    42.4 µs |
 | 2020-08-10 | [Heartbeat](Puzzles/CrackingTheCryptic/2024/2020-08-10.cs)                       | 2,469.5 µs |
 | 2020-07-31 | [Arrow/Group Sum](Puzzles/CrackingTheCryptic/2024/2020-07-31.cs)                 | 7,468.4 ms |
+| 2020-07-28 | [Mystery Killer](Puzzles/CrackingTheCryptic/2020/2020-07-28.cs)                  |   392.2 s  |
 | 2020-05-15 | [Equal Sudoku](Puzzles/CrackingTheCryptic/2024/2020-05-15.cs)                    |   370.3 ms |
 | 2020-05-06 | [Antiknight Killer](Puzzles/CrackingTheCryptic/2024/2020-05-06.cs)               |    10.4 ms |
 | 2020-04-27 | [The Sequal](Puzzles/CrackingTheCryptic/2024/2020-04-27.cs)                      |   118.3 µs |

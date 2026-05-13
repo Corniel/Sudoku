@@ -115,6 +115,22 @@ public class Maths
     public void At_most(int value, params int[] values)
         => Digits.AtMost(value).Should().Be([.. values]);
 
+    [TestCase(0 /*   =>   [ ] */)]
+    [TestCase(1, /*  => */ 1)]
+    [TestCase(2, /*  => */ 1, 2)]
+    [TestCase(3, /*  => */ 1, 2, 3)]
+    [TestCase(4, /*  => */ 1, 2, 3, 4)]
+    [TestCase(5, /*  => */ 1, 2, 3, 4, 5)]
+    [TestCase(6, /*  => */ 1, 2, 3, 4, 5, 6)]
+    [TestCase(7, /*  => */ 1, 2, 3, 4, 5, 6, 7)]
+    [TestCase(8, /*  => */ 1, 2, 3, 4, 5, 6, 7, 8)]
+    [TestCase(9, /*  => */ 1, 2, 3, 4, 5, 6, 7, 8, 9)]
+    [TestCase(10, /* => */ 1, 2, 3, 4, 5, 6, 7, 8, 9)]
+    [TestCase(11, /* => */ 1, 2, 3, 4, 5, 6, 7, 8, 9)]
+    [TestCase(20, /* => */ 1, 2, 3, 4, 5, 6, 7, 8, 9)]
+    public void Range_at_most(int value, params int[] values)
+        => Digits.New(..value).Should().Be([.. values]);
+
     [TestCase(-1, /* => */ 1, 2, 3, 4, 5, 6, 7, 8, 9)]
     [TestCase(+0, /* => */ 1, 2, 3, 4, 5, 6, 7, 8, 9)]
     [TestCase(+1, /* => */ 1, 2, 3, 4, 5, 6, 7, 8, 9)]
@@ -127,7 +143,20 @@ public class Maths
     [TestCase(+8, /* => */ 8, 9)]
     [TestCase(+9, /* => */ 9)]
     public void At_least(int value, params int[] values)
-       => Digits.AtLeast(value).Should().Be([.. values]);
+        => Digits.AtLeast(value).Should().Be([.. values]);
+
+    [TestCase(+0, /* => */ 1, 2, 3, 4, 5, 6, 7, 8, 9)]
+    [TestCase(+1, /* => */ 1, 2, 3, 4, 5, 6, 7, 8, 9)]
+    [TestCase(+2, /* => */ 2, 3, 4, 5, 6, 7, 8, 9)]
+    [TestCase(+3, /* => */ 3, 4, 5, 6, 7, 8, 9)]
+    [TestCase(+4, /* => */ 4, 5, 6, 7, 8, 9)]
+    [TestCase(+5, /* => */ 5, 6, 7, 8, 9)]
+    [TestCase(+6, /* => */ 6, 7, 8, 9)]
+    [TestCase(+7, /* => */ 7, 8, 9)]
+    [TestCase(+8, /* => */ 8, 9)]
+    [TestCase(+9, /* => */ 9)]
+    public void Range_at_least(int value, params int[] values)
+        => Digits.New(value..).Should().Be([.. values]);
 
     [TestCase(-2, -1 /* => [] */ )]
     [TestCase(+2, +1 /* => [] */ )]
@@ -139,7 +168,17 @@ public class Maths
     [TestCase(3, 36, /* => */ 3, 4, 5, 6, 7, 8, 9)]
     [TestCase(0, 45, /* => */ 1, 2, 3, 4, 5, 6, 7, 8, 9)]
     public void Between(int min, int max, params int[] values)
-      => Digits.Between(min, max).Should().Be([.. values]);
+        => Digits.Between(min, max).Should().Be([.. values]);
+
+    [TestCase(+2, +1 /* => [] */ )]
+    [TestCase(0, 3, /* => */ 1, 2, 3)]
+    [TestCase(1, 3, /* => */ 1, 2, 3)]
+    [TestCase(4, 7, /* => */ 4, 5, 6, 7)]
+    [TestCase(1, 9, /* => */ 1, 2, 3, 4, 5, 6, 7, 8, 9)]
+    [TestCase(3, 36, /* => */ 3, 4, 5, 6, 7, 8, 9)]
+    [TestCase(0, 45, /* => */ 1, 2, 3, 4, 5, 6, 7, 8, 9)]
+    public void Range_between(int min, int max, params int[] values)
+        => Digits.New(min..max).Should().Be([.. values]);
 
     [TestCase(1, 0, 1 + 0)]
     [TestCase(1, 2, 1 + 2)]

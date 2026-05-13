@@ -38,7 +38,7 @@ public static class BetweenLine
                 }
                 else return Digits.None;
             }
-            return Digits.AtLeast(min + 1);
+            return (min + 1)..;
         }
 
         /// <summary>Assumes this end is the low value.</summary>
@@ -54,7 +54,7 @@ public static class BetweenLine
                 }
                 else return Digits.None;
             }
-            return Digits.AtMost(max - 1);
+            return ..(max - 1);
         }
 
         public override string ToString()
@@ -63,7 +63,7 @@ public static class BetweenLine
 
     public sealed class Segment(Pos appliesTo, Pos start, Pos end) : Group(appliesTo, [start, end])
     {
-        public static readonly Digits Mask = Digits.Between(2, 8);
+        public static readonly Digits Mask = 2..8;
 
         public Pos Start { get; } = start;
 

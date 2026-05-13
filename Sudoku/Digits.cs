@@ -16,23 +16,16 @@ public readonly struct Digits(uint bits) : IEquatable<Digits>, IReadOnlyCollecti
     /// <summary>Digits 1 up to 9.</summary>
     public static readonly Digits _1_to_9 = new(Mask);
 
-    /// <summary>Digits 1, 2, 3, (low digits).</summary>
-    public static readonly Digits _123 = [1, 2, 3];
-
-    /// <summary>Digits 4, 5, 6, (mid digits).</summary>
-    public static readonly Digits _456 = [4, 5, 6];
-
-    /// <summary>Digits 7, 8, 9, (hi digits).</summary>
-    public static readonly Digits _789 = [7, 8, 9];
-
     /// <summary>Digits 2, 4, 6, 8 (even digits).</summary>
     public static readonly Digits Even = [2, 4, 6, 8];
 
     /// <summary>Digits 1, 3, 5, 7, 9 (odd digits).</summary>
     public static readonly Digits Odd = [1, 3, 5, 7, 9];
 
+    [Pure]
     public static Digits New(int value) => new(1U << value);
 
+    [Pure]
     public static Digits New(params ReadOnlySpan<int> digits)
     {
         var vals = 0U;
@@ -43,6 +36,7 @@ public readonly struct Digits(uint bits) : IEquatable<Digits>, IReadOnlyCollecti
         return new(vals);
     }
 
+    [Pure]
     public static Digits New(IEnumerable<int> digits)
     {
         var vals = 0U;
@@ -53,6 +47,7 @@ public readonly struct Digits(uint bits) : IEquatable<Digits>, IReadOnlyCollecti
         return new(vals);
     }
 
+    [Pure]
     public static Digits New(IEnumerable<Digits> digits)
     {
         var vals = 0U;
@@ -63,12 +58,22 @@ public readonly struct Digits(uint bits) : IEquatable<Digits>, IReadOnlyCollecti
         return new(vals);
     }
 
+    [Pure]
+    public static Digits New(Range range) => range switch
+    {
+        { Start.IsFromEnd: false, End.IsFromEnd: false } => Between(range.Start.Value, range.End.Value),
+        { Start.IsFromEnd: false, End.IsFromEnd: true, End.Value: 0 } => AtLeast(range.Start.Value),
+        _ => throw new NotSupportedException(),
+    };
+
+    [Pure]
     public static Digits AtLeast(int value)
         => new(0b_111_111_111_1U << (value & gte0(value)));
 
     [Pure]
     public static Digits AtMost(int value) => new((2U << value) - 1);
 
+    [Pure]
     public static Digits Between(int min, int max)
     {
         var atl = 0b_111_111_111_1UL << (min & gte0(min));
@@ -134,6 +139,8 @@ public readonly struct Digits(uint bits) : IEquatable<Digits>, IReadOnlyCollecti
     public static Digits operator &(Digits l, Digits r) => new(l.Bits & r.Bits);
 
     public static Digits operator |(Digits l, Digits r) => new(l.Bits | r.Bits);
+
+    public static implicit operator Digits(Range range) => New(range);
 
     public Iterator GetEnumerator() => new(Bits);
 

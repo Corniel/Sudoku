@@ -12,7 +12,7 @@ public sealed class Link(Pos pos) : SudokuCell
     /// <inheritdoc />
     public int Digit
     {
-        get => Digits.HasSingle ? Digits.First() : 0;
+        get => Digits.HasSingle ? Digits.Min() : 0;
         set => Digits = Digits.New(value);
     }
 

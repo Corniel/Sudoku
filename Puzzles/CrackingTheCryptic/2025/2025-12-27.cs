@@ -100,7 +100,7 @@ public sealed class _2025_12_27 : CtcPuzzle
                 var digits = cells[t].Digits;
 
                 if (digits.HasSingle)
-                    Min[digits.First()]++;
+                    Min[digits.Min()]++;
                 else
                     foreach (var d in digits)
                         Max[d]++;
@@ -152,7 +152,7 @@ public sealed class _2025_12_27 : CtcPuzzle
                 var digits = cells[o].Digits;
 
                 if (digits.HasSingle)
-                    Min[digits.First()]++;
+                    Min[digits.Min()]++;
                 else
                     foreach (var d in digits)
                         Max[d]++;

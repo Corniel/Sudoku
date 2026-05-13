@@ -44,7 +44,7 @@ public sealed class Node : SudokuCell
 
         if (Digits.HasSingle)
         {
-            digit = Digits.First();
+            digit = Digits.Min();
             Root.Todo ^= Pos;
 
             foreach (var pos in Peers)

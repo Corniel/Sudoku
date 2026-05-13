@@ -115,7 +115,7 @@ public sealed class _2025_09_04 : CtcPuzzle
                 if (!Others
                     .Select(o => cells[o].Digits)
                     .Where(d => d.HasSingle)
-                    .All(x => remaining.Remove(x.First()))) return Digits.None;
+                    .All(x => remaining.Remove(x.Min()))) return Digits.None;
 
                 var match = Digits.None;
 

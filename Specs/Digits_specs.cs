@@ -35,10 +35,10 @@ public class Flags
     [TestCase(9)]
     [TestCase(3, 4, 9)]
     [TestCase(1, 2, 3, 4, 9)]
-    public void First(params int[] values)
+    public void Min(params int[] values)
     {
         var cell = Digits.New(values);
-        cell.First().Should().Be(values[0]);
+        cell.Min().Should().Be(values[0]);
     }
 
     [TestCase(0)]
@@ -53,10 +53,10 @@ public class Flags
     [TestCase(9)]
     [TestCase(3, 4, 7)]
     [TestCase(1, 2, 3, 4, 9)]
-    public void Last(params int[] values)
+    public void Max(params int[] values)
     {
         var cell = Digits.New(values);
-        cell.Last().Should().Be(values[^1]);
+        cell.Max().Should().Be(values[^1]);
     }
 
     [Test]

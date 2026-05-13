@@ -104,10 +104,10 @@ public readonly struct Digits(uint bits) : IEquatable<Digits>, IReadOnlyCollecti
     public bool IsSubsetOf(Digits other) => (other.Bits & Bits) == Bits;
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public int First() => BitOperations.TrailingZeroCount(Bits) & 15;
+    public int Min() => BitOperations.TrailingZeroCount(Bits) & 15;
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public int Last() => BitOperations.Log2(Bits);
+    public int Max() => BitOperations.Log2(Bits);
 
     public override bool Equals(object? obj) => obj is Digits other && Equals(other);
 

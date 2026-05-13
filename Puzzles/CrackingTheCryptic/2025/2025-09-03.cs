@@ -47,7 +47,7 @@ public sealed class _2025_09_03 : CtcPuzzle
         {
             var app = cells[AppliesTo].Digits;
 
-            var min = Digits.New(app.First());
+            var min = Digits.New(app.Min());
             var max = app;
             var sum = Ints.Zero;
 
@@ -58,7 +58,7 @@ public sealed class _2025_09_03 : CtcPuzzle
                 sum += cell.Digits;
             }
 
-            max &= Digits.AtLeast(min.Last());
+            max &= Digits.AtLeast(min.Max());
 
             var allowed = Digits.None;
 

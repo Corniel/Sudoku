@@ -19,33 +19,29 @@ public sealed class Links : IReadOnlyCollection<Link>, SudokuCells
                 links[peer].Peers |= set ^ peer;
 
         foreach (var constraints in rules.Constraints)
-        {
             foreach (var cell in constraints.Cells)
             {
                 var othr = links[cell];
                 othr.Constraints.Add(constraints);
                 othr.Bits += Pars.Constraints;
             }
-        }
 
         foreach (var restriction in rules.Restrictions)
         {
-            foreach (var other in restriction.Cells ^ restriction.AppliesTo)
-            {
-                var othr = links[other];
-                othr.Restrictions.Add(restriction);
-                othr.Bits += Pars.Restrictions;
-            }
-
             if (restriction is Mask mask)
                 links[mask.AppliesTo].Digits &= mask.Restrict(links);
+            else
+                foreach (var other in restriction.Cells ^ restriction.AppliesTo)
+                {
+                    var othr = links[other];
+                    othr.Restrictions.Add(restriction);
+                    othr.Bits += Pars.Restrictions;
+                }
         }
 
         foreach (var set in rules.Sets)
-        {
             foreach (var peer in set)
                 links[peer].Peers |= set ^ peer;
-        }
 
         foreach (var twins in rules.OfType<Twin>())
         {

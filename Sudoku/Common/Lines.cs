@@ -20,9 +20,8 @@ public static partial class Lines
         {
             if (nodes[i].Order - nodes[i - 1].Order > 1)
             {
-                var first = nodes[0];
                 var line = nodes[i..];
-                yield return new([.. line.Select(n => n.Cell)], first.Ch, line[0].Ch);
+                yield return new([.. line.Select(n => n.Cell)],line[0].Ch, line[^1].Ch);
                 nodes.RemoveRange(i, line.Count);
             }
         }

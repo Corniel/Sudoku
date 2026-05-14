@@ -4,9 +4,9 @@
     "net10.0": {
       "DotNetProjectFile.Analyzers": {
         "type": "Direct",
-        "requested": "[1.13.1, )",
-        "resolved": "1.13.1",
-        "contentHash": "nDIThFLyqnihw9eTStm0oteWT31DanE/0k07TDWxcqrlG4wfEoTY4cWNr3MxLBSoXCI6MdkhUIxyrVB53yrM9A=="
+        "requested": "[1.14.0, )",
+        "resolved": "1.14.0",
+        "contentHash": "ZQh99+wAb+tFTwMu0d/gL44W3i4Mx7+Rilz1VbFrowXwvSKtX6HwMZAFobVeQ5opmUdQ9fnW7K4e6QoAcSUdLA=="
       },
       "Qowaiv.Analyzers.CSharp": {
         "type": "Direct",

@@ -195,6 +195,7 @@ able to solve the following puzzles (so far):
 |:----------:|----------------------------------------------------------------------------------|-----------:|
 | 2026-05-12 | [Mushroom Dance](Puzzles/CrackingTheCryptic/2026/2026-05-12.cs)                  |    15.3 ms |
 | 2026-05-10 | [Inbetween Taken](Puzzles/CrackingTheCryptic/2026/2026-05-10.cs)                 | 1,529.5 µs |
+| 2026-05-08 | [Starburst](Puzzles/CrackingTheCryptic/2026/2026-05-08.cs)                       |    14.2 ms |
 | 2026-04-23 | [The Triple Crown](Puzzles/CrackingTheCryptic/2026/2026-04-23.cs)                | 1,430.9 ms |
 | 2026-04-20 | [Williwaw](Puzzles/CrackingTheCryptic/2026/2026-04-20.cs)                        |   547.0 ms |
 | 2026-04-18 | [Shirkflation](Puzzles/CrackingTheCryptic/2026/2026-04-18.cs)                    |   178.5 µs |

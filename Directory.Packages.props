@@ -18,7 +18,7 @@
     <PackageVersion Include="StyleCop.Analyzers.Unstable" Version="1.2.0.556" />
   </ItemGroup>
   <ItemGroup>
-    <GlobalPackageReference Include="DotNetProjectFile.Analyzers" Version="1.13.1" />
+    <GlobalPackageReference Include="DotNetProjectFile.Analyzers" Version="1.14.0" />
     <GlobalPackageReference Include="Qowaiv.Analyzers.CSharp" Version="2.4.0" />
     <GlobalPackageReference Include="SonarAnalyzer.CSharp" Version="10.25.0.139117" />
   </ItemGroup>

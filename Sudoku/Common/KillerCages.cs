@@ -35,7 +35,7 @@ public static partial class KillerCages
         }
 
         // We ignore big cages.
-        SumGroup[] small = [.. combos.Where(c => c.Size <= 4)];
+        SumGroup[] small = [.. combos.Where(c => c.Size <= 7)];
 
         return rules
             + small.SelectMany(c => Groups.SumCage(c.Cells, c.Sum))
@@ -59,7 +59,4 @@ public static partial class KillerCages
             ? []
             : cage.Cells.Select(c => new Mask(c, digits));
     }
-
-    [GeneratedRegex(@"\((?<Row>[0-8]{1,2}),\s*(?<Col>[0-8]{1,2})\)", RegexOptions.CultureInvariant | RegexOptions.ExplicitCapture)]
-    private static partial Regex Pos();
 }

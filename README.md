@@ -312,6 +312,7 @@ able to solve the following puzzles (so far):
 | 2019-11-09 | [Bow and Arrow](Puzzles/CrackingTheCryptic/2019/2019-11-09.cs)                   |    80.0 µs |
 | 2019-10-24 | [Square Killer](Puzzles/CrackingTheCryptic/2024/2019-10-24.cs)                   | 7,804.3 ms |
 | 2019-09-27 | [Hard 2019-09-26](Puzzles/CrackingTheCryptic/2024/2019-09-27.cs)                 |    29.9 µs |
+| 2019-09-10 | [Killer Sudoku](Puzzles/CrackingTheCryptic/2019/2019-09-10.cs)                   |   118.1 ms |
 | 2019-08-29 | [New York Times](Puzzles/CrackingTheCryptic/2024/2019-08-29.cs)                  |    30.2 µs |
 | 2019-05-26 | [Thermo Sudoku](Puzzles/CrackingTheCryptic/2024/2019-05-26.cs)                   | 3,594.5 µs |
 | 2019-05-09 | [Jigsaw Sudoku](Puzzles/CrackingTheCryptic/2024/2019-05-09.cs)                   | 3,942.9 µs |

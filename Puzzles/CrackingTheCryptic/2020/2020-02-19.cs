@@ -1,6 +1,6 @@
 namespace Puzzles.CrackingTheCryptic;
 
-public sealed class _2020_02_15 : CtcPuzzle
+public sealed class _2020_02_19 : CtcPuzzle
 {
     public override string Title => "Classic Sudoku";
 

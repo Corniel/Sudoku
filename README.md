@@ -309,6 +309,7 @@ able to solve the following puzzles (so far):
 | 2020-01-11 | [<= 5](Puzzles/CrackingTheCryptic/2024/2020-01-11.cs)                            |   683.5 µs |
 | 2019-11-27 | [Non-consecutive Anti-Knight](Puzzles/CrackingTheCryptic/2024/2019-11-27.cs)     |   242.0 µs |
 | 2019-11-16 | [Jigsaw](Puzzles/CrackingTheCryptic/2024/2019-11-16.cs)                          | 4,818.5 ms |
+| 2019-11-09 | [Bow and Arrow](Puzzles/CrackingTheCryptic/2019/2019-11-09.cs)                   |    80.0 µs |
 | 2019-10-24 | [Square Killer](Puzzles/CrackingTheCryptic/2024/2019-10-24.cs)                   | 7,804.3 ms |
 | 2019-09-27 | [Hard 2019-09-26](Puzzles/CrackingTheCryptic/2024/2019-09-27.cs)                 |    29.9 µs |
 | 2019-08-29 | [New York Times](Puzzles/CrackingTheCryptic/2024/2019-08-29.cs)                  |    30.2 µs |

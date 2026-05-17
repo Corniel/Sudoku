@@ -42,5 +42,4 @@ public sealed class _2020_05_17 : CtcPuzzle
         => RuleSet.AntiKnight
         + Anti.King
         + NonConsecutives.Orthogonally();
-
 }

@@ -95,7 +95,7 @@ public sealed class _2025_11_14 : CtcPuzzle
 
             foreach (var digits in Digits.All)
                 if (lookup[digits].HasNone)
-                    lookup[digits] = Digits._1_to_9;
+                    lookup[digits] = _1_to_9;
 
             return lookup;
         }

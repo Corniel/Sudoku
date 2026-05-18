@@ -45,7 +45,7 @@ public sealed class _2020_12_30 : CtcPuzzle
     private static readonly int _ = 0;
     private static readonly LookupDigits Kropki = LookupPair.Init(
     [
-        Digits._1_to_9,
+        _1_to_9,
         [_, _, 3, 4, 5, 6, 7, 8, 9],
         [_, _, _, _, 5, 6, 7, 8, 9],
         [1, _, _, _, 5, _, 7, 8, 9],

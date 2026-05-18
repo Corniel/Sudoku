@@ -10,6 +10,6 @@ public sealed class CellsWrapper(Cells cells) : SudokuCells
 
     private readonly record struct CellWrapper(Pos Pos, int Digit) : SudokuCell
     {
-        public Digits Digits => Digit is 0 ? Digits._1_to_9 : [Digit];
+        public Digits Digits => Digit is 0 ? _1_to_9 : [Digit];
     }
 }

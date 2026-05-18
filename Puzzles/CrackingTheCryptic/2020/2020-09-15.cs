@@ -81,7 +81,7 @@ public sealed class _2020_09_15 : CtcPuzzle
     private static readonly int _ = 0;
     private static readonly LookupDigits Not5_10 = LookupPair.Init(
     [
-        Digits._1_to_9,
+        _1_to_9,
         [_, 2, 3, _, 5, 6, 7, 8, _],
         [1, _, _, 4, 5, 6, 7, _, 9],
         [1, _, _, 4, 5, 6, _, 8, 9],

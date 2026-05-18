@@ -127,7 +127,7 @@ public sealed class _2025_09_08 : CtcPuzzle
                 return Digits.Between(min, max);
             }
 
-            return Digits._1_to_9;
+            return _1_to_9;
         }
     }
 

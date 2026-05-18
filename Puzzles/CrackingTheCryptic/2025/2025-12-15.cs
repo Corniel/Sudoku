@@ -99,31 +99,31 @@ public sealed class _2025_12_15 : CtcPuzzle
 
     public static readonly LookupDigits NotTen = LookupPair.Init(d => d switch
     {
-        1 => Digits._1_to_9 ^ 9,
-        2 => Digits._1_to_9 ^ 8,
-        3 => Digits._1_to_9 ^ 7,
-        4 => Digits._1_to_9 ^ 6,
-        5 => Digits._1_to_9 ^ 5,
-        6 => Digits._1_to_9 ^ 4,
-        7 => Digits._1_to_9 ^ 3,
-        8 => Digits._1_to_9 ^ 2,
-        9 => Digits._1_to_9 ^ 1,
-        _ => Digits._1_to_9,
+        1 => _1_to_9 ^ 9,
+        2 => _1_to_9 ^ 8,
+        3 => _1_to_9 ^ 7,
+        4 => _1_to_9 ^ 6,
+        5 => _1_to_9 ^ 5,
+        6 => _1_to_9 ^ 4,
+        7 => _1_to_9 ^ 3,
+        8 => _1_to_9 ^ 2,
+        9 => _1_to_9 ^ 1,
+        _ => _1_to_9,
     });
 
     public static readonly LookupDigits DiffentParity = LookupPair.Init(d => d switch
     {
         1 or 3 or 5 or 7 or 9 => Digits.Even,
         2 or 4 or 6 or 8 => Digits.Odd,
-        _ => Digits._1_to_9,
+        _ => _1_to_9,
     });
 
     public static readonly LookupDigits King = LookupPair.Init(d => d switch
     {
-        2 => Digits._1_to_9 ^ 2,
-        4 => Digits._1_to_9 ^ 4,
-        6 => Digits._1_to_9 ^ 6,
-        8 => Digits._1_to_9 ^ 8,
-        _ => Digits._1_to_9,
+        2 => _1_to_9 ^ 2,
+        4 => _1_to_9 ^ 4,
+        6 => _1_to_9 ^ 6,
+        8 => _1_to_9 ^ 8,
+        _ => _1_to_9,
     });
 }

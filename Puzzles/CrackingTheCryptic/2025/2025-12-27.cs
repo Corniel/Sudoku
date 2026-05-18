@@ -142,7 +142,7 @@ public sealed class _2025_12_27 : CtcPuzzle
 
             // If no count is unique, there are no restrictions.
             if (singles is 0)
-                return Digits._1_to_9;
+                return _1_to_9;
 
             Array.Clear(Min);
             Array.Clear(Max);

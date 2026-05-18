@@ -7,7 +7,7 @@ public sealed class Link(Pos pos) : SudokuCell
     public Pos Pos { get; } = pos;
 
     /// <inheritdoc />
-    public Digits Digits { get; set; } = Digits._1_to_9;
+    public Digits Digits { get; set; } = _1_to_9;
 
     /// <inheritdoc />
     public int Digit

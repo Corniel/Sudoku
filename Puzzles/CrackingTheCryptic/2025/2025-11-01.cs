@@ -73,7 +73,7 @@ public sealed class _2025_11_01 : CtcPuzzle
             {
                 (Parity.O, Parity.O) => Digits.Even,
                 (Parity.E, Parity.E) => Digits.Odd,
-                _ => Digits._1_to_9,
+                _ => _1_to_9,
             };
 
         private static Parity Par(Digits digits) => digits switch

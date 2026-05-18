@@ -69,7 +69,7 @@ public sealed class _2026_05_07 : CtcPuzzle
                 sum += cells[other].Digits;
 
             return sum.Contains(9)
-                ? Digits._1_to_9
+                ? _1_to_9
                 : NotNine;
         }
 
@@ -84,7 +84,7 @@ public sealed class _2026_05_07 : CtcPuzzle
 
         public override Digits Restrict(SudokuCells cells) 
         {
-            if (cells[HotSpot].Digit is not 9) return Digits._1_to_9;
+            if (cells[HotSpot].Digit is not 9) return _1_to_9;
 
             var sum = Nine;
 

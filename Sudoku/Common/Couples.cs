@@ -38,7 +38,7 @@ public static class Couples
 
     private static readonly LookupDigits Ratios1_2 = LookupPair.Init(
     [
-        /* 0 */ Digits._1_to_9,
+        /* 0 */ _1_to_9,
         /* 1 */ [2],
         /* 2 */ [1, 4],
         /* 3 */ [6],

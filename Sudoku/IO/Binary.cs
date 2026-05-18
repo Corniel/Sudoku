@@ -20,9 +20,9 @@ public static class Binary
         }
 
         var cells = Cells.Empty;
-        Digits[] rows = [.. range(_9).Select(_ => Digits._1_to_9)];
-        Digits[] cols = [.. range(_9).Select(_ => Digits._1_to_9)];
-        Digits[] boxs = [.. range(_9).Select(_ => Digits._1_to_9)];
+        Digits[] rows = [.. range(_9).Select(_ => _1_to_9)];
+        Digits[] cols = [.. range(_9).Select(_ => _1_to_9)];
+        Digits[] boxs = [.. range(_9).Select(_ => _1_to_9)];
 
         for (Pos pos = Pos.O; pos < _9x9; pos++)
         {
@@ -47,9 +47,9 @@ public static class Binary
     public static UInt128 ToUInt128(Cells cells)
     {
         var num = UInt128.Zero;
-        Digits[] rows = [.. range(_9).Select(_ => Digits._1_to_9)];
-        Digits[] cols = [.. range(_9).Select(_ => Digits._1_to_9)];
-        Digits[] boxs = [.. range(_9).Select(_ => Digits._1_to_9)];
+        Digits[] rows = [.. range(_9).Select(_ => _1_to_9)];
+        Digits[] cols = [.. range(_9).Select(_ => _1_to_9)];
+        Digits[] boxs = [.. range(_9).Select(_ => _1_to_9)];
 
         for (Pos pos = Pos.O; pos <= MaxPos; pos++)
         {
@@ -77,9 +77,9 @@ public static class Binary
     public static byte[] ToIndexes(Cells cells)
     {
         var indexes = new byte[_9x9];
-        Digits[] rows = [.. range(_9).Select(_ => Digits._1_to_9)];
-        Digits[] cols = [.. range(_9).Select(_ => Digits._1_to_9)];
-        Digits[] boxs = [.. range(_9).Select(_ => Digits._1_to_9)];
+        Digits[] rows = [.. range(_9).Select(_ => _1_to_9)];
+        Digits[] cols = [.. range(_9).Select(_ => _1_to_9)];
+        Digits[] boxs = [.. range(_9).Select(_ => _1_to_9)];
 
         for (Pos pos = Pos.O; pos <= MaxPos; pos++)
         {

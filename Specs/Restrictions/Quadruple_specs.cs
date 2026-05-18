@@ -69,7 +69,7 @@ public class Restricts
             ...│...│...
             """);
 
-        res.Restrict(cells).Should().Be(Digits._1_to_9);
+        res.Restrict(cells).Should().Be(_1_to_9);
     }
 
     [Test]

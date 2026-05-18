@@ -19,7 +19,7 @@ public static class Apply
 
                 foreach (var val in graph[other].Digits)
                 {
-                    var allowed = Digits._1_to_9;
+                    var allowed = _1_to_9;
 
                     foreach (var restriction in restrictions)
                         allowed &= restriction.Restrict(val);

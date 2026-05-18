@@ -72,11 +72,11 @@ public sealed class _2025_05_21 : CtcPuzzle
         {
             var lookup = new Digits[1 << (_9 + 1)];
 
-            lookup[0] = Digits._1_to_9;
+            lookup[0] = _1_to_9;
 
             for (var i = 0; i < 9; i++)
             {
-                lookup[1 << i] = Digits._1_to_9;
+                lookup[1 << i] = _1_to_9;
             }
 
             for (var i = 1; i <= 9; i++)
@@ -90,7 +90,7 @@ public sealed class _2025_05_21 : CtcPuzzle
                         0 => ~Digits.New(i),
                         1 => ~Digits.Between(i - 1, j + 1),
                         2 => ~Digits.Between(i - 0, j + 0),
-                        _ => Digits._1_to_9,
+                        _ => _1_to_9,
                     };
                 }
             }

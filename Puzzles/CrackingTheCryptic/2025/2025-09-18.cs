@@ -82,7 +82,7 @@ public sealed class _2025_09_18 : CtcPuzzle
             return distinct.Count switch
             {
                 3 => distinct,
-                1 or 2 => Digits._1_to_9,
+                1 or 2 => _1_to_9,
                 _ => Digits.None,
             };
         }

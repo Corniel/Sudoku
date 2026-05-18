@@ -8,7 +8,7 @@ public readonly struct Ints(Int128 bits) : IReadOnlyCollection<int>
     public static readonly Ints Zero = new(Int128.One);
 
     /// <summary>Only contains 1-9.</summary>
-    public static readonly Ints _1_9 = new(Digits._1_to_9.Bits);
+    public static readonly Ints _1_9 = new(_1_to_9.Bits);
 
     /// <summary>Only contains 45.</summary>
     public static readonly Ints _45 = [45];

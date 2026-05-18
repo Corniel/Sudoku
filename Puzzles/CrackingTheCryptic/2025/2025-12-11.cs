@@ -83,7 +83,7 @@ public sealed class _2025_12_11 : CtcPuzzle
 
             return used.Count switch
             {
-                < 3 => Digits._1_to_9,
+                < 3 => _1_to_9,
                 3 => used,
                 _ => Digits.None,
             };

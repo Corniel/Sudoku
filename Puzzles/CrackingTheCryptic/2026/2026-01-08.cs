@@ -64,13 +64,13 @@ public sealed class _2026_01_08 : CtcPuzzle
 
     public static readonly LookupDigits Shading = LookupPair.Init(
     [
-        /* ? */ Digits._1_to_9,
+        /* ? */ _1_to_9,
         /* 1 */ Digits.AtMost(6),
         /* 2 */ Digits.AtMost(6),
         /* 3 */ Digits.AtMost(6),
-        /* 4 */ Digits._1_to_9,
-        /* 5 */ Digits._1_to_9,
-        /* 6 */ Digits._1_to_9,
+        /* 4 */ _1_to_9,
+        /* 5 */ _1_to_9,
+        /* 6 */ _1_to_9,
         /* 7 */ Digits.AtLeast(4),
         /* 8 */ Digits.AtLeast(4),
         /* 9 */ Digits.AtLeast(4),

@@ -11,6 +11,9 @@ public static class Statics
     /// <summary>Is 9 * 9 (81).</summary>
     public const int _9x9 = _9 * _9;
 
+    /// <summary>[1..9].</summary>
+    public static readonly Digits _1_to_9 = Digits._1_to_9;
+
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static IEnumerable<int> range() => Enumerable.Range(0, _9);
 

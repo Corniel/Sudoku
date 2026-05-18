@@ -81,7 +81,7 @@ public sealed class _2025_05_11 : CtcPuzzle
 
             foreach (var val in Others.Select(o => cells[o].Digit))
             {
-                if (val is 0) return Digits._1_to_9;
+                if (val is 0) return _1_to_9;
                 sum += val;
             }
             return Allowed[sum % 4];

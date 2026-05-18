@@ -62,7 +62,7 @@ public class Flags
     [Test]
     public void All_1_to_9()
     {
-        int[] digits = [.. Digits._1_to_9];
+        int[] digits = [.. _1_to_9];
         digits.Should().BeEquivalentTo([1, 2, 3, 4, 5, 6, 7, 8, 9]);
     }
 
@@ -92,7 +92,7 @@ public class Flags
     [TestCase(9, /* => */ 1, 2, 3, 4, 5, 6, 7, 8, _)]
     public void Digit(int value, params int[] digits)
     {
-        var reduced = Digits._1_to_9 ^ value;
+        var reduced = _1_to_9 ^ value;
         reduced.Should().Be([.. digits.Where(v => v != _)]);
     }
 }
@@ -210,7 +210,7 @@ public class All
         Digits[] all = [.. Digits.All];
 
         all[00].Should().Be(Digits.None);
-        all[^1].Should().Be(Digits._1_to_9);
+        all[^1].Should().Be(_1_to_9);
 
         all.Should().OnlyHaveUniqueItems()
             .And.HaveCount(512);

@@ -27,7 +27,7 @@ public sealed class Node : SudokuCell
     }
 
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    private Digits digits = Digits._1_to_9;
+    private Digits digits = _1_to_9;
 
     public ImmutableArray<Pos> Backgtracking { get; set; } = [];
 

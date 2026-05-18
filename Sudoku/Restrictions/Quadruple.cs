@@ -31,7 +31,7 @@ public sealed class Quadruple(Pos appliesTo, PosArray others, Digits digits) : G
 
         return missing.Count switch
         {
-            0 => Digits._1_to_9,
+            0 => _1_to_9,
             1 => missing,
             _ => Digits.None,
         };

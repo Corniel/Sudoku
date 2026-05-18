@@ -55,7 +55,7 @@ public static partial class KillerCages
         foreach (var combo in Digits.All.Where(comb => comb.Count == cage.Size && cage.Sum.Contains(comb.Sum())))
             digits |= combo;
 
-        return digits == Digits._1_to_9
+        return digits == _1_to_9
             ? []
             : cage.Cells.Select(c => new Mask(c, digits));
     }

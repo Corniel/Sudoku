@@ -119,15 +119,30 @@ public readonly struct Ints(Int128 bits) : IReadOnlyCollection<int>
         return new(bits);
     }
 
-    public static Ints operator /(Ints ints, Digits digits)
+    public static Ints operator /(Ints ints, Digits dividers)
     {
         var bits = Int128.Zero;
 
         foreach (var @int in ints.GetEnumerator())
         {
-            foreach (var digit in digits)
+            foreach (var divider in dividers)
             {
-                if (Math.DivRem(@int, digit) is { Remainder: 0 } factor)
+                if (Math.DivRem(@int, divider) is { Remainder: 0 } factor)
+                    bits |= Int128.One << factor.Quotient;
+            }
+        }
+        return new(bits);
+    }
+
+    public static Ints operator /(Ints ints, Ints dividers)
+    {
+        var bits = Int128.Zero;
+
+        foreach (var @int in ints.GetEnumerator())
+        {
+            foreach (var divider in dividers)
+            {
+                if (Math.DivRem(@int, divider) is { Remainder: 0 } factor)
                     bits |= Int128.One << factor.Quotient;
             }
         }

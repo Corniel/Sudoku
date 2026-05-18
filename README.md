@@ -193,6 +193,7 @@ able to solve the following puzzles (so far):
 
 | Date       | Puzzle                                                                           |      Speed |
 |:----------:|----------------------------------------------------------------------------------|-----------:|
+| 2026-05-14 | [Killers In Hiding](Puzzles/CrackingTheCryptic/2026/2026-05-14.cs)               | 1,409.0 µs |
 | 2026-05-12 | [Mushroom Dance](Puzzles/CrackingTheCryptic/2026/2026-05-12.cs)                  |    15.3 ms |
 | 2026-05-10 | [Inbetween Taken](Puzzles/CrackingTheCryptic/2026/2026-05-10.cs)                 | 1,529.5 µs |
 | 2026-05-08 | [Starburst](Puzzles/CrackingTheCryptic/2026/2026-05-08.cs)                       |    14.2 ms |

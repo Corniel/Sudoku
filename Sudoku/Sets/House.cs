@@ -27,6 +27,9 @@ public abstract class House(int index, PosSet set)
     public bool Contains(Pos pos) => Cells.Contains(pos);
 
     /// <inheritdoc />
+    public override string ToString() => $"{Name}[{Index}]";
+
+    /// <inheritdoc />
     public IEnumerator<Pos> GetEnumerator() => Cells.GetEnumerator();
 
     /// <inheritdoc />

@@ -2,6 +2,7 @@
   <Folder Name="/Solvers/">
     <Project Path="Dlx/Dlx.csproj" />
     <Project Path="DynamicSolver/DynamicSolver.csproj" />
+    <Project Path="JvoSolver/JvoSolver.csproj" Id="c63b4072-d590-4149-8e7f-f85c4d50a757" />
     <Project Path="Reference/Reference.csproj" />
     <Project Path="StrategyBased/StrategyBased.csproj" />
   </Folder>
@@ -10,6 +11,6 @@
   <Project Path="Generator/Generator.csproj" />
   <Project Path="Puzzles/Puzzles.csproj" />
   <Project Path="Specs/Specs.csproj" />
-  <Project Path="Sudoku/Sudoku.csproj" />
   <Project Path="Sudoku.App/Sudoku.App.csproj" />
+  <Project Path="Sudoku/Sudoku.csproj" />
 </Solution>

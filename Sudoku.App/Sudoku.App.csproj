@@ -14,6 +14,7 @@
     <ProjectReference Include="../DynamicSolver/DynamicSolver.csproj" />
     <ProjectReference Include="../Reference/Reference.csproj" />
     <ProjectReference Include="../StrategyBased/StrategyBased.csproj" />
+    <ProjectReference Include="..\JvoSolver\JvoSolver.csproj" />
   </ItemGroup>
 
 </Project>

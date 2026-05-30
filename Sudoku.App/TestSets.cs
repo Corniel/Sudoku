@@ -54,6 +54,18 @@ public static class TestSets
             Log(sw, set);
             var reference = sw.Elapsed;
 
+            // JVO
+            {
+                sw.Restart();
+                foreach (var clues in set.Clues)
+                {
+                    _ = JvoSolver.Solver.Solve(clues);
+                }
+                sw.Stop();
+                Log(sw, set);
+                Log(sw, reference);
+            }
+
             if (dlx)
             {
                 sw.Restart();

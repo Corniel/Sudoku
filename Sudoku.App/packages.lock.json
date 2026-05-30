@@ -39,6 +39,12 @@
           "Sudoku": "[1.0.0, )"
         }
       },
+      "jvosolver": {
+        "type": "Project",
+        "dependencies": {
+          "Sudoku": "[1.0.0, )"
+        }
+      },
       "puzzles": {
         "type": "Project",
         "dependencies": {

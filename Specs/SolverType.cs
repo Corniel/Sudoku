@@ -7,4 +7,5 @@ public enum SolverType
     Dlx = 2,
     Reference = 3,
     StrategyBased = 4,
+    Jvo = 5,
 }

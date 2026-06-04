@@ -4,7 +4,7 @@ namespace Specs;
 
 internal static class TestSolver
 {
-    private const SolverType Default = SolverType.Dynamic;
+    private const SolverType Default = SolverType.Dlx;
 
     public static Cells Solve(Puzzle puzzle, SolverType solver = Default)
         => Solve(puzzle.Clues, puzzle.Constraints, solver);

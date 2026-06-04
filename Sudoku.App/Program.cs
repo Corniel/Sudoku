@@ -35,8 +35,9 @@ public static class Program
 
         else if (args[0] == "test")
         {
-            var all = args.Length > 1 && args[1] is "all";
-            TestSets.SolveAll(dlx: all, refr: all);
+            var dlx = args.Length > 1 && args[1] is "all" or "dlx";
+            var refr = args.Length > 1 && args[1] is "all";
+            TestSets.SolveAll(dlx, refr);
         }
         else
             Console.WriteLine($"Unknown command '{args[0]}'");

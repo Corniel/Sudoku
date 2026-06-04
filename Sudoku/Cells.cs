@@ -93,6 +93,13 @@ public readonly struct Cells : IEquatable<Cells>
 
     public static bool operator !=(Cells l, Cells r) => !(l == r);
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static Cells operator +(Cells cells, Cell cell)
+    {
+        cells[cell.Pos] = cell.Digit;
+        return cells;
+    }
+
     /// <summary>Creates cells based on <see cref="Clues"/>.</summary>
     public static Cells New(Clues clues)
     {

@@ -45,46 +45,51 @@ public static class TestSets
             Console.Write($"| {set.Name,-20} ");
             Console.Write($"| {set.Clues.Length,7:#,###} ");
 
-            sw.Restart();
-            foreach (var clues in set.Clues)
-            {
-                _ = DynamicSolver.Solver.Raw(clues, RuleSet.Standard);
-            }
-            sw.Stop();
-            Log(sw, set);
-            var reference = sw.Elapsed;
+            var reference = Test(set, clues => DynamicSolver.Solver.Raw(clues, RuleSet.Standard));
 
             if (dlx)
             {
-                sw.Restart();
-                foreach (var clues in set.Clues)
-                {
-                    _ = Dlx.DlxSolver.Raw(clues);
-                }
-                sw.Stop();
-                Log(sw, set);
-                Log(sw, reference);
+                Test(set, Dlx.DlxSolver.Solve, reference);
             }
             if (refr)
             {
-                sw.Restart();
-                foreach (var clues in set.Clues)
-                {
-                    _ = Reference.Solver.Raw(clues);
-                }
-                sw.Stop();
-                Log(sw, set);
-                Log(sw, reference);
+                Test(set, Reference.Solver.Raw, reference);
             }
             Console.WriteLine(" |");
         }
     }
 
-    private static void Log(Stopwatch sw, TestSet set)
-        => Console.Write($"| {set.Clues.Length / sw.Elapsed.TotalMilliseconds,10:#,##0.00} k/s | {sw.Elapsed.TotalMicroseconds / set.Clues.Length,9:#,##0.00} μs ");
+    private static TimeSpan Test<T>(TestSet set, Func<Clues, T> run, TimeSpan? reference = null)
+    {
+        var sw = Stopwatch.StartNew();
+        var best = TimeSpan.MaxValue;
 
-    private static void Log(Stopwatch sw, TimeSpan reference)
-        => Console.Write($"| {sw.Elapsed.TotalSeconds / reference.TotalSeconds,6:0.00} ");
+        for (var i = 0; i < 10_000; i += set.Clues.Length)
+        {
+            sw.Restart();
+
+            foreach (var clues in set.Clues)
+                _ = run(clues);
+
+            sw.Stop();
+
+            if (sw.Elapsed < best)
+                best = sw.Elapsed;
+        }
+
+        Log(best, set);
+
+        if (reference is { } r)
+            Log(best, r);
+
+        return best;
+    }
+
+    private static void Log(TimeSpan sw, TestSet set)
+        => Console.Write($"| {set.Clues.Length / sw.TotalMilliseconds,10:#,##0.00} k/s | {sw.TotalMicroseconds / set.Clues.Length,9:#,##0.00} μs ");
+
+    private static void Log(TimeSpan sw, TimeSpan reference)
+        => Console.Write($"| {sw.TotalSeconds / reference.TotalSeconds,6:0.00} ");
 
     private static TestSet Kaggle()
     {

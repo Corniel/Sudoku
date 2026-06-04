@@ -8,8 +8,11 @@ namespace Dlx;
 [Inheritable]
 public class Node
 {
-    public Node()
+    protected Node() : this(default) { }
+
+    public Node(Cell cell)
     {
+        Cell = cell;
         L = this;
         R = this;
         U = this;
@@ -18,7 +21,7 @@ public class Node
 
     public Head Head { get; set; } = null!;
 
-    public Cell Cell { get; set; }
+    public Cell Cell { get; }
 
     /// <summary>Left node.</summary>
     public Node L { get; set; }

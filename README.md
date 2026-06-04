@@ -331,6 +331,7 @@ able to solve the following puzzles (so far):
 | 2017-09-18 | [9313 Super Fiendish](Puzzles/CrackingTheCryptic/2024/2017-09-18.cs)             |    19.7 µs |
 | 2017-08-31 | [9284 Super Fiendish](Puzzles/CrackingTheCryptic/2024/2017-08-31.cs)             |    16.2 µs |
 | 2017-08-26 | [Killer Sudoku No 5596 Deadly](Puzzles/CrackingTheCryptic/2024/2017-08-26.cs)    |    12.1 ms |
+| 2006-01-01 | [World's Hardest Sudoku](Puzzles/CrackingTheCryptic/2006/2006-01-01.cs)          |   539.1 µs |
 
 ## Models
 
@@ -391,15 +392,15 @@ test sets containing zillions of generated puzzles to solve.
 
 | Set                  | Puzzles |   Dynamic | Solver   |   Knuth's | DLX      |      | Ref.     |              |        |
 |:---------------------|--------:|----------:|---------:|----------:|---------:|-----:|---------:|-------------:|-------:|
-| Kaggle (300k)[1]     | 300,000 | 55.21 k/s | 18.11 µs | 14.47 k/s | 69.13 µs | 3.82 | 1.87 k/s |    534.00 µs |  29.48 |
-| Exchange (easy)      | 100,000 | 58.84 k/s | 17.00 µs | 15.54 k/s | 64.35 µs | 3.79 | 1.38 k/s |    724.43 µs |  42.62 |
-| Exchange (medium)    | 352,643 | 45.08 k/s | 22.18 µs | 14.43 k/s | 69.31 µs | 3.12 | 0.71 k/s |  1,408.18 µs |  63.49 |
-| Exchange (hard)      | 183,357 | 36.23 k/s | 27.61 µs | 13.71 k/s | 72.95 µs | 2.64 | 0.69 k/s |  1,450.88 µs |  52.56 |
-| Exchange (diabolic)  | 119,681 | 29.25 k/s | 34.18 µs | 13.12 k/s | 76.21 µs | 2.23 | 0.65 k/s |  1,542.81 µs |  45.13 |
-| Exchange (1000*)[2]  |   1,000 | 14.37 k/s | 69.59 µs | 10.71 k/s | 93.41 µs | 1.34 | 0.37 k/s |  2,716.72 µs |  39.04 |
-| Generated (hard)     |  17,905 | 22.79 k/s | 43.88 µs | 12.84 k/s | 77.91 µs | 1.78 | 0.56 k/s |  1,776.96 µs |  40.49 |
-| New York Times       |     717 | 17.65 k/s | 56.65 µs | 11.87 k/s | 84.21 µs | 1.49 | 0.10 k/s |  9,767.92 µs | 172.43 |
-| Cracking the Cryptic |      17 | 12.83 k/s | 77.92 µs | 11.64 k/s | 85.94 µs | 1.10 | 0.06 k/s | 17,523.12 µs | 224.89 |
+| Kaggle (300k)        | 300,000 | 51.44 k/s | 19.44 µs | 15.96 k/s | 62.64 µs | 3.22 | 2.01 k/s |    496.93 µs |  25.56 |
+| Exchange (easy)      | 100,000 | 54.22 k/s | 18.44 µs | 15.95 k/s | 62.71 µs | 3.40 | 1.49 k/s |    671.26 µs |  36.40 |
+| Exchange (medium)    | 352,643 | 42.59 k/s | 23.48 µs | 15.14 k/s | 66.06 µs | 2.81 | 0.78 k/s |  1,282.95 µs |  54.64 |
+| Exchange (hard)      | 183,357 | 33.64 k/s | 29.72 µs | 15.13 k/s | 66.08 µs | 2.22 | 0.74 k/s |  1,350.48 µs |  45.44 |
+| Exchange (diabolic)  | 119,681 | 27.12 k/s | 36.87 µs | 14.31 k/s | 69.87 µs | 1.90 | 0.70 k/s |  1,435.88 µs |  38.95 |
+| Exchange (1000*)     |   1,000 | 14.18 k/s | 70.50 µs | 12.07 k/s | 82.83 µs | 1.17 | 0.40 k/s |  2,516.89 µs |  35.70 |
+| Generated (hard)     |  14,900 | 16.29 k/s | 61.38 µs | 14.24 k/s | 70.21 µs | 1.14 | 0.36 k/s |  2,754.53 µs |  44.88 |
+| New York Times       |     822 | 17.77 k/s | 56.29 µs | 13.62 k/s | 73.44 µs | 1.30 | 0.12 k/s |  8,402.50 µs | 149.28 |
+| Cracking the Cryptic |      20 | 10.61 k/s | 94.23 µs | 10.83 k/s | 92.35 µs | 0.98 | 0.07 k/s | 14,526.88 µs | 154.16 |
 
 * [1] From the 9M puzzles (with an overkill of given digits) only the hardest 300k haven been chosen
 * [2] The hardest 1000 of the diabolic set

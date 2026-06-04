@@ -1,3 +1,5 @@
+using System;
+
 namespace Dlx;
 
 /// <summary>Solves a Sudoku using Don Knuth's Dancing Links X algohrithm.</summary>
@@ -5,24 +7,13 @@ public static class DlxSolver
 {
     public static Cells Solve(Clues clues)
     {
+        var nodes = Init(clues);
         var cells = Cells.Empty;
-
-        foreach (var cell in Raw(clues).Select(r => r.Cell))
-            cells[cell.Pos] = cell.Digit;
-
+        Solve(nodes, cells);
         return cells;
     }
 
-    public static Stack<Node> Raw(Clues clues)
-    {
-        var nodes = Nodes(clues);
-        var rows = new Stack<Node>();
-
-        if (!Solve(nodes, rows)) return [];
-        return rows;
-    }
-
-    private static bool Solve(Nodes nodes, Stack<Node> rows)
+    private static bool Solve(Nodes nodes, Cells cells)
     {
         if (nodes.AreSolved) return true;
         if (nodes.NextHeader is not { RowCount: > 0 } header) return false;
@@ -34,11 +25,9 @@ public static class DlxSolver
             for (var col = row.R; col != row; col = col.R)
                 col.Head.Cover();
 
-            rows.Push(row);
+            cells += row.Cell;
 
-            if (Solve(nodes, rows)) return true;
-
-            rows.Pop();
+            if (Solve(nodes, cells)) return true;
 
             for (var col = row.L; col != row; col = col.L)
                 col.Head.Uncover();
@@ -50,9 +39,10 @@ public static class DlxSolver
     }
 
     /// <summary>Creates a new set of nodes based on the clues.</summary>
-    public static Nodes Nodes(Clues clues)
+    private static Nodes Init(Clues clues)
     {
-        var nodes = new Nodes();
+        Nodes ??= new Nodes();
+        var nodes = Nodes;
         var cells = Cells.Empty;
 
         foreach (var clue in clues)
@@ -104,4 +94,7 @@ public static class DlxSolver
 
         return nodes;
     }
+
+    [ThreadStatic]
+    private static Nodes Nodes;
 }

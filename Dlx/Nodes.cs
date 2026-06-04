@@ -40,15 +40,15 @@ public sealed class Nodes
         => Headers[(int)type][index][value] = new(type, index, value, Root);
 
     /// <summary>Set a column as attached on the current row.</summary>
-    public Node SetCol(Cell cell, HeadType type, int index, int value, Node? row = null)
+    public Node SetCol(Cell cell, HeadType type, int index, int value, Node? next = null)
     {
         var head = Headers[(int)type][index][value];
-        var node = new Node() { Cell = cell };
-        row ??= node;
-        node.L = row;
-        node.R = row.R;
-        row.R.L = node;
-        row.R = node;
+        var node = new Node(cell);
+        next ??= node;
+        node.L = next;
+        node.R = next.R;
+        next.R.L = node;
+        next.R = node;
         node.Head = head;
         node.U = head;
         node.D = head.D;

@@ -1,3 +1,5 @@
+using Sudoku.Constraints;
+
 namespace Sudoku.Common;
 
 public static class Couples
@@ -24,12 +26,14 @@ public static class Couples
     [
         new CellSet([a, b], nameof(Consecutive)),
         .. new LookupPair(a, b, Consecutives).Couple(),
+        new SumGroup([a, b], [1 + 2, 2 + 3, 4 + 5, 6 + 7, 7 + 8, 8 + 9]),
     ];
 
     public static Rules Ratio1_2(Pos a, Pos b) =>
     [
         new CellSet([a, b], "Ratio 1:2"),
         .. new LookupPair(a, b, Ratios1_2).Couple(),
+        new SumGroup([a, b], [1 + 2, 2 + 4, 3 + 6, 4 + 8]),
     ];
 
     public static IEnumerable<Twin> Twin(Pos a, Pos b) => [new Twin(a, b), new Twin(b, a)];

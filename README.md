@@ -193,6 +193,7 @@ able to solve the following puzzles (so far):
 
 | Date       | Puzzle                                                                           |      Speed |
 |:----------:|----------------------------------------------------------------------------------|-----------:|
+| 2026-06-07 | [Titled Squares](Puzzles/CrackingTheCryptic/2026/2026-06-07.cs)                  |   251.3 µs |
 | 2026-05-14 | [Killers In Hiding](Puzzles/CrackingTheCryptic/2026/2026-05-14.cs)               | 1,409.0 µs |
 | 2026-05-12 | [Mushroom Dance](Puzzles/CrackingTheCryptic/2026/2026-05-12.cs)                  |    15.3 ms |
 | 2026-05-10 | [Inbetween Taken](Puzzles/CrackingTheCryptic/2026/2026-05-10.cs)                 | 1,529.5 µs |
@@ -386,8 +387,8 @@ Both [Kaggle](https://www.kaggle.com/datasets/rohanrao/sudoku/) as
 [Sudoku Exchange(https://github.com/grantm/sudoku-exchange-puzzle-bank) published
 test sets containing zillions of generated puzzles to solve.
 
-| Set                  | Puzzles |   Dynamic Solver   | |       Knuth's DLX       | | |      Reference backtracker   | | |
-|:---------------------|--------:|----------:|---------:|----------:|---------:|-----:|---------:|-------.-----:|-------:|
+| Set                  | Puzzles |   Dynamic | Solver   |   Knuth's | DLX      |      | Ref.     |              |        |
+|:---------------------|--------:|----------:|---------:|----------:|---------:|-----:|---------:|-------------:|-------:|
 | Kaggle (300k)[1]     | 300,000 | 55.21 k/s | 18.11 µs | 14.47 k/s | 69.13 µs | 3.82 | 1.87 k/s |    534.00 µs |  29.48 |
 | Exchange (easy)      | 100,000 | 58.84 k/s | 17.00 µs | 15.54 k/s | 64.35 µs | 3.79 | 1.38 k/s |    724.43 µs |  42.62 |
 | Exchange (medium)    | 352,643 | 45.08 k/s | 22.18 µs | 14.43 k/s | 69.31 µs | 3.12 | 0.71 k/s |  1,408.18 µs |  63.49 |

@@ -186,14 +186,15 @@ var solution = Solver.Solve(clues, Rules.XSudoku);
 ```
 
 ### Cracking The Cryptic
-[Cracking Tye Cryptic](https://www.youtube.com/@CrackingTheCryptic) is a YouTube
+[Cracking The Cryptic](https://www.youtube.com/@CrackingTheCryptic) is a YouTube
 channel dedicated to solving world-class puzzles (their wording, not mine). With
 the extra [constraints](#Constraint) implemented, the solver has been
 able to solve the following puzzles (so far):
 
 | Date       | Puzzle                                                                           |      Speed |
 |:----------:|----------------------------------------------------------------------------------|-----------:|
-| 2026-06-07 | [Titled Squares](Puzzles/CrackingTheCryptic/2026/2026-06-07.cs)                  |   251.3 µs |
+| 2026-06-09 | [36x Even!](Puzzles/CrackingTheCryptic/2026/2026-06-09.cs)                       |   163.7 µs |
+| 2026-06-07 | [Titled Squares](Puzzles/CrackingTheCryptic/2026/2026-06-07.cs)                  |   171.2 µs |
 | 2026-05-14 | [Killers In Hiding](Puzzles/CrackingTheCryptic/2026/2026-05-14.cs)               | 1,409.0 µs |
 | 2026-05-12 | [Mushroom Dance](Puzzles/CrackingTheCryptic/2026/2026-05-12.cs)                  |    15.3 ms |
 | 2026-05-10 | [Inbetween Taken](Puzzles/CrackingTheCryptic/2026/2026-05-10.cs)                 | 1,529.5 µs |
@@ -249,7 +250,7 @@ able to solve the following puzzles (so far):
 | 2025-08-21 | [Miracle Of Eleven](Puzzles/CrackingTheCryptic/2025/2025-08-21.cs)               |   154.5 µs |
 | 2025-08-19 | [Pile of 15](Puzzles/CrackingTheCryptic/2025/2025-08-19.cs)                      |   417.7 ms |
 | 2025-08-07 | [Unstable Seesaws](Puzzles/CrackingTheCryptic/2025/2025-08-07.cs)                | 1,303.4 ms |
-| 2025-05-21 | [Stepped Themos](Puzzles/CrackingTheCryptic/2025/2025-05-21.cs)                  |   165.0 µs |
+| 2025-05-21 | [Stepped Themos](Puzzles/CrackingTheCryptic/2025/2025-05-21.cs)                  |    76.4 µs |
 | 2025-05-11 | [Quadrants](Puzzles/CrackingTheCryptic/2024/2025-05-11.cs)                       |   180.3 ms |
 | 2025-05-02 | [Arrows v.s. Thermo](Puzzles/CrackingTheCryptic/2024/2025-05-02.cs)              |   140.3 µs |
 | 2025-04-23 | [Indifferent Neighbours](Puzzles/CrackingTheCryptic/2024/2025-04-23.cs)          |   199.4 µs |

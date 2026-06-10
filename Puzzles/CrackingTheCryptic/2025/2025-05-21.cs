@@ -8,7 +8,7 @@ public sealed class _2025_05_21 : CtcPuzzle
 
     public override Uri? Url => new("https://youtu.be/AdSOJQ3huN0");
 
-    public override O Duration => O.μs100;
+    public override O Duration => O.μs10;
 
     public override Clues Clues { get; } = Clues.New("""
         ...|...|...
@@ -40,7 +40,7 @@ public sealed class _2025_05_21 : CtcPuzzle
 
     protected override RuleSet GetConstraints() =>
         RuleSet.Standard
-        + Triples().SelectMany(NonConsecutives)
+        + Triples().SelectMany(NonConsecutive.New)
         + Lines.Thermometer("""
          ...|...|.P.
          FE.|...|NO.
@@ -54,49 +54,6 @@ public sealed class _2025_05_21 : CtcPuzzle
          .ed|...|.op
          .f.|...|...
          """);
-
-    private static Rules NonConsecutives(PosSet cells)
-        => Group.Select(cells, (a, o) => new NonConsecutive(a, o));
-
-    public sealed class NonConsecutive(Pos appliesTo, PosArray others) : Group(appliesTo, others)
-    {
-        public override Digits Restrict(SudokuCells cells)
-        {
-            var index = Digits.New(cells[Others[0]].Digit, cells[Others[1]].Digit);
-            return Loookup[index.GetHashCode()];
-        }
-
-        private static readonly ImmutableArray<Digits> Loookup = Init();
-
-        private static ImmutableArray<Digits> Init()
-        {
-            var lookup = new Digits[1 << (_9 + 1)];
-
-            lookup[0] = _1_to_9;
-
-            for (var i = 0; i < 9; i++)
-            {
-                lookup[1 << i] = _1_to_9;
-            }
-
-            for (var i = 1; i <= 9; i++)
-            {
-                for (var j = i; j <= 9; j++)
-                {
-                    var index = Digits.New(i, j).GetHashCode();
-
-                    lookup[index] = (j - i) switch
-                    {
-                        0 => ~Digits.New(i),
-                        1 => ~Digits.Between(i - 1, j + 1),
-                        2 => ~Digits.Between(i - 0, j + 0),
-                        _ => _1_to_9,
-                    };
-                }
-            }
-            return [.. lookup];
-        }
-    }
 
     private static IEnumerable<PosSet> Triples()
     {

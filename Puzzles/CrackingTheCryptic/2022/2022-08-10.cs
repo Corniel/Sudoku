@@ -40,5 +40,5 @@ public sealed class _2022_08_10 : CtcPuzzle
 
     protected override RuleSet GetConstraints()
         => RuleSet.XSudoku
-        + Dominos.Dig.SelectMany(d => NonConsecutive.New(d));
+        + NonConsecutives.Diagonally();
 }

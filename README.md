@@ -195,6 +195,7 @@ able to solve the following puzzles (so far):
 |:----------:|----------------------------------------------------------------------------------|-----------:|
 | 2026-06-09 | [36x Even!](Puzzles/CrackingTheCryptic/2026/2026-06-09.cs)                       |   163.7 µs |
 | 2026-06-07 | [Titled Squares](Puzzles/CrackingTheCryptic/2026/2026-06-07.cs)                  |   171.2 µs |
+| 2026-05-20 | [Balance Lines](Puzzles/CrackingTheCryptic/2026/2026-05-20.cs)                   | 8,523.4 ms |
 | 2026-05-14 | [Killers In Hiding](Puzzles/CrackingTheCryptic/2026/2026-05-14.cs)               | 1,409.0 µs |
 | 2026-05-12 | [Mushroom Dance](Puzzles/CrackingTheCryptic/2026/2026-05-12.cs)                  |    15.3 ms |
 | 2026-05-10 | [Inbetween Taken](Puzzles/CrackingTheCryptic/2026/2026-05-10.cs)                 | 1,529.5 µs |

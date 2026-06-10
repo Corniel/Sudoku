@@ -4,6 +4,8 @@ public static class Compare
 {
     extension(Pos p)
     {
+        public Mask IsEven => Mask.Even(p);
+
         public Rules LT(int row, int col) => pos(row, col).GT(p);
 
         public Rules LT(Pos other) => other.GT(p);

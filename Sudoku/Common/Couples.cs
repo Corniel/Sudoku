@@ -26,7 +26,7 @@ public static class Couples
     [
         new CellSet([a, b], nameof(Consecutive)),
         .. new LookupPair(a, b, Consecutives).Couple(),
-        new SumGroup([a, b], [1 + 2, 2 + 3, 4 + 5, 6 + 7, 7 + 8, 8 + 9]),
+        new SumGroup([a, b], [3, 5, 7, 9, 11, 13, 15, 17]),
     ];
 
     public static Rules Ratio1_2(Pos a, Pos b) =>

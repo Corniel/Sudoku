@@ -66,13 +66,13 @@ public sealed class _2026_04_14 : CtcPuzzle
         ...│...│..C
         ...│...│...
         """)
-        + KillerCages.Extend;
+       + KillerCages.Extend;
 
     public sealed class SlingShot(Pos appliesTo, PosArray others)
         : Group(appliesTo, others)
         , Summation
     {
-        public Ints Sum { get; } = Init(others.Length+1);
+        public Ints Sum { get; } = Init(others.Length + 1);
 
         private static Ints Init(int size) =>
         [

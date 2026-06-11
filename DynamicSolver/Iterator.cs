@@ -45,7 +45,7 @@ public sealed class Iterator : IEnumerator<Links>, IEnumerable<Links>
                     }
                 }
 
-                // Constraints do not reduce indvidual cells.
+                // Constraints do not reduce individual cells.
                 valid &= link.Constraints is not { Count: > 0 } constraints
                     || constraints.All(c => c.IsSatisfied(Links));
 

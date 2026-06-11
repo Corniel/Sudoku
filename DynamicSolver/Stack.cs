@@ -77,7 +77,12 @@ public sealed class Stack : IReadOnlyCollection<Stack.State>
         }
     }
 
-    public readonly record struct StateInfo(Link Link, Digits Digits, PosSet Todo);
+    public readonly ref struct StateInfo(Link link, Digits digits, PosSet todo)
+    {
+        public readonly Link Link = link;
+        public readonly Digits Digits = digits;
+        public readonly PosSet Todo = todo;
+    }
 
     private static readonly DigitLookup<ImmutableArray<int>> Lookup = Init();
 

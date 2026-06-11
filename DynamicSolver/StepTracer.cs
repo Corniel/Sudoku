@@ -24,11 +24,7 @@ public sealed class StepTracer(int size = 1024) : IReadOnlyCollection<Step>
         else if (next != curr)
         {
             link.Digits = next;
-#if DEBUG
-            Stack[Count++] = new(cell, curr, next, mask);
-#else
             Stack[Count++] = new(cell, curr);
-#endif
         }
         return true;
     }

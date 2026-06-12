@@ -56,6 +56,6 @@ public sealed class _2022_05_03 : CtcPuzzle
     private static Rules DutchWhisper(NamedGroup group) =>
     [
         new CellSet(group.Cells, nameof(DutchWhisper)),
-        .. Sudoku.Restrictions.DutchWhisper.New(new([..group.Cells], group.Name, group.Name)),
+        .. Sudoku.Restrictions.DutchWhisper.New(new Line([..group.Cells], group.Name, group.Name)),
     ];
 }

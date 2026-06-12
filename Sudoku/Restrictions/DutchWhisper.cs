@@ -2,6 +2,9 @@ namespace Sudoku.Restrictions;
 
 public static class DutchWhisper
 {
+    public static Rules New(Domino domino)
+        => new LookupPair(domino.A, domino.B, Lookups[0]).Couple();
+
     public static Rules New(Line line)
     {
         for (var f = 0; f < line.Length - 1; f++)

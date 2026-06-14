@@ -92,10 +92,14 @@ public sealed class _2024_11_16 : CtcPuzzle
 
     private static Rules Sums() =>
     [
-        new LookupPair((0, 0), (0, 1), Prime1), new LookupPair((0, 1), (0, 0), Prime2),
-        new LookupPair((0, 7), (0, 8), Prime1), new LookupPair((0, 8), (0, 7), Prime2),
-        new LookupPair((8, 0), (8, 1), Prime1), new LookupPair((8, 1), (8, 0), Prime2),
-        new LookupPair((8, 7), (8, 8), Prime1), new LookupPair((8, 8), (8, 7), Prime2),
+        .. Numbers.Two(
+        [
+            [(0, 0), (0, 1)],
+            [(0, 7), (0, 8)],
+            [(8, 0), (8, 1)],
+            [(8, 7), (8, 8)],
+        ],
+        Primes),
 
         // A + B = 80
         .. Sum.New((0, 0), (0, 7), 07),
@@ -110,25 +114,5 @@ public sealed class _2024_11_16 : CtcPuzzle
         .. Sum.New((0, 8), (8, 8), 10),
     ];
 
-    private static readonly LookupDigits Prime1 = LookupPair.Init(d => d switch
-    {
-        1 => [1, 3, 4, 6, 7],    // 11,     31, 41,     61, 71
-        3 => [1, 2, 4, 5, 7, 8], // 13, 23,     43, 53,     73, 83
-        7 => [1, 3, 4, 6, 9],    // 17,     37, 47,     67,         97
-        9 => [1, 2, 5, 7, 8],    // 19, 29,         59,     79, 89
-        _ => Digits.None,
-    });
-
-    private static readonly LookupDigits Prime2 = LookupPair.Init(d => d switch
-    {
-        1 => [1, 3, 7, 9], // 11, 13, 17, 19
-        2 => [3, 9], //           23,     29
-        3 => [1, 7], //       31,     37
-        4 => [1, 3, 7], //    41, 43, 47
-        5 => [3, 9], //           53,     59
-        6 => [1, 7], //       61,     67
-        7 => [1, 3, 9], //    71, 73,     79
-        8 => [3, 9], //           83,     89
-        _ => [7], //                  97
-    });
+    private static readonly ImmutableArray<int> Primes = [11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97];
 }

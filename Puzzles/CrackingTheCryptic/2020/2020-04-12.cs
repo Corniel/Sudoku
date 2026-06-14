@@ -42,19 +42,5 @@ public sealed class _2020_04_12 : CtcPuzzle
         => RuleSet.AntiKnight
         + Diagonal.NW_SE
         + Diagonal.NE_SW
-        + MagicSquare.SelectMany(line => Group.Select(line, (a, o) => new Cage(a, o, [15])));
-
-    private static readonly PosSet[] MagicSquare =
-    [
-        [(3, 3), (3, 4), (3, 5)],
-        [(4, 3), (4, 4), (4, 5)],
-        [(5, 3), (5, 4), (5, 5)],
-
-        [(3, 3), (4, 3), (5, 3)],
-        [(3, 4), (4, 4), (5, 4)],
-        [(3, 5), (4, 5), (5, 5)],
-
-        [(3, 3), (4, 4), (5, 5)],
-        [(3, 5), (4, 4), (5, 3)],
-    ];
+        + MagicSquare.New(Houses.Boxes[4]);
 }

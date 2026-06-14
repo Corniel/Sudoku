@@ -204,6 +204,7 @@ able to solve the following puzzles (so far):
 | 2026-05-07 | [Hotspots](Puzzles/CrackingTheCryptic/2026/2026-05-07.cs)                        |   342.7 ms |
 | 2026-05-05 | [This Is Sparta!](Puzzles/CrackingTheCryptic/2026/2026-05-05-1.cs)               | 5,483.4 µs |
 | 2026-05-05 | [Wrapped](Puzzles/CrackingTheCryptic/2026/2026-05-05.cs)                         |   368.3 µs |
+| 2026-05-03 | [Killer Whispers](Puzzles/CrackingTheCryptic/2026/2026-05-03.cs)                 | 1,362.3 µs |
 | 2026-04-23 | [The Triple Crown](Puzzles/CrackingTheCryptic/2026/2026-04-23.cs)                | 1,430.9 ms |
 | 2026-04-20 | [Williwaw](Puzzles/CrackingTheCryptic/2026/2026-04-20.cs)                        |   547.0 ms |
 | 2026-04-18 | [Shirkflation](Puzzles/CrackingTheCryptic/2026/2026-04-18.cs)                    |   178.5 µs |

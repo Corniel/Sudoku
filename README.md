@@ -193,6 +193,7 @@ able to solve the following puzzles (so far):
 
 | Date       | Puzzle                                                                           |      Speed |
 |:----------:|----------------------------------------------------------------------------------|-----------:|
+| 2026-06-14 | [Counterpoint](Puzzles/CrackingTheCryptic/2026/2026-06-14.cs)                    |    82.7 ms |
 | 2026-06-09 | [36x Even!](Puzzles/CrackingTheCryptic/2026/2026-06-09.cs)                       |   163.7 µs |
 | 2026-06-08 | [Hot or Cold](Puzzles/CrackingTheCryptic/2026/2026-06-08.cs)                     | 1,733.8 µs |
 | 2026-06-07 | [Titled Squares](Puzzles/CrackingTheCryptic/2026/2026-06-07.cs)                  |   171.2 µs |

@@ -92,7 +92,7 @@ public sealed class _2024_11_16 : CtcPuzzle
 
     private static Rules Sums() =>
     [
-        .. Numbers.Two(
+        .. Numbers.New(
         [
             [(0, 0), (0, 1)],
             [(0, 7), (0, 8)],

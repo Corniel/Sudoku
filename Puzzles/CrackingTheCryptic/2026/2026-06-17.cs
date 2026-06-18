@@ -53,7 +53,7 @@ public sealed class _2026_06_17 : CtcPuzzle
         ...│...│EE.
         """)
         + Couples.Consecutive((2, 4), (3, 4))
-         + Grid.NamedGroups("""
+         + Lines.Nabmer("""
         AA.│...│.BB
         AA.│...│.BB
         ...│...│...
@@ -65,10 +65,6 @@ public sealed class _2026_06_17 : CtcPuzzle
         ...│...│...
         CC.│...│.DD
         CC.│...│.DD
-        """).SelectMany(GoldenLine)
+        """)
         + KillerCages.Extend;
-
-    private static Rules GoldenLine(NamedGroup group) => Dominos
-        .RoundRobin([.. group])
-        .SelectMany(NonConsecutive.New);
 }

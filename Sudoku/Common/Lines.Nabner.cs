@@ -1,0 +1,29 @@
+namespace Sudoku.Common;
+
+public static partial class Lines
+{
+    /// <summary>
+    /// Along a number none of the cell can be consequative
+    /// with any of the other cells.
+    /// </summary>
+    /// <example>
+    /// ...│.7.│...
+    /// ...│.5.│...
+    /// ...│.2.│...
+    /// ───┼───┼───
+    /// ...│.9.│...
+    /// ...│...│...
+    /// ...│...│...
+    /// ───┼───┼───
+    /// ...│...│...
+    /// ...│...│...
+    /// ...│...│...
+    /// </example>
+    [Pure]
+    public static Rules Nabmer(string grid)
+        => Grid.NamedGroups(grid).SelectMany(Nabmer);
+
+    private static Rules Nabmer(NamedGroup group) => Dominos
+        .RoundRobin([.. group])
+        .SelectMany(NonConsecutive.New);
+}

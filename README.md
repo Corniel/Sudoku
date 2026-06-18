@@ -221,6 +221,7 @@ able to solve the following puzzles (so far):
 | 2026-03-30 | [The X and The V Squared](Puzzles/CrackingTheCryptic/2026/2026-03-30.cs)         |   899.4 µs |
 | 2026-03-20 | [Catacomb](Puzzles/CrackingTheCryptic/2026/2026-03-20.cs)                        |   745.0 µs |
 | 2026-02-25 | [XII](Puzzles/CrackingTheCryptic/2026/2026-02-25.cs)                             |    51.5 µs |
+| 2026-02-21 | [Schubladen](Puzzles/CrackingTheCryptic/2026/2026-02-21.cs)                      | 2,207.4 µs |
 | 2026-01-13 | [Quality Street](Puzzles/CrackingTheCryptic/2026/2026-01-13.cs)                  |    18.3 ms |
 | 2026-01-08 | [Paper Snowflake](Puzzles/CrackingTheCryptic/2026/2026-01-08.cs)                 | 7,614.0 µs |
 | 2025-12-31 | [Venice](Puzzles/CrackingTheCryptic/2025/2025-12-31.cs)                          |   127.7 ms |

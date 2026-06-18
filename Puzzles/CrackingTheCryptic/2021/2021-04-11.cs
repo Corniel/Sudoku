@@ -27,16 +27,16 @@ public sealed class _2021_04_11 : CtcPuzzle
     protected override RuleSet GetConstraints() =>
         RuleSet.XSudoku
         + Lines.Arrow("""
-        ...│...│HI.
-        ..D│..F│G.P
-        BC.│...│.KO
+        ...│...│bb.
+        ..a│..B│b.d
+        aa.│...│.Cd
         ───┼───┼───
-        .A.│...│LN.
+        .A.│...│cD.
         ...│...│...
-        .ag│...│...
+        .Ef│...│...
         ───┼───┼───
-        bf.│..R│.T.
-        c.y│x..│S..
-        .dz│..V│WX.
+        eF.│..I│.i.
+        e.g│G..│i..
+        .eg│..H│hh.
         """);
 }

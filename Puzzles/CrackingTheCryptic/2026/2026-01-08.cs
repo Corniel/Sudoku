@@ -27,16 +27,16 @@ public sealed class _2026_01_08 : CtcPuzzle
     protected override RuleSet GetConstraints()
         => RuleSet.Standard
         + Lines.Arrow("""
-        .lk│...│...
-        ...│j..│...
-        ..D│...│...
+        .aa│...│...
+        ...│A..│...
+        ..b│...│...
         ───┼───┼───
-        .C.│E..│f..
-        .BH│I.g│...
-        .AG│.hd│...
+        .b.│b..│D..
+        .bc│c.d│...
+        .BC│.de│...
         ───┼───┼───
-        ...│..b│c..
-        ...│.a.│...
+        ...│..e│e..
+        ...│.E.│...
         ...│...│...
         """)
         + Shadings();
@@ -65,14 +65,14 @@ public sealed class _2026_01_08 : CtcPuzzle
     public static readonly LookupDigits Shading = LookupPair.Init(
     [
         /* ? */ _1_to_9,
-        /* 1 */ Digits.AtMost(6),
-        /* 2 */ Digits.AtMost(6),
-        /* 3 */ Digits.AtMost(6),
+        /* 1 */ 1..6,
+        /* 2 */ 1..6,
+        /* 3 */ 1..6,
         /* 4 */ _1_to_9,
         /* 5 */ _1_to_9,
         /* 6 */ _1_to_9,
-        /* 7 */ Digits.AtLeast(4),
-        /* 8 */ Digits.AtLeast(4),
-        /* 9 */ Digits.AtLeast(4),
+        /* 7 */ 4..9,
+        /* 8 */ 4..9,
+        /* 9 */ 4..9,
     ]);
 }

@@ -8,7 +8,7 @@ public sealed class _2020_07_31 : CtcPuzzle
 
     public override Uri? Url => new("https://youtu.be/73iEwlTO_p0");
 
-    public override O Duration => O.s;
+    public override O Duration => O.Unknown;
 
     public override Cells Solution { get; } = Cells.New("""
         529│781│463
@@ -27,17 +27,17 @@ public sealed class _2020_07_31 : CtcPuzzle
     protected override RuleSet GetConstraints()
         => RuleSet.Standard
         + Lines.Arrow("""
-        ...│...│C..
-        ...│...│B..
-        ...│..A│.bc
-        ───┼───┼───
         ...│...│a..
-        ...│...│...
-        ..E│...│...
+        ...│...│a..
+        ...│..A│.bb
         ───┼───┼───
-        GF.│e..│...
-        ..f│...│...
-        ..g│...│...
+        ...│...│B..
+        ...│...│...
+        ..C│...│...
+        ───┼───┼───
+        cc.│D..│...
+        ..d│...│...
+        ..d│...│...
         """)
         + Groups.Cages(
         """

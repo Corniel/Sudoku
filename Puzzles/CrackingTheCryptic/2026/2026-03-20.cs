@@ -25,8 +25,7 @@ public sealed class _2026_03_20 : CtcPuzzle
         """);
 
     protected override RuleSet GetConstraints()
-        => RuleSet.Standard
-        + Groups.Cages("""
+        => RuleSet.Killer("""
         ...│.II│JJJ
         ...│jjI│JE.
         ..k│b.j│JE.

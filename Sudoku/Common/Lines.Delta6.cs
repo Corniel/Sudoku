@@ -26,8 +26,8 @@ public static partial class Lines
     private static Rules Delta6(Line line) =>
     [
         .. Restrictions.Delta6.New(line),
-        .. line.Select(c => new Mask(c, _123__789)),
+        .. line.Select(c => new Mask(c, _123_789)),
     ];
 
-    private static readonly Digits _123__789 = [1, 2, 3, 7, 8, 9];
+    private static readonly Digits _123_789 = [1, 2, 3, 7, 8, 9];
 }

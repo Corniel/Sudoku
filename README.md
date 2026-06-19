@@ -193,6 +193,7 @@ able to solve the following puzzles (so far):
 
 | Date       | Puzzle                                                                           |      Speed |
 |:----------:|----------------------------------------------------------------------------------|-----------:|
+| 2026-06-18 | [Quiet Room](Puzzles/CrackingTheCryptic/2026/2026-06-18.cs)                      |   232.9 µs |
 | 2026-06-17 | [Nabnerfel](Puzzles/CrackingTheCryptic/2026/2026-06-17.cs)                       |   263.2 ms |
 | 2026-06-16 | [Four Octagons](Puzzles/CrackingTheCryptic/2026/2026-06-16.cs)                   |   138.7 µs |
 | 2026-06-14 | [Counterpoint](Puzzles/CrackingTheCryptic/2026/2026-06-14.cs)                    |    82.7 ms |

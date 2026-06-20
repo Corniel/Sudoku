@@ -218,8 +218,9 @@ able to solve the following puzzles (so far):
 | 2026-04-23 | [The Triple Crown](Puzzles/CrackingTheCryptic/2026/2026-04-23.cs)                | 1,430.9 ms |
 | 2026-04-20 | [Williwaw](Puzzles/CrackingTheCryptic/2026/2026-04-20.cs)                        |   547.0 ms |
 | 2026-04-18 | [Shirkflation](Puzzles/CrackingTheCryptic/2026/2026-04-18.cs)                    |   178.5 µs |
-| 2026-04-16 | [The Not So Simple Mircale](Puzzles/CrackingTheCryptic/2026/2026-04-16.cs)       |   140.5 µs
+| 2026-04-16 | [The Not So Simple Mircale](Puzzles/CrackingTheCryptic/2026/2026-04-16.cs)       |   140.5 µs |
 | 2026-04-14 | [Supersonic Slingshots](Puzzles/CrackingTheCryptic/2026/2026-04-14.cs)           |   134.1 ms |
+| 2026-03-13 | [Dancing In A Ring](Puzzles/CrackingTheCryptic/2026/2026-03-13.cs)               |    67.1 ms |
 | 2026-04-09 | [Mayan Ruins](Puzzles/CrackingTheCryptic/2026/2026-04-09.cs)                     | 2,524.5 µs |
 | 2026-04-08 | [Colorful Whispers](Puzzles/CrackingTheCryptic/2026/2026-04-08.cs)               |   286.0 µs |
 | 2026-04-04 | [Farrago](Puzzles/CrackingTheCryptic/2026/2026-04-04.cs)                         |   103.7 ms |

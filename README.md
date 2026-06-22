@@ -226,11 +226,12 @@ able to solve the following puzzles (so far):
 | 2026-04-04 | [Farrago](Puzzles/CrackingTheCryptic/2026/2026-04-04.cs)                         |   103.7 ms |
 | 2026-04-01 | [Wilkommen im Palindrom](Puzzles/CrackingTheCryptic/2026/2026-04-01.cs)          |   212.1 µs |
 | 2026-03-30 | [The X and The V Squared](Puzzles/CrackingTheCryptic/2026/2026-03-30.cs)         |   899.4 µs |
-| 2026-03-28 | [Just A Killer](Puzzles/CrackingTheCryptic/2026/2026-03-28.cs)                   |    73.5 ms
+| 2026-03-28 | [Just A Killer](Puzzles/CrackingTheCryptic/2026/2026-03-28.cs)                   |    73.5 ms |
 | 2026-03-20 | [Catacomb](Puzzles/CrackingTheCryptic/2026/2026-03-20.cs)                        |   745.0 µs |
-| 2026-03-14 | [Wingspan](Puzzles/CrackingTheCryptic/2026/2026-03-14.cs)                        |   931.3 ms
+| 2026-03-14 | [Wingspan](Puzzles/CrackingTheCryptic/2026/2026-03-14.cs)                        |   931.3 ms |
 | 2026-02-25 | [XII](Puzzles/CrackingTheCryptic/2026/2026-02-25.cs)                             |    51.5 µs |
 | 2026-02-21 | [Schubladen](Puzzles/CrackingTheCryptic/2026/2026-02-21.cs)                      | 2,207.4 µs |
+| 2026-02-19 | [Ubiquitous](Puzzles/CrackingTheCryptic/2026/2026-02-19.cs)                      | 5,515.1 ms |
 | 2026-01-13 | [Quality Street](Puzzles/CrackingTheCryptic/2026/2026-01-13.cs)                  |    18.3 ms |
 | 2026-01-08 | [Paper Snowflake](Puzzles/CrackingTheCryptic/2026/2026-01-08.cs)                 | 7,614.0 µs |
 | 2025-12-31 | [Venice](Puzzles/CrackingTheCryptic/2025/2025-12-31.cs)                          |   127.7 ms |

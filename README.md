@@ -231,6 +231,7 @@ able to solve the following puzzles (so far):
 | 2026-03-14 | [Wingspan](Puzzles/CrackingTheCryptic/2026/2026-03-14.cs)                        |   931.3 ms |
 | 2026-02-25 | [XII](Puzzles/CrackingTheCryptic/2026/2026-02-25.cs)                             |    51.5 µs |
 | 2026-02-21 | [Schubladen](Puzzles/CrackingTheCryptic/2026/2026-02-21.cs)                      | 2,207.4 µs |
+| 2026-02-20 | [Pinpoint](Puzzles/CrackingTheCryptic/2026/2026-02-20.cs)                        |   749.5 ms |
 | 2026-02-19 | [Ubiquitous](Puzzles/CrackingTheCryptic/2026/2026-02-19.cs)                      | 5,515.1 ms |
 | 2026-01-13 | [Quality Street](Puzzles/CrackingTheCryptic/2026/2026-01-13.cs)                  |    18.3 ms |
 | 2026-01-08 | [Paper Snowflake](Puzzles/CrackingTheCryptic/2026/2026-01-08.cs)                 | 7,614.0 µs |

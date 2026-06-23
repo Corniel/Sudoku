@@ -26,7 +26,7 @@ public sealed class _2025_12_24 : CtcPuzzle
 
     protected override RuleSet GetConstraints()
         => RuleSet.Standard
-        + Lines.DutchWhispers("""
+        + Lines.DutchWhisper("""
         ..a│...│A..
         .b.│...│.B.
         c..│...│..C

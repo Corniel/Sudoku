@@ -15,6 +15,14 @@ public static partial class KillerCages
 
         HashSet<SumGroup> combos = [];
 
+        Dictionary<Pos, PosSet> links = [];
+        foreach (var p in Pos.All)
+            links[p] = default;
+
+        foreach (var set in sets)
+            foreach (var cell in set)
+                links[cell] |= set ^ cell;
+
         var adding = true;
 
         while (adding)
@@ -22,6 +30,22 @@ public static partial class KillerCages
             adding = false;
             foreach (var rule in existing)
             {
+                var inverse = PosSet.All;
+                foreach (var c in rule.Cells)
+                    inverse &= links[c];
+
+                var full = rule.Cells | inverse;
+
+                if (inverse.HasAny && sets.Add(full))
+                {
+                    adding = true;
+
+                    if (full.Count is _9)
+                    {
+                        combos.Add(new(inverse, Ints.New(_45) - rule.Sum));
+                    }
+                }
+
                 foreach (var other in existing.Where(o => o.Cells.IsProperSubsetOf(rule.Cells)))
                 {
                     var cage = new SumGroup(rule.Cells ^ other.Cells, rule.Sum - other.Sum);

@@ -316,7 +316,7 @@ able to solve the following puzzles (so far):
 | 2020-07-27 | [The Mirical Sudoku 2](Puzzles/CrackingTheCryptic/2020/2020-07-27.cs)            |   237.6 µs |
 | 2020-07-28 | [Mystery Killer](Puzzles/CrackingTheCryptic/2020/2020-07-28.cs)                  |   392.2 s  |
 | 2020-05-17 | [The New Mirical](Puzzles/CrackingTheCryptic/2020/2020-05-17.cs)                 |   399.7 µs |
-| 2020-05-25 | [Killer XXL](Puzzles/CrackingTheCryptic/2020/2020-05-25.cs)                      |    15.6 s  |
+| 2020-05-25 | [Killer XXL](Puzzles/CrackingTheCryptic/2020/2020-05-25.cs)                      |   605.9 ms |
 | 2020-05-17 | [Thermo Miracle Sudoku](Puzzles/CrackingTheCryptic/2020/2020-05-17-1.cs)         |   365.0 µs |
 | 2020-05-15 | [Equal Sudoku](Puzzles/CrackingTheCryptic/2024/2020-05-15.cs)                    |   370.3 ms |
 | 2020-05-06 | [Antiknight Killer](Puzzles/CrackingTheCryptic/2024/2020-05-06.cs)               |    10.4 ms |

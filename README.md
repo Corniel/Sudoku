@@ -193,6 +193,7 @@ able to solve the following puzzles (so far):
 
 | Date       | Puzzle                                                                           |      Speed |
 |:----------:|----------------------------------------------------------------------------------|-----------:|
+| 2026-06-23 | [Good and Plenty](Puzzles/CrackingTheCryptic/2026/2026-06-23.cs)                 |    31.3 ms |
 | 2026-06-18 | [Quiet Room](Puzzles/CrackingTheCryptic/2026/2026-06-18.cs)                      |   232.9 µs |
 | 2026-06-17 | [Nabnerfel](Puzzles/CrackingTheCryptic/2026/2026-06-17.cs)                       |   263.2 ms |
 | 2026-06-16 | [Four Octagons](Puzzles/CrackingTheCryptic/2026/2026-06-16.cs)                   |   138.7 µs |
@@ -237,7 +238,7 @@ able to solve the following puzzles (so far):
 | 2026-01-08 | [Paper Snowflake](Puzzles/CrackingTheCryptic/2026/2026-01-08.cs)                 | 7,614.0 µs |
 | 2025-12-31 | [Venice](Puzzles/CrackingTheCryptic/2025/2025-12-31.cs)                          |   127.7 ms |
 | 2025-12-27 | [Tinsel & Baubles](Puzzles/CrackingTheCryptic/2025/2025-12-27.cs)                |   660.2 ms |
-| 2025-12-25 | [Xmas 2025](Puzzles/CrackingTheCryptic/2025/2025-12-25.cs)                       | 2,435.4 µs |
+| 2025-12-25 | [Xmas 2025](Puzzles/CrackingTheCryptic/2025/2025-12-25.cs)                       | 2,461.7 µs |
 | 2025-12-24 | [Star Of Bethlehem](Puzzles/CrackingTheCryptic/2025/2025-12-24.cs)               | 5,029.8 µs |
 | 2025-12-22 | [Arrow Renban Sudoku](Puzzles/CrackingTheCryptic/2025/2025-12-22.cs)             |    17.1 ms |
 | 2025-12-20 | [Zebra Knights](Puzzles/CrackingTheCryptic/2025/2025-12-20.cs)                   |   158.6 µs |

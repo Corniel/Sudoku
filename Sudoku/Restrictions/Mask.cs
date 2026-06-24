@@ -18,9 +18,11 @@ public sealed class Mask(Pos appliesTo, Digits mask)
     /// <inheritdoc />
     public Ints Sum { get; } = [.. mask];
 
-    /// <inheritdoc />
-    public Digits Restrict(SudokuCells cells) => mask;
+    public Digits Allowed { get; } = mask;
 
     /// <inheritdoc />
-    public override string ToString() => $"{AppliesTo} => {mask}";
+    public Digits Restrict(SudokuCells cells) => Allowed;
+
+    /// <inheritdoc />
+    public override string ToString() => $"{AppliesTo} => {Allowed}";
 }

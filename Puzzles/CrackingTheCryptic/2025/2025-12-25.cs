@@ -57,5 +57,6 @@ public sealed class _2025_12_25 : CtcPuzzle
         ...│...│...
 
         A:2479  a:56  B:14  b:24  C:27 c:3
-        """);
+        """)
+        + Quadruple.Extend;
 }

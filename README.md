@@ -299,7 +299,8 @@ able to solve the following puzzles (so far):
 | 2021-08-05 | [Checkerboard](Puzzles/CrackingTheCryptic/2024/2021-08-05.cs)                    |   172.2 s  |
 | 2021-07-26 | [Classic Sudoku](Puzzles/CrackingTheCryptic/2024/2021-07-26.cs)                  |    14.8 µs |
 | 2021-07-10 | [White Room](Puzzles/CrackingTheCryptic/2024/2021-07-10.cs)                      | 3,307.6 µs |
-| 2021-05-01 | [Wave Particals](Puzzles/CrackingTheCryptic/2024/2021-05-01.cs)                  |    99.3 ms |
+| 2021-05-03 | [Spoons](Puzzles/CrackingTheCryptic/2021/2021-05-03.cs)                          |    43.0 ms |
+| 2021-05-01 | [Wave Particals](Puzzles/CrackingTheCryptic/2021/2021-05-01.cs)                  |   243.7 ms |
 | 2021-04-23 | [Wheels Of Arrows](Puzzles/CrackingTheCryptic/2024/2021-04-23.cs)                |   231.6 ms |
 | 2021-04-21 | [Ten Knights](Puzzles/CrackingTheCryptic/2024/2021-04-21.cs)                     |    11.9 ms |
 | 2021-04-19 | [Archers And Arrows](Puzzles/CrackingTheCryptic/2024/2021-04-19.cs)              |   637.8 µs |

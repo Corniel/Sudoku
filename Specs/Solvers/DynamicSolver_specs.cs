@@ -1,4 +1,5 @@
 using DynamicSolver;
+using MathNet.Numerics;
 using Puzzles;
 using Puzzles.CrackingTheCryptic;
 using Puzzles.Killer;
@@ -20,31 +21,31 @@ public class Solves
     }
 
     [Test]
-    public void standard_Easy() => Run(70.29, PuzzleBankPuzzle.Easy.Take(5_000));
+    public void standard_Easy() => Run(61.68, PuzzleBankPuzzle.Easy.Take(5_000));
 
     [Test]
-    public void standard_Medium() => Run(117.56, PuzzleBankPuzzle.Medium.Take(5_000));
+    public void standard_Medium() => Run(95.20, PuzzleBankPuzzle.Medium.Take(5_000));
 
     [Test]
-    public void Standard_Hard() => Run(155.00, PuzzleBankPuzzle.Hard.Take(5_000));
+    public void Standard_Hard() => Run(122.97, PuzzleBankPuzzle.Hard.Take(5_000));
     
     [Test]
-    public void Standard_Diabolical() => Run(198.34, PuzzleBankPuzzle.Diabolical.Take(5_000));
+    public void Standard_Diabolical() => Run(149.62, PuzzleBankPuzzle.Diabolical.Take(5_000));
 
     [Test]
-    public void Standard_hardest() => Run(
-        448.18,
+    public void Standard_Hardest() => Run(
+        335.58,
         [
             .. PuzzleBankPuzzle.Diabolical.OrderByDescending(p => p.Level).Take(1_000),
             .. CtcPuzzle.Classics
         ]);
 
     [Test]
-    public void Killer() => Run(58_646.75, KillerPuzzle.Load());
+    public void Killer() => Run(5_017.85, KillerPuzzle.Load());
 
     [Test]
     public void Fantacy() => Run(
-        120_975.45,
+        41_645.18,
         [
             new _2020_04_12(),
             new _2024_11_18(),
@@ -66,16 +67,23 @@ public class Solves
 
         var count = 0;
 
+        var total = 0.0;
+
+        var prev = Iterator.Options.ToArray();
+
+
         foreach (var puzzle in puzzles)
         {
             if (logPuzzles) Console.WriteLine(puzzle);
 
             TestSolver.Solve(puzzle);
             count++;
+            total += Math.Log10(range(10).Select(i => Iterator.Options[i] - prev[i]).Sum());
+            prev = Iterator.Options.ToArray();
         }
 
-        var total = decimal.Round(1m * Iterator.Options.Sum() / count, 2);
+        total = double.Round(Math.Pow(10, total / count), 2);
 
-        total.Should().Be((decimal)avg);
+        ((decimal)total).Should().Be((decimal)avg);
     }
 }

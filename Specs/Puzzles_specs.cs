@@ -8,6 +8,7 @@ using Puzzles.SudokuPad;
 using Specs.Tools;
 using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Specs.Puzzles_specs;
 
@@ -219,6 +220,83 @@ public class Killer_Sudoku
         puzzle.Constraints.Should().BeValidFor(solved);
 
         Console.WriteLine(solved);
+    }
+
+    /// <summary>
+    /// Converts the verbose instructions into a grid.
+    /// </summary>
+    [Test]
+    public void Convert()
+    {
+        var grid = new char[9, 9];
+
+        var group = 'A';
+        var pattern = new Regex(@"\((?<Row>[0-8]),\s*(?<Col>[0-8])\)");
+        var sums = new StringBuilder();
+
+        var str = """
+            41 = (1,6) + (2,4) + (2,5) + (2,6) + (2,7) + (3,6) + (4,6)
+            32 = (6,1) + (6,2) + (7,0) + (7,1) + (7,2) + (8,0) + (8,1)
+            30 = (0,2) + (0,3) + (0,4) + (0,5) + (0,6)
+            26 = (2,8) + (3,8) + (4,8) + (5,8) + (6,8)
+            26 = (3,4) + (3,5) + (4,4) + (4,5)
+            19 = (4,0) + (4,1) + (5,0) + (6,0)
+            18 = (7,4) + (8,2) + (8,3) + (8,4)
+            18 = (5,5) + (5,6) + (6,5) + (7,5)
+            13 = (0,7) + (0,8) + (1,7) + (1,8)
+            12 = (2,3) + (3,1) + (3,2) + (3,3)
+            23 = (6,3) + (6,4) + (7,3)
+            19 = (1,2) + (1,3) + (2,2)
+            19 = (4,2) + (5,1) + (5,2)
+            14 = (4,3) + (5,3) + (5,4)
+            13 = (5,7) + (6,7) + (6,6)
+            11 = (7,6) + (8,6) + (8,5)
+            9  = (2,0) + (3,0) + (2,1)
+            17 = (0,0) + (1,0)
+            11 = (7,7) + (7,8)
+            11 = (8,7) + (8,8)
+            11 = (3,7) + (4,7)
+            8  = (0,1) + (1,1)
+            4  = (1,4) + (1,5)
+            """;
+
+        foreach (var line in str.Split('\n'))
+        {
+            var tot = line.Split(' ', StringSplitOptions.RemoveEmptyEntries)[0];
+            
+            var points = pattern.Matches(line);
+
+            foreach (Match point in points)
+            {
+                var row = point.Groups["Row"].Value[0] - '0';
+                var col = point.Groups["Col"].Value[0] - '0';
+                grid[row, col] = points.Count is 1 ? tot[0] : group;
+            }
+
+
+            if (points.Count > 1)
+            {
+                sums.Append(group).Append('=').Append(tot).Append(' ');
+                group = group is 'Z' ? 'a' : (char)(group + 1);
+            }
+        }
+
+        var builder = new StringBuilder();
+
+        for (var r = 0; r < 9; r++)
+        {
+            for (var c = 0; c < 9; c++)
+            {
+                var p = grid[r, c];
+                builder.Append(p == default ? '.' : p);
+            }
+            builder.AppendLine();
+        }
+        builder.Append(sums);
+
+        builder.Should().NotBeNull();
+
+        Console.WriteLine(builder);
     }
 }
 

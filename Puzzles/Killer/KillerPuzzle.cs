@@ -1,3 +1,4 @@
+using Microsoft.VisualBasic;
 using Puzzles.PuzzleBank;
 using System.IO;
 
@@ -24,7 +25,12 @@ public sealed class KillerPuzzle(string title, RuleSet rules) : Puzzle
         }
 
         yield return new CrackingTheCryptic._2017_08_26();
+        yield return new CrackingTheCryptic._2019_09_10();
         yield return new CrackingTheCryptic._2020_04_13();
+        yield return new CrackingTheCryptic._2020_04_21();
         yield return new CrackingTheCryptic._2021_07_10();
+        yield return new CrackingTheCryptic._2025_09_09();
+        yield return new CrackingTheCryptic._2026_03_28();
+        yield return new CrackingTheCryptic._2026_05_22();
     }
 }

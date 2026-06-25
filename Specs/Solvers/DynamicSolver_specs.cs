@@ -40,7 +40,7 @@ public class Solves
         ]);
 
     [Test]
-    public void Killer() => Run(1_395.00, KillerPuzzle.Load());
+    public void Killer() => Run(58_646.75, KillerPuzzle.Load());
 
     [Test]
     public void Fantacy() => Run(

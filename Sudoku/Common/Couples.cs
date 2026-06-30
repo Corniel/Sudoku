@@ -16,6 +16,12 @@ public static class Couples
             .Where(group => group.Size is 2)
             .SelectMany(group => Consecutive(group.First(), group.Last()));
 
+    /// <summary>Goldend dots describe pairs that are non-consecutive.</summary>
+    public static Rules GoldenDots(string grid)
+        => Grid.NamedGroups(grid)
+            .Where(group => group.Size is 2)
+            .SelectMany(group => NonConsecutive.New(group.First(), group.Last()));
+
     public static Rules Twins(string grid)
         => Grid.NamedGroups(grid)
          .Where(group => group.Size is 2)

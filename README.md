@@ -195,6 +195,7 @@ able to solve the following puzzles (so far):
 |:----------:|----------------------------------------------------------------------------------|-----------:|
 | 2026-06-29 | [Just Sum Long Lines](Puzzles/CrackingTheCryptic/2026/2026-06-29.cs)             |   175.2 ms |
 | 2026-06-27 | [Proxyimity](Puzzles/CrackingTheCryptic/2026/2026-06-27.cs)                      | 9,307.8 µs |
+| 2026-06-24 | [Auralis](Puzzles/CrackingTheCryptic/2026/2026-06-24.cs)                         |    72.8 ms |
 | 2026-06-23 | [Good and Plenty](Puzzles/CrackingTheCryptic/2026/2026-06-23.cs)                 |    31.3 ms |
 | 2026-06-18 | [Quiet Room](Puzzles/CrackingTheCryptic/2026/2026-06-18.cs)                      |   232.9 µs |
 | 2026-06-17 | [Nabnerfel](Puzzles/CrackingTheCryptic/2026/2026-06-17.cs)                       |   263.2 ms |
@@ -249,7 +250,7 @@ able to solve the following puzzles (so far):
 | 2025-12-12 | [Crossroads On Another World](Puzzles/CrackingTheCryptic/2025/2025-12-12.cs)     |    35.2 ms |
 | 2025-12-11 | [Fallen Mast In A Storm](Puzzles/CrackingTheCryptic/2025/2025-12-11.cs)          | 3,782.0 µs |
 | 2025-12-08 | [Heavy Is The Crown](Puzzles/CrackingTheCryptic/2025/2025-12-08.cs)              |    26.3 ms |
-| 2025-12-07 | [Odd Way To Even Out](Puzzles/CrackingTheCryptic/2025/2025-12-07.cs)             |   648.5 ms |
+| 2025-12-07 | [Odd Way To Even Out](Puzzles/CrackingTheCryptic/2025/2025-12-07.cs)             | 1,100.2 ms |
 | 2025-12-04 | [Lockdown](Puzzles/CrackingTheCryptic/2025/2025-12-04.cs)                        | 4,223.0 ms |
 | 2025-11-28 | [Brink](Puzzles/CrackingTheCryptic/2025/2025-11-28.cs)                           |    65.5 ms |
 | 2025-11-25 | [Simple Miracle](Puzzles/CrackingTheCryptic/2025/2025-11-25.cs)                  |   858.3 µs |

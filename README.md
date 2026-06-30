@@ -193,7 +193,8 @@ able to solve the following puzzles (so far):
 
 | Date       | Puzzle                                                                           |      Speed |
 |:----------:|----------------------------------------------------------------------------------|-----------:|
-| 2026-06-27 | [Proxyimity](Puzzles/CrackingTheCryptic/2026/2026-06-27.cs)                      | 9,307.8 µs
+| 2026-06-29 | [Just Sum Long Lines](Puzzles/CrackingTheCryptic/2026/2026-06-29.cs)             |   175.2 ms |
+| 2026-06-27 | [Proxyimity](Puzzles/CrackingTheCryptic/2026/2026-06-27.cs)                      | 9,307.8 µs |
 | 2026-06-23 | [Good and Plenty](Puzzles/CrackingTheCryptic/2026/2026-06-23.cs)                 |    31.3 ms |
 | 2026-06-18 | [Quiet Room](Puzzles/CrackingTheCryptic/2026/2026-06-18.cs)                      |   232.9 µs |
 | 2026-06-17 | [Nabnerfel](Puzzles/CrackingTheCryptic/2026/2026-06-17.cs)                       |   263.2 ms |

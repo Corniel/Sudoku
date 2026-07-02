@@ -111,14 +111,10 @@ public sealed class _2025_12_15 : CtcPuzzle
         _ => _1_to_9,
     });
 
-    public static readonly LookupDigits DiffentParity = LookupPair.Init(d => d switch
-    {
-        1 or 3 or 5 or 7 or 9 => Digits.Even,
-        2 or 4 or 6 or 8 => Digits.Odd,
-        _ => _1_to_9,
-    });
+    private static readonly LookupDigits DiffentParity
+        = LookupPair.Init(d => d.IsEven() ? Digits.Odd : Digits.Even);
 
-    public static readonly LookupDigits King = LookupPair.Init(d => d switch
+    private static readonly LookupDigits King = LookupPair.Init(d => d switch
     {
         2 => _1_to_9 ^ 2,
         4 => _1_to_9 ^ 4,

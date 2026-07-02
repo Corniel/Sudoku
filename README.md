@@ -193,6 +193,7 @@ able to solve the following puzzles (so far):
 
 | Date       | Puzzle                                                                           |      Speed |
 |:----------:|----------------------------------------------------------------------------------|-----------:|
+| 2026-06-30 | [Stishovite](Puzzles/CrackingTheCryptic/2026/2026-06-30.cs)                      |    13.9 ms |
 | 2026-06-29 | [Just Sum Long Lines](Puzzles/CrackingTheCryptic/2026/2026-06-29.cs)             |   175.2 ms |
 | 2026-06-27 | [Proxyimity](Puzzles/CrackingTheCryptic/2026/2026-06-27.cs)                      | 9,307.8 µs |
 | 2026-06-24 | [Auralis](Puzzles/CrackingTheCryptic/2026/2026-06-24.cs)                         |    72.8 ms |

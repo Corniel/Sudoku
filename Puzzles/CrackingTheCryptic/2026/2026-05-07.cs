@@ -82,7 +82,7 @@ public sealed class _2026_05_07 : CtcPuzzle
 
         public PosArray Neighbors { get; } = neighbors;
 
-        public override Digits Restrict(SudokuCells cells) 
+        public override Digits Restrict(SudokuCells cells)
         {
             if (cells[HotSpot].Digit is not 9) return _1_to_9;
 

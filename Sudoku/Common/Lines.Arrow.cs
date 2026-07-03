@@ -26,7 +26,7 @@ public static partial class Lines
 
             return
             [
-                new SumGroup([.. line], (min * 2)..18),
+                new SumGroup([.. line],(min * 2)..18),
                 new Mask(circle, Digits.AtLeast(min)),
                 new Arrow.Circle(circle, shaft),
                 .. Group.Select(shaft, (a, o) => new Arrow.Shaft(circle, a, o)),

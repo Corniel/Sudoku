@@ -117,6 +117,7 @@ dotnet_diagnostic.S1541.severity    = none       # Methods and properties should
 dotnet_diagnostic.S1694.severity    = none       # An abstract class should have both abstract and concrete methods
 dotnet_diagnostic.S2178.severity    = none       # Short-circuit logic should be used in boolean contexts - '&' is used instead of && to accommodate expressions with nullable booleans too.
 dotnet_diagnostic.S2342.severity    = none       # Rename this enumeration to match naming convention
+dotnet_diagnostic.S3267.severity    = none       # MLoops should be simplified
 dotnet_diagnostic.S3376.severity    = none       # Attribute, EventArgs, and Exception type names should end with the type being extended
 dotnet_diagnostic.S3776.severity    = none       # Cognitive Complexity of methods should not be too high
 dotnet_diagnostic.S3904.severity    = none       # Provide assembly version

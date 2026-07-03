@@ -120,8 +120,7 @@ var solution = Solver.Solve(clues, Rules.Jigsaw("""
 
 ### Killer Sudoku
 The solver can also solve [Killer Sudoku's](https://en.wikipedia.org/wiki/Killer_sudoku).
-As there is no standard plain text format to describe these (that I'm aware of) there are
-two support formats that seem logical:
+The following format is supported:
 
 ``` csharp
 var rules = Sudoku.Common.Groups.Cage("""
@@ -144,21 +143,6 @@ var rules = Sudoku.Common.Groups.Cage("""
     Q = 20  R = 12  S = 27  T = 6
     U = 20  V = 6   W = 10  X = 14
     Y = 8   Z = 16  a = 15  b = 13  c = 17
-""");
-
-var rules_ = Sudoku.Common.Groups.Cage("""
-    27 = (0,0) + (0,1) + (1,0) + (2,0)
-    13 = (0,2) + (1,1) + (1,2) + (2,1)
-    15 = (0,3) + (1,3) + (2,3) + (3,3) + (4,3)
-    28 = (2,2) + (3,0) + (3,1) + (3,2)
-    17 = (4,0) + (5,0) + (4,1) + (4,2)
-    17 = (5,1) + (5,2) + (5,3) + (5,4)
-    20 = (6,0) + (6,1) + (6,2) + (7,2)
-    25 = (7,0) + (7,1) + (8,0) + (8,1) + (8,2)
-    33 = (5,5) + (6,5) + (6,4) + (6,3) + (7,3)
-    16 = (0,4) + (1,4) + (1,5) + (1,6)
-    16 = (0,5) + (0,6) + (0,7) + (0,8)
-    27 = (1,7) + (1,8) + (2,7) + (2,8)
 """);
 
 var solution = Solver.Solve(Clues.Empty, rules);

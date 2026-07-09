@@ -92,9 +92,9 @@ public sealed class _2020_02_14 : CtcPuzzle
         {
             if ((per[4] - per[0]) is not 5 and not 6) return false;
 
-            var row3 = per[0] * 100 + per[1] * 10 + per[2];
-            var row4 = /*....*/ 600 + per[3] * 10 + 4;
-            var row5 = per[4] * 100 + per[5] * 10 + per[6];
+            var row3 = (per[0] * 100) + (per[1] * 10) + per[2];
+            var row4 = /*....*/ 600 + (per[3] * 10) + 4;
+            var row5 = (per[4] * 100) + (per[5] * 10) + per[6];
 
             return row3 + row4 == row5;
         }

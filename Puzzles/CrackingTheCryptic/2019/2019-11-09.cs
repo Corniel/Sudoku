@@ -82,7 +82,7 @@ public sealed class _2019_11_09 : CtcPuzzle
             {
                 if (t == o) continue;
 
-                var tot = t * 10 + o;
+                var tot = (t * 10) + o;
 
                 if (tot == 45 - t - o)
                 {

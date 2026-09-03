@@ -18,3 +18,13 @@ public class Decomposes
         col.Should().Be(pos.Col);
     }
 }
+
+public class Casts
+{
+    [Test]
+    public void from_tuple()
+    {
+        Pos pos = (1, 4);
+        pos.Should().Be(new Pos(1, 4));
+    }
+}

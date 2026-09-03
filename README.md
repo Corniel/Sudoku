@@ -177,6 +177,7 @@ able to solve the following puzzles (so far):
 
 | Date       | Puzzle                                                                           |      Speed |
 |:----------:|----------------------------------------------------------------------------------|-----------:|
+| 2026-08-24 | [Double Thermos](Puzzles/CrackingTheCryptic/2026/2026-08-24.cs)                  |   586.4 µs |
 | 2026-08-15 | [Thermo Bunches](Puzzles/CrackingTheCryptic/2026/2026-08-15.cs)                  | 2,904.6 µs |
 | 2026-07-15 | [Cataract](Puzzles/CrackingTheCryptic/2026/2026-07-15.cs)                        | 6,240.5 ms |
 | 2026-07-04 | [Green and Blue](Puzzles/CrackingTheCryptic/2026/2026-07-04.cs)                  |   620.0 µs |

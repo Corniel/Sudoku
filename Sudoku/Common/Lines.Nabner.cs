@@ -25,5 +25,5 @@ public static partial class Lines
 
     private static Rules Nabmer(NamedGroup group) => Dominos
         .RoundRobin([.. group])
-        .SelectMany(NonConsecutive.New);
+        .SelectMany(Restrictions.NonConsecutive.New);
 }

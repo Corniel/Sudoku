@@ -9,7 +9,9 @@ public static partial class Groups
 
         List<Rule> rules = [.. items.OfType<GridClue>().Select(c => new Mask(c.Pos, [c.Digit]))];
 
-        foreach (var cage in items.OfType<GridExpression>().Where(e => e.WithDigits && e.Operator is not GridExpression.OperatorKind.Contains))
+        foreach (var cage in items
+            .OfType<GridExpression>()
+            .Where(e => e.WithDigits && e.Operator is not GridExpression.OperatorKind.Contains and not GridExpression.OperatorKind.DoesNotContain))
         {
             foreach (var arg in cage.Args[..^1])
             {
@@ -31,6 +33,15 @@ public static partial class Groups
             {
                 var cells = groups[arg[0]];
                 rules.AddRange(Group.Select(cells, (a, o) => new Quadruple(a, o, quadruple.Digits)));
+            }
+        }
+
+        foreach (var quadruple in items.OfType<GridExpression>().Where(e => e.Operator is GridExpression.OperatorKind.DoesNotContain))
+        {
+            foreach (var arg in quadruple.Args[..^1])
+            {
+                var cells = groups[arg[0]];
+                rules.AddRange(cells.Select(c => new Mask(c, ~quadruple.Digits)));
             }
         }
 

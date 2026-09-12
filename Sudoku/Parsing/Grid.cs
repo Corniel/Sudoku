@@ -69,6 +69,6 @@ public static partial class Grid
         ];
     }
 
-    [GeneratedRegex(@"((?<Token>[A-Z]+)\s*(?<Operator>[<>=≤≥:])\s*)+(?<Last>([A-Z]+)|([1-9][0-9]*))", RegexOptions.CultureInvariant | RegexOptions.IgnoreCase)]
+    [GeneratedRegex(@"((?<Token>[A-Z]+)\s*(?<Operator>[<>=≤≥:!])\s*)+(?<Last>([A-Z]+)|([1-9][0-9]*))", RegexOptions.CultureInvariant | RegexOptions.IgnoreCase)]
     private static partial Regex Expression();
 }

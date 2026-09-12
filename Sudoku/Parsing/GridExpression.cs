@@ -13,6 +13,7 @@ public readonly record struct GridExpression(OperatorKind Operator, ImmutableArr
             "≤" => OperatorKind.LE,
             "≥" => OperatorKind.GE,
             ":" => OperatorKind.Contains,
+            "!" => OperatorKind.DoesNotContain,
             _ => throw new ArgumentException($"{op} is an unknown operator", nameof(op)),
         },
         [.. args])
@@ -26,6 +27,7 @@ public readonly record struct GridExpression(OperatorKind Operator, ImmutableArr
         LE,
         GE,
         Contains,
+        DoesNotContain,
     }
 
     public bool WithDigits => Args[^1].Any(char.IsAsciiDigit);
@@ -83,6 +85,7 @@ public readonly record struct GridExpression(OperatorKind Operator, ImmutableArr
         OperatorKind.LE => " ≤ ",
         OperatorKind.GE => " ≥ ",
         OperatorKind.Contains => ": ",
+        OperatorKind.DoesNotContain => ": !",
         _ => throw new NotSupportedException($"{op} is unknown."),
     };
 }

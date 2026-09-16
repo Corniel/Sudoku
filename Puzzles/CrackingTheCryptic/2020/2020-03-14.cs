@@ -39,6 +39,5 @@ public sealed class _2020_03_14 : CtcPuzzle
         """);
 
     protected override RuleSet GetConstraints()
-        => RuleSet.Standard
-        + Anti.King;
+        => RuleSet.AntiKing;
 }

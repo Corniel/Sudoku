@@ -14,6 +14,9 @@ public readonly partial struct RuleSet
     /// <summary>The standard set of housed extended with the <see cref="Anti.Knight"/> restrictions.</summary>
     public static readonly RuleSet AntiKnight = Standard + Anti.Knight;
 
+    /// <summary>The standard set of housed extended with the <see cref="Anti.King"/> restrictions.</summary>
+    public static readonly RuleSet AntiKing = Standard + Anti.King;
+
     /// <summary>The standard set of houses extended with the four windows.</summary>
     public static readonly RuleSet Hyper = Standard + Houses.Windows;
 

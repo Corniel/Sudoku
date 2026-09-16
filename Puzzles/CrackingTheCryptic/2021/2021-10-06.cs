@@ -39,8 +39,7 @@ public sealed class _2021_10_06 : CtcPuzzle
         """);
 
     protected override RuleSet GetConstraints() =>
-        RuleSet.Standard
-        + Anti.King
+        RuleSet.AntiKing
         + Diagonal.NE_SW
         + Diagonal.NW_SE
         + DutchWhisper.New(new Line(

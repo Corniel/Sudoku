@@ -39,8 +39,7 @@ public sealed class _2026_09_14 : CtcPuzzle
         """);
 
     protected override RuleSet GetConstraints()
-        => RuleSet.Standard
-        + Anti.King
+        => RuleSet.AntiKing
         + Lines.Arrow("""
             A.B│.C.│ddD
             a.b│.c.│...

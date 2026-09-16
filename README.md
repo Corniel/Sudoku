@@ -180,6 +180,7 @@ able to solve the following puzzles (so far):
 | 2026-09-14 | [Border Arrows](Puzzles/CrackingTheCryptic/2026/2026-09-14.cs)                   |   322.1 µs |
 | 2026-09-11 | [Right Angles Wrong Quads](Puzzles/CrackingTheCryptic/2026/2026-09-11.cs)        |    28.1 ms | 
 | 2026-09-03 | [Algae](Puzzles/CrackingTheCryptic/2026/2026-09-03.cs)                           |   546.0 µs |
+| 2026-09-03 | [Blue Waves](Puzzles/CrackingTheCryptic/2026/2026-09-03-1.cs)                    |    45.0 ms |
 | 2026-09-01 | [Ascents Traversed Evenly](Puzzles/CrackingTheCryptic/2026/2026-09-01-1.cs)      | 1,058.7 ms |
 | 2026-09-01 | [Twinned](Puzzles/CrackingTheCryptic/2026/2026-09-01.cs)                         |   489.5 µs |
 | 2026-08-24 | [Double Thermos](Puzzles/CrackingTheCryptic/2026/2026-08-24.cs)                  |   586.4 µs |

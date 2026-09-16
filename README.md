@@ -246,7 +246,7 @@ able to solve the following puzzles (so far):
 | 2025-12-12 | [Crossroads On Another World](Puzzles/CrackingTheCryptic/2025/2025-12-12.cs)     |    35.2 ms |
 | 2025-12-11 | [Fallen Mast In A Storm](Puzzles/CrackingTheCryptic/2025/2025-12-11.cs)          | 3,782.0 µs |
 | 2025-12-08 | [Heavy Is The Crown](Puzzles/CrackingTheCryptic/2025/2025-12-08.cs)              |    26.3 ms |
-| 2025-12-07 | [Odd Way To Even Out](Puzzles/CrackingTheCryptic/2025/2025-12-07.cs)             | 1,100.2 ms |
+| 2025-12-07 | [Odd Way To Even Out](Puzzles/CrackingTheCryptic/2025/2025-12-07.cs)             |   754.3 ms |
 | 2025-12-04 | [Lockdown](Puzzles/CrackingTheCryptic/2025/2025-12-04.cs)                        | 4,223.0 ms |
 | 2025-11-28 | [Brink](Puzzles/CrackingTheCryptic/2025/2025-11-28.cs)                           |    65.5 ms |
 | 2025-11-25 | [Simple Miracle](Puzzles/CrackingTheCryptic/2025/2025-11-25.cs)                  |   858.3 µs |

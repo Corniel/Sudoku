@@ -12,6 +12,7 @@ using System.Text.RegularExpressions;
 
 namespace Specs.Puzzles_specs;
 
+[Explicit]
 public class Work_in_progress
 {
     [Test]

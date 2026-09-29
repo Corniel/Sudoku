@@ -177,6 +177,7 @@ able to solve the following puzzles (so far):
 
 | Date       | Puzzle                                                                           |      Speed |
 |:----------:|----------------------------------------------------------------------------------|-----------:|
+| 2026-09-28 | [Border Thermos](Puzzles/CrackingTheCryptic/2026/2026-09-28.cs)                  | 5,201.6 µs |
 | 2026-09-25 | [Beetle, Beetle](Puzzles/CrackingTheCryptic/2026/2026-09-25.cs)                  |    44.5 ms |
 | 2026-09-14 | [Border Arrows](Puzzles/CrackingTheCryptic/2026/2026-09-14.cs)                   |   322.1 µs |
 | 2026-09-11 | [Right Angles Wrong Quads](Puzzles/CrackingTheCryptic/2026/2026-09-11.cs)        |    28.1 ms | 

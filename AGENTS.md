@@ -91,3 +91,6 @@ pass cleanly.
   `Solved 2026-07-15: Cataract` for puzzle additions. Match the surrounding
   commit style.
 - Only commit when the user explicitly asks.
+
+## Temp files
+Temporary files should be storend in `.temp/`.

@@ -1,5 +1,6 @@
 using Puzzles;
 using Puzzles.CrackingTheCryptic;
+using Qowaiv.Text;
 using System.Diagnostics;
 
 namespace Sudoku.App;
@@ -8,6 +9,14 @@ public static class Cracking_the_Cryptic
 {
     public static void Run(Func<Puzzle, bool>? run = null)
     {
+
+        Console.Write($"{Style.H1_Pipe}|");
+        Console.Write($"{Style.H1} Date       {Style.H1_Pipe}|");
+        Console.Write($"{Style.H1} Puzzle                                                                           {Style.H1_Pipe}|");
+        Console.Write($"{Style.H1}      Speed {Style.H1_Pipe}|");
+        Console.WriteLine(Ansi.Reset);
+        Console.WriteLine("|:----------:|----------------------------------------------------------------------------------|-----------:|");
+
         var selected = run ?? (p => p.Duration is not O.oo);
 
         foreach (var puzzle in CtcPuzzle.All
@@ -45,14 +54,14 @@ public static class Cracking_the_Cryptic
             total += sw.Elapsed;
         }
 
-        var extra = best.O() == puzzle.Duration ? null : $" [{best.O()} != {puzzle.Duration}]";
+        var extra = best.O() == puzzle.Duration ? null : $" [{Style.Error}{best.O()}{Ansi.Reset} != {Style.Error}{puzzle.Duration}{Ansi.Reset}]";
+        
         Console.Write($"\r{Format(puzzle, best, extra)}");
-
         Console.WriteLine();
     }
 
     private static string Format(Puzzle puzzle, TimeSpan elapsed, string? txt)
-        => $"| {Date(puzzle)} | {Link(puzzle),-80} | {elapsed.Format(),10} | {txt ?? new string(' ', 10)}";
+        => $"| {Style.Gray}{Date(puzzle)}{Ansi.Reset} | {Link(puzzle),-118} | {elapsed.Format(),10} | {txt ?? new string(' ', 10)}";
 
     private static string File(Puzzle puzzle) => puzzle.GetType().Name[1..].Replace('_', '-').Replace("-1.", "_1.");
     
@@ -61,5 +70,5 @@ public static class Cracking_the_Cryptic
     private static string Year(Puzzle puzzle) => Date(puzzle)[..4];
 
     private static string Link(Puzzle puzzle)
-        => $"[{puzzle.Title}](Puzzles/CrackingTheCryptic/{Year(puzzle)}/{File(puzzle)}.cs)";
+        => $"[{Style.Yellow}{puzzle.Title}{Ansi.Reset}]({Style.Url}Puzzles/CrackingTheCryptic/{Year(puzzle)}/{File(puzzle)}.cs{Style.UrlEnd})";
 }

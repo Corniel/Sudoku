@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="System.CommandLine" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="../Generator/Generator.csproj" />
     <ProjectReference Include="../Puzzles/Puzzles.csproj" />
   </ItemGroup>

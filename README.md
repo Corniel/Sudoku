@@ -414,8 +414,8 @@ Both [Kaggle](https://www.kaggle.com/datasets/rohanrao/sudoku/) as
 [Sudoku Exchange(https://github.com/grantm/sudoku-exchange-puzzle-bank) published
 test sets containing zillions of generated puzzles to solve.
 
-| Set                  | Puzzles |   Dynamic | Solver   |   Knuth's | DLX      |      | Ref.     |              |        |
-|:---------------------|--------:|----------:|---------:|----------:|---------:|-----:|---------:|-------------:|-------:|
+| Set                  | Puzzles |   Dynamic | Solver   |   Knuth's | DLX      |      | Ref.     |              |         |
+|:---------------------|--------:|----------:|---------:|----------:|---------:|-----:|---------:|-------------:|--------:|
 | Kaggle (300k)        | 300,000 | 53.36 k/s | 18.74 µs | 15.05 k/s | 66.46 µs | 3.55 | 2.06 k/s |    485.32 µs |  25.90  |
 | Exchange (easy)      | 100,000 | 58.98 k/s | 16.95 µs | 15.53 k/s | 64.41 µs | 3.80 | 1.53 k/s |    655.50 µs |  38.66  |
 | Exchange (medium)    | 352,643 | 45.81 k/s | 21.83 µs | 14.59 k/s | 68.55 µs | 3.14 | 0.82 k/s |  1,224.11 µs |  56.07  |

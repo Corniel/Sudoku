@@ -1,9 +1,8 @@
-root = true
+is_global = true
 
 dotnet_diagnostic.CA1012.severity   = none       #
 dotnet_diagnostic.CA1016.severity   = none       # Mark assemblies with assembly version
 dotnet_diagnostic.CA1845.severity   = none       # Use span-based 'string.Concat'
-dotnet_diagnostic.CA1846.severity   = none       # Prefer 'AsSpan' over 'Substring'
 dotnet_diagnostic.CA2231.severity   = none       # Overload operator equals on overriding value type Equals
 
 dotnet_diagnostic.CA1069.severity   = warning    # Enums values should not be duplicated
@@ -116,6 +115,7 @@ dotnet_diagnostic.S138.severity     = none       # Methods can not be too large.
 dotnet_diagnostic.S1541.severity    = none       # Methods and properties should not be too complex
 dotnet_diagnostic.S1694.severity    = none       # An abstract class should have both abstract and concrete methods
 dotnet_diagnostic.S2178.severity    = none       # Short-circuit logic should be used in boolean contexts - '&' is used instead of && to accommodate expressions with nullable booleans too.
+dotnet_diagnostic.S2245.severity    = none       # Pseudorandom number generators (PRNGs) should not be used in security contexts
 dotnet_diagnostic.S2342.severity    = none       # Rename this enumeration to match naming convention
 dotnet_diagnostic.S3267.severity    = none       # MLoops should be simplified
 dotnet_diagnostic.S3376.severity    = none       # Attribute, EventArgs, and Exception type names should end with the type being extended
@@ -135,7 +135,6 @@ dotnet_diagnostic.S1067.severity    = warning    # Expressions should not be too
 dotnet_diagnostic.S1144.severity    = warning    # Unused private types or members should be removed
 dotnet_diagnostic.S1172.severity    = warning    # Unused method parameters should be removed
 dotnet_diagnostic.S1185.severity    = warning    # Overriding members should do more than simply call the same member in the base class
-dotnet_diagnostic.S1227.severity    = warning    # break statements should not be used except for switch cases
 dotnet_diagnostic.S1479.severity    = warning    # Consider reworking this 'switch' to reduce the number of 'case's to at most 30
 dotnet_diagnostic.S1858.severity    = warning    # "ToString()" calls should not be redundant
 dotnet_diagnostic.S2197.severity    = warning    # Modulus results should not be checked for direct equa

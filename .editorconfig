@@ -1,4 +1,4 @@
-root = true
+﻿root = true
 
 [*]
 end_of_line = crlf
@@ -10,20 +10,14 @@ charset = utf-8
 indent_style = space
 indent_size = 4
 
-# Project files
-[*.{csproj,props}]
-indent_style = space
-indent_size = 2
-
-# Static coce analysis
-[*]
-vsspell_section_id = main
-vsspell_ignored_words_main = File:dictionary.dic
-
+# Code Style
 csharp_style_expression_bodied_constructors = true
 csharp_style_expression_bodied_methods = true
 csharp_style_expression_bodied_operators = true
 csharp_style_expression_bodied_properties = true
 csharp_style_expression_bodied_indexers = true
 
-dotnet_diagnostic.VSSpell001.severity = silent # Correct spelling
+# Project files
+[*.{csproj,json,props}]
+indent_style = space
+indent_size = 2

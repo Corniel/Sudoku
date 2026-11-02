@@ -198,10 +198,8 @@ public readonly struct Ints(Int128 bits) : IReadOnlyCollection<int>
         {
             if (Mask == 0) return false;
 
-            var trailing = (int)Int128.TrailingZeroCount(Mask) + 1;
-            Mask >>= trailing;
-
-            Current += trailing;
+            Current = (int)Int128.TrailingZeroCount(Mask);
+            Mask &= Mask - 1;
             return true;
         }
 
@@ -209,6 +207,7 @@ public readonly struct Ints(Int128 bits) : IReadOnlyCollection<int>
 
         readonly IEnumerator IEnumerable.GetEnumerator() => this;
 
+        [DoesNotReturn]
         public void Reset() => throw new NotSupportedException();
 
         public readonly void Dispose() { /* Nothing to dispose. */ }

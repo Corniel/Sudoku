@@ -160,10 +160,8 @@ public readonly struct Digits(uint bits) : IEquatable<Digits>, IReadOnlyCollecti
         {
             if (Remaining is 0) return false;
 
-            var trailing = BitOperations.TrailingZeroCount(Remaining) + 1;
-            Remaining >>= trailing;
-
-            Current += trailing;
+            Current = BitOperations.TrailingZeroCount(Remaining);
+            Remaining &= Remaining - 1;
             return true;
         }
 
@@ -171,6 +169,7 @@ public readonly struct Digits(uint bits) : IEquatable<Digits>, IReadOnlyCollecti
 
         readonly IEnumerator IEnumerable.GetEnumerator() => this;
 
+        [DoesNotReturn]
         public void Reset() => throw new NotSupportedException();
 
         public readonly void Dispose() { /* Nothing to dispose. */ }
@@ -194,6 +193,7 @@ public readonly struct Digits(uint bits) : IEquatable<Digits>, IReadOnlyCollecti
 
         public readonly void Dispose() { }
 
+        [DoesNotReturn]
         public void Reset() => throw new NotSupportedException();
 
         public readonly IEnumerator<Digits> GetEnumerator() => this;

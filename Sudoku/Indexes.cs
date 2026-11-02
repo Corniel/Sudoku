@@ -72,10 +72,8 @@ public readonly struct Indexes(uint bits) : IEquatable<Indexes>, IReadOnlyCollec
         {
             if (Remaining is 0) return false;
 
-            var trailing = BitOperations.TrailingZeroCount(Remaining) + 1;
-            Remaining >>= trailing;
-
-            Current += trailing;
+            Current = BitOperations.TrailingZeroCount(Remaining);
+            Remaining &= Remaining - 1;
             return true;
         }
 
@@ -83,6 +81,7 @@ public readonly struct Indexes(uint bits) : IEquatable<Indexes>, IReadOnlyCollec
 
         readonly IEnumerator IEnumerable.GetEnumerator() => this;
 
+        [DoesNotReturn]
         void IEnumerator.Reset() => throw new NotSupportedException();
 
         readonly void IDisposable.Dispose() { /* Nothing to dispose. */ }

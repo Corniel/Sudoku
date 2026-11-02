@@ -117,6 +117,7 @@ public readonly struct Pos(int i) : IEquatable<Pos>
 
         public readonly void Dispose() { }
 
+        [DoesNotReturn]
         public void Reset() => throw new NotSupportedException();
 
         public readonly IEnumerator<Pos> GetEnumerator() => this;

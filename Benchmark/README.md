@@ -1,11 +1,15 @@
 # Benchmarks
 
 ## Digits iteration
-Test all 512 possible states of `Digits`.
+Test 1_000_000 states of `Digits` (every state roughtly 2000 times).
 
-| Method | Mean     |
-|------- |---------:|
-| Sum    | 1.209 us |
+| Method       | Mean      | Ratio |
+|------------- |----------:|------:|
+| Iterator     |  7.411 ms |  1.00 |
+| Immutable    |  9.729 ms |  1.31 |
+| List         | 11.746 ms |  1.59 |
+| Array        |  9.438 ms |  1.27 |
+| Old Iterator | 10.589 ms |  1.43 |
 
 ## Binary conversions
 To convert cells from and to an `Int128`.
